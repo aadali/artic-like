@@ -1,0 +1,41 @@
+pxtatescale
+===========
+
+LaTeX: to make scaling work also with vertical direction of (u)pTeX
+and dvipdfmx
+
+The graphics' feature of "scaling" (`\scalebox`, `\reflextbox` and
+`\resizebox`) with dvipdfmx driver results in a wrong direction of
+stretch, when used in the vertical direction of pTeX. This behavior
+is caused by the fact that internal X and Y directions of pTeX
+`\tate` mode correspond to physical top-to-bottom and right-to-left
+directions respectively. This package provides a fix for the problem.
+
+### Installation
+
+  - `*.sty` → $TEXMF/tex/latex/pxtatescale
+
+### Usage
+
+Load this package after graphicx (or graphics) package.
+
+    \documentclass[dvipdfmx]{article}
+    \usepackage{graphicx} % or graphics
+    \usepackage{pxtatescale}
+
+Note that this package is of no use unless you work on e-(u)pTeX +
+dvipdfmx combination.
+
+Revision History
+----------------
+
+  * 2013/03/25 v0.2
+      - The first public version. (TY)
+  * 2017/01/16 v0.3
+      - Updated for new dvipdfmx.def with pdf-based scaling. (HY)
+  * 2017/01/21 v0.4
+      - Ensure graphics driver `dvipdfmx` before applying a patch. (HY)
+
+------------------
+Hironobu Yamashita
+https://github.com/aminophen

@@ -1,0 +1,356 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example of  MCF typest with LuaLaTeX(luamplib)    by A.Yamaji    2021.12.12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ** mcf2graph.mf must be version 4.75
+% ** use mcf_data_base.mcf
+\documentclass{article}
+%------------------------------------------------------------------------------
+\usepackage{luamplib}%
+\usepackage[T1]{fontenc}%
+\usepackage{textcomp,verbatim,mcf_setup}%
+\mplibcodeinherit{enable}%
+\mplibverbatim{enable}%
+\mplibnumbersystem{double}%
+\everymplib{%
+  if unknown Ph1: input mcf2graph.mf; fi
+  outputformat:="eps";
+  sw_output:=Font+Info+Temp;
+  tag1:="J"; tag2:="C"; tag3:="fm"; tag4:="mw"; tag5:="EN"; tag6:="MW";
+  max_blength:=4.5mm;
+  defaultfont:="uhvr8r";
+  defaultsize:=8bp;
+  defaultscale:=1;
+}%
+%------------------------------------------------------------------------------
+\pagestyle{empty}
+\topmargin=-20mm
+\oddsidemargin=0mm
+\textwidth=170mm
+\textheight=280mm
+\unitlength=1mm
+%------------------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+ {\Huge\sf MCF example for luamplib(Lua\LaTeX)}\vspace{5mm}\\
+ Author : Akira Yamaji \quad Date : \today\\
+ Located at : http://www.ctan.org/pkg/mcf2graph\vspace{2mm}\\
+\end{center}
+%------------------------------------------------------------------------------------
+\section{MCF example}
+\noindent%
+%------------------------------------------------------------------------------------
+ use molecular data base file 'mcf\_exa\_data.mcf'\\
+{{\tt FM(fm) :} molecular formula (calculated)\\
+{{\tt MW(mw) :} molecular weight (calculated)\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Chlorophyll a}
+\noindent%
+\begin{verbatim}
+beginfont("f:mcf_data_base.mcf","t:EN","v:Chlorophyll a","NO:-",
+          ":,||,{4,11,17,23}:red,27:green")   %%%% change color of atoms %%%%
+  fsize:=(100mm,45mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont
+\end{verbatim}
+%------------------------------------------------------------------------------------
+\begin{mplibcode}
+beginfont("f:mcf_data_base.mcf","t:EN","v:Chlorophyll a","NO:-",
+          ":,||,{4,11,17,23}:red,27:green")   %%%% change color of atoms %%%%
+  fsize:=(100mm,45mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont
+\end{mplibcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dinophysistoxin-1}
+\noindent%
+\begin{verbatim}
+beginfont("t:EN","v:Okadaic acid","EN:Dinophysistoxin-1",
+          "MW:819",":,38:*/_,65=red")  %%%% add methyl group (color red) %%%%
+  fsize:=(150mm,35mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont;
+\end{verbatim}
+%----------------------------------------------------------------------------
+\begin{mplibcode}
+beginfont("t:EN","v:Okadaic acid","EN:Dinophysistoxin-1",
+          "MW:819",":,38:*/_,65=red")  %%%% add methyl group (color red) %%%%
+  fsize:=(150mm,35mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont;
+\end{mplibcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Erythromycin}
+\noindent%
+%----------------------------------------------------------------------------
+\begin{verbatim}
+beginfont("EN:Erythromycin","MW:733.93",
+  %--------------------------------------------------------------------
+  ": <30,#1,<-120,60,60,60,-60,60,60,-60,60,60,60,-60,60,60,##,&1,    ",
+  ": 14:O,13:/*Et,{1,9}://O,{2,10}:*/_,{4,6^-35,8,12^35}:/*_,         ",
+  ": {6^35,11,12^-35}:*/OH,                                           ",
+  ": @$3,\*,O,30,|,?6`.7,2:O,{3,5^35}:/_`.5,4:/OH`.-.5,5^-35`-.5:/O!, ",
+  ": @$5,\*^30`1.7,O,!,|,?6`.7,6:O,5:/_`.5,2:/OH`-.5,3:/N?!`-.5       ")
+  %--------------------------------------------------------------------
+  fsize:=(120mm,30mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+endfont;
+\end{verbatim}
+%----------------------------------------------------------------------------
+\begin{mplibcode}
+beginfont("EN:Erythromycin","MW:733.93",
+  %--------------------------------------------------------------------
+  ": <30,#1,<-120,60,60,60,-60,60,60,-60,60,60,60,-60,60,60,##,&1,    ",
+  ": 14:O,13:/*Et,{1,9}://O,{2,10}:*/_,{4,6^-35,8,12^35}:/*_,         ",
+  ": {6^35,11,12^-35}:*/OH,                                           ",
+  ": @$3,\*,O,30,|,?6`.7,2:O,{3,5^35}:/_`.5,4:/OH`.-.5,5^-35`-.5:/O!, ",
+  ": @$5,\*^30`1.7,O,!,|,?6`.7,6:O,5:/_`.5,2:/OH`-.5,3:/N?!`-.5       ")
+  %--------------------------------------------------------------------
+  fsize:=(120mm,30mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont;
+\end{mplibcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Paclitaxel}
+\noindent%
+\begin{verbatim}
+beginfont("EN:Paclitaxel","MW:853.918",
+  %---------------------------------------------------------------------
+  ": ?6,5=dl,@3,#1,36,45,45,45,45,##,&5,-4=?6,-4=?4,-1=wb,-3=wf,-1:O, ",
+  ": 4:??,6:/_,{3^-60,15}:*/OH,8:/*H^-60,9:*/_^60,10://O,             ",
+  ": @1,\,O,!,//O,!,*/OH,!,/Ph,60~wf,NH,-60,//O,60,Ph,                ",
+  ": @7,\*,O,-45,//O,60,Ph,11:*/OCO!>rl,12:/*OCO!^-15>lr              ")
+  %---------------------------------------------------------------------
+  fsize:=(120mm,30mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+endfont
+\end{verbatim}
+%----------------------------------------------------------------------------
+\begin{mplibcode}
+beginfont("EN:Paclitaxel","MW:853.918",
+  %---------------------------------------------------------------------
+  ": ?6,5=dl,@3,#1,36,45,45,45,45,##,&5,-4=?6,-4=?4,-1=wb,-3=wf,-1:O, ",
+  ": 4:??,6:/_,{3^-60,15}:*/OH,8:/*H^-60,9:*/_^60,10://O,             ",
+  ": @1,\,O,!,//O,!,*/OH,!,/Ph,60~wf,NH,-60,//O,60,Ph,                ",
+  ": @7,\*,O,-45,//O,60,Ph,11:*/OCO!>rl,12:/*OCO!^-15>lr              ")
+  %---------------------------------------------------------------------
+  fsize:=(120mm,30mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont
+\end{mplibcode}
+%----------------------------------------------------------------------------
+\subsection{Kekulene}
+\noindent%
+\begin{verbatim}
+beginfont("EN:Kekulene","MW:600.7",
+  %------------------------------------------------------------------------------
+  ": <30,?6,{3,-3,-2,-3,-2,-3,-2,-3,-2,-3,(-2<,5<),(5<,-4<)}=?6,               ",
+  ": {1,5<,7,9,11,13,17,19,21,23,27,29,31,33,37,39,41,43,47,49,51,53,57,60}=dl ")
+  %------------------------------------------------------------------------------
+  fsize:=(120mm,25mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+endfont
+\end{verbatim}
+%----------------------------------------------------------------------------
+\begin{mplibcode}
+beginfont("EN:Kekulene","MW:600.7",
+  ": <30,?6,{3,-3,-2,-3,-2,-3,-2,-3,-2,-3,(-2<,5<),(5<,-4<)}=?6,               ",
+  ": {1,5<,7,9,11,13,17,19,21,23,27,29,31,33,37,39,41,43,47,49,51,53,57,60}=dl ")
+  fsize:=(120mm,25mm);
+  if check(mc)=0: MC(scantokens(mc)) fi
+  ext(defaultscale:=0.8;
+      label.lrt("fm: "&cal_FM,(0,h-5mm));
+      label.lrt("mw: "&cal_MW,(0,h-9mm));
+      label.lrt("MW: "&inf_MW,(0,h-13mm));)
+endfont
+\end{mplibcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%----------------------------------------------------------------------------
+\subsection{Maitotoxin}
+\noindent%
+%--------------------------------------------------------------------------------
+\begin{verbatim}
+%--------------------------------------------------------------------------------
+\begin{mplibcode}
+  beginfont("t:EN","v:Maitotoxin")
+    sw_output:=Info+Mcode+Temp;           %%%% output temp-info,temp-mc.aux %%%%
+  endfont;
+\end{mplibcode}
+\verbatiminput{temp-mc.aux}                  %%%% input temp-mc.aux %%%%
+\begin{mplibcode}
+  beginfont("t:EN","v:Maitotoxin")
+    fsize:=(120mm,60mm); fmargin:=(0,3mm); sw_frame:=Outside;
+    if check(mc)=0: MC(scantokens(mc)) fi    %%%% output font %%%%
+  endfont
+\end{mplibcode}
+%--------------------------------------------------------------------------------
+\newread\auxfile%
+\openin\auxfile=temp-info.aux                %%%% input temp-info.aux %%%%
+\read\auxfile to \info%
+\infotovar{\info}                            %%%% info to variables %%%%
+\closein\auxfile%
+{\tt ** EN:\EN \quad mw:\MW \quad MW:\mw \quad fm:\fm}%
+%--------------------------------------------------------------------------------
+\end{verbatim}
+%--------------------------------------------------------------------------------
+\begin{mplibcode}
+  beginfont("t:EN","v:Maitotoxin")
+    sw_output:=Info+Mcode+Temp;                       %%%% output temp-info.aux %%%%
+    if check(mc)=0: MC(scantokens(mc)) fi
+  endfont
+\end{mplibcode}
+\begin{mplibcode}
+  beginfont("t:EN","v:Maitotoxin")
+    fsize:=(120mm,60mm); fmargin:=(0,3mm); sw_frame:=Outside;
+    if check(mc)=0: MC(scantokens(mc)) fi    %%%% output font %%%%
+  endfont
+\end{mplibcode}
+%--------------------------------------------------------------------------------
+\newread\auxfile%
+\openin\auxfile=temp-info.aux                %%%% input temp-info.aux %%%%
+\read\auxfile to \info%
+\infotovar{\info}                            %%%% info to variables %%%%
+\closein\auxfile%
+\verbatiminput{temp-mc.aux}                  %%%% input temp-mc.aux %%%%
+{\tt ** EN:\EN \quad mw:\MW \quad MW:\mw \quad fm:\fm}%
+%--------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{TCA cycle}
+\noindent%
+\begin{mplibcode}
+beginfont("EN:TCA cycle")
+fsize:=(160mm,75mm);
+max_blength:=5mm;
+%--------------------------------------------------------------------------------
+COOH:='(//O,!,OH);
+HOCO:='(OH,!,//O,);
+MCat(0.33,   1)(<30,HOCO,!,//O,!2,COOH)                    % Oxaloacetate
+MCat(0.66,   1)(<30,HOCO,!4,COOH,@-4`1,\,COOH,4:/OH^-165)  % Citrate
+MCat(1,      1)(<30,HOCO,!2,!~dr,!,COOH,@-4`1,\,COOH)      % cis-Aconitate
+MCat(1,   0.58)(<30,HOCO,!4,COOH,@-4,\`1,COOH,5:/OH)       % Isocitrate
+MCat(1,   0.05)(<30,HOCO,!3,//O,!,COOH,@-4,\`1,COOH)       % Oxalosuccinate
+MCat(0.66,0.05)(<30,HOCO,!3,//O,!,COOH)                    % alfa-Ketoglutarate
+MCat(0.33,0.05)(<30,HOCO,!3,//O,!,"{S-CoA}")               % Succinyl-CoA
+MCat(0,   0.05)(<30,HOCO,!3,COOH)                          % Succinate
+MCat(0,   0.55)(<30,HOCO,!,!~dr,!,COOH)                    % Fumarate
+MCat(0,      1)(<30,HOCO,!3,COOH,3:/OH)                    % L-Malate
+%--------------------------------------------------------------------------------
+ext(
+defaultfont:="uhvr8r";
+defaultscale:=0.75;
+ext_setup;
+def sel_dir(expr rot)=
+  save tx; nA:=rot; if nA>=360: nA:=nA-360; fi
+  if     (nA<30)or(nA>330):   def tx=top enddef; elseif (nA>=30)and(nA<=150):  def tx=lft enddef;
+  elseif (nA>150)and(nA<210): def tx=bot enddef; elseif (nA>=210)and(nA<=330): def tx=rt enddef; fi
+enddef;
+def reaction_arrow(expr a)(expr r)(expr p)(expr sa,la)(expr sb,lb)(expr sc,lc)(expr sd,ld)=
+  drawarrow ((0,0)..(a,0)) rotated r shifted p;
+  if sa<>"": draw ((0.5a,0){dir 180}..{dir 90}(0,.5a*la)) rotated r shifted p;
+             sel_dir(r); label.tx(sa,p+((0,0.5a*la) rotated r)); fi
+  if sb<>"": draw ((0.5a,0){dir 0}..{dir 90}(a,.5a*lb)) rotated r shifted p;
+             sel_dir(r); label.tx(sb,p+((a,0.5a*lb) rotated r)); fi
+  if sc<>"": draw ((0.5a,0){dir 180}..{dir -90}(0,-.5a*lc)) rotated r shifted p;
+             sel_dir(r+180); label.tx(sc,p+((0,-0.5a*lc) rotated r)); fi
+  if sd<>"": draw ((0.5a,0){dir 0}..{dir -90}(a,-.5a*ld)) rotated r shifted p;
+             sel_dir(r+180); label.tx(sd,p+((a,-0.5a*ld) rotated r)); fi
+enddef;
+def r_arrow(expr a)(expr r)(expr p)(expr sc,lc)(expr sd,ld)=
+   reaction_arrow(a)(r)(p)("",0)("",0)(sc,lc)(sd,ld)
+enddef;
+%------------------------------------------------------------------------
+save dx; pair dx; dx:=(12mm,0);
+label.bot("Oxaloacetate",p1+dx);   label.bot("Citrate",p2+dx);
+label.bot("cis-Aconitate",p3+dx);  label.bot("Isocitrate",p4+dx);
+label.bot("Oxalosuccinate",p5+dx); label.bot("alfa-Ketoglutarate",p6+dx);
+label.bot("Succinyl-CoA",p7+dx);   label.bot("Succinate",p8+dx);
+label.bot("Fumarate",p9+dx);       label.bot("L-Malate",p10+dx);
+sw_label_emu:=1;
+ext_setup;
+r_arrow(10mm)(  0)(p1+ ( 1.1w1, 0.3h1))("Acetyl-CoA",1.5)(" CoA-SH",1);
+r_arrow(10mm)(  0)(p2+ ( 1.1w2, 0.4h2))("",0)("H2O",1);
+r_arrow( 8mm)(270)(p3+ ( 0.5w3,-0.4h3))("H2O",1)("",0);
+r_arrow( 8mm)(270)(p4+ ( 0.5w4,-0.4h4))("NAD+",1)("NADH2+",1);
+r_arrow(10mm)(180)(p5+ (-0.1w5, 0.4h5))("",0)("CO2",1);
+r_arrow(10mm)(180)(p6+ (-0.1w6, 0.5h6))("NAD+,CoA-SH",1.7)("NADH2+,CO2",1);
+r_arrow(10mm)(180)(p7+ (-0.1w7, 0.5h7))("GDP,Pi",1.7)("GTP,CoA-SH",1);
+r_arrow( 8mm)( 90)(p8+ ( 0.4w8, 1.2h8))("FAD",1)("FADH2",1);
+r_arrow( 8mm)( 90)(p9+ ( 0.4w9, 1.2h9))("H2O",1)("",0);
+r_arrow(10mm)(  0)(p10+( 1.1w10,0.3h10))("NAD+",1)("NADH2+",1.5);
+defaultscale:=1.5;
+label("TCA-cycle",(0.5w,0.5h));
+)
+endfont
+\end{mplibcode}
+%------------------------------------------------------------------------
+\begin{verbatim}
+beginfont("EN:TCA cycle")
+fsize:=(160mm,75mm);
+max_blength:=5mm;
+COOH:='(//O,!,OH);
+HOCO:='(OH,!,//O,);
+MCat(0.33,   1)(<30,HOCO,!,//O,!2,COOH)                    % Oxaloacetate
+MCat(0.66,   1)(<30,HOCO,!4,COOH,@-4`1,\,COOH,4:/OH^-165)  % Citrate
+MCat(1,      1)(<30,HOCO,!2,!~dr,!,COOH,@-4`1,\,COOH)      % cis-Aconitate
+MCat(1,   0.58)(<30,HOCO,!4,COOH,@-4,\`1,COOH,5:/OH)       % Isocitrate
+MCat(1,   0.05)(<30,HOCO,!3,//O,!,COOH,@-4,\`1,COOH)       % Oxalosuccinate
+MCat(0.66,0.05)(<30,HOCO,!3,//O,!,COOH)                    % alfa-Ketoglutarate
+MCat(0.33,0.05)(<30,HOCO,!3,//O,!,"{S-CoA}")               % Succinyl-CoA
+MCat(0,   0.05)(<30,HOCO,!3,COOH)                          % Succinate
+MCat(0,   0.55)(<30,HOCO,!,!~dr,!,COOH)                    % Fumarate
+MCat(0,      1)(<30,HOCO,!3,COOH,3:/OH)                    % L-Malate
+ext(
+defaultfont:="uhvr8r";
+defaultscale:=0.75;
+ext_setup;
+save dx; pair dx; dx:=(12mm,0);
+label.bot("Oxaloacetate",p1+dx);   label.bot("Citrate",p2+dx);
+label.bot("cis-Aconitate",p3+dx);  label.bot("Isocitrate",p4+dx);
+label.bot("Oxalosuccinate",p5+dx); label.bot("alfa-Ketoglutarate",p6+dx);
+label.bot("Succinyl-CoA",p7+dx);   label.bot("Succinate",p8+dx);
+label.bot("Fumarate",p9+dx);       label.bot("L-Malate",p10+dx);
+sw_label_emu:=1;
+ext_setup;
+r_arrow(10mm)(  0)(p1+ ( 1.1w1, 0.3h1))("Acetyl-CoA",1.5)(" CoA-SH",1);
+r_arrow(10mm)(  0)(p2+ ( 1.1w2, 0.4h2))("",0)("H2O",1);
+r_arrow( 8mm)(270)(p3+ ( 0.5w3,-0.4h3))("H2O",1)("",0);
+r_arrow( 8mm)(270)(p4+ ( 0.5w4,-0.4h4))("NAD+",1)("NADH2+",1);
+r_arrow(10mm)(180)(p5+ (-0.1w5, 0.4h5))("",0)("CO_2_",1);
+r_arrow(10mm)(180)(p6+ (-0.1w6, 0.5h6))("NAD+,CoA-SH",1.7)("NADH2+,CO2",1);
+r_arrow(10mm)(180)(p7+ (-0.1w7, 0.5h7))("GDP,Pi",1.7)("GTP,CoA-SH",1);
+r_arrow( 8mm)( 90)(p8+ ( 0.4w8, 1.2h8))("FAD",1)("FADH2",1);
+r_arrow( 8mm)( 90)(p9+ ( 0.4w9, 1.2h9))("H2O",1)("",0);
+r_arrow(10mm)(  0)(p10+( 1.1w10,0.3h10))("NAD+",1)("NADH2+",1.5);
+defaultscale:=1.5;
+label("TCA-cycle",(0.5w,0.5h));
+)
+endfont
+\end{verbatim}
+%----------------------------------------------------------------------------
+\end{document}

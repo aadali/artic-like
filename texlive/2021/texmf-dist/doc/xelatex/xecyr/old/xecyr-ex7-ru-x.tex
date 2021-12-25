@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{polyglossia}
+\usepackage{xecyr}
+
+\setmainlanguage{russian}
+
+\setmainfont[Mapping=tex-text]{CMU Serif}
+\setmonofont{CMU Typewriter Text}
+
+\title{Распространенные русские кодировки}
+\author{Из русской <<Википедии>>}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+% Обратите внимание на названия кодировок! Они берутся отсюда: http://www.iana.org/assignments/character-sets
+
+\XeTeXdefaultencoding "IBM866"
+\input 866
+
+\XeTeXdefaultencoding "KOI8-R"
+\input koi8-r
+
+\XeTeXdefaultencoding "windows-1251"
+\input 1251
+
+\XeTeXdefaultencoding "ISO-8859-5"
+\input iso
+
+\XeTeXdefaultencoding "UTF-8"
+
+\end{document}

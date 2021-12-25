@@ -1,0 +1,106 @@
+% File: install.txt
+% A part of mfpic 1.10 2012/12/03
+%
+
+This is version 1.10 of mfpic. See README for a list of files and a
+brief description of each.
+
+Generating and installing the files
+-----------------------------------
+
+This sections is unnecessary if you get
+    http://mirror.ctan.org/install/graphics/mfpic.tds.zip
+when it becomes available. Just unzip it in a texmf directory.
+Alternatively, you can get the entire graphics/mfpic/ directory from
+http://mirror.ctan.org/ and move those files as described below
+
+-- If you have acquired only mfpic.ins, mfpic.dtx and grafbase.dtx, put
+   the three in the same temporary  directory and change to that
+   directory. Run latex (or tex) on mfpic.ins, which should produce
+   these six files:
+      mfpic.tex         grafbase.mf
+      mfpic.sty         grafbase.mp
+      mfpicdef.tex      dvipsnam.mp
+
+-- If you have an older version of mfpic, remove any old files with the
+   same names as the above from your TeX directories, or ensure that the
+   following procedure overwrites them (back them up first, if you wish).
+
+-- Copy mfpic.tex and mfpicdef.tex where TeX and LaTeX will find them,
+   and mfpic.sty where LaTeX will find it. On any TDS compliant system
+   (such as TeXLive, MacTeX and MiKTeX) they can all be put in
+   $TEXMF/tex/generic/mfpic/ (where $TEXMF indicates a directory serving
+   as a root of a texmf tree).
+
+-- Copy grafbase.mp and dvipsnam.mp where MetaPost will find them, for
+   example $TEXMF/metapost/mfpic/ .
+
+-- Copy grafbase.mf where Metafont will find it. For example,
+   $TEXMF/metafont/mfpic/ .
+
+-- Copy mfpguide.pdf, mfpic-doc.pdf. mfpcard.pdf where documentation is
+   kept. For example, $TEXMF/doc/generic/mfpic/ . Optionally, copy the
+   *.tex versions of these, plus mfpdoc.sty, lcheadings.ist  and
+   coil.mps, as well as examples/*.* either to the documentation area or
+   to the same place as mfpic.tex. Also optional: copy the two .dtx
+   files and mfpic.ins to the source area
+   ($TEXMF/source/generic/mfpic/).
+
+-- If required by your TeX system (most do): update the tex filename
+   database.
+
+There is one optional step that may be useful if you plan to make use of
+mfpic's support for Metafont (you may skip this if you only wish to use
+its MetaPost support): find the file modes.mf on your system. Typically
+this will be in $TEXMF/metafont/misc/ . Find, near the end of that file,
+a line similar to
+
+    localfont := ljfour;
+
+Replace, if necessary, the string "ljfour" by one of the modes defined
+in that file. At minimum, select one whose resolution (DPI) matches both
+your printer and the configuration of your dvi viewer. If you make such
+a change, regenerate the mf.base file (fmtutil on MacTeX or TeXLive;
+MiKTeX Options in MiKTeX). On some systems this may be named plain.base.
+
+Read mfpguide.pdf before trying anything further. If you are already
+familiar with mfpic (version 0.2.10.9 or later) you can probably get
+going right away.
+
+If you want to read the documented source code for mfpic, run pdflatex
+on mfpic.dtx and grafbase.dtx three times each. Then run makeindex for
+each:
+    makeindex -s gind.ist -o mfpic.ind mfpic.idx
+    makeindex -s gind.ist -o grafbase.ind grafbase.idx
+and then pdflatex again.
+
+------------------------------------------------------------------------
+
+If you desire to remake mfpic-doc.pdf, make sure mfpic-doc.tex and
+mfpdoc.sty are in the current directory or where LaTeX can find them.
+Make sure that coil.mps is also where LaTeX can find it. Edit, if you
+like, the paper size option in the \documentclass command in
+mfpic-doc.tex. (The document uses Times for the main font family,
+LuxiMono for a typewriter font, and CMSS for a sans serif font. Packages
+mathptmx amd luximono are required.) Then run
+    pdflatex mfpic-doc
+three times. Make sure lcheadings.ist is where makeindex can find it
+and run
+    makeindex -s lcheadings.ist -o mfpic-doc.ind mfpic-doc.idx
+Then
+    pdflatex mfpic-doc
+at least 2 more times.
+
+You could do something similar for mfpguide.tex:
+    pdflatex mfpguide
+    mpost guide.mp
+    pdflatex mfpguide
+    pdflatex mfpguide
+This relies on the mfpic package itself.
+
+\sig
+Dan Luecking  (luecking at uark dot edu)
+Department of Mathematical Sciences
+University of Arkansas
+Fayetteville, Arkansas 72701-1201
+U.S.A

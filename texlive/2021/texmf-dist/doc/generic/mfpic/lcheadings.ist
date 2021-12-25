@@ -1,0 +1,11 @@
+% File: lcheadings.ist
+% A part of mfpic 1.10 2012/12/03
+%
+%% Generic headings. The macros \headingprefix and \headingsuffix must
+%% be defined in the document or in a package that it uses.
+%%
+heading_prefix   "\n\\headingprefix{"
+heading_suffix   "}\\headingsuffix\n"
+headings_flag    -1
+%% headings_flag = +/-1 turns on headings. Positive for uppercase,
+%% negative for lowercase.

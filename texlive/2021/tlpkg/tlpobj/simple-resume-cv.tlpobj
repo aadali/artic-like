@@ -1,0 +1,21 @@
+name simple-resume-cv
+category Package
+revision 43057
+shortdesc Template for a simple resume or curriculum vitae (CV), in XeLaTeX
+longdesc Template for a simple resume or curriculum vitae (CV), in
+longdesc XeLaTeX. Simple template that can be further customized or
+longdesc extended, with numerous examples.
+containersize 3432
+containerchecksum 996341ce711f6f9a68ccd7e0b315da98eed8f4737d44b8dbd9881c2a76c8ef2d04b1c956333b0e33997d57e0b62bcb2485029283bb4f4711c2f8e38c177755d7
+doccontainersize 96196
+doccontainerchecksum a380b2a498bde69cef1ba2401e16886d35edb40e3338963bcbd6e862da3e54f547e7900a18f668515b3ff178462a4ea0d41bc228b6b6e7ea8b0693e295231e92
+docfiles size=29
+ texmf-dist/doc/xelatex/simple-resume-cv/CV.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/simple-resume-cv/CV.tex
+ texmf-dist/doc/xelatex/simple-resume-cv/LICENSE
+ texmf-dist/doc/xelatex/simple-resume-cv/README.md details="Readme"
+runfiles size=3
+ texmf-dist/tex/xelatex/simple-resume-cv/simpleresumecv.cls
+catalogue-ctan /macros/xetex/latex/simple-resume-cv
+catalogue-license pd
+catalogue-topics cv class

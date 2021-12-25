@@ -1,0 +1,522 @@
+% \iffalse meta-comment
+%% File: plvers.dtx
+%
+%  Copyright 1995-2006 ASCII Corporation.
+%  Copyright (c) 2010 ASCII MEDIA WORKS
+%  Copyright (c) 2016-2021 Japanese TeX Development Community
+%
+%  This file is part of the pLaTeX2e system (community edition).
+%  -------------------------------------------------------------
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ifx\JAPANESEtrue\undefined
+  \expandafter\newif\csname ifJAPANESE\endcsname
+  \JAPANESEtrue
+\fi
+\def\eTeX{$\varepsilon$-\TeX}
+\def\pTeX{p\kern-.15em\TeX}
+\def\epTeX{$\varepsilon$-\pTeX}
+\def\pLaTeX{p\kern-.05em\LaTeX}
+\def\pLaTeXe{p\kern-.05em\LaTeXe}
+%</driver>
+% \fi
+%
+% \setcounter{StandardModuleDepth}{1}
+% \StopEventually{}
+%
+% \iffalse
+% \changes{v1.0}{1995/05/16}{p\LaTeXe\ 用に\file{ltvers.dtx}を修正}
+% \changes{v1.0a}{1995/08/30}{\LaTeX\ \texttt{!<1995/06/01!>}版用に修正}
+% \changes{v1.0b}{1996/01/31}{\LaTeX\ \texttt{!<1995/12/01!>}版用に修正}
+% \changes{v1.0c}{1997/01/11}{\LaTeX\ \texttt{!<1996/06/01!>}版用に修正}
+% \changes{v1.0d}{1997/01/23}{\LaTeX\ \texttt{!<1996/12/01!>}版用に修正}
+% \changes{v1.0e}{1997/07/02}{\LaTeX\ \texttt{!<1997/06/01!>}版用に修正}
+% \changes{v1.0f}{1998/02/17}{\LaTeX\ \texttt{!<1997/12/01!>}版用に修正}
+% \changes{v1.0g}{1998/09/01}{\LaTeX\ \texttt{!<1998/06/01!>}版用に修正}
+% \changes{v1.0h}{1999/04/05}{\LaTeX\ \texttt{!<1998/12/01!>}版用に修正}
+% \changes{v1.0i}{1999/08/09}{\LaTeX\ \texttt{!<1999/06/01!>}版用に修正}
+% \changes{v1.0j}{2000/02/29}{\LaTeX\ \texttt{!<1999/12/01!>}版用に修正}
+% \changes{v1.0k}{2000/11/03}{\LaTeX\ \texttt{!<2000/06/01!>}版用に修正}
+% \changes{v1.0l}{2001/09/04}{\LaTeX\ \texttt{!<2001/06/01!>}版用に修正}
+% \changes{v1.0m}{2004/08/10}{\LaTeX\ \texttt{!<2003/12/01!>}版対応確認}
+% \changes{v1.0n}{2005/01/04}{plfonts.dtxバグ修正}
+% \changes{v1.0o}{2006/01/04}{plfonts.dtxバグ修正}
+% \changes{v1.0p}{2006/06/27}{plfonts.dtx \LaTeX\ \texttt{!<2005/12/01!>}対応}
+% \changes{v1.0q}{2006/11/10}{plfonts.dtxバグ修正}
+% \changes{v1.0r}{2016/01/26}{plcore.dtx p\TeX\ (r28720)対応}
+% \changes{v1.0s}{2016/02/01}{\LaTeX\ \texttt{!<2015/01/01!>}のlatexreleaseに
+%    対応するためのコードを導入}
+% \changes{v1.0t}{2016/02/03}{\cs{plIncludeInRelease}と
+%    \cs{plEndIncludeInRelease}を新設。}
+% \changes{v1.0u}{2016/04/17}{\LaTeX\ \texttt{!<2016/03/31!>}版対応確認}
+% \changes{v1.0v}{2016/05/07}{パッチファイルをロードするのをやめた。}
+% \changes{v1.0v}{2016/05/07}{起動時の文字列を最新の\LaTeX{}に合わせた。}
+% \changes{v1.0w}{2016/05/12}{起動時の文字列に入れる\LaTeX{}のバージョンを
+%    元の\LaTeX{}のバナーから引き継ぐように改良}
+% \changes{v1.0w}{2016/05/12}{起動時の文字列に入れるBabelのバージョンを
+%    元の\LaTeX{}のバナーから取得するコードを\file{platex.ini}から取り入れた}
+% \changes{v1.0x}{2016/06/19}{パッチレベルを\file{plvers.dtx}で設定}
+% \changes{v1.0y}{2016/06/27}{\file{platex.cfg}の読み込みを追加}
+% \changes{v1.0z}{2016/08/26}{\file{platex.cfg}の読み込みを
+%    \file{plcore.ltx}から\file{platex.ltx}へ移動}
+% \changes{v1.1}{2016/09/14}{起動時のバナーを取得するコードを改良}
+% \changes{v1.1a}{2017/02/20}{\LaTeX\ \texttt{!<2017/01/01!>}版対応確認}
+% \changes{v1.1b}{2017/03/19}{\cs{l@nohyphenation}の定義を保証
+%    (sync with ltfinal.dtx 2017/03/09 v2.0t)}
+% \changes{v1.1b}{2017/03/19}{\cs{document@default@language}の定義を保証
+%    (sync with ltfinal.dtx 2017/03/09 v2.0t)}
+% \changes{v1.1c}{2017/04/23}{\LaTeX\ \texttt{!<2017-04-15!>}版対応確認}
+% \changes{v1.1d}{2017/09/24}{パッチレベルが負の数の場合をpre-release扱いへ}
+% \changes{v1.1e}{2017/11/09}{\file{latexrelease}と
+%    \cs{platexrelease}のエミュレート内部処理を分離}
+% \changes{v1.1f}{2017/11/11}{\LaTeX{}のバナーを保存するコードを
+%    \file{platex.ltx}から\file{plcore.ltx}へ移動}
+% \changes{v1.1g}{2017/12/04}{\pLaTeX{}のバナーの定義時に
+%    \cs{pfmtname}, \cs{pfmtversion}, \cs{ppatch@level}を展開しないように}
+% \changes{v1.1h}{2018/01/10}{Modify \cs{plIncludeInRelease} code
+%    to check matching \cs{plEndIncluderelease}
+%    (sync with ltvers.dtx 2018/01/08 v1.1a)}
+% \changes{v1.1i}{2018/03/31}{\LaTeXe\ 2017-04-15以降必須}
+% \changes{v1.1j}{2018/04/07}{\LaTeX\ \texttt{!<2018-04-01!>}版対応確認}
+% \changes{v1.1k}{2018/04/08}{バナー調節のコードを最後(plfinal)ではなく
+%    最初(plcore)に早めた}
+% \changes{v1.1l}{2018/04/09}{バナーの保存しかたを改良}
+% \changes{v1.1l}{2018/04/09}{バナーの再構築のしかたを改良}
+% \changes{v1.1m}{2018/09/24}{バナーの再構築を簡略化}
+% \changes{v1.1n}{2018/10/31}{\LaTeXe{}とp\LaTeXe{}の更新タイミングずれ対策を
+%    \file{plvers.dtx} (plfinal) から\file{plcore.dtx}へ移動}
+% \changes{v1.1o}{2018/12/01}{\LaTeX\ \texttt{!<2018-12-01!>}版対応確認}
+% \changes{v1.1p}{2019/09/16}{エラーメッセージを更新
+%    (sync with ltvers.dtx 2019/07/01 v1.1c)}
+% \changes{v1.1q}{2019/10/01}{\LaTeX\ \texttt{!<2019-10-01!>}版対応確認}
+% \changes{v1.1r}{2020/02/01}{\LaTeX\ \texttt{!<2020-02-02!>}版対応確認}
+% \changes{v1.1s}{2020/03/14}{\LaTeX\ \texttt{!<2020-02-02!> PL5}版対応確認}
+% \changes{v1.1t}{2020/03/25}{バナーの再構築を効率化}
+% \changes{v1.1u}{2020/03/28}{latexrelease利用時の警告を早めた}
+% \changes{v1.1v}{2020/09/28}{新しいフックを活用}
+% \changes{v1.1w}{2020/09/30}{\LaTeX\ \texttt{!<2020-10-01!>}版対応確認}
+% \changes{v1.1x}{2020/10/07}{フックシステムが利用可能かどうか判定}
+% \changes{v1.1y}{2021/06/27}{\LaTeX\ \texttt{!<2021-06-01!>}版ほぼ対応}
+% \changes{v1.1z}{2021/12/08}{\LaTeX\ \texttt{!<2021-11-15!>}版ほぼ対応}
+% \fi
+%
+% \iffalse
+%<*driver>
+% \fi
+\ProvidesFile{plvers.dtx}[2021/12/08 v1.1z pLaTeX Kernel (Version Info)]
+% \iffalse
+\documentclass{jltxdoc}
+\GetFileInfo{plvers.dtx}
+\author{Ken Nakano \& Hideaki Togashi}
+\title{\filename}
+\date{作成日：\filedate}
+\begin{document}
+  \maketitle
+  \DocInput{\filename}
+\end{document}
+%</driver>
+% \fi
+%
+% \section{p\LaTeXe{}のバージョンの設定}
+%
+% 現在のp\LaTeXe{}がベースとした\LaTeXe{}のバージョンは、下記のとおりです。
+% \changes{v1.0}{1995/05/16}{p\LaTeXe\ 用に\file{ltvers.dtx}を修正}
+% \changes{v1.0a}{1995/08/30}{\LaTeX\ \texttt{!<1995/06/01!>}版用に修正}
+% \changes{v1.0b}{1996/01/31}{\LaTeX\ \texttt{!<1995/12/01!>}版用に修正}
+% \changes{v1.0c}{1997/01/11}{\LaTeX\ \texttt{!<1996/06/01!>}版用に修正}
+% \changes{v1.0d}{1997/01/23}{\LaTeX\ \texttt{!<1996/12/01!>}版用に修正}
+% \changes{v1.0e}{1997/07/02}{\LaTeX\ \texttt{!<1997/06/01!>}版用に修正}
+% \changes{v1.0f}{1998/02/17}{\LaTeX\ \texttt{!<1997/12/01!>}版用に修正}
+% \changes{v1.0g}{1998/09/01}{\LaTeX\ \texttt{!<1998/06/01!>}版用に修正}
+% \changes{v1.0h}{1999/04/05}{\LaTeX\ \texttt{!<1998/12/01!>}版用に修正}
+% \changes{v1.0i}{1999/08/09}{\LaTeX\ \texttt{!<1999/06/01!>}版用に修正}
+% \changes{v1.0j}{2000/02/29}{\LaTeX\ \texttt{!<1999/12/01!>}版用に修正}
+% \changes{v1.0k}{2000/11/03}{\LaTeX\ \texttt{!<2000/06/01!>}版用に修正}
+% \changes{v1.0l}{2001/09/04}{\LaTeX\ \texttt{!<2001/06/01!>}版用に修正}
+% \changes{v1.0m}{2004/08/10}{\LaTeX\ \texttt{!<2003/12/01!>}版対応確認}
+% \changes{v1.0s}{2016/02/01}{\LaTeX\ \texttt{!<2015/01/01!>}版用に修正}
+% \changes{v1.0u}{2016/04/17}{\LaTeX\ \texttt{!<2016/03/31!>}版対応確認}
+% \changes{v1.1a}{2017/02/20}{\LaTeX\ \texttt{!<2017/01/01!>}版対応確認}
+% \changes{v1.1c}{2017/04/23}{\LaTeX\ \texttt{!<2017-04-15!>}版対応確認}
+% \changes{v1.1j}{2018/04/07}{\LaTeX\ \texttt{!<2018-04-01!>}版対応確認}
+% \changes{v1.1o}{2018/12/01}{\LaTeX\ \texttt{!<2018-12-01!>}版対応確認}
+% \changes{v1.1q}{2019/10/01}{\LaTeX\ \texttt{!<2019-10-01!>}版対応確認}
+% \changes{v1.1r}{2020/02/01}{\LaTeX\ \texttt{!<2020-02-02!>}版対応確認}
+% \changes{v1.1s}{2020/03/14}{\LaTeX\ \texttt{!<2020-02-02!> PL5}版対応確認}
+% \changes{v1.1w}{2020/09/30}{\LaTeX\ \texttt{!<2020-10-01!>}版対応確認}
+% \changes{v1.1y}{2021/06/27}{\LaTeX\ \texttt{!<2021-06-01!>}版ほぼ対応}
+% \changes{v1.1z}{2021/12/08}{\LaTeX\ \texttt{!<2021-11-15!>}版ほぼ対応}
+%    \begin{macrocode}
+%<*2ekernel>
+%\def\fmtname{LaTeX2e}
+%\edef\fmtversion
+%</2ekernel>
+%<latexrelease>\edef\latexreleaseversion
+%<platexrelease>\edef\p@known@latexreleaseversion
+%<*2ekernel|latexrelease|platexrelease>
+   {2021-11-15}
+%</2ekernel|latexrelease|platexrelease>
+%    \end{macrocode}
+%
+% また、現在のp\LaTeXe{}は最低でも\LaTeXe\ 2017-04-15以降
+% （バージョン番号すなわち日付が|YYYY/MM/DD|形式から
+% |YYYY-MM-DD|形式に変更された版）を前提とします。
+% なお、\LaTeXe\ 2017/01/01以降はe-\TeX{}必須になっています。
+% \changes{v1.1i}{2018/03/31}{\LaTeXe\ 2017-04-15以降必須}
+%    \begin{macrocode}
+%<*plcore>
+\ifx\fmtversion\@undefined
+    \errhelp{Please reinstall LaTeX.}%
+    \errmessage{This cannot happen!^^JYour file `latex.ltx'
+                might be broken}\@@end
+\else
+  \ifnum\expandafter\@parse@version\fmtversion//00\@nil<20170415
+    \errhelp{Please update your TeX installation; if not available,
+             obtain it^^Jmanually from CTAN
+             (https://ctan.org/pkg/latex-base) or from^^JGitHub
+             (https://github.com/latex3/latex2e).}%
+    \errmessage{This version of pLaTeX2e requires LaTeX2e 2017-04-15
+                or newer!^^JObtain a newer version of `latex',
+                otherwise pLaTeX2e setup will^^Jnever succeed}\@@end
+  \fi
+\fi
+%</plcore>
+%    \end{macrocode}
+%
+% \begin{macro}{\pfmtname}
+% \begin{macro}{\pfmtversion}
+% \begin{macro}{\ppatch@level}
+% p\LaTeXe{}のフォーマットファイル名とバージョンを定義します。
+% \changes{v1.0x}{2016/06/19}{パッチレベルを\file{plvers.dtx}で設定}
+%    \begin{macrocode}
+%<*plcore>
+\def\pfmtname{pLaTeX2e}
+\def\pfmtversion
+%</plcore>
+%<platexrelease>\edef\platexreleaseversion
+%<*plcore|platexrelease>
+   {2021-11-15}
+%</plcore|platexrelease>
+%<*plcore>
+\def\ppatch@level{0}
+%</plcore>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% コミュニティ版\pLaTeXe{}ではパッチファイルを使用しないので、
+% パッチファイルをロードするコードは削除しました。
+% \changes{v1.0v}{2016/05/07}{パッチファイルをロードするのをやめた。}
+%
+% \iffalse
+% 次の部分は、p\LaTeXe{}のパッチファイルをロードするためのコードです。
+% バグを修正するためのパッチを配布するかもしれません。
+%    \begin{macrocode}
+%<*plfinal>
+%\IfFileExists{plpatch.ltx}
+%  {\typeout{***********************************^^J%
+%            * Applying patch file plpatch.ltx *^^J%
+%            ***********************************}
+%  \def\pfmtversion@topatch{unknown}
+%  \input{plpatch.ltx}
+%  \ifx\pfmtversion\pfmtversion@topatch
+%    \ifx\ppatch@level\@undefined
+%      \typeout{^^J^^J^^J%
+%   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+%   !! Patch file `plpatch.ltx' (for version <\pfmtversion@topatch>)^^J%
+%   !! is not suitable for version <\pfmtversion> of pLaTeX.^^J^^J%
+%   !! Please check if iniptex found an old patch file:^^J%
+%   !! --- if so, rename it or delete it, and redo the^^J%
+%   !!     iniptex run.^^J%
+%   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J}%
+%      \batchmode \@@end
+%    \fi
+%  \else
+%      \typeout{^^J^^J^^J%
+%   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+%   !! Patch file `plpatch.ltx' (for version <\pfmtversion@topatch>)^^J%
+%   !! is not suitable for version <\pfmtversion> of pLaTeX.^^J%
+%   !!^^J%
+%   !! Please check if iniptex found an old patch file:^^J%
+%   !! --- if so, rename it or delete it, and redo the^^J%
+%   !!     iniptex run.^^J%
+%   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J}%
+%      \batchmode \@@end
+%  \fi
+%  \let\pfmtversion@topatch\relax
+%  }{}
+%</plfinal>
+%    \end{macrocode}
+% \fi
+%
+% \section{起動時に実行するコード}
+%
+% \subsection{\LaTeXe{}起動時の実行コードの取得}
+% このファイルの直前で\LaTeXe{}の\file{latex.ltx}が読み込まれているはず
+% なので、その起動時の実行コード（|\everyjob|トークンの内容）を保存します。
+%
+% \LaTeXe\ 2018-04-01 patch level~1までは、|\everyjob|が
+%\begin{verbatim}
+%   \typeout{LaTeX2e version}\typeout{Babel version}
+%\end{verbatim}
+% だけでしたが、patch level~2以降では
+% いくつかのコードが|\everyjob|で遅延実行されるようになっています。
+% それらのコードを抽出するため、最初と最後に区切りトークン
+% （それぞれ|\platexNILa|と|\platexNILb|）を付けておきます。
+% \changes{v1.1f}{2017/11/11}{\LaTeX{}のバナーを保存するコードを
+%    \file{platex.ltx}から\file{plcore.ltx}へ移動}
+% \changes{v1.1l}{2018/04/09}{バナーの保存しかたを改良}
+%    \begin{macrocode}
+%<*plcore>
+\edef\platexBANNER{\noexpand\platexNILa
+                   \the\everyjob % LaTeX banner and delayed codes
+                   \noexpand\platexNILb}
+%    \end{macrocode}
+%
+% \subsection{\pLaTeXe{}起動時に実行するコードの構築}
+%
+% \begin{macro}{\everyjob}
+% \LaTeXe{}起動時の実行コードを元に、\pLaTeXe{}用の調整を加えます。
+% \changes{v1.0v}{2016/05/07}{起動時の文字列を最新の\LaTeX{}に合わせた。}
+% \changes{v1.0w}{2016/05/12}{起動時の文字列に入れる\LaTeX{}のバージョンを
+%    元の\LaTeX{}のバナーから引き継ぐように改良}
+% \changes{v1.0w}{2016/05/12}{起動時の文字列に入れるBabelのバージョンを
+%    元の\LaTeX{}のバナーから取得するコードを\file{platex.ini}から取り入れた}
+% \changes{v1.1}{2016/09/14}{起動時のバナーを取得するコードを改良}
+% \changes{v1.1d}{2017/09/24}{パッチレベルが負の数の場合をpre-release扱いへ}
+% \changes{v1.1g}{2017/12/04}{\pLaTeX{}のバナーの定義時に
+%    \cs{pfmtname}, \cs{pfmtversion}, \cs{ppatch@level}を展開しないように}
+% \changes{v1.1k}{2018/04/08}{バナー調節のコードを最後(plfinal)ではなく
+%    最初(plcore)に早めた}
+% \changes{v1.1l}{2018/04/09}{バナーの再構築のしかたを改良}
+% \changes{v1.1m}{2018/09/24}{バナーの再構築を簡略化}
+% \changes{v1.1t}{2020/03/25}{バナーの再構築を効率化}
+%    \begin{macrocode}
+\begingroup
+%    \end{macrocode}
+%
+% \pLaTeXe{}のバージョン表示を作ります。
+%    \begin{macrocode}
+  \ifnum\ppatch@level=0
+    \toks2={\pfmtname\space<\pfmtversion>\space}%
+  \else\ifnum\ppatch@level>0
+    \toks2={\pfmtname\space<\pfmtversion>+\ppatch@level\space}%
+  \else
+    \toks2={\pfmtname\space<\pfmtversion>-pre\ppatch@level\space}%
+  \fi\fi
+%    \end{macrocode}
+%
+% |\everyjob|の内容をパースして
+% \begin{itemize}
+% \item \LaTeXe{}のバージョン表示の中身（|\typeout{}|の引数）を |#2|
+% \item バージョン表示の前に実行されるコードがあれば |#1|
+% \item バージョン表示の後に残っているコードがあれば |#3|
+% \end{itemize}
+% に入れます。2020年時点では |#1| は空、|#3| は欧文inputencのUTF-8化で
+% 遅延されたコードに該当します。
+% ^^A Babel v3.20まではこの中に|\typeout{Babel version}|も含まれて
+% ^^A いましたが、Babel v3.21からはこのバナー表示は無くなったようです。
+% そして、\LaTeXe{}のバージョンと\pLaTeXe{}のバージョンを
+% まとめて表示するように整形します。
+%    \begin{macrocode}
+  \edef\platexNILa#1\typeout#2#3\platexNILb{%
+    #1\noexpand\typeout{\the\toks2 (based on #2)}#3}
+  \global\everyjob\expandafter\expandafter\expandafter{\platexBANNER}%
+%    \end{macrocode}
+%
+% 不要になったマクロ定義は削除しておきます。
+%    \begin{macrocode}
+\endgroup
+\let\platexBANNER=\@undefined
+%</plcore>
+%    \end{macrocode}
+% \end{macro}
+%
+% ^^A 起動時に\file{platex.cfg}がある場合、それを読み込むようにする
+% ^^A コードは、\file{plcore.ltx}から\file{platex.ltx}へ移動しました。
+% \changes{v1.0y}{2016/06/27}{\file{platex.cfg}の読み込みを追加}
+% \changes{v1.0z}{2016/08/26}{\file{platex.cfg}の読み込みを
+%    \file{plcore.ltx}から\file{platex.ltx}へ移動}
+%
+% ^^A \LaTeXe{}とp\LaTeXe{}の更新タイミングずれ対策
+% ^^A （ハイフネーション関連パラメータの定義）は、
+% ^^A \file{plvers.dtx}から\file{plcore.dtx}へ移動しました。
+% \changes{v1.1b}{2017/03/19}{\cs{l@nohyphenation}の定義を保証
+%    (sync with ltfinal.dtx 2017/03/09 v2.0t)}
+% \changes{v1.1b}{2017/03/19}{\cs{document@default@language}の定義を保証
+%    (sync with ltfinal.dtx 2017/03/09 v2.0t)}
+% \changes{v1.1n}{2018/10/31}{\LaTeXe{}とp\LaTeXe{}の更新タイミングずれ対策を
+%    \file{plvers.dtx} (plfinal) から\file{plcore.dtx}へ移動}
+%
+% \subsection{フックシステムが利用可能かどうか}
+% \begin{macro}{\pltx@newhook@avail}
+% フォーマット作成時（\file{latex.ltx}の読込後すぐ）と、
+% platexreleaseパッケージ内（latexreleaseパッケージ読込後すぐ）で
+% それぞれ判定する必要があります。
+% ^^A 本当は「|\AddToHook| が定義済みかどうか」を使いたいが
+% ^^A \begin{itemize}
+% ^^A   \item Format date 2020-02-02 or older: undefined
+% ^^A   \item Format date 2020-10-01 or newer: available
+% ^^A   \item ... under \texttt{latexrelease} rollback: defined but no-op
+% ^^A \end{itemize}
+% ^^A という特殊なrollbackに対処するため、|\fmtversion|で判定する。
+% ^^A 単なるif-トークンは「読み飛ばし」の考慮が面倒なので使わない。
+% \changes{v1.1x}{2020/10/07}{フックシステムが利用可能かどうか判定}
+%    \begin{macrocode}
+%<*plcore|plhookrelease>
+\chardef\pltx@newhook@avail=\z@
+\@ifl@t@r\fmtversion{2020/10/01}{\chardef\pltx@newhook@avail=\@ne}{}
+%</plcore|plhookrelease>
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \section{latexreleaseパッケージへの対応}
+%
+% 最後に、latexreleaseパッケージへの対応です。
+% \begin{macro}{\plIncludeInRelease}
+% platexreleaseパッケージでは
+% |\plIncludeInRelease|...|\plEndIncludeInRelease|のブロックを使います。
+% \changes{v1.0t}{2016/02/03}{\cs{plIncludeInRelease}と
+%    \cs{plEndIncludeInRelease}を新設。}
+% \changes{v1.1e}{2017/11/09}{\file{latexrelease}と
+%    \cs{platexrelease}のエミュレート内部処理を分離}
+% \changes{v1.1h}{2018/01/10}{Modify \cs{plIncludeInRelease} code
+%    to check matching \cs{plEndIncluderelease}
+%    (sync with ltvers.dtx 2018/01/08 v1.1a)}
+% \changes{v1.1p}{2019/09/16}{エラーメッセージを更新
+%    (sync with ltvers.dtx 2019/07/01 v1.1c)}
+%
+% \iffalse
+% 備忘録：\LaTeX{}では\cs{if@includeinrelease}の定義を
+% \file{ltvers.dtx}ではなく\file{ltdefns.dtx}に遅らせてある。
+% しかし、これは\cs{newif}がその時点で定義されていないからにすぎず、
+% \pLaTeX{}では遅らせる必要がない。
+% \fi
+%
+%    \begin{macrocode}
+%<*plcore|platexrelease>
+\newif\if@plincludeinrelease
+\@plincludeinreleasefalse
+\def\plIncludeInRelease#1{%
+  \if@plincludeinrelease
+    \PackageError{platexrelease}
+      {mis-matched \string\plIncludeInRelease}%
+      {There is an \string\plEndIncludeRelease\space missing}%
+    \@plincludeinreleasefalse
+  \fi
+  \kernel@ifnextchar[%
+  {\@plIncludeInRelease{#1}}
+  {\@plIncludeInRelease{#1}[#1]}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\@plIncludeInRelease#1[#2]{\@plIncludeInRele@se{#2}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\@plIncludeInRele@se#1#2#3{%
+  \toks@{[#1] #3}%
+  \expandafter\ifx\csname\string#2+\@currname+plIIR\endcsname\relax
+    \ifnum\expandafter\@parse@version#1//00\@nil
+          >\expandafter\@parse@version\pfmtversion//00\@nil
+      \GenericInfo{}{Skipping: \the\toks@}%
+     \expandafter\expandafter\expandafter\@gobble@plIncludeInRelease
+    \else
+      \GenericInfo{}{Applying: \the\toks@}%
+      \@plincludeinreleasetrue
+      \expandafter\let\csname\string#2+\@currname+plIIR\endcsname\@empty
+    \fi
+  \else
+    \GenericInfo{}{Already applied: \the\toks@}%
+    \expandafter\@gobble@plIncludeInRelease
+  \fi
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\plEndIncludeInRelease{%
+  \if@plincludeinrelease
+    \@plincludeinreleasefalse
+  \else
+    \PackageError{platexrelease}
+      {mis-matched \string\plEndIncludeInRelease}{}%
+  \fi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\long\def\@gobble@plIncludeInRelease#1\plEndIncludeInRelease{%
+  \@plincludeinreleasefalse
+  \@check@plIncludeInRelease#1\plIncludeInRelease
+    \@check@plIncludeInRelease\@end@check@plIncludeInRelease}
+%    \end{macrocode}
+%    \begin{macrocode}
+\long\def\@check@plIncludeInRelease#1\plIncludeInRelease
+  #2#3\@end@check@plIncludeInRelease{%
+  \ifx\@check@plIncludeInRelease#2\else
+    \PackageError{platexrelease}
+      {skipped \string\plIncludeInRelease\space for tag \string#2}{}%
+  \fi}
+%</plcore|platexrelease>
+%    \end{macrocode}
+% \end{macro}
+%
+% \LaTeXe{}が提供するlatexreleaseパッケージが読み込まれていて、
+% かつ\pLaTeXe{}が提供するplatexreleaseパッケージが読み込まれていない
+% 場合は、巻き戻し機能によって\pLaTeXe{}のコマンドが\LaTeXe{}のコマンドで
+% 上書きされ、動作が壊れてしまいますので、警告を出します。
+% \changes{v1.0s}{2016/02/01}{latexrelease利用時に警告を出すようにした}
+%
+% 当初は|\AtBeginDocument|を使って|\@begindocumenthook|の末尾に
+% 警告文を入れていましたが、\LaTeXe~2020-02-02以降に付属の
+% latexreleaseパッケージで巻き戻すとフックの実行より早い段階
+% （具体的には|\process@table|内の|\kanjiprocess@table|実行中）で
+% 「|\series@maybe@drop@one@m|が未定義」というエラーが出てしまうので、
+% |\process@table|の先頭に警告文を入れます。
+% 万が一|\process@table|も巻き戻し対象とされてしまった場合のため、
+% |\@begindocumenthook|の先頭にも入れておきます。
+% ^^A この場合は|\process@table|が|\romanprocess@table|相当へと
+% ^^A 上書きされているはずであり、|\kanjiprocess@table|は
+% ^^A 実行されないのでエラーは出ない。
+% \changes{v1.1u}{2020/03/28}{latexrelease利用時の警告を早めた}
+%
+% \LaTeXe~2020-10-01以降では|\process@table|より早く実行される
+% フックが用意されたので、これを利用します。
+% \changes{v1.1v}{2020/09/28}{新しいフックを活用}
+%    \begin{macrocode}
+%<*plfinal>
+\ifnum\pltx@newhook@avail=\z@
+% for LaTeX2e 2020-02-02 PL5 or older
+\expandafter\def\expandafter\process@table\expandafter{%
+  \expandafter\p@warn@latexrelease\process@table}
+\begingroup
+\toks@\expandafter{\expandafter\p@warn@latexrelease\@begindocumenthook}
+\xdef\@begindocumenthook{\the\toks@}
+\endgroup
+\else
+% for LaTeX2e 2020-10-01 or later
+\AddToHook{begindocument/before}{\p@warn@latexrelease}
+\fi
+%
+\def\p@warn@latexrelease{%
+  \ifx\latexreleaseversion\@undefined\else
+    \ifx\platexreleaseversion\@undefined
+      \@latex@warning@no@line{%
+        Package latexrelease is loaded.\MessageBreak
+        Some patches in pLaTeX2e core may be overwritten.\MessageBreak
+        Consider using platexrelease.\MessageBreak
+        See platex.pdf for detail}%
+    \fi
+  \fi
+  \let\p@warn@latexrelease\relax
+}
+%</plfinal>
+%    \end{macrocode}
+%
+% \Finale
+%
+\endinput

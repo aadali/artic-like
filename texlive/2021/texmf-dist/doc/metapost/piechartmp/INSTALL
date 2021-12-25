@@ -1,0 +1,20 @@
+piechartMP installation:
+
+Copy the files shown on the left side in the directories
+shown on the right side and update the file database LS-R
+if necessary. 
+
+piechartmp.mp  --> TEXMF/metapost/piechartmp/
+LEGAL, README  --> TEXMF/doc/metapost/piechartmp/
+piechartmp.pdf --> TEXMF/doc/metapost/piechartmp/
+/examples/*    --> TEXMF/doc/metapost/piechartmp/examples/
+
+TEXMF means the root of your system TEX tree, e.g.:
+  C:\texmf\               (win)
+  C:\texmf-local\         (win)
+  /usr/share/texmf/       (Unix)
+  /usr/local/share/texmf/ (Unix)
+  /usr/share/texmf-local/ (Unix)
+  /opt/texmf/             (Unix)
+You should prefer "local" paths for the installation.
+Please consult the documentation of your TeX-system.

@@ -1,0 +1,27 @@
+name bidicontour
+category Package
+revision 34631
+shortdesc Bidi-aware coloured contour around text
+longdesc The package is a re-implementation of the contour package,
+longdesc making it bidi-aware, and adding support of the xdvipdfmx (when
+longdesc the outline option of the package is used).
+containersize 1848
+containerchecksum 10364edc592375f69912888945e6d555df30627498aaae409b727392c64cd4aac386433119578a7a01a48bd0cff84aae33079593219b282feb9d96a68bdde78f
+doccontainersize 30508
+doccontainerchecksum a1a3f9692ea2e462305f8c6db432586eb76d78cef5fa0e9057cbe5766ad99e25c560ad658569a92d1885e373fb6215fe2f9bcbc1c69b46c3088d36eb92e1aae9
+docfiles size=14
+ texmf-dist/doc/xelatex/bidicontour/README
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-doc.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-doc.tex
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-example-copies.pdf
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-example-copies.tex
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-example-outline.pdf
+ texmf-dist/doc/xelatex/bidicontour/bidicontour-example-outline.tex
+runfiles size=1
+ texmf-dist/tex/xelatex/bidicontour/bidicontour.sty
+catalogue-contact-bugs https://github.com/bidi-tex/bidicontour/issues
+catalogue-contact-repository https://github.com/bidi-tex/bidicontour
+catalogue-ctan /macros/xetex/latex/bidicontour
+catalogue-license lppl1.3
+catalogue-topics decoration colour
+catalogue-version 0.2

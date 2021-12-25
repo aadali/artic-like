@@ -1,0 +1,33 @@
+name newfloat
+category Package
+revision 52906
+shortdesc Define new floating environments
+longdesc The package offers the command \DeclareFloatingEnvironment,
+longdesc which the user may use to define new floating environments
+longdesc which behave like the LaTeX standard foating environments
+longdesc figure and table.
+containersize 5592
+containerchecksum 2cd4d1e5097bd6b9abd25621fe64590e67f8933a5292f83277dd546cb949c6193af04e16a72e61c3023293f6471ed41e9b46c23dd4c6c19428c7875cf0279aa8
+doccontainersize 100188
+doccontainerchecksum 4a9b942a072ac5da1e92f6ecd63ff16cda41195403794c8a111140d4d6af43947875828d497f7824bdcfd41ca03ece22469ed5e0fbec0cdd84c56471678cd469
+docfiles size=31
+ texmf-dist/doc/latex/newfloat/CHANGELOG
+ texmf-dist/doc/latex/newfloat/README details="Readme"
+ texmf-dist/doc/latex/newfloat/SUMMARY
+ texmf-dist/doc/latex/newfloat/newfloat.pdf details="Package documentation"
+srccontainersize 14664
+srccontainerchecksum 311c22bfb91719a8358f5feb89f3ada35de942703009cb47d5489b2800f9eb149a285cd6ac99186f94cf8d82ec6b9f582dc9922cde9afe515c10e483044f0d98
+srcfiles size=18
+ texmf-dist/source/latex/newfloat/newfloat.dtx
+ texmf-dist/source/latex/newfloat/newfloat.ins
+runfiles size=8
+ texmf-dist/tex/latex/newfloat/newfloat.sty
+catalogue-also float
+catalogue-contact-bugs https://gitlab.com/axelsommerfeldt/newfloat/issues
+catalogue-contact-home https://gitlab.com/axelsommerfeldt/newfloat
+catalogue-contact-repository https://gitlab.com/axelsommerfeldt/newfloat/tree/master
+catalogue-contact-support https://gitlab.com/axelsommerfeldt/newfloat/issues
+catalogue-ctan /macros/latex/contrib/newfloat
+catalogue-license lppl1.3
+catalogue-topics float
+catalogue-version 1.1l

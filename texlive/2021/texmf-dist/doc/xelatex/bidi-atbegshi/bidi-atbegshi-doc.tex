@@ -1,0 +1,59 @@
+\documentclass{ltxdoc}
+\usepackage{holtxdoc}
+\begin{document}
+\title{The \xpackage{bidi-atbegshi} Package}
+\author{Vafa Khalighi\\\xemail{tex.ctan@gmail.com}}
+\maketitle
+The \xpackage{bidi-atbegshi} adds bidi support to package \xpackage{atbegshi}; it modifies the \cs{AtBeginShipoutUpperLeft}, and \cs{AtBeginShipoutUpperLeftForeground} so that they properly both in LTR and RTL modes. In addition, it also defines the following commands:
+
+\begin{declcs}{AtBeginShipoutUpperRight} \M{background material}
+\end{declcs}
+ This is a macro that puts material in the background of
+ box \cs{AtBeginShipoutBox}.
+ The \meta{background material} is set in an \cs{hbox}, the
+ reference point is the upper right corner of the output page.
+
+
+ The macro \cs{AtBeginShipoutUpperRight} is intended to be used
+ in one of the hook setting macros, such as
+ \cs{AtBeginShipout}, \cs{AtBeginShipoutFirst}, or
+ \cs{AtBeginShipoutNext}.
+
+ The \meta{background material} is set
+ inside a \texttt{picture} environment:
+ \begin{quote}
+   |\begin{picture}(0,0)|\\
+   \mbox{}\quad |\setlength{\unitlength}{1pt}%|\\
+   \mbox{}\quad \meta{background material}\\
+   |\end{picture}|
+ \end{quote}
+ 
+\begin{declcs}{AtBeginShipoutLowerLeft} \M{background material}
+\end{declcs}
+Similar to the \cs{AtBeginShipoutUpperRight} command but
+ the reference point is the lower left corner of the output page.
+
+\begin{declcs}{AtBeginShipoutLowerRight} \M{background material}
+\end{declcs}
+Similar to the \cs{AtBeginShipoutUpperRight} command but
+ the reference point is the lower right corner of the output page.
+
+ \begin{declcs}{AtBeginShipoutUpperRightForeground} \M{foreground material}
+ \end{declcs}
+ See \cs{AtBeginShipoutUpperRight}. The difference is that the material
+ is put in the foreground.
+ 
+  \begin{declcs}{AtBeginShipoutLowerLeftForeground} \M{foreground material}
+ \end{declcs}
+ See \cs{AtBeginShipoutLowerLeft}. The difference is that the material
+ is put in the foreground.
+ 
+  \begin{declcs}{AtBeginShipoutLowerRightForeground} \M{foreground material}
+ \end{declcs}
+ See \cs{AtBeginShipoutLowerRight}. The difference is that the material
+ is put in the foreground.
+ 
+  \begin{declcs}{LengthToUnit} \M{length with units}
+ \end{declcs}
+ For instance, \cs{LengthToUnit}\texttt{\{12pt\}} converts 12pt to 12 (stripping the unit).
+\end{document}

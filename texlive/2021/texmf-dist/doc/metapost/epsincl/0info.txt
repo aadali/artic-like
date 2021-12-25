@@ -1,0 +1,13 @@
+EPSINCL: made in BOP s.c., bop@bop.com.pl; public domain software
+history: 20.08.1999: ver. 0.1, pre-release
+         05.01.2000: ver. 0.2, first release
+
+ENGLISH                              | POLSKI
+                                     |
+The package EPSINCL facilitates      | Pakiet EPSINCL u/latwia w/l/aczanie
+including EPS files in METAPOST      | plik/ow EPS do dokument/ow 
+documents; it makes use of (G)AWK.   | METAPOST-owych; wykorzystywany jest
+Using it is very simple -- see       | (G)AWK. Spos/ob u/zycia demonstruje
+testincl.mp and testincl.bat         | za/l/aczony przyk/lad (testincl.mp)
+(DOS/WIN32) or testincl.sh (U*X)     | i pliki testincl.bat (DOS/WIN32)
+files to see this.                   | lub testincl.sh (U*X)

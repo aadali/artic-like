@@ -1,0 +1,11 @@
+This is package xechangebar that extends package changebar
+so it can be used with XeLaTeX. The package introduces the
+new option `xetex' for use with XeLaTeX. Everything else
+remains the same and users should consult the original 
+documenation for usage information.
+
+Apostolos Syropoulos
+asyropoulos@yahoo.com
+
+Xanthi, Greece
+2017/08/03

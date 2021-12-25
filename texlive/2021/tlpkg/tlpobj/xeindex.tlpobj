@@ -1,0 +1,22 @@
+name xeindex
+category Package
+revision 35756
+shortdesc Automatic index generation for XeLaTeX
+longdesc The package is based on XeSearch, and will automatically index
+longdesc words or phrases in an XeLaTeX document. Words are declared in
+longdesc a list, and every occurrence then creates an index entry whose
+longdesc content can be fully specified beforehand.
+containersize 1660
+containerchecksum bc3f399973bd8be5b83ea6da2c39d80de8f39ac6cf2d82d689c81816cad334310081f44fb4e256e442fc47ed6640c2b8ebd185e431f0d0ddec5f75f7b535283f
+doccontainersize 78928
+doccontainerchecksum c84682c8034c5e182bcbb2ac0411f4ba5d8065a5db1f008c6f9e7a01b94b3563c44c03fc4c1cf48b3b09d19ba93f22778d8840741737bf1a344cb0c8f66ceb49
+docfiles size=24
+ texmf-dist/doc/xelatex/xeindex/README details="Readme"
+ texmf-dist/doc/xelatex/xeindex/xeindex.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/xeindex/xeindex.tex
+runfiles size=2
+ texmf-dist/tex/xelatex/xeindex/xeindex.sty
+catalogue-ctan /macros/xetex/latex/xeindex
+catalogue-license lppl
+catalogue-topics index xetex
+catalogue-version 0.3

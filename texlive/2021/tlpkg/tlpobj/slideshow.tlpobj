@@ -1,0 +1,29 @@
+name slideshow
+category Package
+revision 15878
+shortdesc Generate slideshow with MetaPost
+longdesc The package provides a means of creating presentations in
+longdesc MetaPost, without intervention from other utilities (except a
+longdesc distiller). Such an arrangement has its advantages (though
+longdesc there are disadvantages too).
+containersize 8544
+containerchecksum f7bd44c9720512297f15ff6cee1c49ca52c29fc206f739e6aa447e778fed00a64e282aeab9d42b215cac69a64ab39f3919433bd0640d30d55ac540e2dde07967
+doccontainersize 105052
+doccontainerchecksum d271c1f9e7b9c45694463982da8c9542fea326d7e191a705e92f5b423e054c3f926768d2209844ddabbe75eb610d4a5cb05ffd53098cdca9e35328c865027eff
+docfiles size=42
+ texmf-dist/doc/metapost/slideshow/slideshow.txt
+ texmf-dist/doc/metapost/slideshow/sshowex.pdf
+ texmf-dist/doc/metapost/slideshow/sshowex2.pdf
+ texmf-dist/doc/metapost/slideshow/sshowex3.pdf
+ texmf-dist/doc/metapost/slideshow/sshowintro.pdf details="Presentation about package"
+runfiles size=10
+ texmf-dist/metapost/slideshow/pathalong.mp
+ texmf-dist/metapost/slideshow/slideshow.mp
+ texmf-dist/metapost/slideshow/sshowex.mp
+ texmf-dist/metapost/slideshow/sshowex2.mp
+ texmf-dist/metapost/slideshow/sshowex3.mp
+ texmf-dist/metapost/slideshow/sshowintro.mp
+catalogue-ctan /graphics/metapost/contrib/macros/slideshow
+catalogue-license other-free
+catalogue-topics presentation
+catalogue-version 1.0

@@ -1,0 +1,49 @@
+[Tue Dec 21 14:38:40 2021] install: ctablestack
+[Tue Dec 21 14:38:41 2021] install: ctex
+[Tue Dec 21 14:38:42 2021] install: everyhook
+[Tue Dec 21 14:38:44 2021] install: fandol
+[Tue Dec 21 14:38:45 2021] install: luatexbase
+[Tue Dec 21 14:38:46 2021] install: luatexja
+[Tue Dec 21 14:38:47 2021] install: platex.x86_64-linux
+[Tue Dec 21 14:38:48 2021] install: platex
+[Tue Dec 21 14:38:49 2021] install: platex-tools
+[Tue Dec 21 14:38:49 2021] install: ptex.x86_64-linux
+[Tue Dec 21 14:38:50 2021] install: ptex
+[Tue Dec 21 14:38:50 2021] install: ptex-base
+[Tue Dec 21 14:38:51 2021] install: ptex-fonts
+[Tue Dec 21 14:38:52 2021] install: svn-prov
+[Tue Dec 21 14:38:52 2021] install: ttfutils.x86_64-linux
+[Tue Dec 21 14:38:53 2021] install: ttfutils
+[Tue Dec 21 14:38:53 2021] install: ulem
+[Tue Dec 21 14:38:54 2021] install: uplatex.x86_64-linux
+[Tue Dec 21 14:38:55 2021] install: uplatex
+[Tue Dec 21 14:38:56 2021] install: uptex.x86_64-linux
+[Tue Dec 21 14:38:57 2021] install: uptex
+[Tue Dec 21 14:38:58 2021] install: uptex-base
+[Tue Dec 21 14:38:58 2021] install: uptex-fonts
+[Tue Dec 21 14:38:59 2021] install: xpinyin
+[Tue Dec 21 14:39:00 2021] install: zhmetrics
+[Tue Dec 21 14:39:01 2021] install: zhmetrics-uptex
+[Tue Dec 21 14:39:02 2021] install: zhnumber
+[Tue Dec 21 14:39:02 2021] command: mktexlsr
+[Tue Dec 21 14:39:02 2021] command: updmap-sys
+[Tue Dec 21 14:39:02 2021] command: fmtutil-sys --byengine euptex --no-error-if-no-format --no-error-if-no-engine=luajithbtex,luajittex,mfluajit --status-file=/tmp/IkMMnrxPYI/t8v8Z0DCDs
+[Tue Dec 21 14:39:03 2021]   OK: euptex.fmt/euptex uplatex-dev.fmt/euptex uplatex.fmt/euptex
+[Tue Dec 21 14:39:03 2021] command: fmtutil-sys --byengine eptex --no-error-if-no-format --no-error-if-no-engine=luajithbtex,luajittex,mfluajit --status-file=/tmp/IkMMnrxPYI/t8v8Z0DCDs
+[Tue Dec 21 14:39:03 2021]   OK: eptex.fmt/eptex platex.fmt/eptex platex-dev.fmt/eptex
+[Tue Dec 21 14:39:03 2021] command: fmtutil-sys --byengine ptex --no-error-if-no-format --no-error-if-no-engine=luajithbtex,luajittex,mfluajit --status-file=/tmp/IkMMnrxPYI/t8v8Z0DCDs
+[Tue Dec 21 14:39:03 2021]   OK: ptex.fmt/ptex
+[Tue Dec 21 14:39:03 2021] command: fmtutil-sys --byengine uptex --no-error-if-no-format --no-error-if-no-engine=luajithbtex,luajittex,mfluajit --status-file=/tmp/IkMMnrxPYI/t8v8Z0DCDs
+[Tue Dec 21 14:39:03 2021]   OK: uptex.fmt/uptex
+[Tue Dec 21 16:23:37 2021] install: vtable
+[Tue Dec 21 16:23:37 2021] command: mktexlsr
+[Tue Dec 21 16:24:00 2021] install: varwidth
+[Tue Dec 21 16:24:00 2021] command: mktexlsr
+[Tue Dec 21 16:24:14 2021] install: dashrule
+[Tue Dec 21 16:24:14 2021] command: mktexlsr
+[Tue Dec 21 16:24:31 2021] install: ifmtarg
+[Tue Dec 21 16:24:31 2021] command: mktexlsr
+[Tue Dec 21 16:24:44 2021] install: forloop
+[Tue Dec 21 16:24:44 2021] command: mktexlsr
+[Tue Dec 21 16:24:58 2021] install: alphalph
+[Tue Dec 21 16:24:58 2021] command: mktexlsr

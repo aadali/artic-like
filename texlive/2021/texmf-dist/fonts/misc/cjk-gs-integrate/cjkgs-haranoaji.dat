@@ -1,0 +1,277 @@
+# Harano Aji Fonts (free)
+
+### JAPANESE ###
+
+Name: HaranoAjiMincho-ExtraLight
+Class: Japan
+OTFname: HaranoAjiMincho-ExtraLight.otf
+
+Name: HaranoAjiMincho-Light
+Class: Japan
+Provides(70): Ryumin-Light
+Provides(70): RyuminPro-Light
+Provides(70): HiraMinProN-W3
+Provides(70): HiraMinPro-W3
+OTFname: HaranoAjiMincho-Light.otf
+
+Name: HaranoAjiMincho-Regular
+Class: Japan
+Provides(70): FutoMinA101-Bold
+Provides(70): FutoMinA101Pro-Bold
+OTFname: HaranoAjiMincho-Regular.otf
+
+Name: HaranoAjiMincho-Medium
+Class: Japan
+OTFname: HaranoAjiMincho-Medium.otf
+
+Name: HaranoAjiMincho-SemiBold
+Class: Japan
+Provides(70): MidashiMin-MA31
+Provides(70): MidashiMinPro-MA31
+Provides(70): HiraMinProN-W6
+Provides(70): HiraMinPro-W6
+OTFname: HaranoAjiMincho-SemiBold.otf
+
+Name: HaranoAjiMincho-Bold
+Class: Japan
+Provides(71): MidashiMin-MA31
+Provides(71): MidashiMinPro-MA31
+Provides(71): HiraMinProN-W6
+Provides(71): HiraMinPro-W6
+OTFname: HaranoAjiMincho-Bold.otf
+
+Name: HaranoAjiMincho-Heavy
+Class: Japan
+OTFname: HaranoAjiMincho-Heavy.otf
+
+Name: HaranoAjiGothic-ExtraLight
+Class: Japan
+OTFname: HaranoAjiGothic-ExtraLight.otf
+
+Name: HaranoAjiGothic-Light
+Class: Japan
+OTFname: HaranoAjiGothic-Light.otf
+
+Name: HaranoAjiGothic-Normal
+Class: Japan
+Provides(70): HiraKakuProN-W3
+Provides(70): HiraKakuPro-W3
+OTFname: HaranoAjiGothic-Normal.otf
+
+Name: HaranoAjiGothic-Regular
+Class: Japan
+Provides(70): GothicBBB-Medium
+Provides(70): GothicBBBPro-Medium
+Provides(71): HiraKakuProN-W3
+Provides(71): HiraKakuPro-W3
+OTFname: HaranoAjiGothic-Regular.otf
+
+Name: HaranoAjiGothic-Medium
+Class: Japan
+Provides(70): FutoGoB101-Bold
+Provides(70): FutoGoB101Pro-Bold
+Provides(70): HiraKakuProN-W6
+Provides(70): HiraKakuPro-W6
+OTFname: HaranoAjiGothic-Medium.otf
+
+Name: HaranoAjiGothic-Bold
+Class: Japan
+Provides(70): MidashiGo-MB31
+Provides(70): MidashiGoPro-MB31
+Provides(70): HiraKakuStdN-W8
+Provides(70): HiraKakuStd-W8
+OTFname: HaranoAjiGothic-Bold.otf
+
+Name: HaranoAjiGothic-Heavy
+Class: Japan
+Provides(70): Jun101-Light
+Provides(70): Jun101Pro-Light
+Provides(70): HiraMaruProN-W4
+Provides(70): HiraMaruPro-W4
+OTFname: HaranoAjiGothic-Heavy.otf
+
+### SIMPLIFIED CHINESE ###
+
+Name: HaranoAjiMinchoCN-ExtraLight
+Class: GB
+OTFname: HaranoAjiMinchoCN-ExtraLight.otf
+
+Name: HaranoAjiMinchoCN-Light
+Class: GB
+OTFname: HaranoAjiMinchoCN-Light.otf
+
+Name: HaranoAjiMinchoCN-Regular
+Class: GB
+Provides(45): STSong-Light
+Provides(45): STSong-Regular
+OTFname: HaranoAjiMinchoCN-Regular.otf
+
+Name: HaranoAjiMinchoCN-Medium
+Class: GB
+OTFname: HaranoAjiMinchoCN-Medium.otf
+
+Name: HaranoAjiMinchoCN-SemiBold
+Class: GB
+OTFname: HaranoAjiMinchoCN-SemiBold.otf
+
+Name: HaranoAjiMinchoCN-Bold
+Class: GB
+OTFname: HaranoAjiMinchoCN-Bold.otf
+
+Name: HaranoAjiMinchoCN-Heavy
+Class: GB
+OTFname: HaranoAjiMinchoCN-Heavy.otf
+
+Name: HaranoAjiGothicCN-ExtraLight
+Class: GB
+OTFname: HaranoAjiGothicCN-ExtraLight.otf
+
+Name: HaranoAjiGothicCN-Light
+Class: GB
+OTFname: HaranoAjiGothicCN-Light.otf
+
+Name: HaranoAjiGothicCN-Normal
+Class: GB
+OTFname: HaranoAjiGothicCN-Normal.otf
+
+Name: HaranoAjiGothicCN-Regular
+Class: GB
+OTFname: HaranoAjiGothicCN-Regular.otf
+
+Name: HaranoAjiGothicCN-Medium
+Class: GB
+Provides(45): STHeiti-Light
+Provides(45): STHeiti-Regular
+Provides(45): STKaiti-Regular
+OTFname: HaranoAjiGothicCN-Medium.otf
+
+Name: HaranoAjiGothicCN-Bold
+Class: GB
+OTFname: HaranoAjiGothicCN-Bold.otf
+
+Name: HaranoAjiGothicCN-Heavy
+Class: GB
+OTFname: HaranoAjiGothicCN-Heavy.otf
+
+### TRADITIONAL CHINESE ###
+
+Name: HaranoAjiMinchoTW-ExtraLight
+Class: CNS
+OTFname: HaranoAjiMinchoTW-ExtraLight.otf
+
+Name: HaranoAjiMinchoTW-Light
+Class: CNS
+OTFname: HaranoAjiMinchoTW-Light.otf
+
+Name: HaranoAjiMinchoTW-Regular
+Class: CNS
+Provides(45): MSung-Light
+Provides(45): MSung-Medium
+OTFname: HaranoAjiMinchoTW-Regular.otf
+
+Name: HaranoAjiMinchoTW-Medium
+Class: CNS
+Provides(45): MHei-Medium
+Provides(45): MKai-Medium
+OTFname: HaranoAjiMinchoTW-Medium.otf
+
+Name: HaranoAjiMinchoTW-SemiBold
+Class: CNS
+OTFname: HaranoAjiMinchoTW-SemiBold.otf
+
+Name: HaranoAjiMinchoTW-Bold
+Class: CNS
+OTFname: HaranoAjiMinchoTW-Bold.otf
+
+Name: HaranoAjiMinchoTW-Heavy
+Class: CNS
+OTFname: HaranoAjiMinchoTW-Heavy.otf
+
+Name: HaranoAjiGothicTW-ExtraLight
+Class: CNS
+OTFname: HaranoAjiGothicTW-ExtraLight.otf
+
+Name: HaranoAjiGothicTW-Light
+Class: CNS
+OTFname: HaranoAjiGothicTW-Light.otf
+
+Name: HaranoAjiGothicTW-Normal
+Class: CNS
+OTFname: HaranoAjiGothicTW-Normal.otf
+
+Name: HaranoAjiGothicTW-Regular
+Class: CNS
+OTFname: HaranoAjiGothicTW-Regular.otf
+
+Name: HaranoAjiGothicTW-Medium
+Class: CNS
+OTFname: HaranoAjiGothicTW-Medium.otf
+
+Name: HaranoAjiGothicTW-Bold
+Class: CNS
+OTFname: HaranoAjiGothicTW-Bold.otf
+
+Name: HaranoAjiGothicTW-Heavy
+Class: CNS
+OTFname: HaranoAjiGothicTW-Heavy.otf
+
+### KOREAN ###
+
+Name: HaranoAjiMinchoK1-ExtraLight
+Class: Korea
+OTFname: HaranoAjiMinchoK1-ExtraLight.otf
+
+Name: HaranoAjiMinchoK1-Light
+Class: Korea
+OTFname: HaranoAjiMinchoK1-Light.otf
+
+Name: HaranoAjiMinchoK1-Regular
+Class: Korea
+Provides(45): HYSMyeongJo-Medium
+OTFname: HaranoAjiMinchoK1-Regular.otf
+
+Name: HaranoAjiMinchoK1-Medium
+Class: Korea
+OTFname: HaranoAjiMinchoK1-Medium.otf
+
+Name: HaranoAjiMinchoK1-SemiBold
+Class: Korea
+OTFname: HaranoAjiMinchoK1-SemiBold.otf
+
+Name: HaranoAjiMinchoK1-Bold
+Class: Korea
+OTFname: HaranoAjiMinchoK1-Bold.otf
+
+Name: HaranoAjiMinchoK1-Heavy
+Class: Korea
+OTFname: HaranoAjiMinchoK1-Heavy.otf
+
+Name: HaranoAjiGothicK1-ExtraLight
+Class: Korea
+OTFname: HaranoAjiGothicK1-ExtraLight.otf
+
+Name: HaranoAjiGothicK1-Light
+Class: Korea
+OTFname: HaranoAjiGothicK1-Light.otf
+
+Name: HaranoAjiGothicK1-Normal
+Class: Korea
+OTFname: HaranoAjiGothicK1-Normal.otf
+
+Name: HaranoAjiGothicK1-Regular
+Class: Korea
+OTFname: HaranoAjiGothicK1-Regular.otf
+
+Name: HaranoAjiGothicK1-Medium
+Class: Korea
+Provides(45): HYGoThic-Medium
+Provides(45): HYRGoThic-Medium
+OTFname: HaranoAjiGothicK1-Medium.otf
+
+Name: HaranoAjiGothicK1-Bold
+Class: Korea
+OTFname: HaranoAjiGothicK1-Bold.otf
+
+Name: HaranoAjiGothicK1-Heavy
+Class: Korea
+OTFname: HaranoAjiGothicK1-Heavy.otf

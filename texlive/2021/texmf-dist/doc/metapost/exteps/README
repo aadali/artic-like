@@ -1,0 +1,5 @@
+exteps is a module for including external EPS figures into MetaPost
+figures. It is written entirely in MetaPost, and therefore does not
+require any post processing of the MetaPost output.
+
+Palle Jorgensen

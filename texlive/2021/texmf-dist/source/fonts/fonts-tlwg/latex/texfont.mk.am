@@ -1,0 +1,129 @@
+ltxtype1dir = $(texmfdir)/fonts/type1/public/$(LATEX_PACKAGE)
+ltxafmdir = $(texmfdir)/fonts/afm/public/$(LATEX_PACKAGE)
+ltxtfmdir = $(texmfdir)/fonts/tfm/public/$(LATEX_PACKAGE)
+ltxvfdir  = $(texmfdir)/fonts/vf/public/$(LATEX_PACKAGE)
+
+ltxmapdir = $(texmfdir)/fonts/map/dvips/$(LATEX_PACKAGE)
+
+ltxmap_DATA = $(MAP)
+
+LTX_PFBFILES = $(FONTS:%=%.pfb)
+LTX_AFMFILES = $(FONTS:%=%.afm)
+LTX_TFMFILES = $(FONTS:%=%.tfm)
+LTX_RTFMFILES = $(FONTS:%=r%.tfm)
+LTX_VFFILES = $(FONTS:%=%.vf)
+
+LTX_SYNTH_TFMFILES = $(SYNTH_FONTS:%=%.tfm)
+LTX_SYNTH_RTFMFILES = $(SYNTH_FONTS:%=r%.tfm)
+LTX_SYNTH_VFFILES = $(SYNTH_FONTS:%=%.vf)
+
+ltxtype1_DATA = $(LTX_PFBFILES)
+
+ltxafm_DATA = $(LTX_AFMFILES)
+
+ltxtfm_DATA = \
+	$(LTX_TFMFILES) \
+	$(LTX_RTFMFILES) \
+	$(LTX_SYNTH_TFMFILES) \
+	$(LTX_SYNTH_RTFMFILES) \
+	$(NULL)
+
+ltxvf_DATA = $(LTX_VFFILES) $(LTX_SYNTH_VFFILES)
+
+# OpenType fonts
+
+ltxotfdir = $(texmfdir)/fonts/opentype/public/$(LATEX_PACKAGE)
+
+LTX_OTFFILES = $(FONTSOURCES:.sfd=.otf)
+
+ltxotf_DATA = ${LTX_OTFFILES}
+
+# Local Rules
+
+thai-dummy.afm \
+thailigs.enc \
+lthtlwg.enc \
+thailigs-sc.enc \
+lthtlwg-sc.enc \
+thailigs-osf.enc \
+lthtlwg-osf.enc \
+thailigs-osf-sc.enc \
+lthtlwg-osf-sc.enc \
+:
+	[ -e $@ ] || $(LN_S) $(top_srcdir)/latex/$@ .
+
+thailigs.vpl: thai-dummy.afm thailigs.enc
+	$(AFM2TFM) thai-dummy.afm -v $@ -T thailigs.enc thailigs.tfm
+
+thailigs-sc.vpl: thai-dummy.afm thailigs-sc.enc
+	$(AFM2TFM) thai-dummy.afm -v $@ -T thailigs-sc.enc thailigs-sc.tfm
+
+thailigs-osf.vpl: thai-dummy.afm thailigs-osf.enc
+	$(AFM2TFM) thai-dummy.afm -v $@ -T thailigs-osf.enc thailigs-osf.tfm
+
+thailigs-osf-sc.vpl: thai-dummy.afm thailigs-osf-sc.enc
+	$(AFM2TFM) thai-dummy.afm -v $@ -T thailigs-osf-sc.enc thailigs-osf-sc.tfm
+
+#
+# merge_ligs(font-vpl-file,ligs-vpl-file)
+#
+# Replaces LIGTABLE in font-vpl-file with that in ligs-vpl-file.
+#
+define merge_ligs
+	TMPFILE=`mktemp /tmp/tltx.XXXXXXXXX` && \
+	$(AWK) "BEGIN {show=1} /LIGTABLE/ {show=0} {if(show) print}" $(1) > $$TMPFILE && \
+	$(AWK) "BEGIN {show=0} /LIGTABLE/ {show=1} /CHARACTER/ {show=0} {if(show) print}" $(2) >> $$TMPFILE && \
+	$(AWK) "BEGIN {show=0} /CHARACTER/ {show=1} {if(show) print}" $(1) >> $$TMPFILE && \
+	mv $$TMPFILE $(1)
+endef
+
+r%-osf-sc.tfm: %.afm
+%-osf-sc.vpl: %.afm thailigs-osf-sc.vpl lthtlwg-osf-sc.enc
+	$(AFM2TFM) $*.afm -v $*-osf-sc.vpl -T lthtlwg-osf-sc.enc r$*-osf-sc.tfm \
+	| $(SED) "s/$$/ <$*.pfb/" >> $(MAP)
+	$(call merge_ligs,$*-osf-sc.vpl,thailigs-osf-sc.vpl)
+
+r%-osf.tfm: %.afm
+%-osf.vpl: %.afm thailigs-osf.vpl lthtlwg-osf.enc
+	$(AFM2TFM) $*.afm -v $*-osf.vpl -T lthtlwg-osf.enc r$*-osf.tfm \
+	| $(SED) "s/$$/ <$*.pfb/" >> $(MAP)
+	$(call merge_ligs,$*-osf.vpl,thailigs-osf.vpl)
+
+r%-sc.tfm: %.afm
+%-sc.vpl: %.afm thailigs-sc.vpl lthtlwg-sc.enc
+	$(AFM2TFM) $*.afm -v $*-sc.vpl -T lthtlwg-sc.enc r$*-sc.tfm \
+	| $(SED) "s/$$/ <$*.pfb/" >> $(MAP)
+	$(call merge_ligs,$*-sc.vpl,thailigs-sc.vpl)
+
+r%.tfm: %.afm
+%.vpl: %.afm thailigs.vpl lthtlwg.enc
+	$(AFM2TFM) $*.afm -v $*.vpl -T lthtlwg.enc r$*.tfm \
+	| $(SED) "s/$$/ <$*.pfb/" >> $(MAP)
+	$(call merge_ligs,$*.vpl,thailigs.vpl)
+
+%.tfm: %.vpl
+	$(VPTOVF) $*
+
+$(MAP): $(ltxtfm_DATA)
+	LC_COLLATE=C sort $@ | uniq > /tmp/tmp.$$$$; mv /tmp/tmp.$$$$ $@
+
+install-data-hook:
+	@if test -z "$(DESTDIR)" ; then                                       \
+	  $(TEXHASH) || true ;                                                \
+	  $(UPDMAP) --disable $(MAP) --nohash --nomkmap || true ;             \
+	  $(UPDMAP) --enable Map $(MAP) || true ;                             \
+	else                                                                  \
+	  echo "***" ;                                                        \
+	  echo "*** Warning: TeX font map was not updated" ;                  \
+	  echo "***" ;                                                        \
+	  echo "*** update these files on the target system" ;                \
+	  echo "*** using updmap command" ;                                   \
+	  echo "***" ;                                                        \
+	fi
+ 
+uninstall-hook:
+	$(TEXHASH)
+	$(UPDMAP) --disable $(MAP)
+
+CLEANFILES += *.vpl *.vf *.tfm $(MAP)
+

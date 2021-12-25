@@ -1,0 +1,41 @@
+name pslatex
+category Package
+revision 57434
+shortdesc Use PostScript fonts by default
+longdesc A small package that makes LaTeX default to 'standard'
+longdesc PostScript fonts. It is basically a merger of the times and the
+longdesc (obsolete) mathptm packages from the psnfss suite. You must
+longdesc have installed standard LaTeX and the psnfss PostScript fonts
+longdesc to use this package. The main novel feature is that the pslatex
+longdesc package tries to compensate for the visual differences between
+longdesc the Adobe fonts by scaling Helvetica by 90%, and 'condensing'
+longdesc Courier (i.e. scaling horizontally) by 85%. The package is
+longdesc supplied with a (unix) shell file for a 'pslatex' command that
+longdesc allows standard LaTeX documents to be processed, without
+longdesc needing to edit the file. Note that current psnfss uses a
+longdesc different technique for scaling Helvetica, and treats Courier
+longdesc as a lost cause (there are better free fixed-width available
+longdesc now, than there were when pslatex was designed). As a result,
+longdesc pslatex is widely considered obsolete.
+containersize 5824
+containerchecksum 64dc0f10f3aaa78a4d611d21601e5fb3f27c7c97bcf04f5dd3192f5253660edc862481f3b1bcb8b18b6cc07a6064e78953c31470bf36bc70103f2a83374483c4
+srccontainersize 1200
+srccontainerchecksum 086805aaf0b61b8e3e561627388ea1af67ef8dba3a0b5808ef3d9719652e76abf4353345ca2096e31fb33c9c960b01b4972754f29532a25e91ad59dc6c1d6cae
+srcfiles size=3
+ texmf-dist/source/latex/pslatex/fontinst/pslatex.tex
+ texmf-dist/source/latex/pslatex/shell/pslatex
+ texmf-dist/source/latex/pslatex/shell/pslatex.bat
+runfiles size=9
+ texmf-dist/fonts/map/dvips/pslatex/pcrr8rn.map
+ texmf-dist/fonts/tfm/public/pslatex/pcrr7tn.tfm
+ texmf-dist/fonts/tfm/public/pslatex/pcrr8rn.tfm
+ texmf-dist/fonts/tfm/public/pslatex/pcrr8tn.tfm
+ texmf-dist/fonts/vf/public/pslatex/pcrr7tn.vf
+ texmf-dist/fonts/vf/public/pslatex/pcrr8tn.vf
+ texmf-dist/tex/latex/pslatex/pslatex.sty
+catalogue-contact-bugs https://github.com/davidcarlisle/dpctex/issues
+catalogue-contact-repository https://github.com/davidcarlisle/dpctex
+catalogue-ctan /macros/latex/contrib/pslatex
+catalogue-license lppl
+catalogue-topics font-supp obsolete
+catalogue-version 1.3

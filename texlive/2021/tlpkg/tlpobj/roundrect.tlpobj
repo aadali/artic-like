@@ -1,0 +1,28 @@
+name roundrect
+category Package
+revision 39796
+shortdesc MetaPost macros for highly configurable rounded rectangles (optionally with text)
+longdesc The roundrect macros for MetaPost provide ways to produce
+longdesc rounded rectangles, which may or may not contain a title bar or
+longdesc text (the title bar may itself contain text). They are
+longdesc extremely configurable.
+containersize 2200
+containerchecksum 01cdc4c8443c50a91dd408c52122e8ae65257344176227a508cb082f92d61bc02756d47e27f75d7862d3c87c26add2003604956ad00b448f63b4f6417c520ba6
+doccontainersize 284140
+doccontainerchecksum 35289692327bdc68acbd442588fbd37185f9e00e3e4ca78fe500474c53ef96542042cebd18cba7720bdca0b72f19384fd3b8afcf45447644bb3c560a1385595f
+docfiles size=75
+ texmf-dist/doc/metapost/roundrect/CHANGES
+ texmf-dist/doc/metapost/roundrect/README details="Readme"
+ texmf-dist/doc/metapost/roundrect/lppl.txt
+ texmf-dist/doc/metapost/roundrect/roundrect.pdf details="Package documentation"
+srccontainersize 7076
+srccontainerchecksum 9866ae92b2c5f8c446ebca5c7afcdf3e8b52f12504b7d74c5ac4faa570a98ab6775c3ba5ad99d4300c1f9b7f92ffa423d5c73991ad47951a4e2bee3eb3bfe473
+srcfiles size=7
+ texmf-dist/source/metapost/roundrect/roundrect.dtx
+ texmf-dist/source/metapost/roundrect/roundrect.ins
+runfiles size=2
+ texmf-dist/metapost/roundrect/roundrect.mp
+catalogue-ctan /graphics/metapost/contrib/macros/roundrect
+catalogue-license lppl1.3
+catalogue-topics graphics-mpost boxing
+catalogue-version 2.2

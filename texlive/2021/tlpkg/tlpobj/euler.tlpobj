@@ -1,0 +1,30 @@
+name euler
+category Package
+revision 42428
+shortdesc Use AMS Euler fonts for math
+longdesc Provides a setup for using the AMS Euler family of fonts for
+longdesc mathematics in LaTeX documents. "The underlying philosophy of
+longdesc Zapf's Euler design was to capture the flavour of mathematics
+longdesc as it might be written by a mathematician with excellent
+longdesc handwriting." The euler package is based on Knuth's macros for
+longdesc the book 'Concrete Mathematics'. The text fonts for the
+longdesc Concrete book are supported by the beton package.
+containersize 3372
+containerchecksum 3b3d383a2f715f14dba0ab926d3df9d10ab63c06d203c59e551732a7f6af4ff8965750404a37863c91d3fc3db7d44d1a279d03839162fde9d8d9fd849f0047c3
+doccontainersize 236756
+doccontainerchecksum 789c0b35257ad74dcddea589eed36f0a3b86eae3b201fc708c13cb11dbedc5b489d1495c218f9e10558b8977658b72c345a5622c10b8b1d7ceb3065a6c8fb9a0
+docfiles size=63
+ texmf-dist/doc/latex/euler/euler.pdf details="Package documentation"
+ texmf-dist/doc/latex/euler/legal.txt
+srccontainersize 9832
+srccontainerchecksum 59e262e4ebd3eee88828fb2cbc91b55ffe962e2bfe662df5c052075cf4fe4b9b8580ce217e38e4709789a0e77c810f9681ed3cef95f10709c54da5f1dbebd73b
+srcfiles size=10
+ texmf-dist/source/latex/euler/euler.dtx
+ texmf-dist/source/latex/euler/euler.ins
+runfiles size=3
+ texmf-dist/tex/latex/euler/euler.sty
+catalogue-also beton eulervm
+catalogue-ctan /macros/latex/contrib/euler
+catalogue-license lppl
+catalogue-topics font-supp-maths
+catalogue-version 2.5

@@ -1,0 +1,2463 @@
+\documentclass[11pt,a4paper,french]{article}
+% Needs geometriesyr16.mp
+%http://melusine.eu.org/syracuse/poulecl/geometriesyr16/distrib/geometriesyr16-050408.tgz
+
+% To compile:
+% pdflatex repere-doc.tex
+% mptopdf repere-doc.mp
+% mptopdf repere-doc.mp
+% pdflatex repere-doc.tex
+
+  \usepackage{calc,ifthen}
+
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  \usepackage{textcomp}
+  \usepackage{mathtools}
+
+  \usepackage{geometry}
+  \geometry{twoside,hmargin=2cm,vmargin={1.5cm,1.8cm},includefoot}
+  
+  \usepackage[bottom]{footmisc}
+
+  \usepackage{mflogo}
+  
+  \usepackage[output-decimal-marker={,}]{siunitx}
+
+  \usepackage{multicol}
+  \setlength{\multicolsep}{3pt}
+  \setlength{\columnsep}{0pt}
+  
+  \usepackage[toc]{multitoc}
+  
+  \usepackage{enumitem}
+  \setlist[description]{font=\ttfamily\bfseries\color{blue}}
+  
+  \usepackage[svgnames]{xcolor}
+
+  \usepackage{graphicx}
+  \usepackage{ifpdf}
+    \ifpdf
+      \DeclareGraphicsRule{*}{mps}{*}{}
+    \fi
+
+  \usepackage{url}
+  \usepackage{verbatim}
+  \usepackage{fancyvrb}
+  
+  \usepackage{array}
+  \usepackage{tabularx}
+  \renewcommand{\tabularxcolumn}[1]{>{\arraybackslash}m{#1}}
+  \newcolumntype{M}[1]{>{\arraybackslash}m{#1}}
+  \usepackage{longtable}
+  
+  \usepackage{tcolorbox}
+  \tcbset{colframe=black,boxsep=0pt,left=3pt,right=3pt,top=0pt,bottom=0pt,boxrule=0.4pt,colback=LightGoldenrod}
+  
+
+
+  \usepackage{babel}
+ \frenchbsetup{og=«,fg=»}
+
+  \usepackage{listings}
+  \lstset{columns=flexible,%
+          language=MetaPost,%
+          showstringspaces=false,%
+          basicstyle=\ttfamily,
+          literate={é}{{\'e}}1}
+
+  \usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+%%%%%%%%%%%%%%%%%%% moreverb.sty
+\makeatletter
+\newwrite\verbatim@out
+  \immediate\openout \verbatim@out \jobname.mp
+\newwrite\temp@code
+\def\verbatimwrite{%
+  \@bsphack
+  \immediate\openout \temp@code figtmp.mp
+  \let\do\@makeother\dospecials
+  \catcode`\^^M\active \catcode`\^^I=12
+  \def\verbatim@processline{%
+    \immediate\write\verbatim@out
+      {\the\verbatim@line}%
+    \immediate\write\temp@code
+          {\the\verbatim@line}
+     }%
+  \verbatim@start}
+
+\def\endverbatimwrite{%
+  \immediate\closeout\temp@code
+  \@esphack
+  }%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\largeurcode}
+\newlength{\largeurfig}
+\newcounter{numfig}
+\setcounter{numfig}{0}
+
+\newcommand{\codedeuxcol}{%
+                  \begin{tcolorbox}
+                     \begin{minipage}[c]{\largeurcode}
+                       \begin{multicols}{2}
+                         \lstinputlisting{figtmp.mp}
+                       \end{multicols}
+                     \end{minipage}
+                   \end{tcolorbox}
+                     \par\noindent
+                    }
+                    
+                    
+\newcommand{\codehoriz}{%
+                   \begin{minipage}[c]{\largeurcode}
+                        \lstinputlisting[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]{figtmp.mp}
+                    \end{minipage}
+                    \hfill
+                 }
+
+\newcommand{\codevert}{%
+                   {\centering
+                   \begin{minipage}[c]{\largeurcode}
+                        \lstinputlisting[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]{figtmp.mp}
+                    \end{minipage}
+                    \par\noindent}
+                 }
+
+\newenvironment{codefigure}[3]%
+               {%
+               \refstepcounter{numfig}
+               \setlength{\largeurcode}{#2\linewidth}
+               \ifnum#1=0
+                  \setlength{\largeurfig}{\linewidth-\largeurcode-2\fboxsep-2\fboxrule}
+                  \def\inscode{\codehoriz}
+               \else
+                  \setlength{\largeurfig}{\linewidth}
+                  \def\inscode{\codevert}
+                  \ifnum#3=1
+                   \relax
+                  \else
+                    \def\inscode{\codedeuxcol}
+                  \fi
+               \fi
+               \verbatimwrite
+               }%
+               {%
+               \endverbatimwrite
+               \par
+               \noindent
+                 \inscode
+               \IfFileExists{\jobname.\thenumfig}%
+                   {\begin{minipage}[c]{\largeurfig}
+                        \centering \includegraphics{\jobname-\thenumfig.pdf}\par
+%                        \centering \includegraphics{\jobname.\thenumfig}\par
+%                        \centering a\includegraphics{reperedocfig2.mps}a\par
+                    \end{minipage}}{}
+               \par}
+
+
+\newenvironment{codecache}%
+            {\verbatimwrite}{\endverbatimwrite}
+            
+\newcounter{reptmp}
+
+\newenvironment{codefigureinter}[2][1]%
+                  {%
+                    \setcounter{reptmp}{\value{numfig}+#2}
+                    \setlength{\largeurcode}{#1\linewidth}
+                    \def\inscode{\codevert}
+                    \verbatimwrite
+                  }%
+                 {\endverbatimwrite
+                  \par
+                  \noindent
+                  \inscode
+                 \whiledo{\value{numfig}<\value{reptmp}}
+                 {\refstepcounter{numfig}
+                  \IfFileExists{\jobname.\thenumfig}%
+                   {\includegraphics{\jobname-\thenumfig.pdf}
+%                   {\includegraphics{\jobname.\thenumfig}
+                    \qquad}{}
+                   }
+                 \par}
+            
+
+\newcounter{repexemple}
+\setcounter{repexemple}{0}
+
+\newcommand{\debutexemple}{\par\vspace{2ex}
+                   \refstepcounter{repexemple}
+                   \noindent {\bfseries \color{blue!20!black} 
+                   Exemple \arabic{repexemple}}
+                   \par\nopagebreak\vspace{1ex}
+                   }
+
+
+\newenvironment{exemple}[1][0.5]%
+                   {\debutexemple
+                   \codefigure{0}{#1}{1}
+                   }%
+                   {\endcodefigure
+                   \par\vspace{2ex}}
+
+\newenvironment{exemplev}[2][1]%
+                   {\debutexemple
+                   \codefigure{1}{#1}{#2}
+                   }%
+                   {\endcodefigure
+                   \par\vspace{2ex}}
+                   
+\newenvironment{exemplefiginter}[2][1]%
+                   {\debutexemple
+                   \codefigureinter[#1]{#2}
+                   }%
+                   {\endcodefigureinter
+                   \par\vspace{2ex}}
+                   
+\newenvironment{figreperedoc}%
+                  {\refstepcounter{numfig}%
+                   \verbatimwrite}%
+                   {%
+                   \endverbatimwrite%
+                   \IfFileExists{\jobname.\thenumfig}%
+                      {\includegraphics{\jobname-\thenumfig.pdf}}{}
+%                      {\includegraphics{\jobname.\thenumfig}}{}
+                   }
+
+
+\newcommand{\vect}[1]{\overrightarrow{#1\rule{0.1em}{0ex}}}
+
+\begin{document}
+\title{Documentation de \texttt{repere.mp}}
+\date{\today}
+\author{Olivier \textsc{Péault}%
+\footnote{E-mail : \href{mailto:o.peault@posteo.net}{\texttt{o.peault@posteo.net}}}}
+\maketitle
+
+\setcounter{tocdepth}{2}
+
+\setlength{\columnsep}{25pt}
+\tableofcontents
+\setlength{\columnsep}{10pt}
+
+
+
+
+\begin{codecache}
+%outputtemplate := "%j-%c.mps";
+input geometriesyr16;
+input repere;
+\end{codecache}
+
+
+\section{Utilisation du fichier}
+Les macros du fichier \verb+repere.mp+ ont pour but de simplifier la création de figures dans un repère du plan avec \MP{}. L'idée de départ est de coller le plus possible aux besoins de l'enseignement secondaire de mathématiques.
+
+Il est possible d'utiliser \verb+repere+ et \verb+geometriesyr+ (les macros de Christophe \textsc{Poulain} pour la géométrie disponibles à l'adresse \url{http://melusine.eu.org/syracuse/poulecl/macros/}) dans une même figure comme le montre l'exemple page \pageref{exgeom}.
+
+Le fichier \verb+repere.mp+ doit être placé dans un répertoire accessible à \MP{} (Par ex. le répertoire \verb+metapost+ du \verb+texmf+). De plus, la ligne \verb+input repere;+ doit apparaître dans le document contenant les figures.
+
+
+Les étiquettes (noms de points, de courbes, de vecteurs...) sont composées automatiquement au format \LaTeX{} avec le package \verb+latexmp.mp+. Il est donc nécessaire de compiler deux fois les documents.
+
+
+\section{Repère utilisateur}
+
+\subsection{Numérotation des figures}
+Chaque figure devra débuter par une instruction \verb|repere()| et se terminer par \verb|fin| (voir ci-dessous). Si ces instructions se trouvent en dehors d'un environnement \verb|beginfig()|-\verb|endfig| la numérotation est automatique :
+
+\bigskip
+\begin{minipage}[c]{0.3\linewidth}
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]
+beginfig(2);
+repere(...);
+<instructions de dessin>
+fin;
+endfig;
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.6\linewidth}
+La figure porte le numéro 2
+\end{minipage}
+
+\bigskip
+\begin{minipage}[c]{0.3\linewidth}
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]
+repere(...);
+<instructions de dessin>
+fin;
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.6\linewidth}
+La numérotation est automatique. La figure porte le numéro qui suit la figure précédemment dessinée. S'il s'agit de la première, elle porte le numéro 1.
+\end{minipage}
+
+
+
+\subsection{Définition du repère}
+\begin{description}
+\item[repere(xmin,xmax,ux,ymin,ymax,uy,theta)] débute une figure et définit le repère utilisateur : axe des abscisses de \verb+xmin+ à \verb+xmax+, unité \verb+ux+, axe des ordonnées de \verb+ymin+ à \verb+ymax+, unité \verb+uy+ et \verb+theta+ est l'angle en degrés entre les axes. Le paramètre \verb+theta+ est optionnel. Il est égal à 90 par défaut.
+
+\item[repere.larg(xmin,xmax,Lx,ymin,ymax,Ly,theta)] définit un repère tel que la largeur totale de la figure produite soit \verb+Lx+ et sa hauteur \verb+Ly+.
+
+\item[repere.orth(xmin,xmax,Lx,ymin,ymax)] définit un repère orthonormé de largeur totale \verb+Lx+.
+
+\item[interaxes(x,y)] définit les coordonnées du point d'intersection des axes. Par défaut ces coordonnées sont $(0,0)$.
+
+\item[cadre] chemin fermé qui fait le tour du repère.
+
+\item[fin] termine la figure et la découpe pour ne garder que la partie limitée par le repère utilisateur.
+\end{description}
+
+
+
+
+\subsection{Axes}
+
+\subsubsection{Généralités}
+\begin{description}
+\item[axex.pos(grad,val)] axe des abscisses gradué avec un pas de \verb+grad+ et étiqueté avec un pas de \verb+val+.
+
+Si \verb+grad+ est négatif ou nul, l'axe n'est pas gradué et si \verb+val+ est négatif ou nul, l'axe n'est pas étiqueté.
+
+\verb+pos+ est un paramètre optionnel qui désigne la position (au sens de \MP : \verb+rt+, \verb+urt+, \verb+top+, \verb+ulft+, \verb+lft+, \verb+llft+, \verb+bot+ ou \verb+lrt+) des étiquettes. \verb+pos+ peut être omis, la valeur par défaut est \verb+bot+.
+
+Les étiquettes qui ne sont pas entièrement à l'intérieur du cadre ne sont pas dessinées.
+
+\item[axey.pos(grad,val)] axe des ordonnées. La valeur par défaut de \verb+pos+ est \verb+lft+.
+\end{description}
+
+
+Au niveau de l'intersection des axes, les étiquettes sont tracées à la position \verb+pos+ si l'abscisse est différente de l'ordonnée ou si un seul axe est tracé. Dans le cas contraire, une seule étiquette est tracée pour les deux axes à une position \og intermédiaire \fg{} (pour \verb+axex.bot+ et \verb+axey.lft+, on obtient la position \verb+llft+)
+
+\begin{description}
+\item[axes.pos(grad,val)] figure formée par les deux axes gradués avec le même pas \verb+grad+ et étiquetés avec le même pas \verb+val+. \verb+pos+ désigne la position de l'étiquette de l'intersection des axes, sa valeur par défaut est \verb|llft|. La position des étiquettes des axes est définie à partir de \verb+pos+ (pour \verb+urt+ on obtient \verb+top+ pour l'axe des abscisses et \verb+rt+ pour l'axe des ordonnées.
+
+\end{description}
+
+
+
+\begin{exemple}
+repere(-3,3,1cm,-1,1,1cm);
+draw axex(1,1);
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-3,3,1cm,-1,1,1cm);
+draw axex.top(1,1);
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-3,3,0.8cm,-2.5,2.5,1cm);
+draw axes(1,1) withcolor pourpre;
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-3,3,0.8cm,-2.5,2.5,1cm,60);
+draw axes.lrt(1,1);
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere.orth(-3,3,5cm,-2.5,2.5);
+draw axex.top(0.5,1) withcolor bleu;
+draw axey(1,1) withcolor bleu;
+fin;
+\end{exemple}
+
+
+
+
+\subsubsection{Réglages des axes}
+
+Les axes sont dessinés, gradués et étiquetés par défaut sur toute la longueur du repère utilisateur. Pour des valeurs différentes on peut utiliser les macros suivantes :
+
+
+\begin{description}
+\item[setaxes(xmin,xmax,ymin,ymax)] définit les valeurs minimales et maximales pour les axes.
+
+\item[setgrad(xmin,xmax,ymin,ymax)] définit les valeurs minimales et maximales pour les graduations.
+
+\item[setval(xmin,xmax,ymin,ymax)] définit les valeurs minimales et maximales pour l'étiquetage.
+
+\item[flecheaxe] booléen égal à \verb|true| par défaut qui permet de dessiner, ou non, des flèches au bout des axes.
+\end{description}
+
+\begin{exemple}
+repere.larg(110,160,5cm,2000,7000,5cm);
+interaxes(120,3000);
+setaxes(120,160,3000,7000);
+setgrad(120,160,3000,7000);
+draw axex(10,10);
+draw axey(1000,1000);
+fin;
+\end{exemple}
+
+
+\begin{description}
+ \item[axexo.pos(grad,val), axeyo.pos(grad,val), axeso.pos(grad,val)] macros identiques aux précédentes sauf pour l'étiquette correspondant à l'intersection des axes qui est toujours dessinée.
+ 
+ \item[axexn.pos(grad,val), axeyn.pos(grad,val), axesn.pos(grad,val)] macros identiques aux précédentes sauf pour l'étiquette correspondant à l'intersection des axes qui n'est jamais dessinée.
+\end{description}
+
+
+\begin{exemple}
+repere(-0.5,3,0.8cm,-0.5,2.5,1cm);
+setaxes(0,3,0,2.5);
+draw axeso(1,1);
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere.larg(-3,3,6cm,-3,4,3.5cm,60);
+draw axexn(1,2) withcolor rouge;
+draw axeyn(1,1) withcolor olive;
+draw cadre;
+fin;
+\end{exemple}
+
+\subsubsection{Graduations multiples de $\pi$}
+
+\begin{description}
+\item[axexpi.pos(n,d)] axe des abscisses gradué et étiqueté avec un pas de $\frac{n\pi}{d}$. Les fractions sont composées en mode normal. Pour les obtenir en mode \og displaystyle \fg, la variable de type booléen \verb+displayfrac+ doit être égale à \verb+true+.
+
+\item[axeypi.pos(n,d)] axe des ordonnées gradué et étiqueté avec un pas de $\frac{n\pi}{d}$.
+
+\item[axespi.pos(n,d)] les deux axes gradués et étiquetés avec un pas de $\frac{n\pi}{d}$.
+
+\item[axexpio.pos(n,d), axeypio.pos(n,d), axespio.pos(n,d)] même chose que précédemment sauf pour l'étiquette correspondant à l'intersection des axes qui est toujours dessinée.
+
+\item[axexpin.pos(n,d), axeypin.pos(n,d), axespin.pos(n,d)] même chose que précédemment sauf pour l'étiquette correspondant à l'intersection des axes qui n'est jamais dessinée.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,2.5,1.3cm,-3.5,3.5,0.8cm);
+draw axexpi(1,6) withcolor grisfonce;
+draw axeypi(1,4) withcolor grisfonce;
+draw cadre;
+fin;
+\end{exemple}
+
+\subsubsection{Graduations isolées}
+
+\begin{description}
+\item[axexpart.pos(x1,lab1,x2,lab2,...)] graduation et étiquetage partiels de l'axe des abscisses pour les valeurs \verb+x1+, \verb+x2+... et les étiquettes \verb+lab1+, \verb+lab2+... à la position \verb+pos+. Si \verb+pos+ est omis, les étiquettes sont placées à la position \verb+bot+. Les étiquettes peuvent être soit des chaînes de caractères ("aa", "bonjour"), soit des expressions du type \verb+btex $\pi$ etex+ (ou \verb|LaTeX("$\pi$")| voir page \pageref{latex}), soit d'autres figures. Si \verb+labn+ est omis, la valeur de \verb+xn+ sera utilisée comme étiquette. Pour obtenir une graduation sans étiquette, on peut utiliser la chaîne vide \verb+""+.
+
+On peut désactiver le dessin de la graduation en donnant la valeur \verb|false| à \verb|boolgradxpart|.
+
+\item[axeypart.pos(y1,lab1,y2,lab2,...)] même chose sur l'axe des ordonnées. Si \verb+pos+ est omis, les étiquettes sont placées à la position \verb+lft+.
+\end{description}
+
+
+
+\begin{exemple}[0.55]
+repere.orth(-4,5,6cm,-3,4.5);
+setgrad(0,5,0,3);
+setval(0,5,0,3);
+draw axex(1,2);
+draw axey(1,0);
+draw axexpart(-1.8,-pi,LaTeX("$-\pi$"))
+                                   withcolor bleu;
+draw axeypart.rt(-2.5,"dd",-1,2.5,"")
+                                  withcolor rouge;
+fin;
+\end{exemple}
+
+\subsubsection{Ajout de texte sur les graduations}
+
+\begin{description}
+\item[extranumx] chaine de caractères qui sera ajoutée après les valeurs des graduations sur l'axe des abscisses avant d'être composée avec la commande \verb|\num| de \verb|siunitx|.
+\item[extranumy] même chose sur l'axe des ordonnées.
+
+\end{description}
+
+\begin{exemple}
+repere(-1,4,1.2cm,-1,3.5,1cm);
+extranumx:="e3";
+extranumy:="0000";
+draw axes(1,1);
+draw cadre;
+fin;
+\end{exemple}
+
+
+\subsection{Quadrillages}
+\begin{description}
+\VerbatimFootnotes
+\item[setquad(xmin,xmax,ymin,ymax)] définit les valeurs minimales et maximales pour le tracé des quadrillages.\footnote{Il existe une macro \verb|settout| qui appelle successivement \verb+setaxes+, \verb+setgrad+, \verb+setval+ et \verb+setquad+.}
+
+\item[quadrillage(x,y)] quadrillage avec un pas de \verb+x+ sur l'axe des abscisses et de \verb+y+ sur l'axe des ordonnées. L'épaisseur des traits par défaut est \verb+0.3bp+ et la couleur par défaut est \verb+0.7white+.
+\end{description}
+
+
+\begin{exemple}
+repere(-3,3,0.8cm,-2.5,2.5,1cm);
+draw quadrillage(1,0.5);
+draw axes(1,1);
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-3,3,0.8cm,-2.5,2.5,1cm);
+draw quadrillage(1,1) dashed evenly
+                       withcolor (1,0.5,0.5);
+draw axes(1,1) withcolor marine;
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[papiermillimetre] comme son nom l'indique... Les couleurs et les épaisseurs des traits sont stockées dans \verb+pm_coula+, \verb+pm_coulb+, \verb+pm_coulc+ et \verb+pm_epa+, \verb+pm_epb+, \verb+pm_epc+.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,2.5,1cm,-2.5,2.5,1cm);
+setquad(-2,2,-2,2);
+draw papiermillimetre;
+draw axes(1,1);
+fin;
+\end{exemple}
+
+\begin{description}
+\item[papierpointe(x,y)] quadrillage formé de points avec un pas de \verb+x+ sur l'axe des abscisses et de \verb+y+ sur l'axe des ordonnées. La taille des points par défaut est \verb+2bp+.
+\end{description}
+
+
+\begin{exemple}
+repere(-3,3,0.8cm,-2.5,2.5,1cm);
+setquad(0,3,0,2.5);
+draw papierpointe(0.5,0.5);
+setquad(-3,0,-2.5,2.5);
+draw quadrillage(1,1) dashed
+          withdots withcolor magenta;
+draw axes(1,1);
+draw cadre;
+fin;
+\end{exemple}
+
+\subsection{Base}
+\begin{description}
+\item[base(O,i,j)] figure formée par le point d'intersection des axes et son nom (\verb+O+), ainsi que des deux vecteurs de la base et leurs noms (\verb+i+ et \verb+j+ surmontés d'une flèche). Si les noms sont de la forme \og lettre + nombre\fg, le nombre est affiché en indice.
+
+\item[basep(O,I,J)] figure formée par le point d'intersection des axes et son nom (\verb+O+), ainsi que des deux points qui définissent le repère.
+\end{description}
+
+
+\begin{exemple}
+repere(-1.5,3.5,0.8cm,-1,3,1cm);
+flecheaxe:=false;
+draw axesn(1,1);
+drawoptions(withcolor marine);
+draw base(O,i,j);
+interaxes(2,1);
+draw base(I,e1,e2);
+drawoptions();
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-1,2.5,0.8cm,-1,2,1cm);
+flecheaxe:=false;
+draw axes(1,0);
+draw basep(O,I,J);
+draw cadre;
+fin;
+\end{exemple}
+
+
+
+
+\section{Points, vecteurs}
+
+\subsection{Points}
+\label{points}
+\begin{description}
+\item[(x,y)] désigne le point (ou le vecteur) de coordonnées cartésiennes \verb+x+ et \verb+y+ dans le repère utilisateur.
+
+\item[pol(r,t)] désigne le point (ou le vecteur) de coordonnées $(r\cos t;r\sin t)$ dans le repère utilisateur.
+
+\item[pold(r,t)] même chose avec l'angle donné en degrés.
+\end{description}
+
+Les macros suivantes sont directement inspirées des macros similaires de \verb+geometriesyr16.mp+.
+
+
+\begin{description}
+\item[MarquePoint(A)] marque le point \verb+A+. Le style de marque est contrôlé par le paramètre \verb+marque_p+ qui peut prendre les valeurs \verb+"plein"+ (valeur par défaut), \verb+"creux"+ ou \verb+"croix"+. Une autre valeur que celles-ci ne produira aucune marque.
+
+\item[pointe(A,B,C...)] permet de marquer plusieurs points.
+
+\item[nomme.pos(A,nom)] marque le point et affiche son nom à la position \verb+pos+ (qui peut être \verb|rt|, \verb|urt|, \verb|top|, \verb|ulft|...). \verb+nom+ peut être soit une chaîne de caractères, soit une expression du type \verb+btex ... etex+, soit une autre figure. Si \verb+nom+ est omis, le nom \verb+A+ est affiché. S'il s'agit d'un élément d'un tableau de points (\verb+A1+, \verb+A2+...), le nombre est affiché en indice.
+\end{description}
+
+
+\begin{exemple}[0.6]
+repere(-3,3,0.9cm,-2.5,5,0.9cm);
+pair A,B,C[],D,E,F;
+A=(1,1);B=(2,3);
+D=(-2,-1);E=(-1,-1);F=(-1,-2);
+draw axes(1,0);
+marque_p:="";drawoptions(withcolor magenta);
+nomme.llft(A);nomme.top(B);draw A--B;
+marque_p:="croix";drawoptions(withcolor rouge);
+pointe(D,E,F);
+marque_p:="creux";drawoptions(withcolor orange);
+nomme.bot(pol(sqrt(2),-pi/4),
+          "$\sqrt{2}e^{-i\frac{\pi}{4}}$");
+nomme.bot((-1.5,1),"$(-1,5;1)$");
+marque_p:="plein";drawoptions(withcolor violet);
+for i=2 upto 4:
+  C[i]=(-3+i/2,i);nomme.lft(C[i]);
+endfor
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[nomme{[a]}(A,nom)] Il est possible d'obtenir un placement plus fin des étiquettes en remplaçant la position au sens de \MP{} (\verb|rt|, \verb|urt|...) par un nombre qui représente alors la position de l'étiquette par rapport au point en degrés.
+\end{description}
+
+\begin{exemple}[0.55]
+repere(-3,3.5,1cm,-3,3,1cm);
+ pair A,B,C[];
+ A=(-2,-1);B=(1,-2);
+ nomme[40](A);nomme[70](A);nomme[100](A);
+ nomme[-110](B);
+ for i=0 upto 8:
+   C[i]:= (1+1.5*cosd(40i),1+1.5*sind(40i));
+   nomme[40*i](C[i]) couleur pourpre;
+ endfor
+draw cadre;
+fin;
+\end{exemple}
+
+
+\subsection{Vecteurs}
+\begin{description}
+\item[vecteur.pos(A,u,nom)] figure formée du représentant du vecteur \verb+u+ d'origine \verb+A+ ainsi que de \verb+nom+ placé à la position \verb+pos+ par rapport au milieu de la flèche. Si \verb+nom+ est une chaine de caractère, il sera affiché avec une flèche. Si \verb+nom+ est omis, \verb+u+ surmonté d'une flèche est utilisé. S'il s'agit d'un élément d'un tableau de points (\verb+u1+, \verb+u2+...), le nombre est affiché en indice.
+\end{description}
+
+
+\begin{exemple}[0.6]
+repere(-1,5.5,0.7cm,-4,4,0.8cm);
+pair A,B,C[],u,v,w[];
+u=(2,2);v=(2,-1);
+A=(1,1);B=A+u;
+draw axes(1,0);
+draw base(O,i,j);
+drawoptions(withcolor cyan);
+nomme.llft(A);nomme.top(B);
+draw vecteur.ulft(A,u,"AB");
+draw vecteur.urt(B,v);
+draw vecteur.bot(A,u+v,%
+                 LaTeX("$\vect{u}+\vect{v}$"));
+drawoptions(withcolor marine);
+for i=1 upto 3:
+ C[i]=(1,i-4);w[i]=(1.5,0.5*i-1);
+draw vecteur.bot(C[i],w[i]);
+endfor
+draw cadre;
+fin;
+\end{exemple}
+
+
+
+\section{Droites, courbes...}
+
+\subsection{Droites}
+\begin{description}
+\item[droite(A,B)] droite $(AB)$.
+
+\item[droite(a,b,c)] droite d'équation $ax+by+c=0$ dans le repère utilisateur.
+
+\item[droite(a,b)] droite d'équation $y=ax+b$ dans le repère utilisateur.
+
+\item[droite(c)] droite d'équation $x=c$ dans le repère utilisateur.
+\end{description}
+
+
+\begin{exemple}[0.65]
+repere(-2,3,1cm,-2,3,1cm);
+pair A,B;
+A=(-0.5,-1);B=(1.5,1.5);
+draw axes(1,0);
+nomme.ulft(A);
+nomme.lrt(B);
+drawoptions(withpen pencircle scaled 1);
+draw droite(A,B) withcolor olive;
+draw droite(1) withcolor vertfonce;           %x=1
+draw droite(1/3,3/2) withcolor vertfonce; %y=(1/3)x+3/2
+draw droite(2,3,-1) withcolor vertfonce;      %2x+3y-1=0
+fin;
+\end{exemple}
+
+\subsection{Demi-droites}
+\begin{description}
+\item[demidroite(A,B)] demi-droite $[AB)$.
+
+\item[demidroite(A,a)] demi-droite d'origine $A$ qui fait un angle $a$ avec la direction $(Ox)$.
+\end{description}
+
+
+\begin{exemple}
+repere(-4,4,0.9cm,-3,4,0.9cm);
+pair A,B,C;
+numeric a;
+A=(-1,1);B=(2,2);C=(-1,-2);
+draw axes(1,0);
+draw demidroite(A,B);
+nomme.llft(A);nomme.lrt(B);
+draw demidroite(C,0) dashed evenly;
+draw demidroite(C,120);
+nomme.llft(C);
+fin;
+\end{exemple}
+
+\subsection{Courbes et fonctions}
+\MP{} permet de définir simplement des fonctions (en utilisant par exemple la syntaxe suivante :
+\verb|vardef f(expr x)=2x+1 enddef;|) et de définir des courbes passant par des points donnés (\verb+A..B..C+). Ces possibilités sont utilisées dans les macros qui suivent.
+
+\begin{description}
+\item[courbefonc(f)()] courbe représentant la fonction $f$ sur l'intervalle définissant le repère.
+
+\item[courbefonc(f)(xmin,xmax)] courbe représentant la fonction $f$ sur l'intervalle $[xmin;xmax]$.
+
+\item[courbefonc(f)(xmin,xmax,n)] courbe représentant la fonction $f$ sur l'intervalle $[xmin;xmax]$ en utilisant \verb+n+ points d'interpolation. La valeur par défaut de \verb|n| est 60.
+
+\item[courbepoints(f)(xmin,xmax,n)] ne trace que les \verb+n+ points sans les relier. Les points sont dessinés en fonction de la valeur de \verb+marque_p+ (voir \ref{points}).
+
+\item[fonccourbe.p(x)] image de \verb+x+ par la fonction dont la courbe représentative est le chemin \verb+p+. La macro renvoie 0 si la fonction n'est pas définie.
+
+\item[nomme.pos(p,x,nom)] affiche \verb+nom+ au point d'abscisse \verb+x+ de la courbe \verb+p+ à la position \verb+pos+. \verb+nom+ peut être soit une chaîne de caractères, soit une expression du type \verb+btex ... etex+, soit une autre figure. Si \verb+nom+ est omis, le nom \verb+p+ est affiché. S'il s'agit d'un élément d'un tableau de points (\verb+p1+, \verb+p2+...), le nombre est affiché en indice.
+\end{description}
+
+
+\begin{exemple}[0.5]
+repere(-2,5,0.7cm,-3,3,0.7cm);
+vardef f(expr x)=-0.5(x**2)+2*x enddef;
+vardef g(expr x)=exp(x)/10-3 enddef;
+path C_f;
+draw axes(1,1);
+drawoptions(withcolor moutarde);
+C_f= courbefonc(f)();
+draw C_f withpen pencircle scaled 1;
+nomme.llft(C_f,4.7);
+drawoptions(withcolor beige);
+draw courbepoints(g)(0,4,9);
+fin;
+\end{exemple}
+
+\begin{description}
+\item[intercourbes(P,p,q)] stocke dans le tableau de points \verb+P+ les points d'intersection des chemins \verb+p+ et \verb+q+. \verb+P1+ est un des points d'intersection, \verb+P2+ un autre etc. Il faut, avant d'utiliser cette macro, déclarer le tableau \verb+P+ de la façon suivante : \verb+pair P[];+
+
+\item[ptantecedents(P,y,p)] stocke dans le tableau de points \verb+P+ les points du chemin \verb+p+ d'ordonnée \verb+y+. De même que précédemment, le tableau \verb+P+ doit être déclaré avant d'utiliser cette macro.
+
+\item[antecedents(X,y,p)] stocke dans le tableau de nombres \verb+X+ les antécédents de \verb+y+ par la fonction dont la courbe représentative est le chemin \verb+p+. De même que précédemment, le tableau \verb+X+ doit être déclaré avant d'utiliser cette macro.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,4.5,1cm,-3.5,2.5,1cm);
+path p,C_f;
+pair I[],A[];
+vardef f(expr x)= x**2-2x enddef;
+p=(-2,-2)..(-1,1)..(0,2)..(1,1)
+       ..(2,-2)..(3,-3)..(3.5,-2.5)
+       ..(4,-1);
+C_f= courbefonc(f)(-2,2.5);
+draw axes(1,1);
+drawoptions(withpen pencircle scaled 1);
+draw p withcolor bleu;
+draw C_f withcolor rouge;
+intercourbes(I,C_f,p);
+drawoptions(withcolor violet);
+nomme.lft(I1);nomme.rt(I2);
+draw droite(0,-1.5) dashed evenly;
+ptantecedents(A,-1.5,p);
+nomme.lrt(A1);nomme.llft(A2);
+nomme.lrt(A3);
+fin;
+\end{exemple}
+
+\begin{description}
+\item[marquepointcourbe(p,x1,x2,...)] marque les points de la courbe \verb+p+ d'abscisses \verb+x1+, \verb+x2+... La marque dépend de la valeur de \verb+marque_p+.
+
+\item[marquepointchemin(p,n1,n2,...)] dans le cas d'un chemin défini par \verb+A..B..C..+, marque le \verb+n1+-ième point, le \verb+n2+-ième point... La marque dépend de la valeur de \verb+marque_p+. Attention, le premier point est numéroté 0.
+
+\end{description}
+
+
+
+\begin{exemple}
+repere(-2.5,4.5,1cm,-3.5,2.5,1cm);
+path p,C_f;
+pair I[],A[];
+vardef f(expr x)= x**2-2x enddef;
+p=(-2,-2)..(-1,1)..(0,2)
+  ..(1,1)..(2,-2)..(3,-3)
+  ..(3.5,-2.5)..(4,-1);
+C_f= courbefonc(f)(-2,3);
+draw axes(1,1);
+drawoptions(withpen pencircle scaled 1);
+draw p withcolor bleu;
+draw C_f withcolor rouge;
+drawoptions(withcolor violet);
+marquepointcourbe(C_f,-0.5,0.8,2.2,2.6);
+marquepointchemin(p,0,2,3,5);
+fin;
+\end{exemple}
+
+
+\subsection{Nommage automatique des courbes}
+\begin{description}
+\item[nomme(p,nom)] affiche \verb|nom| au niveau d'un point d'intersection de \verb|p| et du contour de la figure. Ce point est choisi en fonction de la chaine \verb|prefnomme| qui peut prendre les valeurs \verb|"right"| (valeur par défaut), \verb|"left"|, \verb|"top"| ou \verb|"bottom"|.
+\end{description}
+
+\begin{exemple}
+prefnomme:="left";
+
+repere(-5,5,0.7cm,-5,5,0.7cm);
+path d,C_f;
+d=droite(-1,3);
+vardef f(expr x)=0.5(x**2)-x -4 enddef;
+C_f=courbefonc(f)();
+draw axes(1,1);
+draw d epaisseur 1 couleur bleu;
+draw C_f epaisseur 1 couleur bleu;
+nomme(d,"$d_2$") couleur bleu;
+nomme(C_f) couleur bleu;
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{exemple}
+prefnomme:="bottom";
+
+repere(-5,5,0.7cm,-5,5,0.7cm);
+path d,C_f;
+d=droite(-1,3);
+vardef f(expr x)=0.5(x**2)-x -4 enddef;
+C_f=courbefonc(f)();
+draw axes(1,1);
+draw d epaisseur 1 couleur bleu;
+draw C_f epaisseur 1 couleur bleu;
+nomme(d,"$d_2$") couleur bleu;
+nomme(C_f) couleur bleu;
+draw cadre;
+fin;
+\end{exemple}
+
+\subsection{Dérivée et tangentes}
+\begin{description}
+\item[der.p(x)] image de \verb+x+ par la dérivée de la fonction dont la courbe représentative est \verb+p+.
+%\item[der2.f(x)] image de \verb+x+ par la dérivée de la fonction \verb+f+.
+
+\item[tangente(p,x)] tangente à la courbe \verb+p+ au point d'abscisse \verb+x+.
+
+\item[tangente.gauche(p,x,long)] flèche de longueur \verb+long+ représentant la demi-tangente gauche à la courbe \verb+p+ au point d'abscisse \verb+x+. Le paramètre \verb+long+ est optionnel. Sa valeur par défaut est \verb+20bp+.
+
+\item[tangente.droite(p,x,long)] idem à droite.
+
+\item[tangente.double(p,x,long)] idem des deux côtés.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,4.5,1cm,-3.5,2.5,1cm);
+path p,q;
+p=(-2,-2){dir 60}..(-1,1)
+  ..(0,2){right}..(1,1)..(2,-2)
+  ..(3,-3){right}..(4,-2){(1,2)};
+q= courbefonc(der.p)(-1,4);
+draw axes(1,1);
+drawoptions(withpen pencircle scaled 1);
+draw p withcolor  bleu;
+nomme.rt(p,0.7,"$y=f(x)$");
+draw q withcolor  rouge;
+nomme.lft(q,3.7,"$y=f'(x)$");
+drawoptions(withpen pencircle scaled 1
+            withcolor violet);
+draw tangente.double(p,0);
+draw tangente.droite(p,-2,40);
+draw tangente.gauche(p,4,30);
+draw tangente(p,2.5);
+fin;
+\end{exemple}
+
+\subsection{Interpolation}
+
+
+
+\MP{} propose les commandes suivantes (qui peuvent être combinées dans une même courbe) :
+
+\begin{description}
+\item[A-{}-B-{}-C-{}-] Ligne brisée passant par les points $A$, $B$, $C$...
+\item[A..B..C..] Courbe de Bézier passant par les points $A$, $B$, $C$...
+\end{description}
+
+\subsubsection*{Interpolation polynomiale}
+\verb|repere.mp| propose aussi les  commandes ci-dessous (pas toujours la meilleure méthode d'approximation...). À compiler avec \verb|mpost -numbersystem="decimal" fichier.mp| pour gagner en précision.
+
+\begin{description}
+\item[lagrange(A,B,C,...)()] Courbe passant par $A$, $B$, $C$... représentant le polynôme  de degré maximal $n-1$ tel que $P(x_A)=y_A$, $P(x_B)=y_B$... sur l'intervalle définissant le repère.
+\item[lagrange(A,B,C,...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\item[lagrange(x1,y1,x2,y2,x3,y3...)()]  Courbe passant par les points $(x_1;y_1)$, $(x_2;y_2)$, $(x_3;y_3)$... représentant le polynôme de degré maximal $n-1$ tel que $P(x_i)=y_i$ sur l'intervalle définissant le repère.
+\item[lagrange(x1,y1,x2,y2,x3,y3...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\end{description}
+
+\begin{exemple}[0.55]
+repere.orth(-1,10,7cm,-1,10);
+pair A[],B[];
+A[1]=(1,1);A[2]=(3,5);A[3]=(5,8);
+A[4]=(7,2);A[5]=(9,4);
+B[1]=(1,6);B[2]=(3,7);B[3]=(6,4);B[4]=(8,9);
+path L;L=lagrange(A[1],A[2],A[3],A[4],A[5])();
+path C;C=lagrange(1,6,3,7,6,4,8,9)(0,8);
+draw quadrillage(1,1);
+draw axes(1,1);
+draw L epaisseur 1 couleur rouge; 
+draw C epaisseur 1 couleur bleu;
+for i=1 upto 5: nomme.llft(A[i]) couleur rouge;
+endfor
+for i=1 upto 4: nomme.llft(B[i]) couleur bleu;
+endfor
+fin;
+\end{exemple}
+
+
+\begin{description}
+\item[hermite((x1,y1,y'1),(x2,y2,y'2)...)()] Courbe passant par les points $(x_1;y_1)$, $(x_2;y_2)$, $(x_3;y_3)$... représentant le polynôme de degré maximal $2n-1$ tel que $P(x_i)=y_i$ et $P'(x_i)=y'_i$ sur l'intervalle définissant le repère.
+\item[hermite((x1,y1,y'1),(x2,y2,y'2)...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\item[hermite(A,y'A,B,y'B,C,y'C...)()] Courbe passant par les points $A$, $B$, $C$... représentant le polynôme de degré maximal $2n-1$ tel que $P(x_A)=y_A$ et $P'(x_A)=y'_A$... sur l'intervalle définissant le repère.
+\item[hermite(A,y'A,B,y'B,C,y'C...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\end{description}
+
+\begin{exemple}[0.55]
+repere.orth(-1,10,7cm,-1,10);
+draw quadrillage(1,1);
+draw axes(1,1);
+path H;H=hermite((1,2,0.5),(4,8,0),(8,2,2))();
+draw H epaisseur 1 couleur bleu;
+draw tangente.double(H,1) couleur bleu;
+draw tangente.double(H,4) couleur bleu;
+draw tangente.double(H,8) couleur bleu;
+pair A,B,C; A:=(1,8);B:=(4,4);C:=(7,6);
+path I;I=hermite(A,-1,B,0.5,C,2)(0,7.5);
+draw I epaisseur 1 couleur rouge;
+draw tangente.double(I,1) couleur rouge;
+draw tangente.double(I,4) couleur rouge;
+draw tangente.double(I,7) couleur rouge;
+fin;
+\end{exemple}
+
+
+\subsubsection*{Interpolation à l'aide de splines cubiques}
+
+%\begin{description}
+%\item[splineder(A,y'A,B,y'B,C,y'C...)()] Courbe passant par les points $A$, $B$, $C$ représentant une fonction cubique par morceaux telle que $f(x_A)=y_A$ et $f'(x_A)=y'_A$ sur l'intervalle définissant le repère.
+%\item[splineder(A,y'A,B,y'B,C,y'C...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+%\item[splineder(xA,yA,y'A,xB,yB,y'B,...)()] Même courbe que précédemment (sur l'intervalle définissant le repère) mais les valeurs sont données sous forme de liste. 
+%\item[splineder(xA,yA,y'A,xB,yB,y'B,...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+%\end{description}
+%
+%\begin{exemple}[0.55]
+%repere.orth(-1,10,7cm,-1,10);
+%draw quadrillage(1,1);
+%draw axes(1,1);
+%path H;H=splineder(1,2,0.5,4,8,0,8,2,2)();
+%draw H epaisseur 1 couleur bleu;
+%draw tangente.double(H,1) couleur bleu;
+%draw tangente.double(H,4) couleur bleu;
+%draw tangente.double(H,8) couleur bleu;
+%pair A,B,C; A:=(1,8);B:=(4,4);C:=(7,6);
+%path I;I=splineder(A,-1,B,0.5,C,2)(0,7.5);
+%draw I epaisseur 1 couleur rouge;
+%draw tangente.double(I,1) couleur rouge;
+%draw tangente.double(I,4) couleur rouge;
+%draw tangente.double(I,7) couleur rouge;
+%fin;
+%\end{exemple}
+%
+%
+
+\begin{description}
+\item[spline(A,B,C...)()] Courbe passant par les points $A$, $B$, $C$ représentant une fonction cubique par morceaux telle que $f(x_A)=y_A$, $f(x_B)=y_B$...  sur l'intervalle définissant le repère.
+\item[spline(A,B,C...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\item[spline(xA,yA,xB,yB,xC,yC,...)()] Même courbe que précédemment (sur l'intervalle définissant le repère) mais les valeurs sont données sous forme de liste. 
+\item[spline(xA,yA,xB,yB,xC,yC...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\end{description}
+
+\begin{exemple}[0.55]
+repere.orth(-1,10,7cm,-1,10);
+pair A[],B[];
+A[1]=(1,1);A[2]=(3,5);A[3]=(5,8);
+A[4]=(7,2);A[5]=(9,4);
+B[1]=(1,6);B[2]=(3,7);B[3]=(6,4);B[4]=(8,9);
+path L;L=spline(A[1],A[2],A[3],A[4],A[5])();
+path C;C=spline(1,6,3,7,6,4,8,9)(0,8);
+draw quadrillage(1,1);
+draw axes(1,1);
+draw L epaisseur 1 couleur rouge; 
+draw C epaisseur 1 couleur bleu;
+for i=1 upto 5: nomme.llft(A[i]) couleur rouge;
+endfor
+for i=1 upto 4: nomme.llft(B[i]) couleur bleu;
+endfor
+fin;
+\end{exemple}
+
+\begin{description}
+\item[spline(A,<y'A>,B,<y'B>,C,<y'C>...)()] Courbe passant par les points $A$, $B$, $C$ représentant une fonction cubique par morceaux telle que $f(x_A)=y_A$, $f(x_B)=y_B$... et, le cas échéant, $f'(x_A)=y'_A$, $f'(x_B)=y'_B$... sur l'intervalle définissant le repère.
+\item[spline(A,<y'A>,B,<y'B>,C,<y'C>...)(xmin,xmax)] Même courbe que précédemment mais sur l'intervalle $[xmin;xmax]$.
+\end{description}
+
+\begin{exemple}[0.55]
+repere.orth(-1,10,7cm,-1,10);
+pair A,B,C,D;
+A=(0,1);B=(3,7);C=(6,2);D=(9,6);
+path S,T;
+S=spline(A,B,C,D)();
+T=spline(A,0.5,B,C,0,D,-2)();
+draw quadrillage(1,1);
+draw axes(1,1);
+draw S epaisseur 1 couleur bleu;
+draw T epaisseur 1 couleur rouge;
+draw tangente.double(T,0) couleur rouge;
+draw tangente.double(T,6) couleur rouge;
+draw tangente.double(T,9) couleur rouge;
+nomme.lrt(A);nomme.top(B);
+nomme.llft(C);nomme.rt(D);
+fin;
+\end{exemple}
+
+
+\section{Suites}
+\begin{description}
+\item[suite(u,deb,fin)] figure formée des points $(i;u_i)$ pour $i$ variant entre \verb+deb+ et \verb+fin+.
+\end{description}
+
+
+\begin{exemple}
+repere(-0.9,7,0.8cm,-1.2,1.2,1.5cm);
+vardef u(expr n)=(-1)**n/n enddef;
+taillepoint:=4;
+draw axes(1,1);
+draw suite(u,1,6) withcolor vertfonce;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[suiterec(f,deb,fin,init)] ligne brisée (\og escalier \fg{} ou \og escargot \fg) permettant de visualiser les termes de la suite définie par $u_{n+1}=f(u_n)$ de premier terme $u_{deb}=init$ et de dernier terme $u_{fin}$.
+
+\item[suiterecprojx.pos(lab,min,max)] figure formée des segments joignant les points $(u_n;u_n)$ et $(u_n;0)$ pour $n$ compris entre \verb+min+ et \verb+max+. La suite $u$ et sa valeur initiale sont définies par le dernier appel de la macro \verb+suiterec+. \verb+lab+ désigne l'étiquette au niveau de l'axe des abscisse placée à la position \verb+pos+. Si \verb+lab+ est la chaîne vide \verb+""+, rien n'est écrit ; si \verb+lab+ est une autre chaîne de caractère (par ex. \verb+"u"+), elle est utilisée comme nom de la suite (on obtiendra $u_0$, $u_1$...) ; si \verb+lab+ est un nombre, les valeurs de la suites seront affichées et arrondies à \verb+lab+ décimales. Les valeurs \verb+min+ et \verb+max+ sont facultatives et égales par défaut aux valeurs \verb+deb+ et \verb+fin+ passées à la macro \verb+suiterec+.
+
+\item[suiterecprojy.pos(lab,min,max)] même chose sur l'axe des ordonnées.
+
+\item[suiterecproj(lab,min,max)] même chose sur les deux axes. Les positions sont \verb+bot+ sur l'axe des abscisses et \verb+lft+ sur l'axe des ordonnées.
+
+
+\begin{exemple}[0.55]
+repere(-2,4.5,1cm,-1,4,1cm);
+vardef f(expr x)=sqrt(2*x+4) enddef;
+path C_f,sr;
+C_f= courbefonc(f)();
+sr=suiterec(f,0,3,-1.2);
+draw axes(1,0);
+drawoptions(withpen pencircle scaled 1);
+draw C_f withcolor bleu;
+draw droite(1,0);
+drawoptions(withcolor rouge);
+draw suiterecprojx.bot(1) dashed evenly;
+draw suiterecprojy.lft("") dashed evenly;
+draw sr withcolor rouge;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-0.5,5,1cm,-0.5,5,1cm);
+vardef f(expr x)=4-0.8*x enddef;
+path C_f,sr;
+C_f= courbefonc(f)();
+sr=suiterec(f,0,5,0.2);
+draw axes(1,0);
+drawoptions(withpen pencircle scaled 1);
+draw C_f  withcolor bleu;
+draw droite(1,0);
+drawoptions(withcolor rouge);
+draw suiterecproj("u",1,3) dashed evenly;
+draw sr withcolor rouge;
+fin;
+\end{exemple}
+
+
+
+\end{description}
+
+
+
+\section{Surfaces}
+
+\subsection{Calcul intégral}
+\begin{description}
+\item[entrecourbes(p,q,xmin,xmax)] chemin fermé délimitant la zone comprise entre les courbes \verb+p+ et \verb+q+ et les droites d'équations $y=\verb+xmin+$ et $y=\verb+xmax+$. Il peut donc être dessiné, rempli...
+
+\item[souscourbe(p,xmin,xmax)] chemin fermé délimitant la zone comprise entre la courbe \verb+p+, l'axe des abscisses et les droites d'équations $y=\verb+xmin+$ et $y=\verb+xmax+$.
+\end{description}
+
+
+\begin{exemple}
+repere(-3.5,6,0.7cm,-2.5,4.5,0.7cm);
+vardef f(expr x)= -(x/4)**3+0.75x enddef;
+vardef g(expr x)= -((x-2)**2)/9+4 enddef;
+path C_f,C_g,p,q;
+C_f:= courbefonc(f)();
+C_g:= courbefonc(g)();
+p:=entrecourbes(C_f,C_g,-2,1);
+q:=souscourbe(C_f,3,5);
+fill p withcolor 0.5Violet;
+draw p withpen pencircle scaled 2
+                        withcolor Violet;
+fill q withcolor 0.5Bleu;
+draw q dashed evenly withcolor Bleu;
+draw axes(1,1);
+drawoptions(withpen pencircle scaled 1);
+draw C_f withcolor Bleu;
+draw C_g withcolor Rouge;
+draw cadre;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[rectangles.type(p,a,b,n)] figure formée de \verb+n+ rectangles s'appuyant sur la courbe \verb+p+ entre les abscisses \verb+a+ et \verb+b+. \verb+type+ peut être \verb+min+, \verb+max+, \verb+droite+ ou \verb+gauche+.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,6,0.8cm,-2,5,0.8cm);
+vardef f(expr x)=
+ -((x-2)**4)/32+((x-2)**2)/2+1
+enddef;
+path Cf,r[];
+Cf= courbefonc(f)();
+r1=rectangles.max(Cf,2,5.5,8);
+r2=rectangles.min(Cf,2,5.5,8);
+r3=rectangles.droite(Cf,-2,1,10);
+fill r1 withcolor 0.8Rouge;
+fill r2 withcolor 0.4Rouge;
+fill r3 withcolor 0.5Bleu;
+draw r1;draw r2 withcolor 0.8Rouge;
+draw r3;
+draw axes(1,0);
+draw Cf withcolor Bleu
+               withpen pencircle scaled 1;
+fin;
+\end{exemple}
+
+\subsection{Demi-plans}
+\begin{description}
+ \item[demiplaninf(d)] chemin fermé délimité par la droite \verb+d+ et par la partie inférieure de \verb+cadre+ (ou la partie gauche si \verb+d+ est parallèle à l'axe des ordonnées.
+ \item[demiplansup(d)] chemin fermé délimité par la droite \verb+d+ et par la partie supérieure de \verb+cadre+ (ou la partie droite si \verb+d+ est parallèle à l'axe des ordonnées.
+\end{description}
+
+
+\begin{exemple}
+repere(-2.5,3.5,1cm,-2.5,3.5,1cm);
+numeric qqw;qqw=6;
+path d[],dp[];
+d1=droite(2);
+d2=droite(1,1);
+d3=droite(-0.5,-0.5);
+dp1=demiplansup(d1);
+dp2=demiplansup(d2);
+dp3=demiplaninf(d3);
+for i=1 upto 3:
+fill dp[i] withcolor 0.7Lime;
+endfor
+draw axes(1,1);
+drawoptions(withpen pencircle scaled 1
+                     withcolor Vertfonce);
+draw d1;draw d2;
+draw d3 dashed evenly;
+drawoptions();
+draw cadre;
+fin;
+\end{exemple}
+
+
+
+
+
+\section{Projections sur les axes}
+
+\subsection{Projetés}
+\begin{description}
+\item[projetex(A)] projeté de \verb+A+ sur l'axe des abscisses parallèlement à l'axe des ordonnées.
+
+\item[projetey(A)] projeté de \verb+A+ sur l'axe des ordonnées parallèlement à l'axe des abscisses.
+
+\item[projectionx.pos(A,lab,dec)] figure constituée du segment joignant \verb+A+ à son projeté sur l'axe des abscisses ainsi que de l'étiquette \verb+lab+ placée à la position \verb+pos+ par rapport à ce projeté. La valeur \verb+dec+ indique un décalage par rapport à l'axe des abscisses. L'étiquette et le décalage sont optionnels.
+
+\item[projectiony.pos(A,lab,dec)] même chose sur l'axe des ordonnées.
+
+\item[projectionaxes(A,labx,laby,dec)] figure constituée des segments joignant \verb+A+ à ses projetés sur les axes ainsi que des étiquettes \verb+labx+ et \verb+laby+ positionnées automatiquement avec un décalage \verb+dec+ par rapport aux axes. Les étiquettes et le décalage sont optionnels.
+\end{description}
+
+
+
+\begin{exemple}[0.6]
+repere(-1.5,3.5,1cm,-2.2,2.5,1cm);
+path Cf; pair A[];
+vardef f(expr x)= x**2-2x-0.5 enddef;
+Cf= courbefonc(f)();
+ptantecedents(A,2,Cf);
+draw axes(1,1);
+draw Cf withpen pencircle scaled 1 withcolor bleu;
+drawoptions(dashed evenly withcolor rouge);
+draw projectionaxes((1.3,f(1.3)),"$x$","$f(x)$");
+draw projectionx.urt(A1,"$x_1$");
+draw projectionx.llft(A2,"$x_2$",-6);
+draw A1--A2;
+fin;
+\end{exemple}
+
+\subsection{Intervalles}
+\begin{description}
+\item[intervallex.bornes(a,b)] intervalle dessiné sur l'axe des abscisses entre \verb+a+ et \verb+b+ avec une épaisseur par défaut de \verb+1.5bp+. \verb+bornes+ peut être \verb+OO+ (ouvert à gauche, ouvert à droite), \verb+OF+, \verb+FO+ ou \verb+FF+.
+
+\item[intervalley.bornes(a,b)] même chose sur l'axe des ordonnées.
+\end{description}
+
+
+\begin{exemple}[0.6]
+repere(-1,5,0.9cm,-1,4.5,1cm);
+vardef f(expr x)=x**2-5x+7 enddef;
+draw axes(1,1);
+draw courbefonc(f)()
+       withpen pencircle scaled 1 withcolor bleu;
+drawoptions(dashed evenly withcolor rouge);
+draw projectionx.bot((1,f(1)));
+draw projectiony.llft((2.5,f(2.5)),"0,75");
+draw projectionaxes((4,f(4)));
+drawoptions(withcolor violet);
+draw intervallex.OF(1,4);
+draw intervalley.FF(0.75,3);
+label("$f(]1;4])=[0,75;3]$",(2.5,4));
+draw cadre;
+fin;
+\end{exemple}
+
+
+
+\section{Statistiques et probabilités}
+
+\subsection{Boite à moustache}
+\begin{description}
+\item[boitemoustache(min,Q1,Me,Q3,max,dec,larg)] \og Boite à moustache \fg{} correspondant aux données en argument. Elle est située à un distance \verb|dec| de l'axe des abscisses et le rectangle a une largeur de \verb|larg|. Ces deux dernières valeurs sont optionnelles et valent par défaut \SI{1,5}{cm} et \SI{1}{cm}.
+
+\item[projboitemoustache(t)] Figure formée des lignes joignant les cinq valeurs du dernier diagramme en boite dessiné à son projeté sur l'axe des abscisses ainsi que de certaines étiquettes : Si \verb|t| est vide, les textes $X_{min}$, $Q_1$, $M_e$, $Q_3$ et $X_{max}$ sont affichés ; si \verb|t| est un entier, les valeurs arrondies à $10^{-t}$ sont affichées ; si \verb|t| est une liste de cinq textes (ou valeurs), ceux-ci sont affichés.
+\end{description}
+
+
+\begin{exemple}
+repere(-0.5,10,0.7cm,-1,5,0.7cm);
+ setaxes(0,10,0,1);
+ draw axex(1,0);
+ draw boitemoustache(1,4,5,7,9)
+                            withcolor marine;
+ draw projboitemoustache.bot()
+           withcolor 0.7rouge dashed evenly;
+fin;
+\end{exemple}
+
+\begin{exemplev}[1]{1}
+repere(-1,11,0.8cm,-1,5,0.7cm);
+ settout(-0.5,10.5,0,1);
+ draw axex(1,0);
+ drawoptions(withcolor rouge);
+ draw boitemoustache(1.22,3.9,5,7.18,9.05,1cm,0.7cm);
+ draw projboitemoustache.bot(1) dashed evenly;
+ drawoptions(withcolor blue);
+ draw boitemoustache(0,3.14,6,8,10,2cm,0.7cm);
+ draw projboitemoustache.bot(0.0456,"$\pi$","$\numproduct{2x3}$","$x$","Max")
+                                                                     dashed evenly;
+fin;
+\end{exemplev}
+
+
+\subsection{Diagrammes}
+\begin{description}
+\item[diagrammebatons((v1,e1),(v2,e2),...(vn,en))] Figure formée des \verb|n| segments joignant les points \verb|(v1,e1),(v2,e2),...(vn,en)| et leur projeté sur l'axe des abscisses. Les bâtons sont surmontés d'un point dont le diamètre est égal à la largeur des segments multiplié par \verb|diampointsbatons|. \verb|diampointsbatons| est égal à 5 par défaut. On peut lui donner la valeur 0 pour ne pas avoir ces points.
+\end{description}
+
+\begin{exemple}[0.6]
+repere(-0.5,5,1cm,-0.5,5,1cm);
+ picture diag;
+ draw axes(1,1);
+ diag:=diagrammebatons((1,2),(2,4),(3,2),(4,1));
+ draw diag epaisseur 2 withcolor rouge;
+fin
+\end{exemple}
+
+
+\begin{description}
+\item[diagrammebarres((a1,h1),(a2,h2),...(an,hn))] Figure formée de \verb|n| barres rectangulaires de hauteurs \verb|h1| \dots \verb|hn| aux abscisses \verb|a1| \dots \verb|an|. La largeur de ces barres est le nombre \verb|largbarres| qui vaut \verb|20bp| par défaut.
+\end{description}
+
+\begin{exemple}[0.6]
+repere(-0.5,5,1cm,-0.5,5,1cm);
+ path diag;
+ draw axey(1,1);
+ diag:=diagrammebarres((1,2),(2,4),(3,2),(4,1));
+ fill diag withcolor cyan;
+ draw diag epaisseur 1 withcolor marine;
+ flecheaxe:=false;
+ draw axex(0,0);
+ boolgradxpart:=false;
+ draw axexpart.bot(1,"A",2,"B",3,"C",4,"D");
+fin
+\end{exemple}
+
+\subsection{Probabilités}
+
+Quelques fonctions mathématiques sont proposées. Pour les grandes valeurs, on dépasse rapidement les capacités de \MP. Il est dans ce cas conseillé de compiler en utilisant la ligne de commande \verb|mpost -numbersystem="decimal" <fichier>.mp|.
+
+
+\begin{description}
+\item[factorielle(n)] Entier égal à $n!$.
+\item[binom(n,k)] Entier égal à $\binom{n}{k}$.
+\item[binomiale(n,p,k)] $P(X=k)$ pour $X$ suivant la loi binomiale de paramètres $n$ et $p$.
+\item[diagrammebinomiale(n,p)] Diagramme en bâtons de la loi binomiale de paramètres $n$ et $p$.
+\item[diagrammeuniforme(n,m)] Diagramme en bâtons de la loi uniforme discrète sur les entiers consécutifs de \verb|n| à \verb|m|.
+\item[diagrammegeometrique(p)] Diagramme en bâtons de la loi géométrique de paramètre \verb|p|.
+\item[diagrammepoisson(lambda)] Diagramme en bâtons de la loi de Poisson de moyenne \verb|lambda|.
+\end{description}
+
+
+\begin{exemple}
+repere(-2,16,0.45cm,-0.1,0.25,15cm);
+setall(0,16,0,0.25);
+draw axex(1,1);
+draw axey(0.1,0.1);
+picture diag;
+diampointsbatons:=0;
+diag:=diagrammebinomiale(15,0.6);
+draw diag withcolor vertfonce epaisseur 4;
+fin;
+\end{exemple}
+
+\begin{codecache}
+diampointsbatons:=5;
+\end{codecache}
+
+\begin{exemple}
+repere.larg(-2,10,8cm,-0.1,0.5,6cm);
+ setall(0,10,0,0.5);
+ draw axex(1,1);
+ draw axey(0.05,0.05);
+ draw diagrammegeometrique(0.4)
+                   epaisseur 2 couleur bleu;
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere(-2,16,0.45cm,-0.1,0.25,15cm);
+setall(0,16,0,0.25);
+draw axex(1,1);
+draw axey(0.1,0.1);
+picture diag;
+diampointsbatons:=0;
+diag:=diagrammepoisson(6);
+draw diag withcolor orange epaisseur 4;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[densitenormale(mu,sigma,a,b)] Courbe représentant la densité de la loi normale de moyenne \verb|mu| et d'écart type \verb|sigma| entre \verb|a| et \verb|b|. Si \verb|a| et \verb|b| sont omis, le tracé est fait sur l'intervalle définissant le repère.
+\item[densiteexponentielle(lambda)] Courbe représentant la densité de la loi normale de paramètre \verb|lambda|.
+\end{description}
+
+\begin{codecache}
+prefnomme:="top";
+\end{codecache}
+
+\begin{exemple}[0.45]
+repere(-4,32,0.23cm,-0.01,0.12,46cm);
+  draw axex(2,2);
+  draw axey(0.02,0.02);
+  path C,d;
+  C=densitenormale(16,4);
+  fill souscourbe(C,0,14) couleur gris;
+  draw souscourbe(C,0,14);
+  draw C epaisseur 2 couleur rouge;
+  d=droite(16);
+  draw d dashed evenly;
+  drawarrow (5,0.06)--(11,0.02);
+  label.top("$P(X\leq 14)$",(5,0.06));
+  nomme(d,"$\mu$");
+fin;
+\end{exemple}
+
+\begin{exemple}
+repere.larg(-1,9,8cm,-0.05,0.6,6cm);
+  setall(0,9,0,0.6);
+  draw axex(1,1);
+  draw axey(0.1,0.1);
+  path C,D;
+  C=densiteexponentielle(0.5);
+  D=densiteexponentielle(0.3);
+  draw C epaisseur 2 couleur rouge;
+  draw D epaisseur 2 couleur violet;
+fin;
+\end{exemple}
+
+
+\section{Géométrie}
+Certaines des macros suivantes sont largement inspirées des macros de \verb|geometriesyr16.mp| de Christophe \bsc{Poulain}.
+
+\subsection{Polygones}
+\begin{description}
+\item[polygone(A,B,C,...)] Chemin fermé représentant le polygone $ABC...$
+
+\item[triangle(A,B,C)] Cas particulier du précédent. Chemin fermé représentant le triangle $ABC$.
+
+\item[parallélogramme(A,B,C)] Chemin fermé représentant $ABCD$ où $D$ est le quatrième point du parallélogramme.
+
+\item[polygoneregulier(A,B,n)] Chemin fermé représentant le polygone régulier de sens direct à $n$ côtés dont un des côtés est $[AB]$.
+
+\item[equilateral(A,B)] Cas particulier du précédent. Triangle équilatéral de sens direct de côté $[AB]$.
+
+\item[carre(A,B)] Autre cas particulier. Carré de sens direct de côté $[AB]$.
+
+\item[sommetpolygoneregulier(A,B,n,i)] Sommet numéro $i$ du polygone régulier à $n$ côtés dont un des côtés est $[AB]$. $A$ est le sommet numéro 1 et $B$ est le sommet numéro 2.
+\end{description}
+
+\begin{exemple}[0.51]
+repere(-1,5,1cm,-1,4,1cm);
+draw axes(1,1);
+pair A,B,C,D,E,F,G;
+A=(0,1);B=(2,0);C=(4,2);D=(3,3);E=(1,3);
+F=(4,0);G=(3,2);
+fill triangle(A,F,G) withcolor orange;
+draw triangle(A,F,G);
+draw polygone(A,B,C,D,E);
+draw parallelogramme(D,G,E) withcolor vert;
+fin;
+\end{exemple}
+
+
+\begin{exemple}[0.53]
+repere(-1,5,1cm,-1,4,1cm);
+draw axes(1,1);
+pair A,B,M;
+A=(1,1);B=(3,0.5);
+fill polygoneregulier(A,B,5) withcolor bleu;
+fill equilateral(A,B) withcolor cyan;
+draw polygoneregulier(A,B,5);
+M=sommetpolygoneregulier(A,B,5,3);
+nomme.rt(M);
+draw equilateral(A,B);
+fin;
+\end{exemple}
+
+\subsection{Cercles et arcs}
+
+\begin{description}
+\item[cercle(A,B,C)] Cercle circonscrit au triangle $ABC$.
+\item[cercle(O,A)] Cercle de centre $O$ passant par $A$.
+\item[cercle(O,r)] Cercle de centre $O$ et de rayon $r$. L'unité de longueur est l'unité de l'axe des abscisses.
+\item[arccercle(A,O,B)] Arc de cercle de sens direct de centre $O$, passant par $A$ et s'appuyant sur la demi-droite $[OB)$.
+\end{description}
+
+
+\begin{exemple}
+repere(-1,5,1cm,-0.5,4,1cm);
+draw axes(1,1);
+pair A,B,C;
+A=(1,1);B=(2,0);C=(3.5,2);
+nomme.lft(A);nomme.urt(C);nomme.top(B);
+draw triangle(A,B,C) withcolor bleu;
+draw cercle(A,B,C) withcolor marine;
+draw A--B withcolor rouge epaisseur 1;
+draw cercle(A,B) withcolor rouge;
+fin;
+\end{exemple}
+
+
+\begin{exemple}
+repere(-1,5,1cm,-2,8,0.5cm);
+draw axes(1,1);
+pair A,M,B;
+A=(2,2);M=(2,6);B=(3,2);
+nomme.bot(A);nomme.rt(B);nomme.top(M);
+draw B--A--M;
+draw cercle(A,2);
+draw arccercle(B,A,M);
+fin;
+\end{exemple}
+
+
+
+\subsection{Codage des segments et des angles}
+
+\begin{description}
+\item[taille\_marque\_a] Valeur numérique (qui vaut par défaut \verb|0.4cm|) donnant le rayon des arcs de cercles servant à marquer les angles.
+
+\item[sep\_marque\_a] Valeur numérique (qui vaut par défaut \verb|1.5bp|) donnant la différence de rayon entre les différents arcs servant à marquer les angles.
+
+\item[marqueangle(A,O,B,n)] Figure formée de \verb|n| arcs de cercle de centre $O$ et de rayon moyen \verb|taille_marque_a| permettant de marquer l'angle géométrique $\widehat{AOB}$. Les arcs (si \verb|n| est supérieur à 1) sont séparés de \verb|sep_marque_a|.
+
+Il s'agit d'un chemin fermé qui peut donc être rempli.
+
+\item[marqueangle(A,O,B)] Arc de cercle de centre \verb|O| et de rayon \verb|taille_marque_a| permettant de marquer l'angle orienté avec \verb|drawarrow|.
+
+\item[nomme.pos(A,O,B,texte)] Place le texte à la position \verb|pos| par rapport au point central de l'arc de cercle de centre $O$ et de rayon \verb|taille_marque_a|. \verb|pos| peut être \verb|rt|, \verb|urt|, \verb|top|, etc. ou un angle donné par rapport à la direction $(Ox)$.
+
+\item[nomme(A,O,B,texte)] Même chose que précédemment mais la position est calculée automatiquement en fonction de l'angle.
+\end{description}
+
+
+\begin{exemple}
+repere(-2,12,0.4cm,-2,10,0.4cm);
+pair A,B,C;
+A=(1,2);B=(11,2);C=(8,9);
+draw axes(0,0);
+draw triangle(A,B,C);
+nomme.llft(A);nomme.lrt(B);nomme.top(C);
+fill marqueangle(C,B,A,3) withcolor red;
+draw marqueangle(C,B,A,3);
+drawarrow marqueangle(A,C,B);
+fill marqueangle(B,A,C,1) withcolor vert;
+draw marqueangle(B,A,C,1);
+nomme[20](B,A,C,"\ang{45}");
+nomme(C,B,A,"$\alpha$");
+fin;
+\end{exemple}
+
+\begin{description}
+\item[marqueangledroit(A,O,B)] Chemin fermé permettant de marquer l'angle droit $\widehat{AOB}$ sous forme d'un losange (il s'agit donc d'un carré si l'angle est réellement droit). Le côté du losange est \verb|taille_marque_ad| et vaut \verb|0.3cm| par défaut.
+\item[marquesegment(A,B,n)] Figure formées de \verb|n| marques sur le segment $[AB]$. Ces marques ont une taille de \verb|taille_marque_s| (\verb|0.3cm| par défaut), forment un angle en degrés de \verb|angle_marque_s| avec le segment (\verb|60| par défaut) et sont séparées de \verb|sep_marque_s| (\verb|2| par défaut).
+\end{description}
+
+\begin{exemple}[0.6]
+repere(-1,10,0.5cm,-1,9,0.5cm);
+pair A,B,C,A',B',C',u;
+A=(3,1);B=(5,2);C=(1,5);u=(3,3);
+A'-A=B'-B=C'-C=u;
+draw projectionaxes(A,"$x_A$","$y_A$") dashed evenly;
+draw axes(0,0);
+drawoptions(withcolor pourpre);
+draw triangle(A,B,C);draw triangle(A',B',C');
+draw marqueangledroit(B,A,C);
+draw marqueangledroit(B',A',C');
+draw marquesegment(B,C,2);
+draw marquesegment(B',C',2);
+nomme.llft(A);nomme.lrt(B);nomme.ulft(C);
+nomme.llft(A');nomme.lrt(B');nomme.ulft(C');
+drawoptions(withcolor vertfonce);
+draw vecteur.lrt(B,u);draw vecteur.lrt(C,u);
+fin;
+\end{exemple}
+
+
+\subsection{Cotes}
+
+\begin{description}
+\item[cote(A,B,texte)] Figure formée du texte orienté dans la direction du segment $[AB]$, placé au niveau du milieu et situé « sous » le segment.
+
+\item[cote.top(A,B,texte)] Même chose mais le texte est placé au-dessus du segment.
+\end{description}
+
+\begin{exemple}
+repere(0,6,1cm,0,6,1cm);
+pair A,B,C;
+A=(1,1);B=(2,5);C=(5,2);
+nomme.llft(A);
+nomme.top(B);
+nomme.lrt(C);
+draw triangle(A,B,C);
+cote(A,C,"\SI{5}{cm}");
+cote(B,C,"de $B$ vers $C$") couleur rouge;
+cote(C,B,"de $C$ vers $B$") couleur bleu;
+cote.top(A,B,"au-dessus");
+fin;
+\end{exemple}
+
+\begin{description}
+\item[cotefleche(A,B,texte)] Figure formée d'une double flèche et du texte orienté dans la direction du segment $[AB]$, placés au niveau du milieu et situés « sous » le segment.
+
+\item[cotefleche.top(A,B,texte)] Même chose mais la double flèche et le texte sont placés au-dessus du segment.
+
+\item[dec\_cote] Variable numérique qui indique le décalage entre le segment et la double flèche. La valeur par défaut est \SI{4}{mm}.
+
+\item[traits\_cote] Variable booléenne qui indique si des traits délimitant la double flèche doivent être tracés. La valeur par défaut est \verb|false|.
+
+\end{description}
+
+\begin{exemple}
+repere(0,6,1cm,0,6,1cm);
+pair A,B,C;
+A=(1,1);B=(2,5);C=(5,2);
+nomme.llft(A);
+nomme.top(B);
+nomme.lrt(C);
+draw triangle(A,B,C);
+cotefleche(A,C,"\SI{5}{cm}");
+cotefleche.top(A,B,"Texte") couleur rouge;
+traits_cote:=true;
+dec_cote:=8mm;
+cotefleche.top(B,C,"Avec traits");
+fin;
+\end{exemple}
+
+\section{Divers}
+\subsection{Composition des étiquettes}
+Tous les textes et étiquettes peuvent être composés en utilisant la macro ci-dessous.
+\begin{description}
+ \item[LaTeX(ch)] \label{latex} Figure formée de la chaîne \verb+ch+ composée avec \LaTeX{} et mise à l'échelle \verb|defaultscale|. Cette macro utilise la commande \verb|textext| de \verb|luamplib| dans le cas de l'utilisation de Lua\LaTeX{} et \verb|textext| de \verb|latexmp| dans le cas d'une compilation \MP{} \og standard \fg. Ce dernier cas nécessite alors deux compilations.
+\end{description}
+
+
+\begin{exemple}[0.65]
+repere(-1,7,1cm,-1,1,1cm);
+for i=2 upto 6:
+label(LaTeX("$\frac{1}{"&decimal(i)&"}$"),(i,0));
+endfor
+fin;
+\end{exemple}
+
+\begin{description}
+\item[label.pos(fig,point)] Commande de \MP{} qui permet de placer la figure \verb|fig| au niveau du point \verb|point|.
+\end{description}
+
+\begin{exemple}[0.55]
+repere(-1,5,1cm,-1,4,1cm);
+draw axes(1,1);
+label.ulft("Abscisses",(5,0.1));
+label.lrt("Ordonnées",(0.1,4));
+label("$f(x)=\pi^2\sqrt{x}$",(2,2));
+fin;
+\end{exemple}
+
+\begin{description}
+\item[legende.pos(fig,p)] Figure formée du chemin \verb|p| dessiné avec une flèche et de la figure ou de la chaine \verb|fig| située à la position \verb|pos| par rapport au premier point du chemin.
+\end{description}
+
+\begin{exemple}[0.6]
+repere(-0.5,5,1cm,-0.5,4,1cm);
+  draw axes(1,1);
+  pair A,B;
+  A=(2,1);B=(2,2);
+  nomme.rt(A) couleur rouge;
+  nomme.top(B) couleur rouge;
+  legende.top("Le point $A$",(1,3){down}..{down}A);
+  legende.bot("Le point $B$",(4,1)--B);
+fin;
+\end{exemple}
+
+\subsection{Couleurs}
+Certaines couleurs sont définies par leur nom et peuvent être utilisées directement : 
+
+\begin{center}
+\begin{figreperedoc}
+repere(0,18,1cm,-3,1,1cm);
+ path rectangle;
+ save a,b,dech,decv;
+ a:=25;b:=12;dech:=70;decv:=-20;
+ rectangle = ((0,0)--(a,0)--(a,b)--(0,b)--cycle) transformed inverse _T;
+ vardef couleur(expr t)=
+    image(%
+          fill rectangle withcolor scantokens(t);
+          label.rt(LaTeX("\smash{" & t & "}"),(a,b/4) transformed inverse _T)
+          )
+ enddef;
+ draw couleur("rouge");
+ draw couleur("vert") shifted (dech,0);
+ draw couleur("bleu") shifted (2*dech,0);
+ draw couleur("cyan") shifted (3*dech,0);
+ draw couleur("magenta") shifted (4*dech,0);
+ draw couleur("jaune") shifted (5*dech,0);
+ draw couleur("noir") shifted (6*dech,0);
+ draw couleur("marron") shifted (0,decv);
+ draw couleur("lime") shifted (dech,decv);
+ draw couleur("orange") shifted (2*dech,decv);
+ draw couleur("rose") shifted (3*dech,decv);
+ draw couleur("pourpre") shifted (4*dech,decv);
+ draw couleur("olive") shifted (5*dech,decv);
+ draw couleur("violet") shifted (6*dech,decv);
+ draw couleur("beige") shifted (0,2decv);
+ draw couleur("marine") shifted (dech,2decv);
+ draw couleur("moutarde") shifted (2*dech,2decv);
+ draw couleur("grisclair") shifted (3*dech,2decv);
+ draw couleur("gris") shifted (4*dech,2decv);
+ draw couleur("grisfonce") shifted (5*dech,2decv);
+ draw couleur("vertfonce") shifted (6*dech,2decv);
+fin;
+\end{figreperedoc}
+\end{center}
+
+Toutes ces couleurs sont définies selon le modèle \og rgb \fg. Pour les obtenir selon le modèle \og cmyk \fg, remplacer la première lettre par une majuscule.
+
+
+\subsection{Remplissage}
+Pour remplir des chemins fermés avec autre chose que de la couleur, \verb+repere+ permet l'utilisation de la syntaxe \verb+fill p avec motif+ où \verb+motif+ est un des motifs décrits ci-dessous. Cette instruction peut être complétée par des options de dessin (\verb+withpen+, \verb+withcolor+...).
+
+\begin{description}
+\item[hachures(pas,angle)] hachures espacées de \verb+pas+ et formant un angle en degrés de \verb+angle+ avec l'horizontale. Si les valeurs sont omises, \verb|pas| vaut 5 et \verb+angle+ vaut 60.
+
+
+\item[briques(larg,haut,dec)] briques de largeur \verb+larg+, de hauteur \verb+haut+ et décalées d'une ligne à l'autre de \verb+dec+. Si les valeurs sont omises, \verb|larg| vaut 12, \verb|haut| vaut 6 et \verb+dec+ vaut 6.
+
+
+\item[vagues(per,amp,dec)] (d'après le manuel de l'utilisateur) \og vagues \fg{} de période \verb+per+, d'amplitude \verb+amp+ et décalées d'une ligne à l'autre de \verb+dec+. Si les valeurs sont omises, \verb|per| vaut 20, \verb|amp| vaut 3 et \verb+dec+ vaut 10.
+\end{description}
+
+
+
+\begin{exemple}[0.55]
+repere(-1.5,4.5,1cm,-1.5,7.5,1cm);
+path c[];picture lab;
+c1=fullcircle scaled 2.5;
+for k=1 upto 6:
+  i:=(k-1) mod 2;j:=(k-1) div 2;
+  c[k]:=c1 shifted (3*i,3*j);
+endfor;
+fill c1 withcolor lime;
+fill c1 avec hachures(10,30) dashed evenly;
+fill c2 withcolor lime;
+fill c2 avec hachures();
+fill c3 withcolor (0,0.65,0.8,0.48);
+fill c3 avec briques(15,5,4);
+fill c4 withcolor (0,0.65,0.8,0.48);
+fill c4 avec briques();
+fill c5 withcolor (1,0,0,0.2);
+fill c5 avec vagues(30,10,20)
+           withpen pencircle scaled 2;
+fill c6 withcolor (1,0,0,0.2);
+fill c6 avec vagues();
+for k=1 upto 6:
+  i:=(k-1) mod 2;j:=(k-1) div 2;
+  draw c[k];
+  lab:=thelabel("c"&decimal(k),3*(i,j));
+  unfill bbox lab;draw lab;
+endfor;
+fin;
+\end{exemple}
+
+
+
+\subsection{Figures pour une présentation}
+\begin{description}
+\item[figureinter] exporte la figure telle qu'elle est au moment où cette commande apparait. La numérotation est incrémentée et la figure peut continuer.
+\end{description}
+ L'exemple ci-dessous crée trois figures :
+ 
+ \begin{exemplefiginter}[0.7]{3}
+ repere(-3,3,0.7cm,-1,5,0.7cm);
+  path C_f;
+  vardef f(expr x)=x**2 enddef;
+  C_f= courbefonc(f)();
+  draw quadrillage(1,1);
+  draw axes(1,1);
+  draw cadre;
+  figureinter;
+  draw courbepoints(f)(-2,2,9) withcolor rouge;
+  figureinter;
+  draw C_f withcolor bleu withpen pencircle scaled 1;
+ fin;
+ \end{exemplefiginter}
+
+
+Si ces trois figures s'appellent \verb|mafigure.1|, \verb|mafigure.2| et \verb|mafigure.3|,  elles peuvent être incluses dans un document de la classe \verb|beamer| avec le code ci-dessous :
+
+\begin{center}
+\begin{minipage}{0.6\linewidth}
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{beamer}
+ \ifpdf   % Pour utiliser pdflatex
+  \DeclareGraphicsRule{*}{mps}{*}{}
+ \fi
+\begin{document}
+\begin{frame}
+\includegraphics<+>{mafigure.1}%
+\includegraphics<+>{mafigure.2}%
+\includegraphics<+>{mafigure.3}%
+\end{frame}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+
+
+
+\subsection{Code embarqué dans un document \LaTeX}
+
+Certains packages permettent d'écrire du code \MP{} directement dans un document \LaTeX. \verb|repere| est compatible avec, entre autres, \verb|emp| et \verb|mpgraphics|.
+
+\medskip
+
+\begin{minipage}[t]{0.45\linewidth}
+{\centering \textbf{Utilisation du package \texttt{emp}}\par}
+
+
+
+\verb|pdflatex monfichier.tex|
+
+\verb|mpost monfichier.mp|
+
+\verb|mpost monfichier.mp|
+
+\verb|pdflatex monfichier.tex|
+
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage{emp}
+\usepackage{ifpdf}
+ \ifpdf % Pour utiliser pdflatex
+  \DeclareGraphicsRule{*}{mps}{*}{}
+ \fi
+\begin{document}
+\begin{empfile}
+\begin{empcmds}
+ input repere;
+\end{empcmds}
+\begin{emp}(0,0)
+  repere(-3,3,1cm,-2,2,1cm);
+   draw axes(1,1);
+  fin;
+\end{emp}
+\end{empfile}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\linewidth}
+{\centering \textbf{Utilisation du package \texttt{mpgraphics}}\par}
+
+
+\verb|pdflatex -shell-escape monfichier.tex|
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage[runs=2]{mpgraphics}
+\begin{document}
+\begin{mpdefs}
+ input repere;
+\end{mpdefs}
+\begin{mpdisplay}
+  repere(-3,3,1cm,-2,2,1cm);
+   draw axes(1,1);
+  fin;
+\end{mpdisplay}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+
+
+Il est aussi possible d'utiliser Lua\LaTeX{} avex le package \verb|luamplib|. Il faut alors charger les packages \verb|siunitx| et \verb|esvect| utilisés par \verb|repere|.
+
+\begin{center}
+\begin{minipage}[t]{0.5\linewidth}
+{\centering \textbf{Utilisation de Lua\LaTeX}\par}
+
+
+\verb|lualatex monfichier.tex|
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{siunitx}
+\usepackage{esvect}
+\usepackage{luamplib}
+\mplibnumbersystem{double} % Si nécessaire
+\begin{document}
+\everymplib{input repere;}
+\begin{mplibcode}
+  repere(-3,3,1cm,-2,2,1cm);
+  draw axes(1,1);
+fin;
+\end{mplibcode}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\section{Dessin à main levée avec \texttt{geometriesyr}}
+
+\label{exgeom}Il est possible, dans une figure créée avec \verb+repere+, d'utiliser le \og dessin à main levée \fg{} de \verb+geometriesyr+. Il faut alors charger \verb+geometriesyr+ \emph{avant} \verb|repere| et utiliser les fonctions de dessin telles que \verb|cercles|, \verb|triangle|...
+
+\begin{exemple}
+repere(-0.5,5,1cm,-0.5,5,1cm);
+pair A,B,C,D;
+A=(0.5,0.5);B=(4,1);C=(3,4);
+typetrace:="mainlevee";
+draw axes(1,1);
+drawoptions(withcolor violet);
+draw triangle(A,B,C);
+nomme.llft(A);nomme.lrt(B);
+nomme.top(C);
+draw marqueangle(B,A,C,1);
+drawoptions(withcolor vertfonce);
+draw cercles(CentreCercleC(A,B,C),A);
+fin;
+\end{exemple}
+
+\section{Tableaux et grilles}
+Il est possible d'utiliser \verb|repere| pour représenter des tableaux ou « damiers » et placer des objets dans chacune des cases. La figure devra alors débuter par une commande \verb|tableau| au lieu de la commande \verb|repere| et la numérotation sera automatique.
+
+\subsection{Définition du tableau}
+
+\begin{description}
+\item[tableau(n,m,u)] débute une figure et définit un tableau de $n$ colonnes et $m$ lignes. La largeur des colonnes est égale à la hauteur des lignes et vaut \verb|u|.
+\item[tableau(n,m,ux,uy)] débute une figure et définit un tableau de $n$ colonnes et $m$ lignes. La largeur des colonnes vaut \verb|ux| et la hauteur des lignes vaut \verb|uy|.
+\item[fin] termine la figure.
+\end{description}
+
+\subsection{Grille}
+
+\begin{description}
+\item[grille(x,y)] quadrillage avec un pas de x sur les colonnes et de y sur les lignes.
+\end{description}
+La couleur et l'épaisseur des lignes peuvent être modifiées localement mais on peut aussi les changer globalement : 
+\begin{description}
+\item[coullignes] variable contenant la couleur des lignes de la grille. La valeur par défaut est \verb|black|.
+\item[eplignes] variable contenant l'épaisseur des lignes de la grille. La valeur par défaut est \verb|0.7bp|.
+ \end{description}
+
+
+\begin{exemple}
+tableau(8,8,0.7cm);
+coullignes:=olive;
+draw grille(1,1);
+draw grille(2,2) epaisseur 2;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[damier(x,y)] figure formée de la grille et des cases coloriées alternativement.
+\item[coultableau{[]}] variables qui contiennent les couleurs des cases.
+
+Les valeurs par défaut sont \verb|coultableau[1]=0.45white| et \verb|coultableau[2]:=0.9white|.
+
+\end{description}
+
+\begin{exemple}
+tableau(5,5,1cm);
+  coultableau[1]:=jaune;
+  coultableau[2]:=0.7rouge;
+  draw damier(1,1);
+fin;
+\end{exemple}
+
+\subsection{Grille partielle}
+
+\begin{description}
+\item[lignesh(<suite de 0 et 1>)] Figure qui décrit les lignes horizontales qui doivent être tracées. De gauche à droite et de haut en bas.
+\item[lignesv(<suite de 0 et 1>)] Figure qui décrit les lignes verticales qui doivent être tracées. De gauche à droite et de haut en bas.
+\end{description}
+
+\begin{exemple}
+tableau(3,3,1cm);
+  draw grille(1,1);
+  draw coord;
+  draw lignesh(1,1,1,
+                1,0,1,
+                0,1,0,
+                1,1,1) epaisseur 3;
+  draw lignesv(1,0,0,1,
+                1,1,1,1,
+                1,0,1,1) epaisseur 3;
+fin;
+\end{exemple}
+
+\subsection{Coordonnées}
+
+\begin{description}
+\item[coordx] figure formée des numéros de colonnes placée par défaut en bas.
+\item[coordy] figure formée des numéros de lignes placée par défaut à gauche.
+\item[coord] figure formée des deux figures précédentes.
+\end{description}
+
+\begin{exemple}
+tableau(5,5,1cm);
+  draw grille(1,1);
+  draw coord;
+fin;
+\end{exemple}
+
+\begin{description}
+\item[style\_coord\_x] variable de type \verb|string| qui indique comment doivent être composées les coordonnées des colonnes. La valeur par défaut est \verb|"1"|. Les autres valeurs possibles sont \verb|"a"| (lettres minuscules), \verb|"A"| (lettres majuscules), \verb|"i"| (chiffres romains minuscules) et \verb|"I"| (chiffres romains majuscules).
+\item[style\_coord\_y] même chose pour les lignes.
+\item[deb\_coord\_x] variable de type \verb|numeric| qui indique la première valeur des colonnes. La valeur par défaut est \verb|1|.
+\item[deb\_coord\_y] même chose pour les lignes.
+\item[align\_coord\_y] variable de type \verb|string| qui indique comment doivent être alignés les numéros de lignes. La valeur par défaut est \verb|"c"| (centré). Les valeurs possibles sont \verb|"g"| ou \verb|"l"| (gauche) et \verb|"d"| ou \verb|"r"| (droite).
+\item[place\_coord] variable de type \verb|string| qui indique où les coordonnées doivent être affichées. La valeur par défaut est \verb|"bg"| (en bas à gauche). On peut utiliser une combinaison des lettres \verb|"b"| (en bas), \verb|"h"| (en haut), \verb|"g"| (à gauche) et \verb|"d"| (à droite).
+\item[inverse\_coord\_x] variable de type \verb|boolean| si le sens par défaut dans lequel  les numéros de colonnes doivent être écrits (de gauche à droite) doit être inversé. La valeur par défaut est \verb|false|.
+\item[inverse\_coord\_y]  variable de type \verb|boolean| si le sens par défaut dans lequel  les numéros de lignes doivent être écrits (de bas en haut) doit être inversé. La valeur par défaut est \verb|false|.
+\end{description}
+
+\begin{exemple}
+tableau(5,5,1cm);
+  draw grille(1,1);
+  style_coord_x:="a";
+  style_coord_y:="I";
+  deb_coord_x:=5;
+  deb_coord_y:=3;
+  draw coord;
+fin;
+\end{exemple}
+
+\begin{exemple}
+tableau(5,5,1cm);
+  draw grille(1,1);
+  style_coord_x:="A";
+  style_coord_y:="I";
+  place_coord:="hg";
+  inverse_coord_y:=true;
+  align_coord_y:="r";
+  draw coord;
+fin;
+\end{exemple}
+
+
+\begin{description}
+\item[numerotationdames] description
+\end{description}
+
+\subsection{Placements d'objets dans les cases}
+
+\begin{description}
+\item[case(x,y)] figure formée de la case de coordonnées \verb|(x,y)| remplie et de son contour dessiné avec l'épaisseur et la couleur de la grille.
+\item[cases((x1,y1),(x2,y2),...)] toutes les cases \verb|(x1,y1)|, \verb|(x2,y2)|... sont coloriées.
+\end{description}
+
+\begin{codecache}
+def couleur= withcolor enddef;
+\end{codecache}
+
+\begin{exemple}[0.6]
+tableau(5,5,1cm);
+ draw damier(1,1);
+ draw coord;
+ draw case(2,4) couleur rouge;
+ draw cases((1,2),(3,3),(5,1)) couleur bleu;
+fin;
+\end{exemple}
+
+On peut utiliser une variante de \verb|label| pour placer des objets dans les cases :
+
+\begin{description}
+\item[tablabel(obj,x,y)] Place l'objet \verb|obj| dans la case de coordonnées \verb|(x,y)|. L'objet peut être une chaine de caractère, un chemin ou une figure.
+\item[tablabels(obj)((x1,y1),(x2,y2)...)] Place l'objet \verb|obj| dans toutes les cases indiquées.
+\end{description} 
+
+\begin{exemple}[0.6]
+tableau(8,8,0.6cm);
+  draw grille(1,1);
+  draw coord;
+  tablabel(fullcircle scaled 0.8,5,3);
+  tablabels("X")((3,4),(6,1),(2,2)) couleur vert;
+  for i=5 upto 8:
+    for j=5 upto 8:
+      tablabel(decimal(i*j),i,j) couleur bleu;
+    endfor
+  endfor
+fin;
+\end{exemple}
+
+\begin{exemple}
+tableau(5,5,0.8cm);
+  draw grille(1,1);
+  inverse_coord_x:=true;
+  inverse_coord_y:=true;
+  deb_coord_x:=3;
+  deb_coord_y:=4;
+  draw coord;
+  tablabels("X")((3,4),(6,7),(4,8));
+fin;
+\end{exemple}
+
+\subsection{Quelques dessins}
+
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{|m{5cm}|m{5cm}|>{\noindent\centering \rule{0pt}{0pt}\\ \arraybackslash}m{4cm}|}\hline
+\centering \bfseries Syntaxe & \centering \bfseries Exemples &\multicolumn{1}{c|}{\bfseries Résultat} \\\endhead \hline
+\verb|Pion(v)(coul1,coul2)| & \verb|Pion(1)(noir,0.85blanc)|&%\rule{0pt}{1.8cm}%
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Pion(1)(noir,0.85blanc),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+ & \verb|Pion(1)(0.9blanc,noir)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Pion(1)(0.9blanc,noir),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+  & \verb|Pion(2)(noir,0.85blanc)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+   tablabel(Pion(2)(noir,0.85blanc),1,1);
+ fin;
+\end{figreperedoc}
+ \\ \hline
+ & \verb|Pion(2)(0.9blanc,noir)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Pion(2)(0.9blanc,noir),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Dame(v)(coul1,coul2)| & \verb|Dame(1)(noir,0.85blanc)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Dame(1)(noir,0.85blanc),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+ & \verb|Dame(1)(0.9blanc,noir)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Dame(1)(0.9blanc,noir),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+  & \verb|Dame(2)(noir,0.85blanc)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+   tablabel(Dame(2)(noir,0.85blanc),1,1);
+ fin;
+\end{figreperedoc}
+ \\ \hline
+ & \verb|Dame(2)(0.9blanc,noir)|&
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Dame(2)(0.9blanc,noir),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Croix| & &
+\begin{figreperedoc}
+tableau(1,1,1.5cm);
+  tablabel(Croix,1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Trou| & &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Trou,1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Marque(v)(coul)| &\verb|Marque(1)((0.9,0.7,0.7))| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Marque(1)((0.9,0.7,0.7)),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+ &\verb|Marque(2)((0.8,0.65,0.5))| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Marque(2)((0.8,0.65,0.5)),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Mur(coul1,coul2)| &\verb|Mur(rouge,noir)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Mur(rouge,noir),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Plot(coul1,coul2)| &\verb|Plot(0.7rouge,0.5rouge)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Plot(0.7rouge,0.5rouge),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Caisse(coul1,coul2)| &\verb|Caisse(orange,marron)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Caisse(orange,marron),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Robotdroite(coul1,coul2)| &\verb|Robotdroite(noir,0.6vert)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Robotdroite(noir,0.6vert),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Robotgauche(coul1,coul2)| &\verb|Robotgauche(marine,0.6rouge)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Robotgauche(marine,0.6rouge),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Bateau(numcases,coul)| &\verb|Bateau(1,violet)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Bateau(1,violet),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+ &\verb|Bateau(2,marron)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Bateau(2,marron),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Eau(coul)| &\verb|Eau(marine)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Eau(marine),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\verb|Fleche(coul1,coul2)| &\verb|Fleche(jaune,marine)| &
+\begin{figreperedoc}
+tableau(1,1,2cm);
+  tablabel(Fleche(jaune,marine),1,1);
+fin;
+\end{figreperedoc}
+\\ \hline
+\end{longtable}
+\end{center}
+
+
+\subsection{Exemples}
+
+\subsubsection*{Mots croisés}
+
+\begin{exemple}
+def moth(expr ch,n,m)=
+ for i=1 upto length ch:
+  tablabel(substring(i-1,i) of ch,n+i-1,m);
+ endfor
+enddef;
+
+tableau(8,8,0.8cm);
+ draw grille(1,1);
+ inverse_coord_y:=true;
+ style_coord_y:="I";
+ place_coord:="hg";
+ draw coord;
+ draw cases((3,3),(3,5),(2,7),(6,6),(7,4));
+ moth("OMELETTE",1,2);
+ moth("AMIES",4,3);
+fin;
+
+\end{exemple}
+
+\subsubsection*{Sudokus}
+
+\begin{exemple}
+tableau(9,9,0.8cm);
+ draw grille(1,1);
+ draw grille(3,3) epaisseur 2;
+ tablabels("1",(1,4),(4,8),(6,5),(7,3));
+ tablabels("2",(3,9),(5,6),(6,2));
+ tablabels("3",(1,1),(4,2),(9,6));
+ tablabels("4",(3,8),(8,7));
+ tablabels("5",(2,7),(4,9),(6,6),(7,1));
+ tablabels("6",(2,4),(5,8));
+ tablabels("7",(6,3),(7,2),(8,9),(9,5));
+ tablabels("8",(1,3),(3,7),(5,5),(8,8));
+ tablabels("9",(3,2));
+fin;
+\end{exemple}
+
+\subsubsection*{Dames}
+
+\begin{exemple}
+tableau(10,10,0.8cm);
+ picture pionblanc,pionnoir,dameblanche;
+ picture fleche;
+ pionblanc:=Pion(2)(0.9blanc,noir);
+ pionnoir:=Pion(2)(noir,0.85blanc);
+ dameblanche:=Dame(2)(0.9blanc,noir);
+ coultableau[1]:=0.7marron+0.3blanc;
+ coultableau[2]:=beige;
+ fleche:=Fleche(rouge,noir) rotated 135;
+ draw damier(1,1);
+ draw numerotationdames;
+ tablabels(pionblanc,31,36,39);
+ tablabels(pionnoir,3,7,16,19,23,30);
+ tablabels(dameblanche,15);
+ tablabel(fleche,5.5,5.5);
+fin;
+\end{exemple}
+
+\subsubsection*{Bataille navale}
+
+\begin{exemplev}{1}
+tableau(10,10,0.8cm);
+ draw grille(1,1);
+ inverse_coord_y:=true;
+ style_coord_x:="A";
+ place_coord:="hg";
+ draw coord;
+ tablabel(Bateau(4,marron),5.5,3);
+ tablabel(Bateau(3,0.5vert),7,8);
+ tablabel(Bateau(3,0.5vert) rotated 90,2,9);
+ tablabels(Bateau(1,violet),(4,10),(3,5),(8,1),(9,4));
+ tablabels(Eau(marine),(2,7),(3,7),(4,9),(4,2),(5,2));
+ tablabels(Croix,(5,3),(8,8));
+fin;
+\end{exemplev}
+
+\subsubsection*{Algoréa}
+
+\begin{exemplev}{1}
+tableau(13,5,1cm);
+ coultableau[1]:=(1,0.9,0.7);
+ coultableau[2]:=(1,0.9,0.7);
+ draw damier(1,1);
+ tablabels(Mur(0.8rouge,noir),(1,2),(1,3),(1,4),(13,2),(13,3),(13,4));
+ for i=1 upto 13:
+  tablabels(Mur(0.8rouge,noir),(i,1),(i,5));
+ endfor
+ tablabel(Robotdroite(noir,0.7vert),2,2);
+ for i=4,6,7,10,12:
+  tablabel(Caisse(orange,marron),i,3);
+  tablabel(Marque(2)((0.8,0.65,0.5)),i,4);
+ endfor
+fin;
+\end{exemplev}
+
+
+\begin{codecache}
+end
+\end{codecache}
+
+\makeatletter
+\immediate\closeout\verbatim@out
+\makeatother
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{2em}
+
+
+\begin{exemplev}[1]{2}
+repere(-9.5,6,1cm,-1.25,1.25,2cm);
+%cercle
+pair O,A,A',B,B',M,S,C;
+numeric x;x=pi/4;
+O=_c(-7,0);A=_c(-5,0);
+B=_c(-7,1);A+A'=B+B'=2O;
+M=rotation(A,O,180*x/pi);
+C=projection(M,A,A');
+S=projection(M,B,B');
+draw cerclepoint(O,A);
+drawarrow A'--A;drawarrow B'--B;
+nomme.rt(A);nomme.top(B);nomme.llft(O);
+drawoptions(withcolor rouge);
+draw O--M;draw C--M--S dashed evenly;
+draw codeperp(M,C,O,5);
+draw codeperp(O,S,M,5);
+draw codeangle.urt(A,O,M,0,
+                         LaTeX("$x$"));
+marque_p:="";
+nomme.urt(M);
+label.lft(LaTeX("$\sin x$"),S);
+%repere
+settout(-4.5,6,-1.25,1.25);
+path C_f;
+C_f=courbefonc(sin,-4.5,6,80);
+pair m;m=_c(x,sin(x));
+drawoptions();
+draw axexpi.bot(1,2);
+draw axey(0.5,1);
+drawoptions(withcolor bleu);
+draw C_f withpen pencircle scaled 1.5;
+nomme.urt(C_f,2.5,LaTeX("$y=\sin x$"));
+drawoptions(withcolor rouge);
+draw projectionx.bot(m,LaTeX("$x$"))
+                         dashed evenly;
+%
+draw M--m dashed evenly;
+fin;
+\end{exemplev}
+
+\vspace{3em}
+
+\begin{exemple}
+repere(-0.5,5,1cm,-0.5,5,1cm);
+coulpoint:=blue;coullabel:=blue;
+pair A,B,C,D;
+A=_c(0.5,0.5);B=_c(4,1);C=_c(3,4);
+typetrace:="mainlevee";
+draw axes(1,1);
+drawoptions(withcolor violet);
+draw triangle(A,B,C);
+nomme.llft(A);nomme.lrt(B);
+nomme.top(C);
+draw marqueangle(B,A,C,0);
+drawoptions(withcolor vertfonce);
+draw cercles(CentreCercleC(A,B,C),A);
+fin;
+\end{exemple}
+
+
+
+\begin{codecache}
+end
+\end{codecache}
+
+\makeatletter
+\immediate\closeout\verbatim@out
+\makeatother
+\end{document}
+
+

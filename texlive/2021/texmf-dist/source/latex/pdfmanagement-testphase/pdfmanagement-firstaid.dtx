@@ -1,0 +1,334 @@
+% \iffalse meta-comment
+%
+%% File: pdfmanagement-firstaid.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=pdfmanagement-firstaid
+  (LaTeX PDF management testphase bundle)}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \title{^^A
+%   The \pkg{pdfmanagement-firstaid} package  -- temporary patches and package replacements  ^^A
+%   \\ \LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{pdfmanagement-firstaid} documentation}
+% This code is temporary! It tries to patch commands of other packages or even
+% replace package which are incompatible with the pdfmanagement,
+% to remove clashes and test if everything works as expected.
+% This code should disappear when packages adapt to the central interfaces.
+%
+% The package contains an number of sections for various packages. Every
+% section can be disabled in (the first) \cs{DeclareDocumentMetadata} with
+% |firstaidoff={name1,name2,...}|.
+%    \begin{macrocode}
+%<*package>
+\ProvidesExplPackage{pdfmanagement-firstaid}{2021-08-28}{0.95i}
+  {LaTeX PDF management testphase bundle / firstaid-patches}
+
+%<@@=pdfmanagement>
+\clist_map_inline:nn {pgf,transparent,hyperxmp,pdflscape,xcolor,color,beamer,output}
+  {
+    \bool_new:c       { g_@@_firstaid_#1_bool }
+    \bool_gset_true:c { g_@@_firstaid_#1_bool }
+  }
+\clist_map_inline:Nn \g_@@_firstaidoff_clist
+  {
+    \bool_if_exist:cT { g_@@_firstaid_#1_bool }
+      {
+        \bool_gset_false:c { g_@@_firstaid_#1_bool }
+      }
+  }
+\msg_new:nnn  { pdfmanagement } { firstaid }
+              { loading~pdfmanagement~firstaid~code~for~#1 }
+%    \end{macrocode}
+% \subsection{Output routine}
+% This load as few patches for the LaTeX output routine commands. They add
+% hooks for the interruption of links and for paragraph tagging.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_output_bool
+  {
+    \RequirePackage{output-patches-tmp-ltx}
+  }
+%    \end{macrocode}
+
+% \subsection{\pkg{beamer}}
+% \pkg{beamer} makes use of the now unsupported syntax |linkbordercolor={.5 .5 .5}|.
+% To avoid an error we define this color as a name.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_beamer_bool
+  {
+    \color_set:nnn{.5~.5~.5}{rgb}{0.5,0.5,0.5}
+  }
+%    \end{macrocode}
+% \subsection{\pkg{color}}
+%
+%  \pkg{color} is not incompatible, but the new \pkg{hyperref} driver makes use of
+%  \pkg{l3color} to set the colors. It is therefore necessary to patch some
+%  internal \pkg{color} commands, so
+%  that colors defined with its \cs{definecolor} command are known to \pkg{l3color} and
+%  so \pkg{hyperref}. This only supports the color models from l3color (which covers
+%  all standard model of the \pkg{color} package). The |named| model is mapped to
+%  \cs{color_set:nn}.
+%
+%  This patch serves also as test to check if this change can be safely
+%  added to \pkg{color} later.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_color_bool
+  {
+    \declare@file@substitution{color.sty}{color-ltx.sty}
+  }
+%    \end{macrocode}
+%
+% \subsection{\pkg{xcolor}}
+%
+%  \pkg{xcolor} is not incompatible, but the new \pkg{hyperref} driver makes use of
+%  \pkg{l3color} to set the colors. It is therefore necessary to patch \pkg{xcolor}, so
+%  that colors defined with its \cs{definecolor} command are known to \pkg{l3color} and
+%  so \pkg{hyperref}. This only supports the color model from l3color. Colors defined
+%  with the models |cmy| and |tHsb| are silently ignored.
+%
+%  The |named| model is mapped to \cs{color_set:nn}.
+%
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_xcolor_bool
+  {
+    \AddToHook{package/after/xcolor}
+       {\RequirePackage{xcolor-patches-tmp-ltx}\XC@@@@names}
+  }
+%    \end{macrocode}
+% \subsection{\pkg{pgf}}
+%
+% In \pkg{pgf}, resource management is set up in the file |pgfutil-common.tex|.
+% This then provides three functions for adding to the resources, all of which
+% are objects:
+% \begin{itemize}
+%   \item \cs{pgfutil@addpdfresource@extgs}: Extended graphics state
+%   \item \cs{pgfutil@addpdfresource@colorspaces}: Color spaces
+%   \item \cs{pgfutil@addpdfresource@patterns}: Patterns
+% \end{itemize}
+%
+% These resource dictionaries are used by adding entries in a cumulative sense;
+% the macro layer deals with ensuring that each entry is only given once. Note
+% that the objects themselves must be given only once for each page.
+%
+% To support these functions, there are a series of set-up macros which install
+% these resources. That has to take place for every page: the exact route
+% therefore depends on the driver.
+%
+% For the pdfmanagement project we need to avoid that pgf interferes in ExtGState,
+% ColorSpace and Pattern (Shadings are added to the xform resources and so probably
+% unproblematic for now).
+% The actual patch is in a file hook guarded by the boolean,
+% the rest of the code is always defined.
+%    \begin{macrocode}
+
+\bool_if:NT \g_@@_firstaid_pgf_bool
+  {
+    \msg_info:nnn{pdfmanagement }{firstaid}{pgf}
+    \AddToHook{file/after/pgfrcs.sty}
+      {
+        \cs_set_eq:NN
+          \@@_pgfori_pgfutil@setuppdfresources
+          \pgfutil@setuppdfresources
+        \def\pgfutil@setuppdfresources
+          {
+            \pdfmanagement_if_active:TF
+              {
+                \@@_pgf_sys_setuppdfresources_plain:
+              }
+              {
+                \@@_pgfori_pgfutil@setuppdfresources
+              }
+         }
+     }
+  }
+%\def\pgfutil@addpdfresource@extgs#1{\pgf@sys@addpdfresource@extgs@plain{#1}}
+%\def\pgfutil@addpdfresource@colorspaces#1{\pgf@sys@addpdfresource@colorspaces@plain{#1}}
+%\def\pgfutil@addpdfresource@patterns#1{\pgf@sys@addpdfresource@patterns@plain{#1}}
+%\def\pgfutil@setuppdfresources{\pgf@sys@setuppdfresources@plain}
+% \pgf@sys@pdf@possible@resources %used in xform
+%Trying to patch pgf ..
+\cs_new_protected:Npn \@@_pgf_sys_setuppdfresources_plain:
+  {
+   %objects are already created ...
+    \def\pgf@sys@pdf@possible@resources
+      {
+        /ColorSpace~\pdf_object_ref:n {__pdf/Page/Resources/ColorSpace}
+        /Pattern   ~\pdf_object_ref:n {__pdf/Page/Resources/Pattern}
+        /ExtGState ~\pdf_object_ref:n {__pdf/Page/Resources/ExtGState}
+      }
+    \let\pgf@sys@pdf@check@resources=\relax%
+    %not sure if needed, but perhaps the lists are used somewhere else ...
+    \let\pgf@sys@pgf@resource@list@extgs=\pgfutil@empty%
+    \let\pgf@sys@pgf@resource@list@patterns=\pgfutil@empty%
+    \let\pgf@sys@pgf@resource@list@colorspaces=\pgfutil@empty%
+    % the commands to add page resources
+    \def\pgf@sys@addpdfresource@extgs@plain##1
+      {
+        %\exp_after:wN %for transparent which passes a command
+          \@@_patch_pgfextgs:w ##1\q_stop
+      }
+    \def\pgf@sys@addpdfresource@patterns@plain##1
+      {
+        \@@_patch_pgfpatterns:w ##1\q_stop
+      }
+   \def\pgf@sys@addpdfresource@colorspaces@plain##1
+      {
+        \@@_patch_pgfcolorspaces:w ##1\q_stop
+      }
+  }
+
+%\AtEndPreamble{\pgfutil@setuppdfresources}
+% helper commands as pgf doesn't pass resources as two arguments
+% code to add to the resources existing stuff in the format "/name value":
+\cs_new:Npn \@@_split_dict_entry_aux:NNw #1 #2 /#3~#4\q_stop
+  {
+    \tl_set:Nn #1 {#3}
+    \tl_set:Nn #2 {#4}
+  }
+
+\cs_generate_variant:Nn \tl_trim_spaces:n{V}
+\cs_generate_variant:Nn \pdfmanagement_add:nnn {nex}
+\cs_new:Npn \@@_patch_pgfextgs:w  #1/#2<<#3>>#4\q_stop
+  {
+    \tl_set:Nx\l_tmpa_tl{#2}
+      \pdfmanagement_add:nex
+        {Page/Resources/ExtGState}{\tl_trim_spaces:V\l_tmpa_tl}{<<#3 #4>>}
+  }
+\cs_new:Npn \@@_patch_pgfpatterns:w  #1/#2\space#3\q_stop
+  {
+     \pdfmanagement_add:nex
+        {Page/Resources/Pattern}{\tl_trim_spaces:n{#2}}{#3}
+  }
+\cs_new:Npn \@@_patch_pgfcolorspaces:w  #1/#2[#3]#4\q_stop
+  {
+    \pdfmanagement_add:nex
+      {Page/Resources/ColorSpace}{\tl_trim_spaces:n{#2}}{[#3]}
+  }
+
+%    \end{macrocode}
+% \subsection{\pkg{transparent}}
+% We simply replace by the new version.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_transparent_bool
+ {
+   \declare@file@substitution{transparent.sty}{transparent-ltx.sty}
+ }
+%    \end{macrocode}
+% \subsection{\pkg{pdflscape}}
+% We simply replace by the new version.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_pdflscape_bool
+ {
+   \declare@file@substitution{pdflscape.sty}{pdflscape-ltx.sty}
+ }
+%    \end{macrocode}
+% \subsection{hyperxmp}
+% We add some code at the end of hyperxmp.sty.
+%    \begin{macrocode}
+\bool_if:NT \g_@@_firstaid_hyperxmp_bool
+ {
+    \AddToHook
+      {file/after/hyperxmp.sty}
+      {\RequirePackage{hyperxmp-patches-tmp-ltx}}
+ }
+%</package>
+%    \end{macrocode}
+% \subsection{\pkg{colorspace}}
+% This is rather difficult as no real places to inject patches
+% at first a try to avoid that its ExtGState is missing:
+% it can not be avoided to recreate the objects (and so to get duplicates)
+% as colorspace uses temporary macros whose contents is lost.
+%    \begin{macrocode}
+%<*package>
+%<@@=pdf>
+% this must be earlier, to avoid problems with luatex which has two pageresources
+% lua/tex
+\hook_gput_code:nnn {begindocument} {pdf}
+  {
+    \tl_if_exist:NT \spc@op
+      {
+        \def\spc@Pageresources#1{}
+      }
+
+  }
+
+\hook_gput_code:nnn {begindocument/end} {pdf}
+  {
+    \tl_if_exist:NT \spc@op
+      {
+        \@@_backend_object_new:nn  {__spc_extgstate_op_false}{dict}
+        \@@_backend_object_write:nn
+          {__spc_extgstate_op_false}
+          {/Type /ExtGState~/op~false~/OP~false}
+        \pdfmanagement_add:nnn
+          {Page/Resources/ExtGState}
+          {SPCko}
+          {\@@_backend_object_ref:n {__spc_extgstate_op_false}}
+        \@@_backend_object_new:nn  {__spc_extgstate_op_true0}{dict}
+        \@@_backend_object_write:nn
+          {__spc_extgstate_op_true0}
+          {/Type /ExtGState~/op~true~/OP~true~/OPM~0}%
+        \pdfmanagement_add:nnn
+          {Page/Resources/ExtGState}
+          {SPCmz}
+          {\@@_backend_object_ref:n {__spc_extgstate_op_true0}}
+        \@@_backend_object_new:nn  {__spc_extgstate_op_true1}{dict}
+        \@@_backend_object_write:nn
+          {__spc_extgstate_op_true1}
+          {/Type /ExtGState~/op~true~/OP~true~/OPM~1}%
+         \pdfmanagement_add:nnn
+          {Page/Resources/ExtGState}
+          {SPCop}
+          {\@@_backend_object_ref:n {__spc_extgstate_op_true1}}
+      }
+  }
+%</package>
+%    \end{macrocode}%
+% \end{documentation}
+% \PrintIndex

@@ -1,0 +1,233 @@
+\iffalse meta-comment
+
+File: pdfmanagement-testphase.ins
+
+Copyright (C) 2019-2021 The LaTeX Project
+
+It may be distributed and/or modified under the conditions of the
+LaTeX Project Public License (LPPL), either version 1.3c of this
+license or (at your option) any later version.  The latest version
+of this license is in the file
+
+   https://www.latex-project.org/lppl.txt
+
+This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+and all files in that bundle must be distributed together.
+
+The released version of this bundle is available from CTAN.
+
+-----------------------------------------------------------------------
+
+The development version of the bundle can be found at
+
+   https://github.com/latex3/pdfresources
+
+for those people who are interested.
+
+-----------------------------------------------------------------------
+
+\fi
+
+\input l3docstrip.tex
+\askforoverwritefalse
+
+\let\MetaPrefix\relax
+\preamble
+
+Copyright (C) 2019-2021 The LaTeX Project
+
+It may be distributed and/or modified under the conditions of
+the LaTeX Project Public License (LPPL), either version 1.3c of
+this license or (at your option) any later version.  The latest
+version of this license is in the file:
+
+   https://www.latex-project.org/lppl.txt
+
+This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+and all files in that bundle must be distributed together.
+
+\endpreamble
+\let\MetaPrefix\DoubleperCent
+% stop docstrip adding \endinput
+\postamble
+\endpostamble
+
+\keepsilent
+
+\generate
+  {%
+    \file{pdfmanagement-testphase.sty}
+      {%
+        \from{pdfmanagement-testphase.dtx}{package}
+      }%
+  }
+
+%\generate{\file{ltdocinit.sty}
+%  {
+%    \from{ltdocinit.dtx}            {header,package}
+%  }
+%}
+%\generate{\file{l3pdfdict.sty}
+%  {
+%    \from{l3pdfdict.dtx}            {header,package}
+%  }
+%}
+%
+%\generate{\file{l3pdfmanagement.sty}
+%  {
+%    \from{l3pdfmanagement.dtx}            {header,package}
+%  }
+%}
+%
+%\generate{\file{l3pdfmeta.sty}
+%  {
+%    \from{l3pdfmeta.dtx}            {header,package}
+%  }
+%}
+%
+%\generate{\file{l3pdftools.sty}
+%  {
+%    \from{l3pdftools.dtx}            {header,package}
+%  }
+%}
+
+\generate
+  {%
+    \file{pdfmanagement-firstaid.sty}
+      {%
+        \from{pdfmanagement-firstaid.dtx}{package}
+      }%
+  }
+
+%\generate
+%  {%
+%    \file{l3pdfannot.sty}
+%      {%
+%        \from{l3pdfannot.dtx}{header,package}
+%      }%
+%  }
+%
+%\generate
+%  {%
+%    \file{l3pdfxform-beta.sty}
+%      {%
+%        \from{l3pdfxform.dtx}{header,package}
+%      }%
+%  }
+%
+%\generate
+%  {%
+%    \file{l3pdffile.sty}
+%      {%
+%        \from{l3pdffile.dtx}{header,package}
+%      }%
+%  }
+
+\generate
+  {%
+    \file{l3pdffield-testphase.sty}
+      {%
+        \from{l3pdffield.dtx}{package}
+        \from{l3pdffield-checkbox.dtx}{package}
+        \from{l3pdffield-radiobutton.dtx}{package}
+        \from{l3pdffield-textfield.dtx}{package}
+        \from{l3pdffield-pushbutton.dtx}{package}
+        \from{l3pdffield-choice.dtx}{package}
+        \from{l3pdffield-action.dtx}{package}
+      }%
+  }
+
+\generate
+  {
+   \file{l3backend-testphase-dvipdfmx.def}
+     {
+       \from{l3backend-testphase.dtx}{drivers,dvipdfmx}
+     }
+  }
+
+\generate
+  {
+    \file{l3backend-testphase-dvips.def}
+      {
+        \from{l3backend-testphase.dtx}{drivers,dvips}
+      }
+  }
+
+\generate
+  {
+    \file{l3backend-testphase-dvisvgm.def}
+      {
+        \from{l3backend-testphase.dtx}{drivers,dvisvgm}
+      }
+  }
+
+\generate
+  {
+    \file{l3backend-testphase-luatex.def}
+      {
+        \from{l3backend-testphase.dtx}{drivers,luatex}
+      }
+  }
+
+\generate
+  {
+    \file{l3backend-testphase-pdftex.def}
+      {
+        \from{l3backend-testphase.dtx}{drivers,pdftex}
+      }
+  }
+\generate
+  {
+    \file {l3backend-testphase-xetex.def}
+      {
+       \from{l3backend-testphase.dtx}{drivers,xdvipdfmx}
+      }
+  }
+
+\generate
+  {
+    \file {hgeneric-testphase.def}
+      {
+       \from{hyperref-generic.dtx}{package}
+      }
+  }
+\generate
+  {
+    \file {hyperref-colorschemes.def}
+      {
+       \from{hyperref-generic.dtx}{colorscheme}
+      }
+  }
+
+\generate
+  {
+    \file {pdfmanagement-testphase.ltx}
+      {
+       \from{pdfmanagement-testphase.dtx}{header}
+       \from{l3pdfdict.dtx}{package}
+       \from{l3pdfmanagement.dtx}{package}
+       \from{ltdocinit.dtx}{package}
+       \from{l3pdfannot.dtx}{package}
+       \from{l3pdfxform.dtx}{package}
+       \from{l3pdfmeta.dtx}{package}
+       \from{l3pdftools.dtx}{package}
+       \from{l3pdffile.dtx}{package}
+      }
+  }
+
+\generate
+  {
+    \file {output-patches-tmp-ltx.sty}
+      {
+       \from{output-patches-tmp-ltx.dtx}{package}
+      }
+  }
+
+\def\MetaPrefix{-- }
+\def\defaultpostamble{%
+  \MetaPrefix^^J%
+  \MetaPrefix\space End of File `\outFileName'.%
+}
+\def\currentpostamble{\defaultpostamble}%
+\generate{\file{l3backend-testphase.lua}   {\from{l3backend-testphase.dtx}{lua}}}
+\endbatchfile

@@ -1,0 +1,29 @@
+name fancyref
+category Package
+revision 15878
+shortdesc A LaTeX package for fancy cross-referencing
+longdesc Provides fancy cross-referencing support, based on the
+longdesc package's reference commands (\fref and \Fref) that recognise
+longdesc what sort of object is being referenced. So, for example, the
+longdesc label for a \section would be expected to be of the form
+longdesc 'sec:foo': the package would recognise the 'sec:' part.
+containersize 3384
+containerchecksum 8f4ea5f16bfdbd06bdbaad76da724a1aad82263f4db2c24cf5f2e9f2db9f2afd9d4004d629098f936e0c2d4dcfa5fba8bd278746b90542f87b547e20abb0bcba
+doccontainersize 104292
+doccontainerchecksum 2231f5fd45d45cb7b538852c95b90db35fde9b66629d17ec9288de6ecf5339359c17fdc8931019fd4acce61ec2927a0cd494cc7462cab0df13d7660106b6a142
+docfiles size=37
+ texmf-dist/doc/latex/fancyref/COPYING
+ texmf-dist/doc/latex/fancyref/README details="Package Readme"
+ texmf-dist/doc/latex/fancyref/fancyref.pdf details="Package documentation"
+ texmf-dist/doc/latex/fancyref/freftest.tex
+srccontainersize 18944
+srccontainerchecksum 65de000487a8d317f0d05ff6d35574cf0bca521e4ab029637fd459b34f8640c53fed78bb9a54c21e4f5cc7c03dab221995810057350c46690c948a9e436c74f3
+srcfiles size=21
+ texmf-dist/source/latex/fancyref/fancyref.dtx
+ texmf-dist/source/latex/fancyref/fancyref.ins
+runfiles size=4
+ texmf-dist/tex/latex/fancyref/fancyref.sty
+catalogue-ctan /macros/latex/contrib/fancyref
+catalogue-license gpl
+catalogue-topics label-ref
+catalogue-version 0.9c

@@ -1,0 +1,21 @@
+name bidipagegrid
+category Package
+revision 34632
+shortdesc Bidi-aware page grid in background
+longdesc The package is based on pagegrid.
+containersize 3264
+containerchecksum b823a646d97c15ad9beb3aebeb7b2156aefc3ffd7bdec813e9cb2481e137cd661936c57bacc3b8c42509151205dbd4096329b5cbec25bd06698b698c59739551
+doccontainersize 25800
+doccontainerchecksum 615d87ca4c29e0a30cf1eee08819b10419a2f399a88f2bfed5bfb6eaf7b1adc8b64a2ccac5da7bedab4e4b951e80488b97203b9960980ca5919f653cc4218996
+docfiles size=9
+ texmf-dist/doc/xelatex/bidipagegrid/README details="README"
+ texmf-dist/doc/xelatex/bidipagegrid/bidipagegrid-doc.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/bidipagegrid/bidipagegrid-doc.tex
+runfiles size=4
+ texmf-dist/tex/xelatex/bidipagegrid/bidipagegrid.sty
+catalogue-contact-bugs https://github.com/bidi-tex/bidipagegrid/issues
+catalogue-contact-repository https://github.com/bidi-tex/bidipagegrid
+catalogue-ctan /macros/xetex/latex/bidipagegrid
+catalogue-license lppl1.3
+catalogue-topics layout-show background xetex bidi
+catalogue-version 0.2

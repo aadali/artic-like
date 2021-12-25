@@ -1,0 +1,2456 @@
+TeX Live installer invocation: /home/a/big/ycq/projects/artic-like/install-tl-20211221/install-tl -from_ext_gui 
+Trying to verify cryptographic signatures!
+Loading https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet/tlpkg/texlive.tlpdb
+Installing TeX Live 2021 from: https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet (verified)
+Platform: x86_64-linux => 'GNU/Linux on x86_64'
+Distribution: net  (downloading)
+Using URL: https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet
+Directory for temporary files: /tmp/wDd30G0cQC
+Installer revision: 61236
+Database revision: 61349
+Settings:
+  TEXDIR: "/home/a/big/ycq/projects/artic-like/texlive/2021"
+  TEXMFCONFIG: "~/.texlive2021/texmf-config"
+  TEXMFHOME: "~/texmf"
+  TEXMFLOCAL: "/home/a/big/ycq/projects/artic-like/texlive/texmf-local"
+  TEXMFSYSCONFIG: "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-config"
+  TEXMFSYSVAR: "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var"
+  TEXMFVAR: "~/.texlive2021/texmf-var"
+  binary_aarch64-linux: ""
+  binary_amd64-freebsd: ""
+  binary_amd64-netbsd: ""
+  binary_armhf-linux: ""
+  binary_i386-cygwin: ""
+  binary_i386-freebsd: ""
+  binary_i386-linux: ""
+  binary_i386-netbsd: ""
+  binary_i386-solaris: ""
+  binary_universal-darwin: ""
+  binary_win32: ""
+  binary_x86_64-cygwin: ""
+  binary_x86_64-darwinlegacy: ""
+  binary_x86_64-linux: "1"
+  binary_x86_64-linuxmusl: ""
+  binary_x86_64-solaris: ""
+  collection-basic: "1"
+  collection-bibtexextra: ""
+  collection-binextra: ""
+  collection-context: ""
+  collection-fontsextra: ""
+  collection-fontsrecommended: ""
+  collection-fontutils: ""
+  collection-formatsextra: ""
+  collection-games: ""
+  collection-humanities: ""
+  collection-langarabic: ""
+  collection-langchinese: ""
+  collection-langcjk: "1"
+  collection-langcyrillic: ""
+  collection-langczechslovak: ""
+  collection-langenglish: ""
+  collection-langeuropean: ""
+  collection-langfrench: ""
+  collection-langgerman: ""
+  collection-langgreek: ""
+  collection-langitalian: ""
+  collection-langjapanese: ""
+  collection-langkorean: ""
+  collection-langother: ""
+  collection-langpolish: ""
+  collection-langportuguese: ""
+  collection-langspanish: ""
+  collection-latex: "1"
+  collection-latexextra: ""
+  collection-latexrecommended: "1"
+  collection-luatex: ""
+  collection-mathscience: ""
+  collection-metapost: "1"
+  collection-music: ""
+  collection-pictures: ""
+  collection-plaingeneric: ""
+  collection-pstricks: ""
+  collection-publishers: ""
+  collection-texworks: ""
+  collection-wintools: ""
+  collection-xetex: "1"
+  doc_splitting_supported: "1"
+  inst_platform: "x86_64-linux"
+  instopt_adjustpath: ""
+  instopt_adjustrepo: "1"
+  instopt_letter: ""
+  instopt_portable: ""
+  instopt_write18_restricted: "1"
+  n_collections_available: "41"
+  n_collections_selected: "6"
+  n_systems_available: "16"
+  n_systems_selected: "1"
+  scheme-basic: ""
+  scheme-context: ""
+  scheme-custom: "1"
+  scheme-full: ""
+  scheme-gust: ""
+  scheme-infraonly: ""
+  scheme-medium: ""
+  scheme-minimal: ""
+  scheme-small: ""
+  scheme-tetex: ""
+  selected_scheme: "scheme-custom"
+  src_splitting_supported: "1"
+  this_platform: "x86_64-linux"
+  tlpdbopt_autobackup: "1"
+  tlpdbopt_backupdir: "tlpkg/backups"
+  tlpdbopt_create_formats: "1"
+  tlpdbopt_desktop_integration: "1"
+  tlpdbopt_file_assocs: "1"
+  tlpdbopt_generate_updmap: ""
+  tlpdbopt_install_docfiles: "1"
+  tlpdbopt_install_srcfiles: "1"
+  tlpdbopt_location: "https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet"
+  tlpdbopt_post_code: "1"
+  tlpdbopt_sys_bin: "/usr/local/bin"
+  tlpdbopt_sys_info: "/usr/local/share/info"
+  tlpdbopt_sys_man: "/usr/local/share/man"
+  tlpdbopt_w32_multi_user: "1"
+  total_size: "711"
+Installing to: /home/a/big/ycq/projects/artic-like/texlive/2021
+Installing [001/320, time/total: ??:??/??:??]: texlive.infra [430k]
+Installing [002/320, time/total: 00:01/14:04]: texlive.infra.x86_64-linux [143k]
+Installing [003/320, time/total: 00:02/21:08]: adobemapping [2120k]
+Installing [004/320, time/total: 00:02/04:29]: ae [84k]
+Installing [005/320, time/total: 00:03/06:31]: amscls [1437k]
+Installing [006/320, time/total: 00:04/05:44]: amsfonts [4725k]
+Installing [007/320, time/total: 00:06/04:03]: amsmath [2433k]
+Installing [008/320, time/total: 00:07/03:43]: anysize [36k]
+Installing [009/320, time/total: 00:07/03:42]: arabxetex [511k]
+Installing [010/320, time/total: 00:08/04:03]: arphic [26908k]
+Installing [011/320, time/total: 00:11/01:42]: atbegshi [409k]
+Installing [012/320, time/total: 00:11/01:41]: attachfile2 [467k]
+Installing [013/320, time/total: 00:12/01:49]: attachfile2.x86_64-linux [1k]
+Installing [014/320, time/total: 00:13/01:58]: atveryend [380k]
+Installing [015/320, time/total: 00:13/01:57]: automata [92k]
+Installing [016/320, time/total: 00:14/02:06]: auxhook [286k]
+Installing [017/320, time/total: 00:15/02:14]: awesomebox [58k]
+Installing [018/320, time/total: 00:15/02:14]: babel [1684k]
+Installing [019/320, time/total: 00:16/02:17]: babel-english [137k]
+Installing [020/320, time/total: 00:17/02:25]: babelbib [1251k]
+Installing [021/320, time/total: 00:18/02:29]: bbcard [9k]
+Installing [022/320, time/total: 00:18/02:29]: beamer [3044k]
+Installing [023/320, time/total: 00:20/02:35]: bibtex [404k]
+Installing [024/320, time/total: 00:20/02:34]: bibtex.x86_64-linux [73k]
+Installing [025/320, time/total: 00:20/02:33]: bidi-atbegshi [67k]
+Installing [026/320, time/total: 00:21/02:41]: bidicontour [32k]
+Installing [027/320, time/total: 00:22/02:48]: bidipagegrid [29k]
+Installing [028/320, time/total: 00:22/02:48]: bidipresentation [102k]
+Installing [029/320, time/total: 00:23/02:56]: bidishadowtext [120k]
+Installing [030/320, time/total: 00:23/02:55]: bigintcalc [467k]
+Installing [031/320, time/total: 00:24/03:01]: bitset [622k]
+Installing [032/320, time/total: 00:25/03:06]: blockdraw_mp [275k]
+Installing [033/320, time/total: 00:26/03:12]: book-of-common-prayer [98k]
+Installing [034/320, time/total: 00:26/03:12]: bookmark [485k]
+Installing [035/320, time/total: 00:27/03:17]: booktabs [306k]
+Installing [036/320, time/total: 00:28/03:24]: bpolynomial [197k]
+Installing [037/320, time/total: 00:29/03:30]: breqn [1141k]
+Installing [038/320, time/total: 00:30/03:32]: businesscard-qrcode [532k]
+Installing [039/320, time/total: 00:30/03:30]: c90 [104k]
+Installing [040/320, time/total: 00:31/03:37]: caption [1758k]
+Installing [041/320, time/total: 00:32/03:36]: carlisle [85k]
+Installing [042/320, time/total: 00:33/03:43]: cite [237k]
+Installing [043/320, time/total: 00:34/03:49]: cjk [1572k]
+Installing [044/320, time/total: 00:35/03:49]: cjk-gs-integrate [50k]
+Installing [045/320, time/total: 00:36/03:55]: cjk-gs-integrate.x86_64-linux [1k]
+Installing [046/320, time/total: 00:36/03:55]: cjkpunct [151k]
+Installing [047/320, time/total: 00:37/04:01]: cjkutils [339k]
+Installing [048/320, time/total: 00:37/03:59]: cjkutils.x86_64-linux [48k]
+Installing [049/320, time/total: 00:38/04:06]: cm [235k]
+Installing [050/320, time/total: 00:38/04:05]: cmap [8k]
+Installing [051/320, time/total: 00:39/04:11]: cmarrows [57k]
+Installing [052/320, time/total: 00:39/04:11]: cns [2917k]
+Installing [053/320, time/total: 00:40/04:05]: collection-basic [1k]
+Installing [054/320, time/total: 00:40/04:05]: collection-langcjk [1k]
+Installing [055/320, time/total: 00:41/04:11]: collection-latex [1k]
+Installing [056/320, time/total: 00:41/04:11]: collection-latexrecommended [1k]
+Installing [057/320, time/total: 00:41/04:11]: collection-metapost [1k]
+Installing [058/320, time/total: 00:41/04:11]: collection-xetex [1k]
+Installing [059/320, time/total: 00:41/04:11]: colorprofiles [113k]
+Installing [060/320, time/total: 00:42/04:16]: colortbl [593k]
+Installing [061/320, time/total: 00:43/04:20]: cqubeamer [2455k]
+Installing [062/320, time/total: 00:44/04:15]: crop [341k]
+Installing [063/320, time/total: 00:45/04:20]: ctable [700k]
+Installing [064/320, time/total: 00:46/04:23]: dehyph [46k]
+Installing [065/320, time/total: 00:46/04:22]: dnp [1k]
+Installing [066/320, time/total: 00:46/04:22]: drv [215k]
+Installing [067/320, time/total: 00:47/04:27]: dviincl [5k]
+Installing [068/320, time/total: 00:47/04:27]: dvipdfmx [3083k]
+Installing [069/320, time/total: 00:48/04:20]: dvipdfmx.x86_64-linux [417k]
+Installing [070/320, time/total: 00:49/04:24]: dvips [567k]
+Installing [071/320, time/total: 00:49/04:22]: dvips.x86_64-linux [145k]
+Installing [072/320, time/total: 00:50/04:27]: ec [280k]
+Installing [073/320, time/total: 00:50/04:26]: emp [221k]
+Installing [074/320, time/total: 00:51/04:30]: enctex [272k]
+Installing [075/320, time/total: 00:52/04:34]: epsincl [6k]
+Installing [076/320, time/total: 00:52/04:34]: epstopdf-pkg [362k]
+Installing [077/320, time/total: 00:53/04:38]: eso-pic [256k]
+Installing [078/320, time/total: 00:54/04:42]: etex [197k]
+Installing [079/320, time/total: 00:55/04:47]: etex-pkg [7k]
+Installing [080/320, time/total: 00:55/04:47]: etexcmds [302k]
+Installing [081/320, time/total: 00:56/04:51]: etoolbox [241k]
+Installing [082/320, time/total: 00:57/04:55]: euenc [153k]
+Installing [083/320, time/total: 00:57/04:54]: euler [245k]
+Installing [084/320, time/total: 00:58/04:58]: everysel [440k]
+Installing [085/320, time/total: 00:59/05:01]: everyshi [136k]
+Installing [086/320, time/total: 01:00/05:06]: expressg [519k]
+Installing [087/320, time/total: 01:01/05:09]: exteps [110k]
+Installing [088/320, time/total: 01:01/05:08]: extsizes [202k]
+Installing [089/320, time/total: 01:02/05:13]: fancybox [279k]
+Installing [090/320, time/total: 01:03/05:16]: fancyhdr [817k]
+Installing [091/320, time/total: 01:04/05:18]: fancyref [124k]
+Installing [092/320, time/total: 01:04/05:17]: fancyvrb [158k]
+Installing [093/320, time/total: 01:05/05:21]: featpost [17579k]
+Installing [094/320, time/total: 01:07/04:27]: feynmf [538k]
+Installing [095/320, time/total: 01:08/04:29]: feynmp-auto [373k]
+Installing [096/320, time/total: 01:08/04:28]: filehook [311k]
+Installing [097/320, time/total: 01:09/04:31]: firstaid [238k]
+Installing [098/320, time/total: 01:10/04:35]: fix2col [217k]
+Installing [099/320, time/total: 01:11/04:38]: fixjfm [282k]
+Installing [100/320, time/total: 01:12/04:41]: fixlatvian [123k]
+Installing [101/320, time/total: 01:12/04:41]: fiziko [4060k]
+Installing [102/320, time/total: 01:13/04:33]: float [125k]
+Installing [103/320, time/total: 01:14/04:36]: font-change-xetex [552k]
+Installing [104/320, time/total: 01:15/04:38]: fontbook [1221k]
+Installing [105/320, time/total: 01:16/04:38]: fonts-tlwg [12391k]
+Installing [106/320, time/total: 01:18/04:14]: fontspec [1269k]
+Installing [107/320, time/total: 01:19/04:14]: fontwrap [278k]
+Installing [108/320, time/total: 01:20/04:17]: footnotehyper [101k]
+Installing [109/320, time/total: 01:20/04:16]: fp [233k]
+Installing [110/320, time/total: 01:21/04:19]: garrigues [9k]
+Installing [111/320, time/total: 01:21/04:19]: garuda-c90 [5k]
+Installing [112/320, time/total: 01:22/04:22]: geometry [900k]
+Installing [113/320, time/total: 01:23/04:23]: gettitlestring [320k]
+Installing [114/320, time/total: 01:24/04:26]: glyphlist [25k]
+Installing [115/320, time/total: 01:24/04:26]: gmp [812k]
+Installing [116/320, time/total: 01:25/04:27]: graphics [2048k]
+Installing [117/320, time/total: 01:26/04:25]: graphics-cfg [2k]
+Installing [118/320, time/total: 01:27/04:29]: graphics-def [12k]
+Installing [119/320, time/total: 01:27/04:29]: grfext [310k]
+Installing [120/320, time/total: 01:28/04:31]: grffile [357k]
+Installing [121/320, time/total: 01:29/04:33]: hatching [4k]
+Installing [122/320, time/total: 01:29/04:33]: hologo [594k]
+Installing [123/320, time/total: 01:30/04:35]: hopatch [305k]
+Installing [124/320, time/total: 01:31/04:37]: hycolor [380k]
+Installing [125/320, time/total: 01:32/04:39]: hyperref [3737k]
+Installing [126/320, time/total: 01:33/04:34]: hyph-utf8 [312k]
+Installing [127/320, time/total: 01:34/04:36]: hyphen-base [22k]
+Installing [128/320, time/total: 01:34/04:36]: hyphenex [208k]
+Installing [129/320, time/total: 01:35/04:38]: ifplatform [156k]
+Installing [130/320, time/total: 01:36/04:41]: iftex [217k]
+Installing [131/320, time/total: 01:36/04:41]: index [179k]
+Installing [132/320, time/total: 01:37/04:43]: infwarerr [287k]
+Installing [133/320, time/total: 01:38/04:45]: intcalc [431k]
+Installing [134/320, time/total: 01:39/04:47]: interchar [89k]
+Installing [135/320, time/total: 01:39/04:47]: jfmutil [35k]
+Installing [136/320, time/total: 01:40/04:50]: jfmutil.x86_64-linux [1k]
+Installing [137/320, time/total: 01:40/04:50]: jknapltx [13k]
+Installing [138/320, time/total: 01:40/04:50]: knuth-lib [30k]
+Installing [139/320, time/total: 01:41/04:53]: knuth-local [23k]
+Installing [140/320, time/total: 01:41/04:53]: koma-script [12658k]
+Installing [141/320, time/total: 01:42/04:28]: kpathsea [1080k]
+Installing [142/320, time/total: 01:43/04:29]: kpathsea.x86_64-linux [40k]
+Installing [143/320, time/total: 01:43/04:29]: kvdefinekeys [297k]
+Installing [144/320, time/total: 01:44/04:31]: kvoptions [490k]
+Installing [145/320, time/total: 01:45/04:32]: kvsetkeys [378k]
+Installing [146/320, time/total: 01:46/04:34]: l3backend [882k]
+Installing [147/320, time/total: 01:47/04:35]: l3experimental [3524k]
+Installing [148/320, time/total: 01:48/04:31]: l3kernel [11537k]
+Installing [149/320, time/total: 01:50/04:15]: l3packages [1830k]
+Installing [150/320, time/total: 01:51/04:15]: latex [28486k]
+Installing [151/320, time/total: 01:54/03:41]: latex-base-dev [28525k]
+Installing [152/320, time/total: 01:57/03:17]: latex-bin [54k]
+Installing [153/320, time/total: 01:57/03:17]: latex-bin.x86_64-linux [1k]
+Installing [154/320, time/total: 01:58/03:19]: latex-firstaid-dev [238k]
+Installing [155/320, time/total: 01:59/03:20]: latex-fonts [19k]
+Installing [156/320, time/total: 01:59/03:20]: latexbug [218k]
+Installing [157/320, time/total: 02:00/03:22]: latexconfig [4k]
+Installing [158/320, time/total: 02:00/03:22]: latexmp [150k]
+Installing [159/320, time/total: 02:01/03:23]: letltxmacro [292k]
+Installing [160/320, time/total: 02:02/03:25]: lineno [739k]
+Installing [161/320, time/total: 02:03/03:26]: listings [2517k]
+Installing [162/320, time/total: 02:04/03:25]: lm [13258k]
+Installing [163/320, time/total: 02:06/03:16]: lm-math [462k]
+Installing [164/320, time/total: 02:06/03:16]: ltxcmds [400k]
+Installing [165/320, time/total: 02:07/03:17]: ltxmisc [16k]
+Installing [166/320, time/total: 02:08/03:19]: lua-alt-getopt [6k]
+Installing [167/320, time/total: 02:08/03:19]: luahbtex [30k]
+Installing [168/320, time/total: 02:08/03:19]: luahbtex.x86_64-linux [2171k]
+Installing [169/320, time/total: 02:09/03:18]: lualibs [214k]
+Installing [170/320, time/total: 02:10/03:20]: luaotfload [1201k]
+Installing [171/320, time/total: 02:11/03:20]: luaotfload.x86_64-linux [1k]
+Installing [172/320, time/total: 02:11/03:20]: luatex [1850k]
+Installing [173/320, time/total: 02:12/03:20]: luatex.x86_64-linux [1752k]
+Installing [174/320, time/total: 02:13/03:20]: lwarp [3577k]
+Installing [175/320, time/total: 02:14/03:19]: lwarp.x86_64-linux [1k]
+Installing [176/320, time/total: 02:15/03:20]: makecmds [120k]
+Installing [177/320, time/total: 02:15/03:20]: makeindex [460k]
+Installing [178/320, time/total: 02:16/03:21]: makeindex.x86_64-linux [49k]
+Installing [179/320, time/total: 02:16/03:21]: mathspec [179k]
+Installing [180/320, time/total: 02:17/03:22]: mathtools [1069k]
+Installing [181/320, time/total: 02:18/03:23]: mcf2graph [919k]
+Installing [182/320, time/total: 02:19/03:24]: mdwtools [1689k]
+Installing [183/320, time/total: 02:20/03:24]: memoir [3373k]
+Installing [184/320, time/total: 02:21/03:23]: metafont [61k]
+Installing [185/320, time/total: 02:22/03:24]: metafont.x86_64-linux [190k]
+Installing [186/320, time/total: 02:22/03:24]: metago [32k]
+Installing [187/320, time/total: 02:23/03:25]: metalogo [86k]
+Installing [188/320, time/total: 02:23/03:25]: metaobj [629k]
+Installing [189/320, time/total: 02:24/03:26]: metaplot [287k]
+Installing [190/320, time/total: 02:25/03:27]: metapost [2452k]
+Installing [191/320, time/total: 02:26/03:27]: metapost-colorbrewer [227k]
+Installing [192/320, time/total: 02:26/03:26]: metapost.x86_64-linux [902k]
+Installing [193/320, time/total: 02:27/03:27]: metauml [455k]
+Installing [194/320, time/total: 02:28/03:28]: mflogo [242k]
+Installing [195/320, time/total: 02:28/03:28]: mfnfss [458k]
+Installing [196/320, time/total: 02:29/03:29]: mfpic [1356k]
+Installing [197/320, time/total: 02:30/03:29]: mfpic4ode [623k]
+Installing [198/320, time/total: 02:31/03:30]: mfware [102k]
+Installing [199/320, time/total: 02:32/03:32]: mfware.x86_64-linux [121k]
+Installing [200/320, time/total: 02:32/03:31]: microtype [2791k]
+Installing [201/320, time/total: 02:34/03:32]: minim-hatching [29k]
+Installing [202/320, time/total: 02:34/03:32]: modes [297k]
+Installing [203/320, time/total: 02:35/03:33]: mp3d [735k]
+Installing [204/320, time/total: 02:35/03:32]: mparrows [113k]
+Installing [205/320, time/total: 02:36/03:34]: mpattern [14k]
+Installing [206/320, time/total: 02:37/03:35]: mpcolornames [117k]
+Installing [207/320, time/total: 02:37/03:35]: mpgraphics [192k]
+Installing [208/320, time/total: 02:38/03:36]: mptopdf [51k]
+Installing [209/320, time/total: 02:39/03:38]: mptopdf.x86_64-linux [1k]
+Installing [210/320, time/total: 02:39/03:38]: mptrees [116k]
+Installing [211/320, time/total: 02:39/03:37]: ms [574k]
+Installing [212/320, time/total: 02:40/03:38]: na-position [85k]
+Installing [213/320, time/total: 02:41/03:40]: natbib [493k]
+Installing [214/320, time/total: 02:42/03:41]: newfloat [118k]
+Installing [215/320, time/total: 02:43/03:42]: norasi-c90 [10k]
+Installing [216/320, time/total: 02:43/03:42]: ntgclass [1742k]
+Installing [217/320, time/total: 02:44/03:42]: oberdiek [8569k]
+Installing [218/320, time/total: 02:46/03:38]: pagesel [334k]
+Installing [219/320, time/total: 02:47/03:39]: parskip [315k]
+Installing [220/320, time/total: 02:48/03:40]: pdfescape [347k]
+Installing [221/320, time/total: 02:48/03:39]: pdflscape [300k]
+Installing [222/320, time/total: 02:49/03:40]: pdfmanagement-testphase [8457k]
+Installing [223/320, time/total: 02:51/03:36]: pdfpages [362k]
+Installing [224/320, time/total: 02:52/03:37]: pdftex [1628k]
+Installing [225/320, time/total: 02:53/03:37]: pdftex.x86_64-linux [816k]
+Installing [226/320, time/total: 02:53/03:37]: pdftexcmds [391k]
+Installing [227/320, time/total: 02:54/03:38]: pgf [10838k]
+Installing [228/320, time/total: 02:56/03:32]: philokalia [172k]
+Installing [229/320, time/total: 02:57/03:33]: piechartmp [48k]
+Installing [230/320, time/total: 02:57/03:33]: plain [29k]
+Installing [231/320, time/total: 02:58/03:35]: polyglossia [889k]
+Installing [232/320, time/total: 02:59/03:35]: psfrag [86k]
+Installing [233/320, time/total: 02:59/03:35]: pslatex [7k]
+Installing [234/320, time/total: 03:00/03:36]: psnfss [275k]
+Installing [235/320, time/total: 03:01/03:37]: pspicture [50k]
+Installing [236/320, time/total: 03:01/03:37]: ptext [77k]
+Installing [237/320, time/total: 03:02/03:38]: pxtatescale [3k]
+Installing [238/320, time/total: 03:02/03:38]: ragged2e [676k]
+Installing [239/320, time/total: 03:03/03:39]: rcs [154k]
+Installing [240/320, time/total: 03:04/03:40]: realscripts [109k]
+Installing [241/320, time/total: 03:05/03:41]: refcount [329k]
+Installing [242/320, time/total: 03:06/03:42]: repere [1241k]
+Installing [243/320, time/total: 03:07/03:43]: rerunfilecheck [317k]
+Installing [244/320, time/total: 03:07/03:42]: roex [28k]
+Installing [245/320, time/total: 03:08/03:43]: roundrect [287k]
+Installing [246/320, time/total: 03:09/03:44]: sansmath [182k]
+Installing [247/320, time/total: 03:09/03:44]: section [359k]
+Installing [248/320, time/total: 03:10/03:45]: seminar [371k]
+Installing [249/320, time/total: 03:11/03:46]: sepnum [349k]
+Installing [250/320, time/total: 03:11/03:46]: setspace [9k]
+Installing [251/320, time/total: 03:12/03:47]: shapes [186k]
+Installing [252/320, time/total: 03:13/03:48]: simple-resume-cv [98k]
+Installing [253/320, time/total: 03:13/03:48]: simple-thesis-dissertation [199k]
+Installing [254/320, time/total: 03:14/03:49]: slideshow [111k]
+Installing [255/320, time/total: 03:14/03:49]: splines [95k]
+Installing [256/320, time/total: 03:15/03:50]: stringenc [702k]
+Installing [257/320, time/total: 03:16/03:51]: suanpan [5k]
+Installing [258/320, time/total: 03:16/03:51]: subfig [492k]
+Installing [259/320, time/total: 03:17/03:52]: symbol [36k]
+Installing [260/320, time/total: 03:18/03:53]: tetragonos [309k]
+Installing [261/320, time/total: 03:18/03:52]: tex [44k]
+Installing [262/320, time/total: 03:19/03:54]: tex-ini-files [5k]
+Installing [263/320, time/total: 03:19/03:54]: tex.x86_64-linux [173k]
+Installing [264/320, time/total: 03:20/03:55]: texlive-common [565k]
+Installing [265/320, time/total: 03:21/03:55]: texlive-en [1895k]
+Installing [266/320, time/total: 03:21/03:54]: texlive-msg-translations [143k]
+Installing [267/320, time/total: 03:22/03:55]: texlive-scripts [499k]
+Installing [268/320, time/total: 03:22/03:55]: texlive-scripts.x86_64-linux [1k]
+Installing [269/320, time/total: 03:23/03:56]: textcase [196k]
+Installing [270/320, time/total: 03:23/03:56]: textpath [237k]
+Installing [271/320, time/total: 03:24/03:57]: threeddice [119k]
+Installing [272/320, time/total: 03:25/03:58]: thumbpdf [33k]
+Installing [273/320, time/total: 03:25/03:58]: thumbpdf.x86_64-linux [1k]
+Installing [274/320, time/total: 03:25/03:58]: tipa [5098k]
+Installing [275/320, time/total: 03:27/03:56]: tlshell [33k]
+Installing [276/320, time/total: 03:27/03:56]: tlshell.x86_64-linux [1k]
+Installing [277/320, time/total: 03:27/03:56]: tools [5427k]
+Installing [278/320, time/total: 03:29/03:54]: translator [239k]
+Installing [279/320, time/total: 03:30/03:55]: typehtml [175k]
+Installing [280/320, time/total: 03:30/03:55]: ucharcat [160k]
+Installing [281/320, time/total: 03:31/03:56]: ucharclasses [148k]
+Installing [282/320, time/total: 03:32/03:57]: uhc [3517k]
+Installing [283/320, time/total: 03:33/03:56]: underscore [246k]
+Installing [284/320, time/total: 03:33/03:56]: unicode-bidi [3k]
+Installing [285/320, time/total: 03:34/03:57]: unicode-data [303k]
+Installing [286/320, time/total: 03:34/03:56]: unicode-math [1764k]
+Installing [287/320, time/total: 03:35/03:56]: uniquecounter [292k]
+Installing [288/320, time/total: 03:36/03:57]: unisugar [449k]
+Installing [289/320, time/total: 03:37/03:58]: url [266k]
+Installing [290/320, time/total: 03:38/03:59]: wadalab [17448k]
+Installing [291/320, time/total: 03:39/03:48]: xcjk2uni [324k]
+Installing [292/320, time/total: 03:40/03:49]: xcolor [997k]
+Installing [293/320, time/total: 03:41/03:49]: xdvi [175k]
+Installing [294/320, time/total: 03:42/03:50]: xdvi.x86_64-linux [530k]
+Installing [295/320, time/total: 03:42/03:50]: xebaposter [324k]
+Installing [296/320, time/total: 03:43/03:51]: xechangebar [10k]
+Installing [297/320, time/total: 03:43/03:51]: xecjk [1807k]
+Installing [298/320, time/total: 03:44/03:50]: xecolor [4k]
+Installing [299/320, time/total: 03:45/03:51]: xecyr [643k]
+Installing [300/320, time/total: 03:46/03:52]: xeindex [79k]
+Installing [301/320, time/total: 03:46/03:52]: xelatex-dev [1k]
+Installing [302/320, time/total: 03:46/03:52]: xelatex-dev.x86_64-linux [1k]
+Installing [303/320, time/total: 03:47/03:53]: xesearch [607k]
+Installing [304/320, time/total: 03:47/03:53]: xespotcolor [144k]
+Installing [305/320, time/total: 03:48/03:53]: xetex [626k]
+Installing [306/320, time/total: 03:49/03:54]: xetex-itrans [45k]
+Installing [307/320, time/total: 03:49/03:54]: xetex-pstricks [2k]
+Installing [308/320, time/total: 03:50/03:55]: xetex-tibetan [9k]
+Installing [309/320, time/total: 03:50/03:55]: xetex.x86_64-linux [6883k]
+Installing [310/320, time/total: 03:51/03:52]: xetexconfig [1k]
+Installing [311/320, time/total: 03:51/03:52]: xetexfontinfo [3k]
+Installing [312/320, time/total: 03:52/03:53]: xetexko [316k]
+Installing [313/320, time/total: 03:52/03:52]: xevlna [56k]
+Installing [314/320, time/total: 03:53/03:53]: xkeyval [439k]
+Installing [315/320, time/total: 03:54/03:54]: xltxtra [107k]
+Installing [316/320, time/total: 03:55/03:55]: xunicode [26k]
+Installing [317/320, time/total: 03:55/03:55]: zapfding [46k]
+Installing [318/320, time/total: 03:55/03:55]: zbmath-review-template [206k]
+Installing [319/320, time/total: 03:56/03:56]: zitie [347k]
+Installing [320/320, time/total: 03:57/03:57]: zxjafont [181k]
+Time used for installing the packages: 03:57
+running mktexlsr /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist ...
+writing fmtutil.cnf to /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/fmtutil.cnf
+writing updmap.cfg to /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg
+writing language.dat to /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/language.dat
+writing language.def to /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/language.def
+writing language.dat.lua to /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/language.dat.lua
+running mktexlsr /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-config /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist ...
+running updmap-sys --nohash ...done
+updmap will read the following updmap.cfg files (in precedence order):
+  /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg
+updmap may write changes to the following updmap.cfg file:
+  /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-config/web2c/updmap.cfg
+dvips output dir: "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/dvips/updmap"
+pdftex output dir: "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/pdftex/updmap"
+dvipdfmx output dir: "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/dvipdfmx/updmap"
+
+updmap is creating new map files
+using the following configuration:
+  LW35 font names                  : URWkb (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  prefer outlines                  : true (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  texhash enabled                  : false
+  download standard fonts (dvips)  : true (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  download standard fonts (pdftex) : true (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  jaEmbed replacement string       : haranoaji (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  jaVariant replacement string     : -04 (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  scEmbed replacement string       : arphic (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  tcEmbed replacement string       : arphic (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  koEmbed replacement string       : baekmuk (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/updmap.cfg)
+  create a mapfile for pxdvi       : false (default)
+
+Scanning for LW35 support files  [  3 files]
+Scanning for MixedMap entries    [  7 files]
+Scanning for KanjiMap entries    [  0 files]
+Scanning for Map entries         [ 28 files]
+
+Generating output for dvipdfmx...
+Generating output for ps2pk...
+Generating output for dvips...
+Generating output for pdftex...
+
+Files generated:
+  /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/dvips/updmap:
+       15846 2021-12-21 14:24:01 builtin35.map
+       21319 2021-12-21 14:24:01 download35.map
+      107346 2021-12-21 14:24:01 psfonts_pk.map
+      113512 2021-12-21 14:24:01 psfonts_t1.map
+      113507 2021-12-21 14:24:01 ps2pk.map
+          14 2021-12-21 14:24:01 psfonts.map -> psfonts_t1.map
+  /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/pdftex/updmap:
+      113514 2021-12-21 14:24:01 pdftex_dl14.map
+      111849 2021-12-21 14:24:01 pdftex_ndl14.map
+          15 2021-12-21 14:24:01 pdftex.map -> pdftex_dl14.map
+  /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/fonts/map/dvipdfmx/updmap:
+         369 2021-12-21 14:24:01 kanjix.map
+
+Transcript written on "/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/updmap.log".
+re-running mktexlsr /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-config ...
+pre-generating all format files, be patient...
+running fmtutil-sys --no-error-if-no-engine=luajithbtex,luajittex,mfluajit --no-strict --all ...done
+fmtutil: fmtutil is using the following fmtutil.cnf files (in precedence order):
+fmtutil:   /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/fmtutil.cnf
+fmtutil: fmtutil is using the following fmtutil.cnf file for writing changes:
+fmtutil:   /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-config/web2c/fmtutil.cnf
+fmtutil [INFO]: writing formats under /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c
+fmtutil [INFO]: --- remaking tex with tex
+fmtutil: running `tex -ini   -jobname=tex -progname=tex tex.ini' ...
+This is TeX, Version 3.141592653 (TeX Live 2021) (INITEX)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/t
+ex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) )
+Beginning to dump on file tex.fmt
+ (preloaded format=tex 2021.12.21)
+2028 strings of total length 29606
+4991 memory locations dumped; current usage is 110&4878
+926 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+No pages of output.
+Transcript written on tex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/tex/tex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/tex/tex.fmt installed.
+fmtutil [INFO]: --- remaking luatex with luatex
+fmtutil: running `luatex -ini   -jobname=luatex -progname=luatex luatex.ini' ...
+This is LuaTeX, Version 1.13.2 (TeX Live 2021)  (INITEX)
+ restricted system commands enabled.
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatexconfig.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/config
+/luatexiniconfig.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/luatex/hyph-ut
+f8/etex.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,))
+Beginning to dump on file luatex.fmt
+ (format=luatex 2021.12.21)
+3359 strings using 10236 bytes
+68809 memory locations dumped; current usage is 149&7701
+1871 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+warning  (pdf backend): no pages of output.
+Transcript written on luatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/luatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/luatex.fmt installed.
+fmtutil [INFO]: --- remaking xetex with xetex
+fmtutil: running `xetex -ini   -jobname=xetex -progname=xetex -etex xetex.ini' ...
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/xetex.ini
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-xetex-classes.tex 
+load-unicode-xetex-classes.tex v1.15 (2021-09-15)
+Reading Unicode east Asian character class data
+# LineBreak-14.0.0.txt 
+# Date: 2021-07-06, 09:58:55 GMT [KW, LI] 
+# EastAsianWidth-14.0.0.txt 
+# Date: 2021-07-06, 09:58:53 GMT [KW, LI] 
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+x.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+ )
+Beginning to dump on file xetex.fmt
+ (preloaded format=xetex 2021.12.21)
+70481 strings of total length 58822
+12098 memory locations dumped; current usage is 647&7495
+3933 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\sevenrm=cmr7
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\seveni=cmmi7
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\sevensy=cmsy7
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\tenbf=cmbx10
+\font\sevenbf=cmbx7
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\tensl=cmsl10
+\font\tenit=cmti10
+4739 words of font info for 16 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6076 has 181 ops out of 35111
+  181 for language 0
+No pages of output.
+Transcript written on xetex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xetex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xetex.fmt installed.
+fmtutil [INFO]: --- remaking luahbtex with luahbtex
+fmtutil: running `luahbtex -ini   -jobname=luahbtex -progname=luahbtex luatex.ini' ...
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (INITEX)
+ restricted system commands enabled.
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatexconfig.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/config
+/luatexiniconfig.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/luatex/hyph-ut
+f8/etex.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,))
+Beginning to dump on file luahbtex.fmt
+ (format=luahbtex 2021.12.21)
+3359 strings using 10240 bytes
+68809 memory locations dumped; current usage is 149&7701
+1871 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+warning  (pdf backend): no pages of output.
+Transcript written on luahbtex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luahbtex/luahbtex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luahbtex/luahbtex.fmt installed.
+fmtutil [INFO]: --- remaking pdftex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdftex -progname=pdftex -translate-file=cp227.tcx *pdfetex.ini' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/p
+dfetex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+x.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/p
+dftexmagfix.tex) )
+Beginning to dump on file pdftex.fmt
+ (preloaded format=pdftex 2021.12.21)
+2916 strings of total length 44224
+7961 memory locations dumped; current usage is 203&7322
+1269 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdftex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdftex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdftex.fmt installed.
+fmtutil [INFO]: --- remaking xelatex with xetex
+fmtutil: running `xetex -ini   -jobname=xelatex -progname=xelatex -etex xelatex.ini' ...
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/xelatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/lat
+ex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tex
+sys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2021-11-15> patch level 1
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tue
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mtt.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/lm/ts1lm
+r.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1c
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+cmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+cmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/omx
+cmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ucm
+r.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.ltx)) page nos., x-ref, environments, center, verbatim, math definitions,
+boxes, title, sectioning, contents, floats, footnotes, index, bibliography,
+output,  Unicode character data,
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+xebabel.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/dumyhyph.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/zerohyph.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/firstaid
+/latex2e-first-aid-for-external-files.ltx)
+ ) )
+Beginning to dump on file xelatex.fmt
+ (preloaded format=xelatex 2021.12.21)
+87280 strings of total length 396371
+296209 memory locations dumped; current usage is 299&294344
+20644 multiletter control sequences
+\font\nullfont=nullfont
+\font\c__fp_exp_intarray=cmr10 at 0.00002pt
+\font\c__fp_trig_intarray=cmr10 at 0.00003pt
+\font\c_initex_cctab=cmr10 at 0.00005pt
+\font\c_other_cctab=cmr10 at 0.00006pt
+\font\c_str_cctab=cmr10 at 0.00008pt
+\font\g__regex_state_active_intarray=cmr10 at 0.00009pt
+\font\g__regex_thread_info_intarray=cmr10 at 0.0001pt
+\font\g__regex_submatch_prev_intarray=cmr10 at 0.00012pt
+\font\g__regex_submatch_begin_intarray=cmr10 at 0.00014pt
+\font\g__regex_submatch_end_intarray=cmr10 at 0.00015pt
+\font\g__regex_balance_intarray=cmr10 at 0.00017pt
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+\font\c_code_cctab=cmr10 at 0.00018pt
+\font\c_document_cctab=cmr10 at 0.0002pt
+403423 words of font info for 27 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6082 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+No pages of output.
+Transcript written on xelatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xelatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xelatex.fmt installed.
+fmtutil [INFO]: --- remaking latex with pdftex
+fmtutil: running `pdftex -ini   -jobname=latex -progname=latex -translate-file=cp227.tcx *latex.ini' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/latexcon
+fig/latex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/lat
+ex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tex
+sys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2021-11-15> patch level 1
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1c
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+cmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+cmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/omx
+cmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ucm
+r.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.ltx)) page nos., x-ref, environments, center, verbatim, math definitions,
+boxes, title, sectioning, contents, floats, footnotes, index, bibliography,
+output,
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/dumyhyph.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/zerohyph.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/pdftex
+/glyphtounicode.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/utf
+8.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.dfu))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/firstaid
+/latex2e-first-aid-for-external-files.ltx)
+ ) )
+Beginning to dump on file latex.fmt
+ (preloaded format=latex 2021.12.21)
+19686 strings of total length 355028
+290086 memory locations dumped; current usage is 165&288357
+17980 multiletter control sequences
+\font\nullfont=nullfont
+\font\c__fp_exp_intarray=cmr10 at 0.00002pt
+\font\c__fp_trig_intarray=cmr10 at 0.00003pt
+\font\c_initex_cctab=cmr10 at 0.00005pt
+\font\c_other_cctab=cmr10 at 0.00006pt
+\font\c_str_cctab=cmr10 at 0.00008pt
+\font\g__regex_state_active_intarray=cmr10 at 0.00009pt
+\font\g__regex_thread_info_intarray=cmr10 at 0.0001pt
+\font\g__regex_submatch_prev_intarray=cmr10 at 0.00012pt
+\font\g__regex_submatch_begin_intarray=cmr10 at 0.00014pt
+\font\g__regex_submatch_end_intarray=cmr10 at 0.00015pt
+\font\g__regex_balance_intarray=cmr10 at 0.00017pt
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+\font\c_code_cctab=cmr10 at 0.00018pt
+\font\c_document_cctab=cmr10 at 0.0002pt
+403423 words of font info for 27 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6081 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on latex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/latex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/latex.fmt installed.
+fmtutil [INFO]: --- remaking pdflatex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdflatex -progname=pdflatex -translate-file=cp227.tcx *pdflatex.ini' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/latexcon
+fig/pdflatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/lat
+ex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tex
+sys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2021-11-15> patch level 1
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1c
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+cmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+cmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/omx
+cmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ucm
+r.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.ltx)) page nos., x-ref, environments, center, verbatim, math definitions,
+boxes, title, sectioning, contents, floats, footnotes, index, bibliography,
+output,
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/dumyhyph.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/zerohyph.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/pdftex
+/glyphtounicode.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/utf
+8.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.dfu)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.dfu))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/firstaid
+/latex2e-first-aid-for-external-files.ltx)
+ ) )
+Beginning to dump on file pdflatex.fmt
+ (preloaded format=pdflatex 2021.12.21)
+19687 strings of total length 355054
+290092 memory locations dumped; current usage is 165&288363
+17980 multiletter control sequences
+\font\nullfont=nullfont
+\font\c__fp_exp_intarray=cmr10 at 0.00002pt
+\font\c__fp_trig_intarray=cmr10 at 0.00003pt
+\font\c_initex_cctab=cmr10 at 0.00005pt
+\font\c_other_cctab=cmr10 at 0.00006pt
+\font\c_str_cctab=cmr10 at 0.00008pt
+\font\g__regex_state_active_intarray=cmr10 at 0.00009pt
+\font\g__regex_thread_info_intarray=cmr10 at 0.0001pt
+\font\g__regex_submatch_prev_intarray=cmr10 at 0.00012pt
+\font\g__regex_submatch_begin_intarray=cmr10 at 0.00014pt
+\font\g__regex_submatch_end_intarray=cmr10 at 0.00015pt
+\font\g__regex_balance_intarray=cmr10 at 0.00017pt
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+\font\c_code_cctab=cmr10 at 0.00018pt
+\font\c_document_cctab=cmr10 at 0.0002pt
+403423 words of font info for 27 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6081 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdflatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdflatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt installed.
+fmtutil [INFO]: --- remaking pdfetex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdfetex -progname=pdfetex -translate-file=cp227.tcx *pdfetex.ini' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/p
+dfetex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+x.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/p
+dftexmagfix.tex) )
+Beginning to dump on file pdfetex.fmt
+ (preloaded format=pdfetex 2021.12.21)
+2916 strings of total length 44227
+7961 memory locations dumped; current usage is 203&7322
+1269 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdfetex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdfetex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/pdfetex.fmt installed.
+fmtutil [INFO]: --- remaking mptopdf with pdftex
+fmtutil: running `pdftex -ini   -jobname=mptopdf -progname=context -translate-file=cp227.tcx mptopdf.tex' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/contex
+t/mptopdf/mptopdf.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/context/base/m
+kii/syst-tex.mkii
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+more fonts,
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping scaled \font in plain
+skipping scaled \font in plain
+skipping scaled \font in plain
+skipping \font in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \textfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+macros, math definitions,
+skipping used \tenex in plain
+output routines, hyphenation
+skipping \input in plain
+skipping \tenrm in plain
+))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/context/base/m
+kii/supp-mis.mkii
+loading : ConTeXt Support Macros / Miscellaneous (2004.10.26)
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/context/base/m
+kii/supp-pdf.mkii
+loading : ConTeXt Support Macros / PDF
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/context/base/m
+kii/supp-mpe.mkii
+loading : ConTeXt Support Macros / MPS extensions
+) )
+Beginning to dump on file mptopdf.fmt
+ (preloaded format=mptopdf 2021.12.21)
+3311 strings of total length 49675
+13894 memory locations dumped; current usage is 116&13747
+1669 multiletter control sequences
+\font\nullfont=nullfont
+0 words of font info for 0 preloaded fonts
+0 hyphenation exceptions
+Hyphenation trie of length 256 has 0 ops out of 35111
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on mptopdf.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/mptopdf.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/mptopdf.fmt installed.
+fmtutil [INFO]: --- remaking etex with pdftex
+fmtutil: running `pdftex -ini   -jobname=etex -progname=etex -translate-file=cp227.tcx *etex.ini' ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+ (/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/config/e
+tex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+x.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,) )
+Beginning to dump on file etex.fmt
+ (preloaded format=etex 2021.12.21)
+2906 strings of total length 43676
+7961 memory locations dumped; current usage is 203&7291
+1267 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on etex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/etex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/pdftex/etex.fmt installed.
+fmtutil [INFO]: --- remaking dviluatex with luatex
+fmtutil: running `luatex -ini   -jobname=dviluatex -progname=dviluatex dviluatex.ini' ...
+This is LuaTeX, Version 1.13.2 (TeX Live 2021)  (INITEX)
+ restricted system commands enabled.
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/dviluatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatexconfig.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/config
+/luatexiniconfig.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/luatex/hyph-ut
+f8/etex.src
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/base/pla
+in.tex Preloading the plain format: codes, registers, parameters, fonts,
+more fonts, macros, math definitions, output routines, hyphenation
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex [skipping from \patterns to end-of-file...]))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/plain/etex/ete
+xdefs.lib Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/tex/generic/config/
+language.def
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)) Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)))
+Beginning to dump on file dviluatex.fmt
+ (format=dviluatex 2021.12.21)
+3364 strings using 10255 bytes
+68809 memory locations dumped; current usage is 149&7701
+1871 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+No pages of output.
+Transcript written on dviluatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/dviluatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/dviluatex.fmt installed.
+fmtutil [INFO]: --- remaking mf with mf-nowin
+fmtutil: running `mf-nowin -ini   -jobname=mf -progname=mf -translate-file=cp227.tcx mf.ini' ...
+This is METAFONT, Version 2.71828182 (TeX Live 2021) (INIMF)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/web2c/cp227.tcx)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/metafont/config/mf
+.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/metafont/base/plai
+n.mf
+Preloading the plain base, version 2.71: preliminaries,
+ basic constants and mathematical macros,
+ macros for converting from device-independent units to pixels,
+ macros and tables for various modes of operation,
+ macros for drawing and filling,
+ macros for proof labels and rules,
+ macros for character and font administration,
+and a few last-minute items.)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/fonts/source/publi
+c/modes/modes.mf) )
+Beginning to dump on file mf.base
+ (preloaded base=mf 2021.12.21)
+2237 strings of total length 30392
+11955 memory locations dumped; current usage is 3679&7916
+1011 symbolic tokens
+Transcript written on mf.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/metafont/mf.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/metafont/mf.base installed.
+fmtutil [INFO]: --- remaking xelatex-dev with xetex
+fmtutil: running `xetex -ini   -jobname=xelatex-dev -progname=xelatex-dev -etex xelatex.ini' ...
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (INITEX)
+ restricted \write18 enabled.
+entering extended mode
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/xelatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/latex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/texsys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2022-06-01> pre-release-0 (develop 2021-12-21 branch)
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/fonttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/fonttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/omlenc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/omsenc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ot1enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/t1enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ts1enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/tuenc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/tulmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/tulmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/tulmtt.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/lm/ts1lm
+r.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/t1cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ot1cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ot1cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ot1cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/fontmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/fontmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/omlcmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/omscmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/omxcmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/ucmr.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/preload.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/base
+/preload.ltx)) page nos., x-ref, environments, center, verbatim,
+math definitions, boxes, title, sectioning, contents, floats, footnotes,
+index, bibliography, output,  Unicode character data,
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+xebabel.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/dumyhyph.tex)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/zerohyph.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex-dev/firs
+taid/latex2e-first-aid-for-external-files.ltx)
+ ) )
+Beginning to dump on file xelatex-dev.fmt
+ (preloaded format=xelatex-dev 2021.12.21)
+87280 strings of total length 396603
+296262 memory locations dumped; current usage is 299&294397
+20644 multiletter control sequences
+\font\nullfont=nullfont
+\font\c__fp_exp_intarray=cmr10 at 0.00002pt
+\font\c__fp_trig_intarray=cmr10 at 0.00003pt
+\font\c_initex_cctab=cmr10 at 0.00005pt
+\font\c_other_cctab=cmr10 at 0.00006pt
+\font\c_str_cctab=cmr10 at 0.00008pt
+\font\g__regex_state_active_intarray=cmr10 at 0.00009pt
+\font\g__regex_thread_info_intarray=cmr10 at 0.0001pt
+\font\g__regex_submatch_prev_intarray=cmr10 at 0.00012pt
+\font\g__regex_submatch_begin_intarray=cmr10 at 0.00014pt
+\font\g__regex_submatch_end_intarray=cmr10 at 0.00015pt
+\font\g__regex_balance_intarray=cmr10 at 0.00017pt
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+\font\c_code_cctab=cmr10 at 0.00018pt
+\font\c_document_cctab=cmr10 at 0.0002pt
+403423 words of font info for 27 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6082 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+No pages of output.
+Transcript written on xelatex-dev.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xelatex-dev.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/xetex/xelatex-dev.fmt installed.
+fmtutil [INFO]: --- remaking lualatex with luahbtex
+fmtutil: running `luahbtex -ini   -jobname=lualatex -progname=lualatex lualatex.ini' ...
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (INITEX)
+ restricted system commands enabled.
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/lualatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatexconfig.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/lat
+ex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tex
+sys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2021-11-15> patch level 1
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tue
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mtt.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/lm/ts1lm
+r.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1c
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+cmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+cmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/omx
+cmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ucm
+r.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.ltx)) page nos., x-ref, environments, center, verbatim, math definitions,
+boxes, title, sectioning, contents, floats, footnotes, index, bibliography,
+output,  Unicode character data,
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+luababel.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/firstaid
+/latex2e-first-aid-for-external-files.ltx)
+))
+Beginning to dump on file lualatex.fmt
+ (format=lualatex 2021.12.21)
+22125 strings using 362817 bytes
+699787 memory locations dumped; current usage is 204&323955
+20752 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+14 preloaded fonts
+warning  (pdf backend): no pages of output.
+Transcript written on lualatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luahbtex/lualatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luahbtex/lualatex.fmt installed.
+fmtutil [INFO]: --- remaking dvilualatex with luatex
+fmtutil: running `luatex -ini   -jobname=dvilualatex -progname=dvilualatex dvilualatex.ini' ...
+This is LuaTeX, Version 1.13.2 (TeX Live 2021)  (INITEX)
+ restricted system commands enabled.
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/dvilualatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/lualatex.ini
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/luatexconfig.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/tex-in
+i-files/pdftexconfig.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/lat
+ex.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tex
+sys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, parameters,
+LaTeX2e <2021-11-15> patch level 1
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3.ltx
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/expl3-code.tex
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/l3kernel
+/l3deprecation.def))) hacks, document commands, control, par, spacing, files,
+font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+ttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1e
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ts1
+enc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tue
+nc.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/tul
+mtt.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/lm/ts1lm
+r.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/t1c
+mr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmr.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmss.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ot1
+cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/fon
+tmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oml
+cmm.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/oms
+cmsy.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/omx
+cmex.fd)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/ucm
+r.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/base/pre
+load.ltx)) page nos., x-ref, environments, center, verbatim, math definitions,
+boxes, title, sectioning, contents, floats, footnotes, index, bibliography,
+output,  Unicode character data,
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/unicod
+e-data/load-unicode-data.tex 
+load-unicode-data.tex v1.15 (2021-09-15)
+Reading Unicode data
+# UnicodeData-14.0.0.txt
+# Modified 2021-09-15 11:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+hyphen.cfg
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/babel/
+luababel.def)
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/generic/hyphen
+/hyphen.tex))
+(/home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/tex/latex/firstaid
+/latex2e-first-aid-for-external-files.ltx)
+)))
+Beginning to dump on file dvilualatex.fmt
+ (format=dvilualatex 2021.12.21)
+22130 strings using 362841 bytes
+699777 memory locations dumped; current usage is 204&323960
+20752 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+14 preloaded fonts
+No pages of output.
+Transcript written on dvilualatex.log.
+fmtutil [INFO]: log file copied to: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/dvilualatex.log
+fmtutil [INFO]: /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-var/web2c/luatex/dvilualatex.fmt installed.
+fmtutil [INFO]: successfully rebuilt formats: 16
+fmtutil [INFO]: total formats: 16
+fmtutil [INFO]: exiting with status 0
+running package-specific postactions
+postaction install script for dvipdfmx: perl /home/a/big/ycq/projects/artic-like/texlive/2021/tlpkg/tlpostcode/dvipdfmx.pl
+postaction install script for xetex: perl /home/a/big/ycq/projects/artic-like/texlive/2021/tlpkg/tlpostcode/xetex.pl
+finished with package-specific postactions
+
+
+Welcome to TeX Live!
+
+
+See /home/a/big/ycq/projects/artic-like/texlive/2021/index.html for links to documentation.
+The TeX Live web site (https://tug.org/texlive/) contains any updates and corrections. TeX Live is a joint project of the TeX user groups around the world; please consider supporting it by joining the group best for you. The list of groups is available on the web at https://tug.org/usergroups.html.
+
+
+Add /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/doc/man to MANPATH.
+Add /home/a/big/ycq/projects/artic-like/texlive/2021/texmf-dist/doc/info to INFOPATH.
+Most importantly, add /home/a/big/ycq/projects/artic-like/texlive/2021/bin/x86_64-linux
+to your PATH for current and future sessions.

@@ -1,0 +1,887 @@
+% \iffalse meta-comment
+%
+%% File: l3pdfmeta.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=l3pdfmeta (LaTeX PDF management testphase bundle)}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3pdfmeta} module\\ PDF standards  ^^A
+%   \\
+%   \LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{l3pdfmeta} documentation}
+% This module sets up some tools and commands needed
+% for PDF standards in general.
+% The goal is to collect the requirements and to provide code to check and fulfill them.
+%
+% In future is will probably also contain
+% code to setup XMP-metadata.
+% Until then XMP-metadata can be added by one of two mutual incompatible packages:
+% \pkg{hyperxmp} and \pkg{pdfx}. Both
+% packages aren't yet compatible with the new PDF management,
+% but for \pkg{hyperxmp} some patches are provided, so the basic functions works.
+%
+% \begin{NOTE}{UF}
+% This module should not replace both packages.
+% Regarding XMP-metadata its goal
+% is to create a skeleton metadata stream, add some core default values
+% and to define interfaces that allows other packages
+% to add data to this metadata and so to extend them.
+% The problems to solve here are
+% \begin{itemize}
+% \item which tree structure is sensible
+% \item how to escape if needed the input (or which tools are needed to allow
+% the users to correctly escape their input)
+% \item how interface to input data should look
+% \end{itemize}
+% \end{NOTE}
+%
+% \subsection{Verifying requirements of PDF standards}
+%
+% Standards like pdf/A set requirements on a PDF: Some things have be in the PDF,
+% e.g. the catalog has to contain a /Lang entry and an colorprofile and
+% an /OutputIntent, some other things are forbidden or restricted, e.g.
+% the action dictionary of an annotation should not contain Javascript.
+%
+% The \pkg{l3pdfmeta} module collects a number of relevant requirements,
+% tries to enforce the ones which can be enforced and offers some tools
+% for package authors to test if an action is allowed in the standard or not.
+%
+% This is work in progress and more tests will be added. But it should be noted
+% that it will probably never be possible to prevent all forbidden actions
+% or enforce all required ones or even to simply check all of them.
+% The commands here don't replace a check with an external validator.
+%
+% Verifying against a PDF-standard involves two different task:
+%
+% \begin{itemize}
+%   \item Check if you are allowed to ignore the requirement.
+%   \item Decide which action to take if the answer to the first question is NO.
+% \end{itemize}
+%
+% The following conditionals address the first task. Because of the second task
+% a return value |FALSE| means that the standard requires you to do some
+% special action. |TRUE| means that you can ignore this
+% requirement.\footnote{One could also make the logic the
+% other way round---there are arguments for both---but I had to decide.}
+%
+% In most cases it only matters if a requirement is in the standard,
+% for example |Catalog_no_OCProperties| means \enquote{don't use |/OCProperties|
+% in the catalog}. For a small number of requirements it is also needed to
+% test a user value against a standard value. For example, |named_actions|
+% restricts the allowed named actions in an annotation of subtype |/Named|,
+% in this case it is needed to check not only if the requirement is
+% in the standard but also if the user value is in the allowed list.
+%
+% \begin{function}[EXP,pTF]{\pdfmeta_standard_verify:n}
+% \begin{syntax}
+% \cs{pdfmeta_standard_verify:n}\Arg{requirement}
+% \end{syntax}
+%
+% This checks if \meta{requirement} is listed in the standard.
+% |FALSE| as result means that the requirement is in the standard and
+% that probably some special action is required---which one depends
+% on the requirement, see the descriptions below.
+% |TRUE| means that the requirement is not there and so no special
+% action is needed.
+% This check can be used for simple requirements where neither
+% a user nor a standard value is of importance.
+% \end{function}
+%
+% \begin{function}[TF]{\pdfmeta_standard_verify:nn}
+% \begin{syntax}
+% \cs{pdfmeta_standard_verify:nn}\Arg{requirement}\Arg{value}
+% \end{syntax}
+%
+% This checks if \meta{requirement} is listed in the standard,
+% if yes it tries to find a predefined test handler for
+% the requirement and passes \meta{value} and the value recorded
+% in the standard to it. The handler returns |FALSE| if some special
+% action is needed (e.g. if \meta{value} violates the rule)
+% and |TRUE| if no special action is needed. If no handler exists
+% this commands works like \cs{pdfmeta_standard_verify:n}.
+% \end{function}
+%
+% In some cases one needs to query the value in the standard,
+% e.g. to correct a wrong minimal PDF version you need to know
+% which version is required by |min_pdf_version|.
+%  For this two commands to access the value are provided:
+%
+% \begin{function}[EXP]{\pdfmeta_standard_item:n}
+% \begin{syntax}
+% \cs{pdfmeta_standard_item:n}\Arg{requirement}
+% \end{syntax}
+% This retrieves the value of \meta{requirement} and leaves it in the input.
+% If the requirement isn't in the standard the result is empty,
+% that means that requirements not in the standard and
+% requirement without values can not be distinguished here.
+% \end{function}
+%
+%
+% \begin{function}{\pdfmeta_standard_get:nN}
+% \begin{syntax}
+% \cs{pdfmeta_standard_get:nN}\Arg{requirement} \meta{tl var}
+% \end{syntax}
+% This retrieves the value of \meta{requirement} and stores
+% it in the \meta{token list variable}.
+% If the \meta{requirement} is not found the special
+% value |\q_no_value| is used.
+% The  \meta{token list variable} is assigned locally.
+% \end{function}
+%
+%
+% The following describe the requirements which can be currently tested.
+% Requirements with a value should use \cs{pdfmeta_standard_verify:nn}
+% or \cs{pdfmeta_standard_verify:nnN} to test a local value against the standard.
+% The rule numbers refer to \url{https://docs.verapdf.org/validation/pdfa-part1/}
+%
+% \subsubsection{Simple tests without handler}
+%
+% \begin{description}
+%
+% \item[|outputintent_A|] requires to embed a color profile and
+%  reference it in a /Outputintent and that all output intents reference
+%  the same colorprofile. The value stores the subtype.
+%  {\em This requirement is detected and fulfilled by \pkg{l3pdfmeta} if the
+%   provided interface in \cs{DeclareDocumentMetadata} is used, see below}.
+%
+% \item[|annot_flags|] in annotations the |Print| flag should be true,
+%  |Hidden|, |Invisible|, |NoView| should be false.
+%  {\em This requirement is detected  and set by \pkg{l3pdfmeta} for annotations
+%  created with the \pkg{l3pdfannot}.
+%  A new check is only needed if the flags are changed
+%  or if links are created by other means.}
+%
+% \item[|no_encryption|] don't encrypt
+% \item[|no_external_content|] no |/F|, |/FFilter|, or |/FDecodeParms|
+%  in stream dictionaries
+% \item[|no_embed_content|]    no |/EF| key in filespec, no |/Type/EmbeddedFiles|.
+%  \emph{This will be checked in future by \pkg{l3pdffiles}
+%  for the files it embeds.}
+%  The restrictment is set for only PDF/A-1b.
+%  PDF/A-2b and PDF/A3-b lifted this restriction: PDF/A-2b allows
+%  to embed other PDF documents conforming to either PDF/A-1 or PDF/A-2,
+%  and PDF/A-3 allows any embedded files. I don't see a way to test the
+%  PDF/A-2b requirement so currently it will simply allow everything. Perhaps
+%  a test for at least the PDF-format will be added in future.
+% \item[|Catalog_no_OCProperties|] don't add |/OCProperties| to the catalog
+% {\em l3pdfmeta removes this entry at the end of the document}
+% \item[|annot_widget_no_AA|] (rule 6.6.2-1)
+%  no AA dictionary in widget annotation,
+%  this will e.g. be checked by the new hyperref driver.
+% \item[|annot_widget_no_A_AA|] (rule 6.9-2)  no A and AA dictionary in widget.
+% \item[|form_no_AA|] (6.9-3)  no /AA dictionary in form field
+% \item[|unicode|] that is set in the U-standards, A-2u and A-3u and means that
+% every text should be in unicode. This is not something that can be enforced or
+% tested from TeX, but in a current LaTeX normally ToUnicode are set for all fonts.
+% \item[|tagged|] that is set in A-2a and A-3a and means that the pdf must be
+% tagged. This is currently neither tested not enforced somewhere.
+% \end{description}
+%
+% \subsubsection{Tests with values and special handlers}
+%
+% \begin{description}
+%
+% \item[|min_pdf_version|]  stores the minimal PDF version.
+%  It should be checked against the current PDF version (\cs{pdf_version:}).
+%  A failure means that the version should be changed.
+%  This check is done by \pkg{l3pdfmeta} when the version is set with
+%  \cs{DeclareDocumentMetadata} so more checks are only needed if the version is changed later.
+%
+% \item[|named_actions|]    this requirement restricts the list of
+% allowed named actions to |NextPage|, |PrevPage|, |FirstPage|, |LastPage|.
+% The check should supply the named action without slash
+% (e.g. |View| (failure) or |NextPage| (pass)).
+%
+% \item[|annot_action_A|] (rule 6.6.1-1) this requirement restricts
+%  the allowed subtypes of the
+% |/A| dictionary of an action. The check should supply the user
+%  subtype without slash e.g. as |GoTo| (pass) or |Movie| (failure).
+% \end{description}
+%
+% \subsection{Colorprofiles and OutputIntent}
+%
+% The pdf/A standards require that a color profile is embedded and
+% referenced in the catalog in the |/OutputIntent| array.
+%
+% The problem is that the pdf/A standards also require, that if the PDF has more then
+% one entry in the |/OutputIntent| array (which is allowed), their |/DestOutputProfile|
+% should all reference the same color profile\footnote{see rule 6.2.2-2 at
+% \url{https://docs.verapdf.org/validation/pdfa-part1/}}.
+%
+% Enforcing this fully is impossible if entries are added manually by users or
+% packages with |\pdfmanagement_add:nnn {Catalog}{OutputIntents}{|\meta{object reference}|}|
+% as it is difficult to inspect and remove entries from the |/OutputIntent| array.
+%
+% So we provide a dedicated interface to avoid the need of manual
+% user settings and allow the code to handle the requirements of the standard.
+% The interface doesn't handle yet all finer points for PDF/X standards, e.g.
+% named profiles, it is meant as a starting point to get at least PDF/A validation
+% here.
+%
+% \begin{NOTE}{UF}
+% The interface has to handle the following points:
+% \begin{itemize}
+% \item  We have to assume that some documents wants to add more
+%  than one OutputIntent with varying subtypes.
+% \item While currently only |/GTS_PDFA1| and |/GTS_PDFX| seem to
+% be relevant, we have to assume that the list of subtypes is open.
+% \item But we can imho assume that every subtype is there at most once.
+% \item The referenced color profile can be used also other means, e.g. an /ICCBased
+% color space. We must avoid that it is embedded twice in this case.
+% This will need coordination with l3color. It should probably provide the
+% code to embed the profile.
+% \item While we can predeclare some standard icc-profiles, an interface to
+% setup more is needed. This is currently not handled, as it needs
+% coordination with a setup in l3color too.
+% \item The implementation doesn't really handle yet all finer points for pdf/X
+% see \url{tn0002_color_in_pdfa-1_2008-03-141.pdf}
+% \end{itemize}
+% \end{NOTE}
+% The interface looks like this
+%
+% \begin{verbatim}
+%  \DeclareDocumentMetadata
+%    {
+%      %other options for example pdfstandard
+%       colorprofiles=
+%        {
+%          A = sRGB.icc, %or a or longer GTS_PDFA1 = sRGB.icc
+%          X = FOGRA39L_coated.icc, % or x or longer GTS_PDFX
+%          ISO_PDFE1 = whatever.icc
+%        }
+%
+%    }
+% \end{verbatim}
+%
+% |sRGB.icc| and |FOGRA39L_coated.icc| (from the \pkg{colorprofiles} package
+% are predefined and will work directly\footnote{The \texttt{dvips} route
+% will require that \texttt{ps2pdf} is called with \texttt{-dNOSAFER},
+% and that the color profiles are in the current folder as \texttt{ps2pdf} doesn't
+% use \texttt{kpathsea} to find them.}. |whatever.icc| will need special setup in
+% the document preamble to declare the values for the
+% |OutputIntent| dictionary, but the interface hasn't be added yet. This will be
+% decided later.
+%
+%
+% If an A-standard is detected or set which requires
+% that all |/DestOutputProfile| reference the same
+% color profile, the setting is changed to the equivalent of
+%
+% \begin{verbatim}
+%  \DeclareDocumentMetadata
+%    {
+%      %other options
+%       pdfstandard=A-2b,
+%       colorprofiles=
+%        {
+%          A = sRGB.icc, %or longer GTS_PDFA1 = sRGB.icc
+%          X = sRGB.icc,
+%          ISO_PDFE1 = sRGB.icc
+%        }
+%
+%    }
+% \end{verbatim}
+%
+% The pdf/A standards will use |A=sRGB.icc| by default, so this doesn't
+% need to be declared explicitly.
+%
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3pdfmeta} implementation}
+%
+%    \begin{macrocode}
+%<@@=pdfmeta>
+%<*header>
+\ProvidesExplPackage{l3pdfmeta}{2021-08-28}{0.95i}
+  {PDF-Standards---LaTeX PDF management testphase bundle}
+%</header>
+%    \end{macrocode}
+% Message for unknown standards
+%    \begin{macrocode}
+%<*package>
+\msg_new:nnn  {pdf }{unknown-standard}{The~standard~'#1'~is~unknown~and~has~been~ignored}
+%    \end{macrocode}
+% \begin{variable}{\l_@@_tmpa_tl,\l_@@_tmpb_tl,\l_@@_tmpa_str}
+%    \begin{macrocode}
+\tl_new:N\l_@@_tmpa_tl
+\tl_new:N\l_@@_tmpb_tl
+\str_new:N \l_@@_tmpa_str
+%    \end{macrocode}
+% \end{variable}
+% \subsection{Standards (work in progress)}
+% \subsubsection{Tools and tests}
+% This internal property will contain for now the settings for the document.
+% \begin{variable}{\g_@@_standard_prop}
+%    \begin{macrocode}
+\prop_new:N \g_@@_standard_prop
+%    \end{macrocode}
+% \end{variable}
+% \subsubsection{Functions to check a requirement}
+% At first two commands to get the standard value if needed:
+% \begin{macro}[EXP]{\pdfmeta_standard_item:n}
+%    \begin{macrocode}
+\cs_new:Npn \pdfmeta_standard_item:n #1
+ {
+   \prop_item:Nn \g_@@_standard_prop {#1}
+ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pdfmeta_standard_get:nN}
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdfmeta_standard_get:nN #1 #2
+ {
+   \prop_get:NnN \g_@@_standard_prop {#1} #2
+ }
+%    \end{macrocode}
+% \end{macro}
+% Now two functions to check the requirement. A simple and one value/handler based.
+% \begin{macro}[pTF]{\pdfmeta_standard_verify:n}
+%  This is a simple test is the requirement is in the prop.
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \pdfmeta_standard_verify:n #1 {T,F,TF}
+  {
+     \prop_if_in:NnTF \g_@@_standard_prop {#1}
+       {
+         \prg_return_false:
+       }
+       {
+         \prg_return_true:
+       }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[TF]{\pdfmeta_standard_verify:nn}
+% This allows to test against a user value. It calls a test handler if this
+% exists and passes the user and the standard value to it. The test
+% handler should return true or false.
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \pdfmeta_standard_verify:nn #1 #2  {T,F,TF}
+  {
+    \prop_if_in:NnTF \g_@@_standard_prop {#1}
+      {
+        \cs_if_exist:cTF {@@_standard_verify_handler_#1:nn}
+          {
+            \exp_args:Nnnx
+            \use:c
+              {@@_standard_verify_handler_#1:nn}
+              { #2 }
+              { \prop_item:Nn \g_@@_standard_prop {#1} }
+          }
+          {
+            \prg_return_false:
+          }
+      }
+      {
+        \prg_return_true:
+      }
+   }
+%    \end{macrocode}
+% \end{macro}
+%
+% Now we setup a number of handlers.
+%
+% The first actually ignores the user values and tests against the
+% current pdf version. If this is smaller than the minimum we report a failure.
+% |#1| is the user value, |#2| the reference value from the standard.
+% \begin{macro}{\@@_standard_verify_handler_min_pdf_version:nn}
+%    \begin{macrocode}
+%
+\cs_new_protected:Npn \@@_standard_verify_handler_min_pdf_version:nn #1 #2
+ {
+   \pdf_version_compare:NnTF <
+     { #2 }
+     {\prg_return_false:}
+     {\prg_return_true:}
+ }
+%    \end{macrocode}
+% \end{macro}
+% The next checks if the user value is in the list and returns a failure if not.
+% \begin{macro}{\@@_standard_verify_handler_named_actions:nn}
+%    \begin{macrocode}
+
+\cs_new_protected:Npn \@@_standard_verify_handler_named_actions:nn #1 #2
+ {
+   \tl_if_in:nnTF { #2 }{ #1 }
+     {\prg_return_true:}
+     {\prg_return_false:}
+ }
+%    \end{macrocode}
+% \end{macro}
+% The next checks if the user value is in the list and returns a failure if not.
+% \begin{macro}{\@@_standard_verify_handler_annot_action_A:nn}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_standard_verify_handler_annot_action_A:nn #1 #2
+ {
+   \tl_if_in:nnTF { #2 }{ #1 }
+     {\prg_return_true:}
+     {\prg_return_false:}
+ }
+%    \end{macrocode}
+% \end{macro}
+% This check is probably not needed, but for completeness
+% \begin{macro}{\@@_standard_verify_handler_outputintent_subtype:nn}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_standard_verify_handler_outputintent_subtype:nn #1 #2
+ {
+   \tl_if_eq:nnTF { #2 }{ #1 }
+     {\prg_return_true:}
+     {\prg_return_false:}
+ }
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{Enforcing requirements}
+%  A number of requirements can sensibly be enforced by us.
+%  \paragraph{Annot flags}
+% pdf/A require a number of settings here, we store them in a command which
+% can be added to the property of the standard:
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_verify_pdfa_annot_flags:
+  {
+    \bitset_set_true:Nn  \l_pdfannot_F_bitset {Print}
+    \bitset_set_false:Nn \l_pdfannot_F_bitset {Hidden}
+    \bitset_set_false:Nn \l_pdfannot_F_bitset {Invisible}
+    \bitset_set_false:Nn \l_pdfannot_F_bitset {NoView}
+    \pdfannot_dict_put:nnn {link/URI}{F}{ \bitset_to_arabic:N \l_pdfannot_F_bitset }
+    \pdfannot_dict_put:nnn {link/GoTo}{F}{ \bitset_to_arabic:N \l_pdfannot_F_bitset }
+    \pdfannot_dict_put:nnn {link/GoToR}{F}{ \bitset_to_arabic:N \l_pdfannot_F_bitset }
+    \pdfannot_dict_put:nnn {link/Launch}{F}{ \bitset_to_arabic:N \l_pdfannot_F_bitset }
+    \pdfannot_dict_put:nnn {link/Named}{F}{ \bitset_to_arabic:N \l_pdfannot_F_bitset }
+  }
+%    \end{macrocode}
+% At begin document this should be checked:
+%    \begin{macrocode}
+\hook_gput_code:nnn {begindocument} {pdf}
+  {
+    \pdfmeta_standard_verify:nF { annot_flags }
+     { \@@_verify_pdfa_annot_flags: }
+  }
+%    \end{macrocode}
+%
+%  \subsubsection{pdf/A}
+%  We use global properties so that follow up standards can be
+%  copied and then adjusted.
+%  Some note about requirements for more standard can
+%  be found in info/pdfstandard.tex.
+%  \begin{variable}{
+%   \g_@@_standard_pdf/A-1B_prop ,
+%   \g_@@_standard_pdf/A-2A_prop ,
+%   \g_@@_standard_pdf/A-2B_prop ,
+%   \g_@@_standard_pdf/A-2U_prop ,
+%   \g_@@_standard_pdf/A-3A_prop ,
+%   \g_@@_standard_pdf/A-3B_prop ,
+%   \g_@@_standard_pdf/A-3U_prop ,
+%   }
+%     \begin{macrocode}
+\prop_new:c { g_@@_standard_pdf/A-1B_prop }
+\prop_set_from_keyval:cn { g_@@_standard_pdf/A-1B_prop }
+  {
+    ,name             = pdf/A-1B
+    ,type             = A
+    ,level            = 1
+    ,conformance      = B
+    ,year             = 2005
+    ,min_pdf_version  = 1.4        %minimum
+    ,no_encryption    =
+    ,no_external_content =  % no F, FFilter, or FDecodeParms in stream dicts
+    ,no_embed_content = % no EF key in filespec, no /Type/EmbeddedFiles
+    ,max_string_size  = 65535
+    ,max_array_size   = 8191
+    ,max_dict_size    = 4095
+    ,max_obj_num      = 8388607
+    ,max_nest_qQ      = 28
+    ,named_actions    = {NextPage, PrevPage, FirstPage, LastPage}
+    ,annot_flags      =
+    %booleans. Only the existence of the key matter.
+    %If the entry is added it means a requirements is there
+    %(in most cases "don't use ...")
+    %
+    %===============
+    % Rule 6.1.13-1 CosDocument, isOptionalContentPresent == false
+      ,Catalog_no_OCProperties =
+    %===============
+    % Rule 6.6.1-1: PDAction, S == "GoTo" || S == "GoToR" || S == "Thread"
+    %               || S == "URI" || S == "Named" || S == "SubmitForm"
+    % means: no /S/Launch, /S/Sound, /S/Movie, /S/ResetForm, /S/ImportData,
+    %        /S/JavaScript, /S/Hide
+      ,annot_action_A        = {GoTo,GoToR,Thread,URI,Named,SubmitForm}
+    %===============
+    % Rule 6.6.2-1: PDAnnot, Subtype != "Widget" || AA_size == 0
+    % means: no AA dictionary
+      ,annot_widget_no_AA      =
+    %===============
+    % Rule 6.9-2: PDAnnot, Subtype != "Widget" || (A_size == 0 && AA_size == 0)
+    % (looks like a tightening of the previous rule)
+      ,annot_widget_no_A_AA    =
+    %===============
+    % Rule 6.9-1 PDAcroForm, NeedAppearances == null || NeedAppearances == false
+    ,form_no_NeedAppearances =
+    %===============
+    %Rule 6.9-3 PDFormField, AA_size == 0
+    ,form_no_AA              =
+    %===============
+    % to be continued https://docs.verapdf.org/validation/pdfa-part1/
+    % - Outputintent/colorprofiles requirements
+    % an outputintent should be loaded and is unique.
+    ,outputintent_A         = {GTS_PDFA1}
+    % - no Alternates key in image dictionaries
+    % - no OPI, Ref, Subtype2 with PS key in xobjects
+    % - Interpolate  = false in images
+    % - no TR, TR2 in ExtGstate
+  }
+
+%A-2b ==============
+\prop_new:c { g_@@_standard_pdf/A-2B_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-2B_prop }
+  { g_@@_standard_pdf/A-1B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2B_prop }{name}{pdf/A-2B}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2B_prop }{year}{2011}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2B_prop }{level}{2}
+% embedding files is allowed (with restrictions)
+\prop_gremove:cn
+  { g_@@_standard_pdf/A-2B_prop }
+  { embed_content}
+
+%A-2u ==============
+\prop_new:c { g_@@_standard_pdf/A-2U_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-2U_prop }
+  { g_@@_standard_pdf/A-2B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2U_prop }{name}{pdf/A-2U}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2U_prop }{conformance}{U}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2U_prop }{unicode}{}
+
+%A-2a ==============
+\prop_new:c { g_@@_standard_pdf/A-2A_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-2A_prop }
+  { g_@@_standard_pdf/A-2B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2A_prop }{name}{pdf/A-2A}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2A_prop }{conformance}{A}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-2A_prop }{tagged}{}
+
+
+%A-3b ==============
+\prop_new:c { g_@@_standard_pdf/A-3B_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-3B_prop }
+  { g_@@_standard_pdf/A-2B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3B_prop }{name}{pdf/A-3B}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3B_prop }{year}{2012}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3B_prop }{level}{3}
+% embedding files is allowed (with restrictions)
+\prop_gremove:cn
+  { g_@@_standard_pdf/A-3B_prop }
+  { embed_content}
+%A-3u ==============
+\prop_new:c { g_@@_standard_pdf/A-3U_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-3U_prop }
+  { g_@@_standard_pdf/A-3B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3U_prop }{name}{pdf/A-3U}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3U_prop }{conformance}{U}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3U_prop }{unicode}{}
+
+%A-3a ==============
+\prop_new:c { g_@@_standard_pdf/A-3A_prop }
+\prop_gset_eq:cc
+  { g_@@_standard_pdf/A-3A_prop }
+  { g_@@_standard_pdf/A-3B_prop }
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3A_prop }{name}{pdf/A-3A}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3A_prop }{conformance}{A}
+\prop_gput:cnn
+  { g_@@_standard_pdf/A-3A_prop }{tagged}{}
+%    \end{macrocode}
+% \end{variable}
+%
+% \subsubsection{Colorprofiles and Outputintents}
+% The following provides a minimum of interface to add a color profile
+% and an outputintent need for PDF/A for now. There will be need to extend it later,
+% so we try for enough generality.
+%
+% Adding a profile and an intent is technically easy:
+% \begin{enumerate}
+% \item Embed the profile as stream with
+% \begin{verbatim}
+%  \pdf_object_unnamed_write:nn{fstream} {{/N~4}{XXX.icc}}
+% \end{verbatim}
+% \item Write a |/OutputIntent| dictionary for this
+% \begin{verbatim}
+% \pdf_object_unnamed_write:nx {dict}
+%  {
+%    /Type /OutputIntent
+%    /S /GTS_PDFA1  % or GTS_PDFX or ISO_PDFE1 or ...
+%    /DestOutputProfile \pdf_object_ref_last: % ref the color profile
+%    /OutputConditionIdentifier ...
+%    ... %more info
+%  }
+% \end{verbatim}
+% \item Reference the dictionary in the catalog:
+% \begin{verbatim}
+% \pdfmanagement_add:nnx {Catalog}{OutputIntents}{\pdf_object_ref_last:}
+% \end{verbatim}
+% \end{enumerate}
+% But we need to do a bit more work, to get the interface right.
+% The object for the profile should be named, to allow l3color to reuse it
+% if needed. And we need container to store the profiles, to handle the
+% standard requirements.
+%
+% \begin{variable}{\g_@@_outputintents_prop}
+% This variable will hold the profiles for the subtypes. We assume
+% that every subtype has only only color profile.
+%    \begin{macrocode}
+\prop_new:N \g_@@_outputintents_prop
+%    \end{macrocode}
+% \end{variable}
+% Some keys to fill the property.
+%    \begin{macrocode}
+\keys_define:nn { document / metadata }
+  {
+    colorprofiles .code:n =
+     {
+       \keys_set:nn { document / metadata / colorprofiles }{#1}
+     }
+  }
+\keys_define:nn { document / metadata / colorprofiles }
+ {
+   ,A .code:n =
+      {
+        \tl_if_blank:nF {#1}
+          {
+            \prop_gput:Nnn \g_@@_outputintents_prop
+             { GTS_PDFA1  } {#1}
+          }
+      }
+   ,a .code:n =
+      {
+        \tl_if_blank:nF {#1}
+          {
+            \prop_gput:Nnn \g_@@_outputintents_prop
+              { GTS_PDFA1  } {#1}
+          }
+      }
+   ,X .code:n =
+      {
+        \tl_if_blank:nF {#1}
+          {
+             \prop_gput:Nnn \g_@@_outputintents_prop
+              { GTS_PDFX  } {#1}
+          }
+      }
+   ,x .code:n =
+      {
+        \tl_if_blank:nF {#1}
+          {
+            \prop_gput:Nnn \g_@@_outputintents_prop
+              { GTS_PDFX  } {#1}
+          }
+      }
+   ,unknown .code:n =
+     {
+       \tl_if_blank:nF {#1}
+          {
+           \exp_args:NNo
+            \prop_gput:Nnn \g_@@_outputintents_prop
+              { \l_keys_key_str  } {#1}
+          }
+     }
+ }
+%    \end{macrocode}
+% At first we setup our two default profiles. This is internal as
+% the public interface is still undecided.
+%    \begin{macrocode}
+\pdfdict_new:n   {l_pdfmeta/outputintent}
+\pdfdict_put:nnn {l_pdfmeta/outputintent}
+  {Type}{/OutputIntent}
+\prop_const_from_keyval:cn { c_@@_colorprofile_sRGB.icc}
+  {
+    ,OutputConditionIdentifier=IEC~sRGB
+    ,Info=IEC~61966-2.1~Default~RGB~colour~space~-~sRGB
+    ,RegistryName=http://www.iec.ch
+    ,N = 3
+  }
+\prop_const_from_keyval:cn { c_@@_colorprofile_FOGRA39L_coated.icc}
+  {
+    ,OutputConditionIdentifier=FOGRA39L~Coated
+    ,Info={Offset~printing,~according~to~ISO~12647-2:2004/Amd~1,~OFCOM,~ %
+           paper~type~1~or~2~=~coated~art,~115~g/m2,~tone~value~increase~
+           curves~A~(CMY)~and~B~(K)}
+    ,RegistryName=http://www.fogra.org
+    ,N = 4
+  }
+%    \end{macrocode}
+% \begin{macro}{\@@_embed_colorprofile:n,\@@_write_outputintent:nn}
+% The commands embed the profile, and write the dictionary and add it to
+% the catalog. The first command should perhaps be moved to l3color
+% as it needs such profiles too. We used named objects so that we can
+% check if the profile is already there. This is not full proof if pathes are
+% used.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_embed_colorprofile:n #1%#1 file name
+  {
+    \pdf_object_if_exist:nF { __color_icc_ #1 }
+      {
+        \pdf_object_new:nn  { __color_icc_ #1 }{fstream}
+        \pdf_object_write:nx { __color_icc_ #1 }
+         {
+           {/N\c_space_tl
+             \prop_item:cn{c_@@_colorprofile_#1}{N}
+           }
+           {#1}
+         }
+      }
+  }
+
+\cs_new_protected:Npn \@@_write_outputintent:nn #1 #2 %#1 file name, #2 subtype
+  {
+    \group_begin:
+     \pdfdict_put:nnx {l_pdfmeta/outputintent}{S}{/\str_convert_pdfname:n{#2}}
+     \pdfdict_put:nnx {l_pdfmeta/outputintent}
+       {DestOutputProfile}
+       {\pdf_object_ref:n{ __color_icc_ #1 }}
+     \clist_map_inline:nn { OutputConditionIdentifier, Info, RegistryName }
+       {
+         \prop_get:cnNT
+          { c_@@_colorprofile_#1}
+          { ##1 }
+          \l_@@_tmpa_tl
+          {
+            \pdf_string_from_unicode:nVN {utf8/string}\l_@@_tmpa_tl\l_@@_tmpa_str
+            \pdfdict_put:nnx
+              {l_pdfmeta/outputintent}{##1}{\l_@@_tmpa_str}
+          }
+       }
+     \pdf_object_unnamed_write:nx {dict}{\pdfdict_use:n {l_pdfmeta/outputintent} }
+     \pdfmanagement_add:nnx {Catalog}{OutputIntents}{\pdf_object_ref_last:}
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+% Now the verifying code.
+% If no requirement is set we simply loop over the property
+%    \begin{macrocode}
+
+\AddToHook{begindocument/end}
+  {
+    \pdfmeta_standard_verify:nTF {outputintent_A}
+      {
+         \prop_map_inline:Nn \g_@@_outputintents_prop
+           {
+             \@@_embed_colorprofile:n
+               {#2}
+             \@@_write_outputintent:nn
+               {#2}
+               {#1}
+           }
+      }
+%    \end{macrocode}
+% If an output intent is required for pdf/A we need to ensure, that the key of
+% default subtype has a value, as default we take sRGB.icc.
+% Then we loop but take always the same profile.
+%    \begin{macrocode}
+      {
+         \exp_args:NNx
+         \prop_if_in:NnF
+           \g_@@_outputintents_prop
+           { \pdfmeta_standard_item:n { outputintent_A } }
+           {
+             \exp_args:NNx
+             \prop_gput:Nnn
+               \g_@@_outputintents_prop
+               { \pdfmeta_standard_item:n { outputintent_A } }
+               { sRGB.icc }
+           }
+         \exp_args:NNx
+         \prop_get:NnN
+           \g_@@_outputintents_prop
+           { \pdfmeta_standard_item:n { outputintent_A } }
+           \l_@@_tmpb_tl
+         \exp_args:NV \@@_embed_colorprofile:n \l_@@_tmpb_tl
+         \prop_map_inline:Nn \g_@@_outputintents_prop
+           {
+             \exp_args:NV
+             \@@_write_outputintent:nn
+               \l_@@_tmpb_tl
+               { #1 }
+           }
+       }
+   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

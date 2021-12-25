@@ -1,0 +1,13 @@
+Changes made in the newfloat package
+====================================
+
+Please note that this document does not reflect bugfix-releases, and that the dates given are the dates of the release w/o bugfixes.
+
+If you are interested in a complete changelog -- including bugfixes -- process the dtx files with \RecordChanges and \PrintChanges.
+
+v1.0 (2011/10/30)
+- 1st published version
+
+v1.1 (2013/04/27)
+- New command \PrepareListOf
+

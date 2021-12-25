@@ -1,0 +1,24 @@
+name zitie
+category Package
+revision 60676
+shortdesc Create CJK character calligraphy practicing sheets
+longdesc This is a LaTeX package for creating CJK character calligraphy
+longdesc practicing sheets (copybooks). Currently, only XeTeX is
+longdesc supported.
+containersize 9584
+containerchecksum 10769951705e67bb929643e39d5480c4c2337a68f59ede2d77b2f8ddc3e2d6363c873d0e8e480a85e02f2062736570fa74171c862e50af73efa941a4d93cdd58
+doccontainersize 345476
+doccontainerchecksum 84f8e20beec5ba5ffbd79c6ffa68f0530b285761a8de6ed53e621ef39c0c14f59c33d76373581f94f10b1149a9fe5c92c1c74bbe2c4d6b8aa589d3a574bd9153
+docfiles size=94
+ texmf-dist/doc/xelatex/zitie/README.md details="Readme"
+ texmf-dist/doc/xelatex/zitie/zitie-cn.pdf details="Package documentation" language="zh"
+ texmf-dist/doc/xelatex/zitie/zitie-cn.tex
+runfiles size=16
+ texmf-dist/tex/xelatex/zitie/zitie.luatex.def
+ texmf-dist/tex/xelatex/zitie/zitie.sty
+ texmf-dist/tex/xelatex/zitie/zitie.xetex.def
+catalogue-contact-repository https://github.com/Sophanatprime/zitie
+catalogue-ctan /macros/xetex/latex/zitie
+catalogue-license lppl1.3c
+catalogue-topics chinese xetex expl3
+catalogue-version 1.4.0

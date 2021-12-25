@@ -1,0 +1,49 @@
+name feynmf
+category Package
+revision 17259
+shortdesc Macros and fonts for creating Feynman (and other) diagrams
+longdesc The feynmf package provides an interface to Metafont (inspired
+longdesc by the facilities of mfpic) to use simple structure
+longdesc specifications to produce relatively complex diagrams. (The
+longdesc feynmp package, also part of this bundle, uses MetaPost in the
+longdesc same way.) While the package was designed for Feynman diagrams,
+longdesc it could in principle be used for diagrams in graph and similar
+longdesc theories, where the structure is semi-algorithmically
+longdesc determined.
+containersize 19484
+containerchecksum d4eb87e3f086f2d39c87eba057fc490ce5d39e9c5ae39aa1c04ee8c3be9c4a188ef123f860fe74d31e0e9e9182909c39df3434ddcc618632723f00627f66397f
+doccontainersize 466364
+doccontainerchecksum 933edaceff112f7442f7c662fda43f343b0e7e41f65aae4f1a45bfd2de18c1e4bda505a235eebc4daf2451846dab376449242217ec803f2932a4a1584038f4ee
+docfiles size=146
+ texmf-dist/doc/latex/feynmf/Announce
+ texmf-dist/doc/latex/feynmf/COPYING
+ texmf-dist/doc/latex/feynmf/Feynman.Diagrams
+ texmf-dist/doc/latex/feynmf/README details="Package Readme"
+ texmf-dist/doc/latex/feynmf/Tutorial
+ texmf-dist/doc/latex/feynmf/fmfman.pdf details="Package documentation"
+ texmf-dist/doc/latex/feynmf/manpics.1
+ texmf-dist/doc/latex/feynmf/manpics.2
+ texmf-dist/doc/latex/feynmf/manpics.3
+ texmf-dist/doc/latex/feynmf/template.tex
+srccontainersize 64056
+srccontainerchecksum bdc4dbbc449c911c0d516b10da18c1d541645ec57fd95c163d571a039c70ad46e6111717ffc86c802123c272509c85ce1d71d90f49578b2e228a9229f4d40f02
+srcfiles size=81
+ texmf-dist/source/latex/feynmf/Makefile
+ texmf-dist/source/latex/feynmf/feynmf.drv
+ texmf-dist/source/latex/feynmf/feynmf.dtx
+ texmf-dist/source/latex/feynmf/feynmf.ins
+ texmf-dist/source/latex/feynmf/feynmf.pl
+ texmf-dist/source/latex/feynmf/feynmf209.ins
+ texmf-dist/source/latex/feynmf/feynmp.drv
+ texmf-dist/source/latex/feynmf/fmfman.drv
+ texmf-dist/source/latex/feynmf/fmfmanps.drv
+runfiles size=40
+ texmf-dist/metafont/feynmf/feynmf.mf
+ texmf-dist/metapost/feynmf/feynmp.mp
+ texmf-dist/metapost/feynmf/manpics.mp
+ texmf-dist/tex/latex/feynmf/feynmf.sty
+ texmf-dist/tex/latex/feynmf/feynmp.sty
+catalogue-ctan /macros/latex/contrib/feynmf
+catalogue-license gpl
+catalogue-topics graphics-use mp-use physics
+catalogue-version 1.08

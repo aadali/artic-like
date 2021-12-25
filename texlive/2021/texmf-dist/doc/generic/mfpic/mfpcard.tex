@@ -1,0 +1,659 @@
+% File: mfpcard.tex
+% A part of mfpic 1.10 2012/12/03
+%
+% (Ask your driver to print so that longer dimension is horizontal.)
+\newdimen\paperlongside
+    \paperlongside 11 truein
+\newdimen\papershortside
+    \papershortside 8.5 truein
+
+\ifx\pdfoutput\undefined
+\else\ifx\pdfoutput\relax
+\else\ifnum\pdfoutput>0
+  \pdfpagewidth\paperlongside
+  \pdfpageheight\papershortside
+\fi\fi\fi
+
+\font\manual=cmcsc8
+\def\MF{{\manual meta}\-{\manual font}}
+\def\MP{{\manual meta}\-{\manual post}}
+\def\TeX{{\rm T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX\null}}
+\def\plainTeX{{\rm plain\kern -.15em\TeX}}
+\def\LaTeX{{\rm L\raise.42ex\hbox{\kern-.36em \manual a}\kern-.15em\TeX}}
+%\def\LaTeXe{\LaTeX$2_{\textstyle\varepsilon}$}
+\def\gobble#1{}
+\def\bsl{{\tt\char\escapechar}}
+
+\def\cs#1{{\tt\char`\\#1}}
+\def\marg#1{{\tt\char`\{#1\char`\}}}
+\def\oarg#1{{\tt[#1]}}
+\def\parg#1{{\tt(#1)}}
+
+% logical markup to typeset filenames, program names, MF code,
+% grafbase identifiers, environment names, email addresses, and
+% emphasis.
+\def\file#1{{\tt #1}}
+\def\prog#1{{\sf #1}} % didn't want everything in \tt
+\def\mfc#1{{\tt #1}}
+\def\opt#1{{\tt #1}}  % LaTeX2e option names
+\def\gbc#1{{\tt #1}}
+\def\env#1{{\tt #1}}
+\def\mail#1{{\tt #1}}
+\def\emph#1{{\it #1\/}}
+
+% Forced, Clean, Linebreak.
+
+\def\brk{\nobreak\hfil\break}
+
+\newcount\columnsperpage
+
+% Entries are too wide for 3 columns.  Print 2 columns landscape
+\columnsperpage=2
+
+% The rest of this header is nicked from gnuplot (which took it from
+% Emacs) but was drastically adapted for mfpic.
+%
+% This file is intended to be processed by plainTeX.
+%
+%    You will need to inform your dvi driver to print it in landscape
+%    and, optionally, double sided.
+% Author of GNU Emacs Refcard:
+%  Stephen Gildea
+%  UUCP: mit-erl!gildea
+%  Internet: gildea@erl.mit.edu
+%
+% Person who ripped off the formatter for gnuplot:
+%  Alex Woo
+%  NASA Ames Research Center
+%  Internet: woo@ames.arc.nasa.gov
+%
+% Modified on 9 Dec 1992 by:
+%  Daniel S. Lewart
+%  University of Illinois
+%  Internet: d-lewart@uiuc.edu
+%
+% Modified on 29 Sep 1999, 11 Jul 2002, 29 Sep 2003 (for mfpic) by:
+%  Daniel H. Luecking
+%  University of Arkansas
+%  luecking@uark.edu
+
+\newdimen\intercolumnskip
+\newbox\columna
+\newbox\columnb
+
+\hsize4.75truein
+\vsize 7.25truein
+
+% Equal left right, right and middle margins, about .5in on USletter
+\intercolumnskip=\paperlongside
+\advance\intercolumnskip -2\hsize
+\intercolumnskip .33333\intercolumnskip
+\hoffset\intercolumnskip
+\advance\hoffset -1truein
+
+% Equal top and bottom margins, about .4in on A4 paper
+\voffset\papershortside
+\advance\voffset-\vsize
+\voffset .5\voffset
+\advance\voffset -1truein
+
+\topskip8truept
+
+\font\manual=cmcsc10 at 8pt
+\font\titlefont=cmbx10 scaled \magstep1
+\font\headingfont=cmbx10
+\font\smallfont=cmr6
+\font\smallsy=cmsy6
+\font\eighti=cmmi8
+\font\sixi=cmmi6
+\font\eightex=cmex10 at 8pt
+\font\eightrm=cmr8
+\font\eightbf=cmbx8
+\let\subheadingfont\eightbf
+\font\sixbf=cmbx6
+\font\eightit=cmti8
+\font\eighttt=cmtt8
+\font\eightsy=cmsy8
+\font\sixsy=cmsy6
+\font\eightsf=cmss10 at 8pt
+\font\eightsl=cmsl8
+\font\tensf=cmss10
+\textfont0=\eightrm \scriptfont0=\smallfont
+\textfont1=\eighti \scriptfont1=\sixi
+\textfont2=\eightsy \scriptfont2=\sixsy
+\textfont3=\eightex \scriptfont3=\eightex \scriptscriptfont3=\eightex
+\textfont\bffam\eightbf \scriptfont\bffam\sixbf
+\def\rm{\fam0\eightrm}
+\def\bf{\fam\bffam\eightbf}
+\def\it{\eightit}
+\def\tt{\eighttt}
+\def\sf{\eightsf}
+\def\sl{\eightsl}
+\smallskipamount 2pt plus 1pt minus 0pt
+\medskipamount 5pt plus 2pt minus 2pt
+\bigskipamount 10pt plus 3pt minus 3pt
+\normalbaselineskip=10pt
+\normalbaselines
+\rm
+\setbox\strutbox=\hbox{\vrule height6.8pt depth3.2pt width0pt}
+
+\def\abc{a}
+\output={%
+    \if b\abc \multicolumnformat \global\def\abc{a}
+    \else\if a\abc
+      \global\setbox\columna\columnbox \global\def\abc{b}
+      \global\setbox\columnb\hbox to -\intercolumnskip{}
+    \fi\fi}
+\def\multicolumnformat{\shipout\vbox{%
+    \hbox{\box\columna\hskip\intercolumnskip
+      \box\columnb\hskip\intercolumnskip\columnbox}}\advancepageno}
+\def\columnbox{\leftline{\pagebody}}
+
+\def\bye{\par\vfill\supereject
+  \if a\abc \else\null\vfill\eject\fi
+  \if a\abc \else\null\vfill\eject\fi
+  \end}
+
+% Typewriter type braces (redefinitions of escaped braces) :
+\def\{{{\tt \char`\{}}
+\def\}{{\tt\char`\}}}
+
+
+\parindent 0pt
+
+\def\title#1{{\titlefont\centerline{#1}}\vskip 1ex plus .5ex}
+
+\def\section#1{\par
+  \penalty-100
+  \vskip 2.25ex plus 2ex minus 2ex {\headingfont #1}%
+  \par \nobreak
+  \vskip 1.25ex plus 1ex minus 1.5ex}
+
+\def\subsection#1{\par
+  \ifdim\lastskip<1.5ex
+    \vskip -\lastskip
+    \vskip 1.5ex plus 1ex minus 1ex
+  \fi
+  {\subheadingfont #1}%
+  \par \nobreak
+  \vskip .75ex plus .5ex minus .5ex}
+
+\newdimen\describeindent
+\describeindent=0em
+
+\def\meta#1{$\langle\hbox{\it #1\/}\rangle$}
+\def\alt{\unskip$\;|\;$\hfilbreak}
+\def\hfilbreak{\hfil\allowbreak\hfilneg}
+
+\newdimen\secondkeyindent
+
+\def\describe#1#2{\leavevmode\vtop
+  {\hsize=\firstkeyfrac\hsize\rightskip=1em plus 1 fill\relax
+   \secondkeyindent\describeindent \advance\secondkeyindent 1em
+   \hangindent\secondkeyindent \hangafter1
+   \hskip\describeindent\relax\strut#1\nobreak\hskip0pt\strut}%
+   \vtop
+  {\hsize=\secondkeyfrac\hsize\rightskip=0pt plus 1 fill\relax
+   \leavevmode\strut#2\unskip\strut}\par}
+\def\code#1{{\sf #1}}
+
+\title{MFPIC Quick Reference}
+
+\centerline{(Copyright 2000--2012 by Daniel Luecking)}
+\medskip
+This information was prepared for version 1.10 of \prog{mfpic}.
+
+\section{Preamble commands}
+
+\def\firstkeyfrac{.4}
+\def\secondkeyfrac{.6}
+
+\describe{Load \prog{mfpic} package (\LaTeX)}
+        {\cs{usepackage}\oarg{\meta{options}}\marg{mfpic}}
+\describe{Options}{\opt{metafont} \alt \opt{metapost}, \opt{mplabels},
+        \opt{overlaylabels}, \opt{centeredcaptions},
+        \opt{raggedcaptions}, \opt{clip}, \opt{truebbox}, \opt{draft},
+        \opt{final}, \opt{nowrite}, \opt{mfpreadlog}}
+\describe{Load \prog{mfpic}; activate options (\plainTeX)}
+        {\cs{input} \file{mfpic}. \cs{usemetafont} \alt
+        \cs{usemetapost}, \cs{usemplabels}, \cs{overlaylabels}
+        \cs{usecenteredcaptions}, \cs{useraggedcaptions},
+        \cs{clipmfpic}, \cs{usetruebbox}, \cs{mfpicdraft},
+        \cs{mfpicfinal}, \cs{mfpicnowrite}, \cs{mfpreadlog}}
+\describe{Turn off some options}
+        {\cs{nomplabels}, \cs{nooverlaylabels},
+        \cs{nocenteredcaptions}, \cs{noraggedcaptions}, \cs{noclipmfpic},
+        \cs{notruebbox}}
+\describe{Set up/close the output file}
+        {\cs{opengraphsfile}\marg{\meta{base name}}$\ldots$\cs{closegraphsfile}}
+
+\section{The {\tensf mfpic} environment}
+
+\def\firstkeyfrac{.30}
+\def\secondkeyfrac{.70}
+
+\describe{Start an \prog{mfpic} figure}
+    {\cs{mfpic}\oarg{\meta{xscale}}\oarg{\meta{yscale}}%
+    \marg{\meta{$x_{\min}$}}\allowbreak\marg{\meta{$x_{max}$}}\allowbreak
+    \marg{\meta{$y_{min}$}}\allowbreak\marg{\meta{$y_{max}$}}\brk
+    \null\quad\meta{mfpic commands}\brk
+    \cs{endmfpic}}
+\describe{\quad\LaTeX{} (optional)}
+        {\cs{begin}\marg{mfpic}${}\equiv{}$\cs{mfpic},
+          \cs{end}\marg{mfpic}${}\equiv{}$\cs{endmfpic}}
+
+
+\section{Dimensions (lengths)}
+
+\def\firstkeyfrac{.58}
+\def\secondkeyfrac{.42}
+
+\describe{\sl Purpose; where used:} {\sl Name and default value:}
+\vskip1pt
+\describe{Unit of length; \cs{mfpic}} {\cs{mfpicunit}, \tt 1pt}
+\describe{Size of a symbol; \cs{point}, \cs{plot}, and \cs{plotsymbol}}
+        {\cs{pointsize}, \tt 2pt}
+\describe{Darkness of shading; \cs{shade}} {\cs{shadespace}, \tt 1pt }
+\describe{Space between dots; \cs{polkadot}}
+    {\cs{polkadotspace}, \tt 10pt}
+\describe{Space between hatch lines; hatching macros}
+    {\cs{hatchspace}, \tt 3pt}
+\describe{Size of arrowhead; \cs{arrow}} {\cs{headlen}, \tt 3pt}
+\describe{Size of x-, y-axis arrowhead; xy-axes macros}
+    {\cs{axisheadlen}, \tt 5pt}
+\describe{Size of border axis arrowhead; side axis macros}
+    {\cs{sideheadlen}, \tt 0pt}
+\describe{Size of marks on axes; axis marks} {\cs{hashlen}, \tt 4pt}
+\describe{Size of dashes; \cs{dashed}} {\cs{dashlen}, \tt 4pt}
+\describe{Space between dashes; \cs{dashed}} {\cs{dashspace}, \tt 4pt}
+\describe{Size of dots; \cs{dotted}} {\cs{dotsize}, \tt 0.5pt}
+\describe{Space between dots; \cs{dotted}} {\cs{dotspace}, 3pt}
+\describe{Space between symbols; \cs{plot}} {\cs{symbolspace}, \tt 5pt}
+
+\medskip
+The following commands are used to change the size of some dimension
+parameters:
+
+\smallskip
+\describe{{\sl Purpose} ({\sl default\/}):} {\sl Command:}
+\vskip1pt
+\describe{Set diameter of drawing pen ({\tt 0.5pt})}
+        {\cs{penwd}\marg{\meta{dimen}}}
+\describe{Set diameter of shading dots ({\tt 0.5pt})}
+        {\cs{shadewd}\marg{\meta{dimen}}}
+\describe{Set diameter of polkadot ({\tt 5pt})}
+        {\cs{polkadotwd}\marg{\meta{dimen}}}
+\describe{Set diameter of hatching pen ({\tt 0.5pt})}
+        {\cs{hatchwd}\marg{\meta{dimen}}}
+\describe{Multiply \cs{shadespace} by 1.2} {\cs{lightershade}}
+\describe{Divide \cs{shadespace} by 1.2} {\cs{darkershade}}
+
+%\vfil\eject
+\section{Colors}
+
+\def\firstkeyfrac{.45}
+\def\secondkeyfrac{.55}
+
+\smallskip
+\describe{Set color for curves} {\cs{drawcolor}\marg{\meta{color}}}
+\describe{Set color for fills} {\cs{fillcolor}\marg{\meta{color}}}
+\describe{Set color for points, symbols} {\cs{pointcolor}\marg{\meta{color}}}
+\describe{Set color for hatching} {\cs{hatchcolor}\marg{\meta{color}}}
+\describe{Set color for arrowheads} {\cs{headcolor}\marg{\meta{color}}}
+\describe{Set color for tlabels} {\cs{tlabelcolor}\marg{\meta{color}}}
+\describe{Set color used by \cs{gclear}} {\cs{backgroundcolor}\marg{\meta{color}}}
+\describe{\quad \LaTeX{} syntax}
+        {\cs{drawcolor}\oarg{\meta{model}}\marg{\meta{clrspec}}, etc.}
+\describe{Define a color name} {\cs{mfpdefinecolor}\marg{\meta{name}}\marg{\meta{model}}\marg{\meta{clrspec}}}
+
+
+\section{Common geometric figures}
+
+Drawing commands that operate on a variable length list in braces may
+be followed by \cs{datafile}\marg{\meta{filename}} instead of the list.
+
+\subsection{Points}
+
+\def\firstkeyfrac{.42}
+\def\secondkeyfrac{.58}
+
+\describe{Place a symbol at given point(s)}
+        {\cs{plotsymbol}\oarg{\meta{size}}\marg{\meta{name}}%
+         \marg{($x_0,y_0$),($x_1,y_1$),$\ldots$}}
+\describe{\quad Available symbol names} {{\tt Triangle}, {\tt Square}, {\tt Circle}, {\tt
+        Diamond}, {\tt Star}, {\tt SolidTriangle}, {\tt SolidSquare}, {\tt SolidCircle},
+        {\tt SolidDiamond}, \tt{SolidStar}, {\tt Plus}, {\tt Cross},
+        {\tt Asterisk}}
+\describe{Points (filled or unfilled circles)}
+        {\cs{point}\oarg{\meta{size}}\marg{($x_0,y_0$),($x_1,y_1$),$\ldots$}}
+\describe{Force filled/open circles in \cs{point}:}
+        {\cs{pointfilltrue}/\cs{pointfillfalse}}
+
+\subsection{Lines}
+
+\def\firstkeyfrac{.45}
+\def\secondkeyfrac{.55}
+
+\describe{Connect points with lines}
+        {\cs{polyline}\marg{($x_0,y_0$),($x_1,y_1$),$\ldots$},
+         or (\cs{lines})}
+\describe{Closed polygon}
+        {\cs{polygon}\marg{($x_0,y_0$),($x_1,y_1$),$\ldots$}}
+\describe{Concatenate vectors}
+        {\cs{turtle}\marg{\meta{initialpoint},\meta{$v_1$},\meta{$v_2$},$\ldots$}}
+\describe{Rectangle (upright) with given corners}
+        {\cs{rect}\marg{($x_0,y_0$),($x_1,y_1$)}}
+
+\subsection{Circles, arcs and ellipses}
+
+\def\firstkeyfrac{.55}
+\def\secondkeyfrac{.45}
+
+\describe{Circles} {}
+\describe{\qquad polar form (default):}
+        {\cs{circle}\oarg{p}\marg{\meta{center},\meta{radius}}}
+\describe{\qquad three-point form:}
+        {\cs{circle}\oarg{t}\marg{($x_0,y_0$),($x_1,y_1$),($x_2,y_2$)}}
+\describe{\qquad center-point form:}
+        {\cs{circle}\oarg{c}\marg{\meta{center},\meta{point}}}
+\describe{\qquad point-sweep form:}
+        {\cs{circle}\oarg{s}\marg{($x_0,y_0$),($x_1,y_1$),\meta{angle}}}
+\describe{Arcs} {}
+\describe{\qquad polar form:}
+        {\cs{arc}\oarg{p}\marg{\meta{center},\meta{$\theta_1$},\meta{$\theta_2$},%
+        \meta{radius}}}
+\describe{\qquad three-point form:}
+        {\cs{arc}\oarg{t}\marg{($x_0,y_0$),($x_1,y_1$),($x_2,y_2$)}}
+\describe{\qquad center-point-angle form:}
+        {\cs{arc}\oarg{c}\marg{\meta{center},\meta{point},\meta{angle}}}
+\describe{\qquad point-sweep form (default):}
+        {\cs{arc}\oarg{s}\marg{($x_0,y_0$),($x_1,y_1$),\meta{angle}}}
+\describe{Ellipse, center $(x_0,y_0)$, radii \meta{$r_x$}, \meta{$r_y$}, angle
+\meta{$\theta$}}
+        {\cs{ellipse}\oarg{\meta{$\theta$}}%
+        \tt\{($x_0,y_0$),\meta{$r_x$},\meta{$r_y$}\}}
+
+\section{General curves}
+
+\def\firstkeyfrac{.45}
+\def\secondkeyfrac{.55}
+
+A \meta{spec} can be {\tt p} (for polyline) or {\tt s} (for smooth)
+followed by a number for the tension.
+
+\smallskip
+\describe{Smooth curve through points}
+        {\cs{curve}\oarg{\meta{tension}}\marg{($x_0,y_0$),($x_1,y_1$),$\ldots$}}
+\describe{Graph of $y=f(x)$}
+        {\cs{function}\oarg{\meta{spec}}\marg{$x_{\min}$,$x_{\max}$,%
+         $\Delta x$}\marg{$f(\hbox{\tt x})$}}
+\describe{Graph of parametric curve $(x(t),y(t))$}
+        {\cs{parafcn}\oarg{\meta{spec}}\marg{$t_{\min}$,$t_{\max}$,$\Delta t$}%
+         \marg{($x(\hbox{\tt t})$, $y(\hbox{\tt t})$)}}
+\describe{Graph of $r = f(\theta)$}
+        {\cs{plrfcn}\oarg{\meta{spec}}%
+        \marg{$\theta_{\min}$,$\theta_{\max}$,$\Delta\theta$}\marg{$f(\hbox{\tt t})$}}
+\describe{Interpolate with a smooth {\it function}}
+        {\cs{fcncurve}\oarg{\meta{tension}}\marg{($x_0,y_0$),($x_1,y_1$),$\ldots$}}
+\describe{Curve from data in a file}
+        {\cs{datafile}\oarg{\meta{spec}}\marg{\meta{file}}}
+\describe{\quad Set how \cs{datafile} processes a line}
+        {\cs{using}\marg{\meta{read\_pattern}}\marg{\meta{write\_pattern}}\brk
+        Default is \cs{using}\marg{\#1 \#2 \#3}\marg{(\#1,\#2)}}
+
+
+\section{Regions}
+
+\def\firstkeyfrac{.45}
+\def\secondkeyfrac{.55}
+
+Curves are not necessarily `closed' even if the start and end are the
+same. The following are closed (can be filled), as are \cs{rect},
+\cs{polygon}, \cs{circle}, and \cs{ellipse}.
+
+\smallskip
+\describe{Closed curve through given points}
+        {\cs{cyclic}\oarg{\meta{tension}}\marg{$(x_1,y_1),(x_2,y_2),\ldots$}}
+\describe{Circular sector (pie slice)}
+        {\cs{sector}\marg{\meta{center},\meta{radius},\meta{$\theta_1$},%
+         \meta{$\theta_2$}}}
+\describe{Region between two functions}
+        {\cs{btwnfcn}\oarg{\meta{spec}}\marg{$x_{\min}$,%
+         $x_{\max}$,$\Delta x$}\marg{$f(\hbox{\tt x})$}\marg{$g(\hbox{\tt x})$}}
+\describe{Region in polar coordinates}
+        {\cs{plrregion}\oarg{\meta{spec}}\marg{$\theta_{\min}$,$\theta_{\max}$,%
+        $\Delta \theta$}\marg{$f(\hbox{\tt t})$}}
+\describe{Curves surrounding text}
+        {\cs{tlabelrect}\oarg{\meta{radius}}\parg{\meta{x},\meta{y}}\marg{\meta{text}}\brk
+         \cs{tlabeloval}\oarg{\meta{mult}}\parg{\meta{x},\meta{y}}\marg{\meta{text}}\brk
+         \cs{tlabelellipse}\oarg{\meta{ratio}}\parg{\meta{x},\meta{y}}\marg{\meta{text}}\brk
+         \meta{radius}: round corners. \meta{mult}: stretch horizontally.
+         \meta{ratio}: width/height of ellipse}
+
+
+\section{Prefix macros}
+
+\subsection{Drawing curves}
+
+\def\firstkeyfrac{.4}
+\def\secondkeyfrac{.6}
+
+\describe{Dashed path}{\cs{dashed}\oarg{\meta{length},\meta{gap}}$\ldots$}
+\describe{Dotted path}{\cs{dotted}\oarg{\meta{size},\meta{gap}}$\ldots$}
+\describe{Trace a path with symbols}
+        {\cs{plot}\oarg{\meta{size},\meta{gap}}\marg{\meta{symbol}}$\ldots$}
+\describe{Generalized dashes}{\cs{gendashed}\marg{\meta{patname}}$\ldots$}
+\describe{\quad Define a named dash pattern}
+        {\cs{dashpattern}\marg{\meta{patname}}\marg{\meta{len$_1$},\meta{len$_2$},$\ldots$,%
+            \meta{len$_{2n}$}}}
+\describe{Place a symbol at all nodes}
+        {\cs{plotnodes}\oarg{\meta{size}}\marg{\meta{symbol}}$\ldots$}
+\describe{Solid curve}{\cs{draw}\oarg{\meta{color}}$\ldots$}
+
+
+\subsection{Closing a curve}
+
+\def\firstkeyfrac{.45}
+\def\secondkeyfrac{.55}
+
+These turn any path into a `closed' path (result can then be filled).
+
+\smallskip
+\describe{Close with a straight line,}{\cs{lclosed}$\ldots$}
+\describe{Close with a smooth join, like \cs{cycle},}{\cs{sclosed}$\ldots$}
+\describe{Close letting \MF{} choose}{\cs{bclosed}$\ldots$}
+
+\subsection{Filling closed curves}
+
+\def\firstkeyfrac{.4}
+\def\secondkeyfrac{.6}
+
+These filling prefixes turn off automatic drawing of the curve.
+
+\smallskip
+\describe{Solid fill} {\cs{gfill}\oarg{\meta{color}}$\ldots$}
+\describe{Unfill} {\cs{gclear}$\ldots$}
+\describe{Hatched fills}
+        {\cs{thatch}\oarg{\meta{space},\meta{angle}}\oarg{\meta{color}}$\ldots$}
+\describe{\qquad \meta{angle}${}=45\,$deg}
+        {\cs{rhatch}\oarg{\meta{space}}\oarg{\meta{color}}$\ldots$}
+\describe{\qquad \meta{angle}${}=-45\,$deg}
+        {\cs{lhatch}\oarg{\meta{space}}\oarg{\meta{color}}$\ldots$}
+\describe{\qquad crosshatching}
+        {\cs{xhatch}\oarg{\meta{space}}\oarg{\meta{color}}$\ldots$}
+\describe{}  {\cs{hatch} $=$ \cs{xhatch}}
+\describe{Shading}
+        {\cs{shade}\oarg{\meta{space}}$\ldots$}
+\describe{Gradients$^{\dag}$}
+        {\cs{gradient}\marg{\meta{clr},\meta{width},\meta{angle}}$\ldots$}
+\describe{}
+        {\cs{areagradient}\marg{\meta{clr},\meta{h-wd},\meta{v-wd}}$\ldots$}
+\describe{}
+        {\cs{radialgradient}\marg{\meta{clr},\meta{wd},\meta{center}}$\ldots$}
+\describe{Polkadot fill}{\cs{polkadot}\oarg{\meta{space}}$\ldots$}
+\describe{Fill with copies of a tile} {\cs{tess}\marg{\meta{tile}}$\ldots$}
+\describe{\quad Define a tile*}
+        {\cs{tile}\marg{\meta{name},\meta{unit},\meta{width},\meta{height},\meta{clip}}
+        \meta{drawing commands} \cs{endtile}}
+
+\smallskip
+$^{\dag}$ \meta{clr} is a function that returns a color for parameter(s)
+in $(0,1)$.\brk
+* Creates a mini-mfpic, clipped if \meta{clip}${}={}${\tt true}.
+
+\subsection{Storing and reusing a path}
+
+\describe{Store a path} {\cs{store}\marg{\meta{name}}$\ldots$}
+\nobreak
+\describe{\quad reusing a stored path} {\cs{mfobj}\marg{\meta{name}}}
+
+\subsection{Subpaths}
+
+\describe{Subpath by fractions of length}
+        {\cs{partpath}\marg{\meta{frac1},\meta{frac2}}$\ldots$}
+\describe{Subpath by node numbers} {\cs{subpath}\marg{\meta{m},\meta{n}}$\ldots$}
+\describe{Cutting by another path}
+        {\cs{cutoffafter}\marg{\meta{obj}}$\ldots$,
+        \cs{cutoffbefore}\marg{\meta{obj}}$\ldots$.\brk
+        \meta{obj} is a name created with \cs{store}}
+\describe{Trim the ends of a path}
+        {\cs{trimpath}\marg{\meta{dim1},\meta{dim2}}$\ldots$}
+
+
+\subsection{Modifying a curve}
+
+\def\firstkeyfrac{.4}
+\def\secondkeyfrac{.6}
+
+\describe{Add arrowhead to the end}
+        {\cs{arrow}\oarg{l\meta{length}}\oarg{r\meta{angle}}%
+         \oarg{b\meta{backset}}\oarg{c\meta{color}}$\ldots$}
+\describe{\quad Define arrowhead shape}
+        {\cs{headshape}\marg{\meta{ratio}}\marg{\meta{tension}}\marg{\meta{filled}}}
+\describe{Reverse a curve} {\cs{reverse}$\ldots$}
+\describe{Double arrow} {\cs{arrow}\cs{reverse}\cs{arrow}$\ldots$}
+\describe{Rotate around a point} {\cs{rotatepath}\marg{($x_0$,$y_0$),\meta{angle}}$\ldots$}
+\describe{Reflect about a line} {\cs{reflectpath}\marg{($x_0$,$y_0$),($x_1$,$y_1$)}$\ldots$}
+\describe{Shift} {\cs{shiftpath}\marg{($dx$,$dy$)}$\ldots$}
+\describe{Scale around a point} {\cs{scalepath}\marg{($x_0$,$y_0$),\meta{scale}}$\ldots$}
+\describe{xscale about line $x=x_0$} {\cs{xscalepath}\marg{$x_0$,\meta{scale}}$\ldots$}
+\describe{yscale about line $y=y_0$} {\cs{yscalepath}\marg{$y_0$,\meta{scale}}$\ldots$}
+\describe{slant, pivoting on line $y=y_0$} {\cs{slantpath}\marg{$y_0$,\meta{slant}}$\ldots$}
+\describe{yslant, pivoting on line $x=x_0$} {\cs{yslantpath}\marg{$x_0$,\meta{slant}}$\ldots$}
+\describe{Swap x and y} {\cs{xyswappath}$\ldots$}
+
+
+\section{Axes}
+
+\def\firstkeyfrac{.30}
+\def\secondkeyfrac{.70}
+
+\describe{Draw x- and/or y-axes} {\cs{axes}\oarg{\meta{headlen}},
+        \cs{xaxis}\oarg{\meta{headlen}}, \cs{yaxis}\oarg{\meta{headlen}}}
+\describe{Draw various axes}
+        {\cs{axis}\oarg{\meta{headlen}}\marg{\meta{axis}}, \ \meta{axis} is one of
+        {\tt x}, {\tt y}, {\tt l}, {\tt b}, {\tt r}, or {\tt t}.}
+\describe{Draw many axes} {\cs{doaxes}\oarg{\meta{headlen}}\marg{\meta{list}}, \
+        \meta{list} of letters, no commas.}
+\describe{Shift border axis inward}
+        {\cs{axismargin}\marg{\meta{axis}}\marg{\meta{amt}}, \ \meta{amt} is
+        in graph units.}
+\describe{Add hashmarks to axes}{%
+        \cs{axismarks}\marg{\meta{axis}}\oarg{\meta{len}}\marg{$c_1$,$c_2$,$\ldots$}, \
+        $c_j$ are positions.\brk Abbrev. by
+        \cs{xmarks} for \cs{axismarks}\marg{x}, etc.}
+\describe{Change position of hash marks}
+        {\cs{setaxismarks}\marg{\meta{axis}}\marg{\meta{pos}} \ \meta{pos} is one of
+            {\tt inside}, {\tt outside}, {\tt centered}, {\tt ontop},
+            {\tt onbottom}, {\tt onleft}, or {\tt onright}.}
+
+\section{Miscellaneous}
+
+\def\firstkeyfrac{.30}
+\def\secondkeyfrac{.70}
+
+\describe{Text labels}
+        {\cs{tlabel}\oarg{\meta{pos}\meta{$\theta$}}%
+                \parg{\meta{x},\meta{y}}\marg{\meta{\TeX{} text}}\brk
+         \cs{tlabels}\marg{\meta{args$_1$}\meta{args$_2$}$\ldots$}\brk
+         \cs{axislabels}\marg{\meta{axis}}\oarg{\meta{pos}\meta{$\theta$}}%
+                \marg{\marg{\meta{txt$_1$}}\meta{$n_1$},%
+                \marg{\meta{txt$_2$}}\meta{$n_2$},$\ldots$}\brk
+            \meta{pos} is a two-letter sequence, \meta{$\theta$} the
+            angle* of rotation in degrees;
+            \meta{args$_j$} is an entire set of arguments as in \cs{tlabel};
+            \meta{axis} is a letter, \meta{txt$_j$} is label, \meta{$n_j$}
+            is coordinate on axis}
+\describe{Clipping to a path} {\cs{gclip}$\ldots$}
+\describe{Polar conversion}
+        {\cs{plr}\marg{($r_0$,$\theta_0$),($r_1$,$\theta_1$),$\ldots$}}
+\describe{Connect paths} {\cs{connect} \meta{path1} \meta{path2} $\ldots$
+        \cs{endconnect}}
+\describe{Draw many curves from one datafile}
+        {\cs{plotdata}\oarg{\meta{spec}}\marg{\meta{file}}, \ \meta{spec} is {\tt
+        p} or {\tt s\meta{num}} where \meta{num} is the (optional) tension
+        in the smooth curve}
+\describe{Set how \cs{plotdata} draws curves$^{\dag}$}{\cs{dashedlines}
+        \ (different dash patterns)\brk
+        \cs{coloredlines} \ (different colors, \MP{} only)\brk
+        \cs{pointedlines} \ (different symbols, like \cs{plot})\brk
+        \cs{datapointsonly} \ (different symbols, like \cs{plotnodes})}
+
+\smallskip
+* The angle is optional, and ignored unless option \opt{mplabels} is
+in effect.\brk
+$^{\dag}$ \cs{plotdata} also respects the \cs{using} setting (see
+\cs{datafile} in section {\bf General curves}).
+
+\bye
+
+% Other commands:
+\cs{setrender}[\<\TeX{} commands\>]
+
+\cs{coords}$\ldots$\cs{endcoords}
+\cs{applyT}[\<transformer\>]
+\cs{rotate}[$\theta$]
+\cs{rotatearound}[$p$][$\theta$]
+\cs{turn}[?$p$][$\theta$]
+\cs{mirror}[$p_1$][$p_2$]
+\cs{reflectabout}[$p_1$][$p_2$]
+\cs{shift}[$p$]
+\cs{scale}[$s$]
+\cs{xscale}[$s$]
+\cs{yscale}[$s$]
+\cs{zscale}[$p$]
+\cs{xslant}[$s$]
+\cs{yslant}[$s$]
+\cs{zslant}[$s$]
+\cs{boost}[$\chi$]
+\cs{xyswap}
+
+\cs{fdef}[\<fcn\>]%
+  (\<param1\>,\<param2\>,$\ldots$)%
+  [\<mf-expr\>]
+
+\cs{tcaption}[?\<maxwd\>,\<linewd\>][\<caption text\>]
+
+\cs{savepic}\bsl\<picname\>
+\cs{newsavepic}
+\cs{usepic}
+
+\cs{dashlineset}, \cs{dotlineset}
+
+\cs{mfsrc}[\<metafont code\>]
+\cs{noship}
+
+\cs{store}[\<path variable\>][\<path\>]
+\cs{mfobj}[\<path expression\>]
+\cs{patharr}[\<pv\>]$\ldots$\cs{endpatharr}
+
+\cs{mftitle}[\<title\>]
+\cs{tmtitle}[\<title\>]
+
+\cs{newfdim}[\<fdim\>]
+
+\cs{setmfpicgraphic}
+\cs{getmfpicoffset}
+\cs{setfilename}
+
+\bye

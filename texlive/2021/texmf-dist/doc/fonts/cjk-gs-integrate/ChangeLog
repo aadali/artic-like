@@ -1,0 +1,1760 @@
+2021-06-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20210625.0 (HEAD -> master) [a418289]
+
+2021-06-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* macOS 12.x version check (origin/master, origin/HEAD) [abbeb0b]
+
+2021-06-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* copyright year [9cdeb62]
+
+2021-06-07  Jun Kurihara  <kurihara@ieee.org>
+
+	* macos 11.x workaround (junkurihara/master) [df744a2]
+
+2021-01-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add Fontworks-made Google Fonts [195c233]
+
+2020-12-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjkgs-haranoaji.dat: aliases (trueroad/master) [0317845]
+
+2020-12-19  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add Harano Aji Fonts CN, TW, and K1 [eb824d9]
+
+2020-12-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20201206.0 (tag: 20201206.0) [0652eb8]
+
+2020-12-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* README [6ad1f11]
+
+2020-12-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* clean [6495a34]
+
+2020-11-28  Masamichi Hosoda  <trueroad@users.noreply.github.com>
+
+	* Merge pull request #45 from trueroad/add-win32-symlink [f5269d3]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Update README.md (trueroad/add-win32-symlink) [13a4810]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add author [4fa99d7]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add compare files on Windows [42493f7]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Remove `--hardlink` option [79c537a]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Remove `--winbatch` option [cbe0bac]
+
+2020-11-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Use Windows symbolic link, hard link, copy by Win32 API [a2926da]
+
+2020-11-16  Hironobu Yamashita  <aminophen@users.noreply.github.com>
+
+	* Merge pull request #43 from trueroad/remove-cp932-dependency [15856ab]
+
+2020-11-16  Hironobu Yamashita  <aminophen@users.noreply.github.com>
+
+	* Merge pull request #44 from junkurihara/master [535653d]
+
+2020-11-16  Jun Kurihara  <kurihara@ieee.org>
+
+	* Support macOS 11.0 Big Sur [caa0466]
+
+2020-03-23  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add support for environments without Encode::Locale (trueroad/remove-cp932-dependency) [7f0ebd9]
+
+2020-03-23  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Limit warning suppression range [09b2b51]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Delete win32 encoding comment (trueroad/experiment-20200322) [576256d]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add output files encoding settings [b1baa54]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add backquote execution encoding settings [3903bdf]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add kpsewhich output encoding settings [e0eb8a0]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add filename encoding settings [eb67742]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add finding font absolute path encoding settings [63176b7]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add dumping database encoding settings [af2062d]
+
+2020-03-22  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add reading database encoding settings [af69825]
+
+2020-03-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add support for non-CP932 Windows [e13f078]
+
+2020-03-21  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add `@ARGV` and `$0` encoding settings [0b44e94]
+
+2020-03-20  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add standard input/output encoding settings [e738a74]
+
+2020-03-20  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Replace `$^W = 1` with `use warnings` [14fa341]
+
+2020-03-20  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Move `use` functions inside `if` block to out of the block [aae7d7f]
+
+2020-03-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* trailing CR in kpsewhich result [b18313b]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20200307.0 (tag: 20200307.0) [57531f5]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate-macos.pl: support Catalina (at least nothing is wrong) [d43852e]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* don't check PSName even in --strict-psname mode if false e.g. STKaiti-Adobe-CNS1 has intentionally wrong PSName in database. [be79554]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix database for MalgunGothic (#28) [bccb1a5]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* comment [8f64741]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* improve hidden debug option --strict-psname [c037fe3]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* typo in warning [53d0a58]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* don't add symlinking AI0 CMaps when real fonts are unavailable [5ce4c52]
+
+2020-03-07  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add search_cmap (trueroad/add-kpsewhich-cmap-cache) [b0b0b09]
+
+2020-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* 'CMap:' entry is unsupported for class other than AI0 [f499f39]
+
+2020-03-05  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add warning when AI0 is specified for non-OTF (trueroad/add-ai0-cmap) [0d8bceb]
+
+2020-03-05  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add AI0 font alias handling [37a8f77]
+
+2020-03-03  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add CMap parameters to the database for sourcehan [adac7e5]
+
+2020-03-03  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Change the class of AI0 fonts to AI0 in the database [9a47a63]
+
+2020-03-03  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add database class AI0 and parameter CMap for AI0 fonts [96b7811]
+
+2020-03-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* HaranoAji -> J70 [e29c9a2]
+
+2020-03-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Merge remote-tracking branch 'trueroad/add-haranoaji-alias' [7c68c9e]
+
+2020-03-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* reduce kpsewhich call [c8f9877]
+
+2020-03-04  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add removing CMap files when `--remove` option (trueroad/add-symlinking-cmaps) [534e4de]
+
+2020-03-04  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add symlinking CMap files used by created snippets [a354a37]
+
+2020-03-03  Masamichi Hosoda  <trueroad@trueroad.jp>
+
+	* Add haranoaji for aliases (trueroad/add-haranoaji-alias) [78a8a63]
+
+2020-01-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more info on debug message [9bf9f64]
+
+2020-01-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20200115.0 (tag: 20200115.0) [2eba287]
+
+2020-01-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* copyright year [ec0590e]
+
+2020-01-14  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix for incompatible change in msgothic.ttc index [14485c6]
+
+2019-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add haranoaji database (see texjporg/jfontmaps#23) [091e829]
+
+2019-10-11  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* prioritize database/ dir in current [ed62e0e]
+
+2019-10-11  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate.pl: support macOS 10.15 Catalina font path (wip) [d870a3f]
+
+2019-09-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* YuMincho-DemiBold -> YuMincho-Demibold [e819473]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Makefile: also install zrlistttc.lua [c03fe55]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjkgs-microsoft.dat: fix typo of HGPMinchoE [6e2de8c]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* code cleanup [840be09]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* use local zrlistttc.lua [3216bf6]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* zrlistttc.lua: licensed under MIT license [b4f072c]
+
+2019-09-04  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* zrlistttc.lua: add -i option, support macOS-TrueType (v0.4) [bda3126]
+
+2019-09-04  Takayuki YATO  <tak_yato@yahoo.co.jp>
+
+	* First public version of zrlistttc.lua (v0.2) [6bd8986]
+
+2019-09-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* use zrlistttc.lua for checking PSName (preliminary) [789ba5b]
+
+2019-08-16  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20190816.0 (tag: 20190816.0) [089a440]
+
+2019-08-16  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* gs-9.27 doesn't like snippets for TTF/TTC it seems gs-9.25 and gs-9.26 does not require snippets for TTF/TTC so it will be safe enough [22bc208]
+
+2019-05-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* mention requirement of kpsewhich in help message [fd6f3d2]
+
+2019-05-19  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* make sure CR is stripped [2120e9f]
+
+2019-05-19  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* \/dev\/null -> $nul [1145435]
+
+2019-05-19  Norbert Preining  <norbert@preining.info>
+
+	* test for kpsewhich (Issue: #33) [68ae7ce]
+
+2019-04-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add info for latest BIZ-UD fonts [ce8d802]
+
+2019-03-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20190303.0 (tag: 20190303.0) [131b0f4]
+
+2019-03-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* copyright year [0732219]
+
+2019-03-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate-macos.pl: warning for macOS newer than known version [dd747ad]
+
+2018-11-10  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate,pl: make sure CR is stripped [510c7a5]
+
+2018-11-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database/cjkgs-{noto,sourcehan}*.dat: priority [276565c]
+
+2018-11-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database/cjkgs-{noto,sourcehan}*.dat [18dcc41]
+
+2018-10-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* forgotten removeonly database [d037c14]
+
+2018-10-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate more database [106a2f5]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate-macos.pl: support 10.14 Mojave (mostly safe) [4aa6618]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate cjkuni database [d285e93]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate fandol database [2bc5564]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate arphic database, more [adf6ae2]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate arphic database [30fcfed]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate monotype database [2a38d6d]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate dynacomware taiwan [d279791]
+
+2018-09-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tools/fontlist_mac.sh: Font5 [dac2a0b]
+
+2018-08-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more debug code [4d6c622]
+
+2018-08-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add bizud database [1958d12]
+
+2018-08-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Adobe-Japan1-7 [a5bc97b]
+
+2018-08-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* hidden option --strict-psname for me debugging [2f10f6c]
+
+2018-08-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* execute 'mktexlsr' when --link-texmf is enabled [2d20f05]
+
+2018-08-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cleanup code [c28d11d]
+
+2018-08-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjkgs-morisawa-extra is not ready [9ff11f7]
+
+2018-05-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add heisei database (more) [7e0eeba]
+
+2018-05-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add heisei database [2b3a5e4]
+
+2018-05-19  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate apple database [876176d]
+
+2018-05-19  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* information for apple database [1fcc897]
+
+2018-05-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate apple database [7f9f0b8]
+
+2018-03-31  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* sort keys for $bntofn without this, link target differs from time to time. e.g. Office for Mac 2016 have the same font files for Excel, Word and PowerPoint. [796fd66]
+
+2018-03-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20180306.0 (tag: 20180306.0) [409e696]
+
+2018-03-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* release.sh [4205a94]
+
+2018-03-06  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* release.sh [0ee14c4]
+
+2018-02-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database helper scripts [5cae691]
+
+2018-02-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Makefile, release.sh: adjustment [ba488b3]
+
+2018-02-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* move database files to database/ [63f9b4e]
+
+2018-02-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* don't discard when otfinfo exits with non-zero [9e630e3]
+
+2018-02-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* forgotten initialization of casefold flag [9abf580]
+
+2018-02-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Guard against unavailable 'otfinfo' command, skip OTC/TTC [bab740e]
+
+2018-02-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Use 'otfinfo' command for casefolding search safety (WIP) [fccf54a]
+
+2018-01-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate-macos.pl: typo (aminophen/master) [ca1bba1]
+
+2018-01-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add a wrapper cjk-gs-integrate-macos.pl [f820eec]
+
+2018-01-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add typebank database (based on Win10 Fall Creators Update) [e5a9733]
+
+2017-12-21  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* removeonly database should be read only in cleanup mode [cbb0b84]
+
+2017-12-21  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate ume database [b1a2269]
+
+2017-12-11  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate mogamobo database [cb36720]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* regenerate README.md [3eca807]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tools/release.sh: adjusted [789b6c7]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* built-in database does not support >=10.8 [59f0912]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* forgotten entry for removeonly database [6e03baf]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add removeonly database [2e16cdc]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tweaked database for sierra/highsierra [3281f12]
+
+2017-12-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* implement 'RMVname' entry for removing-only database [6e49733]
+
+2017-12-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* CRLF -> LF [a5db0ee]
+
+2017-12-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate founder database [afe9fc5]
+
+2017-12-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate adobe database [983cc3b]
+
+2017-12-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate solaris database [d27777a]
+
+2017-12-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add '/Library/Application Support/Apple/Fonts//' to search path [b3caba8]
+
+2017-11-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* checked latest CMap resources [9c274fb]
+
+2017-11-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add simli.ttf and simyou.ttf [44e62dd]
+
+2017-11-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate toppan database [125a2a3]
+
+2017-11-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* cjkgs-morisawa.dat: non-existent ShinMGoPr5-* [7609991]
+
+2017-11-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate fontworks database [c1c9735]
+
+2017-11-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* special case for native CID fonts in ancient days [b1b0d5f]
+
+2017-11-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix a mistake in previous commit [6c131a8]
+
+2017-11-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* handle tlgs.win32 pre-shipped cidfmap [5458fba]
+
+2017-11-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate microsoft database [2f22f8d]
+
+2017-11-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* support more aliases [9c81832]
+
+2017-11-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* update help message [56f97aa]
+
+2017-11-12  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* allow partial comment [c4119ff]
+
+2017-11-12  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate dynacomware database [005f5c2]
+
+2017-11-11  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate macOS-specific sinotype database [918d868]
+
+2017-11-11  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* update sinotype database (WIP) [48de9e3]
+
+2017-11-10  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* rename cjkgs-morisawa-standard.dat -> cjkgs-morisawa.dat [3afc59a]
+
+2017-11-10  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* update sinotype database [e1e781c]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database comment (more) [16446f9]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database comment (more) [27de76e]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database comment [b2b8c70]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* update sinotype database (WIP) [e35f7bf]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate sinotype database (WIP) [2e41fae]
+
+2017-11-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database order [2d749fd]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Update README-macos.md [c53e9be]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tweaked datbase [cec6e62]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate yu-osx/win database [9bbf637]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* perl syntax [3711113]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Support 'INCLUDE' syntax in database [a884634]
+
+2017-10-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Rename: cjkgs-adobe.dat -> cjkgs-ryokana.dat [b4cee4e]
+
+2017-10-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Update help message, regenerate README.md [363cda0]
+
+2017-10-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate hiragino database [07bd9c2]
+
+2017-10-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate kozuka database [a56a8e3]
+
+2017-10-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Shorten .dat namespace (macos), separate morisawa standard [a49e730]
+
+2017-10-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Removed non-existent A-OTF-Jun101Pr6N-Light.otf entry [d675ad6]
+
+2017-10-21  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add cjk-gs-integrate-adobe.dat (ryokana) [994fb3e]
+
+2017-10-14  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* dump PSName only when required [94021d0]
+
+2017-10-01  Norbert Preining  <norbert@preining.info>
+
+	* fix format [0053b99]
+
+2017-10-01  Norbert Preining  <norbert@preining.info>
+
+	* work on the README-macos [6d2e22b]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add GitHub repository URL [88fed5d]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* README-macos.md: more information [4db2895]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add draft README-macos.md, adjust tools/release.sh [9f6464f]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add Makefile [2ad0d1b]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* revised debug level (0:none -- 3:most verbose) [5fe9d00]
+
+2017-10-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* --fontdef-add can be given multiple times [70b5042]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database overwrite warning too noisy, switching to debug [e0fad54]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* ignore cjk-gs-integrate-data.dat this is the default of --dump-data [cdeaed6]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* search external database using kpsewhich -format=miscfont [3987272]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Warning on Mac OS 10.11 or later without --fontdef-add [05599ae]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* separate hiragino chinese [6c012e3]
+
+2017-09-30  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Clean up macOS database [d516eab]
+
+2017-09-28  doraTeX  <taylorkgb@gmail.com>
+
+	* Separate macOS fonts [9c48c51]
+
+2017-09-27  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* implement --fontdef-add option this works as an addition (not a substitution) to the already-available database. it would be useful for OS-specific additional database [2562926]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* SubfontID is unnecessary for TTF, omit it [0c5187e]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* re-implement --dump-data option Now usable for dumping effective database only [d3e2154]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* --dump-data option is unsupported temporarily I'll re-implement this option as a dumper of only effective database, not a merely copying the built-in database [f56585f]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix typo in database [faafa60]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* start code refactoring I'd like to implement --fontdef-add option, to allow multiple database input. First in this commit, separate database catching and database reading. [c06d27d]
+
+2017-09-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tweaked [bcfc0b1]
+
+2017-07-01  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add lowercase link name for simsun.ttf [42e61f0]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more likely to find gswin32c Resource [1a873db]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* strict check for exclusive options [ca86015]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20170624.0 (tag: 20170624.0) [962f02b]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Better comments, update README.md from source [b204205]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Re-add MS-UIGothic (reverts 9a724ad), add YuGothic-UI These are supported by cidfmap.TeXLive by tlgs.win32, so we should restore it [ef00a77]
+
+2017-06-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add more database (based on WPS Office for Linux) [3dcdd5f]
+
+2017-06-23  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* TTC preferred to TTF for Yu-win, OTC warnings to debug (aminophen/cleanup) [35065fe]
+
+2017-06-21  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more cp932 for win32 console (list-aliases, list-fonts) [d8518a4]
+
+2017-06-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* NTFS symlink on win32 has file size = 0, we can distinguish it [ab9b543]
+
+2017-06-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* More cleanup operation (#5) [7e03a4a]
+
+2017-06-20  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Implement a general cleanup operation (trial) (#5) [bfb8138]
+
+2017-06-19  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tidy up the order of sub functions [47e08a1]
+
+2017-06-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* add more comments [4a432a0]
+
+2017-06-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* check --list-fonts and --list-all-aliases conflict [62eb267]
+
+2017-06-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix uninitialized types for --list-all-aliases this bug was introduced when OTC is excluded from aliases [5d7167b]
+
+2017-06-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tidy up (more) [b61e550]
+
+2017-06-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* support --winbatch=[FILE] and --dump-data=[FILE], tidy up [ed28a2b]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* --markdown assumes --help too [97e262b]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Update README.md from source [2e46b62]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add --dump-data option, for easily editing built-in database [de30570]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Move info_list_aliases to sub [bb5f7b4]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* the issue has been settled in 0d03be7 [786b870]
+
+2017-06-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* sort keys to output lines in the same order for each run [06567da]
+
+2017-06-16  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Fix danglink links for NTFS on win32, kpsewhich -all [0d03be7]
+
+2017-05-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Remove MS-UIGothic database [9a724ad]
+
+2017-05-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add HiraMin{Pro,ProN}-W2 database [194bfd2]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Release 20170505.0 (tag: 20170505.0) [1f040e5]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* snippets: %% -> %, %%%% -> %% seems enough [ba0b225]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* help message: search paths all if available [727f51c]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* update README.md from source [61ca8ec]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Merge branch 'win32-support' [a8528dc]
+
+2017-05-05  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix a mistake, adjust help message for search path (aminophen/win32-support) [8fd2c88]
+
+2017-05-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more TODO for win32 [b2d0cf5]
+
+2017-05-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* the order of option declaration [584c0d5]
+
+2017-05-02  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* throw an error for machine-readable alone [bbbd319]
+
+2017-04-29  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* file check [0cf210f]
+
+2017-04-27  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* fix a mistake in previous commit [e73ca96]
+
+2017-04-27  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* ensure new line when adding .runlibfile line [d12f6bb]
+
+2017-04-27  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* more chinese/korean database from debian packages [cf306ed]
+
+2017-04-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* comment [78cd68b]
+
+2017-04-26  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* default to symlink for win32, add --hardlink option [bd87af7]
+
+2017-04-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* change output to lib/ for tlgs, winbatch instruction [aebfd74]
+
+2017-04-25  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* tweaked [f487ab8]
+
+2017-04-24  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* symplify code for Encode::decode -> Encode::encode chain [ca81c6f]
+
+2017-04-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* simplify code [b2c9c77]
+
+2017-04-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* database sync [6ebc456]
+
+2017-04-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Determine tlgs or native-gs (work in progress) [2eb249a]
+
+2017-04-15  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* better aliases [362084c]
+
+2017-03-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* typo in previous commit [092b662]
+
+2017-03-22  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add --winbatch option [cea39ee]
+
+2017-03-17  Norbert Preining  <norbert@preining.info>
+
+	* add a TODO concerning symlink generation on Windows [ab4a6ca]
+
+2017-03-17  Norbert Preining  <norbert@preining.info>
+
+	* simplify code [c755d0f]
+
+2017-03-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add more database for Mac [3254356]
+
+2017-03-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Forgotten fonts for Mac OS X 10.7.5 (Lion) [f8de6fa]
+
+2017-03-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add more database for Office for Mac 2016 [0b9f826]
+
+2017-03-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Support for Office for Mac 2016 search path (typo) [8460b62]
+
+2017-03-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Support for Office for Mac 2016 search path [4db0f57]
+
+2017-03-17  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add database for Office for Mac 2016, MSOffice 2010 [86fce22]
+
+2017-03-09  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* More database for win32 [901274f]
+
+2017-03-09  Norbert Preining  <norbert@preining.info>
+
+	* Release 20170309.0 (tag: 20170309.0) [8ce526f]
+
+2017-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Update wrt. master [6503d0e]
+
+2017-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* comment [efcd6ec]
+
+2017-03-07  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Fix for Hiragino aliases (#23) [b1fb331]
+
+2017-03-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Hiragino aliases (gs9.20 without OTC support) [1c494b6]
+
+2017-03-03  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* bug fix for morisawa aliases [bcbce0c]
+
+2017-02-24  Norbert Preining  <norbert@preining.info>
+
+	* update release script for CTAN location [f2ae343]
+
+2017-02-20  Norbert Preining  <norbert@preining.info>
+
+	* Release 20170220.0 (tag: 20170220.0) [4997503]
+
+2017-02-20  Norbert Preining  <norbert@preining.info>
+
+	* update copyright [a865618]
+
+2017-02-20  Norbert Preining  <norbert@preining.info>
+
+	* update README.md from source [a22f890]
+
+2017-02-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* alias priority: New priority for Simplified/Traditional Chinese [4f02658]
+
+2017-02-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* alias priority: Kozuka before Yu, Adobe before Solaris [4b3e12c]
+
+2017-02-08  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Fix for priority numbers (#12) [97b0c63]
+
+2017-01-18  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Support for ptex-fontmaps 20170114.0 (ume, yu etc.) [cd91c2f]
+
+2017-01-14  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Win32 support: symlink/unlink consistency, quote [0445c18]
+
+2017-01-14  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Win32 support: encode/decode (cp932 <=> utf8) [6e51c3d]
+
+2017-01-14  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Reduce file open/close (again) [5c7e946]
+
+2017-01-13  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Add data for psnames-for-otf also for aliases [5142e98]
+
+2017-01-12  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* better code [d439cac]
+
+2017-01-12  Hironobu Yamashita  <h.y.acetaminophen@gmail.com>
+
+	* Reduce file open/close for winbatch and otfps [6cff16a]
+
+2016-12-29  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add fandol database (typo) [7c15bdf]
+
+2016-12-29  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add fandol database [1de88ed]
+
+2016-12-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Generate psnames-for-otf only when --otfps is given [a1fbdb3]
+
+2016-12-23  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Experiment for supporting win32 (again) [ba45bee]
+
+2016-12-23  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Experiment for supporting win32 [2846489]
+
+2016-12-14  Norbert Preining  <norbert@preining.info>
+
+	* fix indentation, add better explanation for case-insensitve problem [b73e45b]
+
+2016-12-14  Norbert Preining  <norbert@preining.info>
+
+	* update README.md with the changes included recently [0330718]
+
+2016-12-14  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add moga-mobo database [de56b28]
+
+2016-12-14  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #20 from aminophen/ttc-ttf-otc [72cc9f1]
+
+2016-12-13  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix for Name entry different from PSName (aminophen/ttc-ttf-otc) [fcd2515]
+
+2016-12-13  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Complete TTC/OTC database (thanks to @doraTeX) [67a90e3]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Parse 'Filename:' entry for backward compatibility [ce22753]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Show subfont number only when TTC/OTC (even zero) [4ea9cab]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix typo in d3ad4b4 [515e303]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Do not use OTC font as aliases [780f3b2]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Forgotten initialization [ebb6326]
+
+2016-12-12  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Separate OTC/TTC/TTF (experiment) [d3ad4b4]
+
+2016-12-10  Yusuke Terada  <taylorkgb@gmail.com>
+
+	* Merge pull request #19 from doraTeX/master [3db9b75]
+
+2016-12-10  doraTeX  <taylorkgb@gmail.com>
+
+	* Revert unintended Unicode normalization [83267e7]
+
+2016-12-10  Yusuke Terada  <taylorkgb@gmail.com>
+
+	* Merge pull request #18 from doraTeX/master [2666a1d]
+
+2016-12-10  Yusuke Terada  <taylorkgb@gmail.com>
+
+	* cjk-gs-integrate.pl: Fix regex for /bin/gs [2e5d027]
+
+2016-12-10  doraTeX  <taylorkgb@gmail.com>
+
+	* cjk-gs-integrate.pl: Fix regex for /bin/gs [a41ddd0]
+
+2016-12-09  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate.pl: change ttfname -> ttname [9bdfd20]
+
+2016-12-06  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix a mistake in previous commit [daf1c07]
+
+2016-12-06  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate.pl: more database (CJK-Unifonts) [513d8b1]
+
+2016-12-05  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Merge branch 'master' of https://github.com/texjporg/cjk-gs-support [ceb9542]
+
+2016-12-05  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate.pl: more database (arphic) [33b19ff]
+
+2016-12-05  Norbert Preining  <norbert@preining.info>
+
+	* adjust header for copyright and url [4da74ae]
+
+2016-12-03  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix for texjporg/jfontmaps#6 (second attempt) [2374e0c]
+
+2016-12-03  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* More .gitignore [e3f323e]
+
+2016-12-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* cjk-gs-integrate.pl: Fix for database [ec61fef]
+
+2016-10-26  Norbert Preining  <norbert@preining.info>
+
+	* Release 20161026.0 (tag: 20161026.0) [af37d2e]
+
+2016-10-26  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #16 from aminophen/master [480b932]
+
+2016-10-26  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Finished macOS Sierra CJK font database. [7763ba6]
+
+2016-10-07  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #15 from aminophen/master [5c852da]
+
+2016-10-05  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Small fix for comments (thanks to @doraTeX) [40017a9]
+
+2016-10-05  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add CK font list (partial) [90fae6c]
+
+2016-10-04  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add macOS Sierra fonts (Japan) [003e010]
+
+2016-10-02  Norbert Preining  <norbert@preining.info>
+
+	* add Yamashita-san to help and README [9fb17a2]
+
+2016-10-02  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #14 from aminophen/master [8c8e81e]
+
+2016-10-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add more korean fonts, priority settings [9de8aca]
+
+2016-10-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add more korean fonts, priority settings [db77c33]
+
+2016-10-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* small fixups [dfaf936]
+
+2016-10-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* small fixups [206ffec]
+
+2016-10-02  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* restore previous code [ed5c381]
+
+2016-10-01  Norbert Preining  <norbert@preining.info>
+
+	* small fixups [38a2059]
+
+2016-10-01  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #13 from aminophen/gsres [9f702b2]
+
+2016-10-01  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Directory check [4845c37]
+
+2016-10-01  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Assume relative path of gs-resource [8e54dc3]
+
+2016-09-29  Norbert Preining  <norbert@preining.info>
+
+	* update copyright year [df1fd69]
+
+2016-09-29  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #11 from aminophen/master [5993098]
+
+2016-09-29  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add baekmuk (korean) -- now the lowest priority [e6edb62]
+
+2016-09-29  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #10 from aminophen/master [0171ef8]
+
+2016-09-28  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Use 'sep' instead of ':' [f87a35b]
+
+2016-09-27  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Workaround (not setting OPENTYPEFONTS/TTFONTS explicitly) [7d0f926]
+
+2016-09-27  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix a mistake [10e8fd0]
+
+2016-09-27  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Special name (IPAMincho.ttf etc) not needed [ffd8e79]
+
+2016-09-27  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #8 from aminophen/master [2619378]
+
+2016-09-26  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Prevent ttc -> ttf symlink (Songti/STSong, Kaiti/STKaiti) [043feee]
+
+2016-09-25  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* TODO: comment about wrong symlink [3009288]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix for STHeiti family [91455e9]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* cleanup [7b0d0e3]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add ipa-proportional database [548fa68]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add yuwin10 fonts to yu-win database [e7acb2c]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix for hiragino database [805e1b1]
+
+2016-09-24  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Fix morisawa database [68f500d]
+
+2016-09-23  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* typo [5d116a1]
+
+2016-09-23  aminophen  <h.y.acetaminophen@gmail.com>
+
+	* Add /System/Library/Assets, /usr/share/fonts, recursive search [5b96e5a]
+
+2016-01-15  Norbert Preining  <norbert@preining.info>
+
+	* Release 20160115.0 (tag: 20160115.0) [bfb2c76]
+
+2016-01-15  Norbert Preining  <norbert@preining.info>
+
+	* ship README.md as is, supported by CTAN now [ad27d2b]
+
+2016-01-15  Norbert Preining  <norbert@preining.info>
+
+	* remove unrelated file [5f10f56]
+
+2016-01-15  Norbert Preining  <norbert@preining.info>
+
+	* Release 20160115.0 [5a42230]
+
+2016-01-14  Norbert Preining  <norbert@preining.info>
+
+	* if --link-texmf is passed without argument use TEXMFLOCAL again [a4a8228]
+
+2015-10-21  Norbert Preining  <norbert@preining.info>
+
+	* remove cleanup_link and bruteforce [1f9649d]
+
+2015-10-21  Norbert Preining  <norbert@preining.info>
+
+	* fix TTFONT env name [2eee0ce]
+
+2015-10-20  Norbert Preining  <norbert@preining.info>
+
+	* resolve symlinks to make sure we don't catch the wrong files [9f68007]
+
+2015-10-20  Norbert Preining  <norbert@preining.info>
+
+	* put OSFONTDIR before OPENTYPEFONTS and TTFFONTS [c28684d]
+
+2015-10-19  Norbert Preining  <norbert@preining.info>
+
+	* fix problems with links pointing to itself [76e5f82]
+
+2015-10-19  Norbert Preining  <norbert@preining.info>
+
+	* fix name of otf font links in texmf dir [0fc6e58]
+
+2015-10-11  Norbert Preining  <norbert@preining.info>
+
+	* rework link_font to warn only if necessary [c2b986d]
+
+2015-10-11  Norbert Preining  <norbert@preining.info>
+
+	* remove end-of-lines of gs output [157a150]
+
+2015-10-10  Norbert Preining  <norbert@preining.info>
+
+	* better extraction of gs resource (Issue: #6) [c01d79e]
+
+2015-10-10  Norbert Preining  <norbert@preining.info>
+
+	* list other candidates for --list-fonts and --info [bb03240]
+
+2015-10-02  Norbert Preining  <norbert@preining.info>
+
+	* Release 20151002.0 (tag: 20151002.0) [0cab259]
+
+2015-10-02  Norbert Preining  <norbert@preining.info>
+
+	* update documentation [403383d]
+
+2015-09-28  Norbert Preining  <norbert@preining.info>
+
+	* update README.md for current status [789f124]
+
+2015-09-28  Norbert Preining  <norbert@preining.info>
+
+	* add --remove option [fea9b13]
+
+2015-09-28  Norbert Preining  <norbert@preining.info>
+
+	* use only --link-texmf with optional argument [d2ff6f8]
+
+2015-09-25  Norbert Preining  <norbert@preining.info>
+
+	* add HIraginoSans-W2 [10ca035]
+
+2015-09-24  Norbert Preining  <norbert@preining.info>
+
+	* use ttfname also for CIDFSubst link and cidfmap entry, add texmfout option [6acc38a]
+
+2015-09-24  Norbert Preining  <norbert@preining.info>
+
+	* ttf link name support [970dcf0]
+
+2015-09-24  Norbert Preining  <norbert@preining.info>
+
+	* auto-determine type of fontfile, and make type file specific [f8b7032]
+
+2015-09-22  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #4 from doraTeX/master [fed6b30]
+
+2015-09-22  doraTeX  <taylorkgb@gmail.com>
+
+	* Update font definitions for the latest El Capitan [86d28d1]
+
+2015-07-24  Norbert Preining  <preining@logic.at>
+
+	* Merge pull request #1 from munepi/master [98e37ef]
+
+2015-07-24  Munehiro Yamamoto  <munepixyz@gmail.com>
+
+	* cjk-gs-integrate.pl (encode_list): added 2004-{H,V} for Japan [51f4ffd]
+
+2015-07-24  Norbert Preining  <norbert@preining.info>
+
+	* add ISX 10.11 El Capitan fonts [dbe04b4]
+
+2015-05-07  Norbert Preining  <norbert@preining.info>
+
+	* fix line endings [81f0a82]
+
+2015-05-07  Norbert Preining  <norbert@preining.info>
+
+	* remove x bit from prn-variants.tex [202fc80]
+
+2015-05-07  Norbert Preining  <norbert@preining.info>
+
+	* rename README.md to README on release [25dcf6d]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* Release 20150506.1 (tag: 20150506.1) [daf2e89]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* reactivate aliases for MSung-Light and STFangsong-Light [bf0d437]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* remove debug statement [cf81cb7]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* Release 20150506.0 (tag: 20150506.0) [24db8e7]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* add a release script [593eb64]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* genrated md and help output from the same source [32c57ed]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* add /Library/Fonts/Microsoft to search path, add --link-texmflocal option [fc80300]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* provide family like aliases [32a827a]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* remove provides for two imaginary fonts ;-) [f55f662]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* add more Kozuka fonts (not used in jfontmaps) [32d46e9]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* make gulim provide HyGoThic-Medium in case Dotum is not available [b41adbb]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* STKaiti-Adobe-CNS1 update from Bruno [40ad49f]
+
+2015-05-06  Norbert Preining  <norbert@preining.info>
+
+	* add MidashiGo(Pro) provides, fix FutoMin provides for IPA [a173ce6]
+
+2015-04-24  Norbert Preining  <norbert@preining.info>
+
+	* make link checking more resilient to errors [fa083ce]
+
+2015-04-24  Norbert Preining  <norbert@preining.info>
+
+	* terminate immediately on windows, add some TODOs [8a12b5a]
+
+2015-04-24  Norbert Preining  <norbert@preining.info>
+
+	* adjust prefs, add warning when provide priorities agree [c1fffb1]
+
+2015-04-24  Norbert Preining  <norbert@preining.info>
+
+	* add more fonts from Microsoft 2015 for Apple [d9348d4]
+
+2015-04-24  Norbert Preining  <norbert@preining.info>
+
+	* add --list-all-aliases command [c040122]
+
+2015-04-23  Norbert Preining  <norbert@preining.info>
+
+	* add --force option [e4d9ce5]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* add decomposed form filenames for HFS [28c79ea]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* add support for reading files from file list, fix some fonts [a6a4c34]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* update README.md [3d5090f]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* lots of changes, automated testing [8c73fa0]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* order alias output [66bbe4a]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* really fix Morisawa fonts [21be97b]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* make morisawa fonts work [9462210]
+
+2015-04-21  Norbert Preining  <norbert@preining.info>
+
+	* add Gulim fonts for HYRGoThic-Medium [1acf5f3]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* remove the strange alias with extra - at the end [5105987]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* add ~/Library/Fonts and /Network/Library/Fonts on unix/mac add alas for HYRGoThic-Medium [7c8f87f]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* link ttf fonts *not* into Font dir, but into CIDFSubst [513adae]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* first step in Morisawa support, add PSName to font database [ef59d24]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* provide more Foobar- font names for GhostScript [7288e8c]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* sort alias names, remove last Std alias [2d47a81]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* rank Adobe CK fonts higher, fix list aliases ouput [0d4b693]
+
+2015-04-20  Norbert Preining  <norbert@preining.info>
+
+	* add priority to output of aliases [cb5b296]
+
+2015-04-19  Norbert Preining  <norbert@preining.info>
+
+	* list aliases separated in categories [751a7ee]
+
+2015-04-19  Norbert Preining  <norbert@preining.info>
+
+	* add entries for Adobe's CK fonts [8c9fb77]
+
+2015-04-19  Norbert Preining  <norbert@preining.info>
+
+	* add more strange provides ... [6567c15]
+
+2015-04-19  Norbert Preining  <norbert@preining.info>
+
+	* add more aliases after dicsussion with Bruno [e1d089c]
+
+2015-04-16  Norbert Preining  <norbert@preining.info>
+
+	* formatting [2f07c70]
+
+2015-04-16  Norbert Preining  <norbert@preining.info>
+
+	* README.md and help output editing [ffd1988]
+
+2015-04-16  Norbert Preining  <norbert@preining.info>
+
+	* update README.md [b6667d5]
+
+2015-04-16  Norbert Preining  <norbert@preining.info>
+
+	* lots of updates, in particular ttf linking and user aliases [060376a]
+
+2015-04-14  Norbert Preining  <norbert@preining.info>
+
+	* priorities for file names, unify priority writing [1d2727f]
+
+2015-04-13  Norbert Preining  <norbert@preining.info>
+
+	* remove font-definitions.txt, always outdated [b532745]
+
+2015-04-13  Norbert Preining  <norbert@preining.info>
+
+	* add more alias for Korean [c610bb8]
+
+2015-04-13  Norbert Preining  <norbert@preining.info>
+
+	* add TODO, gitingore, and some tests [8f4de68]
+
+2015-04-13  Norbert Preining  <norbert@preining.info>
+
+	* fixes for Korean [287b64d]
+
+2015-04-11  Norbert Preining  <norbert@preining.info>
+
+	* fix subfonts in ttcs, add more fonts for Korea (not working) [243b61e]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* more name fixes from Bruno [33fb493]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* update font-definitions file [fb1135a]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* Korean support (hopefully), fix some name errors [1bb8aed]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* add some provides for TC SC and Korean, and fixes, thanks Bruno [5b754be]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* fix spaces in file names [d7b1ab8]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* fix Dumper usage [05e5789]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* load Data::Dumper only when debugging [a839074]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* add font-definitions for ease of access, but not really used [35302c0]
+
+2015-04-08  Norbert Preining  <norbert@preining.info>
+
+	* fully working script including aliases [283d64a]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* more or less fully functional [88a478b]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* fix typo in cjk-font-definitons [eed0614]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* bummer [d111a8d]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* fix warning for missing font defs [4130ced]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* don't bail out if gs is not found, for now [b625240]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* more work [5b4489d]
+
+2015-04-07  Norbert Preining  <norbert@preining.info>
+
+	* first commit [8011270]
+

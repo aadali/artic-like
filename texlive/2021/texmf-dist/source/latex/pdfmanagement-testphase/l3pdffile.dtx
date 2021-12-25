@@ -1,0 +1,774 @@
+% \iffalse meta-comment
+%
+%% File: l3pdffile.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the package can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=l3pdffile (LaTeX PDF management testphase bundle)}
+\usepackage{caption}
+\providecommand\potentialclash{\noindent\llap{\dbend\ }}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3pdffile} module\\ Embedding and referencing files in a PDF ^^A
+%   \\ \LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{l3pdffile} documentation}
+% \subsection{Introduction}
+% \subsubsection{Background}
+% External files can be referenced from a PDF in three ways:
+% \begin{enumerate}
+% \item through an annotation of type Link,
+% \item by referencing a local file in the file system,
+% \item by embedding the file directly into the PDF
+% \end{enumerate}
+% Case 1 (Links) are created with the \cs{pdfannot} commands.
+% This module handles the two other cases. Actually from the view
+% of the PDF format they are quite similar: Case 2 is case 3 without the stream
+% object and without the /EF entry in the /Filespec dictionary (this points to the
+% stream object of the file). Not embedding the file makes the PDF smaller. But it is
+% also less portable: the files can only be found if they are in the right location
+% relative to the PDF. The normal case is to embed the file.
+%
+% The tasks to embed and reference such a file are
+% \begin{enumerate}
+% \item Embed the file in a stream.
+% \item Create a Filespec dictionary which references the stream object in the /EF
+% dictionary:
+% \begin{verbatim}
+%  <<
+%   /Type /Filespec
+%   /F  (l3pdffile.dtx)
+%   /UF (l3pdffile.dtx)
+%   /AFRelationship /Source
+%   /EF <</F 21 0 R /UF 21 0 R>>   %case 3, embedded file
+%  >>
+% \end{verbatim}
+% The file names in the /UF and /F value don't need to be identical to the
+% name of file on the disc. It is quite possible to embed a \texttt{zzz.tex}
+% and name it \texttt{blub.tex}. The second name is then what the user will see
+% in the attachment list or in the properties of an annotation.
+%
+%\item Reference the Filespec dictionary so that the user can access the file.
+%   This can be done in various way:
+%   \begin{enumerate}
+%      \item With an annotation (/Subtype/FileAttachment). This is done by
+%       \pkg{attachfile}, \pkg{attachfile2} and \pkg{intopdf}.
+%       Typical entries of such an annotation are:
+%
+% \medskip
+%             \begin{tabular}{lll}
+%             key      & value type  & notes\\\hline
+%             /FS       & object reference &(Filespec dictionary)\\
+%             /Name     & name        & /Graph, /PushPin, /Paperclip, /Tag\\
+%             /Contents & text string & optional but recommended\\
+%             /F        & integer     & Flags\\
+%             /AP       & dictionary  & Appearance (required if rectangle >0) \\
+%             /AS       & name\\
+%             \end{tabular}
+%
+%             The |/AP| takes precedence over Border and similar keys.
+%      \item Through an entry in the |/EmbeddedFiles| name tree.
+%       This is what \pkg{embedfiles} does.
+%       \begin{verbatim}
+%       20 0 obj %Document Name tree
+%        <</EmbeddedFiles 21 0 R>>
+%           endobj
+%         21 0 obj %Embedded Files Name dictionary
+%        <</Names [(AcmeCustomCrypto Protected PDF.pdf) 17 0 R]>>
+%        endobj
+%       \end{verbatim}
+%       The strings (keys) in the |/Names| dictionary must be sorted lexically.
+%       But they don't have to be the file name or anything related to
+%       the file name. The resource management code uses l3ef0001, l3ef0002~\ldots,
+%       which allows up to 9999 files.
+%       The key can be needed to identify the start file in a collection,
+%       so their relation to the files are stored in a property list.
+%
+%      \item Through the |/AF| key in various objects (pdf 2.0).
+%       The value is normally an array of object
+%       references, but it can also be a name which is mapped to an array in /Properties:
+%        \begin{verbatim}
+%        /AF /NamedAF BDC
+%        /Properties <</NamedAF [12 0 R]
+%        \end{verbatim}
+%        The related |/Filespec| dictionary should contain an
+%        |/AFRelationship| key in this case (but it doesn't harm to add it by
+%        default anyway). The values of this key is describe in table~\ref{tab:AFrel}.
+%
+% \begin{table}
+%       \caption{Values of the \texttt{/AFRelationship} key\label{tab:AFrel}}
+%       \begin{tabular}{lp{8cm}}
+%       Source  & shall be used if this file specification is the original
+%                source material for the associated content.\\
+%       Data    & shall be used if this file specification represents
+%                 information used to
+%                 derive a visual presentation – such as for a table or a graph.\\
+%       Alternative & shall be used if this file specification is an
+%               alternative representation of content, for example audio.\\
+%       Supplement & shall be used if this file specification represents
+%       a supplemental representation of the original source or data
+%       that may be more easily consumable
+%       (e.g., A MathML version of an equation).\\
+%       EncryptedPayload & shall be used if this file specification
+%       is an encrypted payload document that should be displayed to the user
+%       if the PDF processor has the cryptographic filter
+%       needed to decrypt the document.\\
+%       FormData & shall be used if this file specification
+%       is the data associated with the AcroForm
+%       (see 12.7.3, \enquote{Interactive form dictionary}) of this PDF.\\
+%       Schema & shall be used if this file specification is a schema
+%       definition for the associated object
+%       (e.g. an XML schema associated with a metadata stream).\\
+%       Unspecified &(default value) shall be used when the
+%       relationship is not known
+%       or cannot be described using one of the other values.\\
+%       Other names & Second-class names (see Annex E,
+%       \enquote{(normative) PDF Name Registry}) should be used to
+%       represent other types of relationships.
+%       \end{tabular}
+% \end{table}
+%      \end{enumerate}
+% \end{enumerate}
+%
+% \subsubsection{Task 1: Embedding a file}
+% Embedding an existing file is in most cases quite straightforward. This module
+% offers commands, but it can also be done with the basic commands
+% from the |l3pdf| module \cs{pdf_object_unnamed_write:nn} or
+% \cs{pdf_object_new:nn}/\cs{pdf_object_write:nn} or primitive commands
+% to create objects.
+% The object number should be stored for the reference
+% in the |/Filespec| dictionary.
+%
+% \begin{verbatim}
+% \pdf_object_unnamed_write:nx {fstream}
+%   {
+%     {
+%       /Type /EmbeddedFile
+%       /Subtype /application\c_hash_str2Fpostscript
+%       /Params
+%         <<
+%           /ModDate  ~ (\file_timestamp:n{example-image.eps})
+%           /Size     ~  \file_size:n {example-image.eps}
+%           /CheckSum ~ (\file_mdfive_hash:n {example-image.eps})
+%          >>
+%     }
+%     {example-image.eps}
+%   }
+% \tl_set:Nx \l_my_fileobj_tl {\pdf_object_ref_last:}
+% \end{verbatim}
+%
+% \begin{itemize}
+% \item The |/Params| dictionary is not always required, but the commands of
+% these module will prefill them as shown in the examples. A |/CreationDate| entry
+% has to be added explicitly as there is no sensible way
+% to retrieve this automatically.
+% \item The mimetype (in the |/Subtype|) should be properly escaped.
+% This module contains a property list with maps a number of file extensions
+% to mimetypes and the commands try to detect and fill the mimetype automatically.
+% \item The dictionary can contain additional keys (|/Filter|, |/DecodeParms|),
+% see the pdf reference.
+% \end{itemize}
+%
+% \subsubsection{Task 2: Creating the \texttt{/Filespec} dictionary}
+% The |/Filespec| dictionary is a simple dictionary object, and can also
+% be created in various ways. If it refers to an embedded file it should
+% reference it in the |/EF| key.
+%
+% \subsubsection{Task 3: Referencing the \texttt{/Filespec} dictionary}
+%
+% Using the dictionary reference in annotations and |/AF| keys is unproblematic.
+%
+% \potentialclash
+% But to add it to the |/EmbeddedFiles| name tree so that it appears in the
+% attachment panel requires special care:
+% This name tree is a global resource and uncoordinated access can lead to
+% clashes and files that are not visible or inaccessible.
+% The access here is managed by the \pkg{l3pdfmanagement} module:\\[\smallskipamount]%
+% |\pdfmanagement_add:nnx{Catalog/Names}{EmbeddedFiles}{|\meta{objref}|}|
+%
+% \subsection{Commands and tools of these module}
+% \begin{function}{file, file/Params, file/streamParams,file/Filespec}
+% The module predefines and uses a number of local dictionaries for the
+% components of the stream and the |/Filespec| object. These dictionaries are
+% then used by the \cs{pdffile_embed_XX}.
+% The content of these dictionaries can be changed by users with the commands
+% from the \pkg{l3pdfdict} module, but it should be done only locally
+% to avoid side effects on uses by other packages/commands.
+
+% The preset values are of these dictionaries are shown in table~\ref{tab:filedict}.
+% \end{function}
+% \begin{table}
+% \caption{Preset values in the file dictionaries\label{tab:filedict}}
+% \hspace*{-3cm}\begin{tabular}{lll}
+% dictionary & key      & value \\\hline
+% l\_pdffile       & Type     & /EmbeddedFile\\
+% l\_pdffile/Params& Size     & |\file_size:n{\l_pdffile_source_name_str}|\\
+% l\_pdffile/Params& ModDate  & |(\file_timestamp:n {\l_pdffile_source_name_str})|\\
+% l\_pdffile/Params& CheckSum & |(\file_mdfive_hash:n{\l_pdffile_source_name_str})|\\
+% l\_pdffile/streamParams&    &  a /ModDate entry with year/month/date \\
+%                        &    & (used with \cs{pdffile_embed_stream:nnn})\\
+% l\_pdffile/Filespec & Type  & /Filespec\\
+% l\_pdffile/Filespec & AFRelationship &Unspecified
+% \end{tabular}
+% \end{table}
+% \begin{function}{\pdffile_embed_file:nnn}
+%   \begin{syntax}
+%     \cs{pdffile_embed_file:nnn} \Arg{source filename} \Arg{target filename} \Arg{object name }
+%   \end{syntax}
+%   This commands embeds the file \meta{source filename} in the PDF,
+%   and creates a |/Filespec| dictionary object named \meta{object name}.
+%   The object name must be unique, it should start with the module name, so
+%   e.g. \texttt{module/name}.
+%   The command uses the content of the local
+%   dictionaries |l_pdffile|, |l_pdffile/Params| and |l_pdffile/Filespec|
+%   to setup the dictionary entries of the stream object and the
+%   |/Filespec| dictionary. The |/F| and |/UF| entry are filled
+%   with \meta{target filename}.
+%
+%   It is an error if both \meta{target filename} and \meta{source filename}
+%   are empty.
+%
+%   If \meta{target filename} is empty \meta{source filename} is used instead.
+%
+%   If \meta{source filename} is empty, only a |/Filespec| dictionary is
+%   created.
+%
+%   If the |l_pdffile| dictionary doesn't  contain a
+%   Subtype entry with the mimetype, the command tries to guess it
+%   from the file extension of \meta{source filename}. Unknown file extensions can be
+%   added (or known extension be changed) by adding to or changing the value in
+%   the property \cs{g_pdffile_mimetypes_prop}, see below.
+%
+%   When using \texttt{dvips} and \texttt{pstopdf} the actual embedding is
+%   done by \texttt{pstopdf}.  \texttt{pstopdf} will embed files
+%   only if used with the option \texttt{-dNOSAFER} and will not be able
+%   to use files which are found with \texttt{kpathsea}.
+%
+%   \meta{target filename} doesn't need to be a file name with an extension,
+%   but it is recommended as security settings in the pdf
+%   viewer can restrict access to known file types.
+% \end{function}
+%
+% \begin{NOTE}{UF}
+%  we should perhaps also consider the chunk method see pdfbase and
+%  https://chat.stackexchange.com/transcript/message/54181193#54181193
+% \end{NOTE}
+%
+% \begin{function}{\pdffile_embed_stream:nnn}
+%   \begin{syntax}
+%     \cs{pdffile_embed_stream:nnn} \Arg{content} \Arg{target filename} \Arg{object name }
+%   \end{syntax}
+%   This commands embeds the \meta{content} in the PDF in a stream objects and
+%   creates a |/Filespec| dictionary object named \meta{object name}.
+%   \meta{content} is wrapped in a \cs{exp_not:n}.
+%   The object name must be unique. The command uses the content of the local
+%   dictionaries |l_pdffile|, |l_pdffile/streamParams| and |l_pdffile/Filespec|
+%   to setup the dictionary entries of the stream object and the /Filespec dictionary.
+%   The /F and /UF entry are filled with \meta{target filename}.
+%   If \meta{target filename} is empty the fix name \texttt{stream.txt}
+%   is used instead.
+%
+%   If the |l_pdffile| dictionary doesn't  contain a
+%   Subtype entry with the mimetype, the command tries to guess it
+%   from the file extension of \meta{target filename}.
+%
+%   \meta{target filename} doesn't need to be a file name with an extension,
+%   but it is recommended as security settings in the pdf
+%   viewer can restrict access to known file types.
+%
+%   The stream should not be too long, at least PS imposes a size limit for strings.
+% \end{function}
+%
+% \begin{function}{\pdffile_filespec:nnn,\pdffile_filespec:nnx}
+%   \begin{syntax}
+%     \cs{ pdffile_filespec:nnn }\Arg{object name}\Arg{file name}{stream object reference}
+%   \end{syntax}
+%  The previous commands are fine if stream and filespec dictionary can be created together.
+%  But there are cases where the |filespec| dictionary should be referenced when the
+%  stream object doesn't exist yet. For example in the |AF| key of a structure at
+%  the begin of an environment where the stream is created from the body.
+%
+%  This command allows to write a filespec dictionary alone and reference a previously
+%  created stream.
+%
+%  \begin{verbatim}
+%  \pdf_object_new:nn{module/filespec/A}{dict} % a new filespec object
+%  \pdf_object_ref:n {module/filespec/A}       % a reference
+%  \pdf_object_unnamed_write:nn { stream }{ {...}{content} } %writing the stream
+%  % filling and writing the filespec dictionary:
+%  \pdffile_filespec:nnn {module/filespec/A}{A.xml}{\pdf_object_ref_last:}
+%  \end{verbatim}
+%
+% \end{function}
+%
+%  \begin{variable}{\g_pdffile_mimetypes_prop}
+%   This property contains a list of extensions and their mimetypes.
+%   Values can be added or changed with the standard commands:
+%
+%   |\prop_gput:Nnn \g_pdffile_mimetypes_prop {.abc}{text/plain}|
+%
+%   The extension should start with a period, the mimetype should be given
+%   as plain text (it will be escaped internally). Extensions with two periods
+%   are not supported.
+% \end{variable}
+%
+% \begin{variable}{\l_pdffile_source_name_str}
+% This variable is set at the begin of \cs{pdffile_embed_file:nnn}. It can be
+% (and is) used in the file dictionaries, see table~\ref{tab:filedict} for examples.
+% \end{variable}
+%
+% \begin{variable} {\g_pdffile_embed_prop}
+% This property holds a list of embedded files. It is used by the following
+% show command. The keys are the object names, the argument holds a key word,
+% the source file name and the target file name.
+% \end{variable}
+%
+% \begin{function}{\pdffile_embed_show:}
+% This shows the embedded files with their source and target name.
+% \end{function}
+%
+% \subsection{Example}
+% \begin{verbatim}
+% \group_begin:
+% %set the relationship:
+% \pdfdict_put:nnn  {l_pdffile/Filespec} {AFRelationship}{/Source}
+% %set the description key. The text must first be converted:
+% \pdf_string_from_unicode:nnN {utf16/string}
+%    {this~is~an~odd~description~with~öäü}
+%    \l_tmpa_str
+% \pdfdict_put:nnx  {l_pdffile/Filespec} {Desc}{\l_tmpa_str}
+% %embeds testinput.txt and calls it grüße.txt
+% \pdffile_embed_file:nnn {testinput.txt}{grüße.txt}{mymodule/example1}
+% %reference it in the panel
+% \pdfmanagement_add:nnx
+%  {Catalog/Names}
+%  {EmbeddedFiles}
+%   {\pdf_object_ref:n{mymodule/example1}}
+% \group_end:
+% \end{verbatim}
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3pdffile} implementation}
+%
+%    \begin{macrocode}
+%<*header>
+\ProvidesExplPackage{l3pdffile}{2021-08-28}{0.95i}
+  {embedding and referencing files in PDF---LaTeX PDF management testphase bundle}
+\RequirePackage{l3pdftools}  %temporarly!!
+%</header>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*package>
+%<@@=pdffile>
+\cs_new_protected:Npn \@@_filename_convert_to_print:nN #1 #2
+  {\pdf_string_from_unicode:nnN {utf16/hex}{#1}{#2}}
+%    \end{macrocode}
+% \subsection{Messages}
+%    \begin{macrocode}
+\msg_new:nnn { pdffile } { file-not-found }
+  {
+    File~'\tl_to_str:n{#1}'~not~found
+  }
+
+\msg_new:nnn { pdffile } { mimetype-missing }
+  {
+    Mime~type~not~set~for~file~'\tl_to_str:n{#1}'
+  }
+
+\msg_new:nnn { pdffile } { target-name-missing }
+  {
+    a~target~name~for~the~/Filespec~dictionary~is~missing.
+  }
+
+\msg_new:nnn { pdffile } { object-exists }
+  {
+    object~name~'#1'~is~already~used.
+  }
+
+\msg_new:nnn  { pdffile } { show-files }
+  {
+    The~following~files~have~been~embedded\\
+     #1
+  }
+%    \end{macrocode}
+% \begin{variable}
+%   {
+%     \l_@@_tmpa_tl,
+%     \l_@@_tmpb_tl,
+%     \l_@@_tmpa_str,
+%     \l_@@_tmpb_str,
+%     \l_@@_ext_str,
+%     \l_@@_automimetype_tl,
+%     \l_@@_embed_ref_tl
+%   }
+% temporary variables: generic, for extension, subtype, to store the ref.
+% \end{variable}
+%    \begin{macrocode}
+\tl_new:N  \l_@@_tmpa_tl
+\tl_new:N  \l_@@_tmpb_tl
+\str_new:N \l_@@_tmpa_str
+\str_new:N \l_@@_tmpb_str
+\str_new:N \l_@@_ext_str
+\tl_new:N  \l_@@_automimetype_tl
+\tl_new:N  \l_@@_embed_ref_tl
+%    \end{macrocode}
+% \begin{variable} {\g_pdffile_mimetypes_prop}
+% This variable holds common mimetypes. The key is an extension with (one) period,
+% the value the description, e.g. \texttt{text/csv}.
+% \end{variable}
+%    \begin{macrocode}
+\prop_new:N \g_pdffile_mimetypes_prop
+\prop_set_from_keyval:Nn \g_pdffile_mimetypes_prop
+  {
+    ,.csv = text/csv
+    ,.html= text/html
+    ,.dtx = text/plain %or application/x-tex, not in iana.org list
+    ,.eps = application/postscript
+    ,.jpg = image/jpeg
+    ,.mp4 = video/mp4
+    ,.pdf = application/pdf
+    ,.png = image/png
+    ,.tex = text/plain %or application/x-tex, not in iana.org list
+    ,.txt = text/plain
+    ,.sty = text/plain
+    ,.xml = text/xml
+  }
+%    \end{macrocode}
+% \begin{variable}
+%  {
+%   \l_pdffile_source_name_str
+%  }
+% \cs{l_pdffile_source_name_str} will be set at the begin of the command and
+% contains the full file name and can be used e.g. with \cs{file_timestamp:n}.
+% \end{variable}
+%    \begin{macrocode}
+\str_new:N  \l_pdffile_source_name_str
+%    \end{macrocode}
+% Here we define and setup the local dictionaries.
+% We add a ModDate to ensure that there is an entry if
+% associated files are used.
+%    \begin{macrocode}
+\pdfdict_new:n { l_pdffile }
+\pdfdict_put:nnn { l_pdffile }{Type}{/EmbeddedFile}
+\pdfdict_new:n { l_pdffile/Params }
+\pdfdict_put:nnn { l_pdffile/Params }
+  {ModDate}  { (\file_timestamp:n { \l_pdffile_source_name_str }) }
+\pdfdict_put:nnn { l_pdffile/Params }
+  {Size}     { \file_size:n { \l_pdffile_source_name_str } }
+\pdfdict_put:nnn { l_pdffile/Params }
+  {CheckSum} { (\file_mdfive_hash:n { \l_pdffile_source_name_str }) }
+\pdfdict_new:n { l_pdffile/streamParams }
+\pdfdict_put:nnn { l_pdffile/streamParams }
+  {ModDate}  {
+               (
+                 D:\int_use:N\c_sys_year_int
+                  \int_compare:nNnT{\c_sys_month_int}<{10}{0}
+                  \int_use:N\c_sys_month_int
+                  \int_compare:nNnT{\c_sys_day_int}<{10}{0}
+                  \int_use:N\c_sys_day_int
+               )
+             }
+\pdfdict_new:n { l_pdffile/Filespec }
+\pdfdict_put:nnn { l_pdffile/Filespec }
+  {Type} { /Filespec }
+\pdfdict_put:nnn { l_pdffile/Filespec }
+  {AFRelationship} { /Unspecified }
+
+%    \end{macrocode}
+% \begin{variable}{\g_pdffile_embed_prop}
+% we record here the relation\\%
+% \meta{object name} $\Rightarrow$
+%  \Arg{file/stream or empty}\Arg{sourcename}\Arg{targetname}
+%
+%    \begin{macrocode}
+\prop_new:N \g_pdffile_embed_prop
+%    \end{macrocode}
+% \end{variable}
+% \begin{macro}{\pdffile_embed_show:}
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdffile_embed_show:
+  {
+    \msg_show:nnx
+     {pdffile}{show-files}
+     {
+       \prop_map_function:NN {\g_pdffile_embed_prop} \msg_show_item:nn
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\pdffile_embed_file:nnn, \pdffile_embed_stream:nnn}
+% At first a command to set the mimetype. It either uses the current value
+% in the file dictionary, or tries to guess it from the extension.
+% \begin{macro}{\@@_mimetype_set:nN,\@@_mimetype_set:VN}
+% \begin{macro}{\@@_fstream_write:nN, \@@_fstream_write:VN}
+% \begin{macro}{\@@_stream_write:nN, \@@_stream_write:VN}
+%    \begin{macrocode}
+%#1 file name,
+%#2 tl to return the (printed) value for the guessed mimetype
+\cs_new_protected:Npn \@@_mimetype_set:nN #1 #2
+  {
+    \file_parse_full_name:nNNN
+          {#1}
+          \l_@@_tmpa_str %unused
+          \l_@@_tmpb_str %unused
+          \l_@@_ext_str
+        %check if Subtype has been set
+        \pdfdict_get:nnN { l_pdffile}{Subtype}\l_@@_tmpa_tl
+        %if not look up in the prop:
+        \quark_if_no_value:NT \l_@@_tmpa_tl
+          {
+            \prop_get:NVNTF
+              \g_pdffile_mimetypes_prop
+              \l_@@_ext_str
+              \l_@@_tmpb_tl
+              {
+                \tl_set:Nx #2 {/Subtype~\pdf_name_from_unicode_e:V \l_@@_tmpb_tl}
+              }
+              {
+                \msg_warning:nnx { pdffile }{ mimetype-missing} {#1}
+                \tl_clear:N #2
+              }
+          }
+    }
+
+\cs_generate_variant:Nn \@@_mimetype_set:nN {VN}
+
+%#1 file name,
+%#2 tl, should be empty or contain /Subtype /mimetype
+%   e.g. result from \@@_mimetype_set:NN
+\cs_new_protected:Npn \@@_fstream_write:nN #1 #2
+  {
+    \pdf_object_unnamed_write:nx { fstream }
+      {
+        {
+          #2
+          \pdfdict_use:n { l_pdffile}
+          \pdfdict_if_empty:nF { l_pdffile/Params}
+            {
+              /Params
+                <<
+                  \pdfdict_use:n { l_pdffile/Params}
+                >>
+            }
+        }
+        { #1 }
+      }
+     \tl_clear:N \l_@@_automimetype_tl
+   }
+
+\cs_generate_variant:Nn \@@_fstream_write:nN {VN}
+
+%#1 file content
+%#2 tl, should be empty or contain /Subtype /mimtype
+%   e.g. result from \@@_mimetype_set:NN
+\cs_new_protected:Npn \@@_stream_write:nN #1 #2
+  {
+    \pdf_object_unnamed_write:nx { stream }
+      {
+        {
+          #2
+          \pdfdict_use:n { l_pdffile}
+          \pdfdict_if_empty:nF { l_pdffile/streamParams}
+            {
+              /Params
+                <<
+                  \pdfdict_use:n { l_pdffile/streamParams}
+                >>
+            }
+        }
+        { \exp_not:n { #1 } }
+      }
+     \tl_clear:N \l_@@_automimetype_tl
+   }
+
+\cs_generate_variant:Nn \@@_stream_write:nN {VN}
+
+%#1 symbolic name of dict object
+%#2 target file name,
+%#3 object ref of the file stream.
+\cs_new_protected:Npn \@@_filespec_write:nnn #1 #2 #3
+  {
+    \tl_if_blank:nT { #2 }
+      {
+        \msg_error:nn {pdffile}{target-name-missing}
+      }
+      {
+        \group_begin:
+          \@@_filename_convert_to_print:nN  { #2 } \l_@@_tmpa_str
+          \pdfdict_put:nnx {l_pdffile/Filespec}{F} { \l_@@_tmpa_str }
+          \pdfdict_put:nnx {l_pdffile/Filespec}{UF}{ \l_@@_tmpa_str }
+          \pdf_object_write:nx { #1 }
+            {
+              \pdfdict_use:n { l_pdffile/Filespec}
+              \tl_if_empty:nF { #3 }
+                {
+                  /EF <</F~#3 /UF~#3>>
+                }
+            }
+        \group_end:
+      }
+  }
+
+\cs_set_eq:NN \pdffile_filespec:nnn \@@_filespec_write:nnn
+\cs_generate_variant:Nn \pdffile_filespec:nnn {nnx}
+%#1 {source filename}
+%#2 {target filename}
+%#3 { filespec object name } (will internally get a prefix! ??)
+\cs_new_protected:Npn \pdffile_embed_file:nnn #1 #2 #3
+  { %               if #1 empty => only filespec
+    %               if #2 empty => = #1
+    \pdf_object_if_exist:nTF { #3 }
+      {
+        \msg_error:nnn { pdffile }{ object-exists } { #3 }
+      }
+      {
+        \tl_if_blank:nTF { #1 }
+          {
+            \tl_set:Nn \l_@@_embed_ref_tl {}
+          }
+          {
+            \file_get_full_name:nNTF {#1} \l_pdffile_source_name_str
+              {
+                \@@_mimetype_set:VN
+                  \l_pdffile_source_name_str
+                  \l_@@_automimetype_tl
+                \@@_fstream_write:VN
+                  \l_pdffile_source_name_str
+                  \l_@@_automimetype_tl
+                \tl_set:Nx \l_@@_embed_ref_tl { \pdf_object_ref_last: }
+              }
+              {
+                \msg_error:nnn { pdffile }{ file-not-found }{ #1 }
+              }
+
+           }
+        \prop_gput:Nnx
+           \g_pdffile_embed_prop
+           { #3 }
+           {
+             { \tl_if_blank:nTF { #1 } {filespec}{file} }
+             {\l_pdffile_source_name_str}
+             {
+               \tl_if_blank:nTF { #2 }
+                 { \l_pdffile_source_name_str }
+                 { \tl_to_str:n{#2}}
+             }
+           }
+        \tl_if_blank:nTF { #2 }
+          {
+            \pdf_object_new:nn   { #3 } {dict}
+            \exp_args:Nnnx
+              \@@_filespec_write:nnn
+                %#1 dict, #2 target file name, #3 object ref
+                { #3 }
+                { #1 }
+                {\l_@@_embed_ref_tl}
+          }
+          {
+            \pdf_object_new:nn   { #3 } {dict}
+            \exp_args:Nnnx
+              \@@_filespec_write:nnn
+                %#1 dict, #2 target file name, #3 object ref
+                { #3 }
+                { #2 }
+                {\l_@@_embed_ref_tl}
+          }
+      }
+  }
+
+
+%#1{stream content}
+%#2{target filename}
+%#3{file object name }
+\cs_new_protected:Npn \pdffile_embed_stream:nnn #1 #2 #3
+  {
+    %               if #2 empty => error
+    \pdf_object_if_exist:nTF { #3 }
+      {
+         \msg_error:nnn { pdffile }{ object-exists } { #3 }
+      }
+      {
+         \prop_gput:Nnx
+            \g_pdffile_embed_prop
+            { #3 }
+            {{stream}{}{\tl_if_blank:nTF {#2}{stream.txt}{\exp_not:n{#2}}}}
+         \tl_if_blank:nTF {#2}
+          { \@@_mimetype_set:nN {stream.txt}\l_@@_automimetype_tl}
+          { \@@_mimetype_set:nN { #2 } \l_@@_automimetype_tl }
+         \@@_stream_write:nN
+           { #1 }
+           \l_@@_automimetype_tl
+         \tl_set:Nx \l_@@_embed_ref_tl { \pdf_object_ref_last: }
+         \pdf_object_new:nn   { #3 } {dict}
+         \exp_args:Nnxx
+           \@@_filespec_write:nnn
+             %#1 dict, #2 target file name, #3 object ref
+             { #3 }
+             { \tl_if_blank:nTF {#2}{stream.txt}{\exp_not:n{#2}} }
+             {\l_@@_embed_ref_tl}
+     }
+  }
+
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

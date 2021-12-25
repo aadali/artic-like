@@ -1,0 +1,49 @@
+
+The gmp package allows integration between MetaPost
+pictures and LaTeX, the main feature is that passing
+parameters to the MetaPost pictures is possible and
+the picture code can be put inside arguments to
+commands, including \newcommand.
+
+This is version 1.0 of the package
+
+Copyright (C) 2011 by Enrico Gregorio 
+<Enrico dot Gregorio at univr dot it>
+-------------------------------------------------------
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either
+version 1.3c of this license or (at your option) any
+later version. The latest version of this license is in
+  http://www.latex-project.org/lppl.txt
+and version 1.3 or later is part of all distributions
+of LaTeX version 2005/12/01 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Enrico Gregorio.
+
+This work consists of the files
+  gmp.dtx 
+  gmp.ins
+and the derived file gmp.sty.
+
+To install the distribution:
+
+o run "latex gmp.ins"
+o move "gmp.sty" to locations where LaTeX will find
+  it (the FAQ on CTAN in [...]/help/uktug-FAQ gives
+  information about this magic place
+
+To produce the documentation in pdf format:
+
+o run "pdflatex -shell-escape gmp.dtx"
+o run "makeindex -s gind.ist gmp"
+o run "makeindex -s gglo.ist -o gmp.gls gmp.glo"
+o run "pdflatex gmp.dtx"
+
+Notice that producing the documentation requires
+that the gmp.sty file can be found by LaTeX
+
+2011/03/10
+Enrico Gregorio

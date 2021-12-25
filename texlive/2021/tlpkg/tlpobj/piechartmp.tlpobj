@@ -1,0 +1,31 @@
+name piechartmp
+category Package
+revision 19440
+shortdesc Draw pie-charts using MetaPost
+longdesc The piechartmp package is an easy way to draw pie-charts with
+longdesc MetaPost. The package implements an interface that enables
+longdesc users with little MetaPost experience to draw charts. A
+longdesc highlight of the package is the possibility of suppressing some
+longdesc segments of the chart, thus creating the possibility of several
+longdesc charts from the same data.
+containersize 7216
+containerchecksum e4ef7bdc43280c4311a6e8abf2719815196fb0ed0a8450501061e0b3b0bb44cd60947d6d623ff753c5ad1384d98219df695865e6459eef02b2b96f00906d023a
+doccontainersize 41660
+doccontainerchecksum f74c3c34d37eabc3b5e857a90e8da2c6ffaa3b4a6974c6b1127f898fb727ff18f0f399e9c4ccde8d4d198bece0ea83fbbac37a1ba1d381576166b5a2742113c5
+docfiles size=26
+ texmf-dist/doc/metapost/piechartmp/INSTALL
+ texmf-dist/doc/metapost/piechartmp/LEGAL
+ texmf-dist/doc/metapost/piechartmp/README details="Readme"
+ texmf-dist/doc/metapost/piechartmp/README.TEXLIVE
+ texmf-dist/doc/metapost/piechartmp/examples/wec-mfun.mp
+ texmf-dist/doc/metapost/piechartmp/examples/wec-mfun.pdf
+ texmf-dist/doc/metapost/piechartmp/examples/wec.mp
+ texmf-dist/doc/metapost/piechartmp/examples/wec.pdf
+ texmf-dist/doc/metapost/piechartmp/examples/worldmap.jpg
+runfiles size=7
+ texmf-dist/metapost/piechartmp/piechartmp.mp
+catalogue-also piechart
+catalogue-ctan /graphics/metapost/contrib/macros/piechartmp
+catalogue-license lppl
+catalogue-topics genchart
+catalogue-version 0.3.0

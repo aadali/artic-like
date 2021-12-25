@@ -1,0 +1,28 @@
+name hopatch
+category Package
+revision 56106
+shortdesc Load patches for packages
+longdesc Hopatch provides a command with which the user may register of
+longdesc patch code for a particular package. Hopatch will apply the
+longdesc patch immediately, if the relevant package has already been
+longdesc loaded; otherwise it will store the patch until the package
+longdesc appears.
+containersize 2184
+containerchecksum 1658c78cf7671e821ed38825f8b0a0dd96b268c80afb0e64b27129c08e6c9375a7c8e3e5019361e100cb11691a0d27fe533aa2d000306a38b752114a0eac4d12
+doccontainersize 303776
+doccontainerchecksum 57441e01ba72ed0fe8439da5b41dd7600ae43eab90e06150e58704c9fac5a0047c6ab3f7d581310972b973006d9a98ee52bf782f0f2fca151c59050e5bc402f3
+docfiles size=76
+ texmf-dist/doc/latex/hopatch/README.md
+ texmf-dist/doc/latex/hopatch/hopatch.pdf details="Package documentation"
+srccontainersize 6008
+srccontainerchecksum 30537bb32dc82ccba9df85129db856884e2a948cee2cbe500a6208a5c3481b8f55253d86ed744d939e149c784e5aa6d8f843434629dc39a291762df863ad959d
+srcfiles size=6
+ texmf-dist/source/latex/hopatch/hopatch.dtx
+runfiles size=3
+ texmf-dist/tex/latex/hopatch/hopatch-2016-05-16.sty
+ texmf-dist/tex/latex/hopatch/hopatch.sty
+catalogue-contact-bugs https://github.com/ho-tex/hopatch/issues
+catalogue-ctan /macros/latex/contrib/hopatch
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.4

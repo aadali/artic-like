@@ -1,0 +1,382 @@
+% \iffalse meta-comment
+% 
+% This is file `caption-beamer.dtx'.
+% 
+% Copyright (C) 2007-2020 Axel Sommerfeldt (axel.sommerfeldt@f-m.fm)
+% 
+% --------------------------------------------------------------------------
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+% 
+% This work has the LPPL maintenance status "maintained".
+% 
+% This Current Maintainer of this work is Axel Sommerfeldt.
+% 
+% This work consists of the files
+%   caption.ins, caption.dtx, caption-light.dtx, caption2.dtx, caption3.dtx,
+%   caption-ams-smf.dtx, caption-beamer.dtx, caption-elsarticle.dtx,
+%   caption-koma.dtx, caption-memoir.dtx, caption-ntg.dtx,
+%   caption-thesis.dtx, bicaption.dtx, ltcaption.dtx, subcaption.dtx,
+% the derived files
+%   caption.sty, caption-light.sty, caption2.sty, caption3.sty,
+%   caption-ams-smf.sto, caption-beamer.sto, caption-elsarticle.sto,
+%   caption-koma.sto, caption-memoir.sto, caption-ntg.sto,
+%   caption-thesis.sto, bicaption.sty, ltcaption.sty, subcaption.sty,
+% and the user manuals
+%   caption-deu.tex, caption-eng.tex, caption-rus.tex.
+% 
+% \fi
+% \CheckSum{104}
+%
+% \iffalse
+%<*driver>
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesFile{caption-beamer.drv}[2018/05/13 v2.0 Implementation of the caption-beamer package]
+\hbadness=9999 \newcount\hbadness \hfuzz=100pt % Make TeX shut up.
+%\errorcontextlines=3
+%
+\documentclass{ltxdoc}
+\setlength\parindent{0pt}
+\setlength\parskip{\smallskipamount}
+%
+\makeatletter % make room for subsections like 2.16.14 in the TOC
+%\newcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.7em}}
+\makeatother
+%
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage{mathptmx,courier}
+  \usepackage[scaled=0.90]{helvet}
+  \addtolength\marginparwidth{15pt}
+\fi
+%
+\usepackage{hypdoc}
+\ifpdf\usepackage{hypdestopt}\fi
+\hypersetup{pdfkeywords={LaTeX, package, caption},pdfstartpage={},pdfstartview={}}
+%
+\begin{document}
+  \DocInput{caption-beamer.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \newcommand*\purerm[1]{\texorpdfstring{{\upshape\mdseries\rmfamily #1}}{#1}}
+% \newcommand*\puresf[1]{\texorpdfstring{{\upshape\mdseries\sffamily #1}}{#1}}
+% \newcommand*\purett[1]{\texorpdfstring{{\upshape\mdseries\ttfamily #1}}{#1}}
+% \let\class\puresf \let\package\puresf
+% \let\env\purett \let\opt\purett
+%
+% \newcommand*\csmarg[1]{\texttt{\char`\{#1\char`\}}}
+% \newcommand*\csoarg[1]{\texttt{\char`\[#1\char`\]}}
+% \newcommand*\version[2][]{v$#2$}
+%
+% \GetFileInfo{caption-beamer.drv}
+% \let\docdate\filedate
+% \let\docversion\fileversion
+% \GetFileInfo{caption-beamer.sto}
+%
+% \title{\texorpdfstring
+%   {The adaption of the \package{caption} package to the \class{beamer} document class\thanks{%^^A
+%    This adaption has version number \docversion.}}%^^A
+%   {The adaption of the caption package to the beamer document class}}
+% \author{Axel Sommerfeldt\\
+%         \url{https://gitlab.com/axelsommerfeldt/caption}}
+% \date{\docdate}
+% \maketitle
+%
+% \begin{abstract}
+% This package adapts the \package{caption} package to the \class{beamer} document class.
+% \end{abstract}
+% 
+% \section*{User manual}
+%
+% This document is describing the code implementation only. The user
+% documentation can be found in
+% \nopagebreak\begin{quote}
+% \begin{tabular}{ll}
+% \href{http://mirror.ctan.org/macros/latex/contrib/caption/caption-eng.pdf}%
+%      {\texttt{caption-eng.pdf}} & The caption package bundle documentation \\
+% \end{tabular}
+% \end{quote}
+%
+% \StopEventually{}
+% \iffalse
+% \clearpage
+% \tableofcontents
+% \fi
+% 
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \DoNotIndex{\\,\_,\ ,\@@par}
+% \DoNotIndex{\@bsphack}
+% \DoNotIndex{\@car,\@cdr,\@classoptionslist,\@cons,\@currext,\@currname}
+% \DoNotIndex{\@ehc,\@ehd,\@empty,\@esphack,\@expandtwoargs}
+% \DoNotIndex{\@for,\@firstofone,\@firstoftwo}
+% \DoNotIndex{\@gobble,\@gobblefour,\@gobbletwo,\@hangfrom}
+% \DoNotIndex{\if@minipage\@ifnextchar,\@ifpackagelater,\@ifpackageloaded}
+% \DoNotIndex{\@ifstar,\@ifundefined,\@latex@error,\@minipagefalse,\@minipagetrue}
+% \DoNotIndex{\@namedef,\@nameuse}
+% \DoNotIndex{\@onlypreamble,\@parboxrestore,\@plus,\@ptionlist}
+% \DoNotIndex{\@removeelement,\@restorepar,\@secondoftwo,\@setminipage,\@setpar}
+% \DoNotIndex{\@tempa,\@tempboxa,\@tempdima,\@tempdimb,\@tempdimc,\@tempb,\@tempc}
+% \DoNotIndex{\@testopt}
+% \DoNotIndex{\@undefined,\@unprocessedoptions,\@unusedoptionlist}
+% \DoNotIndex{\p@,\z@}
+% \DoNotIndex{\active,\addtocounter,\addtolength,\advance,\aftergroup}
+% \DoNotIndex{\baselineskip,\begin,\begingroup,\bfseries,\box}
+% \DoNotIndex{\catcode,\centering,\changes,\csname,\def,\divide,\do,\downarrow}
+% \DoNotIndex{\edef,\else,\empty,\end,\endcsname,\endgraf,\endgroup,\expandafter}
+% \DoNotIndex{\fi,\footnotesize,\global}
+% \DoNotIndex{\hangindent,\hbox,\hfil,\hsize,\hskip,\hspace,\hss}
+% \DoNotIndex{\ifcase,\ifdim,\ifnum,\ifodd,\ifvoid,\ifvmode}
+% \DoNotIndex{\ifx,\ignorespaces,\itshape}
+% \DoNotIndex{\Large,\large,\leavevmode,\leftmargini,\leftskip,\let,\linewidth}
+% \DoNotIndex{\llap,\long,\m@ne,\margin,\mdseries,\message}
+% \DoNotIndex{\newcommand,\newdimen,\newlength,\newline,\newif,\newsavebox}
+% \DoNotIndex{\next,\nobreak,\nobreakspace,\noexpand,\noindent,\numberline}
+% \DoNotIndex{\normalcolor,\normalfont,\normalsize,\or,\par,\parbox,\parfillskip}
+% \DoNotIndex{\parindent,\parskip,\prevdepth,\protect,\protected@edef,\protected@write}
+% \DoNotIndex{\providecommand,\quad}
+% \DoNotIndex{\raggedleft,\raggedright,\relax,\renewcommand,\RequirePackage}
+% \DoNotIndex{\rightskip,\rmfamily}
+% \DoNotIndex{\sbox,\scriptsize,\scshape,\setbox,\setlength,\sffamily,\slshape}
+% \DoNotIndex{\small,\string,\space,\strut}
+% \DoNotIndex{\textheight,\the,\toks@,\typeout,\ttfamily}
+% \DoNotIndex{\unvbox,\uparrow,\upshape,\usebox,\usepackage}
+% \DoNotIndex{\value,\vbox,\vsize,\vskip,\wd,\width,\z@skip}
+% \DoNotIndex{\AtBeginDocument,\AtEndOfPackage,\CurrentOption,\DeclareOption}
+% \DoNotIndex{\ExecuteOptions,\GenericWarning,\IfFileExists,\InputIfFileExists}
+% \DoNotIndex{\NeedsTeXFormat,\MessageBreak}
+% \DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\PackageWarningNoLine}
+% \DoNotIndex{\PassOptionsToPackage,\ProcessOptions,\ProvidesPackage}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \setlength{\parskip}{0pt plus 1pt}
+% \newcommand*\Note[2][Note]{\par{\small\emph{#1:} #2}\par}
+%
+% \changes{v1.1}{2007/03/10}{\class{beamer} class support added}
+% \changes{v1.3}{2011/08/06}{\class{beamer} class support revised}
+% \changes{v1.5}{2013/04/27}{The \class{beamer} template \texttt{caption label separator} will be used now}
+% \changes{v1.7}{2016/05/22}{Re-definition of label format \texttt{simpleMagyar} added to \class{beamer} class support}
+% \changes{v1.7}{2018/04/15}{Re-definition of label format \texttt{simpleMagyar} revised}
+% \changes{v1.7}{2018/05/01}{Definition of \class{beamer} default label font revised}
+% \changes{v2.0}{2020/07/27}{\class{beamer} class support adapted to \package{caption3}~\version{2.0}}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \clearpage
+%
+% \iffalse
+%<*package>
+% \fi
+%
+% \section{Identification}
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesFile{caption-beamer.sto}[2020/08/22 v2.0 Adaption of the caption package to the beamer document classes (AR)]
+%    \end{macrocode}
+%
+% \section{Helper macros}
+%
+% \begin{macro}{\caption@ifbeamertemplate}
+% |\caption@ifbeamertemplate|\marg{caption template name}\marg{yes-code}\marg{no-code}\\
+% tests if the given beamer caption template was selected by the user (or not).
+%    \begin{macrocode}
+\newcommand*\caption@ifbeamertemplate[1]{%
+  \begingroup
+    \let\beamer@@tmpl@caption@ORI\beamer@@tmpl@caption
+    \@nameuse{beamer@@tmpop@caption@#1}%
+    \ifx\beamer@@tmpl@caption@ORI\beamer@@tmpl@caption
+      \endgroup\expandafter\@firstoftwo
+    \else
+      \endgroup\expandafter\@secondoftwo
+    \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Single-line-check}
+%
+% The `default' single-line-check maps to the beamer template setting `caption name own line'.
+%    \begin{macrocode}
+\DeclareCaptionSinglelinecheck{default}{%
+  \caption@ifbeamertemplate{caption name own line}%
+    \@secondoftwo % \@secondoftwo -> singlelinecheck=off
+    \@firstoftwo} % \@firstoftwo  -> singlelinecheck=on
+%    \end{macrocode}
+%
+% \begin{macro}{\caption@prepareslc}
+% \changes{v1.12b}{2020/07/20}{Special adaption to \class{beamer} added}
+% The patch of \cs{footnote} provided by the \package{caption3} package assumes
+% that the optional arguments of \cs{footnote} and \cs{footnotemark} match.
+% Since this is not the case in \class{beamer} based documents,
+% and since \class{beamer} extents the syntax of \cs{footnote} in a special way,
+% we need a special patch here.\par
+% \emph{Note:} For this patch we assume that \cs{footnote} will always end with the usage of
+% \cs{beamer@footnotetext}. (Unfortunately \cs{footnote} is defined too monolithic
+% in \class{beamer} to offer a less dirty patch.)
+%    \begin{macrocode}
+\g@addto@macro\caption@prepareslc{%
+  \def\footnote{%
+    \begingroup
+    \let\stepcounter\caption@l@stepcounter
+    \renewcommand<>\beamer@framefootnotetext[1]{%
+      \endgroup}%
+    \let\@footnotetext\beamer@framefootnotetext
+    \caption@footnote@ORI}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Label formats}
+%
+% The `default' caption label format maps to either `simple' (if the `numbered' beamer template is set) or `unnumbered' (otherwise).
+%    \begin{macrocode}
+\DeclareCaptionLabelFormat{default}{%
+  \caption@ifbeamertemplate{numbered}%
+    \caption@labelformat@simple
+    \caption@labelformat@unnumbered
+  {#1}{#2}}
+%    \end{macrocode}
+%
+% The \package{magyar} babel package redefines the current label format to a one called |simple|\-|Magyar|,
+% defined within |\@@magyar@caption|\-|fix| which will be executed |\At|\-|Begin|\-|Document|:
+% \begin{quote}
+%   |\DeclareCaptionLabelFormat{simpleMagyar}%|\\
+%   |  {#2.\bothIfSecond{\nobreakspace}{#1}}|
+% \end{quote}
+% When used with beamer, we need to patch it so no numbering will be used if the `numbered` template isn't selected.
+%    \begin{macrocode}
+\DeclareCaptionLabelFormat{simpleMagyar}{%
+  \caption@ifbeamertemplate{numbered}%
+    {#2.\bothIfSecond{\nobreakspace}{#1}}%
+    {\caption@labelformat@unnumbered{#1}{#2}}}
+%    \end{macrocode}
+% \begin{macro}{\@@magyar@captionfix}
+% Prevent \package{magyar} from defining this caption label format on its own.
+%    \begin{macrocode}
+\let\@@magyar@captionfix\relax
+\AtBeginDocument{\let\@@magyar@captionfix\relax}
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Label separator}
+%
+% The `default' caption label separator maps to the beamer templates
+% `caption name own line' and `caption label separator'.
+%
+% If the beamer template `caption name own line' is set, this code equals to
+% \begin{quote}
+%   |\DeclareCaptionLabelSeparator*{default}{\\}|
+% \end{quote}
+% otherwise this code equals to
+% \begin{quote}
+%   |\DeclareCaptionLabelSeparator{default}%|\\
+%   |  {\usebeamertemplate{caption label separator}}|
+% \end{quote}
+%    \begin{macrocode}
+\DeclareCaptionLabelSeparator**{default}%
+  {\caption@ifbeamertemplate{caption name own line}}%
+  {\caption@ifbeamertemplate{caption name own line}%
+     {\\}%
+     {\usebeamertemplate{caption label separator}}}
+%    \end{macrocode}
+%
+% \section{Fonts}
+%
+% The `default' caption font maps to the beamer settings for `caption' resp. `caption name'.
+%    \begin{macrocode}
+\DeclareCaptionFont{beamer@font}{%
+  \usebeamerfont*{caption}%
+  \usebeamercolor[fg]{caption}}
+\SetCaptionDefault{font}{beamer@font}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareCaptionFont{beamer@labelfont}{%
+  \setbeamercolor*{caption}{}% avoid setting "caption" color additionally
+  \usebeamercolor[fg]{caption name}%
+  \setbeamerfont*{caption}{}% avoid setting "caption" font additionally
+  \usebeamerfont{caption name}}
+\SetCaptionDefault{labelfont}{beamer@labelfont}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareCaptionFont{beamer@textfont}{}
+\SetCaptionDefault{textfont}{beamer@textfont}
+%    \end{macrocode}
+%
+% \section{Justification}
+%
+% The `default' caption justification is `raggedright'.
+%    \begin{macrocode}
+\SetCaptionDefault{justification}{raggedright}
+%    \end{macrocode}
+%
+% \section{Lists}
+%
+% Since the beamer class do not offer a `List of figures' we switch it off.
+%    \begin{macrocode}
+\captionsetup{list=off}
+%    \end{macrocode}
+%
+% \section{Adaption of figure and table environment}
+%
+%    \begin{macrocode}
+\AtCaptionPackage{%
+%    \end{macrocode}
+%
+% \begin{macro}{\figure}
+% \changes{v1.1f}{2007/12/17}{This re-definition for \class{beamer} document class added}
+% \changes{v1.8d}{2019/09/01}{This re-definition for \class{beamer} document class revised}
+%    \begin{macrocode}
+  \expandafter\let\expandafter\caption@beamer@figure
+    \csname\string\figure\endcsname
+  \@namedef{\string\figure}[#1]{%
+    \caption@beamer@figure[#1]% use original beamer code first
+    \caption@settype{figure}} % set "type=figure" afterwards
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\table}
+% \changes{v1.1f}{2007/12/17}{This re-definition for \class{beamer} document class added}
+% \changes{v1.8d}{2019/09/01}{This re-definition for \class{beamer} document class revised}
+% \changes{v1.8e}{2019/10/18}{Bug fixed which was introduced in previous revision}
+%  We redefine |figure| \& |table| so our type-specific options will be used etc.
+%    \begin{macrocode}
+  \expandafter\let\expandafter\caption@beamer@table
+    \csname\string\table\endcsname
+  \@namedef{\string\table}[#1]{%
+    \caption@beamer@table[#1]% use original beamer code first
+    \caption@settype{table}} % set "type=table" afterwards
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \clearpage
+% \Finale
+%
+\endinput
+

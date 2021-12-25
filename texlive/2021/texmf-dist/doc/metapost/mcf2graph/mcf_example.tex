@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example of MCF typeset by LaTeX   mcf_examples.tex   by A.Yamaji  2021.12.12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\makeatletter%
+%--------------------------------
+\edef\jobname{mcf_exa_soc}%
+\usepackage{mcf_setup}
+%--------------------------------
+%%%%\pdfpkresolution=1200
+%--------------------------------
+%%%%\edef\f@ext{pk}%
+\edef\f@ext{mps}%
+%--------------------------------
+\pagestyle{empty}
+\topmargin=-24mm
+\oddsidemargin=-12mm
+\textwidth=190mm
+\textheight=280mm
+\parindent=0mm
+\setlength\columnsep{8mm}
+%--------------------------------
+\newbox \f@box%
+\newcount \f@num%
+\newcount \tnum%
+\tnum=0%
+\font\labelM=cmtt8 at 6pt\relax%
+%--------------------------------
+\newif\ifCONT@%
+\newread\@auxf%
+%--------------------------------
+\f@num=1%
+\unitlength=0.01mm%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{center}
+ {\Huge\sf Molecular Coding Format examples} \vspace{5mm} \\
+ Author : Akira Yamaji \quad Date : \today \\
+ Located at : http://www.ctan.org/pkg/mcf2graph \vspace{3mm} \\
+\end{center}
+{\small * use molecular data base file 'mcf\_data\_base.mcf' \\
+        ** FM(fm):molecular formula (calculated)
+        * MW(mw):molecular weight (calculated)
+ \vspace{3mm} \\
+%------------------------------------------------------------------------
+\noindent%
+\openin\@auxf=\jobname-info.aux%
+\CONT@true%
+\loop%
+\read\@auxf to \info%
+\ifeof\@auxf\CONT@false\else%
+  \infotovar{\info}%
+  \begin{picture}(3750,3350)%
+     \put(20,3000){\footnotesize\bf \EN}%
+     \put(20,2750){\labelM mw:\mw { / }fm:\fm}%
+     \put(20,2530){\labelM MW:\MW { / }[\the\f@num]}%
+     \put( 0,0){%
+       \makebox(3750,2530){%
+         \ifx\f@ext\@pk{\font\@font=\jobname\@font\char\f@num}%
+         \else%
+           \edef\f@file{\jobname-\z@num\f@num.\f@ext}%
+           \includegraphics{\f@file}%
+         \fi%
+       }%
+     }%
+  \end{picture}%
+  %------------------------------------------------------------
+  \advance\f@num1\relax%
+  \advance\tnum1\relax%
+  \ifnum\tnum=5 \\ \tnum=0 \fi%
+\fi%
+\ifCONT@ \repeat%
+\closein\@auxf%
+%------------------------------------------------------------------------
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

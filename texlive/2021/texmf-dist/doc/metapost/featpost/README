@@ -1,0 +1,26 @@
+Welcome to FeatPost-0.8.8! 
+  The file "MPexamples.html" contains the complete collection of examples
+  as raster PNG images and links to the source code of each one.
+  That same collection of examples is also in "doc" directory in the file
+  "doc/Exemplifier.pdf" as exact postscript diagrams but without links. 
+  The user manual is also in the "doc" directory: "doc/featpostmanual.pdf".
+  There a smaller presentation version: "doc/featpostbeamer.pdf".
+  A wide-range tutorial can be found in "doc/metapostpropaganda.pdf".
+  The "doc/metapostpropagandafiles" directory contains additional examples.
+
+Please,
+  the first time you make a diagram with FeatPost-0.8.8, send me an e-mail 
+  message with the subject "FeatPost". My address is lng@fct.unl.pt
+
+% This is free software; you can redistribute it and/or
+% modify it under the terms of the GNU General Public License
+% as published by the Free Software Foundation; either version 3
+% of the License, or (at your option) any later version.
+
+% This set of macros is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+% GNU General Public License for more details.
+
+2014/OCT/01                                                     L. Nobre G. 
+

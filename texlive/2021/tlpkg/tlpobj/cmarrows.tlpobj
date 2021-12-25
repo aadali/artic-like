@@ -1,0 +1,47 @@
+name cmarrows
+category Package
+revision 24378
+shortdesc MetaPost arrows and braces in the Computer Modern style
+longdesc This MetaPost package contains macros to draw arrows and braces
+longdesc in the Computer Modern style.
+containersize 10204
+containerchecksum 5f56f9ab77b2f250aff664b0007aa17eccad96d6f674ae7417f610b62d84123fc85bc80cf83948e0df2a7bfb721300e149fc764b03638e5005cc4832f2fa5544
+doccontainersize 47780
+doccontainerchecksum 0bc738eb48fc34b7cb35240622925d43e5ff5fce21b1c560158b2ceee2790a284b33816fd192a5b0161544ee5add98f4e3ebe7dd0165273d53e5ea2de7d994ac
+docfiles size=14
+ texmf-dist/doc/metapost/cmarrows/README details="Readme"
+ texmf-dist/doc/metapost/cmarrows/cmarrows.pdf details="Package documentation"
+runfiles size=59
+ texmf-dist/metapost/cmarrows/cmarrows.mp
+ texmf-dist/metapost/cmarrows/rgbx0009.mp
+ texmf-dist/metapost/cmarrows/rgbx0016.mp
+ texmf-dist/metapost/cmarrows/rgbx0020.mp
+ texmf-dist/metapost/cmarrows/rgbx0025.mp
+ texmf-dist/metapost/cmarrows/sgbx0008.mp
+ texmf-dist/metapost/cmarrows/sgbx0010.mp
+ texmf-dist/metapost/cmarrows/sgbx0011.mp
+ texmf-dist/metapost/cmarrows/sgbx0012.mp
+ texmf-dist/metapost/cmarrows/sgbx0013.mp
+ texmf-dist/metapost/cmarrows/sgbx0014.mp
+ texmf-dist/metapost/cmarrows/sgbx0015.mp
+ texmf-dist/metapost/cmarrows/sgbx0017.mp
+ texmf-dist/metapost/cmarrows/sgbx0018.mp
+ texmf-dist/metapost/cmarrows/sgbx0019.mp
+ texmf-dist/metapost/cmarrows/sgbx0021.mp
+ texmf-dist/metapost/cmarrows/sgbx0022.mp
+ texmf-dist/metapost/cmarrows/sgbx0023.mp
+ texmf-dist/metapost/cmarrows/sgbx0024.mp
+ texmf-dist/metapost/cmarrows/tgbx0000.mp
+ texmf-dist/metapost/cmarrows/tgbx0001.mp
+ texmf-dist/metapost/cmarrows/tgbx0002.mp
+ texmf-dist/metapost/cmarrows/tgbx0003.mp
+ texmf-dist/metapost/cmarrows/tgbx0004.mp
+ texmf-dist/metapost/cmarrows/tgbx0005.mp
+ texmf-dist/metapost/cmarrows/tgbx0006.mp
+ texmf-dist/metapost/cmarrows/tgbx0007.mp
+ texmf-dist/metapost/cmarrows/tgbx0027.mp
+catalogue-also pst-text
+catalogue-ctan /graphics/metapost/contrib/macros/cmarrows
+catalogue-license lppl
+catalogue-topics graphics-symb
+catalogue-version 0.9

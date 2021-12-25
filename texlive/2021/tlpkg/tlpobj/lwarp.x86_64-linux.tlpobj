@@ -1,0 +1,8 @@
+name lwarp.x86_64-linux
+category Package
+revision 43292
+shortdesc x86_64-linux files of lwarp
+containersize 344
+containerchecksum 0e66d45202b359e9e6f8b7e49eef79fd12aee54dfbc03b8d59723f7d964feaa6babd6da8b202af2226f4a596dbe40a4a9031ae8ae75f47763f8f62ae87071a92
+binfiles arch=x86_64-linux size=1
+ bin/x86_64-linux/lwarpmk

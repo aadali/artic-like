@@ -1,0 +1,120 @@
+
+
+                fontwrap package for XeLaTex
+                ----------------------------
+                Michiel Kamermans, june 2008
+                     Available under GPL
+
+
+What is it?
+  --------------
+
+    fontwrap is a package for XeLaTeX to automatically
+    wrap multilingual utf8 encoded text in approriate
+    font tags, issuing fontspec commands whenever text
+    switches from one unicode block to another. As most
+    of us use TeX in order to separate visual styling
+    from the actual document as much as possible, this
+    package removes the need to add fonttags all over
+    the place when writing multilingual documents.
+
+
+... Example?
+  --------------
+
+    Say you have a mixed text of English and Japanese,
+    going something like this:
+
+    "English and nihongo can both be written in utf8"
+
+    with the word "nihongo" written in Japanes.
+    the fontwrap package can automatically change
+    this to the following:
+
+    "\fontspec{SomeFont}English and \fontspec{OtherFont}
+    nihongo\fontspec{SomeFont}\ can both be written in
+    utf8"
+
+    where 'SomeFont' is a font you picked for English
+    - or rather, Latin - text, and 'OtherFont' is a
+    font you picked for Japanese text.
+
+
+How do I use it?
+  --------------
+
+    simply use the fontwrap package like any other, and
+    wrap whichever text you want automatically font tagged
+    with the following command:
+
+      \fontwrap{...your text here...}
+
+    Both the fontwrap.tex and fontwrap_example.tex files
+    contain examples of this.
+
+    Of course, fontwrap needs to know which fonts you want
+    to use for which blocks, for which there are a few
+    basic commands:
+
+      \setfontwrapdefaultfont{Font Name}
+
+    where 'Font Name' is the name of the font as you'd use
+    it in a word processor (and capitalisation counts!). To
+    then override the default, you can set fonts either for
+    single unicode blocks, or for entire informal unicode
+    groups:
+
+      \setunicodeblockfont{BLock Name}{Font Name}
+
+      \setunicodegroupfont{BLock Name}{Font Name}
+
+    There are a small number of groups to pick from (namely
+    Arabic, Chinese, CJK (which combines all Chinese,
+    Japanese and Korean blocks), Cyrillic, Diacritics,
+    Greek (including some Coptic), Korean, Japanese, Latin,
+    Mathematics, Phonetics, Punctuation, Symbols, Yi and
+    'Other'). There are few more blocks (158 of them), so
+    I won't list all of there here - please see the more
+    detailed pdf documentation for which specific blocks
+    you can set fonts for.
+
+    In addition to these fonts, you also need to instruct
+    fontwrap which macros and environments it is allowed
+    to process the content of, because by default it will
+    skip over any macros or environments it is wrapping.
+
+      \setfontwrapallowedmacros{macro list}
+
+      \setfontwrapallowedenvironments{env. list}
+
+    For both these commands, the lists are comma delimited,
+    so that if you want fontwrap to process the content of
+    emph, ruby and section macros, you would pass it the
+    list "emph,ruby,section".
+
+
+Special notes
+  --------------
+  
+    This package requires you use perltex, which is just
+    a wrapper for xelatex. if you use Tex Live or MikTeX
+    then you should either already have it installed,
+    or it should grab perltex automatically for you. 
+    The command is also rather simple:
+
+      perltex --latex=xelatex inputfile.tex
+
+    Running this when using fontwrap may result in a
+    number of warnings/errors:
+    
+    1) free to wrong pool
+    
+    perltex can, in some cases, perform mem cleanup on
+    the wrong thread. This will not affect your document
+    in any way. it's just annoying.
+    
+    2) no unicode mapping available
+    
+    a font you picked for some block of text does not
+    contain the characters of that text. this is common
+    when using foreign language in a verbatim block.

@@ -1,0 +1,435 @@
+% \iffalse meta-comment
+%
+%% File: l3pdftools.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=l3pdftools (LaTeX PDF management testphase bundle)}
+
+\providecommand\potentialclash{\noindent\llap{\dbend\ }}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3pdftools} module\\ temporary collection of pdf related commands ^^A
+%   \\ LaTeX PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{l3pdftools} documentation}
+%
+% This module collects a number of candidate commands for the l3pdf module
+%
+% \begin{function}[EXP,added=2021-02-14]
+%   {\pdf_name_from_unicode_e:n}
+%  \begin{syntax}
+%   \cs{pdf_name_from_unicode_e:n}  \Arg{content}
+%  \end{syntax}
+%  This converts \meta{content} to a format suitable for a PDF Name.
+%  The output depends on the backend: For almost all backends
+%  it will first expand the content with \cs{text_expand:n} and
+%  then escape it in the way needed in a PDF Name with
+%  \cs{str_convert_pdfname:e}, and at last prepend a slash before.
+%  Typically such names use only ascii,
+%  but non-ascii is supported, but should be utf8 encoded. For example\\
+%  |\pdf_name_from_unicode_e:n {A~B\c_percent_str C\c_hash_str D€}}|\\
+%   will    output |/A#20B#25C#23D#E2#82#AC|.
+%
+%  With dvips it will expand the content with \cs{text_expand:n} and then wrap it
+%  in a |cvn| operation (\enquote{convert to name}).
+%  So the example above will output |(A B%C#D€) cvn| to
+%  the postscript. The content should not contain unbalanced parentheses with dvips.
+%
+% \end{function}
+% \begin{function}[added=2020-07-04]
+%   {\pdf_string_from_unicode:nnN}
+%  \begin{syntax}
+%   \cs{pdf_string_from_unicode:nnN}  \Arg{format}  \Arg{content} \Arg{tlvar}
+%  \end{syntax}
+%  This converts \meta{content} following the rules defined by \meta{format} and stores
+%  the result in \meta{tlvar}. The assignment is done locally.
+%  Non-ascii input should be utf8 encoded.
+%  Currently the following formats exist:
+%  \begin{description}
+%     \item[utf8/string-raw]
+%      this converts with \cs{str_set_convert:Nnnn} into utf8/string.
+%     \item[utf8/string]
+%      this converts into utf8/string and adds parentheses around the result.%
+%     \item[utf8/URI-raw]
+%      this converts with \cs{str_set_convert:Nnnn} into utf8/url and
+%      then replaces reserved and digits back from the percent encoding. Parentheses
+%      are escaped.
+%     \item[utf8/URI]
+%      this converts into utf8/URI  and adds parentheses around the result.%
+%     \item[utf16/string-raw]
+%      this converts with \cs{str_set_convert:Nnnn} into utf16/string.
+%     \item[utf16/string]
+%      this converts into utf16/string and adds parentheses around the result.
+%     \item[utf16/hex-raw]
+%      this converts into utf16/hex
+%     \item[utf16/hex]
+%     this converts into utf16/hex and adds bracket around the result.
+%   \end{description}
+% \end{function}
+%
+% \subsection{BDC operator / Properties resource}
+% \begin{NOTE}{UF}
+%  we need a switch for the case that the resource should be added to
+%  xform resource instead of a page resources, see pdfbase.sty
+% - xdvipdfmx: looks fine, the resource is added to the xform resource automatically
+% - pdftex should now work okay too
+% \end{NOTE}
+% Entries to the /Properties dictionary in the page resources can
+% be added with dvips only through side-effects: if a BDC-mark is created
+% dvips/ghostscript will automatically create the necessary objects and names.
+% To get a sensible abstraction the code does the same for the other backends if the
+% core management code has been activated. This means that the behaviour
+% of the command is different then. The \cs{pdf_bdcobject:..} should only be used
+% if the management is active.
+% \begin{function}[updated = 2020-07-03]
+%   {
+%     \pdf_bdc:nn
+%   }
+%   \begin{syntax}
+%     \cs{pdf_bdc:nn} \Arg{tag} \Arg{dictionary content}
+%   \end{syntax}
+%    This command adds a BDC marked content operator to the current page stream.
+%   \meta{tag} is the tag of this operator (without the leading slash),
+%   \meta{dictionary content} is the content of the second argument.
+%   If the PDF resource management is active an dictionary object with the
+%   content is created and referenced with a name in the BDC operator.
+%   Without the resource management the content is used directly. It then
+%   depends on the backend how it is handled: with dvips a name is used
+%   while the pdfmode engines and dvipdfmx write the content into the stream.
+%
+% \end{function}
+% \begin{function}[added = 2020-07-03]
+%   {
+%     \pdf_bdcobject:nn
+%   }
+%   \begin{syntax}
+%     \cs{pdf_bdcobject:nn} \Arg{tag} \Arg{object name}
+%   \end{syntax}
+%   This command adds a BDC marked content operator to the current page stream.
+%   \meta{tag} is the tag of this operator (without the leading slash),
+%   \meta{object name}  is a the name of an dictionary object reserved with
+%   \cs{pdf_object_new:nn} and filled with \cs{pdf_object_write:n} with
+%   the properties of the BDC. Reusing a predefined object can save space
+%   but the command works correctly
+%   only if the resources management has been activated and should be used only
+%   if this can be ensured.
+% \end{function}
+% \begin{function}[updated = 2020-07-03]
+%   {
+%     \pdf_bdcobject:n
+%   }
+%   \begin{syntax}
+%     \cs{pdf_bdcobject:n} \Arg{tag}
+%   \end{syntax}
+%    This command adds a BDC marked content operator to the current page stream.
+%   \meta{tag} is the tag of this operator (without the leading slash).
+%   As object this commands uses the last anonymous dictionary object created with
+%   \cs{pdf_object_unnamed_write:nn}. It lies in the responsibility of the user that the last
+%   object is the wanted one. Like with \cs{pdf_bdcobject:nn} the command works correctly
+%   only if the resources management has been activated and should be used only
+%   if this can be ensured.
+% \end{function}
+% \begin{function}[added = 2019-10-17]
+%   {
+%     \pdf_bmc:n
+%   }
+%   \begin{syntax}
+%     \cs{pdf_bmc:n} \Arg{tag}
+%   \end{syntax}
+%    This command created a BMC marked content operator. The argument is the
+%    tag without the leading slash. It can be e.g. used for simple artifact
+%    markers.
+% \end{function}
+% \begin{function}[added = 2019-06-30]
+%   {
+%     \pdf_emc:
+%   }
+%   \begin{syntax}
+%     \cs{pdf_emc:}
+%   \end{syntax}
+%    This command closes the  BDC marked content operator opened with \cs{pdf_bdc:nn}.
+%    It should be on the same page as the bdc-command.
+%
+%   \begin{verbatim}
+%   \pdf_object_new:nn   {module/objA}{dict}
+%   \pdf_object_write:nn {module/objA}{/Type/Artifact}
+%   \pdf_bdc:nn {Span}{module/objA}
+%   text
+%   \pdf_emc:
+%   \end{verbatim}
+% \end{function}
+%
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3pdftools} implementation}
+%
+%    \begin{macrocode}
+%<*header>
+\ProvidesExplPackage{l3pdftools}{2021-08-28}{0.95i}
+  {candidate commands for l3pdf---LaTeX PDF management testphase bundle}
+%</header>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<@@=pdf>
+%<*package>
+%    \end{macrocode}
+% \subsection{Conversions and export functions}
+% \begin{macro}{\pdf_name_from_unicode_e:n,\pdf_name_from_unicode_e:V}
+%    \begin{macrocode}
+\cs_generate_variant:Nn \str_convert_pdfname:n { e }
+
+\cs_new:Npn \pdf_name_from_unicode_e:n #1
+  {
+    \__kernel_pdf_name_from_unicode_e:n { #1 }
+  }
+
+\cs_generate_variant:Nn \pdf_name_from_unicode_e:n {V}
+%    \end{macrocode}
+% \end{macro}
+%
+% The convert command must use a different value the source encoding
+% depending on the engines. Until the PR in str-convert is active we add the alias here
+% too
+%    \begin{macrocode}
+\bool_lazy_any:nTF
+  {
+    \sys_if_engine_luatex_p:
+    \sys_if_engine_xetex_p:
+  }
+  {
+    \prop_gput:Nnn \g__str_alias_prop { default } {  }
+  }
+  {
+    \prop_gput:Nnn \g__str_alias_prop { default } { utf8 }
+  }
+%    \end{macrocode}
+% \begin{macro}{\pdf_string_from_unicode:nnN}
+%    \begin{macrocode}
+\cs_new:Npn \pdf_string_from_unicode:nnN #1 #2 #3
+  {
+    \cs_if_exist_use:cF { @@_string_from_unicode_#1:nN }
+      {
+        \__kernel_msg_error:nnn { pdf } { unknown-convert } {#1}
+        \use_none:nn
+      }
+    { #2 } #3
+  }
+
+\cs_generate_variant:Nn \pdf_string_from_unicode:nnN {nVN}
+%    \end{macrocode}
+% \end{macro}
+% Most converter are simply wrapper around the str-convert commands and so
+% use the same names, with the addition raw if no delimiters are added.
+% The exception is the one for url's: it reverts most of the percent encodings
+% and escapes the parentheses.
+% That's why its name is URI instead of url. The current code is probably quite
+% slow and will need a replacement.
+% \begin{macro}{ @@_string_from_unicode_utf8/string-raw:nN }
+% \begin{macro}{ @@_string_from_unicode_utf8/string:nN }
+% \begin{macro}{ @@_string_from_unicode_utf8/URI-raw:nN }
+% \begin{macro}{ @@_string_from_unicode_utf8/URI:nN }
+% \begin{macro}{ @@_string_from_unicode_utf16/string-raw:nN }
+% \begin{macro}{ @@_string_from_unicode_utf16/string:nN }
+% \begin{macro}{ @@_string_from_unicode_utf16/hex-raw:nN }
+% \begin{macro}{ @@_string_from_unicode_utf16/hex:nN }
+%    \begin{macrocode}
+%% TODO Names need a review when it is clear which converters
+%% are actually needed
+%% string conversions and printing
+%% we assume here that the text purify step has been done. The input is
+%% a list of (utf8) chars.
+%% str convert, not expandable.
+%  filespec (attachment view)  tests:
+%  utf8:  gr\303\274\303\237e.txt
+%    %doesn't work, umlaut wrong,
+%  utf8 with BOM \357\273\277gr\303\274\303\237e.txt
+%    %doesn't work, umlaut wrong, bom visible
+%  utf16 with BE: (FEFF)
+%   \376\377\000g\000r\000\374\000\337\000e\000.\000t\000x\000t %works
+%                xetex converts to <feff0067007200fc00df0065002e007400780074>
+%  utf16 with BE / HEX: <FEFF0067007200FC00DF0065002E007400780074> works
+
+% bookmarks: as pdfoutline uses () currently only utf16 with BE is usable.
+% check if one can use HEX too when directly writing the object
+% ==========
+% uri: utf16BE/string seems not to work, hex neither
+%      utf8/string works but not on macos,
+%      so a specfic utf8/url variant is needed
+% ==========
+% "input" is utf8 for pdftex, empty (native) for unicode engine
+% commands to output literal strings  (...)
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf8/string-raw:nN }  #1 #2
+  {
+     \str_set_convert:Nnnn #2
+        { #1 }
+        { default }
+        {utf8/string}
+  }
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf8/string:nN } #1 #2
+  {
+    \use:c { @@_string_from_unicode_utf8/string-raw:nN } { #1 } #2
+    \str_put_left:Nn #2  {(}
+    \str_put_right:Nn #2 {)}
+  }
+% special url command:
+\cs_new_protected:cpx { @@_string_from_unicode_utf8/URI-raw:nN }  #1 #2
+  {
+     \exp_not:N \str_set_convert:Nnnn #2
+       { #1 }
+       { default }
+       {utf8/url}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 3A} {:}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 2F} {/}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 23} {\c_hash_str}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 5B} {[}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 5D} {]}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 40} {\c_atsign_str}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 21} {!}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 24} {\c_dollar_str}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 26} {\c_ampersand_str}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 27} {'}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 2A} {*}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 2B} {+}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 2C} {,}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 3B} {;}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 3D} {=}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 3F} {?}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 30} {0}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 31} {1}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 32} {2}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 33} {3}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 34} {4}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 35} {5}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 36} {6}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 37} {7}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 38} {8}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 39} {9}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 28} {\c_backslash_str(}
+     \exp_not:N \str_replace_all:Nnn #2 {\c_percent_str 29} {\c_backslash_str)}
+  }
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf8/URI:nN } #1 #2
+  {
+     \use:c { @@_string_from_unicode_utf8/URI-raw:nN } {#1} #2
+     \str_put_left:Nn #2  {(}
+     \str_put_right:Nn #2 {)}
+  }
+% with utf16 with BE marker
+\cs_new_protected:cpn { @@_string_from_unicode_utf16/string-raw:nN }  #1 #2
+  {
+    \str_set_convert:Nnnn #2
+      { #1 }
+      { default }
+      {utf16/string}
+  }
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf16/string:nN } #1 #2
+  {
+    \use:c { @@_string_from_unicode_utf16/string-raw:nN } {#1} #2
+    \str_put_left:Nn #2  {(}
+    \str_put_right:Nn #2 {)}
+  }
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf16/hex-raw:nN } #1 #2
+  {
+     \str_set_convert:Nnnn #2
+       { #1 }
+       { default }
+       {utf16/hex}
+  }
+
+\cs_new_protected:cpn { @@_string_from_unicode_utf16/hex:nN } #1 #2
+  {
+    \use:c { @@_string_from_unicode_utf16/hex-raw:nN } {#1} #2
+    \str_put_left:Nn #2  {<}
+    \str_put_right:Nn #2 {>}
+  }
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{BDC  operator commands}
+% \begin{macro}{\pdf_bdc:nn}
+% \begin{macro}{\pdf_bdcobject:nn}
+% \begin{macro}{\pdf_bdcobject:n}
+% \begin{macro}{\pdf_bmc:n}
+% \begin{macro}{\pdf_emc:}
+%    \begin{macrocode}
+\cs_new_protected:Npn  \pdf_bdc:nn #1 #2 { \@@_backend_bdc:nn { #1 }{ #2 } }
+\cs_new_protected:Npn  \pdf_bdcobject:nn #1 #2 { \@@_backend_bdcobject:nn { #1 }{ #2 } }
+\cs_new_protected:Npn  \pdf_bdcobject:n #1     { \@@_backend_bdcobject:n  { #1 } }
+\cs_new_protected:Npn  \pdf_bmc:n #1     { \@@_backend_bmc:n  { #1 } }
+\cs_new_protected:Npn  \pdf_emc:         { \@@_backend_emc: }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

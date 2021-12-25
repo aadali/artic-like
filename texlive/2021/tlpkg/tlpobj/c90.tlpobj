@@ -1,0 +1,18 @@
+name c90
+category Package
+revision 60830
+shortdesc c90 font encoding for Thai
+longdesc part of the CJK package, ctan.org/pkg/cjk
+containersize 1924
+containerchecksum 2350e99bfd047ea514586894d20bd37dc778c74fd4c1848063ba7d53cb59ed5df36cd20fd51140ede8af7f32ed7efc44e1d4f3db4a0baaa7d1439941ed5297a9
+doccontainersize 94164
+doccontainerchecksum 9561381312a2e3fcd6a03da1082e9bdb5a2c30e241078adbb70d06060a21674fc8a40c5cb81ce87d31ff99c168d73e9b4074cb3a6114439d5a441dd0054cc682
+docfiles size=24
+ texmf-dist/doc/fonts/enc/c90/c90.pdf
+srccontainersize 9824
+srccontainerchecksum 774c2aae917343ba9dd78785d2dc9123bf1dfd0920b638ee991a92a9a87199205fea04ea36304806c7213a2bb4ef06459f385558c9691a7dddff69cfe4d35fa0
+srcfiles size=17
+ texmf-dist/source/fonts/enc/c90/c90.etx
+ texmf-dist/source/fonts/enc/c90/c90.mtx
+runfiles size=1
+ texmf-dist/fonts/enc/dvips/c90/c90.enc

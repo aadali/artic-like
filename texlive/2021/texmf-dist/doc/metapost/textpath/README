@@ -1,0 +1,41 @@
+% This material is subject to the LaTeX Project Public License. See
+% http://www.ctan.org/tex-archive/help/Catalogue/licenses.lppl.html
+% for the details of that license.
+
+package: textpath v1.6 2007/02/11
+author: Stephan Hennig (stephanhennig@arcor.de)
+
+
+Description
+-----------
+This MetaPost package provides macros to typeset text along
+a free path with the help of LaTeX, thereby preserving kerning
+and allowing for 8-bit input (accented characters).
+
+
+Installation
+------------
+To install the package put the files into the following
+directories in a local textmf tree and update the file
+name data base.
+
+<localtexmftree>/doc/metapost/textpath:
+ textpath.pdf
+ textpath.tex
+ textpathfigs.mp
+ textpathfigs.tex
+ 
+<localtexmftree>/metapost/textpath:
+ textpath.mp
+ 
+<localtexmftree>/tex/latex/textpath:
+ textpathmp.sty
+
+
+Usage Notes
+-----------
+See file textpath.pdf.
+
+
+Happy TeXing!
+Stephan Hennig

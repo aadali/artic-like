@@ -1,0 +1,167 @@
+﻿\documentclass[12pt]{article}
+
+% Ruby markup renewal
+\usepackage[overlap, CJK]{ruby}     
+\renewcommand{\rubysep}{-0.3ex}
+\renewcommand{\rubysize}{0.6}
+
+% automatically wraps characters from specific unicode blocks with the relevant font tag
+\usepackage{fontwrap}
+
+% in this example, fontwrap is only allowed to process content for 'ruby' tags.
+\setfontwrapallowedmacros{ruby}
+
+% The main font is a somewhat bland font.
+\setmainfont{Times New Roman}
+
+% always good to have, in case a sentence is unmanageable and needs to be rewritten.
+\overfullrule=5pt
+
+% document start
+\begin{document}
+  
+  
+  % ---------------------------------------------------------
+  %
+  %  In the first part of what is effectively a unit test,
+  %  we set the font handling for characters from the Latin
+  %  unicode blocks to the 'Palatino Linotype' font. For
+  %  characters from the CJK unicode blocks, we use the
+  %  'kiloji' font, which is a playful font for Japanese.
+  %
+  % ---------------------------------------------------------
+
+  \section{Before we start:}
+
+  \setunicodegroupfont{Latin}{Palatino Linotype}
+  \setunicodegroupfont{CJK}{kiloji}
+
+  Before the test text is generated, \textbackslash unicodegroupLatinFont is set to '\unicodegroupLatinFont',
+   and \textbackslash unicodegroupCJKFont is set to '\unicodegroupCJKFont'.
+
+
+  % ---------------------------------------------------------
+  %
+  %  In our unit test, the first section must look identical
+  %  to the second section.
+  %
+  % ---------------------------------------------------------
+
+  \section{This:}
+
+  \fontwrap{
+    test 1: \emph{- 仕 -},  test2: \ruby{ruby base text}{- 仕 -}\ どうぞ.
+  }
+
+  \section{Should look like this:}
+
+  \fontspec{\unicodegroupLatinFont}test 1: \emph{- 仕 -},  test2: \ruby{ruby
+   base text}{- \fontspec{\unicodegroupCJKFont}仕\fontspec{\unicodegroupLatinFont}
+   -}\ \fontspec{\unicodegroupCJKFont}どうぞ\fontspec{\unicodegroupLatinFont}.
+
+
+  % ---------------------------------------------------------
+  %
+  %  In the second part of our test, we issue font changes.
+  %  We set the font handling for characters from the Latin
+  %  unicode blocks to the 'Arial' font, which is distinctly
+  %  different from the Palatino Linotype font, and we set
+  %  the CJK font to 'Ume Mincho', a "clinical" Japanese font.
+  %
+  % ---------------------------------------------------------
+
+  \section{Before we continue:}
+
+  \setunicodegroupfont{Latin}{Arial}
+  \setunicodegroupfont{CJK}{Ume Mincho}
+
+  Then, before we continue our test, \textbackslash unicodegroupLatinFont is set to '\unicodegroupLatinFont',
+  and \textbackslash unicodegroupCJKFont is set to '\unicodegroupCJKFont'.
+
+
+  % ---------------------------------------------------------
+  %
+  %  Again, the first section must look identical to the
+  %  second section.
+  %
+  % ---------------------------------------------------------
+
+  \section{And more elaborately, this:}
+
+  \fontwrap{
+    This is a paragraph on the Japanese language, written \ruby{日本語}{nihongo}. The pronunciation above
+    the Japanese is a romanisation of the Japanese syllabic word にほんご, which is a combination of 'ni',
+    'ho', 'n' and 'go'. The last syllable is a voicing of the syllable こ, 'ko', denoted with two tickmarks
+    in the upper right.
+    
+    Adding a pronunciation key to written Japanese is a common practice. A simple example of this would 
+    be the aforementioned \ruby{日本語}{にほんご}, this time with Japanese in the pronunciation key.
+    The type of writing that is used to mark pronunciation is called \ruby{振り仮名}{ふりがな}\ in Japanese,
+    which translates to something like 'sprinkled (syllabic) writing'.
+  }
+  
+  \section{Should look like:}
+
+    \fontspec{\unicodegroupLatinFont}This is a paragraph on the Japanese language, written \ruby{\fontspec{\unicodegroupCJKFont}日本語\fontspec{\unicodegroupLatinFont}}{nihongo}. The pronunciation above
+    the Japanese is a romanisation of the Japanese syllabic word \fontspec{\unicodegroupCJKFont}にほんご\fontspec{\unicodegroupLatinFont}, which is a combination of 'ni',
+    'ho', 'n' and 'go'. The last syllable is a voicing of the syllable \fontspec{\unicodegroupCJKFont}こ\fontspec{\unicodegroupLatinFont}, 'ko', denoted with two tickmarks
+    in the upper right.
+    
+    Adding a pronunciation key to written Japanese is a common practice. A simple example of this would 
+    be the aforementioned \ruby{\fontspec{\unicodegroupCJKFont}日本語\fontspec{\unicodegroupLatinFont}}{\fontspec{\unicodegroupCJKFont}にほんご\fontspec{\unicodegroupLatinFont}}, this time with Japanese in the pronunciation key.
+    The type of writing that is used to mark pronunciation is called \ruby{\fontspec{\unicodegroupCJKFont}振り仮名\fontspec{\unicodegroupLatinFont}}{\fontspec{\unicodegroupCJKFont}ふりがな\fontspec{\unicodegroupLatinFont}}\ in Japanese,
+    which translates to something like 'sprinkled (syllabic) writing'.
+
+  % ---------------------------------------------------------
+  %
+  %  In the third part of our test, we check whether fontwrap
+  %  respects our environment declarations. Because we'll use
+  %  a verbatim group, we make sure to call verbatimfontwrap
+  %  as well, to preserve the whitespace precisely.
+  %
+  % ---------------------------------------------------------
+
+  \section{Again, before we continue:}
+
+  \setunicodegroupfont{Latin}{Arial}
+  \setunicodegroupfont{CJK}{kiloji}
+
+  For the final test, \textbackslash unicodegroupLatinFont is set to \unicodegroupLatinFont\ 
+  and \textbackslash unicodegroupCJKFont is kept at '\unicodegroupLatinFont', for contrast.
+  The verbatim block will not support Japanese, so we'll see gaps in it.
+  
+  \section{This:}
+  
+  \begin{verbatimfontwrap}
+  \fontwrap{
+    This is some text with English and 日本語 in it (\ruby{正解}{せいかい}), with a
+    \begin{verbatim}
+      Verbatim Block Inside It.
+      Also With English And 日本語 Text.
+      (Don't mind the capitals. The point was there
+      should not be any fontspec tags)
+    \end{verbatim}
+    After which some more 日本語 and English.
+  }
+  \end{verbatimfontwrap}
+  
+  \section{Should look like this:}
+
+    \fontspec{\unicodegroupLatinFont}This is some text with English and
+    \fontspec{\unicodegroupCJKFont}日本語\fontspec{\unicodegroupLatinFont}\ in it (\ruby{\fontspec{\unicodegroupCJKFont}正解\fontspec{\unicodegroupLatinFont}}{\fontspec{\unicodegroupCJKFont}せいかい\fontspec{\unicodegroupLatinFont}}), with a
+    \begin{verbatim}
+      Verbatim Block Inside It.
+      Also With English And 日本語 Text.
+      (Don't mind the capitals. The point was there
+      should not be any fontspec tags)
+    \end{verbatim}
+    After which some more \fontspec{\unicodegroupCJKFont}日本語\fontspec{\unicodegroupLatinFont}\ and English.
+  
+
+  % ---------------------------------------------------------
+  %
+  %  And that concludes the unit test.
+  %
+  % ---------------------------------------------------------
+  
+\end{document}

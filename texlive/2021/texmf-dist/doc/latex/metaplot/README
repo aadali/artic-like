@@ -1,0 +1,47 @@
+MetaPlot is a set of Metapost macros for manipulating pre-generated
+plots (and similar objects), and formatting them for inclusion in
+a Metapost figure.  The intent is that the plots can be generated
+by some outside program, in an abstract manner that does not require
+making decisions about on-page sizing and layout, and then they can
+be imported into MetaPlot and arranged using the full capabilities
+of Metapost.  Metaplot also includes a very flexible set of macros
+for generating plot axes, which may be useful in other contexts as
+well.
+
+Presently, MetaPlot is in something of a pre-release beta state; it
+is quite functional, but the syntax of the commands are still 
+potentially in flux.  Bug reports and other suggestions would be
+most welcome!
+
+The documentation currently consists of a preprint of a paper on
+MetaPlot given at Practical TeX 2004, as metaplot_preprint.pdf.
+
+A set of examples of MetaPlot usage are also given in the /examples
+directory; these currently consist of the figures for the afore-
+mentioned paper, along with the various C++ programs and support 
+files needed to produce them.
+
+---------------------------------------------------------------------
+Changelog:
+
+Version 0.9    Initial CTAN release.
+Version 0.91   Bugfix (bounding box of plots set to 0.0-1.0)
+
+---------------------------------------------------------------------
+License information:
+
+Metaplot is distributed under the conditions of the LaTeX Project
+Public License, either version 1.3 of this license or (at your
+option) any later version.  This work has the LPPL maintenance
+status "author-maintained".
+
+The examples in the examples directory are also released under the
+LPPL, except as noted in the files themselves.  In particular, the
+files comprising the MetaContour program are instead released under
+the Gnu Public License (GPL).
+
+---------------------------------------------------------------------
+Author:
+
+Metaplot is written by Brooks Moses.  Bug reports, feature requests,
+and any other suggestions should be directed to metaplot@dpdx.net.

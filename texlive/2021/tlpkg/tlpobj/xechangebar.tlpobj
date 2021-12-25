@@ -1,0 +1,22 @@
+name xechangebar
+category Package
+revision 54080
+shortdesc An extension of package changebar that can be used with XeLaTeX
+longdesc The package extends package changebar so it can be used with
+longdesc XeLaTeX. It introduces the new option xetex for use with
+longdesc XeLaTeX. Everything else remains the same and users should
+longdesc consult the original documentation for usage information.
+containersize 6868
+containerchecksum 833f0b1cea32c0bb345d1aad5360613ee36baf17a35e13d20a4bcc75edc77b3a7c48c4406ddadd670890cb93dc0d03cf91462994271f351ebf2bc221bfbae5a3
+doccontainersize 2412
+doccontainerchecksum 6d2c385b3b826b8b97cb725ffd3e7479ec3ddd2d2bbd8c772fb0b1faa9d0edb758871003ec379d8ec349fc4e3f7de2bf3130cc0e5d9e356ad472232d16acb546
+docfiles size=4
+ texmf-dist/doc/xelatex/xechangebar/README details="Readme"
+ texmf-dist/doc/xelatex/xechangebar/cbtest1.tex
+runfiles size=9
+ texmf-dist/tex/xelatex/xechangebar/xechangebar.sty
+catalogue-also changebar
+catalogue-ctan /macros/xetex/latex/xechangebar
+catalogue-license lppl1.3
+catalogue-topics editorial
+catalogue-version 1.0

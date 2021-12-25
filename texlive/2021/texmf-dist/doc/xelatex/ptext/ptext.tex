@@ -1,0 +1,84 @@
+\documentclass[a4paper,12pt]{article}      
+\usepackage{fancyvrb}
+\usepackage{hyperref}  
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\setdigitfont{Yas}
+\title{بسته
+\textsf{ptext}\RTLthanks{نسخه $1.1$}
+}\author{وحید دامن‌افشان%
+\LTRthanks{\href{mailto:vdamanafshan@gmail.com}{\texttt{vdamanafshan@kut.ac.ir}}}}
+\begin{document}
+\baselineskip=.7cm
+\maketitle
+\begin{abstract}
+بسته \textsf{ptext} با الهام از بسته \textsf{lipsum} نوشته شده است و کار آن، تولید $100$ پاراگراف
+متن از شاهنامه فردوسی، برای پر کردن صفحات یک نوشتار است.
+\end{abstract}
+\section{روش به کارگیری}
+این بسته را  طبق معمول می‌توان با استفاده از دستور
+\verb!\usepackage{...}!
+فراخوانی کرد. همانند سایر بسته‌های سازگار شده با زی‌پرشین، بهتر است که این بسته نیز،  قبل از بسته زی‌پرشین، فراخوانی شود.
+
+این بسته، چهار دستور مهم ارایه می‌کند. مهم‌ترین آن‌ها، 
+\verb!\ptext!
+است. این دستور، به طور پیش‌فرض، پاراگراف $1$ تا $7$ تعریف شده در بسته را در خروجی چاپ 
+می‌کند که مقدار آن، در حالت استاندارد، بیشتر از یک 
+\verb!a4paper!
+است. برای تغییر این مقدار به پاراگراف‌های \texttt{n} تا \texttt{m}   می‌توان از دستور
+\LRE{\verb!\setptextdefault{n-m}!}
+استفاده کرد. دستور 
+\verb!\ptext!
+یک آرگومان اختیاری هم دارد که از آن برای تعیین محدوده پاراگراف‌ها استفاده می‌شود. به عنوان مثال، دستور 
+\LRE{\verb+\ptext[4-57]+}،
+پاراگراف‌های $4$ تا $57$ را در خروجی چاپ می‌کند و یا دستور 
+\verb!\ptext[23]!،
+پاراگراف $23$ام را چاپ می‌کند.
+
+پاراگراف‌های تولید شده به وسیله
+\verb!\ptext!
+توسط دستور
+\verb!\par!
+از هم جدا می‌شوند. به عبارت دیگر، هر پاراگراف با دستور 
+\verb!\par!
+به پایان می‌رسد. این امر، ممکن است گاهی باعث اثرات تصادفی شود. لذا این بسته، گزینه 
+\textsf{nopar}
+را ارایه می‌کند. برای این منظور، بسته را باید به صورت 
+\begin{Verbatim}
+\usepackage[nopar]{ptext}
+\end{Verbatim}
+فراخوانی کرد.
+
+علاوه بر دستورات گفته شده، نسخه ستاره‌دار دستور
+\verb!\ptext!،
+یعنی
+\verb!\ptext*!
+نیز تعریف شده است که همان کار
+گزینه
+\textsf{nopar}
+را انجام می‌دهد. به عبارت دیگر، اگر از گزینه 
+\textsf{nopar}
+استفاده نشود، دستور
+\verb!\ptext*!،
+پاراگراف‌ها را بدون دستور
+\verb!\par!
+چاپ می‌کند.
+
+در صورت نیاز به راهنمایی در مورد   این بسته، می‌توان به 
+\href{http://forum.parsilatex.com}{تالار گفتگوی پارسی‌لاتک}%
+\LTRfootnote{\href{http://forum.parsilatex.com}{\texttt{http://forum.parsilatex.com}}}
+مراجعه کرد.
+\section{سپاس‌گزاری}
+از آقای وفا خلیقی، نویسنده بسته‌های زی‌پرشین و بی‌دی به خاطر پیشنهادهای ارزنده‌شان
+و نیز از سید رضی علوی‌زاده  به خاطر در اختیار گذاشتن 
+\href{http://saaghar.pozh.org/}{متن شاهنامه}%
+\LTRfootnote{\href{http://saaghar.pozh.org}{\texttt{http://saaghar.pozh.org}}}، 
+ سپاس‌گزاری می‌شود. 
+\section*{تغییرات بسته}
+\begin{enumerate}
+\item
+$8$ آبان $1391$، انتشار نسخه $1$؛
+\item
+$9$ اردیبهشت $1392$، رفع باگ مربوط به استفاده از دستور \verb!\ptext! در دستور \verb!\caption! و انتشار نسخه $1.1$.
+\end{enumerate}
+\end{document}

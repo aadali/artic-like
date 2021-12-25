@@ -1,0 +1,32 @@
+\documentclass{minimal}
+\usepackage{tikz}
+\usepackage[xcolor]{xespotcolor}
+\begin{document}
+   % First define a new color space
+   \NewSpotColorSpace{MyPantone}
+   % Now define real colors using http://www.pantone.com/color-finder
+   % The numbers are the CMYK representation. For example, the CMYK 
+   % representation of PANTONE 383 CP is 29 1 100 18 that translatex to
+   % 0.29 0.01 1 0.18  
+   \AddSpotColor{MyPantone}{Blue}{Spot\SpotSpace Color\SpotSpace Blue}{0.92 0.24 0 0 }
+   \AddSpotColor{MyPantone}{Green}{Spot\SpotSpace Color\SpotSpace Green} {0.65 0 0.96 0 }
+   % Next we need to set the page color space
+   \SetPageColorSpace{MyPantone}
+   % Now we can define and use colors. Colors are defined as shades of a specific spot color.
+   \definecolor{AbsoluteBlue}{spotcolor}{Blue,1.0}
+   \pagecolor{AbsoluteBlue}      %% Page color
+   \SpotColor{Green}{0.8} %% Color of letters
+   A spotcolor as background color.
+   \clearpage  % Page 2
+   This is some more text.  %Text appears in black.
+   \clearpage  % Page 3
+   \pagecolor{white}
+   \colorbox{AbsoluteBlue}{Text in blue background}
+   \clearpage  % Page 4 Tikz example
+   \definecolor{MyGreen}{spotcolor}{Green,0.5}
+   \definecolor{MyBlue}{spotcolor}{Blue,0.5}
+   \begin{tikzpicture} 
+     \filldraw[color=MyGreen] (0.1,0.1) rectangle (1.9,0.9);
+     \draw[color=MyBlue, ultra thick] (0,0) rectangle (2,1);
+   \end{tikzpicture}
+\end{document}

@@ -1,0 +1,34 @@
+%%% file tab-spec-xcolor-sty.tex
+\begingroup
+\ttfamily\small\color{mpcolor}
+\setlength{\tabcolsep}{.5\columnsep}
+\setlength{\tabcolwidth}{\textwidth}
+\addtolength{\tabcolwidth}{-4\tabcolsep}
+\setlength{\tabcolwidth}{.333\tabcolwidth}
+\begin{longtable}{@{}*{3}{p{\tabcolwidth}}@{}}
+  \caption{RGB, CMYK, and grey~scale colors from \LaTeX\ package \name{xcolor}.}%
+  \label{tab:spec-xcolor-sty}\\
+\multicolumn{3}{l}{\normalfont\footnotesize\normalcolor Taken from file \texttt{xcolor.sty} v1.0i as distributed by \LaTeX\ package \name{xcolor} (19 colors, with augmented names).}
+\endfirsthead
+
+\colorproof[xcolor-sty]{red}\\
+\colorproof[xcolor-sty]{green}\\
+\colorproof[xcolor-sty]{blue}\\
+\colorproof[xcolor-sty]{brown}\\
+\colorproof[xcolor-sty]{lime}\\
+\colorproof[xcolor-sty]{orange}\\
+\colorproof[xcolor-sty]{pink}\\
+\colorproof[xcolor-sty]{purple}\\
+\colorproof[xcolor-sty]{teal}\\
+\colorproof[xcolor-sty]{violet}\\
+\colorproof[xcolor-sty]{cyan}\\
+\colorproof[xcolor-sty]{magenta}\\
+\colorproof[xcolor-sty]{yellow}\\
+\colorproof[xcolor-sty]{olive}\\
+\colorproof[xcolor-sty]{black}\\
+\colorproof[xcolor-sty]{darkgray}\\
+\colorproof[xcolor-sty]{gray}\\
+\colorproof[xcolor-sty]{lightgray}\\
+\colorproof[xcolor-sty]{white}\\
+\end{longtable}
+\endgroup

@@ -1,0 +1,64 @@
+% This package was written for the CTAN submission of the blockdraw_mp documentation source.
+%
+% It is my first package using options...
+%
+% It should be loaded before the parskip package, or else it will not work!
+%
+% Author:  Henrik Tidefelt
+
+
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesPackage{tighttoc}[2006/07/18 Tight table of contents] 
+
+\RequirePackage{ifthen}
+
+\newcounter{oldtocdepth}
+\newcounter{tighttoctocdepth}
+\newboolean{overridetocdepth}
+\newboolean{bookmarktoc}
+\newboolean{tighttoc}
+\newlength{\tighttocparskipreduction}
+
+\DeclareOption{bookmark}{\setboolean{bookmarktoc}{true}}
+\DeclareOption{nobookmark}{\setboolean{bookmarktoc}{false}}
+\DeclareOption{depthdefault}{\setboolean{overridetocdepth}{false}}
+\DeclareOption{depth0}{\setcounter{tighttoctocdepth}{0}\setboolean{overridetocdepth}{true}}
+\DeclareOption{depth1}{\setcounter{tighttoctocdepth}{1}\setboolean{overridetocdepth}{true}}
+\DeclareOption{depth2}{\setcounter{tighttoctocdepth}{2}\setboolean{overridetocdepth}{true}}
+\DeclareOption{depth3}{\setcounter{tighttoctocdepth}{3}\setboolean{overridetocdepth}{true}}
+\DeclareOption{depth4}{\setcounter{tighttoctocdepth}{4}\setboolean{overridetocdepth}{true}}
+\DeclareOption{0ex}{\setlength{\tighttocparskipreduction}{0ex}}
+\DeclareOption{1ex}{\setlength{\tighttocparskipreduction}{1ex}}
+\DeclareOption{2ex}{\setlength{\tighttocparskipreduction}{2ex}}
+\DeclareOption{3ex}{\setlength{\tighttocparskipreduction}{3ex}}
+
+\ExecuteOptions{bookmark,depthdefault,1ex}
+\ProcessOptions\relax 
+
+\let\@oldstarttoc\@starttoc
+
+\renewcommand{\tableofcontents}%
+{%
+  \ifthenelse{\isundefined{\href}}{%
+    % Don't add a bookmark!
+    }{%
+      \ifthenelse{\boolean{bookmarktoc}}{%
+        \pdfbookmark[1]{Contents}{thetocanchor}%
+      }{%
+        % do nothing
+      }%
+    }%
+  \section*{\contentsname}%
+  \addtolength{\parskip}{-\tighttocparskipreduction}%
+  \setcounter{oldtocdepth}{\value{tocdepth}}%
+  \ifthenelse{\boolean{overridetocdepth}}{%
+    \setcounter{tocdepth}{\thetighttocdepth}  % limit the depth of the conents tree
+  }{%
+    % do nothing
+  }%
+  \makeatletter
+  \@oldstarttoc{toc}%
+  \makeatother
+  \setcounter{tocdepth}{\value{oldtocdepth}}%
+  \addtolength{\parskip}{\tighttocparskipreduction}%
+}

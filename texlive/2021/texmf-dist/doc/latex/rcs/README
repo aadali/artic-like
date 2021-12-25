@@ -1,0 +1,65 @@
+$Id: README,v 1.7 2003/02/02 22:47:39 schrod Exp $
+------------------------------------------------------------
+
+
+The rcs package utilizes the inclusion of RCS supplied data in
+LaTeX documents. It's upward compatible to *all* rcs styles I know of.
+
+In particular, you can easily
+ -- access values of every RCS field in your document
+ -- put the checkin date on the titlepage
+ -- put RCS fields in a footline
+
+You can typeset revision logs. Not in verbatim -- real LaTeX text! But
+you need a configurable RCS for that. Refer to the user manual for
+more detailed information.
+
+You can also configure the rcs package easily to do special
+things for any keyword.
+    This bundle comes with a user manual, an internal interface
+description, full documentation of the implementation, style
+information for AUC-TeX, and test cases.
+
+
+Concerning compatibility: The user interfaces of Piet van Oostrum's,
+Nelson Beebe's, and Tom Verhoeff's style are supported. It is also
+compatible to previous versions of this style option (of course).
+I.e., the confusion of multiple incompatible rcs style options should
+be resolved now.
+
+
+MANIFEST features a list of files in this distribution.
+For installation instructions, check the file INSTALL.
+
+
+Reference anonymous ftp site:
+CTAN, directory /tex-archive/macros/latex/contrib/supported/rcs
+
+
+LEGALESE
+
+This is freely distributable software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License (version
+2) as published by the Free Software Foundation.
+
+This software is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License in
+the file License along with this package; if not, write to the Free
+Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+
+Share and enjoy,
+
+	Joachim
+
+--
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Joachim Schrod				Email: jschrod@acm.org
+Rödermark, Germany
+
+	I've finally learned what "upward compatible" means.  It means we get
+	to keep all our old mistakes.				[D. van Tassel]

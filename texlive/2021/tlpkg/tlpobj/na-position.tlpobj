@@ -1,0 +1,24 @@
+name na-position
+category Package
+revision 55559
+shortdesc Tables of relative positions of curves and asymptotes or tangents in Arabic documents
+longdesc This package facilitates, in most cases, the creation of tables
+longdesc of relative positions of a curve and its asymptote, or a curve
+longdesc and a tangent in one of its points. It depends on tkz-tab and
+longdesc listofitems, as well as amsmath, amsfonts, mathrsfs, and
+longdesc amssymb. This package has to be used with polyglossia and
+longdesc XeLaTeX to produce documents in Arabic.
+containersize 1900
+containerchecksum fb88693c5d626331b9deab494bdb0fececfcb3d6f76e91f76f467ab8f152fe857e4ef41f87b38092118646961c0f64f82501f0f75f5610d793b8158d77bbbf9e
+doccontainersize 84476
+doccontainerchecksum abe7a0a765cfdd1d4ff454180b32d4153cd715d9af333221ed3213082dfbcf5ae0562617a2b30835a8aaf2a65c166e6fb3941d3bd6c781d83d65e971bd53f356
+docfiles size=25
+ texmf-dist/doc/xelatex/na-position/README details="Readme"
+ texmf-dist/doc/xelatex/na-position/na-positiondocAR.pdf details="Package documentation (Arabic)" language="ar"
+ texmf-dist/doc/xelatex/na-position/na-positiondocAR.tex
+runfiles size=2
+ texmf-dist/tex/xelatex/na-position/na-position.sty
+catalogue-ctan /macros/xetex/latex/na-position
+catalogue-license lppl
+catalogue-topics maths arabic xetex
+catalogue-version 1.2

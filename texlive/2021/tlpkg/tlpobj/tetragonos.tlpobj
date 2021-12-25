@@ -1,0 +1,24 @@
+name tetragonos
+category Package
+revision 49732
+shortdesc Four-Corner codes of Chinese characters
+longdesc This is a XeLaTeX package for mapping Chinese characters to
+longdesc their codes in the Four-Corner Method.
+containersize 207756
+containerchecksum dbb37eec17d41633d951b3202289289bffd9bf9a8f509cfbb7f98baab9b7e684e7d7fbfb5f50ce41251d09d9f0ea81fd9e68fa91984e788e5e43f8e398463fff
+doccontainersize 108080
+doccontainerchecksum f55cba055574e78934b8766f02de08f417f625042627c2c1e64cb7fe39ecb1e3553d5b862afe521f4d65805713c856ab000e3db3b7fc906266886f2ebec490a6
+docfiles size=31
+ texmf-dist/doc/xelatex/tetragonos/README.md details="Readme"
+ texmf-dist/doc/xelatex/tetragonos/tetragonos-example.tex
+ texmf-dist/doc/xelatex/tetragonos/tetragonos.pdf details="Package documentation" language="zh"
+ texmf-dist/doc/xelatex/tetragonos/tetragonos.tex
+runfiles size=376
+ texmf-dist/tex/xelatex/tetragonos/tetragonos-database.def
+ texmf-dist/tex/xelatex/tetragonos/tetragonos.sty
+catalogue-contact-bugs https://github.com/Mikumikunisiteageru/tetragonos/issues
+catalogue-contact-home https://github.com/Mikumikunisiteageru/tetragonos
+catalogue-ctan /macros/xetex/latex/tetragonos
+catalogue-license lppl1.3c
+catalogue-topics chinese
+catalogue-version 1

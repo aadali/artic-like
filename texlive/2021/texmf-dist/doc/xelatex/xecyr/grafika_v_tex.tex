@@ -1,0 +1,101 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[russian]{babel}
+\usepackage{a4wide,onepagem,qqru}
+
+\font\manual=logo10
+\def\PiCTeX{{\rm P\kern-.12em\lower.5ex\hbox{I}\kern-.075emC\kern-.11em\TeX}}
+\def\MF{{\manual META}\-{\manual FONT}}
+\def\MP{{\scshape Meta\-post}}
+\def\Xy{\leavevmode\hbox{\kern-.1em X\kern-.3em\lower.4ex\hbox{Y\kern-.15em}}}
+
+% russification of 'enumerate'
+\makeatletter
+\def\labelenumi{\theenumi)}
+\def\theenumii{\asbuk{enumii}}
+\def\labelenumii{\theenumii)}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{{\bf--}}
+\let\theenumiii\relax
+\def\p@enumiii{\theenumi\theenumii}
+\makeatother
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\author{А. Шипунов}
+\title{Графика в \TeX/\LaTeX}
+\date{19.10.1999}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item Работа с внешними объектами
+
+        \begin{enumerate}
+
+        \item Графический код (\<векторный\>), используемый для
+        препроцессинга или получаемый в результате компиляции
+        \TeX-файла, а затем встраиваемый в \texttt{dvi}-файл при
+        помощи команды \verb|\special|.
+
+                \begin{itemize}
+
+                \item \MF\ (и его вариант \MP)~--- пакеты \MP\ и
+                \texttt{mfpic}. Перед встраиванием в \texttt{dvi}-файл
+                требуется компиляция кода.
+
+                \item PostScript~--- пакеты из набора
+                \<\texttt{graphics}\>, PSTricks, \TeX{}\-Draw,
+                \Xy-pic, \texttt{pspicture}, \texttt{psfrag} и~т.д.
+
+                \item TPIC~--- \Xy-pic, \texttt{eepic}.
+
+                \item Em\TeX~--- \texttt{curvesls}, \texttt{stree}, код,
+                производимый пакетом \TeX{}cad и~т.д.
+
+                \item Различные языки для препроцессоров,
+                переводящих внешний код во внутренний: mathsPIC
+                ($\rightarrow$ \PiCTeX), Flow ($\rightarrow$
+                \LaTeX) и~т.д.
+
+                \end{itemize}
+
+        \item Готовые рисунки: растровые (\texttt{BMP}, \texttt{PCX} и~т.д.)
+        и векторные (\texttt{WMF}, \texttt{FIG}, \texttt{EPS}).
+
+                \begin{itemize}
+
+                \item Встраивание за счет команды
+                \verb|\special| в \texttt{dvi}-файл~--- пакеты из
+                набора \<\texttt{graphics}\> и~т.д.
+
+                \item Препроцессинг для преобразования в линейки
+                (\texttt{bm2latex}), в шрифты (\texttt{bm2font}) или в
+                другие внешние графические форматы
+                (\texttt{transfig}).
+
+                \end{itemize}
+
+        \item \<Чужие\> шрифты: \texttt{tfm} + \texttt{vf} + Type1 или
+        TrueType
+
+        \end{enumerate}
+
+\item Работа с внутренними объектами
+
+        \begin{enumerate}
+
+        \item Линейки (rules)~--- \<\LaTeX\ picture
+        environment\> и его расширения (пакеты \texttt{bar},
+        \texttt{bez123}, \texttt{epic}, \texttt{pmgraph} и~т.д.), \PiCTeX,
+        \Xy-pic, Dra\TeX.
+
+        \item Шрифты (\texttt{tfm} + \texttt{pk})~--- \LaTeX\ picture с
+        расширениями (см. выше), \Xy-pic и~т.д.
+
+        \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

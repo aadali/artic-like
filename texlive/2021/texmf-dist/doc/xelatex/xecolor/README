@@ -1,0 +1,43 @@
+_________________________
+The xecolor Package v0.1
+
+xecolor package is a simple package which defines about 140 different colors by XeTeX's font
+colour feature that can be used in bidirectional texts without any problem. 
+
+The xecolor package is a replacement for xecolour package.
+
+The following commands are provided:
+
+	*\definergbcolor{colorname}{RRGGBB}
+
+This command is similar to the \definecolor command of color package but has only two arguments.
+The second argument is triple pair of hex values to specify the colour in RGB space. As an example you
+can say \definergbcolor{blue}{0000FF} to define "blue" color. For more examples, see xecolor.sty
+
+	*\xecolor{colorname}
+
+This command is similar to \color command of color package.
+
+	*\textxecolor{colorname}{text}
+
+This command is similar to \textcolor command of color package.
+
+	*\normalxecolor
+
+This command is similar to \normalcolor of color package.
+
+
+If you want to report any bugs or typos and corrections in the documentation,
+or ask for any new features, or suggest any improvements, or ask any questions
+about the package, then please do not send any direct emails to us; we will not 
+answer any direct emails. Instead please use the issue tracker:
+  <https://github.com/persian-tex/xecolor/issues>
+In doing so, please always explain your issue well enough, always include
+a minimal working examples showing the issue, and always choose the appropriate
+label for your query (i.e. if you are reporting any bugs, choose `bug' label). 
+
+Current version release date: 2013/04/04
+
+_________________________
+Persian TeX Group
+persian-tex@tug.org

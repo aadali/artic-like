@@ -1,0 +1,34 @@
+\documentclass{ltxdoc}
+\usepackage{holtxdoc}
+\begin{document}
+\title{The \xpackage{bidicontour} Package}
+\author{Vafa Khalighi\\\xemail{persian-tex@tug.org}}
+\maketitle
+\vskip 0pt plus 3fill
+\fbox{%
+\begin{minipage}{\dimexpr(\textwidth-2\fboxsep-2\fboxrule)}
+If you want to report any bugs or typos and corrections in the documentation,
+or ask for any new features, or suggest any improvements, or ask any questions
+about the package, then please do not send any direct email to me; I will not 
+answer any direct email. Instead please use the issue tracker:
+
+\medskip
+  \centerline{\url{https://github.com/vafa/bidicontour/issues}}
+
+\medskip
+In doing so, please always explain your issue well enough, always include
+a minimal working example showing the issue, and always choose the appropriate
+label for your query (i.e. if you are reporting any bugs, choose `Bug' label). 
+\end{minipage}
+}
+\tableofcontents
+ \section{Introduction}
+The \xpackage{contour} package allows you to have colored contour text; unfortunately this package does not work together with \xpackage{bidi} package; in addition its \texttt{outline} option does not support xdvipdfmx driver.
+
+
+The \xpackage{bidicontour} package is a re-implementation of \xpackage{contour} package adding bidi support; it also adds support for xdvipdfmx driver when you use \texttt{outline} option of the package.
+
+\section{Documentation}
+All the commands of \xpackage{contour} package are prefixed with \texttt{bidi} in \xpackage{bidicontour} package; for instance instead using \cs{contour} command; you will need to use \cs{bidicontour} command. You must always load \xpackage{bidicontour} package before \xpackage{bidi} package (or any other packages that uses \xpackage{bidi} package internally like \xpackage{xepersian} package).
+
+\end{document}

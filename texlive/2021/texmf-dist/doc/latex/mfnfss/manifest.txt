@@ -1,0 +1,42 @@
+%
+% CONTENTS OF THE MFNFSS BUNDLE
+% =============================
+
+oldgerm.dtx
+        Package to typeset with old german fonts designed by Yannis
+        Haralambous.  These fonts use special ligatures to access
+        accented characters and may therefore need additional
+        definitions if used with packages like babel or
+        german.  Please don't report those kind of problems as bugs,
+        we do know about it.
+
+oldgerm.ins
+        Installation script for the oldgerm package.
+
+pandora.dtx
+        Package to typeset with Pandora fonts by Nazeen N. Billawala.
+
+pandora.ins
+        Installation script for the Pandora package and its .fd files.
+
+manifest.txt
+        The file you are reading.
+
+README.md
+        General readme file (in markdown) about the bundle.
+
+
+===
+
+The following files have been removed from this bundle and are now
+part of the AMS-LaTeX distribution:
+
+ - amsfonts.fdd
+ - amsfonts.ins
+ - eufrak.dtx
+ - eufrak.ins
+ - euscript.dtx
+ - euscript.ins
+
+
+

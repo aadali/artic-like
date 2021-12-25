@@ -1,0 +1,28 @@
+name pdflscape
+category Package
+revision 53047
+shortdesc Make landscape pages display as landscape
+longdesc The package adds PDF support to the landscape environment of
+longdesc package lscape, by setting the PDF /Rotate page attribute.
+longdesc Pages with this attribute will be displayed in landscape
+longdesc orientation by conforming PDF viewers.
+containersize 2252
+containerchecksum c343f0527f21421f26396a6210f7932786a222a437b43d6b2bf1c53339633a0aa8337843222d92048a6a5a41f0952aa2fde6e2bfb2e181cf811383a23ffadadb
+doccontainersize 298264
+doccontainerchecksum 5fccb7dc5607f1196d6df6a1a68d010c0b9eea10854cdf2e133f31dc4095f101efc05abcf9e980a3e05375ba29ce319dc13385790c2261778fde54d3b94d1251
+docfiles size=75
+ texmf-dist/doc/latex/pdflscape/README.md
+ texmf-dist/doc/latex/pdflscape/pdflscape.pdf details="Package documentation"
+srccontainersize 6000
+srccontainerchecksum 08cc0550cb76eff49ab4cc9f357f22a7c8086b2802eb191237bbf79acce2b134a2bf3ea28a8324d0140ac785afb8a928a8f7b8cc7e58bdd7e9d8b1d3a66ee7e5
+srcfiles size=6
+ texmf-dist/source/latex/pdflscape/pdflscape.dtx
+runfiles size=2
+ texmf-dist/tex/latex/pdflscape/pdflscape.sty
+catalogue-also lscape
+catalogue-contact-bugs https://github.com/ho-tex/pdflscape/issues
+catalogue-contact-repository https://github.com/ho-tex/pdflscape
+catalogue-ctan /macros/latex/contrib/pdflscape
+catalogue-license lppl1.3
+catalogue-topics landscape layout
+catalogue-version 0.12

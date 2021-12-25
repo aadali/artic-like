@@ -1,0 +1,49 @@
+name breqn
+category Package
+revision 60881
+shortdesc Automatic line breaking of displayed equations
+longdesc The package provides solutions to a number of common
+longdesc difficulties in writing displayed equations and getting
+longdesc high-quality output. For example, it is a well-known
+longdesc inconvenience that if an equation must be broken into more than
+longdesc one line, 'left...right' constructs cannot span lines. The
+longdesc breqn package makes them work as one would expect whether or
+longdesc not there is an intervening line break. The single most
+longdesc ambitious goal of the package, however, is to support automatic
+longdesc linebreaking of displayed equations. Such linebreaking cannot
+longdesc be done without substantial changes under the hood in the way
+longdesc formulae are processed; the code must be watched carefully,
+longdesc keeping an eye on possible glitches. The bundle also contains
+longdesc the flexisym and mathstyle packages, which are both designated
+longdesc as support for breqn.
+containersize 24524
+containerchecksum c280871916bf0689794cba9640a7666a0f7b295635b85d99d08f04cc0c4cb7ac82552360b0c8b3d677b138779239c4ac4a2583db26fe194870c0c97a9a53395f
+doccontainersize 1063132
+doccontainerchecksum 70ab6500b714c0e91c597b43d934942c39c23cfc9993702b6eefa19b8c9027aa0e7eaa55cb48413e2cb42e468167492e7a401380c1cb4a711daae364ae01283b
+docfiles size=280
+ texmf-dist/doc/latex/breqn/CHANGES.md
+ texmf-dist/doc/latex/breqn/README.md details="Readme"
+ texmf-dist/doc/latex/breqn/breqn.pdf details="Package documentation"
+ texmf-dist/doc/latex/breqn/flexisym.pdf
+ texmf-dist/doc/latex/breqn/mathstyle.pdf
+srccontainersize 80324
+srccontainerchecksum aa4922ba1ebcbfe00716b02b567da4b17ab1b0d22cd5fe8332d147496f93dbe0a94e9e38964b13b6b4944ccfb2ce49bfb32ed5602ca1f147fc99163eaedadf46
+srcfiles size=83
+ texmf-dist/source/latex/breqn/breqn.dtx
+ texmf-dist/source/latex/breqn/breqnbundle.ins
+ texmf-dist/source/latex/breqn/flexisym.dtx
+ texmf-dist/source/latex/breqn/mathstyle.dtx
+runfiles size=42
+ texmf-dist/tex/latex/breqn/breqn.sty
+ texmf-dist/tex/latex/breqn/cmbase.sym
+ texmf-dist/tex/latex/breqn/flexisym.sty
+ texmf-dist/tex/latex/breqn/mathpazo.sym
+ texmf-dist/tex/latex/breqn/mathptmx.sym
+ texmf-dist/tex/latex/breqn/mathstyle.sty
+ texmf-dist/tex/latex/breqn/msabm.sym
+catalogue-contact-home http://wspr.io/breqn/
+catalogue-contact-repository https://github.com/wspr/breqn
+catalogue-ctan /macros/latex/contrib/breqn
+catalogue-license lppl1.3
+catalogue-topics maths
+catalogue-version 0.98l

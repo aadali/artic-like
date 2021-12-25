@@ -1,0 +1,377 @@
+% \iffalse meta-comment
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright (C) Martin Schröder, 1994–2001
+% 				Marei Peischl (peiTeX)  <marei@peitex.de>, 2020
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is
+%   Marei Peischl <marei@peitex.de>.
+%
+% This work consists of the files
+% 	README.md
+% 	everyshi.dtx
+% 	everyshi.ins
+% and the derived files
+% 	everyshi.sty
+% 	everyshi-2001-05-15.sty
+% 	everyshi.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \fi
+% \iffalse
+%
+%<package|fallback>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{everyshi}
+%<package>         [2020/11/18 v4.00 EveryShipout Package]
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{url}
+\usepackage{everyshi}
+\GetFileInfo{everyshi.sty}
+\setcounter{IndexColumns}{2}
+\EnableCrossrefs
+\CodelineIndex    % Index code by line number
+%\OnlyDescription  % comment out for implementation details
+\setcounter{IndexColumns}{2}
+\setlength{\IndexMin}{30ex}
+\setlength{\columnseprule}{.4pt}
+\begin{document}
+   \DocInput{everyshi.dtx}
+\end{document}
+%</driver>
+% \fi
+% \CheckSum{68}
+%
+%
+%% \CharacterTable
+%% {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%  Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%  Digits        \0\1\2\3\4\5\6\7\8\9
+%%  Exclamation   \!     Double quote  \"     Hash (number) \#
+%%  Dollar        \$     Percent       \%     Ampersand     \&
+%%  Acute accent  \'     Left paren    \(     Right paren   \)
+%%  Asterisk      \*     Plus          \+     Comma         \,
+%%  Minus         \-     Point         \.     Solidus       \/
+%%  Colon         \:     Semicolon     \;     Less than     \<
+%%  Equals        \=     Greater than  \>     Question mark \?
+%%  Commercial at \@     Left bracket  \[     Backslash     \\
+%%  Right bracket \]     Circumflex    \^     Underscore    \_
+%%  Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%  Right brace   \}     Tilde         \~}
+%%
+%  \newcommand*{\package}[1]{\textnormal{\sffamily#1}}
+%  \changes{v1.00}{1994/12/04}{New}
+%  \changes{v1.02}{1994/12/07}{Name changed from \textsf{atshipou} to 
+%                                \textsf{everyshi}}
+%  \changes{v1.03}{1994/12/09}{Documentation improved}
+%  \changes{v2.00}{1995/01/25}{Redesign}
+%  \changes{v2.02}{1998/08/09}{Documentation improved}
+%  \changes{v2.03}{1999/06/08}{Moved to LPPL}
+%  \changes{v3.00}{2001/05/15}{\cs{AtNextShipout} added}
+%  \changes{v4.00}{2020/11/18}{Mark \package{everyshi} as obsolete and use the kernel methods}
+%
+% ^^A -----------------------------
+%
+%  \changes{v2.01}{1997-03-09}{Fixed use of \cs{newline} in title.}
+%  \title{\unskip
+%           The obsolete \package{everyshi} package^^A
+%           \thanks{^^A
+%              The version umber of this file is \fileversion,
+%              last revised \filedate.\protect\newline
+%              The name \textsf{everyshi} is a tribute to the $8+3$
+%              file-naming convention of certain ``operating
+%              systems''; strictly speaking it should be 
+%              \textsf{everyshipout}.}^^A
+%        }
+%  \author{Martin Schröder\thanks{maintained by Marei Peischl}}
+%  \date{\filedate}
+%  \maketitle
+%
+% ^^A -----------------------------
+%  \renewcommand*{\abstractname}{Why you should no longer use this package:}
+%  \begin{abstract}
+%     This packages provides hooks into \cs{sshipout}
+%     called \cs{EveryShipout} and \cs{AtNextShipout} analogous to 
+%     \cs{AtBeginDocument}.
+%
+%	  With the introduction of the \LaTeX{} hook management this package became obsolete in 2020.
+%	  Information on their usage can be found in the the corresponding documentation for
+%     \package{lthooks}\cite{lthooks-doc} and \package{ltshipout}\cite{ltshipout-doc}.
+%     We only provide this package to allow backwards compatibility.
+%     For current versions of \LaTeX{} it's only mapping the hooks to the original \package{everyshi} macros.
+%	  In case you use an older \LaTeX{} format, \package{everyshi} will automatically fallback to its' old implementation by loading \package{everyshi-2001-05-15}.
+%  \end{abstract}
+%
+%  \pagestyle{headings}
+%
+% ^^A -----------------------------
+%
+%  \tableofcontents
+%
+% ^^A -----------------------------
+%
+%  \section{Introduction}
+%
+% \changes{v4.00}{2020/11/18}{Information on new kernel methods}
+%  This package provides the hooks \cs{EveryShipout} and 
+%  \cs{AtNextShipout} whose arguments are executed after the output 
+%  routine has constructed \cs{box255}, and before \cs{shipout} is 
+%  called.
+%  \changes{v4.00}{2020/11/18}{Remove example applications.}
+% ^^A -----------------------------
+%
+%  \section{Usage}
+%
+%  \cs{EveryShipout}\marg{code} declares
+%  \mbox{$\langle$\emph{code}$\rangle$} that is saved internally
+%  and executed before each \cs{shipout}.
+%
+%  \emph{Warning:} The \mbox{$\langle$\emph{code}$\rangle$} is saved 
+%  globally; there is currently no way to remove it.
+%
+%  \DescribeMacro{\AtNextShipout}
+%  \cs{AtNextShipout}\marg{code} declares
+%  \mbox{$\langle$\emph{code}$\rangle$} that is saved internally
+%  and executed just before \emph{only the next} \cs{shipout}.
+%
+%  The \meta{code} is executed after \cs{box255} has been constructed
+%  by the output routine and can change \cs{box255}.
+%  \cs{shipout} is called \emph{after} \meta{code}.
+%
+%  Repeated use of the commands is permitted: the code in the
+%  argument is stored (and executed) in the order of their
+%  declarations.
+%
+%  The argument of \cs{AtNextShipout} is executed \emph{after}
+%  the argument of \cs{EveryShipout}.
+%
+% ^^A -----------------------------
+%
+%  \section{Options}
+%
+%  The package has no options.
+%
+% ^^A -----------------------------
+%
+%  \section{Required packages}
+%
+%  The package does not require any further packages.
+%
+% ^^A -----------------------------
+%
+%  \begin{thebibliography}{1}
+%	\bibitem{lthooks-doc}
+%        Frank Mittelbach.
+%        \newblock The \package{ltshipout} package.
+%        \newblock \url{http://mirrors.ctan.org/macros/latex/base/lthooks-doc.pdf}
+%	\bibitem{ltshipout-doc}
+%        Frank Mittelbach.
+%        \newblock The \package{ltshipout} package.
+%        \newblock \url{http://mirrors.ctan.org/macros/latex/base/ltshipout-doc.pdf}
+%  \end{thebibliography}
+%
+%  \StopEventually{^^A
+% ^^A -----------------------------
+%
+%  \section{Acknowledgements}
+%  ^^A
+%  Thanks to Ulrike Fischer for the advice during preparation of Version 4.00.
+%  Version 2.0 of \package{everyshi} borrows heavily from
+%  \textsf{quire.tex} of the \textsf{Midnight Macros} by Marcel R.~van 
+%  der Goot (\texttt{marcel@cs.caltech.edu}).
+%  The pointer to \textsf{quire} was provided by Lothar Meyer-Lerbs
+%  (\texttt{\TeX{}Satz@zfn.uni-bremen.de}).
+%  As usual Rebecca Stiels improved the quality of this documentation.
+%
+%
+% \PrintChanges
+%  }
+% ^^A -----------------------------
+%
+%  \section{The implementation}
+%  \changes{v4.00}{2020/11/18}{Emulate everyshi if the kernel is new enough.}
+%  \raggedright
+%    \begin{macrocode}
+%<*package>
+\providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+\IfFormatAtLeastTF{2020/10/01}{}{\input{everyshi-2001-05-15.sty}}
+\IfFormatAtLeastTF{2020/10/01}{}{\endinput}
+\protected \def \EveryShipout  {\AddToHook{shipout/before}}
+\protected \def \AtNextShipout {\AddToHookNext{shipout/before}}
+%</package>
+%    \end{macrocode}
+%  \subsection{The original implementation by Martin Schröder}
+%  To provide compatibility for older \LaTeX{} formats we wrap the
+%  original implementation of \package{everyshi} version 3.00 into
+%  the fallback package \package{everyshi-2001-05-15}.
+%    \begin{macrocode}
+%<*fallback>
+\ProvidesPackage{everyshi-2001-05-15}
+       [2020/11/18 v4.00 EveryShipout Package (fallback mechanism)]
+%    \end{macrocode}
+%
+%  \subsection{Allocations}
+%
+%  First we allocate the hooks
+%  \begin{macro}{\@EveryShipout@Hook}
+%  \changes{v2.00}{1995/01/25}{Name changed from \cs{@shipouthook} to
+%                                \cs{@EveryShipout@Hook}}
+%  \changes{v3.00}{2001/05/15}{\cs{newcommand}}
+%  The code to be executed before \cs{shipout} is stored in
+%  \cs{@EveryShipout@Hook}.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@Hook}{}
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{\@EveryShipout@AtNextHook}
+%  \changes{v3.00}{2001/05/15}{new}
+%  The code to be executed just before the normal \cs{shipout}
+%  and \cs{@EveryShipout@EveryHook}.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@AtNextHook}{}
+%    \end{macrocode}
+%  \end{macro}
+%
+%
+% ^^A -----------------------------
+%
+%  \subsection{The user-visible commands}
+%  ^^A
+%  \begin{macro}{\EveryShipout}
+%  \begin{macro}{\AtNextShipout}
+%  \changes{v1.01}{1994/12/06}{\cs{newcommand} instead of \cs{def}}
+%  \changes{v1.02}{1994/12/07}{Name changed from \cs{AtShipout} to 
+%                                \cs{EveryShipOut}}
+%  \changes{v3.00}{2001/05/15}{\cs{AtNextShipout} added}
+%  The commands are modeled after \cs{AtBeginDocument}.
+%    \begin{macrocode}
+\newcommand*{\EveryShipout}[1]
+   {\g@addto@macro\@EveryShipout@Hook{#1}}
+\newcommand*{\AtNextShipout}[1]
+   {\g@addto@macro\@EveryShipout@AtNextHook{#1}}
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+%
+% ^^A -----------------------------
+%
+%  \subsection{Inserting the hooks}
+%  ^^A
+%  We want to redefine \cs{shipout} so that first \cs{box255} is
+%  constructed and after that we can do something and at last shipout
+%  the (possible modified) \cs{box255}.
+%  Alas, this does not work in the usual way, since \cs{shipout} is
+%  a \TeX{} primitive whose argument is a \meta{box}.
+%  This means that simply redefining \cs{shipout} via \cs{newcommand[1]}
+%  is impossible since \meta{box} can be something like \cs{box255} or
+%  something like \cs{vbox\{\ldots\}}.
+%  In the first case \texttt{\#1} would be \meta{\cs{box}} (without 
+%  \meta{255}); in the second case it would be \meta{\cs{vbox}} (without
+%  \meta{\{\ldots\}}).
+%
+%  The solution we use here is borrowed from \textsf{quire.tex} by
+%  Marcel R.~van der Goot.
+%  It is based upon \cs{afterassignment} and \cs{aftergroup}.
+%
+%  \begin{macro}{\@EveryShipout@Shipout}
+%  \changes{v2.00}{1995/01/25}{new}
+%  \cs{@EveryShipout@Shipout} is our replacement for \cs{shipout}.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@Shipout}{%
+   \afterassignment\@EveryShipout@Test
+   \global\setbox\@cclv= %
+   }
+%    \end{macrocode}
+%  \cs{box255} is set to whatever comes after \cs{shipout}; but after
+%  that assignment \cs{@EveryShipout@Test} is called.
+%  \end{macro}
+%
+%  \begin{macro}{\@EveryShipout@Test}
+%  \changes{v2.00}{1995/01/25}{new}
+%  \cs{@EveryShipout@Test} determines if \cs{shipout} is called with
+%  an argument like \cs{box255} or something like \cs{vbox\{\ldots\}}.
+%  In the later case we delay the call of \cs{@EveryShipout@Output} 
+%  (where the original \cs{shipout} is called) via \cs{aftergroup}.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@Test}{%
+   \ifvoid\@cclv\relax
+      \aftergroup\@EveryShipout@Output
+   \else
+      \@EveryShipout@Output
+   \fi%
+   }
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{\@EveryShipout@Output}
+%  \changes{v2.00}{1995/01/25}{new}
+%  \changes{v3.00}{2001/05/15}{added call to \cs{@EveryShipout@AtNextHook}}
+%  \cs{@EveryShipout@Output} does the actual work.
+%  First the \meta{code} accumulated via \cs{EveryShipout} and 
+%  \cs{AtNextShipout} is called and then the original \cs{shipout} stored 
+%  in \cs{@EveryShipout@Org@Shipout} is called to finally ship out 
+%  \cs{box255}.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@Output}{%
+   \@EveryShipout@Hook%
+   \@EveryShipout@AtNextHook%
+%    \end{macrocode}
+%  We have to reset \cs{@EveryShipout@AtNextHook} after each use.
+%    \begin{macrocode}
+      \gdef\@EveryShipout@AtNextHook{}%
+   \@EveryShipout@Org@Shipout\box\@cclv%
+   }
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{\@EveryShipout@Org@Shipout}
+%  \changes{v2.00}{1995/01/25}{new}
+%  The original \cs{shipout} is stored in \cs{@EveryShipout@Org@Shipout}
+%  by \cs{@EveryShipout@Init}.
+%  Here we allocate it.
+%    \begin{macrocode}
+\newcommand{\@EveryShipout@Org@Shipout}{}
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{\@EveryShipout@Init}
+%  \changes{v2.00}{1995/01/25}{new}
+%  \changes{v3.00}{2001/05/15}{output message}
+%  \cs{@EveryShipout@Init} stores the original \cs{shipout} in 
+%  \cs{@EveryShipout@Org@Shipout} and sets \cs{shipout} to 
+%  \cs{@EveryShipout@Shipout}.
+%  This is done at \cs{begin\{document\}} via \cs{AtBeginDocument}.
+%    \begin{macrocode}
+\newcommand*{\@EveryShipout@Init}{%
+   \message{ABD: EveryShipout initializing macros}%
+   \let\@EveryShipout@Org@Shipout\shipout
+   \let\shipout\@EveryShipout@Shipout
+   }
+\AtBeginDocument{\@EveryShipout@Init}
+%    \end{macrocode}
+%  \end{macro}
+%
+%    \begin{macrocode}
+%</fallback>
+%    \end{macrocode}
+%
+%
+% ^^A -----------------------------
+%
+%  \Finale
+%

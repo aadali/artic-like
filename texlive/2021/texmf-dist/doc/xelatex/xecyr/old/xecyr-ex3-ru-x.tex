@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[russian]{babel}
+\usepackage{xecyr}
+\usepackage[arrow,graph]{xy}
+\usepackage[margin=2cm]{geometry}
+
+\setmainfont[Mapping=tex-text]{CMU Serif}
+\setmonofont{CMU Typewriter Text}
+
+\nofiles
+\everymath={\rm}
+\let\к=\textit
+\let\ж=\textbf
+\let\мж=\mathbf
+
+\newdimen\sH
+\def\tsH#1{\setbox0=\txt{#1}\global\sH=\wd0\POS *!L{\copy0}}
+
+\title{Классификация жизненных форм}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+\shorthandoff{"}
+\xygraph{%
+*!R\txt{Организмы}="A"
+        (:[rr]*!L\txt{Эндотрофные, E})
+        :[uurr]!{\tsH{Омнитрофные}}[r/.8\sH/]
+                (:[urrr(.5)]*!L\txt{Двумерно, O$_2$})
+                :[drrr(.5)]*!L\txt{Трехмерно, O$_3$}
+"A"
+        :[drr]!{\tsH{Экзотрофные}}[r/.8\sH/]="B"
+                ((:[urr]!{\tsH{Активные}}[r/.7\sH/]
+                        (:[urrr(.5)]*!L\txt{Нападающие, A$_n$})
+                        (:[drrr(.5)]*!L\txt{Охотящиеся, A$_o$}))
+                (:[rr]*!L\txt{Растущие, R}))
+"B"
+                (:[drr]*!L\txt{Седативные, S})
+                :[ddrr]!{\tsH{Пропускающие}}[r/.8\sH/]
+                        (:[urrr(.7)]*+!L\txt{Неподвижно\\ фильтрующие,\\ F$_n$})
+                        :[drrr(.7)]*+!L\txt{Подвижно\\ фильтрующие,\\ F$_p$}
+}
+\shorthandon{"}
+\end{center}
+
+{\parindent0pt\obeylines
+Примеры:
+\к{Centroheliozoa} --- A$_n$, R, \ж{F$_\мж{p}$}
+\к{Echinodermata} --- S, \ж{A$_\мж{n}$}, F$_p$
+\к{Spermatophyta} --- \ж{O$_\мж{2}$}, R, E, S
+\к{Eumycota} --- \ж{R}, E, S
+\к{Chlorophyta} --- F$_n$, A$_o$, \ж{O$_\мж{1}$}, O$_2$
+\к{Scolecida} --- E, M$_2$, \ж{A$_\мж{n}$}, F$_n$
+}
+
+\end{document}

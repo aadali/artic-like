@@ -1,0 +1,176 @@
+Part I
+very basic
+    def X(expr A) = 
+    def Y(expr A) =
+    def Z(expr A) =  
+    def W(expr A) =   
+    def conorm(expr A) = 
+    def cmyknorm(expr A) = %% This is not good when MalcomX is true 
+    def makecmyk( expr A, B ) =
+    def maketrio( expr A  ) =
+Vector Calculus
+    def N(expr A) =
+    def cdotprod(expr A, B) = 
+    def ccrossprod(expr A, B) = 
+    def ndotprod(expr A, B) = 
+    def ncrossprod(expr A, B) = 
+    def paircrossprod(expr A, B) = 
+    def getangle(expr A, B) =
+    def getcossine( expr Center, Radius ) =
+    vardef planarrotation( expr VecX, VecY, TheAngle ) =
+    def eulerrotation( expr AngA, AngB, AngC, Vec ) =
+    def rotvecaroundanother( expr Angle, RotVec, FixVec ) =
+    def inplanarvolume( expr PointPerpA, PointPerpB, Point ) =
+    def getanglepair( expr InVec ) =
+Auxiliary
+    def ps(expr A, Thicken_Factor) =
+    def signalvertex(expr A, TF, Col) =
+    def signalshadowvertex(expr A, TF, Col) =
+    def resolvec(expr A, B) =
+    def produce_vga_border =
+    def produce_auto_scale =
+    vardef cstr( expr Cl ) =
+    vardef bstr( expr bv ) =
+Fundamental
+    def rp(expr R) =
+    def vp(expr D) =
+    def cb(expr R) =
+    def projectpoint(expr ViewCentr, R) =
+    def lineintersectplan( expr LinePoi, LineDir, PlanPoi, PlanDir ) =
+Basic Functions
+    def pathofstraightline( expr A, B ) =
+    def drawsegment( expr A, B ) =
+    def cartaxes(expr axex, axey, axez) =
+    def orthaxes(expr axex, strx, axey, stry, axez, strz ) =
+    def angline(expr A, B, Or, W, S)(suffix RelPos) =
+    def anglinen(expr A, B, Or, W, S, RelPos) =
+    def squareangline(expr A, B, Or, W) =
+    def rigorouscircle( expr CenterPos, AngulMom, Radius ) =
+    def tdarrow(expr FromPos, ToTip ) =
+    def tdcircarrow(expr CenterPos, AngulMom, Ray, StartAngle, Amplituda ) =
+    def emptyline(expr JoinP,ThickenFactor,OutCol,InCol,theN,EmptyFrac,sN)(text LinFunc) = 
+    def closedline( expr ThisIsClosed, theN, ForeFrac, BackFrac )( text LinFunc ) =
+    def twocyclestogether( expr CycleA, CycleB ) =
+    def ellipticpath(expr CenterPos, OneAxe, OtherAxe ) =
+    def ellipticshadowpath(expr CenterPos, OneAxe, OtherAxe ) =
+    def labelinspace(expr KeepRatio,RefPoi,BaseVec,UpVec)(text SomeString) =
+    def closedpathinspace( expr SomeTDPath, NDivide )( text ConverterFunc ) =
+Standard Objects
+    def goodcirclepath(expr CenterPos, AngulMom, Radius ) =
+    def circleshadowpath(expr CenterPos, AngulMom, Radius ) =
+    def head_on_circle(expr Pos, Radius ) =
+    def spatialhalfcircle(expr Center, AngulMom, Radius, ItsTheNearest ) =
+    def rigorousdisc(expr InRay, FullFill, BaseCenter, Radius, LenVec) =
+    def rigorouscone(expr UsualForm,CenterPos,AngulMom,Radius,VertexPos) =
+    def verygoodcone(expr BackDash,CenterPos,AngulMom,Radius,VertexPos) =
+    def rigorousfearpath(expr Center, Radius ) =
+    def rigorousfearshadowpath(expr Center, Radius ) =
+    def tropicalglobe( expr NumLats, TheCenter, Radius, AngulMom ) =
+    def whatisthis(expr CenterPos,OneAxe,OtherAxe,CentersDist,TheFactor) =
+    def spheroidshadow( expr CentrPoi, NorthPoleVec, Ray ) =
+    def spheroid( expr CentrPoi, NorthPoleVec, Ray ) =
+    def ellipsoid( expr Centr, AxOne, AxTwo, AxThr ) =
+    def ellipsoidshadow( expr Centr, AxOne, AxTwo, AxThr ) =
+    def revolparab( expr BaseCenter, ParabTip, BaseRay ) =
+    def fakehole( expr CenterPos, LenVec, Radius ) =
+    def kindofcube(expr WithDash, IsVertex, RefP, AngA, AngB, AngC, LenA, LenB, LenC ) =
+    def setthestage( expr NumberOfSideSquares, SideSize ) =
+    def setthearena( expr NumberOfDiameterCircles, ArenaDiameter ) =
+    def spatialhalfsfear(expr Center, AngulMom, Radius ) =
+Toroidal Stuff
+    def smoothtorus( expr Tcenter, Tmoment, Bray, Sray ) =
+    def torushadow( expr Tcenter, Tmoment, Bray, Sray ) =
+    def quartertorus( expr Tcenter, Tstart, Tfinis, Sray ) =
+    def pointinsidetorus( expr Point, Tcenter, Tmoment, Bray, Sray ) =
+    def pointrelativetotorus( expr Point, Tcenter, Tmoment, Bray, Sray ) =
+    def intersectorus( expr Tcenter, Tmoment, Bray, Sray, LinePoi, LineDir ) =
+Non-standard objects
+    def positivecharge( expr InFactPositive, Center, BallRay ) =
+    def simplecar(expr RefP, AngCol, LenCol, FronWheelCol, RearWheelCol ) =
+Differential Equations
+    def fieldlinestep( expr Spos, Step )( text VecFunc ) =
+    def fieldlinepath( expr Numb, Spos, Step )( text VecFunc ) =
+    def trajectorypath( expr Numb, Spos, Svel, Step )( text VecFunc ) =
+    def dragtrajectorypath( expr Spos, Svel, Step )( text VecFunc ) =
+    def magnetictrajectorypath( expr Numb, Spos, Svel, Step )( text VecFunc ) =
+Part II
+Advanced 3D-Object Definition Functions
+    vardef makeline@#( text vertices ) = 
+    vardef makeface@#( text vertices ) = 
+    vardef getready( expr commstr, refpoi ) =
+    def flipvector(expr A, B) =
+    def facevector(expr A, B, C) =
+    def masscenter(expr Nsides)(suffix Coords) =
+    def covervector(expr A, B, MassCenter) =
+    def themarkisinview(expr Mark, OwnFace) =
+    def maycrossviewplan(expr Ea, Eb, La, Lb) =
+    def crossingpoint(expr Ea, Eb, La, Lb) =
+    def crossingpointf(expr Ea, Eb, Fen) =
+    def maycrossviewplanf(expr Ea, Eb, Fen) =
+    def insidedge(expr Point, Ea, Eb) =
+    def insideviewsphere(expr Ea, Eb, La, Lb) =
+    def insidethistriangle(expr Point, A, B, C ) =
+    def insideviewtriangle(expr Point, Ea, Eb) =
+    def insidethisface(expr Point, FaN) =
+    def coarse_line(expr A, B, Facen, Press, Col) =
+    def facepath(expr Facen) =
+    def faceshadowpath(expr Facen) =
+    def face_invisible( expr Facen )( text LineAtribs ) =
+Different kinds of renderers
+    def sharpraytrace
+    def lineraytrace(expr Press, Col) =
+    def faceraytrace(expr Press, Col) =
+    def draw_all_test( expr AlsoDrawLines ) =
+    def fill_faces( text LineAtribs ) =
+    def doitnow =
+Nematic Liquid Crystal wise
+    def generatedirline(expr Lin, Phi, Theta, Long, Currpos ) =
+    def generatedirface(expr Fen, Phi, Theta, Long, Base, Currpos ) =
+    def generateonebiax(expr Lin, Phi, Theta, Long, SndDirAngl, Base, Currpos ) =
+    def director_invisible( expr SortEmAll, ThickenFactor, CyclicLines ) =
+    def circularsheet( expr CenterP, Rad, VecX, VecY, StartA, FinisA, Width ) =
+    def banana( expr CenterPos,  Radius, AngleColor, Wid, Amp  ) =
+Plotting
+    def hexagonaltrimesh( expr BeHexa,theN,SideSize )( text SurFunc ) = 
+    def fillfacewithlight( expr FaceN ) =
+Part III 
+parametric plots and another renderer
+    def face_drawfill( expr Facen, dmin_, dmax_ ,ColAtrib, ColAtribone ) =
+    def draw_invisible( expr Option, DoJS, ColAtrib, ColAtribone ) =
+    def bracket( expr low, poi, hig ) = 
+    def partrimesh( expr nt,ns,lowt,higt,lows,higs,lowx,higx,lowy,higy,lowz,higz,facz)( text parSurFunc ) =
+Part IV 
+automatic perspective tuning and minimization
+    def randomfear =
+    def renormalizevc( expr inF, inVC ) =
+    def calculatecost( expr TryF, TryVc, TrySp, TrySh ) =
+    def forcepointinsidefear( text A ) =
+    def forcepairinsidepage( text A ) =
+    def calculatejump( expr AverCost, PrevCost, RandCost, JumpLimit ) =
+    def photoreverse( expr IterNum, ExpTao, JumpFact ) =
+    def minimizestep( expr Abcisscolor )( text PlainFunc ) =
+Part V
+Intersections
+    def calculatecostver(expr VerA,DisA,VerB,DisB,VerC,DisC,TryV) =
+    def improvertex( expr VerA, DisA, VerB, DisB, VerC, DisC, IniV ) =
+    def ultraimprovertex( expr PlanPoi, PlanDir, BaseCenter, Radius, LenVec,
+    def necplusimprovertex( expr PlanPoi, PlanDir,
+    def intersectprolatespheroid( expr CentrPoi, NorthPoleVec, Ray,
+Part VI 
+strictly two-dimensional
+    def is_cyclic expr cpath =
+    def springpath( expr begp, endp, piturnum, piturnproj, spgfrac ) =  
+    def zigzagfrontier( expr begp, endp, nzigs, dev, zthick, tthick, fthick, excol, incol ) =  
+    def randomcirc( expr radi, stddev, numpois ) =  
+    def labeln(expr S, Pos, RelPos) =
+    def dotlabelrand(expr S, Pos ) =
+    def radialcross( expr A, la, B, lb, GoUp) =
+    def ropethread( expr Index ) =
+    def ropepattern( expr BasePath, RopeWidth, Nturns ) =
+    def firsttangencypoint( expr Path, Point, ResolvN ) =
+    def lasermachine( expr DefinedPath, Beam, CosLimit ) =
+    def startahead( expr DefinedPath, JumpTime ) =
+    def crossingline( expr FirstPath, SecondPath, TimeTolerance ) =
+ vardef segmentarea( expr Ps ) = 
+ vardef cyclicpatharea( expr P ) = % result = area of the interior
+ vardef archangle@#( expr _p, _q, _s, archwidth ) text _t =

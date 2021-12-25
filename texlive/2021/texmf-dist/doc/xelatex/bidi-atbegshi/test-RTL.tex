@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage{bidi-atbegshi}
+\usepackage[RTLdocument]{bidi}
+\setbox0\hbox{\Huge\textbf{Upper Left}}
+\setbox1\hbox{\Huge\textbf{Upper Right}}
+\setbox2\hbox{\Huge\textbf{Lower Left}}
+\setbox3\hbox{\Huge\textbf{Lower Right}}
+\AtBeginShipout{%
+\AtBeginShipoutUpperRight{%
+\put(0,\LengthToUnit{-\ht1}){\usebox1}
+}%
+\AtBeginShipoutUpperLeft{%
+\put(\LengthToUnit{-\wd0},\LengthToUnit{-\ht0}){\usebox0}
+}%
+\AtBeginShipoutLowerRight{%
+\put(0,\LengthToUnit{\dp3}){\usebox3}
+}%
+\AtBeginShipoutLowerLeft{%
+\put(\LengthToUnit{-\wd2},\LengthToUnit{\dp2}){\usebox2}
+}%
+}
+\begin{document}
+\lipsum
+\end{document}

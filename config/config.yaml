@@ -1,0 +1,37 @@
+# the input file or directory, endswith fastq or fastq.gz or fq or fq.gz
+input_fastq: "/home/a/big/ycq/data/henanCDC-20210801/20210801_1_5/barcode05.fq.gz"
+
+# the primer bed file, if specified, trim_bases will be ignored. else the raw bam will be trimmed depended on the primer positions
+primer_bed: ""
+
+# if no primer bed file, the raw fastq will be trimmed {trim_bases} base both of the ends
+trim_bases: 75
+
+# if read length is less than {min_read_len}, this read will be dropped
+min_read_len: 300
+
+# if read length is greater than {max_read_len}, this read will be dropped, 0 means no limitation
+max_read_len: 800
+
+# if read qual is less than {min_read_qual}, this read will be dropped
+min_read_qual: 8
+
+# if read map qual is less than {min_mapq}, this align will be dropped from bam
+min_mapq: 30
+
+# map threads
+map_thread: 8
+
+# sample name, default test001
+sample_name: "test001"
+
+# what sample was analysed, default sars-cov-2
+what_sample: "sars-cov-2"
+
+# the medaka model
+model: "r941_min_hac_g507"
+
+# the min depth in vcf, if the dp is less than {min_dp}, this position will be N
+min_dp: 20
+
+

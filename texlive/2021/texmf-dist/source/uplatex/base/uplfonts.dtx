@@ -1,0 +1,413 @@
+% \iffalse meta-comment
+%% File: uplfonts.dtx
+%
+%    pLaTeX fonts files:
+%       Copyright 1994-2006 ASCII Corporation.
+%    and modified for upLaTeX
+%
+%  Copyright (c) 2010 ASCII MEDIA WORKS
+%  Copyright (c) 2016 Takuji Tanaka
+%  Copyright (c) 2016-2020 Japanese TeX Development Community
+%
+%  This file is part of the upLaTeX2e system (community edition).
+%  --------------------------------------------------------------
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ifx\JAPANESEtrue\undefined
+  \expandafter\newif\csname ifJAPANESE\endcsname
+  \JAPANESEtrue
+\fi
+\def\eTeX{$\varepsilon$-\TeX}
+\def\pTeX{p\kern-.15em\TeX}
+\def\epTeX{$\varepsilon$-\pTeX}
+\def\pLaTeX{p\kern-.05em\LaTeX}
+\def\pLaTeXe{p\kern-.05em\LaTeXe}
+\def\upTeX{u\pTeX}
+\def\eupTeX{$\varepsilon$-\upTeX}
+\def\upLaTeX{u\pLaTeX}
+\def\upLaTeXe{u\pLaTeXe}
+%</driver>
+% \fi
+%
+% \setcounter{StandardModuleDepth}{1}
+% \StopEventually{}
+%
+% \iffalse
+% \changes{v1.5-u00}{2011/05/07}{p\LaTeX{}用からup\LaTeX{}用に修正。
+%     (based on plfonts.dtx 2006/11/10 v1.5)}
+% \changes{v1.6a-u00}{2016/04/06}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2016/04/01 v1.6a)}
+% \changes{v1.6b-u00}{2016/04/30}{uptrace.styの冒頭でtracefnt.styを
+%    \cs{RequirePackageWithOptions}するようにした
+%     (based on plfonts.dtx 2016/04/30 v1.6b)}
+% \changes{v1.6c-u00}{2016/06/06}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2016/06/06 v1.6c)}
+% \changes{v1.6d-u00}{2016/06/19}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2016/06/19 v1.6d)}
+% \changes{v1.6e-u00}{2016/06/29}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2016/06/26 v1.6e)}
+% \changes{v1.6f-u00}{2017/03/05}{uptrace.styのplatexrelease対応
+%     (based on plfonts.dtx 2017/02/20 v1.6f)}
+% \changes{v1.6g-u00}{2017/03/08}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2017/03/07 v1.6g)}
+% \changes{v1.6h-u00}{2017/08/05}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2017/08/05 v1.6h)}
+% \changes{v1.6i-u00}{2017/09/24}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2017/09/24 v1.6i)}
+% \changes{v1.6j-u00}{2017/11/06}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2017/11/06 v1.6j)}
+% \changes{v1.6k-u00}{2017/12/05}{デフォルト設定ファイルの読み込みを
+%    \file{uplcore.ltx}から\file{uplatex.ltx}へ移動
+%     (based on plfonts.dtx 2017/12/05 v1.6k)}
+% \changes{v1.6k-u01}{2017/12/10}{uptraceパッケージは
+%    ptraceパッケージを読み込むだけとした}
+% \changes{v1.6k-u02}{2017/12/10}{p\LaTeX{}との統合のため、
+%    up\LaTeX{}用の最小限の変更だけを定義するようにした}
+% \changes{v1.6l-u02}{2018/02/04}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2018/02/04 v1.6l)}
+% \changes{v1.6q-u02}{2018/07/03}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2018/07/03 v1.6q)}
+% \changes{v1.6t-u02}{2019/09/22}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2019/09/16 v1.6t)}
+% \changes{v1.6v-u02}{2020/02/01}{p\LaTeX{}の変更に追随。
+%     (based on plfonts.dtx 2020/02/01 v1.6v)}
+% \fi
+%
+% \iffalse
+%<*driver>
+\NeedsTeXFormat{pLaTeX2e}
+% \fi
+\ProvidesFile{uplfonts.dtx}[2020/02/01 v1.6v-u02 upLaTeX New Font Selection Scheme]
+% \iffalse
+\documentclass{jltxdoc}
+\GetFileInfo{uplfonts.dtx}
+\title{up\LaTeXe{}のフォントコマンド\space\fileversion}
+\author{Ken Nakano \& Hideaki Togashi \& TTK}
+\date{作成日：\filedate}
+\begin{document}
+   \maketitle
+   \tableofcontents
+   \DocInput{\filename}
+\end{document}
+%</driver>
+% \fi
+%
+% \section{概要}\label{plfonts:intro}
+% ここでは、和文書体を\NFSS2のインターフェイスで選択するための
+% コマンドやマクロについて説明をしています。
+% また、フォント定義ファイルや初期設定ファイルなどの説明もしています。
+% 新しいフォント選択コマンドの使い方については、\file{fntguide.tex}や
+% \file{usrguide.tex}を参照してください。
+% \changes{v1.5-u00}{2011/05/07}{p\LaTeX{}用からup\LaTeX{}用に修正。
+%     (based on plfonts.dtx 2006/11/10 v1.5)}
+% \changes{v1.6k-u02}{2017/12/10}{p\LaTeX{}との統合のため、
+%    up\LaTeX{}用の最小限の変更だけを定義するようにした}
+%
+% \begin{description}
+% \item[第\ref{plfonts:intro}節] この節です。このファイルの概要と
+%    \dst{}プログラムのためのオプションを示しています。
+% \item[第\ref{plfonts:codes}節] 実際のコードの部分です。
+% \item[第\ref{plfonts:pldefs}節] プリロードフォントやエラーフォントなどの
+%  初期設定について説明をしています。
+% \item[第\ref{plfonts:fontdef}節] フォント定義ファイルについて
+%    説明をしています。
+% \end{description}
+%
+%
+% \subsection{\dst{}プログラムのためのオプション}
+% \dst{}プログラムのためのオプションを次に示します。
+%
+% \DeleteShortVerb{\|}
+% \begin{center}
+% \begin{tabular}{l|p{0.7\linewidth}}
+% \emph{オプション} & \emph{意味}\\\hline
+% plcore & \file{uplcore.ltx}の断片を生成するオプションでしたが、削除。\\
+% trace  & \file{uptrace.sty}を生成します。\\
+% JY2mc  & 横組用、明朝体のフォント定義ファイルを生成します。\\
+% JY2gt  & 横組用、ゴシック体のフォント定義ファイルを生成します。\\
+% JT2mc  & 縦組用、明朝体のフォント定義ファイルを生成します。\\
+% JT2gt  & 縦組用、ゴシック体のフォント定義ファイルを生成します。\\
+% pldefs & \file{upldefs.ltx}を生成します。次の４つのオプションを付加する
+%          ことで、プリロードするフォントを選択することができます。
+%          デフォルトは10ptです。\\
+% xpt    & 10pt プリロード\\
+% xipt   & 11pt プリロード\\
+% xiipt  & 12pt プリロード\\
+% ori    & \file{plfonts.tex}に似たプリロード\\
+% \end{tabular}
+% \end{center}
+% \MakeShortVerb{\|}
+%
+%
+%
+% \section{コード}\label{plfonts:codes}
+% \NFSS2の拡張は、p\LaTeX{}において\file{plfonts.dtx}から生成される
+% \file{plcore.ltx}をそのまま利用するので、up\LaTeX{}では定義しません。
+% 後方互換性のため、\file{uptrace.sty}を提供しますが、
+% これも単に\file{ptrace.sty}を読み込むだけとします。
+%
+% \changes{v1.6b-u00}{2016/04/30}{uptrace.styの冒頭でtracefnt.styを
+%    \cs{RequirePackageWithOptions}するようにした}
+% \changes{v1.6k-u01}{2017/12/10}{uptraceパッケージは
+%    ptraceパッケージを読み込むだけとした}
+%    \begin{macrocode}
+%<*trace>
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesPackage{uptrace}
+     [2019/09/22 v1.6t-u02 Standard upLaTeX package (font tracing)]
+\RequirePackageWithOptions{ptrace}
+%</trace>
+%    \end{macrocode}
+%
+% デフォルト設定ファイル\file{upldefs.ltx}は、もともと\file{uplcore.ltx}の途中で
+% 読み込んでいましたが、2018年以降の新しいコミュニティ版\upLaTeX{}では
+% \file{uplatex.ltx}から読み込むことにしました。
+% 実際の中身については、第\ref{plfonts:pldefs}節を参照してください。
+% \changes{v1.6k-u00}{2017/12/05}{デフォルト設定ファイルの読み込みを
+%    \file{uplcore.ltx}から\file{uplatex.ltx}へ移動
+%     (based on plfonts.dtx 2017/12/05 v1.6k)}
+%
+%
+% \section{デフォルト設定ファイル}\label{plfonts:pldefs}
+% ここでは、フォーマットファイルに読み込まれるデフォルト値を設定しています。
+% この節での内容は\file{upldefs.ltx}に出力されます。
+% このファイルの内容を\file{uplcore.ltx}に含めてもよいのですが、
+% デフォルトの設定を参照しやすいように、別ファイルにしてあります。
+%
+% プリロードサイズは、\dst{}プログラムのオプションで変更することができます。
+% これ以外の設定を変更したい場合は、\file{upldefs.ltx}を
+% 直接、修正するのではなく、このファイルを\file{upldefs.cfg}という名前で
+% コピーをして、そのファイルに対して修正を加えるようにしてください。
+%    \begin{macrocode}
+%<*pldefs>
+\ProvidesFile{upldefs.ltx}
+      [2020/02/01 v1.6v-u02 upLaTeX Kernel (Default settings)]
+%</pldefs>
+%    \end{macrocode}
+%
+% \subsection{テキストフォント}
+% テキストフォントのための属性やエラー書体などの宣言です。
+% p\LaTeX{}のデフォルトの横組エンコードはJY1、縦組エンコードはJT1ですが、
+% up\LaTeX{}では横組エンコードはJY2、縦組エンコードはJT2とします。
+%
+% \changes{v1.6s}{2019/08/13}{Explicitly set some defaults
+%    after \cs{DeclareErrorKanjiFont} change
+%    (sync with ltfssini.dtx 2019/07/09 v3.1c)}
+% \noindent
+% 縦横エンコード共通：
+%    \begin{macrocode}
+%<*pldefs>
+\DeclareKanjiEncodingDefaults{}{}
+\DeclareErrorKanjiFont{JY2}{mc}{m}{n}{10}
+\kanjifamily{mc}
+\kanjiseries{m}
+\kanjishape{n}
+\fontsize{10}{10}
+%    \end{macrocode}
+% 横組エンコード：
+%    \begin{macrocode}
+\DeclareYokoKanjiEncoding{JY2}{}{}
+\DeclareKanjiSubstitution{JY2}{mc}{m}{n}
+%    \end{macrocode}
+% 縦組エンコード：
+%    \begin{macrocode}
+\DeclareTateKanjiEncoding{JT2}{}{}
+\DeclareKanjiSubstitution{JT2}{mc}{m}{n}
+%    \end{macrocode}
+% 縦横のエンコーディングのセット化：
+% \changes{v1.6j}{2017/11/06}{縦横のエンコーディングのセット化を
+%    plcoreからpldefsへ移動}
+%    \begin{macrocode}
+\KanjiEncodingPair{JY2}{JT2}
+%    \end{macrocode}
+% フォント属性のデフォルト値：
+% \LaTeXe~2019-10-01までは|\shapedefault|は|\updefault|でしたが、
+% \LaTeXe~2020-02-02で|\updefault|が``n''から``up''へと修正されたことに
+% 伴い、|\shapedefault|は明示的に``n''に設定されました。
+% \changes{v1.6v}{2020/02/01}{Set \cs{kanjishapedefault} explicitly to ``n''
+%    (sync with fontdef.dtx 2019/12/17 v3.0e)}
+%    \begin{macrocode}
+\newcommand\mcdefault{mc}
+\newcommand\gtdefault{gt}
+\newcommand\kanjiencodingdefault{JY2}
+\newcommand\kanjifamilydefault{\mcdefault}
+\newcommand\kanjiseriesdefault{\mddefault}
+\newcommand\kanjishapedefault{n}% formerly \updefault
+%    \end{macrocode}
+% 和文エンコードの指定：
+%    \begin{macrocode}
+\kanjiencoding{JY2}
+%    \end{macrocode}
+% フォント定義：
+% これらの具体的な内容は第\ref{plfonts:fontdef}節を参照してください。
+% \changes{v1.3}{1997/01/24}{Rename font definition filename.}
+%    \begin{macrocode}
+\input{jy2mc.fd}
+\input{jy2gt.fd}
+\input{jt2mc.fd}
+\input{jt2gt.fd}
+%    \end{macrocode}
+% フォントを有効にします。
+%    \begin{macrocode}
+\fontencoding{JT2}\selectfont
+\fontencoding{JY2}\selectfont
+%    \end{macrocode}
+%
+% \changes{v1.3b}{1997/01/30}{数式用フォントの宣言をクラスファイルに移動した}
+%
+%
+% \subsection{プリロードフォント}
+% あらかじめフォーマットファイルにロードされるフォントの宣言です。
+% \dst{}プログラムのオプションでロードされるフォントのサイズを
+% 変更することができます。\file{uplfmt.ins}では|xpt|を指定しています。
+%    \begin{macrocode}
+%<*xpt>
+\DeclarePreloadSizes{JY2}{mc}{m}{n}{5,7,10,12}
+\DeclarePreloadSizes{JY2}{gt}{m}{n}{5,7,10,12}
+\DeclarePreloadSizes{JT2}{mc}{m}{n}{5,7,10,12}
+\DeclarePreloadSizes{JT2}{gt}{m}{n}{5,7,10,12}
+%</xpt>
+%<*xipt>
+\DeclarePreloadSizes{JY2}{mc}{m}{n}{5,7,10.95,12}
+\DeclarePreloadSizes{JY2}{gt}{m}{n}{5,7,10.95,12}
+\DeclarePreloadSizes{JT2}{mc}{m}{n}{5,7,10.95,12}
+\DeclarePreloadSizes{JT2}{gt}{m}{n}{5,7,10.95,12}
+%</xipt>
+%<*xiipt>
+\DeclarePreloadSizes{JY2}{mc}{m}{n}{7,9,12,14.4}
+\DeclarePreloadSizes{JY2}{gt}{m}{n}{7,9,12,14.4}
+\DeclarePreloadSizes{JT2}{mc}{m}{n}{7,9,12,14.4}
+\DeclarePreloadSizes{JT2}{gt}{m}{n}{7,9,12,14.4}
+%</xiipt>
+%<*ori>
+\DeclarePreloadSizes{JY2}{mc}{m}{n}
+        {5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88}
+\DeclarePreloadSizes{JY2}{gt}{m}{n}
+        {5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88}
+\DeclarePreloadSizes{JT2}{mc}{m}{n}
+        {5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88}
+\DeclarePreloadSizes{JT2}{gt}{m}{n}
+        {5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88}
+%</ori>
+%    \end{macrocode}
+%
+%
+% \subsection{組版パラメータ}
+% 禁則パラメータや文字間へ挿入するスペースの設定などです。
+% 実際の各文字への禁則パラメータおよびスペースの挿入の許可設定などは、
+% \file{ukinsoku.tex}で行なっています。
+% 具体的な設定については、\file{ukinsoku.dtx}を参照してください。
+%    \begin{macrocode}
+\InputIfFileExists{ukinsoku.tex}%
+  {\message{Loading kinsoku patterns for japanese.}}
+  {\errhelp{The configuration for kinsoku is incorrectly installed.^^J%
+            If you don't understand this error message you need
+            to seek^^Jexpert advice.}%
+   \errmessage{OOPS! I can't find any kinsoku patterns for japanese^^J%
+               \space Think of getting some or the
+               uplatex2e setup will never succeed}\@@end}
+%    \end{macrocode}
+%
+% 組版パラメータの設定をします。
+% |\kanjiskip|は、漢字と漢字の間に挿入されるグルーです。
+% |\noautospacing|で、挿入を中止することができます。
+% デフォルトは|\autospacing|です。
+%    \begin{macrocode}
+\kanjiskip=0pt plus .4pt minus .5pt
+\autospacing
+%    \end{macrocode}
+% |\xkanjiskip|は、和欧文間に自動的に挿入されるグルーです。
+% |\noautoxspacing|で、挿入を中止することができます。
+% デフォルトは|\autoxspacing|です。
+% \changes{v1.1c}{1995/09/12}{\cs{xkanjiskip}のデフォルト値}
+%    \begin{macrocode}
+\xkanjiskip=.25zw plus1pt minus1pt
+\autoxspacing
+%    \end{macrocode}
+% |\jcharwidowpenalty|は、パラグラフに対する禁則です。
+% パラグラフの最後の行が１文字だけにならないように調整するために使われます。
+%    \begin{macrocode}
+\jcharwidowpenalty=500
+%    \end{macrocode}
+%
+% ここまでが、\file{pldefs.ltx}の内容です。
+%    \begin{macrocode}
+%</pldefs>
+%    \end{macrocode}
+%
+%
+%
+% \section{フォント定義ファイル}\label{plfonts:fontdef}
+% \changes{v1.3}{1997/01/24}{Rename provided font definition filename.}
+% ここでは、フォント定義ファイルの設定をしています。フォント定義ファイルは、
+% \LaTeX{}のフォント属性を\TeX{}フォントに置き換えるためのファイルです。
+% 記述方法についての詳細は、|fntguide.tex|を参照してください。
+%
+% 欧文書体の設定については、
+% \file{cmfonts.fdd}や\file{slides.fdd}などを参照してください。
+% \file{skfonts.fdd}には、写研代用書体を使うためのパッケージと
+% フォント定義が記述されています。
+%    \begin{macrocode}
+%<JY2mc>\ProvidesFile{jy2mc.fd}
+%<JY2gt>\ProvidesFile{jy2gt.fd}
+%<JT2mc>\ProvidesFile{jt2mc.fd}
+%<JT2gt>\ProvidesFile{jt2gt.fd}
+%<JY2mc,JY2gt,JT2mc,JT2gt>       [2018/07/03 v1.6q-u02 KANJI font defines]
+%    \end{macrocode}
+% 横組用、縦組用ともに、
+% 明朝体のシリーズ|bx|がゴシック体となるように宣言しています。
+% \changes{v1.2}{1995/11/24}{it, sl, scの宣言を外した}
+% \changes{v1.3b}{1997/01/29}{フォント定義ファイルのサイズ指定の調整}
+% \changes{v1.3b}{1997/03/11}{すべてのサイズをロード可能にした}
+% また、シリーズ|b|は同じ書体の|bx|と等価になるように宣言します。
+% \changes{v1.6q}{2018/07/03}{シリーズbがbxと等価になるように宣言}
+%
+% p\LaTeX{}では従属書体にOT1エンコーディングを指定していましたが、
+% up\LaTeX{}ではT1エンコーディングを用いるように変更しました。
+% また、要求サイズ（指定されたフォントサイズ）が10ptのとき、
+% 全角幅の実寸が9.62216ptとなるようにしますので、
+% 和文スケール値（$1\,\mathrm{zw} \div \textmc{要求サイズ}$）は
+% $9.62216\,\mathrm{pt}/10\,\mathrm{pt}=0.962216$です。
+% upjis系のメトリックは全角幅が10ptでデザインされているので、
+% これを0.962216倍で読込みます。
+% \changes{v1.6l}{2018/02/04}{和文スケール値を明文化}
+%    \begin{macrocode}
+%<*JY2mc>
+\DeclareKanjiFamily{JY2}{mc}{}
+\DeclareRelationFont{JY2}{mc}{m}{}{T1}{cmr}{m}{}
+\DeclareRelationFont{JY2}{mc}{bx}{}{T1}{cmr}{bx}{}
+\DeclareFontShape{JY2}{mc}{m}{n}{<->s*[0.962216]upjisr-h}{}
+\DeclareFontShape{JY2}{mc}{bx}{n}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY2}{mc}{b}{n}{<->ssub*mc/bx/n}{}
+%</JY2mc>
+%<*JT2mc>
+\DeclareKanjiFamily{JT2}{mc}{}
+\DeclareRelationFont{JT2}{mc}{m}{}{T1}{cmr}{m}{}
+\DeclareRelationFont{JT2}{mc}{bx}{}{T1}{cmr}{bx}{}
+\DeclareFontShape{JT2}{mc}{m}{n}{<->s*[0.962216]upjisr-v}{}
+\DeclareFontShape{JT2}{mc}{bx}{n}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT2}{mc}{b}{n}{<->ssub*mc/bx/n}{}
+%</JT2mc>
+%<*JY2gt>
+\DeclareKanjiFamily{JY2}{gt}{}
+\DeclareRelationFont{JY2}{gt}{m}{}{T1}{cmr}{bx}{}
+\DeclareFontShape{JY2}{gt}{m}{n}{<->s*[0.962216]upjisg-h}{}
+\DeclareFontShape{JY2}{gt}{bx}{n}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY2}{gt}{b}{n}{<->ssub*gt/bx/n}{}
+%</JY2gt>
+%<*JT2gt>
+\DeclareKanjiFamily{JT2}{gt}{}
+\DeclareRelationFont{JT2}{gt}{m}{}{T1}{cmr}{bx}{}
+\DeclareFontShape{JT2}{gt}{m}{n}{<->s*[0.962216]upjisg-v}{}
+\DeclareFontShape{JT2}{gt}{bx}{n}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT2}{gt}{b}{n}{<->ssub*gt/bx/n}{}
+%</JT2gt>
+%    \end{macrocode}
+%
+%
+% \Finale
+%
+\endinput

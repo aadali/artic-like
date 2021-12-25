@@ -1,0 +1,72 @@
+name caption
+category Package
+revision 56771
+shortdesc Customising captions in floating environments
+longdesc The caption package provides many ways to customise the
+longdesc captions in floating environments like figure and table, and
+longdesc cooperates with many other packages. Facilities include
+longdesc rotating captions, sideways captions, continued captions (for
+longdesc tables or figures that come in several parts). A list of
+longdesc compatibility notes, for other packages, is provided in the
+longdesc documentation. The package also provides the "caption outside
+longdesc float" facility, in the same way that simpler packages like
+longdesc capt-of do. The package supersedes caption2.
+containersize 30812
+containerchecksum d0e7276e6e84cabc85d64bc397fd2e4a258e913e4f78022ae40f3c7293e7f9b3f34dd011a944223507cb1555dbf2031dc563e34a5f7064e9903964bda5a893c3
+doccontainersize 1564528
+doccontainerchecksum 50018fff476b99763a3373b9defdf9de854915af11cf37f3a00907483ac481b9a0709d23f6d3612ab754c3f079eda905c5fa3447f576dadcb65f83a5ae5a98e8
+docfiles size=486
+ texmf-dist/doc/latex/caption/CHANGELOG
+ texmf-dist/doc/latex/caption/README details="Readme"
+ texmf-dist/doc/latex/caption/SUMMARY
+ texmf-dist/doc/latex/caption/bicaption.pdf
+ texmf-dist/doc/latex/caption/caption-deu.pdf details="German documentation" language="de"
+ texmf-dist/doc/latex/caption/caption-eng.pdf details="English documentation" language="en"
+ texmf-dist/doc/latex/caption/caption-light.pdf
+ texmf-dist/doc/latex/caption/caption-rus.pdf details="Russian documentation" language="ru"
+ texmf-dist/doc/latex/caption/ltcaption.pdf
+ texmf-dist/doc/latex/caption/subcaption.pdf
+srccontainersize 203920
+srccontainerchecksum 5f961b0fb1a11d5f28d75f58331d0b79bb87800d4a5412c57a66c5693c07225a46e49cb42f8f0653e06a74e2c7de38660f99d89f12905892f47fda5ba6820826
+srcfiles size=313
+ texmf-dist/source/latex/caption/bicaption.dtx
+ texmf-dist/source/latex/caption/caption-ams-smf.dtx
+ texmf-dist/source/latex/caption/caption-beamer.dtx
+ texmf-dist/source/latex/caption/caption-deu.tex
+ texmf-dist/source/latex/caption/caption-elsarticle.dtx
+ texmf-dist/source/latex/caption/caption-eng.tex
+ texmf-dist/source/latex/caption/caption-koma.dtx
+ texmf-dist/source/latex/caption/caption-light.dtx
+ texmf-dist/source/latex/caption/caption-memoir.dtx
+ texmf-dist/source/latex/caption/caption-ntg.dtx
+ texmf-dist/source/latex/caption/caption-rus.tex
+ texmf-dist/source/latex/caption/caption-thesis.dtx
+ texmf-dist/source/latex/caption/caption.dtx
+ texmf-dist/source/latex/caption/caption.ins
+ texmf-dist/source/latex/caption/caption2.dtx
+ texmf-dist/source/latex/caption/caption3.dtx
+ texmf-dist/source/latex/caption/cat.eps
+ texmf-dist/source/latex/caption/elephant.eps
+ texmf-dist/source/latex/caption/ltcaption.dtx
+ texmf-dist/source/latex/caption/subcaption.dtx
+runfiles size=52
+ texmf-dist/tex/latex/caption/bicaption.sty
+ texmf-dist/tex/latex/caption/caption-ams-smf.sto
+ texmf-dist/tex/latex/caption/caption-beamer.sto
+ texmf-dist/tex/latex/caption/caption-elsarticle.sto
+ texmf-dist/tex/latex/caption/caption-koma.sto
+ texmf-dist/tex/latex/caption/caption-light.sty
+ texmf-dist/tex/latex/caption/caption-memoir.sto
+ texmf-dist/tex/latex/caption/caption-ntg.sto
+ texmf-dist/tex/latex/caption/caption-thesis.sto
+ texmf-dist/tex/latex/caption/caption.sty
+ texmf-dist/tex/latex/caption/caption2.sty
+ texmf-dist/tex/latex/caption/caption3.sty
+ texmf-dist/tex/latex/caption/ltcaption.sty
+ texmf-dist/tex/latex/caption/subcaption.sty
+catalogue-also subcaption bicaption
+catalogue-contact-bugs https://gitlab.com/axelsommerfeldt/caption/issues
+catalogue-contact-repository https://gitlab.com/axelsommerfeldt/caption
+catalogue-ctan /macros/latex/contrib/caption
+catalogue-license lppl1.3
+catalogue-topics caption float

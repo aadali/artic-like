@@ -1,0 +1,41 @@
+name index
+category Package
+revision 24099
+shortdesc Extended index for LaTeX including multiple indexes
+longdesc This is a reimplementation of LaTeX's indexing macros to
+longdesc provide better support for indexing. For example, it supports
+longdesc multiple indexes in a single document and provides a more
+longdesc robust \index command. It supplies short hand notations for the
+longdesc \index command (^{word}) and a * variation of \index
+longdesc (abbreviated _{word}) that prints the word being indexed, as
+longdesc well as creating an index entry for it.
+containersize 11040
+containerchecksum 2b9bed00e12b5aa7b1813be766ba7c2e1eb750dc270e9eb585b1cc3d559a3f0c9094919344aaaa51cb6cf7cc132a5f89f8c07c96a12c5b1a5446524d07f4121e
+doccontainersize 156688
+doccontainerchecksum 0e68aca1c5dda444aa42cb1883821f2003c450291191b2eef16169f3f76e03e5ec9d31577574afd8d3b10237309be303538ccd1d4c8edb9757e7c910da7c5f51
+docfiles size=63
+ texmf-dist/doc/latex/index/README details="Package Readme"
+ texmf-dist/doc/latex/index/TODO
+ texmf-dist/doc/latex/index/agsmtst.tex
+ texmf-dist/doc/latex/index/autind.tex
+ texmf-dist/doc/latex/index/index.pdf details="Package documentation"
+ texmf-dist/doc/latex/index/plaintst.tex
+ texmf-dist/doc/latex/index/sample.tex
+ texmf-dist/doc/latex/index/test.bib
+srccontainersize 14900
+srccontainerchecksum fc9e646c54415a14e41f1adf9894e723ea8d25e1d151b56fe40e5dd437a4659535b11eccbe9e2b6077d01a7a83b044c2d1d2b9aa1b08243d82b5a37a70641c11
+srcfiles size=14
+ texmf-dist/source/latex/index/index.dtx
+ texmf-dist/source/latex/index/index.ins
+runfiles size=17
+ texmf-dist/bibtex/bst/index/xagsm.bst
+ texmf-dist/bibtex/bst/index/xplain.bst
+ texmf-dist/makeindex/index/bibref.ist
+ texmf-dist/tex/latex/index/autind.sty
+ texmf-dist/tex/latex/index/bibref.sty
+ texmf-dist/tex/latex/index/index.sty
+catalogue-also splitindex multind
+catalogue-ctan /macros/latex/contrib/index
+catalogue-license other-free
+catalogue-topics index index-multi
+catalogue-version 4.1beta

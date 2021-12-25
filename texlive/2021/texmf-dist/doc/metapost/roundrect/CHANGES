@@ -1,0 +1,19 @@
+v2.2, released on 19 February 2016:  added the ability to
+include arbitrary packages (or indeed, arbitrary TeX
+definitions) for typesetting labels, with the string
+rrusepackage.
+
+v2.1, released on 7 August 2015:  incremental improvements.
+Added in dropshadows and parameters for controlling them.
+Updated and rearranged the documentation.
+
+v2.0, released on 1 August 2015:  complete rewrite.  The
+code is much cleaner and works better and more consistently.
+Removed all the "titlebar" options; it's better to form such
+things out of an entirely separate rectangle.  Much more
+granular control over appearance.  Also several
+"convenience" macros to allow adjusting multiple, related
+settings at one time.
+
+v1.0, released on 29 July 2015:  initial release.  All basic
+functionality implemented.

@@ -1,0 +1,30 @@
+_____________________
+The bidi-atbegshi package
+v0.1
+
+Bidi-aware shipout macros
+
+The package adds few commands to `atbegshi' package
+for proper placement of <background material> in the left
+and right corners of the output page, in both LTR and RTL
+modes. 
+
+The package only works with `xelatex' format and should be
+loaded before `bidi' package.
+
+For more information, please see the documentation.
+
+
+Current version release date: 2014/09/11
+
+___________________
+Vafa Khalighi
+tex.ctan@gmail.com
+
+Copyright © 2014
+It may be distributed and/or modified under the LaTeX Project Public License,
+version 1.3c or higher (your choice). The latest version of
+this license is at: http://www.latex-project.org/lppl.txt
+
+This work is “author-maintained” (as per LPPL maintenance status)
+by Vafa Khalighi.

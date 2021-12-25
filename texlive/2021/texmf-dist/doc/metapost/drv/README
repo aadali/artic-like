@@ -1,0 +1,21 @@
+drv - derivation trees with MetaPost
+version 0.97
+
+Licence
+lppl
+
+Description
+drv is a set of MetaPost macros for typesetting derivation trees (such as
+used in sequent calculus, type inference, programming language semantics...) 
+NO MetaPost knowledge is needed to use these macros.
+
+Contents
+drv.mp		the main file
+drv-guide.pdf	a user guide attempt
+doc/		the sources for drv-guide.pdf
+sample/		an example of use in conjunction with the beamer class
+template/	a basic set of files for your own tries
+README		this file
+
+Any feedback is welcome.
+laurent.mehats@gmail.com

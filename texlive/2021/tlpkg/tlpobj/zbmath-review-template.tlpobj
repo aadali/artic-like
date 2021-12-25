@@ -1,0 +1,30 @@
+name zbmath-review-template
+category Package
+revision 59693
+shortdesc Template for a zbMATH Open review
+longdesc This package contains a template for zbMATH Open reviews. It
+longdesc will show what your review will look like on zbMATH Open and
+longdesc you can test whether your LaTeX-Code will compile on our
+longdesc system. The template has to be compiled using XeLaTeX and
+longdesc relies on scrartcl, scrlayer-scrpage, amsfonts, amssymb,
+longdesc amsmath, babel, enumitem, etoolbox, fontspec, gensymb,
+longdesc geometry, graphicx, mathrsfs, mathtools, stmaryrd, textcomp,
+longdesc tikz-cd, xcolor, and xparse.
+containersize 2228
+containerchecksum c9685b151679e7516e146f3d97f4242c7cdf084f84a7ac857a8aa27031c60950d0da07d66b7b57d7bdec384d3501c30b339231654cf845bbed2945b0ac069368
+doccontainersize 208668
+doccontainerchecksum 470ee6c9895effd3c6bcac5a9faaa3862380bb137044411dd0013f4f465dc923dc1de507f2d1d087fb4b4178cb2f43f435e71b090d55744a8be6e59f8cc010fa
+docfiles size=60
+ texmf-dist/doc/xelatex/zbmath-review-template/README.md details="Readme"
+ texmf-dist/doc/xelatex/zbmath-review-template/figures/screenshot.png
+ texmf-dist/doc/xelatex/zbmath-review-template/zb-example.pdf
+ texmf-dist/doc/xelatex/zbmath-review-template/zb-example.tex
+ texmf-dist/doc/xelatex/zbmath-review-template/zb-manual.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/zbmath-review-template/zb-manual.tex
+runfiles size=2
+ texmf-dist/tex/xelatex/zbmath-review-template/zb-basics.sty
+ texmf-dist/tex/xelatex/zbmath-review-template/zbMATH.cls
+catalogue-ctan /macros/xetex/latex/zbmath-review-template
+catalogue-license gpl3 cc-by-sa-4
+catalogue-topics doc-templ xetex
+catalogue-version 2.1

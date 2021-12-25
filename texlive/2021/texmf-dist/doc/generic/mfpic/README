@@ -1,0 +1,143 @@
+% File: README
+% A part of mfpic 1.10 2012/11/13
+%
+
+MFpic defines a command group \mfpic...\endmfpic (optionally in LaTeX
+an environment, mfpic) and drawing commands to be used inside this group.
+When TeX (or LaTeX) is run on a file containing those commands, a
+MetaPost (or Metafont) source file is created. When that file is correctly
+processed by MetaPost (or Metafont), and LaTeX or TeX is run again, the
+result is a figure in the TeX document at the location of each
+environment.
+
+See install.txt for installation instructions. See mfpguide.pdf for a
+short tutorial. See below for a summary of features added since the
+previous major release (1.0). See the manual mfpic-doc.pdf for more
+detailed instructions and descriptions of features.
+
+This is mfpic version 1.10
+
+LICENSE
+-------
+All files of the core mfpic distribution (listed below) may be
+distributed and/or modified under the conditions of the LaTeX Project
+Public License, either version 1.3c of this license or (at your option)
+any later version. The latest version of this license is
+
+  http://www.latex-project.org/lppl.txt
+
+and version 1.3c or later is part of all distributions of LaTeX version
+2008/12/01 or later.
+
+DISCLAIMER
+----------
+While every effort has been made to make mfpic useful, it comes with no
+warranty, expressed or implied.
+
+MANIFEST
+--------
+Here is a list, plus explanation of purpose, of all files in the mfpic
+distribution. Read it *before* trying to process any of the example
+files. These files constitute the mfpic distribution to which the LPPL
+applies.
+
+The six files marked with "+" below are the only ones essential to using
+all the facilities of mfpic. The three files marked with "*" below are
+sufficient to generate those essential files.
+
+All the *.tex files in the doc directory (except the plain TeX file
+mfpcard.tex) require the LaTeX style file mfpdoc.sty. The mfpic manual
+is mfpic-doc.pdf. A tutorial is available in mfpguide.pdf.
+
+The directory names given below are subdirectories of graphics/mfpic/ in
+your nearest CTAN mirror (go to http://mirror.ctan.org/)
+
+Source files (in source/):
+------------
+*mfpic.dtx      Contains mfpic.sty and mfpic.tex
+*grafbase.dtx   Contains grafbase.mf, grafbase.mp and dvipsnam.mp
+*mfpic.ins      The unpacking script: run tex or latex on it. It reads
+                in mfpic.dtx and grafbase.dtx and produces the six
+                required run-time files (marked "+" below)
+
+TeX/LaTeX code (in tex/):
+--------------
++mfpic.tex      Basic TeX/LaTeX code
++mfpic.sty      LaTeX2e wrapper for mfpic.tex
++mfpicdef.tex   Input file used by metapost for TeX labels
+
+MetaPost/Metafont code (in metapost/ and metafont/):
+----------------------
++grafbase.mp    MetaPost macros supporting mfpic
++dvipsnam.mp    Color definitions for MetaPost, needed by grafbase.mp
++grafbase.mf    Metafont macos supporting mfpic
+
+Documentation (in doc/):
+-------------
+ changes.txt    Summary of 20+ years of changes
+ install.txt    Basic information on installation
+ README         This file.
+ mfpguide.pdf   Tutorial (usletter paper size)
+ mfpic-doc.pdf  Manual   (usletter paper size)
+ mfpcard.pdf    Reference card (two sides of usletter, landscape).
+ mfpdoc.sty     LaTeX style used by the next two
+ mfpguide.tex   LaTeX source for mfpguide.pdf, requires mfpdoc.sty and
+                the mfpic package.
+ mfpic-doc.tex  LaTeX source for mfpic-doc.pdf, requires mfpdoc.sty.
+ coil.mps       Figure included in mfpic-doc.tex
+ mfpcard.tex    reference card source, should fit on two sides of
+                either USletter or A4, rotated. Plain TeX.
+ lcheaders.ist  makeindex style file for mfpic-doc.tex
+
+Examples (in doc/examples/):
+--------
+ pictures.tex   Example pictures. Produces pics.mp. Plain TeX
+ lapictures.tex Same examples. Produces same pics.mp. LaTeX
+ data.dat       Sample data file used by above two
+ forfun.tex     Examples of \mfsrc. Produces fun.mp. Plain TeX
+
+
+This distribution, any new updates, and some past versions, should also be
+available at my web site:
+
+http://comp.uark.edu/~luecking/tex/mfpic.html
+
+
+NEW FEATURES since Version 1.0
+-------------------------------
+
+ -- bugfix in \vectorfield. (1.01)
+
+ -- Work-around for some not-so-nice behavior of verbatimtex in some
+    versions of MetaPost. (1.02)
+
+ -- Bugfix in grafbase handling of color. (1.03)
+
+ -- Bugfix in \mfresolution and \mfmode. (1.04)
+
+ -- Changes to avoid namespace clashes in some internal macros. (1.05)
+
+ -- Differential equation plotters \DEgraph and \DEtrajectory added. (1.06)
+
+ -- Remove mfppatch.tex (which has never been used). (1.06)
+
+ -- Added file mfpicdef.tex for metapost labels. (1.07)
+
+ -- Added \quarterellipse, \halfellipse and \fullellipse. (1.07)
+
+ -- Added \gbrace for large braces in pictures. (1.07)
+
+ -- Added \hypergeodesic for certain (technical) circular arcs. (1.07)
+
+ -- Added \browniangraph and \randomwalk (1.07)
+
+ -- Added \gradient, \radialgradient and \areagradient (1.08)
+
+ -- Added \interpolatepath. Added \reversepath (= \reverse) (1.10)
+
+\sig
+Dan Luecking  (luecking at uark dot edu)
+Department of Mathematical Sciences
+University of Arkansas
+Fayetteville, Arkansas 72701-1201
+U.S.A.

@@ -1,0 +1,60 @@
+% Any piece of code related to font selection in the following preamble
+% (document class, font package, font selection commands ...) should be
+% reported in `template.mp'.
+
+\documentclass[twoside,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Choose your favourite fonts combination (if available).
+% See "http://ctan.tug.org/tex-archive/info/Free_Math_Font_Survey".
+%
+%\usepackage{cmbright}			% CM text & CM Bright math
+%\usepackage{ccfonts,eulervm}		% Concrete text & Euler math
+%\usepackage{ccfonts}			% Concrete text & math
+%\usepackage[math]{iwona}		% Iwona text & math
+%\usepackage[math]{kurier}		% Kurier text & math
+%\usepackage[math]{anttor}		% Antykwa Torunska text & math
+%\usepackage{kmath,kerkis}		% Kerkis text & math
+%\usepackage{fouriernc}			% New Century Schoolbook & Fourier math
+%\usepackage{pxfonts}			% Palatino & pxfonts math
+%\usepackage{mathpazo}			% Palatino & Pazo math
+%\usepackage{mathpple}			% Palatino & Euler math
+\usepackage[varg]{txfonts}		% Times & txfonts math
+%\usepackage{mathtime}			% Times & Belleek math
+%\usepackage{mathptmx}			% Times & Symbol math
+%\usepackage{mbtimes}			% Omega Serif text & Omega math
+%\usepackage{arev}			% Arev Sans text with Arev math
+%\usepackage[charter]{mathdesign}	% Bitstream Charter & Math Design math
+%\usepackage{comicsans}			% Comic Sans text & math
+%\usepackage[garamond]{mathdesign}	% Garamond & Math Design math
+%\usepackage{fourier}			% Utopia & Fourier math
+%\usepackage[utopia]{mathdesign}	% Utopia & Math Design math
+
+% Picture inclusion macro: \drv
+%
+% \drv includes a picture file in such a way that the baseline of the included
+% picture coincides with the baseline of the inclusion point. The code for \drv
+% was suggested by Josselin Noirel on the fr.comp.text.tex usenet group.
+
+\usepackage{graphicx}
+\makeatletter
+\def\Gin@def@bp#1\relax#2#3{\gdef#2{#3}}
+\newsavebox{\graphicsbox}
+\newcommand*{\drv}[1]{%
+\sbox{\graphicsbox}{\includegraphics{#1}}%
+\raisebox{\Gin@lly bp}%
+{\usebox{\graphicsbox}}}
+\makeatother
+
+\begin{document}
+\paragraph{First example}
+\begin{gather*}
+\drv{template.100}
+\end{gather*}
+\paragraph{Second example}
+\begin{gather*}
+\drv{template.110}
+\end{gather*}
+\end{document}

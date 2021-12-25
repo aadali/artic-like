@@ -1,0 +1,8 @@
+name cjk-gs-integrate.x86_64-linux
+category Package
+revision 37223
+shortdesc x86_64-linux files of cjk-gs-integrate
+containersize 348
+containerchecksum 9b04db277b84b51d42882a8f7ed274526493b9518871010b630db00d72694da45635e2c08a121019b195a981708c2e03b84da25c7bd2098bef115251639ff47b
+binfiles arch=x86_64-linux size=1
+ bin/x86_64-linux/cjk-gs-integrate

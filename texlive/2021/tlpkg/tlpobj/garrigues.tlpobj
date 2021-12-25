@@ -1,0 +1,21 @@
+name garrigues
+category Package
+revision 15878
+shortdesc MetaPost macros for the reproduction of Garrigues' Easter nomogram
+longdesc MetaPost macros for the reproduction of Garrigues' Easter
+longdesc nomogram. These macros are described in Denis Roegel: An
+longdesc introduction to nomography: Garrigues' nomogram for the
+longdesc computation of Easter, TUGboat (volume 30, number 1, 2009,
+longdesc pages 88-104)
+containersize 8268
+containerchecksum e1440fcf8eb0ccd3b140649c590c902882a8a5a02d4cc14589ed44193f3a70bf13839e9de9663c500bb6874d6fce34f5a21c07e38a7456738548b6ebf449b258
+doccontainersize 532
+doccontainerchecksum 0c91f7e1c8fe4910fa7052440edd9afd81c8932e99368219c8a5037bddfa4c8c11037576e9c94721062df9cf7fd5d467389ddcf3aed3e1853be38846c049100f
+docfiles size=2
+ texmf-dist/doc/metapost/garrigues/README details="Readme"
+ texmf-dist/doc/metapost/garrigues/article.txt
+runfiles size=9
+ texmf-dist/metapost/garrigues/garrigues.mp
+catalogue-ctan /graphics/metapost/contrib/macros/garrigues
+catalogue-license lppl
+catalogue-topics calculation

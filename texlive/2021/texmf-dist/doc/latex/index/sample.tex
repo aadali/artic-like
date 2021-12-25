@@ -1,0 +1,132 @@
+%%
+%% This is file `sample.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% index.dtx  (with options: `sample')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file index.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%% \CheckSum{755}
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%% latex sample.tex
+%% makeindex sample
+%% makeindex -o sample.and sample.adx
+%% makeindex -o sample.nnd sample.ndx
+%% makeindex -o sample.lnd sample.ldx
+%% latex sample.tex
+
+\documentclass{book}
+\usepackage{index}
+
+\listfiles
+
+\makeindex
+\newindex{aut}{adx}{and}{Name Index}
+\newindex{not}{ndx}{nnd}{List of Notation}
+
+\newindex[theenumi]{list}{ldx}{lnd}{Items}
+
+\shortindexingon
+
+\proofmodetrue
+
+\def\aindex{\index*[aut]}
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+
+\chapter{Here is a ^[aut]{chapter} title}
+
+\section{Section header\index[aut]{section}}
+
+Here is some text.\index{subject}
+
+Here is \index[not]{notation}some more \index[not]{sin@$\sin$}
+text.
+
+\newpage
+
+Here is some ^{more} _[not]{notation} text.
+
+Here is yet more \aindex{text}.
+
+\section{Another Section header _[aut]{section2}}
+
+And here is some math: $x^1_b$.
+
+Here is an ^[aut]{index} entry \fbox{inside an
+\index[not]{min@$\min$}fbox}
+
+\fbox{Here is an ^[aut]{entry} in a box.}
+
+\section{An indexed list environment}
+
+\begin{enumerate}
+
+\item
+First item
+
+\item
+Second item\index[list]{second item}
+
+\item
+Third item
+
+\newpage
+
+\item
+Fourth item
+
+\item
+Fifth item\index[list]{fifth item}
+
+\item
+Sixth item
+
+\end{enumerate}
+
+\printindex[not]
+
+\printindex[aut][Here is a prologue for the author index.
+Note that it is set in a single column at the top of the
+first page of the index.]
+
+\printindex[list]
+
+\printindex
+
+\end{document}
+\endinput
+%%
+%% End of file `sample.tex'.

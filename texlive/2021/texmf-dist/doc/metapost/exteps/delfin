@@ -1,0 +1,108 @@
+#! /usr/bin/perl -w
+#
+# Program for inserting EPS files into MetaPost output files. Requires
+# the extpeps module for MetaPost -- and it is probably not even
+# necessary to run this program
+#
+# Copyright (C) 2005  Palle Jorgensen <hamselv@pallej.dk>
+#                     http://pallej.dk/exteps/
+#                     http://pallej.dk/
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+#
+# Bugs and comments can be reported to Palle Jorgensen,
+# <hamselv@pallej.dk>.
+#
+# This is version 0.12 Mon Dec 26 2005
+
+use strict;
+our($opt_h,$opt_q,$opt_v,$opt_V,$opt_i);
+
+use Getopt::Std;
+getopts('-helpvqVi');
+
+use Env qw(HOME);
+
+my $progversion = 0.12;
+my $progname = "delfin";
+my $prognamelong = "Delfin, the Exteps Large File INserter";
+if ($opt_h) { version(); help(); exit; }
+if ($opt_v) { version(); exit; }
+if ($opt_V) { versionbrief(); exit; }
+
+unless ( $opt_q ) {
+    print "This is $progname version $progversion\n";
+    print "$prognamelong\n";
+}
+
+foreach ( @ARGV ) {
+    my $mpsfile = $_;
+    my $elffound = 0;
+    open (MPSIN, "$mpsfile") or die "Cannot open file $mpsfile";
+    my @OUT;
+    foreach ( <MPSIN> ) {
+	if ($_ =~ /^%% MetaPost exteps large file->/) {
+	    $elffound = 1;
+	    my $epsfile = (split(/->|\n/,$_))[1];
+	    unless ( $opt_q ) {
+		print "Inserting $epsfile into $mpsfile\n";
+	    }
+	    open(EPS, "$epsfile") or die "cannot open file $epsfile";
+	    push (@OUT, <EPS>);
+	} else {
+	    push (@OUT, $_);
+	}
+    }
+    close MPSIN;
+    if ( $elffound ) {
+	open (MPSOUT, ">$_") or die "Cannot write to file $_";
+	print MPSOUT @OUT;
+	close MPSOUT;
+    }
+    else {
+	unless ( $opt_q ) {
+	    print "No file to insert into $mpsfile\n"
+	}
+    }
+}
+
+sub help {
+    print << "EOF";
+Usage:
+$progname [options] file.n [file.m [file.l ... ]]
+Options:
+    -h\tPrint this message end exit
+    -q\tBe quiet
+    -i\tIgnore configuration file
+    -v\tDisplay version and license and exit
+    -V\tDisplay version number and exit
+See exteps.pdf for further documentation
+(texdoc exteps on most unix systems)
+EOF
+}
+
+sub version {
+    print << "EOF"
+This is $progname version $progversion
+$prognamelong
+Copyright 2005 by Palle Jorgensen
+The license of $progname is GNU General Public License (GPL)
+EOF
+}
+
+sub versionbrief {
+    print "$progversion\n";
+}

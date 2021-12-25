@@ -1,0 +1,9 @@
+METAOBJ
+
+This metapost package provides high-level object-oriented drawing.
+It can be seen as an approximate extension of boxes.mp.
+It implements many of PSTricks' features.
+
+It is released under the LPPL.
+
+Denis Roegel, 3 August 2003

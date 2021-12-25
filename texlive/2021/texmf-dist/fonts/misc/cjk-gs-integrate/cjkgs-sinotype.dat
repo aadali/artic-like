@@ -1,0 +1,195 @@
+# Changzhou SinoType
+
+### SIMPLIFIED/TRADITIONAL CHINESE ###
+
+# Note about Mac (Mac OS X 10.6 -- macOS 10.13)
+#   STHeiti Light.ttc
+#   STHeiti Medium.ttc
+# are bundled with all versions.
+#   华文细黑.ttf
+#   华文黑体.ttf
+#   华文仿宋.ttf
+# are bundled with macOS 10.12.6 Sierra or earlier versions.
+#   STXIHEI.ttf
+#   STHEITI.ttf
+#   STFANGSO.ttf
+# are bundled with macOS 10.13 High Sierra or later versions.
+#   华文宋体.ttf
+#   华文楷体.ttf
+# are bundled with Mac OS X 10.7.5 Lion or earlier versions.
+#   宋体.ttc
+#   楷体.ttc
+# are bundled with OS X 10.8 -- 10.8.5 Mountain Lion.
+#   Songti.ttc
+#     index 0: STSongti-SC-Black
+#     index 1: STSongti-SC-Bold
+#     index 2: STSongti-TC-Bold
+#     index 3: STSongti-SC-Light
+#     index 4: STSong
+#     index 5: STSongti-TC-Light
+#     index 6: STSongti-SC-Regular
+#     index 7: STSongti-TC-Regular
+# is bundled with OS X 10.9 or later versions.
+#   Kaiti.ttc
+#     index 0: STKaiti-SC-Black
+#     index 1: STKaiti-SC-Bold
+#     index 2: STKaiTi-TC-Bold
+#     index 3: STKaiti-SC-Regular
+#     index 4: STKaiti
+#     index 5: STKaiTi-TC-Regular
+# is bundled with OS X 10.9 -- 10.11.6 El Capitan.
+#   Kaiti.ttc
+#     index 0: STKaitiSC-Regular
+#     index 1: STKaiti
+#     index 2: STKaitiTC-Regular
+#     index 3: STKaitiSC-Bold
+#     index 4: STKaitiTC-Bold
+#     index 5: STKaitiSC-Black
+#     index 6: STKaitiTC-Black
+# is bundled with macOS 10.12 Sierra or later versions.
+#   Baoli.ttc
+#     index 0: STBaoli-SC-Regular
+#   Libian.ttc
+#     index 0: STLibian-SC-Regular
+#   Xingkai.ttc
+#     index 0: STXingkai-SC-Bold
+#     index 1: STXingkai-SC-Light
+# are bundled with OS X 10.9 Mavericks -- 10.11.6 El Capitan.
+#   Baoli.ttc
+#     index 0: STBaoliSC-Regular
+#     index 1: STBaoliTC-Regular
+#   Libian.ttc
+#     index 0: STLibianSC-Regular
+#     index 1: STLibianTC-Regular
+#   Xingkai.ttc
+#     index 0: STXingkaiSC-Bold
+#     index 1: STXingkaiTC-Bold
+#     index 2: STXingkaiSC-Light
+#     index 3: STXingkaiTC-Light
+# are bundled with macOS 10.12 Sierra or later versions.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Bold
+#     index 1: STYuanti-SC-Light
+#     index 2: STYuanti-SC-Regular
+# is bundled with OS X 10.9 Mavericks -- 10.10.5 Yosemite.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Bold
+#     index 1: STYuanti-TC-Bold
+#     index 2: STYuanti-SC-Light
+#     index 3: STYuanti-TC-Light
+#     index 4: STYuanti-SC-Regular
+#     index 5: STYuanti-TC-Regular
+# is bundled with OS X 10.11 -- 10.11.6 El Capitan.
+#   Yuanti.ttc
+#     index 0: STYuanti-SC-Regular
+#     index 1: STYuanti-TC-Regular
+#     index 2: STYuanti-SC-Bold
+#     index 3: STYuanti-TC-Bold
+#     index 4: STYuanti-SC-Light
+#     index 5: STYuanti-TC-Light
+# is bundled with macOS 10.12 Sierra or later versions.
+
+# Note about MSOffice:
+#   STZHONGS.ttf
+#   STXINWEI.ttf
+#   STXINGKA.ttf
+#   STLITI.ttf
+#   STHUPO.ttf
+# are bundled with Office for Mac 2016.
+
+Name: STSong
+Class: GB
+#Provides(??): STSong-Light # fails
+#Provides(??): STSong-Regular # fails
+TTFname(10): STSong.ttf
+TTFname(11): STSONG.TTF
+TTFname(20): 华文宋体.ttf
+
+Name: STKaiti
+Class: GB
+#Provides(??): STKaiti-Regular # fails
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+
+Name: STKaiti-Adobe-CNS1
+Class: CNS
+#Provides(??): MKai-Medium # fails
+Doublecheck: false
+TTFname(10): STKaiti.ttf
+TTFname(11): STKAITI.TTF
+TTFname(20): 华文楷体.ttf
+
+Name: STXihei
+Class: GB
+#Provides(??): STHeiti-Light # fails
+TTFname(10): STXihei.ttf
+TTFname(11): STXIHEI.TTF
+TTFname(19): STXIHEI.ttf
+TTFname(20): 华文细黑.ttf
+
+Name: STHeiti
+Class: GB
+#Provides(??): STHeiti-Regular # fails
+TTFname(10): STHeiti.ttf
+TTFname(19): STHEITI.ttf
+TTFname(20): 华文黑体.ttf
+
+Name: STFangsong
+Class: GB
+#Provides(??): STFangsong-Light # fails
+#Provides(??): STFangsong-Regular # fails
+TTFname(10): STFangsong.ttf
+TTFname(11): STFANGSO.TTF
+TTFname(19): STFANGSO.ttf
+TTFname(20): 华文仿宋.ttf
+
+Name: STZhongsong
+Class: GB
+TTFname(11): STZHONGS.TTF
+TTFname(12): STZHONGS.ttf
+
+Name: STXinwei
+Class: GB
+TTFname(11): STXINWEI.TTF
+TTFname(12): STXINWEI.ttf
+
+Name: STXingkai
+Class: GB
+TTFname(11): STXINGKA.TTF
+TTFname(12): STXINGKA.ttf
+
+Name: STLiti
+Class: GB
+TTFname(11): STLITI.TTF
+TTFname(12): STLITI.ttf
+
+Name: STHupo
+Class: GB
+TTFname(11): STHUPO.TTF
+TTFname(12): STHUPO.ttf
+
+Name: STCaiyun
+Class: GB
+TTFname(11): STCAIYUN.TTF
+
+Name: STHeitiSC-Light
+Class: GB
+TTCname(30): STHeiti-Light.ttc(1)
+TTCname(40): STHeiti Light.ttc(1)
+
+Name: STHeitiTC-Light
+Class: CNS
+TTCname(30): STHeiti-Light.ttc(0)
+TTCname(40): STHeiti Light.ttc(0)
+
+Name: STHeitiSC-Medium
+Class: GB
+TTCname(30): STHeiti-Medium.ttc(1)
+TTCname(40): STHeiti Medium.ttc(1)
+
+Name: STHeitiTC-Medium
+Class: CNS
+TTCname(30): STHeiti-Medium.ttc(0)
+TTCname(40): STHeiti Medium.ttc(0)
+

@@ -1,0 +1,356 @@
+% \iffalse meta-comment
+%
+%% File: l3draw-scopes.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "l3experimental bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/latex3
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{expl3}
+\documentclass[full]{l3doc}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3draw} package\\ Drawing scopes^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Released 2021-11-12}
+%
+% \maketitle
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3draw-scopes} implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<@@=draw>
+%    \end{macrocode}
+%
+% This sub-module covers more-or-less the same ideas as
+% \texttt{pgfcorescopes.code.tex}. At present, equivalents of the
+% following are currently absent:
+% \begin{itemize}
+%   \item \cs{pgftext}: This is covered at this level by the coffin-based
+%     interface \cs{draw_coffin_use:Nnn}
+% \end{itemize}
+%
+% \subsection{Drawing environment}
+%
+% \begin{variable}
+%   {\g_@@_xmax_dim, \g_@@_xmin_dim, \g_@@_ymax_dim, \g_@@_ymin_dim}
+%   Used to track the overall (official) size of the image created: may
+%   not actually be the natural size of the content.
+%    \begin{macrocode}
+\dim_new:N \g_@@_xmax_dim
+\dim_new:N \g_@@_xmin_dim
+\dim_new:N \g_@@_ymax_dim
+\dim_new:N \g_@@_ymin_dim
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\l_draw_bb_update_bool}
+%   Flag to indicate that a path (or similar) should update the bounding box
+%   of the drawing.
+%    \begin{macrocode}
+\bool_new:N \l_draw_bb_update_bool
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\l_@@_layer_main_box, \l_@@_layer_main_box}
+%   Box for setting the drawing itself and the top-level layer.
+%    \begin{macrocode}
+\box_new:N \l_@@_main_box
+\box_new:N \l_@@_layer_main_box
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\g_@@_id_int}
+%   The drawing number.
+%    \begin{macrocode}
+\int_new:N \g_@@_id_int
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\@@_reset_bb:}
+%   A simple auxiliary.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_reset_bb:
+  {
+    \dim_gset:Nn \g_@@_xmax_dim { -\c_max_dim }
+    \dim_gset:Nn \g_@@_xmin_dim {  \c_max_dim }
+    \dim_gset:Nn \g_@@_ymax_dim { -\c_max_dim }
+    \dim_gset:Nn \g_@@_ymin_dim {  \c_max_dim }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\draw_begin:, \draw_end:}
+%   Drawings are created by setting them into a box, then adjusting the box
+%   before inserting into the surroundings. Color is set here using the drawing
+%   mechanism largely as it then sets up the internal data structures. It may be
+%   that a coffin construct is better here in the longer term: that may become
+%   clearer as the code is completed. As we need to avoid any insertion of
+%   baseline skips, the outer box here has to be an |hbox|. To allow for
+%   layers, there is some box nesting: notice that we 
+%    \begin{macrocode}
+\cs_new_protected:Npn \draw_begin:
+  {
+    \group_begin:
+      \int_gincr:N \g_@@_id_int
+      \hbox_set:Nw \l_@@_main_box
+        \@@_backend_begin:
+        \@@_reset_bb:
+        \@@_path_reset_limits:
+        \bool_set_true:N \l_draw_bb_update_bool
+        \draw_transform_matrix_reset:
+        \draw_transform_shift_reset:
+        \@@_softpath_clear:
+        \draw_linewidth:n { \l_draw_default_linewidth_dim }
+        \color_select:n { . }
+        \draw_nonzero_rule:
+        \draw_cap_butt:
+        \draw_join_miter:
+        \draw_miterlimit:n { 10 }
+        \draw_dash_pattern:nn { } { 0cm }
+        \hbox_set:Nw \l_@@_layer_main_box
+  }
+\cs_new_protected:Npn \draw_end:
+  {
+          \@@_baseline_finalise:w
+          \exp_args:NNNV \hbox_set_end:
+          \clist_set:Nn \l_draw_layers_clist \l_draw_layers_clist
+          \@@_layers_insert:
+        \@@_backend_end:
+      \hbox_set_end:
+      \dim_compare:nNnT \g_@@_xmin_dim = \c_max_dim
+        {
+          \dim_gzero:N \g_@@_xmax_dim
+          \dim_gzero:N \g_@@_xmin_dim
+          \dim_gzero:N \g_@@_ymax_dim
+          \dim_gzero:N \g_@@_ymin_dim
+        }
+      \@@_finalise:
+      \box_set_wd:Nn \l_@@_main_box
+        { \g_@@_xmax_dim - \g_@@_xmin_dim }
+      \mode_leave_vertical:
+      \box_use_drop:N \l_@@_main_box
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_finalise:}
+% \begin{macro}{\@@_finalise_baseline:n}
+%   Finalising the (vertical) size of the output depends on whether we have
+%   an explicit baseline or not. To allow for that, we have two functions, and
+%   the one that's used depends on whether the user has set a baseline. Notice
+%   that in contrast to \pkg{pgf} we \emph{do} allow for a non-zero depth if
+%   the explicit baseline is above the lowest edge of the initial bounding box.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_finalise:
+  {
+    \hbox_set:Nn \l_@@_main_box
+      {
+        \skip_horizontal:n { -\g_@@_xmin_dim }
+        \box_move_down:nn
+          { \g_@@_ymin_dim }
+          { \box_use_drop:N \l_@@_main_box }
+      }
+    \box_set_dp:Nn \l_@@_main_box { 0pt }
+    \box_set_ht:Nn \l_@@_main_box
+      { \g_@@_ymax_dim - \g_@@_ymin_dim }
+  }
+\cs_new_protected:Npn \@@_finalise_baseline:n #1
+  {
+    \hbox_set:Nn \l_@@_main_box
+      {
+        \skip_horizontal:n { -\g_@@_xmin_dim }
+        \box_move_down:nn
+          {#1}
+          { \box_use_drop:N \l_@@_main_box }
+      }
+    \box_set_dp:Nn \l_@@_main_box
+      {
+        \dim_max:nn
+          { #1 - \g_@@_ymin_dim }
+          { 0pt }
+      }
+    \box_set_ht:Nn \l_@@_main_box
+      { \g_@@_ymax_dim + #1 }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Baseline position}
+%
+% \begin{variable}{\l_@@_baseline_bool, \l_@@_baseline_dim}
+%   For tracking the explicit baseline and whether it is active.
+%    \begin{macrocode}
+\bool_new:N \l_@@_baseline_bool
+\dim_new:N \l_@@_baseline_dim
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\draw_baseline:n}
+%   A simple setting of the baseline along with the flag we need to know that
+%   it is active.
+%    \begin{macrocode}
+\cs_new_protected:Npn \draw_baseline:n #1
+  {
+    \bool_set_true:N \l_@@_baseline_bool
+    \dim_set:Nn \l_@@_baseline_dim { \fp_to_dim:n {#1} }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_baseline_finalise:w}
+%   Rather than use a global data structure, we can arrange to put the baseline
+%   value at the right group level with a small amount of shuffling. That happens
+%   here.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_baseline_finalise:w #1 \@@_finalise:
+  {
+    \bool_if:NTF \l_@@_baseline_bool
+      {
+        \use:x
+          {
+            \exp_not:n {#1}
+            \@@_finalise_baseline:n { \dim_use:N \l_@@_baseline_dim }
+          }
+      }
+      { #1 \@@_finalise: }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Scopes}
+%
+% \begin{variable}{\l_@@_linewidth_dim}
+% \begin{variable}{\l_@@_fill_color_tl, \l_@@_stroke_color_tl}
+%   Storage for local variables.
+%    \begin{macrocode}
+\dim_new:N \l_@@_linewidth_dim
+\tl_new:N \l_@@_fill_color_tl
+\tl_new:N \l_@@_stroke_color_tl
+%    \end{macrocode}
+% \end{variable}
+% \end{variable}
+%
+% \begin{macro}{\draw_scope_begin:, \draw_scope_begin:}
+%   As well as the graphics (and \TeX{}) scope, also deal with global
+%   data structures.
+%    \begin{macrocode}
+\cs_new_protected:Npn \draw_scope_begin:
+  {
+    \@@_backend_scope_begin:
+    \group_begin:
+      \dim_set_eq:NN \l_@@_linewidth_dim \g_@@_linewidth_dim
+      \draw_path_scope_begin:
+  }
+\cs_new_protected:Npn \draw_scope_end:
+  {
+      \draw_path_scope_end:
+      \dim_gset_eq:NN \g_@@_linewidth_dim \l_@@_linewidth_dim
+    \group_end:
+    \@@_backend_scope_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{variable}
+%   {\l_@@_xmax_dim, \l_@@_xmin_dim, \l_@@_ymax_dim, \l_@@_ymin_dim}
+%   Storage for the bounding box.
+%    \begin{macrocode}
+\dim_new:N \l_@@_xmax_dim
+\dim_new:N \l_@@_xmin_dim
+\dim_new:N \l_@@_ymax_dim
+\dim_new:N \l_@@_ymin_dim
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\@@_scope_bb_begin:, \@@_scope_bb_end:}
+%   The bounding box is simple: a straight group-based save and restore
+%   approach.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_scope_bb_begin:
+  {
+    \group_begin:
+      \dim_set_eq:NN \l_@@_xmax_dim \g_@@_xmax_dim
+      \dim_set_eq:NN \l_@@_xmin_dim \g_@@_xmin_dim
+      \dim_set_eq:NN \l_@@_ymax_dim \g_@@_ymax_dim
+      \dim_set_eq:NN \l_@@_ymin_dim \g_@@_ymin_dim
+      \@@_reset_bb:
+  }
+\cs_new_protected:Npn \@@_scope_bb_end:
+  {
+      \dim_gset_eq:NN \g_@@_xmax_dim \l_@@_xmax_dim
+      \dim_gset_eq:NN \g_@@_xmin_dim \l_@@_xmin_dim
+      \dim_gset_eq:NN \g_@@_ymax_dim \l_@@_ymax_dim
+      \dim_gset_eq:NN \g_@@_ymin_dim \l_@@_ymin_dim
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\draw_suspend_begin:, \draw_suspend_end:}
+%   Suspend all parts of a drawing.
+%    \begin{macrocode}
+\cs_new_protected:Npn \draw_suspend_begin:
+  {
+    \@@_scope_bb_begin:
+    \draw_path_scope_begin:
+    \draw_transform_matrix_reset:
+    \draw_transform_shift_reset:
+    \@@_layers_save:
+  }
+\cs_new_protected:Npn \draw_suspend_end:
+  {
+    \@@_layers_restore:
+    \draw_path_scope_end:
+    \@@_scope_bb_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

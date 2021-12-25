@@ -1,0 +1,65 @@
+% aamfigs.tex    AAM figures
+
+\documentclass[11pt]{article}
+
+% set up for (pdf)LaTeX processing
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+  \pdffalse
+\else
+  \pdftrue
+\fi
+\ifpdf
+  \pdfoutput=1
+  \usepackage[pdftex,final]{graphicx}
+  \DeclareGraphicsRule{*}{mps}{*}{}
+\else
+  \usepackage[final]{graphicx}
+\fi
+\usepackage{rotating}  % or \usepackage{isorot}
+
+% isopage.tex    Dimensions of an ISO page on US letterpaper
+\setlength{\headheight}{11pt}
+\setlength{\headsep}{10mm}
+\setlength{\topskip}{11pt}
+\setlength{\footskip}{11mm}
+\setlength{\textwidth}{160mm}
+\setlength{\textheight}{221mm}
+\setlength{\columnsep}{10mm}
+\setlength{\topmargin}{-9.4mm}
+\setlength{\oddsidemargin}{1.55mm}
+\setlength{\evensidemargin}{1.55mm}
+
+\title{AAMFIGS.TEX}
+\author{Peter Wilson} \date{22 May 2000}
+\begin{document}
+\maketitle
+\listoffigures
+\clearpage
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics{aam.1}
+\caption{AAM 1}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics{aam.2}
+\caption{AAM 2}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics{aam.3}
+\caption{AAM 3}
+\end{sidewaysfigure}
+
+\begin{figure}
+\centering
+\includegraphics{aam.5}
+\caption{AAM 5}
+\end{figure}
+
+\end{document}
+

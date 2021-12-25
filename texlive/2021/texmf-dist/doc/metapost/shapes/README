@@ -1,0 +1,25 @@
++AMDG
+
+This document is copyright 11EE (2015) by Donald P. Goodman, and is
+released publicly under the LaTeX Project Public License.  The
+distribution and modification of this work is constrained by the
+conditions of that license.  See
+	http://www.latex-project.org/lppl.txt
+for the text of the license.  This document is released
+under version 1.3 of that license, and this work may be distributed
+or modified under the terms of that license or, at your option, any
+later version.
+
+This work has the LPPL maintenance status 'maintained'.
+
+The Current Maintainer of this work is Donald P. Goodman
+(dgoodmaniii@gmail.com).
+
+This work consists of the files shapes.dtx and shapes.ins,
+along with the generated files shapes.mp and shapes.pdf,
+along with this README.
+
+The shapes macros for Metapost provide regular polygons,
+their corresponding reentrant stars, and images
+demonstrating fractions.  These macros are quite
+configurable.

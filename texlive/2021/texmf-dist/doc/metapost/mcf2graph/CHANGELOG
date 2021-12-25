@@ -1,0 +1,640 @@
+*******************************************************************************
+ Changelog of mcf2graph software package          by Akira Yamaji 2022-12-12
+*******************************************************************************
+[ver. 4.75  / 2022-12-12]
+  -change syntax of bond type
+   {a<}=dl : {a}=dr
+   {a<}=dr : {a}=dl
+  -change syntax of fused ring
+   {(a<,b)}=?6  : (a,b)=?6[3]
+   {(a<,b)}=?5  : (a,b)=?5[2]
+   {(a<,b<)}=?6 : (a,b)=?6[2]
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.74  / 2021-11-23]
+  -change syntax of fused ring
+   (a,b)=?6[4] => (a,b)=?6
+   (a,b)=?5[3] => (a,b)=?5
+   (a,b)=?4[2] => (a,b)=?4
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.73  / 2021-10-10]
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.72  / 2021-09-20]
+  -change syntax of beginfont()
+    keep file open 'f+' => 'v+'
+    enable to use default input file name
+  -change syntax of query()
+    input file name 'i:' => 'f:'
+  -fix bug in beginfont(),endfont
+  -fix bug in query()
+  -fix bug in expand mode
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.71  / 2021-09-05]
+  -add function query() for data base file
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.70  / 2021-08-01]
+  -change syntax of @(x,y)
+    @(x,y)  : Move (x,y) from current position
+    @$(x,y) : Move (x,y) from origin(@1)
+  -add bond type for glycan
+    arc_lb  : arc left > bottom
+    arc_br  : arc bottom > right
+    arc_lbr : arc left > bottom > right
+    arc_ltr : arc left > top > right
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.69  / 2021-07-18]
+  -add bond type wf_r,wb_r,bd_r for steric ring
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.68  / 2021-06-28]
+  -fix bug in data base file handling
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.67  / 2021-06-13]
+  -fix bug in bond color
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.66  / 2021-06-06]
+  -add binary operator in {...}
+    { a -- b , ...} : { a,a+1,...,b , ...} (a<b)
+  -change option parameters
+     sw_numberA=1 => sw_numbering=Atom
+     sw_numberA=2 => sw_numbering=Atom+Brock
+     sw_numberA=3 => sw_numbering=Atom+Inverse
+     sw_numberB=1 => sw_numbering=Bond
+     sw_numberB=2 => sw_numbering=Bond+Brock
+     sw_numberB=3 => sw_numbering=Bond+Inverse
+     sw_fframe=1 => sw_frame=Outside
+     sw_fframe=2 => sw_frame=Inside
+     sw_fframe=3 => sw_frame=Outside+Inside=Bothside
+     sw_aframe=1 => sw_frame=sw_frame+Atom
+     sw_mframe=1 => sw_frame=sw_frame+Mol
+     numberA_start,numberB_start => numbering_start
+     numberA_end,numberB_end => numbering_end
+     Info1 => Info
+     Info2 => Info+Table
+     Info_t => Info+Temp
+     Mcode_t => Mcode+Temp
+     Report_t => Report+Temp
+     None_Info_t => Font+Info+Temp
+     None_Mcode_t => Font+Mcode+Temp
+     None_Report_t => Font+Report+Temp
+     None_Info_Mcode_t => Font+Info+Mcode+Temp
+  -delete option parameters
+     sw_numberA,sw_numberB,numberA_start,numberA_end,
+     numberB_start,numberB_end,
+     sw_fframe,sw_aframe,sw_mframe
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.65  / 2021-05-23]
+  -add parameter for sw_output
+    None_Info_t  :  output font,'temp-info.aux'
+    None_Mcode_t :  output font,'temp-mc.aux'
+    None_Report_t : output font,'temp-report.aux'
+    None_Info_Mcode_t :
+      output font,'temp-info.aux','temp-mc.aux'
+  -update mcf_data_base.mcf
+  -update MCF manual,example
+
+[ver. 4.64  / 2021-05-05]
+  -add parameter for sw_output
+    Mcode   : output MCF aux files
+    Mcode_t : output 'temp-mc.aux'
+    Info_t  : output 'temp-info.aux'
+  -update MCF manual,example
+
+[ver. 4.63  / 2021-04-18]
+  -add option parameter sw_output
+     sw_calc   =1 => sw_output=None
+     sw_aux_out=1 => sw_output=Info1
+     sw_aux_out=2 => sw_output=Info2
+     sw_rep_out=1 => sw_output=Report
+     sw_mol_out=1 => sw_output=MOL2k
+     sw_mol_out=2 => sw_output=MOL3k
+  -delete option parameters
+     sw_calc,sw_aux_out,sw_rep_out,sw_mol_out,
+     sw_file_open
+  -change molecular data base format
+     end MCF : "-" => "+"
+  -update MCF manual,example
+
+[ver. 4.62  / 2021-04-04]
+  -add molecular data base file
+     'mcf_data_base.mcf'
+  -improve function beginfont()
+     able to use molecular data base file
+  -add option parameter sw_file_open
+  -improve function check()
+  -update MCF manual,example
+
+[ver. 4.61  / 2021-03-21]
+  -change syntax
+     @.$n => @$n
+     &.$n => &$n
+  -change function name
+     check_mc() => check()
+  -improve function check()
+  -update MCF manual,example
+
+[ver. 4.60  / 2021-03-07]
+  -$n (0<=n<360) can use as absolute angle
+  -change option parameter name
+     ratio_zebragap_bond => ratio_hashgap_bond
+     offset_zebra_gap => offset_hash_gap
+  -improve function check_mc()
+  -update MCF manual,example
+     pk font => eps(mps) file
+
+[ver. 4.59  / 2021-02-28]
+  -add command @(x,y) : move to (x,y)
+  -improve function check_mc()
+  -improve report output
+  -delete option parameter sw_indent_off
+  -update MCF manual,example
+
+[ver. 4.58  / 2021-02-21]
+  -change syntax
+     "+" => p_
+     "-" => n_
+  -add function check_mc()
+  -update MCF manual,example
+
+[ver. 4.57  / 2021-02-11]
+  -change syntax
+     n:@ => @n
+     n:# => &n
+     &"+" => "+"
+     &"-" => "-"
+     |=n  => #n
+     =|   => ##
+  -delete command ``
+  -delete command a@#b
+  -delete command A[1],A[-1]
+  -delete bond type d,w,z
+  -fix bug in MOL file output
+  -update MCF manual,example
+
+[ver. 4.56  / 2021-01-31]
+  -fix bug in molecular weight calculation
+  -fix bug in report output
+  -fix bug in MOL file output
+  -improve parts definition
+  -improve global ext() setting
+  -update MCF manual,example
+
+[ver. 4.55  / 2021-01-03]
+  -fix bug in molecular weight calculation
+  -fix bug in charged atom calculation
+  -add commands
+     ?!   : /_,!
+     ??   : /_^35,/_-35
+     /?!  : isopropyl
+     /??! : tert-butyl
+  -change syntax
+     /N!_ => /N?! : dimethylamino
+  -update MCF manual,example
+
+[ver. 4.54  / 2020-12-12]
+  -fix bug in report output
+  -update MCF manual,example
+
+[ver. 4.53  / 2020-11-03]
+  -improve inline definition
+  -update MCF manual(add index),example
+
+[ver. 4.52  / 2020-08-30]
+  -improve aux file output,input
+  -update MCF manual,example
+
+[ver. 4.51  / 2020-08-10]
+  -improve aux file output,input
+  -add style file mcf_setup.sty
+  -update MCF manual,example
+
+[ver. 4.50  / 2020-07-26]
+  -fix bug in function add()
+  -delete file mcf_man_soc-064.mps
+  -update MCF manual,example
+
+[ver. 4.49  / 2020-07-09]
+  -improve command !,!n
+  -delete command !0
+  -improve function ext()
+  -add command
+     ext_clear: reset global ext()
+  -fix bug in environment setting
+  -update MCF manual,example
+
+[ver. 4.48  / 2020-01-26]
+  -add command  a@#b : a:@,b:#
+  -update MCF manual
+
+[ver. 4.47  / 2019-12-15]
+  -fix bug in fused ring
+  -change option parameter name
+     sw_subst_off => sw_group_off
+  -update MCF manual
+
+[ver. 4.46  / 2019-12-08]
+  -miner update mcf2graph.mf
+  -update MCF manual
+
+[ver. 4.45  / 2019-10-05]
+  -improve function ext()
+  -delete option parameter sw_auxfix
+     sw_auxfix=1 => sw_aux_out=2
+  -update MCF manual,example
+
+[ver. 4.44  / 2019-07-07]
+  -improve to ignore unknown command
+
+[ver. 4.43  / 2019-06-23]
+  -add binary operator for add()
+     a << b : a rotated b
+  -improve embedded font
+  -update MCF manual
+
+[ver. 4.42  / 2019-05-26]
+  -add function for add()
+     plus     : circled plus
+     minus    : circled minus
+     lonepair : lonepair
+  -add binary operator for add()
+     a ** b : a scaled b
+     a /* b : point of b scaled a
+  -add variable for add()
+     A[n]up    : dir An
+     A[n]left  : dir An+90
+     A[n]right : dir An-90
+     A[n]down  : dir An+180
+     B[n]up    : dir Bn
+     B[n]left  : dir Bn+90
+     B[n]right : dir Bn-90
+     B[n]down  : dir Bn+180
+  -change variable for add()
+     A[n]dir => A[n]ang
+     A[n]ang : angle of An
+     B[n] => Bm[n]
+     B[n] : bond position => path
+  -improve label emulation
+  -update MCF manual
+
+[ver. 4.41  / 2019-05-11]
+  -change syntax
+     |<=,=>|  =>  |=,=|
+     ext() => add()
+     EXT() => ext()
+  -update MCF manual
+
+[ver. 4.40  / 2019-03-21]
+  -add function MC()
+  -change function name MCa() => MCat()
+  -delete function MCc(),MCd(),MCf()
+  -add angle parameter mangle
+  -add size parameter
+     thickness_mframe
+  -change size parameter name
+     bond_len => blength
+     max_bond_length => max_blength
+     font_wd,font_ht => fsize(w,h)
+     margin_left_right,margin_top_bottom
+       => fmargin(w,h)
+     thickness_font_frame => thickness_fframe
+     thickness_atom_frame => thickness_aframe
+  -delete ratio parameter ratio_bond_width
+  -delete option parameter sw_solid
+  -change option parameter name
+     sw_clip        => sw_trimming
+     sw_bond_single => sw_single
+     sw_fomt_frame  => sw_fframe
+     sw_mol_frame   => sw_mframe
+     sw_atom_frame  => sw_aframe
+  -update MCF manual
+
+[ver. 4.36  / 2019-02-11]
+  -fix bug in draw atom,draw bond
+  -delete size parameter atomfontsize
+  -update MCF manual
+
+[ver. 4.35  / 2019-01-03]
+  -fix bug in numbering bond
+  -update MCF manual
+
+[ver. 4.34  / 2018-11-11]
+  -change default driver(graphicx,hyperref)
+   dvipdfmx => pdftex
+  -change file name
+   mcf_man_soc-064.eps  => mcf_man_soc-064.mps
+  -change command-line parameter settings
+  -change option parameter name
+     sw_report => sw_rep_out
+  -update MCF manual
+
+[ver. 4.33  / 2018-06-18]
+  -change syntax n:&
+     n:& => n:#
+  -add command &"c"
+  -update MCF manual and examples
+
+[ver. 4.32  / 2018-06-03]
+  -add commands C[],N[],O[],S[]
+     X[1]  : "{X^+^}"
+     X[-1] : "{X^-^}"
+  -change option parameter name
+     sw_MOLout => sw_mol_out
+     sw_auxout => sw_aux_out
+  -improve MOL file output
+     sw_mol_out=0 : no MOL file
+     sw_mol_out=1 : MOL file V2000
+     sw_mol_out=2 : MOL file V3000
+  -update MCF manual and examples
+
+[ver. 4.31  / 2018-04-16]
+  -add command */*n , n:*\* , |<=n
+     */*n  : /n~wv
+     n:*\* : n:\~wv
+     |<=n  : |<,``n
+  -update MCF manual and examples
+
+[ver. 4.30  / 2018-01-03]
+  -change syntax &n
+     &n => n:&
+  -improve address error detection
+  -improve expand mode
+  -update MCF manual and examples
+
+[ver. 4.29  / 2017-10-29]
+  -miner update mcf2graph.mf
+
+[ver. 4.28  / 2017-09-15]
+  -change syntax #n
+    #n => $n
+  -update MCF syntax manual
+
+[ver. 4.27  / 2017-09-03]
+  -improve function ext(),EXT()
+  -update MCF syntax manual
+
+[ver. 4.26  / 2017-08-13]
+  -improve label emulation
+  -update MCF syntax manual
+
+[ver. 4.25  / 2017-07-23]
+  -improve label,arrow emulation
+  -change variable name
+    Bs[]   => B[]s
+    Be[]   => B[]e
+    B[]ang => B[]dir
+    A[]bra => B[]dir
+  -update MCF syntax manual
+
+[ver. 4.24  / 2017-07-17]
+  -atom font can be changed
+  -update MCF syntax manual
+
+[ver. 4.23  / 2017-06-04]
+  -change syntax n*,n\
+     n* => n:@
+     n\ => n:\
+  -update MCF syntax manual
+
+[ver. 4.22  / 2017-05-27]
+  -change syntax @(),$()
+     @(a,b,...)c => {a,b,...}:c
+     $(a,b,...)c => {a,b,...}=c
+  -improve function ext()
+     add variable Bs[],Be[]
+  -update MCF syntax manual
+
+[ver. 4.21  / 2017-05-03]
+  -change brock making commands
+     '{','}' => '|<','>|'
+  -improve report output
+  -update MCF syntax manual
+
+[ver. 4.20  / 2017-03-26]
+  -change length expression
+     length# => length
+  -add emulation commands
+     dotlabel,drawarrow,drawdblarrow
+  -add function MCa(),MCc()
+  -delete function draw_vector()
+  -update MCF syntax manual
+
+[ver. 4.11  / 2017-03-06]
+  -improve function EXT(),ext()
+  -update MCF syntax manual
+
+[ver. 4.10  / 2017-02-13]
+  -improve function EXT(),ext()
+  -update MCF syntax manual
+
+[ver. 4.09  / 2017-01-29]
+  -add new function puts()
+     put string in EXT(),ext()
+  -add new function use_font()
+     make font for puts()
+  -change option parameter name
+     sw_checklist => sw_report
+  -update MCF syntax manual
+
+[ver. 4.08  / 2017-01-15]
+  -add monoisotopic mass calculation
+  -update MCF syntax manual
+
+[ver. 4.07  / 2017-01-09]
+  -add new command '!!'  : '!~db'
+  -add new command '!!!' : '!~tm'
+  -add new substituent '/_' : '/Me'
+  -improve molecular weight calculation
+  -update MCF syntax manual
+
+[ver. 4.06  / 2017-01-03]
+  -miner update
+  -corrected molecular examples
+  -update MCF syntax manual
+
+[ver. 4.05  / 2016-11-15]
+  -improve molecular checklist
+  -update MCF syntax manual
+
+[ver. 4.04  / 2016-11-05]
+  -improve clipping mode
+  -update MCF syntax manual
+
+[ver. 4.03  / 2016-11-03]
+  -miner update
+  -update MCF syntax manual
+
+[ver. 4.02  / 2016-10-30]
+  -add function EXT(),ext()
+  -delete option parameter sw_start_vector
+  -update MCF syntax manual
+
+[ver. 4.01  / 2016-10-23]
+  -many fixes for robustness
+  -update MCF syntax manual
+
+[ver. 4.00  / 2016-10-19]
+  -change solid mode parameter
+   1:solid ratio,2:solid length
+  -update MCF syntax manual
+
+[ver. 3.99  / 2016-10-14]
+  -miner update
+  -update MCF syntax manual
+   fixed page number of contents
+
+[ver. 3.98  / 2016-10-10]
+  -add option parameter sw_clip (clipping font)
+  -add max_bond_length , delete max_bond_width
+  -update MCF syntax manual
+
+[ver. 3.97  / 2016-08-21]
+  -change bond type name 'ov' to 'si_'
+  -add bond type 'wf_','wb_','bd_'
+  -update MCF syntax manual
+
+[ver. 3.96  / 2016-08-06]
+  -large scaled rings can fuse
+   5,6,7,8 membered ring scaled 11/10,12/10,13/10,14/10,15/10
+  -update MCF syntax manual
+
+[ver. 3.95  / 2016-07-10]
+  -improve bond type 'ov'
+  -update MCF syntax manual and example
+
+[ver. 3.94  / 2016-06-19]
+  -set maximum ratio atom size / bond length to 0.8
+   for avoid error when font size is very small
+
+[ver. 3.93  / 2016-06-11]
+  -improve font frame
+  -update MCF syntax manual
+
+[ver. 3.92  / 2016-05-05]
+  -miner update
+  -update MCF syntax manual
+
+[ver. 3.91  / 2016-05-01]
+  -add information tag and var for fixed aux file
+  -update MCF syntax manual
+
+[ver. 3.90  / 2016-04-28]
+  -add parameter 'sw_auxfix'
+   fixed aux information format is added
+   It is easy to use with spreadsheet software
+
+[ver. 3.89  / 2016-04-10]
+  -add new bond type bz (broad dotted)
+
+[ver. 3.88  / 2016-04-06]
+  -rename variable 'aux_separater' => 'aux_delimiter'
+
+[ver. 3.87  / 2016-04-04]
+  -change aux information delimiter(, => ;)
+   a lot of molecular name include ','
+
+[ver. 3.86  / 2016-04-02]
+  -change aux output format(command => csv)
+  -update MCF syntax manual
+
+[ver. 3.85  / 2016-03-24]
+  -change aux output control
+  -update MCF syntax manual
+
+[ver. 3.84  / 2016-03-19]
+  -improve efficiency of command @,:
+  -update MCF syntax manual
+
+[ver. 3.83  / 2016-03-05]
+  -change option parameter name
+     sw_logout  => sw_auxout
+     sw_MOLfile => sw_MOLout
+  -update MCF syntax manual
+
+[ver. 3.82  / 2016-02-14]
+  -add new commands  ~~,^^,'`,:>
+  -update MCF syntax manual
+
+[ver. 3.81  / 2016-02-11]
+  -add parameter sw_subst_off,sw_bond_single
+  -delete constant _skeltonA_end
+  -update MCF syntax manual
+
+[ver. 3.80  / 2016-02-06]
+  add new command || , divide CHANGELOG from README
+  change e-mail address
+
+[ver. 3.78  / 2016-01-16]
+  update MCF syntax manual and MCF luamplib example
+
+[ver. 3.76  / 2015-11-28]
+  update MCF syntax manual and MCF example
+
+[ver. 3.75  / 2015-10-17]
+  fix bug in command **
+
+[ver. 3.74  / 2015-10-03]
+  improve bond infomation of checklist
+
+[ver. 3.72  / 2015-09-22]
+  change command ^^ to <  and delete ^^
+
+[ver. 3.71  / 2015-09-18]
+  delete command !!,??
+
+[ver. 3.70  / 2015-09-16]
+  add new command | ,change syntax of !,!!,?,??
+
+[ver. 3.63  / 2015-09-14]
+  add command option of numbering address,update MCF syntax manual
+
+[ver. 3.62  / 2015-09-07]
+  improve numbering bond, numbering atom, update MCF syntax manual
+
+[ver. 3.61  / 2015-09-01]
+  fix bug in local setting of font_wd# and font_ht#
+
+[ver. 3.59  / 2015-08-23]
+  update MCF syntax manual
+
+[ver. 3.58  / 2015-08-18]
+  improve calculation of molecular formula and weight
+
+[ver. 3.57  / 2015-08-14]
+  improve AUX file format
+
+[ver. 3.55  / 2015-08-04]
+  support luamplib(v2.11), renew mcf_mplib_exa.tex
+
+[ver. 3.54  / 2015-08-03]
+  maximum item number of MOLinfo can be changed
+
+[ver. 3.53  / 2015-07-29]
+  support luamplib(LuaLaTeX)
+
+[ver. 3.52  / 2015-07-20]
+  '!!4`2' can use as '{,``2,!4,}'
+
+[ver. 3.51  / 2015-07-19]
+  '?6`2' can use as '{,``2,?6,}'
+
+[ver. 3.50  / 2015-07-11]
+  first version uploaded to ctan.
+******************************************************************************

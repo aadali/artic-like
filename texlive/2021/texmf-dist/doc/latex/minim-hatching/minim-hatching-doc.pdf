@@ -1,0 +1,1402 @@
+%PDF-1.5
+%ÌÕÁÔÅØĞÄÆ
+1 0 obj
+<< /Type/EmbeddedFile /Subtype/text#2Fplain /Length 13827 >>      
+stream
+                      EUROPEAN UNION PUBLIC LICENCE v. 1.2
+                      EUPL Â© the European Union 2007, 2016
+
+This European Union Public Licence (the â€˜EUPLâ€™) applies to the Work (as defined
+below) which is provided under the terms of this Licence. Any use of the Work,
+other than as authorised under this Licence is prohibited (to the extent such
+use is covered by a right of the copyright holder of the Work).
+
+The Work is provided under the terms of this Licence when the Licensor (as
+defined below) has placed the following notice immediately following the
+copyright notice for the Work:
+
+        Licensed under the EUPL
+
+or has expressed by any other means his willingness to license under the EUPL.
+
+1. Definitions
+
+In this Licence, the following terms have the following meaning:
+
+- â€˜The Licenceâ€™: this Licence.
+
+- â€˜The Original Workâ€™: the work or software distributed or communicated by the
+  Licensor under this Licence, available as Source Code and also as Executable
+  Code as the case may be.
+
+- â€˜Derivative Worksâ€™: the works or software that could be created by the
+  Licensee, based upon the Original Work or modifications thereof. This Licence
+  does not define the extent of modification or dependence on the Original Work
+  required in order to classify a work as a Derivative Work; this extent is
+  determined by copyright law applicable in the country mentioned in Article 15.
+
+- â€˜The Workâ€™: the Original Work or its Derivative Works.
+
+- â€˜The Source Codeâ€™: the human-readable form of the Work which is the most
+  convenient for people to study and modify.
+
+- â€˜The Executable Codeâ€™: any code which has generally been compiled and which is
+  meant to be interpreted by a computer as a program.
+
+- â€˜The Licensorâ€™: the natural or legal person that distributes or communicates
+  the Work under the Licence.
+
+- â€˜Contributor(s)â€™: any natural or legal person who modifies the Work under the
+  Licence, or otherwise contributes to the creation of a Derivative Work.
+
+- â€˜The Licenseeâ€™ or â€˜Youâ€™: any natural or legal person who makes any usage of
+  the Work under the terms of the Licence.
+
+- â€˜Distributionâ€™ or â€˜Communicationâ€™: any act of selling, giving, lending,
+  renting, distributing, communicating, transmitting, or otherwise making
+  available, online or offline, copies of the Work or providing access to its
+  essential functionalities at the disposal of any other natural or legal
+  person.
+
+2. Scope of the rights granted by the Licence
+
+The Licensor hereby grants You a worldwide, royalty-free, non-exclusive,
+sublicensable licence to do the following, for the duration of copyright vested
+in the Original Work:
+
+- use the Work in any circumstance and for all usage,
+- reproduce the Work,
+- modify the Work, and make Derivative Works based upon the Work,
+- communicate to the public, including the right to make available or display
+  the Work or copies thereof to the public and perform publicly, as the case may
+  be, the Work,
+- distribute the Work or copies thereof,
+- lend and rent the Work or copies thereof,
+- sublicense rights in the Work or copies thereof.
+
+Those rights can be exercised on any media, supports and formats, whether now
+known or later invented, as far as the applicable law permits so.
+
+In the countries where moral rights apply, the Licensor waives his right to
+exercise his moral right to the extent allowed by law in order to make effective
+the licence of the economic rights here above listed.
+
+The Licensor grants to the Licensee royalty-free, non-exclusive usage rights to
+any patents held by the Licensor, to the extent necessary to make use of the
+rights granted on the Work under this Licence.
+
+3. Communication of the Source Code
+
+The Licensor may provide the Work either in its Source Code form, or as
+Executable Code. If the Work is provided as Executable Code, the Licensor
+provides in addition a machine-readable copy of the Source Code of the Work
+along with each copy of the Work that the Licensor distributes or indicates, in
+a notice following the copyright notice attached to the Work, a repository where
+the Source Code is easily and freely accessible for as long as the Licensor
+continues to distribute or communicate the Work.
+
+4. Limitations on copyright
+
+Nothing in this Licence is intended to deprive the Licensee of the benefits from
+any exception or limitation to the exclusive rights of the rights owners in the
+Work, of the exhaustion of those rights or of other applicable limitations
+thereto.
+
+5. Obligations of the Licensee
+
+The grant of the rights mentioned above is subject to some restrictions and
+obligations imposed on the Licensee. Those obligations are the following:
+
+Attribution right: The Licensee shall keep intact all copyright, patent or
+trademarks notices and all notices that refer to the Licence and to the
+disclaimer of warranties. The Licensee must include a copy of such notices and a
+copy of the Licence with every copy of the Work he/she distributes or
+communicates. The Licensee must cause any Derivative Work to carry prominent
+notices stating that the Work has been modified and the date of modification.
+
+Copyleft clause: If the Licensee distributes or communicates copies of the
+Original Works or Derivative Works, this Distribution or Communication will be
+done under the terms of this Licence or of a later version of this Licence
+unless the Original Work is expressly distributed only under this version of the
+Licence â€” for example by communicating â€˜EUPL v. 1.2 onlyâ€™. The Licensee
+(becoming Licensor) cannot offer or impose any additional terms or conditions on
+the Work or Derivative Work that alter or restrict the terms of the Licence.
+
+Compatibility clause: If the Licensee Distributes or Communicates Derivative
+Works or copies thereof based upon both the Work and another work licensed under
+a Compatible Licence, this Distribution or Communication can be done under the
+terms of this Compatible Licence. For the sake of this clause, â€˜Compatible
+Licenceâ€™ refers to the licences listed in the appendix attached to this Licence.
+Should the Licensee's obligations under the Compatible Licence conflict with
+his/her obligations under this Licence, the obligations of the Compatible
+Licence shall prevail.
+
+Provision of Source Code: When distributing or communicating copies of the Work,
+the Licensee will provide a machine-readable copy of the Source Code or indicate
+a repository where this Source will be easily and freely available for as long
+as the Licensee continues to distribute or communicate the Work.
+
+Legal Protection: This Licence does not grant permission to use the trade names,
+trademarks, service marks, or names of the Licensor, except as required for
+reasonable and customary use in describing the origin of the Work and
+reproducing the content of the copyright notice.
+
+6. Chain of Authorship
+
+The original Licensor warrants that the copyright in the Original Work granted
+hereunder is owned by him/her or licensed to him/her and that he/she has the
+power and authority to grant the Licence.
+
+Each Contributor warrants that the copyright in the modifications he/she brings
+to the Work are owned by him/her or licensed to him/her and that he/she has the
+power and authority to grant the Licence.
+
+Each time You accept the Licence, the original Licensor and subsequent
+Contributors grant You a licence to their contributions to the Work, under the
+terms of this Licence.
+
+7. Disclaimer of Warranty
+
+The Work is a work in progress, which is continuously improved by numerous
+Contributors. It is not a finished work and may therefore contain defects or
+â€˜bugsâ€™ inherent to this type of development.
+
+For the above reason, the Work is provided under the Licence on an â€˜as isâ€™ basis
+and without warranties of any kind concerning the Work, including without
+limitation merchantability, fitness for a particular purpose, absence of defects
+or errors, accuracy, non-infringement of intellectual property rights other than
+copyright as stated in Article 6 of this Licence.
+
+This disclaimer of warranty is an essential part of the Licence and a condition
+for the grant of any rights to the Work.
+
+8. Disclaimer of Liability
+
+Except in the cases of wilful misconduct or damages directly caused to natural
+persons, the Licensor will in no event be liable for any direct or indirect,
+material or moral, damages of any kind, arising out of the Licence or of the use
+of the Work, including without limitation, damages for loss of goodwill, work
+stoppage, computer failure or malfunction, loss of data or any commercial
+damage, even if the Licensor has been advised of the possibility of such damage.
+However, the Licensor will be liable under statutory product liability laws as
+far such laws apply to the Work.
+
+9. Additional agreements
+
+While distributing the Work, You may choose to conclude an additional agreement,
+defining obligations or services consistent with this Licence. However, if
+accepting obligations, You may act only on your own behalf and on your sole
+responsibility, not on behalf of the original Licensor or any other Contributor,
+and only if You agree to indemnify, defend, and hold each Contributor harmless
+for any liability incurred by, or claims asserted against such Contributor by
+the fact You have accepted any warranty or additional liability.
+
+10. Acceptance of the Licence
+
+The provisions of this Licence can be accepted by clicking on an icon â€˜I agreeâ€™
+placed under the bottom of a window displaying the text of this Licence or by
+affirming consent in any other similar way, in accordance with the rules of
+applicable law. Clicking on that icon indicates your clear and irrevocable
+acceptance of this Licence and all of its terms and conditions.
+
+Similarly, you irrevocably accept this Licence and all of its terms and
+conditions by exercising any rights granted to You by Article 2 of this Licence,
+such as the use of the Work, the creation by You of a Derivative Work or the
+Distribution or Communication by You of the Work or copies thereof.
+
+11. Information to the public
+
+In case of any Distribution or Communication of the Work by means of electronic
+communication by You (for example, by offering to download the Work from a
+remote location) the distribution channel or media (for example, a website) must
+at least provide to the public the information requested by the applicable law
+regarding the Licensor, the Licence and the way it may be accessible, concluded,
+stored and reproduced by the Licensee.
+
+12. Termination of the Licence
+
+The Licence and the rights granted hereunder will terminate automatically upon
+any breach by the Licensee of the terms of the Licence.
+
+Such a termination will not terminate the licences of any person who has
+received the Work from the Licensee under the Licence, provided such persons
+remain in full compliance with the Licence.
+
+13. Miscellaneous
+
+Without prejudice of Article 9 above, the Licence represents the complete
+agreement between the Parties as to the Work.
+
+If any provision of the Licence is invalid or unenforceable under applicable
+law, this will not affect the validity or enforceability of the Licence as a
+whole. Such provision will be construed or reformed so as necessary to make it
+valid and enforceable.
+
+The European Commission may publish other linguistic versions or new versions of
+this Licence or updated versions of the Appendix, so far this is required and
+reasonable, without reducing the scope of the rights granted by the Licence. New
+versions of the Licence will be published with a unique version number.
+
+All linguistic versions of this Licence, approved by the European Commission,
+have identical value. Parties can take advantage of the linguistic version of
+their choice.
+
+14. Jurisdiction
+
+Without prejudice to specific agreement between parties,
+
+- any litigation resulting from the interpretation of this License, arising
+  between the European Union institutions, bodies, offices or agencies, as a
+  Licensor, and any Licensee, will be subject to the jurisdiction of the Court
+  of Justice of the European Union, as laid down in article 272 of the Treaty on
+  the Functioning of the European Union,
+
+- any litigation arising between other parties and resulting from the
+  interpretation of this License, will be subject to the exclusive jurisdiction
+  of the competent court where the Licensor resides or conducts its primary
+  business.
+
+15. Applicable Law
+
+Without prejudice to specific agreement between parties,
+
+- this Licence shall be governed by the law of the European Union Member State
+  where the Licensor has his seat, resides or has his registered office,
+
+- this licence shall be governed by Belgian law if the Licensor has no seat,
+  residence or registered office inside a European Union Member State.
+
+Appendix
+
+â€˜Compatible Licencesâ€™ according to Article 5 EUPL are:
+
+- GNU General Public License (GPL) v. 2, v. 3
+- GNU Affero General Public License (AGPL) v. 3
+- Open Software License (OSL) v. 2.1, v. 3.0
+- Eclipse Public License (EPL) v. 1.0
+- CeCILL v. 2.0, v. 2.1
+- Mozilla Public Licence (MPL) v. 2
+- GNU Lesser General Public Licence (LGPL) v. 2.1, v. 3
+- Creative Commons Attribution-ShareAlike v. 3.0 Unported (CC BY-SA 3.0) for
+  works other than software
+- European Union Public Licence (EUPL) v. 1.1, v. 1.2
+- QuÃ©bec Free and Open-Source Licence â€” Reciprocity (LiLiQ-R) or Strong
+  Reciprocity (LiLiQ-R+).
+
+The European Commission may update this Appendix to later versions of the above
+licences without producing a new version of the EUPL, as long as they provide
+the rights granted in Article 2 of this Licence and protect the covered Source
+Code from exclusive appropriation.
+
+All other changes or additions to this Appendix require the production of a new
+EUPL version.
+
+endstream
+endobj
+5 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 6 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+7 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 8 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+9 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 10 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+11 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 12 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+13 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 14 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+15 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 16 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+17 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 18 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+19 0 obj
+<< /Subtype/Form /BBox [ 0 -1 100 1 ] /Resources 20 0 R /Filter /FlateDecode /Length 45 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\CÃÌÈ «›é
+endstream
+endobj
+21 0 obj
+<< /Subtype/Form /BBox [ -2.199 -2.199 20.574 7.449 ] /Resources 22 0 R /Filter /FlateDecode /Length 68 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\C=S #‡+®ŠË\ÏÂÜTÁTÏÈ¤ÀBÏÆ©
+ä y—|
+endstream
+endobj
+23 0 obj
+<< /Subtype/Form /BBox [ -2.199 -2.199 19.699 5.699 ] /Resources 24 0 R /Filter /FlateDecode /Length 62 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\C=S #‡+®ŠË\Á(”3R &H6 ^×
+endstream
+endobj
+25 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 26 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+27 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 28 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+29 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 30 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+31 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 32 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+33 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 34 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+35 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 36 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+37 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 38 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+39 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 40 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+41 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 42 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+43 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 44 0 R /Filter /FlateDecode /Length 63 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.#=3#S…\S= áäpÃUsA„€* ,°:Š@. »x=
+endstream
+endobj
+45 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 46 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+47 0 obj
+<< /Subtype/Form /BBox [ 0 0 3.5 3.5 ] /Resources 48 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.C=sS…\c=S3‡+®”,b ”3@j@Ò\ [ª
+endstream
+endobj
+49 0 obj
+<< /Subtype/Form /BBox [ -1.699 -1.699 6.949 6.949 ] /Resources 50 0 R /Filter /FlateDecode /Length 84 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.]C=S…\ÃWÇ–1Õ3IÃ™(*ŒõÌM:sÌ I°r°Š\ˆV°"’@. ¤§;
+endstream
+endobj
+51 0 obj
+<< /Subtype/Form /BBox [ -3.199 -3.199 8.449 8.449 ] /Resources 52 0 R /Filter /FlateDecode /Length 80 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.]c…\c…®`¸. ¨©‘)P
+Ê@‘5‰ %- I°r#ˆf0Û¦? Ï
+¥
+endstream
+endobj
+53 0 obj
+<< /Subtype/Form /BBox [ -1.699 -1.699 5.199 5.199 ] /Resources 54 0 R /Filter /FlateDecode /Length 76 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.]C=S…\ÃWÇ–1ËÂX(òF@M¹
+¦@E¤Î(¢!:¹ 'ÿ
+endstream
+endobj
+55 0 obj
+<< /Subtype/Form /BBox [ 0 -0.875 10.5 4.375 ] /Resources 56 0 R /Filter /FlateDecode /Length 58 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\S=#Sc=S…C e ÃÌÈ Ì
+H
+endstream
+endobj
+57 0 obj
+<< /Subtype/Form /BBox [ -0.875 0 4.375 10.5 ] /Resources 58 0 R /Filter /FlateDecode /Length 57 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.…\c=SS=#S… ×Ğ ÈËá
+æ
+ä z
+H
+endstream
+endobj
+59 0 obj
+<< /Subtype/Form /BBox [ 0 0 5.25 5.25 ] /Resources 60 0 R /Filter /FlateDecode /Length 62 >>         
+stream
+xÚ+ä2Ğ3¶´P(ç24PğU0TÈb/.c=#S™«`¨g¤!dW0\TD¦"RÈ kÉ=
+endstream
+endobj
+61 0 obj
+<< /Subtype/Form /BBox [ -0.199 -0.199 15.551 10.301 ] /Resources 62 0 R /Filter /FlateDecode /Length 107 >>        
+stream
+xÚ]Á€0EïLÁĞí
+&Œw0­IO®/Eñ`-/ÿ…¶B…IRÂ÷*(Jªœƒ…i`1~ƒ?‡;`Yšğa\Pğ°Q©W{­r[ m€íÓÁÊ#ûáÌ_­ng$‹
+endstream
+endobj
+63 0 obj
+<< /Subtype/Form /BBox [ -0.199 -0.199 10.301 10.301 ] /Resources 64 0 R /Filter /FlateDecode /Length 149 >>        
+stream
+xÚ­P1
+Ã0ÜõŠû@„Tã¡Ğ!tèº»©ß¯ÉÚĞ©ûîĞI'¼ĞBƒ°–‚€N¢]×®j/|êî§dµ2áE*¸@ñ°{&ÁÈy<Y„£¿•®»—4AÌâìÀb+Ëv _äWíŞ¬U8cğá­“€5fşWoîyò0H.áÿW²™fz‡&PP
+endstream
+endobj
+65 0 obj
+<< /Subtype/Form /BBox [ -1.927 -11.999 8.227 2.899 ] /Resources 66 0 R /Filter /FlateDecode /Length 101 >>        
+stream
+xÚ=Œ1
+A{¿B°X¯³ï®8ò„t+Råû±	¹B#ŒŞÒè+ğkØaxe¶ï¨œĞÆéş/£G@;{œZxÊãº‘Á	-œ˜\¥şêÆe©væËJ”zÈÃíc
+endstream
+endobj
+67 0 obj
+<< /Subtype/Form /BBox [ -0.492 -0.492 6.398 6.398 ] /Resources 68 0 R /Filter /FlateDecode /Length 107 >>        
+stream
+xÚ+ä2Ğ³´0Q(ç24PğU0TÈb/.c=Kc™«€ÌËá
+†ká2P0 JƒH4aC=K3K°„…"é„±ĞtÃì5Àf'DÈ î,İ¦z–f`İŠ4D¤ÆIr ˆ×2÷
+endstream
+endobj
+69 0 obj
+<< /Subtype/Form /BBox [ -4.137 -0.199 4.137 8.074 ] /Resources 70 0 R /Filter /FlateDecode /Length 101 >>        
+stream
+xÚM;
+€@Dûœb.`Hö¯ XˆGØN´°òúfAd‹)Şğ˜¹I8Î†‡T°Bqx.OæqÒş[4E£¡²ÕìÊ‡K;ª(«%LÂƒCJŠ¾Ø06£:®4¿ÛèãŒ)
+endstream
+endobj
+71 0 obj
+<< /Subtype/Form /BBox [ -0.199 -2.824 12.012 8.074 ] /Resources 72 0 R /Filter /FlateDecode /Length 135 >>        
+stream
+xÚ=»Ã0D{Mqä@Š¢>+pdw]¤Êú!"9¿Çw|'¡ORÁÅ‚{’Èg„3;(­vTJdzC£t‡qX¾7Ç·&¾”J—¶€©ÿœöôüÿK“Î¬!œ‹Vv»ha–°ÌÅæR…¥\ÇEóòÙ¯ñ6ç#>ÒÍ
++Ï
+endstream
+endobj
+73 0 obj
+<< /Subtype/Form /BBox [ -0.199 -0.199 11.613 13.441 ] /Resources 74 0 R /Filter /FlateDecode /Length 92 >>         
+stream
+xÚMŒ»€0D{OqXN‰½b
+*ÖÇRøW¼Ó»;HXİpRÌHØ")»œÅ;:%å2 ÑúNH9×O4T¶:ŞıC…-ü_[È½Ã….0çÑ
+endstream
+endobj
+75 0 obj
+<< /Subtype/Form /BBox [ -0.199 -0.199 7.676 8.894 ] /Resources 76 0 R /Filter /FlateDecode /Length 93 >>         
+stream
+xÚMŒQ
+€0Cÿ{Šœ ´ÛZİ?Ä[ÈüğËë[Ø~òB’‡„s]ñ’
+v(®ĞF‰=œÅntª,5£Ñ9'$P6õY4‡éñ€ÂV–€ÿi‹îÈãğ "’
+endstream
+endobj
+77 0 obj
+<< /Subtype/Form /BBox [ -7.875 -7.875 7.875 7.875 ] /Resources 78 0 R /Filter /FlateDecode /Length 133 >>        
+stream
+xÚ]AÃ ï~Å~`Ú/DÊ!oàV©‡ª‡~¿(„sÀ¬ìõx?â]Ü2~<¼êÛ%º-fx¼¡*8ŸRÕ%b©úYëšS«¥õtŞ½JĞ¿€s›³ŸÅù
+çóìÌÒ%Ç ®%q ê2İXìMß¬Üxæ˜É1òÉWNùäÜA»
+endstream
+endobj
+79 0 obj
+<< /Subtype/Form /BBox [ -5.25 -5.25 5.25 5.25 ] /Resources 80 0 R /Filter /FlateDecode /Length 132 >>        
+stream
+xÚ]A… D÷=Å\ D¼‚‰Ïàî'a\x}	B]PÚéôµy×„‡‚Ç€_~MN¦ÔÌÉ*9sBpQæÓ"5UÓ~ó*Aÿ<Ê<úÙ¢xÜÂãúV¨©pz£‚ÊŒ’¸;ª˜>,nİŒ|xf™¹£ßG7ôù	AÛ
+endstream
+endobj
+81 0 obj
+<< /Subtype/Form /BBox [ -4.137 -4.137 10.957 8.074 ] /Resources 82 0 R /Filter /FlateDecode /Length 248 >>        
+stream
+xÚ]Q;nD1ì}
+. ²ş]!RŠœáu‘¶ˆ¶Øë/ØzŞâñÃÌ`ü"ñèğ
+)Â7$øÕï+0îá†EÅ%3dÅUcëâñò3«¯^S°ÿx?Æ{?RxwÁ»=.ÍkAÜzsL	·à–z7}háğ8?(z‡Ù1Ç/<÷Zu¯ÔJóÚ<=Ï„…¡hÂ0¨FJ-guéÔk…F2C¯2c+ZVšÁKy­UÏD±X¿Päº…˜òhn‘©+İ¼¯Û[¦q°3’âìZ‰Raí2“H’Š›G›h¾‰}rk²;-º_×”}fy,i®ï'üBn 
+endstream
+endobj
+83 0 obj
+<< /Subtype/Form /BBox [ -2.824 -2.824 7.371 5.449 ] /Resources 84 0 R /Filter /FlateDecode /Length 245 >>        
+stream
+xÚ]P;n1ì}
+.`düç
+‘RäÛEzE”"×ë±Wö+–0Ìü¸ÀI;ı9	ôIBßö}¸È5
+ô¢‰¸j5œr'áT³Å^êŒ×¬á}õ‚ÿ‹ü^ö{¿?©ü®âwù• iğ<“hÌ€É?„ÕhzãòËàQ?FŞø±ÃÇãÏı>gu¥Åùô"d‰SªÜµÖ®†sH”9w1‰Â*–hKc±X¡äxÙX/À‰¥§Ùm2c4‘Å<@@Xã^‹#»£Î	áXernU‡Ş­8¶í0ı„á÷6à=XhMcUğâĞÛs_íËı°%|é
+endstream
+endobj
+85 0 obj
+<< /Subtype/Form /BBox [ -4.137 -4.137 8.074 4.137 ] /Resources 86 0 R /Filter /FlateDecode /Length 156 >>        
+stream
+xÚ]K!†÷œ‚HPtÄ+4é¢éÜ5™EW½~™ˆ6v!øÀ70ISü@d¼cÄ—½¡&ŠŒ'z"qÎWV’`H–—«š§ëKö¦52XtÜômä·-Ûî˜ÌÏõ`—O+$Ò&È”c±}Ú’ÙXÄmwmÔ½÷ÅLM­ŠÅü¤TSZó•ì¤©¤uBFìµÛğ—C
+endstream
+endobj
+87 0 obj
+<< /Subtype/Form /BBox [ -2.824 -2.824 5.449 2.824 ] /Resources 88 0 R /Filter /FlateDecode /Length 157 >>        
+stream
+xÚ]A!E÷‚HTå
+MºhzwMfÑU¯_t»P¾xÈÛ$iğq1À"¼ôÜœOÈ©@€Lú€,<^”øˆÄy„Vø
+}ÙV´ZN–‰›¿µüñ¶aÛ?.fwÏµfšˆ(ItRªUuâ¨º²Øİ—wægí
+„”4«QÚEÉ˜[\ı¥’Q
+Î=dJÛS¿öp_[!BÅ
+endstream
+endobj
+89 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 7.848 5.629 ] /Resources 90 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃWÂeªgdª`¬g`l”Eâ€r 8m
+endstream
+endobj
+91 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 6.098 4.618 ] /Resources 92 0 R /Filter /FlateDecode /Length 59 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃWÂe¬gª`¤g`d”D°AJ¹ ¥!
+endstream
+endobj
+93 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 10.473 7.144 ] /Resources 94 0 R /Filter /FlateDecode /Length 62 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃWÂe®ganª`¢gjb”Fæ”r Z[%
+endstream
+endobj
+95 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 96 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+97 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 98 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+99 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 100 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+101 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 102 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+103 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 104 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+105 0 obj
+<< /Subtype/Form /BBox [ -2.598 -2.598 2.598 2.598 ] /Resources 106 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3´4S(ç24PğU0TÈb/.…\™ÃÌÈ ›h…
+endstream
+endobj
+107 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 8.147 5.928 ] /Resources 108 0 R /Filter /FlateDecode /Length 61 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃWÂeªgdª`¬g`l”Eâ€r 9À“
+endstream
+endobj
+109 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 6.397 4.917 ] /Resources 110 0 R /Filter /FlateDecode /Length 59 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃWÂe¬gª`¤g`d”D°AJ¹ ì'
+endstream
+endobj
+111 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 10.772 7.443 ] /Resources 112 0 R /Filter /FlateDecode /Length 62 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃWÂe®ganª`¢gjb”Fæ”r [º+
+endstream
+endobj
+113 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 114 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+115 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 116 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+117 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 118 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+119 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 120 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+121 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 122 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+123 0 obj
+<< /Subtype/Form /BBox [ -2.897 -2.897 2.897 2.897 ] /Resources 124 0 R /Filter /FlateDecode /Length 43 >>         
+stream
+xÚ+ä2Ô3·4V(ç24PğU0TÈb/.…\™ÃÌÈ ›×ˆ
+endstream
+endobj
+129 0 obj
+<< /Filter /FlateDecode /Length 1629 >>       
+stream
+xÚ½˜ÛŠ#7†ïızku>À0Ç™…ÀÂ.Ì]ÈÍ$2a.òú)µTR©[m·İ3É2±­.éWÕW*I-™€’)!¹rÌ«À­PìåõğÏA°?áÿ²Xƒâ&8–L2\Lÿ1±øÒÁ¿dŠcH¸÷†½ö`ãÒÃÓóáÓ“eRòh­ôìùjæhıüÊ~{ÂHø;?ª ß]„?²òñ85¨'h8Ãç)?4*=œ:üşüëá—ç:úÒçoÄ_±ÏÓ2øÂQÇ"N9CıÄ™ônº „~Ê¸ôçµ{Xş–?·ï©İœr›	Ç S‡lùP:ÅíÑÖÀ	ïÚ@)dÚÑ†qŠõÔ/…8MÇ™§629kˆFÌÓs‘Ç¢$½4FzVŠY£Œ™.øYİjrœ²ƒipS¢aDqÀLƒ]x 3yv8Ói¥½O=«›è~şÔÈCµéÛ@•|ß1©MiŠ3'QòÑÚë‘;:ÿq|£IÍEl‰¥ò¨©†JŸúJr,s>}¨Á-ÖS8Î£õ '§pş˜-MÚõhºÎÅôQ4«ÿ~¨ü;…<ƒ¥Y›½›pœ1£¶2‡¾ç¼RP§ee›¿#ã˜sŸ6ı2k£iK ¥Œ-»´ê³N}’z¢=sn’‰ÅY›F\T”ò„:¬ÎôÉ~ÕëmKL¨Ş¥ÛÎÓ\BêJ[®ƒ§&çIŞºBFwR ’]µñ¹Ï¶TM-†­˜¥ï¹‚.cNÓ=œÒN•ıeÆùü›÷šc€Â[ßQjÏııÛ«á
+ìh£ç1Ú«Ûk6GkÌK’äu˜K¼oó6ï«{}Í£A¨„³\ÆıñTÎqcı2ã]¼XÏÂ©Zb¸)·„æÍş…#ØçÃ§¯oŸÙËX~úòãõ«do/?R°/Ğó/°8JeÅöÊ¬ã.êÖòwkÑ2LB‹˜ÿ@ÛÃ÷":T“àa>ö+¤†Uê¨\kªË,f™”»³¦„İ'D°°«ïÅ§•æÒ=ØOœ‰—éc´-ğôS+şiMø@*Gl¥iÚÂlİÜ zscğDË=$:[Zìx2Ò{®™Á­jd•ğ¾pTyŠÚÖH®s(¯£-¶­¤¨—-7€Âj+V¥ÌthmX±eÂ$#½W±ºkS«›Ü€ôzªuÊC¬JZnÛV*Ø°Ü6°Å·å€ŠÇÜ¥ó©é]úÔ*®aË!@KË xCFz¯3 U­­rÆëIÖ)Ÿ»‹°	†;±­£-ÙASÑõÚÿ 66°Ap‡$¶´‚Ø±d¤÷*XØÈ{²U®a¬zØ²JÉzÅ•»É‚¢rzÙb‹dõìí#g¥»‰’ƒu\j˜#èpî®JRÀìUòUÁÙN^}oUÌÑwœr°N—2_î)ù‚ö!ì>+¹ˆŸW^aeë™ËÛÎO·¹‡‡û½şáá~›Åzôê!âî¤\­AZ{n´#5[Úr× @D‘ËNÿmWOø¾¯AM®œ¦×šªÆr
+‹i®Ö qˆz÷9PÇÈ­ßT‚Š)£5yëõ=ÀÁ2À,,i}¸ÿúÎ1
+Æñ §ÌÕë{6Gk\r?µå†;ãGT—}¾æQÈ Ã¾O£®ğy</®ğY8÷\ßç{};.êh`‡ˆtE—²x >è²ˆ»h»zª˜›\[¾U¯5UåÓ\_ÑÁr§ìîm~ã’.¶¸NtÜ«İÂRÜxZ€±e™#½×qÍ®áM®²iz‚ë9ÔIq.z¹—4Üj¹W±İx_{/œíöm¬àA)Š³´"×d¤÷:ÎÙõ»É5œUo@x=Ç:é1NX
+Z†½8Up\³	'ÚŞx[{/¬²aõ‘KG‹*¶"Ø‘d¤÷:ÖÙ›Ğ&×V½é¹F¥ÇX½àÎ™İXaC:lÃZl	V£Ú¥OñôUÙ{!m·o+<·0™†[Ñë(2Ò{ıä+{¤M®òkzÊëyÖI‘ÆüB|/R¹‰Û
+/ÚŞñrûĞ*ÑĞjËƒ£¯@±eÅ&#½×ÑÎVk“kh«Ş€öz¾uÒC´V¥×á~7Zˆª4vÚb{ãËíÛ±~;üÑ¯N
+endstream
+endobj
+135 0 obj
+<< /Filter /FlateDecode /Length 2094 >>       
+stream
+xÚ½Zİj\7¾ß§8/°Šş¥ÆĞMâ@!€ïJoh¡Ô’‹¾~¥#f¤#yÏ®ÜÚØ»«3Ò§™ù4V,<üŠErÁ¤]œôÌp¹|{9ı}âËá¿Èg¯—~‰:
+Æ·Ÿ…ïŞà£ğEa!“J.g§\±ñáåùôîÉ,B°Õá–çß‹<ˆƒôóËòËçò#çF„†5ü¹ğ^s.ŞçÏáOÉğàõ‡ğ*}şùôñ¹ºWõ+Q3©7¥¤ä+sVï•´ËÊV+Ã#¢#H7:Zõz4ö!ëÆS›ºQk˜XİœByŒs„)˜_ç ”TL˜ƒËÂ-'’ß“ÏÚ‰3³üˆşéôîËOË·Aòİçï/_´Y~|û~|ùºşDÎ¡ŸÒvyYŒevU¥á/hàá-ÏÿËÃÓo¤PÀ©ì%p^1å-ZxÕNcˆ¤R;p€rÁ5n¥P¹…7°»IE°*<ÌêÃtÄÊ¼–w3ÁÅîaÇ=³×˜…³,aB‰7° 1›áÉlÁ—ÙÒèùüº÷õü‚=Ç¾±5
+R1xÚóbÄÃë¨¾aÂ#vÏ‘!A+à>;´g"D‹YvXÏ™ê=@˜FÖKxı ‘5EÙm×poÇQøããj%üÉ{QÎ,ØsìIWó§ —¨=£†l¾Šº6üAX`Âî5¦6îóÇYf”™ç	Ù†uù“…I|Ñ2qG_Wâ®Ûß’?ºğìƒ‚–½Ï(kÒwèL#k
+!Xq¢íi5¤ôu`Õ°ˆ iòYcŠWØƒmŠkæ½˜gRÈF¬™”…3“Ô–³`ÈÃ}[­È"-˜É4aQné8­¢ÎBzİi8tKÁëPkLíëĞ®eb&!v‡\¯0½BpI)&ÃÑh–Kf5L:}ŒK |pWû¸f1c®å–[+z-¤÷ØáMÚ„pè¶‚×¡ß+à*t›;ìB,ÄîĞïµÕ@Ñ\³‚§ç¹f-[gp-Üß–k¤±*¦ãA4¤a>woÁ]8rG#¨hUq­
+‘ÅA¬ğSĞÚ£6êé­ª]â)UV—”–9G#9´"¯iiò‚¢ŠìˆâJ7GÓ‡©ÁCîŒıvÓÜó;UÎRø`7[H>a2å‰W	 ›İªmrU$¸]o#hY¥³j”UzHX¥µ"‘‡q7Ø¸çïæÄ<TÃ„ğ”w¹¥ãâŠjé=äl2„CŞ¼Ç‹¡‚îóNQ1]ÀÒ>çı!Şlv—“û yk±ù7©ğï˜>YºQh_‘Kññ~Eû¬!qÑ‡ıÁšªD—Z:T¨(¹Şc~ú¶dp¤$xÊ¾²h(tŸŸNÃOÓÓ(fRqî:=³,É/ãn¦ó«¼À>û>4Óª°ôZÀÒZ¯¨äÊÛN.	['vk¬ş¨Sx!+¡¥C€Šˆé=Ş­›ó;Â
+"^‡¨ã¥RAwY©xOïÖ!I`b=¶[ƒ,qŸ‚”2»qKCï¥ä¬J…“‡tNÖJ¥¬‘Üı¸¤hmŞš;ë åÃ•`Ö¨ûsgË´aœÕ†×«¹siš;ç¼4ƒıáíoófuN£A:l³2±´q{»ö/³tcÖ¸âl;˜ùÇ³×S¹ŸÂê‘²É
+$Šå04KÔåÀU} ÙaI™7Q¬Àa+xØT0öSØMsÅ,Ÿ`	äØÆ
+²$‚¥¥£]C×E’Ğ¬(7tlTùjÁ¾ãİ§É‰
+úÀ:|…J·ï4ŸnŸf·ñåØ3È½GúkŠcÓ¶áˆg¡eoHêÌ…ô{¶©±!Xq$¢í½=äZÜu­QTN»vK_y6‰Veùp0É‘"%®	ÇiL	SJo”¡¥c§Ê[é=¦MJˆpèº‚×ñæ˜Mtßy:İÆL:/e£ê÷@–¬KyÁìé¶5×©6j-d¦«éÜçVA´Êyñí²¥şYwşTV¢·ĞBxá7ï'z’÷Ereš}Áğš¸ !Ub‡¿›â¨†§òû,Q·bÓ1&QØ÷Uv”Ì[ƒ8µÌ*§–CÚdáZ¨Ü½Úİí¦ŠIUã{W[ˆ?Æ9¸K¹ºÚ²8HCØ¡c †•Şß¦ŸÖ'¿Sgğ]ÂM¸QÆú´§é\Ú°îñlıCú~¡ÉQ(¢‚p¦H—8¡qİœzW’’â¬„á*£óÑÖÀ9:Æ‡p‡1¬@ÁõJ*í.Dµ5—r”Û¢ÃZŸ)«ó6ŞÈ¨–€òyšm¾Iç[ …Nö=^””!>Tq„lƒh‹¸L€`E Y‡–MÌ£™eq4“çø>;KFKuUüæh3§Y´e¿èbb‡0O›æ¨K‰Œãç¨l? ¶õÉÏEzÕ–¨¥.h‡­äö„2W&_æ’}¼}7—9jY›±cÖ4·§¬i‹D§^/Eí¾•fRni=âDlá8)V—	ıP!Ÿ…iV`«‡e»éLUúZtî 9CÕĞFƒíû@¢·"ÀNi¤ŠöÖDÏÒ‹^‹’İ³˜”LŒ½õVä|U¢R9_µ‹º*gG"‡l.˜em}0k59á[—52ÉÉ ¬¿]¯EVÅ®6ıiY
+ÆøäŒ'øŒñÅ6ñ%N§’±µHm§vá²T,²¹Î÷Û4Ç%=Û8¼/Ã‚½Ù¿ş«3ÇÆ
+endstream
+endobj
+137 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 5.250000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0.86603 -0.5 0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 17 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+138 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 5.250000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 5 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+139 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 97 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+140 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 6.062160
+/BBox [ -2.897 -2.897 8.147 5.928 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 107 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+141 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 9.093290 /YStep 5.250000
+/BBox [ -2.824 -2.824 7.371 5.449 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 83 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+142 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 10.500000
+/BBox [ -1.699 -1.699 6.949 6.949 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 49 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+143 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -4.137 -4.137 8.074 4.137 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 85 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+144 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 39 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+145 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 123 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+146 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 101 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+147 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 37 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+148 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 0.86603 -0.5 0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 35 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+149 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -5.25 -5.25 5.25 5.25 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 79 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+150 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 0.86603 0.5 -0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 31 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+151 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -7.875 -7.875 7.875 7.875 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 77 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+152 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 14.000000 /YStep 7.000000
+/BBox [ -2.199 -2.199 19.699 5.699 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 23 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+153 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 119 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+154 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 117 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+155 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 3.500000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0 -1 1 0 0 0 ] /Resources << /XObject << /PTempl 11 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+156 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 113 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+157 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 115 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+158 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 15.750000 /YStep 9.093250
+/BBox [ -2.897 -2.897 10.772 7.443 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 111 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+159 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.000000 /YStep 4.041440
+/BBox [ -2.897 -2.897 6.397 4.917 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 109 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+160 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 13.639940 /YStep 7.875000
+/BBox [ -4.137 -4.137 10.957 8.074 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 81 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+161 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 105 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+162 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 10.500000
+/BBox [ -0.199 -0.199 15.551 10.301 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 61 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+163 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 103 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+164 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 5.250000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0.86603 0.5 -0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 13 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+165 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 25 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+166 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 3.500000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 7 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+167 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 95 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+168 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 10.500000
+/BBox [ -0.199 -0.199 10.301 10.301 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 63 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+169 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 13.639900
+/BBox [ -0.199 -0.199 11.613 13.441 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 73 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+170 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 59 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+171 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.000000 /YStep 7.000000
+/BBox [ -1.699 -1.699 5.199 5.199 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 53 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+172 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 5.250000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0 -1 1 0 0 0 ] /Resources << /XObject << /PTempl 9 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+173 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ -2.824 -2.824 5.449 2.824 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 87 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+174 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 15.750000 /YStep 10.500000
+/BBox [ -2.199 -2.199 20.574 7.449 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 21 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+175 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 9.093200
+/BBox [ -0.199 -0.199 7.676 8.894 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 75 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+176 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 27 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+177 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 3.500000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0.86603 -0.5 0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 19 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+178 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 0.7071 -1.06067 0.7071 1.06067 0 0 ] /Resources << /XObject << /PTempl 43 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+179 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 1.06067 -0.7071 1.06067 0.7071 0 0 ] /Resources << /XObject << /PTempl 41 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+180 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 0.86603 0.5 -0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 29 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+181 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.000000 /YStep 4.041440
+/BBox [ -2.598 -2.598 6.098 4.618 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 91 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+182 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 10.500000
+/BBox [ -0.199 -2.824 12.012 8.074 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 71 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+183 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 5.250000
+/BBox [ -4.137 -0.199 4.137 8.074 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 69 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+184 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -2.897 -2.897 2.897 2.897 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 121 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+185 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 14.700040 /YStep 4.200010
+/BBox [ -1.927 -11.999 8.227 2.899 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 65 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+186 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 15.750000 /YStep 9.093250
+/BBox [ -2.598 -2.598 10.473 7.144 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 93 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+187 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 10.500000
+/BBox [ -3.199 -3.199 8.449 8.449 ]
+/Matrix [ 0.7071 -0.7071 0.7071 0.7071 0 0 ] /Resources << /XObject << /PTempl 51 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+188 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 0.7071 -1.06067 0.7071 1.06067 0 0 ] /Resources << /XObject << /PTempl 47 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+189 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 6.062160
+/BBox [ -2.598 -2.598 7.848 5.629 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 89 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+190 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ -2.598 -2.598 2.598 2.598 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 99 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+191 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 7.875000 /YStep 7.875000
+/BBox [ -0.492 -0.492 6.398 6.398 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 67 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+192 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 10.500000
+/BBox [ -0.875 0 4.375 10.5 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 57 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+193 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 5.250000 /YStep 5.250000
+/BBox [ 0 0 5.25 5.25 ]
+/Matrix [ 0.86603 -0.5 0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 33 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+194 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 10.500000 /YStep 5.250000
+/BBox [ 0 -0.875 10.5 4.375 ]
+/Matrix [ 1 0 0 1 0 0 ] /Resources << /XObject << /PTempl 55 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+195 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 3.500000 /YStep 3.500000
+/BBox [ 0 0 3.5 3.5 ]
+/Matrix [ 1.06067 -0.7071 1.06067 0.7071 0 0 ] /Resources << /XObject << /PTempl 45 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+196 0 obj
+<< /PatternType 1 /PaintType 2 /TilingType 1 /XStep 100.000000 /YStep 3.500000
+/BBox [ 0 -1 100 1 ]
+/Matrix [ 0.86603 0.5 -0.5 0.86603 0 0 ] /Resources << /XObject << /PTempl 15 0 R >> >>
+ /Filter /FlateDecode /Length 18 >>         
+stream
+xÚÓIÍ-ÈQpÉ ØU
+endstream
+endobj
+199 0 obj
+<< /Type/Metadata /Subtype/XML /Length 1304 >>       
+stream
+<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:creator>
+      <rdf:Seq>
+        <rdf:li>Esger Renkema</rdf:li>
+      </rdf:Seq>
+    </dc:creator>
+    <dc:date>
+      <rdf:Seq>
+        <rdf:li>2021-06-01</rdf:li>
+      </rdf:Seq>
+    </dc:date>
+    <dc:format>application/pdf</dc:format>
+    <dc:subject>
+      <rdf:Bag>
+        <rdf:li>MetaPost</rdf:li>
+        <rdf:li>tiling patterns</rdf:li>
+      </rdf:Bag>
+    </dc:subject>
+    <dc:title>
+      <rdf:Alt>
+        <rdf:li xml:lang="x-default">minim-hatching</rdf:li>
+      </rdf:Alt>
+    </dc:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+    <pdf:Keywords>MetaPost, tiling patterns</pdf:Keywords>
+  </rdf:Description>
+  <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+    <xmp:CreateDate>2021-06-01</xmp:CreateDate>
+    <xmp:ModifyDate>2021-06-01</xmp:ModifyDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
+    <xmpMM:VersionID>2021/1.0</xmpMM:VersionID>
+  </rdf:Description>
+</rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="r"?>
+endstream
+endobj
+202 0 obj
+<< /Filter /FlateDecode /Length 24 >>         
+stream
+xÚc``M|=¥nÂæ;«Z  
+
+endstream
+endobj
+203 0 obj
+<< /Subtype /CIDFontType0C /Filter /FlateDecode /Length 5385 >>       
+stream
+xÚµY	t[Õµ}Š£0&$Ušè‚®iœ eLÓ ™HBæyãÈ³-[’5ÏÖøÍ²[¶åI¶cÇvæ‰†Â4¿Jù¤ıíb†6Wæ¥¿ÿJÎ ¥tµkõËkIZÏo8÷œ}ö>ûŠCŒKp8œÛW,X¿pîªiÏ,]%«.ªY[£¨ºæôUÒÒúª"yö„™)™;¨|qæ6"s;'#“yÉXöîü¼}ùc/ï`ßÆíş&Ã½ 8»oÁïc
+nEãóïÀß@uşÔì^ş]„`Á!n'î ¾äğ88“9bÎİÿìÑÎœù³¹²Z­¼¼´L)y`æÌš}LòT¡dqQq¥L­¨,—Õì’,.”,-”,“©ñÑrÉ=²ÉNiYQU‰DV"Y#İ ©WHå
+I©\V_«¸·P²¦¬\!QËä•ü)—VI‹Ò]’úš]R¹DY&•,\»zd¬F)y¦¼XZ£J¦O—HR©¤L©¬}|Æe}i¡L^:£Ÿ£˜Q5z’bFöºé–/[3ı™Esç/[=¿P©QJJdrÉ.©²¨¼JQøúƒËdòê¢ª'wÉvJí’Ö(Ë•Z¿ qq'1ø)1˜AÜO<@<BÌ"æOOOóˆÄBâib	±”XI¬"VkˆµÄ:b±™ØAì$Š‰¢”(#Ê‰J¢Š¨&j	9¡$T„†0æá¢àW!Q˜-ÏX¢“ósÎÉ1÷Œ©3·eì3cq·q¿äExgùù	êoXzÃ;7>yÓÌ›>Î2ÿàÍ[$†‚w
+2·Ç—÷·[~ëœñ¼ñ–	‹'\úQ«P"übâ¾—OºcÒßPÁÈQªmêÏ¬SsF-Â¸ËLéÁFw¸£²5#nªÁå×ƒİ­µCvëåóusK¬UîÉfÒJút«7ì
+„Ş7^ípû?Aµ¸`Ìe¦ Ñ†œmÎ¦Ä¾pwóa’‰	P„w’Tûë—’“fJã‡.Úoîõ}r7<{=K!5òĞè·Ü‚ÌsÖt¦9èâÛy™4ºSs)'ĞÒn9ümªYÃî¨z‚HTD¢=\?ÕHúÅM.}TŒj›Œ{ªËÚŠ ›ÿ0{{ç œÖùÎ’àÌŞC	XÒ²¿êjIõ…aã>Ï‹”ˆ]g–Ñ[f­ ›e¿Üg…æ£$º1~Dğvj_k¼²ûa«ùw..$=ÌùÕ›y™ÇĞ€µ³N<¶TÕ*ä'4¤…Oµñ‡_;ÙèQqpÌï°ÁË3ùn²$R*.ì8‡CA7\Dw {¥ğQöaá"Ã®²°¹òÙcfhİKüTÔ×Ô‘L‰#‘ÎŞaĞ;¬XØcë<k‘àjœŒúsaÈ£5 å±Úá"éSòÕ`í¶á7tĞ|œú=ÿƒÎÓ­ zÈSŞwÚÂ%´[ ÷5é:AgªuŸ>k^58°?Êö'Cğ®®ş »OwÁô!…òåqPmf¢°×^›P€ª™4«C]†ĞŸî²Böí±?ô/|öIZ—½…æ˜p¿¥>Uvè¥5A¨ö·(ö€TÀBú'kW«ê.›v
+ìL¨!Z>E7¡[ªàU dşŒ3~ğŸ`!àjŒŠ2oñ|WÂ€³?Õ6)[ŸV`ôEqÓ›ÒNÊâ±ş¾,>F”¸¯^èG½ı4ëƒ¼‘YˆÄÍ•×H{TNÈÂºúÅì£€Ê³Y)Æ
+ÉFÒ¡ô§üóúº ôii¹KD:('.•Ñ§ü Aû› *ç“1š!½‚„ËD9€r©àR­ŸfòHäà©İbtqkg·B¿Ú«a4x­NœS½/FA3lö@šësãnnøË6ÎLi}Ğà‹P­ ¯ƒÒû c§ì¢Ë½ür—mi½…ÒøÄÙô5L€—¢éf/Ü‹Ji"ı“sPD%itÿ¡q~ù¹ÃèhwìæíC+)4¾
+>kZ;´ °vâtvş!8£ãW^ºŠ;6…÷v²3))ØÉCã˜wûÁaMq$‡§éØ{e?ò`rxsäVá!Ëúöm@bÇKd9Üy<)K2F¼èx×ÎşÕ·„²z–OV’«KëµQJÜjL:R‚{ßjôŠª Ü=©Ú.¹Ñ“è;Ô W¹ñšcYbÊ–Ï å9C6¸-8æñŞ6Ê”„F‡QPj‚]ÎFĞÓÜÑ×€ëÆ!¢yéŒ0=ŠØÇ	3KømüQjR›jØª+XØb§°wì?éº°òm0ÜßÜßá‘
+U¥x{Õ6
+p-ª­qgšµ:µñzP§VU„áúØë—xûU8K·şbùªCG,bó!ê/‘#‚—›†÷‚—ûgÕú¾ÓC¿úNé(—.ñ¨×m{<éÂuò¶1­çˆ0œ|X¿(µ<Q^$×@t†ïNè¯7•7Õ(³1Ù¦º|™ol1´5Åã´˜ñ“_½%JÑmdJÜ‘Bç@²²<,¯4²\Ç·Ö£Ç—o(9>!˜%›Ìd´ô,½€6ƒt+Ç1Ì€•ò4Êè U´3‡Ò$@R^K€ŠãK¢ú3Åöøyè«QÓ‚JÕäÂ\@1qQ¦Ÿ?àŸkk¤ZœbÊ7˜+<¤Y¼„WXçµû(L¼QªtPÔò/ñKh—}>Ğb¡òa¡
+Xc ©“¡qNä‘Ñ=(æô
+c1—Õ/QŞø	Ï¡×’Š;SGÂÅõú×²Ê4û´£§&yStÄÙ*8eÜœŞ¦9X‰ÉMŞ8 M”7	O0‰WdÈ„[2 ôh\e
+vÙ$Õ£õeóu°ä—à?š‚¹n‚äîŒT¸ÇVÕ¨eòªòæİn};èî´]é“Ì‡¹àĞ3ç'œCáõÂÌ~+òÅ§Œ‡Ö‚)
+v
+~¼Ù›Èrå1ğ“¦ƒ»A2ÑP†^ewŠ.ßÎ/·Î\`63~£¸=îèÁ8tèâJP«SV¡4rTu|xúü»8¢ò‘{~8¢Qœø šCá…7‘Ñt=g¤Ó°Ê¹l»NÆ²áj"[¢&OÀkßšÓñT´¯£÷?(xyÿöAÛ¨uitA™@ìpÄ@G{Ë^+ÜİP=°	l’V¬(†[k­Z› 35§?\«Õàò¾ÙÖĞ’±Ænˆ6ñ:ÿK›XA;hmØi3c¯NÛñ8”Ha|ˆ9í	
+Ff_aæR™˜ÇO‰bncFÊ­rÃÌF–Ç>¦]£|¦üÌ0Èy_â%³ğ„OƒÏ¶}«{û]:/¦Pã(6cT3èîÉb³y€_îş;JŞÄkÏQrê³¦GòsÚ²yu]Á¢®'ÉE¥@fÛuÁ€óªDş³nÆÏjà«c/k:Yu´õÅ`x:MúßÜ<:|“÷w ÿ>•Ÿ‹‹Jæí®—ÃóuK’[ÀÏÊW)ğˆv+.Y™FSf†¶rj9«kıĞqÆbO:\†«ä32zÒ(`óiébÌI°›ê†òÑm|ªA”7Ü&ß3~Mµˆd}´“´0ÎÉÙs›¯û*ş£Ã/íÙ+H$Ò­ûAšàjò`jºÖj×¨	]·>ıv^¯,wP;âIç·—kÌ.wqj5x¨â?¶Ä6’¡ˆqèMMg:zİéø ØÛš¸8tcãUVm<˜eÕ İ}ù99ê~]÷à«3;ñÎÑa“şÃŠß>Cb4µ>¼GªŒÜ'_(X£İV²	ìZÛõ®Z»ÿÔrJp¾ódû 8~´t~2{Wª$_ÍÉ¬¹ê¬¼-L×É¸c“=A*e^äÇø^ÒÕhx5f',[°I:ßnÏc:ÙõÁÀP<=/ïâKİÖ‡ÄV6ÇÇ”ßØ$~İËESyd{·§ÙöÈMVÕ½hw/:Û?wÛ„# Ó#|_uÿ9öfÀ¾™d¾Ó24ÄÍkÃ½½›_ìv,2˜²m3ÁÒÀ„a0á	ÿ!†Á³¼	‡?ìÁ&&Õz3¥•Š¬„`"z‚¦ î%Ä­÷µCÕşGdÅ‚µÒÎÀNA]¼=ªOü5ï×•ss¹a×õ£i£æe"&¹ºœEÍ:±¬ŞU,ÓÀcŠ-­¥ÿFùWÊ¯p;wY²©»hŸ5öyß>Ÿt‡r¶É	³ƒœ	ÈTF*é§º›Dè.¾t÷v şM»â/ôÒ2)XTùQ[5>šÃoö2áVñ™Ş¡dèR,L^·+X­êƒšƒXÖ&$}$m/?»ù×24¶=h@Ÿ h™ £½”ˆ¡ñCEaOÖS{ãìkávv’ÕQ˜œ×³¤w‹àéÃ¯,kÁ€7ìßº÷³™g„Ú·ª_©>*x}û’³z`s¹r|L»+ßœ7ÌŞ·} Á~Â®d—õ“Hí¢DLÀYïôÄ)xÍÖ¢YÊ?
+FÍ
+6*¯ı OÉNf×Kó\/;WÇôeÎæoĞ	3ƒ´!-`Æº"Uì—K{7}Ï!õù!{7éYBŠÍ¹AÁæ:Ã}ƒŞ÷âîğ•Ò°…è¬°lë¬9Ç şc°x!–Ò-.ÈlkTefá¨&á¨ædÂÓÆ9å`EYe‰k‹ú6ÿküaaúÈ±‡x”=Ò¾v<¸xøñºõÂiÒĞ.®1ûë˜¬›í8hIÇ÷[²U±¦Ÿ}M;¿S…Í*/&Kƒ[Ã%Aë~AÚŞxú7`÷¥ªVØB•”HëoÆŒêÛO2Â3†§»Wö6'Ë‘F` .)ëÒuk¢—Mí®ç-±‚êı	v,P-ó©„CÖa¯¨²*P«R5ÂÕñ×v^èÁ(º[ßëñ_0¿Ûè¶ÚşGÙäc|AH>*]¥ª3I’v]q”­ÑPAÎQ^`¦r¤Ru›MÀä²ÙÜ½ø¿s¸N6@"³7f‰˜/öBtñ›9\›©#-Xñ/aÅÿû»Í™
+¡-È9ª¬M¸|œWï¦´$Ô±¸S±£&Î ¼^èeHÆÛ-@S]Mè6ĞÚIyš 	Ñå¦)Ë±‰§¹¶G’ŞëİŞáí;èŞ—;³ıe(O§§i-”{0ç
+È ÕH‰2ü¾ Äów°»¹Ïö;1!1VÚNÛÂ‹'áÆrr)Zß–$ƒq¸ ıKÃ¸~´NÍù
+Ï_¡©8FÊ”ÛäwiŠÔ•@nM¥œĞtE¢"ôâùÍÑë1<Œ:Åo·«üVPIUÛ ;c_{…„ãØzıíç©i‡×*^‘x®â8¸Ô$9=}NõFÁ4êÂpK GsÆ™t[<pkgñ:P±=ì—Á`ÙÎP ”‹÷şæÜşş$šıùŞsu_GöÓW¦vú6vÕ¼$¬
+µ—ï· ş+lwÔ˜€¿0¸ü¯‹ñDL>öi†{–ƒ%Úæ„¯ëöb«w8ò¢ìáÄ\óØ“w.eoÔÎŞÊäm¤Â N31hæä^Ğß¯«? é}ª åÇÑc­¬IGUı#ãsÃúâ@ŞHİÈıÂ€Ç²ºî…sô˜úl>L¾8é»É^G¨BÀØH%bGøìÍL›ºî©ŞÏåb{—§§MDf&s|á—Ús~ÅOÚÃf «÷Zì‰yË½Ü8şˆ/ó™üZ1{k³ès€àïĞ/AÄòß<Æô3âí¸£˜Õß½2
+¼ù-ûç–Óğ¦ŠÚšìŠøêfÚanœbH¯¸Åiˆ`CEUÙ Í¦¹jåì…Ëg›]bÃó¡sÿímı–™¹ï{fæ%¦õÔ¡kfÂJÛ/¬OÅ×f¶¿]s´ö„ÓÇ-İ`ğ[-×w·dÆ
+_ÖWFô@¥TË‚¸OÂö£S•jÒH5±|0Ow.á‚–ƒÌ‰èE¦Ã—ş·²>Öğ4f¨{;ß«=ĞìZôî/M¸ª%£ŒLÍP1ü] qY°6²ËyWC±`ƒ­¾x#˜«{ön*~Fôÿy~œêÊ¥O‡cÏ¥­áË°R*Äş:k­İ(P˜õØYÔöššN„/„^ñ÷Ó¡+v{#UÙ!`óz>Ö?zÏwÀµ^mè/ïy¿	&ÎÑHl<‰+ï·¦›ŞEÛßmÂ
+SÆœëuÜU˜÷ÜV8Õ±²¾TÕ¦°8Sä±šÈ©{p¸«ÍD2âw½>XsÅheÃ
+OÅ+ÀÎe±vhŠ÷.SdìøÚà•ˆcŒ7BÃÏ'»@W]IúÕ”j‡ˆÈ¯ ^R¯	ûÄÉPcÒ™ô4ÈıP­—W‡àæèªCàHWzO,é:\wü¹ëÍnªtb?;üş‘Q`ŒÃkXgfnã“qšÆ¤Å©èş¿€z¸'•ˆAz¹A¾QP¡­ªŞêd]ZØí¶;R‚¤S—P}…ecnˆ=Wú"@¼sş=“Õs½çPÅ9Œetnº+w&¸Ù¹£|P©ƒ‘*Ûe¥ªÁ>úâĞ†nlkï:†;6ŠY¶˜=$V¦õ«MTÚ¦¤¦+Ta˜]{?Î7–)¼Š¨—0ğxğ$şŞÖÙàh‚Œ!²•Ô”oİXV\W]W£¬,^%_ÉX³“71šù`k¨uh$£Y?Tv¦Œ=àë^tk.İ(»‡õxN<ß1>:Ú-ÏÆÕİww0Şàú)?F|ÔmÉîÙDx?q¿tz£ñ ÷¸[Ó©
+C¨B¬ö')ĞİšÚcƒç5,áİe¹ìÏ#0xwîµ}»¬³ÍîÛx—Ò:råd9I®)Ù;øƒ;w!Ñãˆk‡jt‹*¯)Ï²Ä©ª#`(™ê‹\å—ìïhã2 ÿîÛ	‚x(ûË˜u¼ª-37‚”‘PO¼xMÕŒü¨ü›Ò7~pSš¡†öÓ¾¡æÆüü´/âë`hš¡½¾ü›ÿ6xñÓ
+endstream
+endobj
+204 0 obj
+<< /Filter /FlateDecode /Length 572 >>        
+stream
+xÚ”[oâ0…ßó+¼Hô!Å¹Ùİ
+!(+¤m‹€½¼†d`#9Éÿ~m§•ªZ$_<sfìÉèËf>•õÂä³-µu¯
+/yŒFËºè/¤ºW¢’Êaµ}d];êØx±^®UÕİ™àµ*Î}ICÔ¿ƒætªÔGˆÕaã=ı7«_ßÛğûË¶¾äê‡jÏ·têÏ¹¹İº¯º³ÙòÑÌ„°[!Ì%üIº­jõÈ¢{Î¹yğ¬ÊE}±·ÁÄ›f“¡Œc¥Jí³ƒ­#ˆbVVEçÉıÓ9»ywm;º¬Õ±¦S61ÊUÛé«óLŞtIºR'6¾eÔîú¦9“5Åx0›±’&¿éÛk~!6±İX—fµê®7Ûò±qmˆÅ#X/ê’Ú&/HçêDÁÔ´ƒÏØte>³€Tùic×á4Ãß4–Š?¹¶‰¢¹IÄyÍ-	Pœ€b"EBdòZ:2­™:J"(d k$H€¼‚ù,R…%Èçü
+ò9=¥ 8Kh‚^
+ŸéÖ<yu¯€ŠÄ³£zb‚^‚.eèRÆAP—2¸F¼Äğ™A=ö
+P—È)P­Dçô$:/ — "ásÂ™@}1Ô2œƒiËâ	z‰WÀif8Ú%Hz/8#é½àŒ¤¯õIx‘¨OB]â¤ï§À9¹;éî ½¾v&ßG¦èµ6óâ×Íƒ„JÑûl7ucw¹¯{)ï+Ko«à/ğ:a
+endstream
+endobj
+208 0 obj
+<< /Filter /FlateDecode /Length 24 >>         
+stream
+xÚc``à`0V0Llñ`xèÂØ  È`
+endstream
+endobj
+209 0 obj
+<< /Subtype /CIDFontType0C /Filter /FlateDecode /Length 2797 >>       
+stream
+xÚ}WTW2ƒŠ¨±’Ñ™©õ]|¿ÛŠ‚`@Ñj ! @"*‘GÈ%‘—‹<‚ApÂK
+j-®¶µ¥TÖz¶-»uumİnµkïÀ¥Û ¶İİ¶“snæÜÜüóıß÷ıÿ+Â\]1‘H4%8$ "Âÿù›¶©“å)ëô)	óıæmS(õ*¹Æ¹`=ÿ,?¸ÓüdŒŸ"âió¬+šá.nwwŞ=Ü=YÒ:Yò¥d
+†‰Ç9ÇÏ&À±îS…;w­û4çÄ§îÓ17L„MÁ¦bßŠp)òÑ¢ôì>~~‹ÖªS34‰Ê»ÀÏoá\ç¸œõ÷a7Èc“ÔéÚ¤DVÇnğa7ù°!êta6‘¥Nac	rU<«gÃÛY½V¡Ñ²JZŸªíÃ†%$jÙtµ&‰¾5
+•B®UÄ±ú”8…†Õ%(Øõá¡al :EÇnLŒU¤hì¼y,«U(Ø.u…¯¯N¯ôQk”¾ñÂ­¯êñ"­¯óó7‡„ÍÛ¼6 $4ÀG·WÇÆ«5lœB'OTi}~3ÑÿšQk’åª5qêEpœ"E—¨ËÀ„k26{óÁ|±Ø
+l%ö"¶óÇÖcAØ&l+†Ecr,Sb‰X2–íT—7æí$İ+IDrÑu——q ë"×3®?I¶KZ%÷ğ(¼‡ğ'İbF¹7êµQ£‰ÑÛa£o4Øø…6‘ãcÛÓ.æÓïJ¯hB‰­š\Ãîü®"î":A›²•n‹ÛQ±“Z¸+8¹z_]}euİ±¼Æ×
+™æS­êâÕ¸L<±İ`Ü˜ìöR¢&"J¶â+Í{}İíç«èØ#§äç©škÇÿÆ •—¤s×&F¾ÓüÆŸ:oÁåÅ´Ç`¼ZË‰®|Ç§Îƒÿ’V€âƒY ç0"ó yS›QD7¿ºı²ãŸÌµSıßBŒ‚Ëº
+QG™=f`<NU K‡ˆ Äc2Ì¥wÎüu{HóKz­@ñ¨]€«P†áÀ½p
+ãÁo1Øaã­vQÓ-ñ…˜_ÇHÆì‚üÜÚ'eCV<õÊÂ³p1\úigOÙ{&e3cÌM>(K«L¯¯«>qúú‹m/ 	¾Cã‘×ƒYĞÊN!¯"À=Ã‰ }‡'¿Fğ*)¬F“ Ğè'ÕIüc³AÉüØM(/ĞZáğHC9¬ffJÙ<ŸÄ¥ôzõæùHDÍÆw”42ƒïæ’óô}’W¹³’©
+«B‹d|Á¦ïä½müNO!™ª>ò r"G.¹È"Ğ4ƒDEü¹4çUf8›hI‰®§Ğè©³‘‘÷gA¼·«Éag‚	(uÍ †}4Ù°39RME*ëÎh™´ãÕY«ù†.š«9Óx™jî<É1Ö}  Cö˜ÈäèoÕß‚Ù}O˜<lÎË.È=\@OK˜Q;bO·ê˜ä ¯E¸Íj„…& 7ßiÂ(û~$ GW1ÁĞ[ŠápvñßíMÔwGÇxÖé9˜É®qË’»âA-Ì“rò0Jb— ‹’Q9ˆÏ,†xæe¹¡)yû·¡¸6>€_Cßèuú%ÑVúüònì¶ùÚ„–£tuÂ%h7ÜÖ{»öİF_Şk¥Ê@éëô'Ú½O„bjá¶·ºj+j!¨Íªõ„ÿ„—Ø@>ƒŸ%=‘åˆKÊ‘Ó$24Êå=åøB”MaßÃ<±;A¦*Wpéôæ}IÑ±²µÂ ığÒ'Í™—¶×Óõ¯l!”&æ0IGöpÙP{¢šV·u«¨{ıı·îoÕÔ2M--E•ùŒ” ‹‰6äç²dûÊ³*V•ÔÒhÂ¤©¦¤:ë°NK-_×*t¼ngÈ^Ã±ÒÚúvê`¦.Ãc¤áëvÌx©§ûLë9ı6~º‚ÅB¹ô nÄbœªÓºô÷CE?9À;ŸEhÀiC‰;€SµĞ'2wWo¥–FmVîgLƒ8N6üÊ€?¶‘D«(±@W£„#È·ƒ ‹‰‡7®ô¾gßF£Ì_­’xÀŸÔÓä»bxg"—F¬2Z[˜Án¢Åb ë8Ü˜°
+ÄQq«%QÕ–'åe4¬¢ÓT¸¥y œ¡Ú€±™ñ€œŠDÈ¦=ò¼ıÃŠ>ÒFp~QÃ‹	ò*bxß/Ë}•A¶Ÿ‘¸X$ÍÍ¦&†œ6-=¥«KNv™ÔÚ´ÓMÕõv¡ì%#0=˜±wÉ"~ Z¥|º!S0ø:j9NF?®ä7‰&püKº‘ÃÉ-F¥ˆy
+ü$AÖüog¨ÄG qÄ‹ûÈVX*€¡lÈ‹ û›\±@ÛˆfÎ`‘«á÷åòß½9•1}‡Ÿı9 ªù?µjE6üZÂÖbçıFºÁé[b>	î–B¯™ĞX4a	\H>GÁ±ßÜ‡$½¬Tªáú(:R•²ƒŠªéNe4çÀµY¸|òİ}ê|M;uî¬>º©‹[Î†‡^áà\ïÍeÚ=õÃŠ[äx¾
+M–œó ¹®–GéÓé>‚üê177Jr£˜á„ŸAºZ ä—TV9EáQpÌÃûPÊ,›ˆÆ,]«¨îH¥3k@aµj	ÒëRÃÅ†KÔÍk‘D¨†ÉO™}Ô÷èÉò?AêP5Dû+ƒbÒ¦œ42¿E#n‘´ŸÆv†ÛC¬)L}rÖƒÎ»•˜ÉLMéYi2uÍ[¥ı˜Cè2=z¯æøÉõ¢+½ğz¯˜Ï‡eÒ»ºŒfZy=´:ÉêËMŠ/×”¥µ»¥vä\9#{xùó8§-@Ï¥Óó­T9(ªb`÷H¿Ë6åòè¤5’OvZ£)ä²áhúÎ’Ç¦%øòŞ³*'}‘dEcÂdˆŸµ%åÃ¢ó&º,×œ{ädĞ¨‹Ør¬¥…æãÅtÉq‹Õş¦ÛÎæ«‘÷(ˆß‚p®Àm°™«øg«</À˜ºä28½¤=É§³Ñ»q¥òR·PkPù[²æº;Ğ¥h¾ÊLf[€ıfk^È:Hóeçİê1à …<A¡	êSzÆ‘VŸûa¦yÓ–ÿéşµ²í	±«—*¯ŞŞK—MGQN¬š4‚µ¨°°ªŠ6›¹²ÊM~®ËTCA¢ûƒ…fpÇƒ÷ü:‘ƒÓ=ökìPf'¿‡·áxéUM±&Y>?AC>Ç¡çœÎOĞà¦åÉìì|7=AŞ¼p4î^VËú½ôÓİXÒù´èFŠnd/†@3qE A¶.Ú¹Şişù7ixûÉoŸ ãÍ!V?8÷Ê¹úwêéÂ…¸AÓ'â¯Âj¡« öpºÚD¡—p~êĞ8Iñ1`.–Uä‚tz87 ½ÄC¢¤q .Ş–ğá©ÿ/ÉÍ9²}E †æåBÄ-ÀÎ{ÙDüt¸Ùqtö(ä&¼àãİ%eV`>"+?Åo
+¿-®j….‚Î8r•d@A,³TÑğîá<MŒç)÷Â‘ [á<ä{êmCá¶á‹'ø+bô†0•¯û(à>†mSe.,4[Ì…efË5ww›Åbi¶—[-GÜÇş;|ºš
+endstream
+endobj
+210 0 obj
+<< /Filter /FlateDecode /Length 475 >>        
+stream
+xÚ“Q‹â0Çßû)r‚ûĞmZk»»HA«BáÖ]Tnïµ&£°IIÛ¿ı%™tCN¨øëÿ?“™É8ùñ~—\ œ=R²‡NšAX¾Öm0™¬ı€Õî…¼kÅĞ“iY­+)úc®$»F×¿M+¸ùm±çé~‡Õnóñ±
+¾îUSËõ ?cîá2\kRzıÕ„ü‡›¹g!.á/ĞPò…Ä”Rób#y©ÛpD¾hmœ…äÚWNN¶ N¬÷ä¾Yc&gƒ·®‡¦’g,$2'‹®×7WÿC½iZÈ™Ş+ÔCÛ^ÁEhP„ÃÙä7sÛÕÈMƒUô·»cù<ŞZ ‰ãKgŠC×Öt-/,Ì8hA[ó)ü/bÔéŒhãÏ$%öYk›(.M"J³¸°”,¥3¤j6¨¥H[Ôf	ÒÉgÉ‘|O>îÉQ£óÉgñ”£V"=¡æi´q4Ç,Ù)u”SGEJĞ9Ç2</÷„ç%>î5ì/Ãórì/Gç|‰„•åË'í&k/ÅnÚ×"°Ak³nİ-Ûû¾6¶U­r[õñ_hémüÇ`&¬
+endstream
+endobj
+214 0 obj
+<< /Trapped /False >>
+endobj
+3 0 obj
+<< /Type /ObjStm /N 82 /First 646 /Filter /FlateDecode /Length 1752 >>       
+stream
+xÚíXÛnG}çWÔ£Œ…4Ó=}]dYt„µ½†dÇ(|“ci6ÔA‚èï÷œ^ZZ'‚`±‚!³/ÕÕ§n]U£¥'ÊD	¢|%ª½(-Z+¬‹6V”í¢¨ :V¢K©”Ç¾TFM´‘ÊYìK¢è FUR•b*/•ãÈÄ2±e™ØªSŠµ^ŒÔÄq¥µ8A-ÎV ç½X-¾TbxmÅ:ñ@kƒxÀu¥xÀuZ‚Vg$ ®s ×	€ëK‰€ëµD£pV"àz'p=„.7@ê€ƒÆ¯S“`ğÈªQÀ@§ :‚Nu
+
+¡)à Ó A§-µBìªeUª‰*AZ?øc 	pT9u^QéĞº2T;ô®¯hªº‡‘*^'Ê*ZÄP°€²IAùÊB*Ü“4¯¨İ«˜G’A ‘ÖF¯”ã
+,	Ú‰‚0ˆ`o\¶t	-ú¢ìU„"4xå9€M«À+KŸ÷(1ŞrîŸhÈiKhF+¹Ò“ï¾“âÃÃª)¦í²Ù¬š¹S9zsqvşîìü…ÍÎ§ÂSQpŞË´;¾ÿ^ŠWÍfâvŞtóF¾ôknÛ¬êùÏõM#?|ÿæ§'às:½l–õĞöİæ¶]OÇ«Û/m³ «êıºŸ_5ƒ\cøj*³çõçõçõçõçõÿu&,ñe/ÎúnhºaƒÇÄpÙlúûõ¼Ù¤”˜–Ş6‹¶~Ùÿ
+N%şÙhO´gÙ N²üŒÌÖà’²Õ˜SF õ04ë.%ÌÄè¬_öë+¤•&¥Ì´6‚15Ù”ÿÆE—òå.?=‘¤øĞü:|KÊş—<HàNâ´ëúÄÔíä»FYÀá,ƒ¨¤xÙ¯ÍZ®É»œÁœĞU°'¬`ìI`QáÕ‰GY‡»Ê³ÙDŠ«ûÏóù›¶û™™Ú€#4S\//$ıwt;«Íß‹âß}Ûİ¯NšùIs¿îW5~Šy¿\â*¤æ¢¹_-ÓÇTuœFJ¿ îÿ±mŞvwïYÅì<	S”j{?5Ü‡¹e=Wfû(Œ:ÌuÅz/ÛgÅ]eìYô™ÃÜñ¼Íè#«ÃŒ÷›«Ç_•ŠÈlŸ•c†¢¡¶ÌöYkfø,Ì‹:›á#»Æ(L³9àØ%}…³ÍàA•Êeğ M¹\}ÜÏá®Ëáaš¡S<Áƒq\†ŠT.CW‘[®<²ËĞ±Œö:Öö>Ca|n[ú«ıØ}ºÏÀ±ğ:^–cà3pŠìrËâö{Trpœgè*Òçªc·—ÃSŒùŒ„<ö !Çø!òÏğÁ+UÌ=O³?ÉÎ{6*™<¸/fø4û™›¦˜áãvö¾íŸ´¿ 5x½®¶ÏİûÍëÔüdoı»úOìuÖrŒHf#3`»FÇˆn–À/®ÙÎ`)Ça}òK$	y×âSLbËs#‘{®ÚÒ³›FGµ¥€#îˆás#±cßåùÆ{²
+8€!ïspõ™`{dÅ¿t/~<3ö´;–Qíï‡Ö,¹Fv$b+{€æq1zÁ´¾1é$$Z¥÷ÙÌBnxÄ,õ³\iLşV§±.·wÍÒ+¾!ÏH|ÀÙÜ­ÛÕ€®.Íi)˜púéõÙåßŞ¼½ìïê]ÜR•Ç—ÍÍı²&İ²¾Ù0ñÀË1U¼+Çšm¼aÜ³‡Fv;İÌSªä´8«W?4íÍí EWc_ÉÍtª¸êe;?ín–\£¸š»qNIñ¯í!ƒIW²¥eï¼õŞ³‹WL1º|T^DÜçÎqÌÏ»y¿h»Üº ‚vx8ş™¹Ş4#ıï‹?â^Ô Ò³˜¸NMûèÎÅ‡şc×‚{ƒEóM<€Î•-¬?
+à‰İø!)âSú°°×ÉÃ:¼è¾ô)Iãt»Örtºè?7hÖÿÉB„Z8Úiá¡­VËæv)™ÁÇø‡€Ô[×]ËĞû<rÂöàt–g<^¸'Qˆa
+S·5†ŠãW“qzïp¢`ö«)*¸L
+œ˜¼¬ö‘‡ŠãºüĞ´;¦TÜÁˆïÂÅ»óOŸ^îñê¾»ıv à99¶©HéY=
+N³@ˆPÃ!xêë€—ú·ã >‰ƒğWÅÁïKÿ•8Pê+q Ê?ßPÿÓ8ğ‡8p}<î&6Âªøûx¼şÑ.(?¿òZ~%Ü§7;¿ûÜ,Í"}Œ~äöc¦g5ßßì¸ï»‹1wòßØlL©èšß6C½ÀAğŒ;-ÿã¢¤_
+endstream
+endobj
+215 0 obj
+<< /Type /XRef /Index [ 0 216 ] /Size 216 /W [ 1 2 1 ] /Root 213 0 R /Info 214 0 R /ID [ <43A5AF486BCB81A60EC998573D907A2D> <43A5AF486BCB81A60EC998573D907A2D> ] /Filter /FlateDecode /Length 585 >>        
+stream
+xÚÓyLÏqÇñ×³r	Eî#GHrU?*]téP9‹rüaæ†rLÎ‘kÜ÷¢ĞÊ9şqıg†ÙÚÚ,›YıÁlÆ_şàóşşñÜcû|ŞÛç{Jú‡Bå'Ñ9ĞL!v»	qQ¦qŸMâšøRÍ.øş˜]™YovcV‰Ù„`³	f ‰ÏÍ ’jÌÌÎ4{‘b“üÉìMÊ3„Ôr³i‘f_Ò¾›ıH`†2§Êcn²ÙŸŒ s ?Ìp2?šÉj1‘íÍ&'İÂ¼ s(¹½ÌaäùÌáäO7GPà9’ùÑæ(
+sÌŠ’ÌÑÇ˜cXmea™9EŞù‘,Ùbg©÷\&PÒfN¤´ÑŒb™w=“X^`FSæ=‡É”½7c(?nNaE‘9•Š0s­ætV6˜3XUmÆ²Ú›‹£Ò›‹§Ò›ó±¦ÎœÉZï½ÌbİP3Á•æšãJr%²®İÖs]Y®|Wªk6km=™­Áb[”Ø/ªÖˆê=bÇE±óØÕ)vÿ{F‹šb±·BìÛ)öŸšÅÁ·â›9.Lµ)âh©8vX¿-N¼'¿ˆS!ât´8“%Îº3ê‰s§Åù&qá«¸$q9B\)WËÄµ­âºÛ¿áöo~·~ŠúPqÛ'î,›Dc­¸[/î½÷ÛEÓ_Ñìî£%_<X/ÖˆG—Äãñä£xÚ!Ú=§»æòÜûş2\™¼¨/İ?ÒºÙÖ²]9®y´ˆ¶âÛ[Ïs¸æÓñKü,×‘Gk
+endstream
+endobj
+startxref
+61280
+%%EOF

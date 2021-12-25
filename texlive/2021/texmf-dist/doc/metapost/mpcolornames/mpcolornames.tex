@@ -1,0 +1,359 @@
+%%% file mpcolornames.tex
+%%% Copyright 2009, 2011 Stephan Hennig
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, either version 1.3 of this license
+% or (at your option) any later version.  The latest version of this
+% license is in http://www.latex-project.org/lppl.txt
+%
+\RequirePackage{cmap}
+\documentclass[DIV=9, captions=tableheading]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{berasans}
+\usepackage{textcomp}
+\renewcommand*{\ttdefault}{fvs}
+\setkomafont{disposition}{\normalfont\bfseries}
+\usepackage{caption}
+\captionsetup[table]{position=top}
+\usepackage{amsmath}
+% \usepackage{amssymb}
+\usepackage[x11names]{xcolor}
+\colorlet{framecol}{black!50}
+\usepackage{listings}
+\lstloadlanguages{MetaPost, [LaTeX]TeX}
+\lstdefinelanguage[ext]{MetaPost}[]{MetaPost}{
+  morekeywords={verbatimtex},
+  morekeywords=[2]{blackpart, cmykcolor, colormodel, colorpart,
+    cyanpart, greypart, magentapart, rgbcolor, yellowpart},
+  morekeywords=[3]{withcmykcolor, withgreyscale, withoutcolor,
+    withpostscript, withprescript, withrgbcolor},
+  morekeywords=[5]{defaultcolormodel, mpprocset, outputformat,
+    outputtemplate},
+  morekeywords=[6]{mpversion},
+%  morecomment=[s][basicstyle]{\%}{&},
+  deletekeywords=[4]{z}
+}
+\colorlet{mpcolor}{RoyalBlue4}
+\colorlet{latexcolor}{IndianRed4}
+\colorlet{textcolor}{black}
+\lstset{
+  columns=fullflexible, breaklines=true, breakatwhitespace=true,
+  escapechar=|,
+  aboveskip=10pt, belowskip=10pt,
+  frame=tb, framerule=2pt, framesep=6pt,
+  framexleftmargin=10pt, framexrightmargin=10pt,
+  xleftmargin=20pt, xrightmargin=20pt,
+}
+\lstdefinestyle{MP}{
+  language=[ext]MetaPost,
+  basicstyle=\normalfont\ttfamily,%\color{mpcolor},
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  rulecolor=\color{mpcolor!40},
+}
+\lstdefinestyle{LaTeX}{
+  language=[LaTeX]TeX,
+  basicstyle=\normalfont\sffamily,%\color{latexcolor},
+  keywordstyle={}, commentstyle=\itshape,
+  rulecolor=\color{latexcolor!40},
+}
+\lstdefinestyle{text}{
+  basicstyle=\normalfont\sffamily,%\color{textcolor},
+  keywordstyle={}, commentstyle={},
+  rulecolor=\color{textcolor!40},
+}
+\lstdefinestyle{textnof}{
+  style=text,
+  frame=none
+}
+\lstMakeShortInline[style=MP,
+basicstyle=\normalfont\ttfamily\color{mpcolor}, keywordstyle={},
+commentstyle={}]|
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{graphicx}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{0}
+\usepackage[USenglish]{babel}
+\usepackage{hyperref}
+\hypersetup{
+  pdfstartview={XYZ null null null},% Zoom factor is determined by viewer.
+  pdfpagemode=UseNone,
+  colorlinks=true,
+  linkcolor=DarkOrange2,
+  urlcolor=Chocolate4,
+  citecolor=DeepPink2
+}
+
+\newcommand*{\cmd}[1]{\texttt{#1}}
+\newcommand*{\name}[1]{\textsf{\mdseries\emph{#1}}}
+\newcommand*{\pkg}{\name{mpcolornames}}
+\newcommand{\user}[1]{\emph{#1}}
+\newcommand*{\macro}[1]{%
+  \marginpar{%
+    \hspace*{-\marginparsep}%
+    \hspace*{-\textwidth}%
+    \hspace*{-\marginparsep}%
+    \hspace*{-\marginparwidth}%
+    \makebox[\marginparwidth][r]{%
+      \color{mpcolor}%
+      \texttt{#1}%
+    }%
+  }%
+}
+
+\urlstyle{same}% See url.sty.
+\newcommand*{\colorproof}[2][]{%
+  \includegraphics{proof-spec-#1-#2.mps}%
+  \hspace{5pt}%
+  \nolinkurl{#2}%
+}
+
+\typearea{last}
+
+\begin{document}
+\title{The \pkg\ package\thanks{This document describes \pkg\ v0.20,
+    last revised 2011/07/14.}}
+\author{Stephan Hennig\thanks{stephanhennig@arcor.de}}
+\maketitle
+
+\begin{abstract}
+  The MetaPost format \cmd{plain.mp} provides only five built-in color
+  names (variables), all defined in the RGB model: |red|, |green| and
+  |blue| for the primary colors and |black| and |white|
+  (\autoref{tab:spec-plain-mp}).  The \pkg\ package makes more than 500
+  color names from different color sets in different color models
+  available to MetaPost.  Color sets include X11, SVG, DVIPS and
+  \name{xcolor} specifications.
+\end{abstract}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+
+
+\section{Color model constants}
+\label{sec:color-model-constants}
+Before discussing color names, lets have a look at some other constants
+that are provided by the \pkg\ package.  MetaPost supports the CMYK and
+grey scale color models since version~1.000.  At that time a new
+internal variable |defaultcolormodel| was introduced, whose value
+determines the color model of the black color used for drawing and
+filling in absence of a |withcolor| statement---either explicit or via
+|drawoptions|---and if the output format supports more than one color
+model (cf. section~9 of the MetaPost manual).  Note, |defaultcolormodel|
+never triggers a color model conversion.
+
+Do you remember what value of variable |defaultcolormodel| corresponds
+to the CMYK color model?  And do you remember what color model
+corresponds to a value of~3?  Memoizing these numbers, which you need to
+know only once in a while, isn't easy and in code they are less
+descriptive than names.  For that reason, the \pkg\ package declares a
+few internal variables with the values shown in
+\autoref{tab:color-model-constants} that should help switching between
+color models.
+
+\begin{table}
+  \centering
+  \caption{Color model constants.}
+  \label{tab:color-model-constants}
+  \begin{tabular}{lc}
+    internal variable & value\\
+    \addlinespace\toprule\addlinespace
+    |nomodel| & 1\\
+    |greyscalemodel| & 3\\
+    |rgbmodel| & 5\\
+    |cmykmodel| & 7\\
+  \end{tabular}
+\end{table}
+
+
+\section{Color sets}
+\label{sec:colorsets}
+This package provides color names from four color sets in three
+different color models.  Color definitions are taken from X11
+(\autoref{tab:spec-x11nam-def}), SVG (\autoref{tab:spec-svgnam-def}) and
+DVIPS (\autoref{tab:spec-dvipsnam-def}) specifications as distributed by
+packages \name{color} and \name{xcolor}.  Additionally, there is a small
+set of colors that are defined by package \name{xcolor}
+(\autoref{tab:spec-xcolor-sty}).  All color specifications have
+automatically been translated into MetaPost code by scripts.
+
+Colors defined in the X11 and SVG specifications are in the RGB color
+space, i.e., the corresponding variables are of type |rgbcolor|.  Colors
+defined in the DVIPS specification are in the CMYK color space, i.e.,
+the corresponding variables are of type |cmykcolor|.  The set of colors
+from the \name{xcolor} package are in the CMYK, RGB and grey scale color
+model.  The corresponding variable identifiers have been augmented by a
+prefix |cmyk_|, |rgb_| and |grey_| that indicates the color model used.
+Variables are of type |cmykcolor|, |rgbcolor| and |numeric|, resp.
+
+The package can be loaded by writing
+
+\begin{lstlisting}[style=MP]
+input mpcolornames
+\end{lstlisting}
+%
+in the MetaPost source file.  After that, all color names defined in the
+above mentioned color specifications are available as (array) variables.
+This is possible, because the sets of color names defined in the color
+specifications are nearly disjoint.  Only a few color names are defined
+in more than one color specification.
+
+Array variables can be indexed the usual way.  As long as the index is a
+constant number, brackets can be omitted.  That way, color names, like
+e.g., |VioletRed1| from X11 specification, can easily be used in
+MetaPost.  If the index is a not a constant, brackets are mandatory.  As
+an example, the color definitions of colors |VioletRed1| to |VioletRed4|
+can be output like this
+
+\lstinputlisting[style=MP, firstline=9]{expl-array-index.mp}
+%
+and the result would look like
+
+\lstinputlisting[style=text, firstline=9]{expl-array-index.log}
+
+
+\section{SVG and DVIPS color name clash}
+\label{sec:nameclash}
+There is a name clash between forty of the color names defined by the
+SVG and DVIPS specifications.  The problem is that both specifications
+define colors in different color models, RGB for the SVG specification
+and CMYK for the DVIPS specification.  Additionally, the visual
+impression of most colors with the same name varies quite drastically,
+e.g., for the name |Lavender| (see \autoref{fig:clash-svg-dvips}).  The
+set of clashing color names is listed in \autoref{tab:clash-svg-dvips}.
+Here is how name clashes are handled by the \pkg\ package: When loading
+the \pkg\ package, definitions of the SVG specification are processed
+after those of the DVIPS specification and hence, for the clashing
+names, definitions of the SVG specification ``win.''  Note, the variable
+type of all clashing color names is therefore |rgbcolor|.
+
+To control the active set of clashing color definitions two user macro
+are provided: |svgnames|\macro{svgnames} and
+|dvipsnames|\macro{dvipsnames}.  Calling any of both macros re-applies
+all SVG or DVIPS color name declarations, overwriting all current
+definitions of the respective set.  As an example, DVIPS definitions for
+all clashing color names can be activated in the preamble by loading the
+\pkg\ package as follows:
+
+\begin{lstlisting}[style=MP]
+input mpcolornames
+dvipsnames;
+\end{lstlisting}
+
+One can switch back and forth between SVG and DVIPS definitions by
+repeatedly calling macros |dvipsnames| and |svgnames| within one figure.
+A better alternative, however, is to call these macros within a group,
+since both macros save the set of clashing identifiers w.\,r.\,t. the
+current group before setting the new definitions into effect.  As an
+example, \autoref{fig:clash-svg-dvips} has been drawn with the following
+code:
+
+\lstinputlisting[style=MP, firstline=10]{fig-clash-svg-dvips.mp}
+
+\begin{figure}
+  \centering
+  \includegraphics{fig-clash-svg-dvips-1.mps}
+  \caption{Color \texttt{\color{mpcolor}Lavender} with DVIPS and SVG
+    definitions within one figure.}
+  \label{fig:clash-svg-dvips}
+\end{figure}
+
+
+\section{Related packages}
+\label{sec:relatedpkg}
+Package \name{mfpic} distributes a file \cmd{dvipsnam.mp} that contains
+the same color definitions from the DVIPS specification that this
+package provides.  For backwards compatibility, package \name{mfpic}
+converts all colors into the RGB color model for MetaPost version that
+don't support the CMYK color model.  Be careful when using both packages
+in parallel!
+
+\begin{flushleft}
+  \itshape%
+  Happy \TeX ing!\par
+  Stephan Hennig
+\end{flushleft}
+
+
+\appendix
+\section{Proof tables}
+\label{sec:prooftables}
+The following proof tables are sorted by color model.
+
+
+\clearpage
+% Enlarge width of typearea.
+\areaset{1.2\textwidth}{\textheight}
+\setlength{\columnsep}{3pt}
+
+\subsection{Color names for multiple color models}
+\label{sec:multinames}
+
+%%% names from xcolor.sty
+\newlength{\tabcolwidth}
+\begingroup
+\renewcommand*{\colorproof}[2][]{%
+  \includegraphics{proof-spec-#1-rgb_#2.mps}%
+  \hspace{5pt}%
+  \nolinkurl{rgb_#2}%
+  & \includegraphics{proof-spec-#1-cmyk_#2.mps}%
+  \hspace{5pt}%
+  \nolinkurl{cmyk_#2}%
+  & \includegraphics{proof-spec-#1-grey_#2.mps}%
+  \hspace{5pt}%
+  \nolinkurl{grey_#2}%
+}
+\input{tab-spec-xcolor-sty}
+\endgroup
+
+\clearpage
+\subsection{RGB color names}
+\label{sec:rgbnames}
+
+%%% names from plain.mp
+\input{tab-spec-plain-mp}
+
+%%% names from x11nam.def
+\input{tab-spec-x11nam-def}
+
+%%% names from svgnam.def
+\input{tab-spec-svgnam-def}
+
+\clearpage
+\subsection{CMYK color names}
+\label{sec:cmyknames}
+
+%%% names from dvipsnam.def
+\input{tab-spec-dvipsnam-def}
+
+
+\clearpage
+\section{Color name clashes}
+\label{sec:nameclashes}
+
+% svgnam.def and dvipsnam.def name clash
+\begingroup
+\renewcommand*{\colorproof}[2][]{%
+  \includegraphics{proof-spec-svgnam-def-#2.mps}%
+  \includegraphics{proof-spec-dvipsnam-def-#2.mps}%
+  \hspace{5pt}%
+  \nolinkurl{#2}%
+}
+\input{tab-clash-svg-dvips}
+\endgroup
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: t
+%%% End: 

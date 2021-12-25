@@ -1,0 +1,27 @@
+The unisugar package 0.92
+=========================
+
+The package requires an TeX-alike system that uses Unicode input
+in a native way: current examples are XeTeX and LuaTeX.
+
+This package provides syntactic sugar for LaTeX commands, using selected
+Unicode characters: Certain Unicode characters can be used as shorthand for
+popular LaTeX commands, e.g., a Unicode bullet can be used instead of a \item,
+and a pilcrow can be used instead paragraph.
+
+The intent is to minimize the use of English left-to-right characters in
+documents whose main language is written right-to-left, since mixing characters
+of different directionality confuses both text editors and human beings.
+
+Using this package, you may find yourself typing a bit less, provided you can
+configure your text editor or keyboard driver to generate the handful of Unicode
+characters defined by this package. More importantly, the package is useful in
+defining macros whose name is composed of right-to-left characters and in
+minimizing mixed directionality text in right-to-left documents.
+
+This package may be distributed and/or modified under the LaTeX Project Public
+License (LPPL), version 1.3 or higher (your choice). The latest version of this
+license can be found at: http://www.latex-project.org/lppl.txt
+
+This work is author-maintained(as per LPPL maintenance status)
+by Yossi Gil <yogi@cs.Technion.ac.IL>

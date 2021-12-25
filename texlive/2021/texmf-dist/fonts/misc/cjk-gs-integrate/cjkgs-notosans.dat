@@ -1,0 +1,182 @@
+# NotoSans
+
+Name: NotoSansCJKjp-Thin
+Class: AI0
+OTFname(10): NotoSansCJKjp-Thin.otf
+OTCname(20): NotoSansCJK-Thin.ttc(0)
+
+Name: NotoSansCJKjp-Light
+Class: AI0
+OTFname(10): NotoSansCJKjp-Light.otf
+OTCname(20): NotoSansCJK-Light.ttc(0)
+
+Name: NotoSansCJKjp-DemiLight
+Class: AI0
+OTFname(10): NotoSansCJKjp-DemiLight.otf
+OTCname(20): NotoSansCJK-DemiLight.ttc(0)
+
+Name: NotoSansCJKjp-Regular
+Class: AI0
+OTFname(10): NotoSansCJKjp-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(0)
+
+Name: NotoSansCJKjp-Medium
+Class: AI0
+OTFname(10): NotoSansCJKjp-Medium.otf
+OTCname(20): NotoSansCJK-Medium.ttc(0)
+
+Name: NotoSansCJKjp-Bold
+Class: AI0
+OTFname(10): NotoSansCJKjp-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(0)
+
+Name: NotoSansCJKjp-Black
+Class: AI0
+OTFname(10): NotoSansCJKjp-Black.otf
+OTCname(20): NotoSansCJK-Black.ttc(0)
+
+Name: NotoSansCJKkr-Thin
+Class: AI0
+OTFname(10): NotoSansCJKkr-Thin.otf
+OTCname(20): NotoSansCJK-Thin.ttc(1)
+
+Name: NotoSansCJKkr-Light
+Class: AI0
+OTFname(10): NotoSansCJKkr-Light.otf
+OTCname(20): NotoSansCJK-Light.ttc(1)
+
+Name: NotoSansCJKkr-DemiLight
+Class: AI0
+OTFname(10): NotoSansCJKkr-DemiLight.otf
+OTCname(20): NotoSansCJK-DemiLight.ttc(1)
+
+Name: NotoSansCJKkr-Regular
+Class: AI0
+OTFname(10): NotoSansCJKkr-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(1)
+
+Name: NotoSansCJKkr-Medium
+Class: AI0
+OTFname(10): NotoSansCJKkr-Medium.otf
+OTCname(20): NotoSansCJK-Medium.ttc(1)
+
+Name: NotoSansCJKkr-Bold
+Class: AI0
+OTFname(10): NotoSansCJKkr-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(1)
+
+Name: NotoSansCJKkr-Black
+Class: AI0
+OTFname(10): NotoSansCJKkr-Black.otf
+OTCname(20): NotoSansCJK-Black.ttc(1)
+
+Name: NotoSansCJKsc-Thin
+Class: AI0
+OTFname(10): NotoSansCJKsc-Thin.otf
+OTCname(20): NotoSansCJK-Thin.ttc(2)
+
+Name: NotoSansCJKsc-Light
+Class: AI0
+OTFname(10): NotoSansCJKsc-Light.otf
+OTCname(20): NotoSansCJK-Light.ttc(2)
+
+Name: NotoSansCJKsc-DemiLight
+Class: AI0
+OTFname(10): NotoSansCJKsc-DemiLight.otf
+OTCname(20): NotoSansCJK-DemiLight.ttc(2)
+
+Name: NotoSansCJKsc-Regular
+Class: AI0
+OTFname(10): NotoSansCJKsc-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(2)
+
+Name: NotoSansCJKsc-Medium
+Class: AI0
+OTFname(10): NotoSansCJKsc-Medium.otf
+OTCname(20): NotoSansCJK-Medium.ttc(2)
+
+Name: NotoSansCJKsc-Bold
+Class: AI0
+OTFname(10): NotoSansCJKsc-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(2)
+
+Name: NotoSansCJKsc-Black
+Class: AI0
+OTFname(10): NotoSansCJKsc-Black.otf
+OTCname(20): NotoSansCJK-Black.ttc(2)
+
+Name: NotoSansCJKtc-Thin
+Class: AI0
+OTFname(10): NotoSansCJKtc-Thin.otf
+OTCname(20): NotoSansCJK-Thin.ttc(3)
+
+Name: NotoSansCJKtc-Light
+Class: AI0
+OTFname(10): NotoSansCJKtc-Light.otf
+OTCname(20): NotoSansCJK-Light.ttc(3)
+
+Name: NotoSansCJKtc-DemiLight
+Class: AI0
+OTFname(10): NotoSansCJKtc-DemiLight.otf
+OTCname(20): NotoSansCJK-DemiLight.ttc(3)
+
+Name: NotoSansCJKtc-Regular
+Class: AI0
+OTFname(10): NotoSansCJKtc-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(3)
+
+Name: NotoSansCJKtc-Medium
+Class: AI0
+OTFname(10): NotoSansCJKtc-Medium.otf
+OTCname(20): NotoSansCJK-Medium.ttc(3)
+
+Name: NotoSansCJKtc-Bold
+Class: AI0
+OTFname(10): NotoSansCJKtc-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(3)
+
+Name: NotoSansCJKtc-Black
+Class: AI0
+OTFname(10): NotoSansCJKtc-Black.otf
+OTCname(20): NotoSansCJK-Black.ttc(3)
+
+Name: NotoSansMonoCJKjp-Regular
+Class: AI0
+OTFname(10): NotoSansMonoCJKjp-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(4)
+
+Name: NotoSansMonoCJKjp-Bold
+Class: AI0
+OTFname(10): NotoSansMonoCJKjp-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(4)
+
+Name: NotoSansMonoCJKkr-Regular
+Class: AI0
+OTFname(10): NotoSansMonoCJKkr-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(5)
+
+Name: NotoSansMonoCJKkr-Bold
+Class: AI0
+OTFname(10): NotoSansMonoCJKkr-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(5)
+
+Name: NotoSansMonoCJKsc-Regular
+Class: AI0
+OTFname(10): NotoSansMonoCJKsc-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(6)
+
+Name: NotoSansMonoCJKsc-Bold
+Class: AI0
+OTFname(10): NotoSansMonoCJKsc-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(6)
+
+Name: NotoSansMonoCJKtc-Regular
+Class: AI0
+OTFname(10): NotoSansMonoCJKtc-Regular.otf
+OTCname(20): NotoSansCJK-Regular.ttc(7)
+
+Name: NotoSansMonoCJKtc-Bold
+Class: AI0
+OTFname(10): NotoSansMonoCJKtc-Bold.otf
+OTCname(20): NotoSansCJK-Bold.ttc(7)
+

@@ -1,0 +1,16 @@
+The mfpic4ode is a set of macros for drawing direction fields, phase
+portraits and trajectories of differential equations and two
+dimensional autonomous systems. The Euler, Runge-Kutta and 4th order
+Runge-Kutta algorithms are available to solve the ODE's. The picture
+is translated into mfpic macros and MetaPost is used to create the
+final drawing. The package is intended for LaTeX, but it can be used
+in plainTeX as well.
+
+Online demonstration of the mfpic4ode macros is available on
+http://wood.mendelu.cz/math/mfpicpreviewer/ as Example 6.
+
+You can get the documentation but compiling mfpic4ode.dtx file and the
+files for installation by compiling mfpic4ode.ins by LaTeX.
+
+The author is supported by the grant FRVS 99/2008 (Fund for
+Developement of Czech Universities).

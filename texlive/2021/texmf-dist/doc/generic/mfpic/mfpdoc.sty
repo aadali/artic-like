@@ -1,0 +1,294 @@
+% File: mfpdoc.sty
+% A part of mfpic 1.10 2012/12/03
+%
+\ProvidesPackage{mfpdoc}[2012/12/03 v1.10 macros for mfpic documentation]
+\newcommand\mfpversion{1.10}
+\newcommand\mfpicversion{110}
+\newcommand\mfpfiledate   {2012/12/03}
+\newif\if@chapters
+\@chaptersfalse
+\DeclareOption{chapters}{\@chapterstrue}
+
+\newif\if@stupidlogos
+\@stupidlogostrue
+\DeclareOption{nologos}{\@stupidlogosfalse}
+\ProcessOptions
+
+\IfFileExists{ifpdf.sty}{\RequirePackage{ifpdf}}
+  {\csname newif\expandafter\endcsname\csname ifpdf\endcsname \pdffalse
+   \ifx\pdfoutput\undefined
+   \else\ifx\pdfoutput\relax
+   \else\ifnum0=\pdfoutput
+   \else
+     \pdftrue
+   \fi\fi\fi}
+
+
+%% Text size:
+
+\textwidth  5.5in
+\textheight 8.0in
+\oddsidemargin 0.5in
+\evensidemargin\oddsidemargin
+\topmargin 0.5in
+  \advance\topmargin-\headheight
+  \advance\topmargin-\headsep
+
+\ifpdf
+% These two are now defaults in TeX Live:
+%  \pdfminorversion 5
+%  \pdfobjcompresslevel 2
+  \pdfpageheight\paperheight
+  \pdfpagewidth\paperwidth
+  \def\mfpHyOpts{%
+    pdftex,colorlinks,pdfpagemode=UseNone,%
+    pdfstartview={XYZ null null null},%
+    plainpages=false,hypertexnames=true}
+  \def\mfpHyDisable{%
+    \let\opt\@firstofone\let\prog\@firstofone}
+\else % dvi output could be for dvipdfm or dvips
+  \ifx\mfpdvipdfm\UndEfInEd
+    \special{papersize=\the\paperwidth,\the\paperheight}
+  \else
+    \special{pdf: pagesize width \the\paperwidth\space height \the\paperheight}
+  \fi
+\fi
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-2.4ex \@plus -.5ex \@minus -.1ex}%
+                                   {1.0ex \@plus.1ex}%
+                                   {\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-1.8ex\@plus -.4ex \@minus -.1ex}%
+                                     {.75ex \@plus .1ex}%
+                                     {\normalfont\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-1.5ex\@plus -.3ex \@minus -.1ex}%
+                                     {.5ex \@plus .1ex}%
+                                     {\normalfont\scshape\raggedright}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                     {-1ex\@plus -.2ex \@minus -.1ex}%
+                                     {.4ex \@plus .1ex}%
+                                     {\normalfont\itshape\raggedright}}
+%
+% To allow \chapter command in article class, load this package with
+% [chapters] option
+\if@chapters
+  \let\chapter\section
+  \let\section\subsection
+  \let\subsection\subsubsection
+  \let\subsubsection\paragraph
+\fi
+
+\def\mfpicversiontext{\prog{Mfpic} version:  \mfpversion.}
+
+\def\@maketitle{%
+  \newpage\vspace*{-2\baselineskip}
+  \ifx\mfpicversiontext\relax
+  \else
+    {\let\p@footnote\relax\let\@thempfn\relax
+    \footnotetext{\mfpicversiontext}}%
+  \fi
+  {\centering%
+    {\Large \@title \par}%
+    \vskip 1em%
+    {\large \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip .7em%
+    {\normalsize \@date}%
+    \par
+  }%
+  \vskip 1em\relax}
+
+\def\@listi{\leftmargin\leftmargini
+  \parsep \z@ \@plus\p@ \@minus\z@
+  \topsep 1ex \@plus.2ex \@minus 1ex
+  \itemsep\parsep}
+\let\@listI\@listi \@listi
+\renewcommand\labelitemi{\normalfont\bfseries \textendash}
+\renewcommand\labelitemii{\textasteriskcentered}
+\renewcommand\labelitemiii{\textperiodcentered}
+\leftmargini 1.5\parindent
+
+% Index stuff
+\def\mfpindexheading{}
+\def\mfpindexpagemarks{}
+
+% If lcheadings.ist or ucheadings.ist is used we need these:
+\def\headingprefix#1{\textbf{#1}}
+\def\headingsuffix{\par\nobreak\smallskip}
+
+\renewenvironment{theindex}
+               {%
+                \@restonecoltrue
+                \columnseprule \z@
+                \columnsep 35\p@
+                \twocolumn[\mfpindexheading%
+                \vspace{1ex}]%
+                \mfpindexpagemarks
+                \parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem
+                }
+               {\clearpage}
+
+
+%% Because \pageref doesn't link to the actual page:
+\newcommand\pagelabel{\ifpdf \phantomsection \fi\label}
+
+%% Displays %%%%%%%%%%%
+%% command descriptions (cd):
+\newenvironment{cd}
+  {\par\addvspace{1.75ex plus .3ex minus .1ex}
+   \parindent0pt
+   \vbox\bgroup\hsize\textwidth
+     \def\ {\leavevmode\null\quad}% small space at beginning of line
+  }
+  {\unskip\strut\egroup\@ignoretrue
+   \aftergroup\@afterindenttrue\aftergroup\@afterheading
+   \nobreak\vskip.75ex plus .3ex minus .1ex}
+
+%% examples (ex):
+\newenvironment{ex}
+ {\par\addvspace{1ex plus.2ex minus.1ex}%
+  \parindent0pt
+   \vbox\bgroup\hsize\textwidth
+     \leftskip\leftmargini
+     \def\ {\leavevmode\null\quad}}
+ {\unskip \strut \egroup \vskip 1ex plus.2ex minus.1ex
+  \@ignoretrue\@endpetrue}
+
+%% verbatim:
+\RequirePackage{verbatim}
+\def\verbatim@processline{\hspace{\leftmargini}\the\verbatim@line\par}
+\addto@hook\every@verbatim{\predisplaypenalty\@M}
+
+%% displayed text:
+\newenvironment{display}{\list{}{}\item[]}{\endlist}
+%% end displays %%%%%%%
+
+%% Logos %%%%%%%%%%%%%%
+\if@stupidlogos
+  \def\TeX{T\kern-.1667em\lower.4ex\hbox{E}\kern-.125emX}
+  \def\pdfTeX{pdf\kern.04em\TeX}
+  \def\pdfLaTeX{pdf\kern.06em\LaTeX}
+  \def\ConTeXt{Con\kern-.16em \TeX \kern-0.06em t}
+  \def\eTeX{e\kern-.10em \TeX}
+  \def\LMcal{\fontencoding{OMS}\fontfamily{lmsy}\selectfont}
+  \def\CMcal{\fontencoding{OMS}\fontfamily{cmsy}\selectfont}
+%
+% Use CM mathcal for AMS logo
+%  \def\AmSTeX{{\CMcal A\kern-.1667em\lower.5ex\hbox{M}\kern-.125em S}-\TeX}
+%
+% Use whatever is default for \mathcal:
+%  \def\AmSTeX{%
+%    $\mathcal{A}\kern-.1667em
+%    \lower.5ex
+%    \hbox{$\mathcal{M}$}\kern-.125em
+%    \mathcal{S}$-\TeX}
+%
+% Use LM mathcal for AMS logo
+  \def\AmSTeX{{\LMcal A\kern-.1667em\lower.5ex\hbox{M}\kern-.125em S}-\TeX}
+  \def\PiCTeX{P\kern-.06em\lower.4ex\hbox{I}\kern-.075emC\kern-.06em\TeX}
+\else
+  \def\TeX     {\textsc{TeX}}
+  \def\LaTeX   {\textsc{LaTeX}}
+  \def\pdfTeX  {\textsc{pdfTeX}}
+  \def\pdfLaTeX{\textsc{pdfLaTeX}}
+  \def\ConTeXt {\textsc{ConTeXt}}
+  \def\eTeX    {\textsc{eTeX}}
+  \def\AmSTeX  {\textsc{$AMS$-TeX}}
+  \def\PiCTeX  {\textsc{PiCTeX}}
+\fi
+%% end Logos %%%%%%%%%%
+
+\hyphenation{meta-font meta-post Post-Script Ghost-script}
+
+%% Special words %%%%%%%%%%
+\def\MF{\prog{metafont}}
+\def\CMF{\prog{Metafont}}
+\def\MP{\prog{metapost}}
+\def\CMP{\prog{Metapost}}
+\def\PS{\prog{PostScript}}
+\def\GS{\prog{Ghostscript}}
+\def\EPS{\prog{EPS}\null}
+\def\mfp{\prog{mfpic}}
+\def\Mfp{\prog{Mfpic}}
+\def\grafbase{\prog{grafbase}}
+\def\Grafbase{\prog{Grafbase}}
+
+%% font commands
+\def\mytt#1{\relax
+  \ifmmode
+    \mathtt{#1}%
+  \else
+    {\upshape\ttfamily#1}%
+  \fi
+}
+\def\mfc{%                              % Metafont/Post code
+  \begingroup
+    \ttfamily\catcode`\_=12 \grabit
+}
+\def\grabit#1{#1\endgroup}
+% like \mfc, but no line breaks
+\def\codebox{%
+  \hbox\bgroup
+    \ttfamily\catcode`\_=12 \boxgrabit
+}
+\def\boxgrabit#1{#1\egroup}
+\def\_{\mytt{\char`\_}}
+\def\prog#1{{\mdseries\scshape#1}}      % programs, packages
+\let\file\mytt                          % filenames
+\def\opt#1{{\upshape\sffamily#1}}       % package options
+\let\gbc  \mfc                          % grafbase code
+\let\env  \file                         % LaTeX environment names
+\let\email\file                         % email addresses
+\let\mail \file                         % (ditto)
+\let\dim  \file                         % TeX and Metafont dimensions
+\let\kw   \opt                          % MF key word like numeric
+
+%% TeX code %%%%%%%%%%%%%%%
+{
+\escapechar`\\
+\xdef\otherbsbs{\string\\}
+\escapechar-1
+\xdef\otherbackslash{\string\\}
+}
+\DeclareRobustCommand\cs[1]{%
+  \texorpdfstring{\leavevmode\mytt{\otherbackslash#1}}{\textbackslash#1}}
+\def\bbsl{\mytt{\otherbsbs}}% prints "\\"
+\DeclareRobustCommand\meta[1]{%
+     \ensuremath{\langle\mbox{\rmfamily\itshape#1\/}\rangle}}
+\providecommand\marg[1]{\mytt{\char`\{#1\char`\}}}
+\providecommand\oarg[1]{\mytt{[#1]}}
+\providecommand\parg[1]{\mytt{(#1)}}
+
+%% page style %%%%%%%%%%%%%%%
+\def\ps@mfpdoc{%
+      \let\@oddfoot\@empty\let\@evenfoot\@empty
+      \def\@oddhead{\small{\scshape\rightmark}\hfil\thepage}%
+      \let\@evenhead\@oddhead
+      \let\@mkboth\markboth
+    \def\sectionmark##1{\thispagestyle{plain}}
+    \def\subsectionmark##1{%
+      \markright {\thesubsection\enspace##1}}%
+    \def\subsubsectionmark##1{}}
+
+\if@chapters
+\renewcommand\tableofcontents{\pagenumbering{roman}%
+    \chapter*{\contentsname
+        \@mkboth{\scshape\contentsname}{\scshape\contentsname}}%
+    \@starttoc{toc}\clearpage\pagenumbering{arabic}}
+\fi
+
+%% figures:
+\@fptop=-\@fpsep
+\@addtoreset{figure}{section}
+
+%% misc:
+\def\tallstrut{\vbox to 10pt{}}
+\def\deepstrut{\vtop to 5pt{}}
+
+\frenchspacing
+\endinput

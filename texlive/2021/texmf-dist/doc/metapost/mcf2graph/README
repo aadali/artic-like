@@ -1,0 +1,80 @@
+********************************************************************************
+ mcf2graph  : Convert Molecular Coding Format to graphics with METAFONT/METAPOST
+ Author     : Akira Yamaji
+ version    : 4.75 2021-12-12
+ E-mail     : mcf2graph@gmail.com
+ Located at : http://www.ctan.org/pkg/mcf2graph
+********************************************************************************
+
+1. Introduction
+ Molecular Coding Format(MCF) is new linear notation represent
+ chemical structure diagrams.
+ This Coding is named from programing technique
+ such as operator, array, scope, macro, adressing, etc.
+ mcf2graph convert from MCF to pk font, PNG, SVG, EPS, MOL file.
+ It is also able to calculate molecular weight, exact mass, molecular formula.
+
+2. The distribution of software
+ ( 1) README              This file
+ ( 2) CHANGELOG           Changelog file of mcf2graph
+ ( 3) mcf2graph.mf        Main macro of Metafont / Metapost
+ ( 4) mcf_data_base.mcf   Molecular data base file
+ ( 5) mcf_setup.sty       Style file for aux file input
+ ( 6) mcf_manual.tex      MCF syntax manual(LaTeX file)
+                            make files 'mcf_man_soc-***.mps' before typeset
+                              >mpost mcf_man_soc.mf
+ ( 7) mcf_man_soc.mf      Molecular definition file for mcf_manual.tex
+ ( 8) mcf_manual.pdf      PDF of (6) (used pdftex(LaTeX),makeindex)
+ ( 9) mcf_example.tex     LaTeX example
+                            make file 'mcf_exa_soc-info.aux' before typeset
+                              >mpost -s ahlength=1 mcf_exa_soc.mf
+                            make files 'mcf_exa_soc-***.mps' before typeset
+                              >mpost mcf_exa_soc.mf
+                          (for metafont)
+                            make file 'mcf_exa_soc-mf.aux' before typeset
+                              >mpost -s ahlength=7 mcf_exa_soc.mf
+ (10) mcf_exa_soc.mf      Metafont/Metapost souce file for mcf_example.tex
+ (11) mcf_example.pdf     PDF of (9) typeset with pdftex(LaTeX)
+ (12) mcf_mplib_exa.tex   luamplib(LuaLaTeX) example
+ (13) mcf_mplib_exa.pdf   PDF of (12) typeset with LuaTeX(LaTeX)
+
+3. How to use mcf2graph with Metapost
+ Minimum requirement to use mcf2graph : mpost.exe,mpost.dll,mpost.mp,plain.mp
+ ( 1) >mpost                  FILENAME  => output eps(.mps) file
+ ( 2) >mpost -s bboxmargin=1  FILENAME  => output first font only (for test)
+ ( 3) >mpost -s ahangle=1     FILENAME  => output png file (600dpi)
+ ( 4) >mpost -s ahangle=11    FILENAME  => output png file (1200dpi)
+ ( 5) >mpost -s ahangle=2     FILENAME  => output svg file 
+ ( 6) >mpost -s ahangle=3     FILENAME  => output eps(.eps) file
+ ( 7) >mpost -s ahlength=1    FILENAME  => output information-aux file
+                                             tag1:var1;tag2:var2;
+ ( 8) >mpost -s ahlength=2    FILENAME  => output information-aux file
+                                             tag1;tag2;
+                                             var1;var2;
+ ( 9) >mpost -s ahlength=3    FILENAME  => output report file
+ (10) >mpost -s ahlength=5    FILENAME  => output mol file(V2000)
+ (11) >mpost -s ahlength=6    FILENAME  => output mol file(V3000)
+ (12) >mpost -s ahlength=7    FILENAME  => output metafont-aux file
+ (13) >mpost -s ahlength=8    FILENAME  => output data-base-aux file
+ (14) >mpost -s labeloffset=1 FILENAME  => use plain.mp 'label','drawarrow'
+ (15) >mpost -s labeloffset=2 FILENAME  => atomfont="uhvr8r"
+
+4. License
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+

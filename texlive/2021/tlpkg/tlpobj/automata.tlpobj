@@ -1,0 +1,25 @@
+name automata
+category Package
+revision 19717
+shortdesc Finite state machines, graphs and trees in MetaPost
+longdesc The package offers a collection of macros for MetaPost to make
+longdesc easier to draw finite-state machines, automata, labelled
+longdesc graphs, etc. The user defines nodes, which may be isolated or
+longdesc arranged into matrices or trees; edges connect pairs of nodes
+longdesc through arbitrary paths. Parameters, that specify the shapes of
+longdesc nodes and the styles of edges, may be adjusted.
+containersize 5320
+containerchecksum 09026f967084d5f1804a32166e854ac410a768f6b4654d9ea9bb69dd29acb8a3199919daa1fd6dd48963ea5d6454b9b9d8263939e5af81a8f07f66f08b5f4835
+doccontainersize 88216
+doccontainerchecksum 49c6515e979a87ce270d32b367c5800acffa4b638a8bed3e20f3e74387c2e7ee4ae0c2ea8b232e2ae57d0d0a730424d18911835581c0c274732f3d36f650693b
+docfiles size=26
+ texmf-dist/doc/metapost/automata/README details="Readme"
+ texmf-dist/doc/metapost/automata/example.mp
+ texmf-dist/doc/metapost/automata/example.pdf details="Example of use"
+ texmf-dist/doc/metapost/automata/example.tex
+runfiles size=7
+ texmf-dist/metapost/automata/automata.mp
+catalogue-ctan /graphics/metapost/contrib/macros/automata
+catalogue-license lppl
+catalogue-topics automata
+catalogue-version 0.3

@@ -1,0 +1,421 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 1993-2021
+% The LaTeX Project and any individual authors listed elsewhere
+% in this file.
+%
+% This file is part of the LaTeX base system.
+% -------------------------------------------
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    https://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008 or later.
+%
+% This file has the LPPL maintenance status "maintained".
+%
+% The list of all files belonging to the LaTeX base distribution is
+% given in the file `manifest.txt'. See also `legal.txt' for additional
+% information.
+%
+% The list of derived (unpacked) files belonging to the distribution
+% and covered by LPPL is defined by the unpacking scripts (with
+% extension .ins) which are part of the distribution.
+%
+% \fi
+%
+% \iffalse
+%%% From File: ltvers.dtx
+%
+%<*driver>
+% \fi
+\ProvidesFile{ltvers.dtx}
+             [2021/08/10 v1.1h LaTeX Kernel (Version Info)]
+% \iffalse
+\documentclass{ltxdoc}
+\GetFileInfo{ltvers.dtx}
+\title{\filename}
+\date{\filedate}
+ \author{%
+  Johannes Braams\and
+  David Carlisle\and
+  Alan Jeffrey\and
+  Leslie Lamport\and
+  Frank Mittelbach\and
+  Chris Rowley\and
+  Rainer Sch\"opf}
+\begin{document}
+ \MaintainedByLaTeXTeam{latex}
+ \maketitle
+ \DocInput{\filename}
+\end{document}
+%</driver>
+% \fi
+%
+%
+% \section{Version Identification}
+% First we identify the date and version number of this release of
+% \LaTeX, and set |\everyjob| so that it is printed at the start of
+% every \LaTeX\ run.
+%
+% \StopEventually{}
+%
+% \changes{v1.0g}{1996/11/28}
+%     {Check for old format modified /2319}
+% \changes{v1.0f}{1996/11/20}
+%     {Check for old format modified /2319}
+% \changes{v1.0e}{1995/05/12}
+%     {Add autoload docstrip guards}
+% \changes{v1.0e}{1995/05/12}
+%     {Check for format older than 1 year}
+% \changes{v1.0d}{1994/05/25}
+%     {Remove PRELIMINARY TEST RELEASE from startup banner
+%      (spring is here)}
+% \changes{v1.0b}{1994/04/12}
+%     {Have version info generated automatically.}
+% \changes{v1.0a}{1994/03/04}
+%     {Initial version, split from latex.dtx}
+% \changes{v1.0r}{2015/02/21}{Removed autoload code}
+% \changes{v1.0t}{2015/06/23}
+%     {set \cs{patch@level} in ltvers rather than in ltfinal/ltpatch}
+%
+% \begin{macro}{\fmtname}
+% \begin{macro}{\fmtversion}
+% \begin{macro}{\latexreleaseversion}
+% \begin{macro}{\patch@level}
+%    A |\patch@level| of \texttt{0} or higher denotes an official
+%    public release. A negative value indicates a candidate release
+%    that is not distributed.
+%
+%    If we put code updates into the kernel that are supposed to go
+%    into the next release we set the |\patch@level| to \texttt{-1}
+%    and the |\fmtversion| / |\latexreleaseversion| to  the dated of
+%    the next release (guessed, the real value is not so important and
+%    will get corrected when we make the release official).
+%
+%    If the |\patch@level| is already at \texttt{-1} we do nothing
+%    here and use the |\fmtversion| date for  any new|\IncludeInRelease|
+%    line when we add further code.
+%
+%    Finally, if we do make a public release we either just set the
+%    |\patch@level| to zero (if our initial guess was good) or we also
+%    change the date and then have to additionally change to that date
+%    on all the |\IncludeInRelease| statements that used the
+%    ``guessed'' date.
+%    \begin{macrocode}
+%<*2ekernel>
+\def\fmtname{LaTeX2e}
+\edef\fmtversion
+%</2ekernel>
+%<latexrelease>\edef\latexreleaseversion
+%<*2ekernel|latexrelease>
+   {2021-11-15}
+%</2ekernel|latexrelease>
+%<*2ekernel>
+\def\patch@level{1}
+%    \end{macrocode}
+%
+% \begin{macro}{\development@branch@name}
+%    For more fine grain control there is the possibility to name the
+%    current development branch. This is only used when the
+%    \cs{patch@level} is negative (i.e., a pre-release format) and is
+%    intended to help us internally when we locally install a
+%    format out of some development branch.
+%    \begin{macrocode}
+\edef\development@branch@name{}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% Check that the format being made is not too old.
+% The error message complains about `more than 5 years'
+% but in fact the error is not triggered until 65 months.
+%
+% This code is currently not activated as we don't know if we already
+% got to the last official 2e version (due to staff shortage or due to
+% a successor (think positive:-)).
+% \changes{v1.0i}{2001/06/04}{Check for old format disabled}
+% \changes{v1.0k}{2004/01/28}{Check for old format made 5 years (pr/3601)}
+% \changes{v1.0l}{2009/09/24}{Stop checking for old format}
+%    \begin{macrocode}
+\iffalse
+\def\reserved@a#1/#2/#3\@nil{%
+  \count@\year
+  \advance\count@-#1\relax
+  \multiply\count@ by 12\relax
+  \advance\count@\month
+  \advance\count@-#2\relax}
+\expandafter\reserved@a\fmtversion\@nil
+%    \end{macrocode}
+% |\count@| is now the age of this file in months. Take a generous
+% definition of `year' so this message is not generated too often.
+%    \begin{macrocode}
+\ifnum\count@>65
+  \typeout{^^J%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+!  You are attempting to make a LaTeX format from a source file^^J%
+!  That is more than five years old.^^J%
+!^^J%
+!  If you enter <return> to scroll past this message then the format^^J%
+!  will be built, but please consider obtaining newer source files^^J%
+!  before continuing to build LaTeX.^^J%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J%
+}
+   \errhelp{To avoid this error message, obtain new LaTeX sources.}
+   \errmessage{LaTeX source files more than 5 years old!}
+\fi
+\let\reserved@a\relax
+\fi
+%    \end{macrocode}
+%
+% \changes{v1.0p}{2015/01/22}{Preserve any \cs{everyjob} material inserted
+%   by a loader (\texttt{.ini} file)}
+% \changes{v1.0v}{2015/08/23}{Allow negative patchlevel for pre-release}
+% \changes{v1.1e}{2020/01/31}{Allow for upcoming format as pre-release 0}
+%    \begin{macrocode}
+  \ifnum0\ifnum\patch@level=0 \ifx\development@branch@name\@empty 1\fi\fi>0 %
+    \everyjob\expandafter{\the\everyjob
+      \typeout{\fmtname\space <\fmtversion>}}
+    \immediate
+    \write16{\fmtname \space<\fmtversion>}
+  \else\ifnum\patch@level>0
+    \everyjob\expandafter{\the\everyjob
+      \typeout{\fmtname\space <\fmtversion> patch level \patch@level}}
+    \immediate
+    \write16{\fmtname\space <\fmtversion> patch level \patch@level}
+  \else
+    \everyjob\expandafter{\the\everyjob
+      \typeout{\fmtname\space <\fmtversion>
+               pre-release-\number-\patch@level\space
+               \ifx\development@branch@name\@undefined  \else
+                 \ifx\development@branch@name\@empty  \else
+                  \space (\development@branch@name\space branch)%
+          \fi
+        \fi
+    }}
+    \immediate
+    \write16{\fmtname\space <\fmtversion>
+             pre-release-\number-\patch@level\space
+            \ifx\development@branch@name\@undefined  \else
+             \ifx\development@branch@name\@empty  \else
+               \space (\development@branch@name\space branch)%
+          \fi
+        \fi
+    }
+    \fi
+  \fi
+%</2ekernel>
+%    \end{macrocode}
+%
+% \begin{macro}{\IncludeInRelease}
+% \begin{macro}{\EndIncludeInRelease}
+% \begin{macro}{\@IncludeInRelease}
+% \begin{macro}{\@IncludeInRele@se}
+% \begin{macro}{\@gobble@IncludeInRelease}
+% \begin{macro}{\@check@IncludeInRelease}
+% \changes{v1.0w}{2015/02/21}
+%         {set \cs{@currname} empty here (in case \cs{IncludeInRelease} input early)}
+%    \begin{macrocode}
+%<2ekernel>\let\@currname\@empty
+%    \end{macrocode}
+%
+% \changes{v1.0n}{2015/01/07}{macro added}
+% \changes{v1.0m}{2015/01/17}{modified with \cs{@currname}}
+% \changes{v1.0o}{2015/01/19}{Optional argument}
+% \changes{v1.0q}{2015/02/19}{Swap argument order}
+% \changes{v1.1f}{2021/03/18}{Add support for usage in \cs{NewModuleRelease}}
+% \changes{v1.1h}{2021/08/10}{Add error to aid debugging}
+%
+%    \begin{macrocode}
+%<*2ekernel|latexrelease>
+%<latexrelease>\newif\if@includeinrelease
+%<latexrelease>\@includeinreleasefalse
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\IncludeInRelease#1{%
+ \if@includeinrelease
+   \PackageError{latexrelease}{mis-matched IncludeInRelease}%
+                {There is an \string\EndIncludeRelease\space missing}%
+  \@includeinreleasefalse
+  \fi
+  \ifnum0%
+      \ifx\new@moduledate\@empty\else 1\fi
+      \ifnum \expandafter\@parse@version#1//00\@nil=0 1\fi
+      =11
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+    {\finish@module@release{#1}}%
+    {\kernel@ifnextchar[%
+      {\@IncludeInRelease{#1}}
+      {\@IncludeInRelease{#1}[#1]}}}
+\def\finish@module@release#1#2#3{%
+  \toks@{[#1] #3}%
+  \begingroup
+    \edef\x{\detokenize\expandafter{\new@modulename}}%
+    \edef\y{\detokenize{#2}}%
+  \expandafter\endgroup
+  \ifx\x\y \else
+    \@latex@error{\noexpand\IncludeInRelease dated #1 in a module is not
+      allowed.\MessageBreak Use a date at least equal to \new@moduledate
+      \space for complete rollback}\@ehd
+  \fi
+  \ifnum\expandafter\@parse@version\new@moduledate//00\@nil
+       >\expandafter\@parse@version\fmtversion//00\@nil
+    \GenericInfo{}{Applying: \the\toks@}%
+  \else
+    \GenericInfo{}{Skipping: \the\toks@}%
+    \expandafter\gobble@finish@module@release
+  \fi}
+\long\def\gobble@finish@module@release#1\EndModuleRelease{%
+  \EndModuleRelease}
+%    \end{macrocode}
+%
+% If a specific date has not been specified in |latexrelease|
+% use `|#1|`.
+%    \begin{macrocode}
+\def\@IncludeInRelease#1[#2]{\@IncludeInRele@se{#2}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\@IncludeInRele@se#1#2#3{%
+  \toks@{[#1] #3}%
+  \expandafter\ifx\csname\string#2+\@currname+IIR\endcsname\relax
+%    \end{macrocode}
+%    If we roll back and the first patch already match then applying
+%    that is actually reapplying what is already in the format, i.e.,
+%    it is useless and possibly allocating new registers. However, it
+%    makes the logic simpler so this is the way it is for now. In
+%    theory we could always jump over the first patch because that is
+%    only really needed for rolling forward. So maybe one day \dots
+%    \begin{macrocode}
+    \ifnum\expandafter\@parse@version#1//00\@nil
+         >\expandafter\@parse@version\fmtversion//00\@nil
+      \GenericInfo{}{Skipping: \the\toks@}%
+      \expandafter\expandafter\expandafter\@gobble@IncludeInRelease
+    \else
+      \GenericInfo{}{Applying: \the\toks@}%
+      \@includeinreleasetrue
+      \expandafter\let\csname\string#2+\@currname+IIR\endcsname\@empty
+    \fi
+  \else
+    \GenericInfo{}{Already applied: \the\toks@}%
+    \expandafter\@gobble@IncludeInRelease
+  \fi
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\EndIncludeInRelease{%
+\if@includeinrelease
+  \@includeinreleasefalse
+\else
+  \PackageError{latexrelease}{mis-matched EndIncludeInRelease}{}%
+\fi
+\if@skipping@module
+  \expandafter\new@module@skip
+\fi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\long\def\@gobble@IncludeInRelease#1\EndIncludeInRelease{%
+  \@includeinreleasefalse
+  \@check@IncludeInRelease#1\IncludeInRelease\@check@IncludeInRelease
+  \@end@check@IncludeInRelease}
+%    \end{macrocode}
+%    \begin{macrocode}
+\long\def\@check@IncludeInRelease#1\IncludeInRelease
+                                   #2#3\@end@check@IncludeInRelease{%
+  \ifx\@check@IncludeInRelease#2\else
+    \PackageError{latexrelease}{skipped IncludeInRelease for tag \string#2}{}%
+  \fi
+  \if@skipping@module
+    \expandafter\new@module@skip
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Declaring an all-new module}
+%
+% \begin{macro}{\if@skipping@module}
+% \begin{macro}{\NewModuleRelease}
+% \begin{macro}{\EndModuleRelease}
+% \begin{macro}{\new@module@skip}
+% \begin{macro}{\new@modulename}
+% \begin{macro}{\new@moduledate}
+%
+%   When we have a whole new module, we can't roll back to a date where
+%   such module exists, otherwise hundreds of \enquote{command already
+%   defined} errors will pop up.  But we can't skip it altogether
+%   either, because the module might have changes we still want applied,
+%   so a more detailed cherry-picking of code chunks have to be done.
+%
+%   \changes{v1.1f}{2021/03/18}{Added \cs{NewModuleRelease}.}
+%   \changes{v1.1g}{2021/04/16}
+%           {\cs{NewModuleRelease} with the same arguments as \cs{IncludeInRelease}.}
+%    \begin{macrocode}
+\let\if@skipping@module\iffalse
+\def\@skipping@moduletrue{\let\if@skipping@module\iftrue}
+\def\@skipping@modulefalse{\let\if@skipping@module\iffalse}
+\let\new@modulename\@empty
+\let\new@moduledate\@empty
+\def\NewModuleRelease#1#2#3{%
+  \ifx\new@modulename\@empty \else
+    \@latex@error{Nested \noexpand\NewModuleRelease forbidden.}\@ehd \fi
+  \edef\new@moduledate{#1}%
+  \edef\new@modulename{#2}%
+  \GenericInfo{}{BEGIN module: \new@modulename\space (\new@moduledate)}%
+  \GenericInfo{}{ \@spaces\@spaces\@spaces\space#3\@gobble}%
+  \ifnum\sourceLaTeXdate<%
+      \expandafter\@parse@version\new@moduledate//00\@nil\relax
+    \ifnum\expandafter\@parse@version\fmtversion//00\@nil<%
+          \expandafter\@parse@version\new@moduledate//00\@nil\relax
+      \GenericInfo{}{Skipping module \new@modulename}%
+      \expandafter\expandafter
+      \expandafter\gobble@finish@module@release
+    \else
+      \GenericInfo{}{Applying module \new@modulename}
+      \@skipping@modulefalse
+    \fi
+  \else
+    \GenericInfo{}{Skipping module \new@modulename}
+    \@skipping@moduletrue
+    \expandafter\new@module@skip
+  \fi}
+\long\def\new@module@skip#1\IncludeInRelease{\IncludeInRelease}
+\def\EndModuleRelease{%
+  \ifx\new@modulename\@empty
+    \@latex@error{Extra \string\EndModuleRelease.}\@eha
+  \else
+    \GenericInfo{}{END module: \new@modulename\space (\new@moduledate)}%
+    \let\new@modulename\@empty
+    \let\new@moduledate\@empty
+    \@skipping@modulefalse
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</2ekernel|latexrelease>
+%    \end{macrocode}
+%
+% \Finale
+%
+\endinput

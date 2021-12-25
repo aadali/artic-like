@@ -1,0 +1,6 @@
+suanpan.mp is the macro file, and abacus.mp is the user file.
+To process abacus.mp, write
+
+  metapost abacus.mp
+
+The macros are released under the LPPL.

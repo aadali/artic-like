@@ -1,0 +1,12 @@
+Version 1.6 released on 2007-02-11:
+* Fixed: a problem with multiple root signs and textpathCureSqrt=1
+
+* Added: configuration variables
+    textpathAutoScale
+    textpathDraft
+    textpathDebug
+  These options, especially textpathAutoScale, were introduced
+  to help with automatic document generation.
+* Added: Numeric restrictions are now discussed in the manual.
+  
+* Changed: Default value of textpathClip is now 0.

@@ -1,0 +1,240 @@
+% Copyright (c) 2015-2019 Robert Ryszard Paciorek <rrp@opcode.eu.org>
+% 
+% MIT License
+% 
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+% 
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass[a4paper]{article}
+
+\usepackage{vtable,hhline,xcolor}
+\usepackage{fvextra,geometry,lipsum}
+\fvset{breaklines=true, breakafter={/\}\{}, breakaftersymbolpre={}, breakaftersymbolpost={\tiny\ensuremath{\ \hookrightarrow\ }}}
+\geometry{tmargin=20mm, bmargin=27mm, lmargin=21mm, rmargin=21mm}
+
+\begin{document}
+
+\title{The \texttt{vtable}  package}
+\author{Robert Ryszard Paciorek <rrp@opcode.eu.org>}
+\date{2019-05-13}
+\maketitle
+
+\section{Introduction}
+
+This package allow vertical alignement of table cell
+  by providing \texttt{Z}, \texttt{L}, \texttt{C}, \texttt{R}, \texttt{J} and \texttt{I} column types 
+  and \Verb$\nextRow$, \Verb$\lb$, \Verb$\setMultiColRow$, \Verb$\setMultiColumn$, \Verb$\setMultiRow$ and \Verb$\tableFormatedCell$ commands
+  for \texttt{tabular} and similar environment.
+
+\section{Column types}
+
+\subsection{\texttt{Z}}
+
+\texttt{Z} column type have 6 arguments:
+\begin{enumerate}
+  \item max width of cell
+  \item min width of cell (optional – can be empty)
+  \item horizontal align mode, supported values:
+    \begin{description}
+      \item[l] left
+      \item[c] center
+      \item[r] right
+      \item[j] justify
+    \end{description}
+  \item number of columns to span this cell
+  \item vertical align mode, supported values:
+    \begin{description}
+      \item[t] top
+      \item[m] middle
+      \item[b] bottom
+    \end{description}
+  \item number of rows to span this cell
+\end{enumerate}
+
+\subsection{\texttt{L}, \texttt{C}, \texttt{R} and \texttt{J}}
+
+\texttt{L}, \texttt{C}, \texttt{R} and \texttt{J} column types are shortcuts for Z column type and have 3 arguments:
+\begin{enumerate}
+  \item max width of cell
+  \item min width of cell (optional – can be empty)
+  \item vertical align mode, supported values:
+    \begin{description}
+      \item[t] top
+      \item[m] middle
+      \item[b] bottom
+    \end{description}
+\end{enumerate}
+\texttt{L} is left ragged column, \texttt{C} is center ragged column, \texttt{R} is right ragged column and \texttt{J} is justifying column.
+
+\subsection{\texttt{I}}
+
+\texttt{I} column type insert vertical frame line and have 3 arguments:
+\begin{enumerate}
+  \item formatting command (eg. \Verb$\color$)
+  \item line width, second argument of \Verb$\hdashrule$
+  \item line style, third argument of \Verb$\hdashrule$
+\end{enumerate}
+
+
+\section{Commands}
+
+\subsection{nextRow an lb}
+{\bfseries Each row (even last) MUST be ended with \Verb$\nextRow$ command} (insted of \Verb$\\$ or \Verb$\tabularnewline$).
+Line break in table cell can be do with \Verb$\lb$ (shortcut for \Verb$\linebreak$), \Verb$\linebreak$ or \Verb$\newline$.
+
+\subsection{setMultiColRow}
+\Verb$\setMultiColRow{col num}{row num}{max width}{min width}{hmode}{vmode}{left sep}{right sep}{text}$ command allow span cells on rows and columns create multi column at the same time.
+It have 9 arguments:
+\begin{description}
+  \item[col num] number of columns to span this cell
+  \item[row num] number of rows to span this cell
+  \item[max width] max width of cell
+  \item[min width] min width of cell (optional – can be empty)
+  \item[hmode] horizontal align mode, supported values:
+    \begin{description}
+      \item[l] left
+      \item[c] center
+      \item[r] right
+      \item[j] justify
+    \end{description}
+  \item[vmode] vertical align mode, supported values:
+    \begin{description}
+      \item[t] top
+      \item[m] middle
+      \item[b] bottom
+    \end{description}
+  \item[left sep]  left cell frame element
+  \item[right sep] right cell frame element
+  \item[text] cell content
+\end{description}
+
+\Verb$\setMultiColRow$ command MUST be repeated in each row of multirow set.
+Only first call CAN (and MUST) have not empty last argument (cell content).
+Every next call of \Verb$\setMultiColRow$ in single multirow set MUST have empty last argument (cell content).
+
+\subsection{setMultiColumn}
+\Verb$\setMultiColumn{col num}{max width}{min width}{hmode}{vmode}{left sep}{right sep}{text}$ command allow create multi column cell.
+It have 8 arguments meaningful as corresponding args in \Verb$\setMultiColRow$ command.
+
+\subsection{setMultiRow}
+\Verb$\setMultiRow{col num}[minimal height]{text}$ command allow create multi row cell.
+Next cells in multirow set should be empty.
+Horizontal lines between cells in multirow set should be manualy removed (via setting \Verb$\hhline$ parametrs).
+
+\subsection{tableFormatedCell}
+\Verb$\tableFormatedCell{max width}[min width]{hmode}{vmode}$ command allow change formatting for single cell.
+It have 4 arguments meaningful as corresponding args in \Verb$\setMultiColRow$ command.
+
+\subsection{forceRowHeight}
+\Verb$\forceRowHeight{value}$ enforce current row minimum height to value.
+
+
+\section{Examples}
+
+\begin{center}
+\begin{tabular}{
+    | C{2cm}{}{t} | C{2cm}{1.5cm}{m} | C{2cm}{}{b} | L{2cm}{}{m} |
+    R{2cm}{}{t} | J{2cm}{}{t} I{\color{red}}{1pt}{0.5mm 0.5mm 0.5mm 0mm}
+  }
+  \hline
+    top & middle & bottom & middle left & top right & top justify
+  \nextRow \hline
+    A \lb xxx \lb X & B & C &
+      \setMultiRow{3}{ -- \lipsum[1][1] -- \lb -- \lipsum[1][2] -- } &
+      q & q
+  \nextRow \hhline{---~--}
+    D \lb d & E \lb xxx xx \lb X \lb X & F \lb f & & q & q
+  \nextRow \hhline{---~--}
+    G & H & I \lb xxx \lb Xj & & q & q
+  \nextRow \hline
+    G &
+    \setMultiColumn{2}{4cm}{3cm}{c}{t}{}{|} {top, center: \lb \lipsum[1][3]} &
+    xx & q & q
+  \nextRow \hline
+    G &
+    \multicolumn{2}{Z{4cm}{3cm}{l}{2}{t}{1}|} {top, left: \lb \lb \lipsum[1][4]} &
+    LL LL\lb xxx\lb X\lb X & RR RR\lb xxx\lb X\lb X & BB BB\lb xxx\lb X\lb X
+  \nextRow \hline
+    G &
+    \tableFormatedCell{3.5cm}[3cm]{r}{b}I I \lb xxxxxxx \lb a a Xj &
+    y & \lipsum[1][1] & \lipsum[1][1] & \lipsum[1][1]
+  \nextRow \hline
+\end{tabular}
+\end{center}
+
+\begin{Verbatim}
+\begin{tabular}{
+    | C{2cm}{}{t} | C{2cm}{1.5cm}{m} | C{2cm}{}{b} | L{2cm}{}{m} |
+    R{2cm}{}{t} | J{2cm}{}{t} I{\color{red}}{1pt}{0.5mm 0.5mm 0.5mm 0mm}
+  }
+  \hline
+    top & middle & bottom & middle left & top right & top justify
+  \nextRow \hline
+    A \lb xxx \lb X & B & C &
+      \setMultiRow{3}{ -- \lipsum[1][1] -- \lb -- \lipsum[1][2] -- } &
+      q & q
+  \nextRow \hhline{---~--}
+    D \lb d & E \lb xxx xx \lb X \lb X & F \lb f & & q & q
+  \nextRow \hhline{---~--}
+    G & H & I \lb xxx \lb Xj & & q & q
+  \nextRow \hline
+    G &
+    \setMultiColumn{2}{4cm}{3cm}{c}{t}{}{|} {top, center: \lb \lipsum[1][3]} &
+    xx & q & q
+  \nextRow \hline
+    G &
+    \multicolumn{2}{Z{4cm}{3cm}{l}{2}{t}{1}|} {top, left: \lb \lb \lipsum[1][4]} &
+    LL LL\lb xxx\lb X\lb X & RR RR\lb xxx\lb X\lb X & BB BB\lb xxx\lb X\lb X
+  \nextRow \hline
+    G &
+    \tableFormatedCell{3.5cm}[3cm]{r}{b}I I \lb xxxxxxx \lb a a Xj &
+    y & \lipsum[1][1] & \lipsum[1][1] & \lipsum[1][1]
+  \nextRow \hline
+\end{tabular}
+\end{Verbatim}
+
+\subsection{multicolumn, multirow}
+
+\begin{center}
+\begin{tabular}{| C{2cm}{}{t} | C{2cm}{}{m} | C{2cm}{}{b} | L{2cm}{}{m} |}
+  \hline
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{ multi multi multi multi multi multi multi multi multi } & c1 & d1
+  \nextRow\hhline{~~--}
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{} & c2 & d2
+  \nextRow\hhline{~~--}
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{} & c3 & d3
+  \nextRow\hline
+  a4 & b4 & c4 & d4
+  \nextRow\hline
+\end{tabular}
+\end{center}
+
+\begin{Verbatim}
+\begin{tabular}{| C{2cm}{}{t} | C{2cm}{}{m} | C{2cm}{}{b} | L{2cm}{}{m} |}
+  \hline
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{ multi multi multi multi multi multi multi multi multi } & c1 & d1
+  \nextRow\hhline{~~--}
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{} & c2 & d2
+  \nextRow\hhline{~~--}
+  \setMultiColRow{2}{3}{4cm}{3cm}{c}{m}{|}{|}{} & c3 & d3
+  \nextRow\hline
+  a4 & b4 & c4 & d4
+  \nextRow\hline
+\end{tabular}
+\end{Verbatim}
+\end{document}

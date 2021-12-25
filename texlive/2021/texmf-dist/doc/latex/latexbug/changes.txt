@@ -1,0 +1,37 @@
+2021-09-25  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx: don't warn for expl3.ltx (part of rollback) 
+
+2021-08-26  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx:
+	Do not classify packages maintained by us (but in different
+	repositories) as third-party files.
+
+2021-06-27  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx:
+	added a lot of new files as supported ...
+
+2021-03-05  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx
+	ignore hyperref-langpatches.def
+
+2021-01-02  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx: add l3debug.def
+
+2020-09-25  Joseph Wright  <Joseph.WRight@latex-project.org>
+
+	* latexbug.dtx: update l3backend file list
+
+2019-09-13  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx: added rotating.sty (graphics)
+
+2018-12-31    <Frank.Mittelbach@latex-project.org>
+
+	* latexbug.dtx:
+	AMS classes are not supported by the LaTeX team but by the AMS
+

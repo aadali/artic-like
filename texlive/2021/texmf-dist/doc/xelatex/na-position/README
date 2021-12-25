@@ -1,0 +1,63 @@
+************* README file for na-position **********************
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+                 The
+            na-position
+              package
+              
+                v1.2
+
+            14/06/2020
+
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+Author   :LAOUIDJI WALID  and NAAM MOHAMED   
+Maintainer:LAOUIDJI WALID
+email : walidlaouidji28@gmail.com
+email: naas231083@gmail.com
+-------
+
+
+********************* ENGLISH *****************************
+This package facilitates, in most cases, the creation of tables 
+of relative positions of a curve and its asymptote or a curve 
+and a tangent in one of its points.
+
+It depends on the package "tkz-tab"  .
+
+This package has to be used with polyglossia and XeLaTeX to produce 
+documents in Arabic.
+
+License : 
+---------
+This package can be redistributed and/or modified under the terms of the LaTeX 
+Project Public License (see ctan:/macros/latex/base/lppl.txt).
+
+
+
+********************* FRENCH *****************************
+
+Ce paquetage facilite la création de tableaux d'études de la postion relative 
+d'une courbe et de son asymptote ou d'une courbe et de sa tangente en un 
+de ses points dans la majeure partie des cas.
+Il appuie sur le paquetage "tkz-tab".
+
+Cette extension est à utiliser avec l'extension "polyglossia" pour 
+produire des documents en arabe via "XeLaTeX".
+
+
+
+Licence
+-------
+
+L'extension peut autre redistribuée et/ou modifiée sous les termes 
+de la licence LaTeX Project Public (voir macros/latex/base/lppl.txt).
+
+Documentation
+-------------
+
+La documentation de l'extension se trouve dans le fichier ZIP ou
+dans dans le répertoire /doc/.
+
+Merci d'utiliser na-position.sty.
+

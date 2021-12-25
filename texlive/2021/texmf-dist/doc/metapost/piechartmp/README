@@ -1,0 +1,17 @@
+This is the README of the piechartMP MetaPost package.
+For license informations see LEGAL.
+
+The package consists of the files:
+- README                  (this file)
+- LEGAL                   (license information)
+- piechartmp.mp           (the MetaPost module)
+- piechartmp.pdf          (english documentation)
+
+
+This is a BETA-release, but I believe that
+the user interface will not change anymore.
+Please send bug-reports and suggestions to:
+Jens-Uwe Morawski <morawski@gmx.net>
+
+Jens-Uwe Morawski
+May 14, 2002; piechartMP version 0.3.0

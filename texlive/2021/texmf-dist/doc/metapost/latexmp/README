@@ -1,0 +1,12 @@
+The MetaPost package latexMP implements a user-friendly
+interface to access LaTeX-based typesetting capabilities in
+MetaPost.
+The text to be typeset is given as string. This allows even
+dynamic text elements, for example counters, to be used in
+labels. 
+
+All files of the package belong to the Public Domain.
+
+Since version 1.2 the MP prologues value is not set by
+latexMP anymore. Additionally, the compatibility with
+the normal btex..etex behaviour has been improved.

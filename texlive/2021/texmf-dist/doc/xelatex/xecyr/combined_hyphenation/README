@@ -1,0 +1,4 @@
+Combined Russian-English hyphenation is now made simple: just combine
+together hyphenation patterns (both types), then change
+'loadhyph-ru.tex'. Please see examples to understand it better. Then, as
+usual, re-compile format files.

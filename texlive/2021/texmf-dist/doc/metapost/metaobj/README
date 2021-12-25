@@ -1,0 +1,46 @@
+README file for release 0.83 of METAOBJ
+---------------------------------------
+
+Installation
+------------
+
+  Install the file inputs/metaobj.mp on your metapost path, typically under
+
+      .../texmf/metapost/metaobj/
+
+  On UNIX, you may need to run texhash or something like this, so that your
+  TeX installation knows about the new file.
+
+Testing
+-------
+
+  In order to test the package, take any .mp file from the examples
+  directory, for instance mobjstandard.mp, and do the following:
+
+    mpost mobjstandard.mp
+    tex mproof mobjstandard.[0-9]*
+    dvips mproof.dvi -o
+    gv mproof.ps
+
+  If you run into problems, you may have to increase your metapost
+  environment. Try to increase first the limits you have reached.
+  In order to do this, create a texmf.cnf file and put the 
+  environment variables with the new values. Recreate the metapost format
+  with inimpost mpost.ini, but be sure the texmf.cmf file you have
+  created is taken into account. (Do something like setenv TEXMFCNF .:
+  or export TEXMF=.: if needed.) And then compile again. 
+  Eventually, you should be able to compile the example.
+
+  Note: the compilation of proofex.mp is very slow, be patient.
+
+Documentation
+-------------
+
+  A manual is in the doc directory.
+  The metaobj.mp code is not formatted with mft, because mft can't
+  handle many of metaobj's idiosyncrasies.
+
+
+Denis Roegel, August 2, 2003.
+
+

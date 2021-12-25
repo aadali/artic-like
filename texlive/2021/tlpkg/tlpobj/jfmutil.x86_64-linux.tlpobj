@@ -1,0 +1,8 @@
+name jfmutil.x86_64-linux
+category Package
+revision 44835
+shortdesc x86_64-linux files of jfmutil
+containersize 340
+containerchecksum f7ec55c98663ff4cc8efea8664c544945a3041ad917f7dd0c338729bc971f6e21ea6bb51c7763c97f6042388c0b77c9597d48aa4f90ee711ecf6c0e7562f9496
+binfiles arch=x86_64-linux size=1
+ bin/x86_64-linux/jfmutil

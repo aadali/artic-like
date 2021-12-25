@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[russian]{babel}
+
+\usepackage{url}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\author{А.\,Б.\,Шипунов\footnote{e-mail: \texttt{plantago at
+herba.msu.ru}}}
+
+\title{\texttt{xecyr.sty},\\ русский стиль для \texttt{XeLaTeX}}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Стиль основан на файле А.\,Крюкова <<\texttt{xecyr.tex}>>.
+
+Доступны две пары опций: \texttt{ext/noext} и \texttt{nomis/mis}
+(умалчиваемые опции первые). Первая грузит пакет \texttt{xltxtra} (и
+заодно \texttt{fontspec}, без которого жизнь в \texttt{XeLaTeX} осложняется),
+вторая грузит (если ее задать явно) пакет \texttt{misccorr}, для загрузки
+которого нужен некий трюк с кодировками.
+
+Кавычки набираются "<по-бабелевски">, при помощи \verb|"< "> "` "'|,
+лигатуры \verb|<< >>| будут работать только если в поставке имеются
+последние версии файлов \texttt{tex-text.map} и \texttt{tex-text.tec},
+скачанные с \url{http://scripts.sil.org/svn-view/xetex/TRUNK}. В будущем
+эта ситуация, скорее всего, изменится.
+
+В системе должны быть
+установлены шрифты Computer Modern Unicode
+(\url{http://sourceforge.net/projects/cm-unicode}).
+
+\end{document}

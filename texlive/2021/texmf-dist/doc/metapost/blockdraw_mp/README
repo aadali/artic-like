@@ -1,0 +1,54 @@
+The blockdraw_mp package
+========================
+
+This material is subject to the LaTeX Project Public License. See 
+http://www.ctan.org/tex-archive/help/Catalogue/licenses.lppl.html 
+for the details of that license.
+
+History
+-------
+o  Submitted to CTAN: 2006-03-08
+   -  First submission.
+o  Updated 2006-07-18
+   -  Added documentation sources and created separate sub-directories
+      for the implementation and documentation.
+o  Updated 2007-01-21 (Backward incompatible changes for bond graphs.)
+   -  Bond graphs can be drawn with arrowheads that are not filled.
+   -  Bond graph labels that depend on the LaTeX preamble have been
+      removed from the bond graph package file, and must now be defined
+      in every bond graph application source.
+   -  See further comments in bondgraph.mp, and how the changes affect
+      the example bonddemo.mp.
+   -  Thanks to Johan Engelen for suggesting added features and bringing
+      my attention to the problem of preamble-dependent content in package
+      files.
+
+Description
+-----------
+This package targets the simple problem of producing block diagrams
+and bond graphs.  In more detail, the provided functionality can be
+divided into
+o  Standard elements such as labeled blocks and bond graph arrows.
+o  Standardized way for selecting input and output points on blocks.
+o  Means for the construction of "carpented" paths connecting points.
+o  Standardized label positioning along block connections.
+o  Higher-level macros that specialize and/or combine some of the above.
+
+An important example from the group of higher-level macros is the 
+macro that takes two blocks as arguments and generates a path connecting
+them.
+
+Experienced MetaPost users will certainly prefer to write their own
+macros for this purpose, but less experienced users may find these
+simple macros accessible and handy in combination with the series
+of examples provided on the WWW (see below).
+
+Further information
+-------------------
+The main source of information for this package is located at
+  http://www.control.isy.liu.se/~tidefelt/projects/blockdraw/
+
+
+Please let me know if you run into problems or have suggestions,
+
+Henrik Tidefelt

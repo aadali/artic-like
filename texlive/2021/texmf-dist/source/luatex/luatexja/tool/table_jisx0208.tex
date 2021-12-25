@@ -1,0 +1,123 @@
+%#! euptex -shell-escape
+\catcode`\!=1
+\catcode`\?=2
+\immediate\openout1=jisx0208_1.lua
+\def\OUT{\immediate\write1}
+\catcode`@11
+\def\@firstoftwo#1#2{#1}
+\def\@secondoftwo#1#2{#2}
+\def\ifnumcomp#1#2#3{%
+        \ifnum\numexpr#1\relax#2\numexpr#3\relax
+                \expandafter\@firstoftwo
+        \else
+                \expandafter\@secondoftwo
+        \fi
+}
+\def\truncdiv#1#2{%
+        \ifnumcomp{#1}<{(#1)/(#2)*(#2)}{%
+                \numexpr(#1)/(#2)-1%
+        }{%
+                \numexpr(#1)/(#2)%
+        }%
+}
+\def\hex#1{%
+        \ifnumcomp{#1}<0{}{\hn@i{#1}{}}%
+}
+\def\hn@i#1#2{%
+        \ifnumcomp{#1}<{16}
+        {%
+                \hn@digit{#1}#2%
+        }{%
+                \expandafter\hn@ii\expandafter{%
+                        \the\numexpr\truncdiv{#1}{16}%
+                }{#1}{#2}%
+        }%
+}
+\def\hn@ii#1#2#3{%
+        \expandafter\hn@i\expandafter{%
+                \number\numexpr#1\expandafter\expandafter\expandafter
+                \expandafter\expandafter\expandafter\expandafter}%
+                \expandafter\expandafter\expandafter\expandafter
+                \expandafter\expandafter\expandafter{%
+                        \hn@digit{(#2)-16*(#1)}#3}%
+}
+\begingroup
+\catcode`012\catcode`112\catcode`212\catcode`312\catcode`412
+\catcode`512\catcode`612\catcode`712\catcode`812\catcode`912
+\catcode`A12\catcode`B12\catcode`C12\catcode`D12\catcode`E12
+\catcode`F12
+\gdef\hn@digit#1{%
+        \ifcase\numexpr#1\relax 0%
+        \or \expandafter 1%
+        \or \expandafter 2%
+        \or \expandafter 3%
+        \or \expandafter 4%
+        \or \expandafter 5%
+        \or \expandafter 6%
+        \or \expandafter 7%
+        \or \expandafter 8%
+        \or \expandafter 9%
+        \or \expandafter A%
+        \or \expandafter B%
+        \or \expandafter C%
+        \or \expandafter D%
+        \or \expandafter E%
+        \or \expandafter F%
+        \fi
+}
+\endgroup
+
+
+\catcode`\{=12
+\catcode`\}=12
+\def\folio!?
+
+\newcount\ku
+\newcount\ten
+\newcount\tmp
+\newcount\tmpa
+\newcount\tmpb
+\font\tt=cmtt10 at 10pt\tt\baselineskip=12pt\parindent=0pt\parskip=0pt
+
+\catcode`\_=12
+\OUT!return {?
+\OUT!version = 3,?
+\OUT!table_jisx0208_uptex = {?
+
+\ku=1
+\loop 
+  \tmp=\ku \multiply\tmp"100 \advance\tmp"2020 %"
+  ! \ten=1
+    \loop
+    \advance\tmp1 
+    \tmpa=\jis\tmp \tmpb=\tmp\advance\tmpb-"2020%"
+    \ifnum\tmpa>0
+       \OUT!  0x\hex\tmpa,?
+    \else	
+       \OUT!  false, -- 0x\hex\tmpb?
+    \fi
+    \advance\ten 1
+    \ifnum\ten<95\relax\repeat
+  ?
+  \advance\ku 1
+\ifnum\ku<95\relax\repeat
+
+\OUT!}}?
+\immediate\closeout1
+\catcode`\#=12
+\immediate\openout1=jisx0208_2.tmp
+\OUT!kpse.set_program_name("luatex")?
+\OUT!require('lualibs')?
+\OUT!local t=require('jisx0208_1.lua')?
+\OUT!local s=t.table_jisx0208_uptex?
+\OUT!for i=#s,1,-1 do if type(s[i])=='number' then a=i;break end end?
+\OUT!for i=a+1,#s do s[i]=nil end?
+\OUT!local f = io.open('ltj-jisx0208.lua', 'w')?
+\OUT!f:write(table.serialize(t, 'return'))?
+\OUT!f:close()?
+\immediate\closeout1
+\immediate\write18!texlua jisx0208_2.tmp?
+\immediate\write18!rm jisx0208_2.tmp?
+\immediate\write18!rm jisx0208_1.lua?
+
+\end

@@ -1,0 +1,32 @@
+name mpgraphics
+category Package
+revision 29776
+shortdesc Process and display MetaPost figures inline
+longdesc The package allows LaTeX users to typeset MetaPost code inline
+longdesc and display figures in their documents with only and only one
+longdesc run of LaTeX, pdfLaTeX or XeLaTeX (no separate runs of mpost).
+longdesc Mpgraphics achieves this by using the shell escape (\write 18)
+longdesc feature of current TeX distributions, so that the whole process
+longdesc is automatic and the end user is saved the tiresome processing.
+containersize 4340
+containerchecksum 5d711f7a981f701e11874916fe8d22fa237404dc119fc2d5c8f8e9b3eaf8feb59a63023ec30f0c67d304839e4971288a669d70a697260af35e401edf00673adb
+doccontainersize 182260
+doccontainerchecksum 954c8e3a8a0deafea163c9bea9da6bd1c27fcc9b5270408fdd29f0051ece1f4138a0af99808cf85279823cb48475b8e21b3a450f021d678fc5b2fbdf28e55320
+docfiles size=49
+ texmf-dist/doc/latex/mpgraphics/README details="Readme"
+ texmf-dist/doc/latex/mpgraphics/mpgraphics-example.ltx
+ texmf-dist/doc/latex/mpgraphics/mpgraphics.pdf details="Package documentation"
+srccontainersize 9484
+srccontainerchecksum 30e7324760efabffddf6920362ba213eb05fce2658d9a442677a2f8f322695d5a361b1d183c4f775b289ac116d586e2466be46d4ea1798cde251132b95a98bdd
+srcfiles size=10
+ texmf-dist/source/latex/mpgraphics/mpgraphics.dtx
+ texmf-dist/source/latex/mpgraphics/mpgraphics.ins
+runfiles size=4
+ texmf-dist/tex/latex/mpgraphics/mpgraphics.sty
+catalogue-also emp
+catalogue-contact-bugs https://github.com/bidi-tex/mpgraphics/issues
+catalogue-contact-repository https://github.com/bidi-tex/mpgraphics
+catalogue-ctan /macros/latex/contrib/mpgraphics
+catalogue-license lppl1.3
+catalogue-topics graphics-inline
+catalogue-version 0.3

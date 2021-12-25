@@ -1,0 +1,258 @@
+% Any piece of code related to font selection in the following preambule
+% (document class, font package, font selection commands ...) should be
+% reported in `coq-sample.mp'.
+
+\documentclass[8pt]{beamer}
+\usetheme{Warsaw}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage[varg]{txfonts}
+
+\usepackage{graphicx}
+\makeatletter
+\def\Gin@def@bp#1\relax#2#3{\gdef#2{#3}}
+\newsavebox{\graphicsbox}
+\newcommand*{\drv}[1]{%
+\sbox{\graphicsbox}{\includegraphics{#1}}%
+\raisebox{\Gin@lly bp}%
+{\usebox{\graphicsbox}}}
+\makeatother
+
+\title{Une construction de preuve en logique minimale}
+\institute{INF462 -- Master S\&T Informatique -- Bordeaux 1}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\ttfamily
+\itshape
+\small
+
+\begin{frame}
+\begin{block}{}
+%
+% coq-tex output
+%
+\begin{overlayarea}{\textwidth}{.5\textheight}
+\only<1>{%
+  \textup{Coq~{<}~Variables~P~Q~R~:~Prop.}\\
+  P~is~assumed\\
+  Q~is~assumed\\
+  R~is~assumed\\
+  \medskip
+  \textup{%
+  Coq~{<}~Lemma~imp\_perm~:~(P~-{>}~(Q~-{>}~R))~-{>}~(Q~-{>}~(P~-{>}~R)).}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~============================\\
+  ~~~\textcolor{blue}{(P~-{>}~Q~-{>}~R)~-{>}~Q~-{>}~P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}~Proof.}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<2>{%
+  \textup{Coq~{<}~Variables~P~Q~R~:~Prop.}\\
+  P~is~assumed\\
+  Q~is~assumed\\
+  R~is~assumed\\
+  \medskip
+  \textup{%
+  Coq~{<}~Lemma~imp\_perm~:~(P~-{>}~(Q~-{>}~R))~-{>}~(Q~-{>}~(P~-{>}~R)).}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~============================\\
+  ~~~\textcolor{blue}{(P~-{>}~Q~-{>}~R)~-{>}~Q~-{>}~P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}~Proof.}\\
+  \medskip
+  \textup{Coq~{<}~~~intro~H.}}
+\only<3>{%
+  \textup{Coq~{<}~~~intro~H.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~============================\\
+  ~~~\textcolor{blue}{Q~-{>}~P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<4>{%
+  \textup{Coq~{<}~~~intro~H.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~============================\\
+  ~~~\textcolor{blue}{Q~-{>}~P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}~~~intro~q.}}
+\only<5>{%
+  \textup{Coq~{<}~~~intro~q.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~============================\\
+  ~~~\textcolor{blue}{P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<6>{%
+  \textup{Coq~{<}~~~intro~q.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~============================\\
+  ~~~\textcolor{blue}{P~-{>}~R}\\
+  \medskip
+  \textup{Coq~{<}~~~intro~p.}}
+\only<7>{%
+  \textup{Coq~{<}~~~intro~p.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{R}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<8>{%
+  \textup{Coq~{<}~~~intro~p.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{R}\\
+  \medskip
+  \textup{Coq~{<}~~~apply~H.}}
+\only<9>{%
+  \textup{Coq~{<}~~~apply~H.}\\
+  2~subgoals\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{P}\\
+  subgoal~2~is:\\
+  ~\textcolor{blue}{Q}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<10>{%
+  \textup{Coq~{<}~~~apply~H.}\\
+  2~subgoals\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{P}\\
+  subgoal~2~is:\\
+  ~\textcolor{blue}{Q}\\
+  \medskip
+  \textup{Coq~{<}~~~assumption.}}
+\only<11>{%
+  \textup{Coq~{<}~~~assumption.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{Q}\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<12>{%
+  \textup{Coq~{<}~~~assumption.}\\
+  1~subgoal\\
+  ~~\\
+  ~~P~:~Prop\\
+  ~~Q~:~Prop\\
+  ~~R~:~Prop\\
+  ~~H~:~P~-{>}~Q~-{>}~R\\
+  ~~q~:~Q\\
+  ~~p~:~P\\
+  ~~============================\\
+  ~~~\textcolor{blue}{Q}\\
+  \medskip
+  \textup{Coq~{<}~~~assumption.}}
+\only<13>{%
+  \textup{Coq~{<}~~~assumption.}\\
+  Proof~completed.\\
+  \medskip
+  \textup{Coq~{<}}}
+\only<14>{%
+  \textup{Coq~{<}~~~assumption.}\\
+  Proof~completed.\\
+  \medskip
+  \textup{Coq~{<}~Qed.}}
+\only<15>{%
+  \textup{Coq~{<}~Qed.}\\
+  intro~H.\\
+  intro~q.\\
+  intro~p.\\
+  apply~H.\\
+  assumption.\\
+  assumption.\\
+  imp\_perm~is~defined\\
+  \medskip
+  \textup{Coq~{<}~}}
+\end{overlayarea}
+\end{block}
+\begin{block}{}
+%
+% derivation tree
+%
+\begin{overprint}
+\begin{gather*}
+\only<1-2>	{\drv{coq-sample.0}}
+\only<3-4>	{\drv{coq-sample.1}}
+\only<5-6>	{\drv{coq-sample.2}}
+\only<7-8>	{\drv{coq-sample.3}}
+\only<9-10>	{\drv{coq-sample.4}}
+\only<11-12>	{\drv{coq-sample.5}}
+\only<13-15>	{\drv{coq-sample.6}}
+\end{gather*}
+\end{overprint}
+\end{block}
+\end{frame}
+\end{document}
