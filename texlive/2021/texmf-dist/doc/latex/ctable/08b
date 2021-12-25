@@ -1,5 +1,0 @@
-\ctable[
-  caption = Frame,
-  framerule = 2pt,
-  framefg = .8 0 0
-]{c}{}{\FL Table's first row\LL}

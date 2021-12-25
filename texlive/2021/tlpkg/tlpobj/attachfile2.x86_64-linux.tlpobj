@@ -1,8 +1,0 @@
-name attachfile2.x86_64-linux
-category Package
-revision 52909
-shortdesc x86_64-linux files of attachfile2
-containersize 348
-containerchecksum f9748d7a39dd20fb69884930d67561b7020688f3d4648bcb05f6c28d20482a1f8fd45c1391291ecaf4f136dd235178b22b0e6422f78c8a678ea8e84f40474c1d
-binfiles arch=x86_64-linux size=1
- bin/x86_64-linux/pdfatfi

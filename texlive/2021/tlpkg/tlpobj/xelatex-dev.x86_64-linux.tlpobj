@@ -1,8 +1,0 @@
-name xelatex-dev.x86_64-linux
-category TLCore
-revision 53999
-shortdesc x86_64-linux files of xelatex-dev
-containersize 324
-containerchecksum b1b8349611565ec3ffe9d3252da1f875d96f6c3fafad7de7cb0864b8483521cddb40dd631d08eb1eae888e14441bcc53c715c48926fb5bf1e6b84f599798342a
-binfiles arch=x86_64-linux size=1
- bin/x86_64-linux/xelatex-dev

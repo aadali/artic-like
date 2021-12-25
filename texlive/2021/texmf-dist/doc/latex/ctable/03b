@@ -1,4 +1,0 @@
-\ctable[
-    caption =  Caption,
-captionskip = 1ex,
-]{c}{}{\FL Table's first row\LL}

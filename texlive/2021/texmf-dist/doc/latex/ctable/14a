@@ -1,8 +1,0 @@
-\ctable[
-  caption=Doinside,
-  doinside = \scriptsize]{l}{
-}{\FL
-  This table has all rows \NN
-  set at script size \LL
-}
-
