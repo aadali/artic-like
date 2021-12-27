@@ -1,0 +1,23 @@
+This is the README file for xeindex.sty v.0.3.
+Read xeindex.pdf for the documentation.
+
+XeIndex, based on XeSearch, automatically 
+indexes words or phrases in a XeLaTeX
+document.
+
+Both the documentation (xeindex.pdf) and
+the file (xeindex.sty) are produced from
+xeindex.tex with the CodeDoc class.
+
+To typeset the documentation, run XeLaTeX
+on xeindex.tex with the 'produce' option
+commented out on line 4.
+
+To create xeindex.sty, run (Xe)LaTeX again,
+but uncomment 'produce' on the same line.
+
+Licensing of this package is covered by LPPL.
+
+Any reaction is welcome: zappathustra@free.fr
+
+Paul Isambert

@@ -1,0 +1,341 @@
+\documentclass[12pt]{article}
+
+% Ruby markup renewal
+\usepackage[overlap, CJK]{ruby}     
+\renewcommand{\rubysep}{-0.3ex}
+\renewcommand{\rubysize}{0.6}
+
+% automatically wraps characters from specific unicode blocks with the relevant font tag
+\usepackage{fontwrap}
+
+% in this example, fontwrap is only allowed to process content for 'ruby' tags.
+\setfontwrapallowedmacros{section,subsection,subsubsection,paragraph,subparagraph,emph}
+\setfontwrapallowedenvironments{tabular}
+
+% always good to have, in case a sentence is unmanageable and needs to be rewritten.
+\overfullrule=5pt
+
+% fontspec
+\setmainfont{Palatino Linotype}
+
+% floaty goodness
+\usepackage{float}
+\floatstyle{boxed}
+\newfloat{block}{htbp}{blocks}
+
+% document start
+\begin{document}
+
+  % frontmatter  
+  \title{fontwrap}
+  \author{Michiel Kamermans\\www.nihongoresources.com}
+  \date{\today}
+  \maketitle
+
+  % set up fontwrap's default font.
+  % not quite sure why I can't issue this before the document start
+  \setfontwrapdefaultfont{Bitstream Cyberbit}
+
+  % set specific unicode groups
+  \setunicodegroupfont{Arabic}{Traditional Arabic}
+  \setunicodegroupfont{Latin}{Palatino Linotype}
+  \setunicodegroupfont{Japanese}{Ume Mincho}
+  \setunicodegroupfont{Chinese}{SimHei}
+  \setunicodegroupfont{Korean}{BatangChe}
+  \setunicodegroupfont{Cyrillic}{Dotum}
+  \setunicodegroupfont{Greek}{Arno Pro}
+  
+  % thai and hebrew have no group, just a block
+  \setunicodeblockfont{Thai}{Cordia New}
+  \setunicodeblockfont{Hebrew}{Times New Roman}
+
+
+  % ----------------
+  % START OF CONTENT
+  % ----------------
+
+  \section{What is fontwrap?}
+
+  fontwrap is a Perl\TeX\ package for automatically adding font tags in multilingual
+  documents. More specifically, it adds font tags between unicode block changes
+  in documents that are encoded in UTF8 unicode (which is, thankfully these days,
+  pretty much any new multilingual document).
+  
+  The whole reason most of us use \TeX\ or \LaTeX\ or the newer \LaTeXe\ or
+  whichever flavour of \TeX\ you like to use, is because it lets you write your
+  document with a minimal amount of placing control codes inside the actual text
+  you're writing. Most of the time, your text will just be text, and you'll be
+  damned if you have to add all kinds of special codes because that will make the
+  source file less readable. However, when you're working in a multilingual \TeX\ document,
+  you might find you're wrapping bits of "foreign" text in with macros that ensure
+  the right font or other visual styling makes its way to the final document.
+  fontwrap was designed to remove the need for that practice, so that your document
+  stays readable.
+
+  \begin{block}
+  \fontwrap{
+    \emph{Even though I am writing this on an English operating system in an English
+    text editor, I can input quite a lot of different language. I can do this,
+    because of the power of unicode: English, 日本語, 中國話, 한글, 조선글, الْعَرَبيّة
+    , Русский язык, Ελληνικά, Tiếng Việt, ภาษาไทย , עִבְרִית and a whole scala of other
+    languages all use different scripts, which all have their own place in the
+    unicode 5.0 world.}
+  }
+  \caption{A paragraph using many different unicode blocks}
+  \end{block}
+
+  If you look closely at the example paragraph in block 1, you will see that all
+  the different languages use a different font. The English font is \emph{Palatino
+  Linotype}, the font for Japanese is \emph{Ume Mincho}, the font for Chinese is
+  \emph{SimHei}, for Korean \emph{BatangChe}, for Arabic \emph{Traditional Arabic},
+  Cyrillic uses \emph{Dotum}, Greek uses \emph{Arno Pro}, Thai uses \emph{Cordia New},
+  and for Hebrew I used \emph{Times New Roman}. For those wondering, Vietnamese
+  actually uses the Latin and Latin Extended Additional blocks, so it uses the same
+  \emph{Palatino Linotype}\ font as the English text.
+  
+  In normal \TeX\ , getting all the languages marked with the right fonts, with all
+  the commas and spaces using the same font as the English text, require a mad amount
+  of font markup, but with fontwrap this requires no markup beyond the 'fontwrap' command:
+  all I had to do to get the text to use all these different fonts is tell fontwrap which
+  fonts to use for which blocks in my frontmatter, and wrap write the paragraph exactly as
+  you see it in this pdf file into my .tex \textemdash\ wrapping it in the \textbackslash
+  fontwrap\{\} macro then takes care of all my fonty needs.
+  
+  \section{Getting fontwrap working for your document}
+  
+  The basic procedure for getting fontwrap to work in your document is really
+  quite straightforward. First, we must make sure to actually use it:
+  
+  \begin{verbatim}
+    \usepackage{autfont}
+  \end{verbatim}
+  
+  The rest of the code comes in the document body itself. Before we do anything
+  with fontwrap, it is usually a good idea to tell it which fonts to use for
+  which unicode blocks. There is one \emph{catch-all} command to do this, which
+  sets the same font for every block, and several \textbackslash set commands for
+  both single blocks, and informal multi-block groups. In this document, for
+  instance, I use this:
+  
+  \begin{verbatim}
+    % set up fontwrap's default font.
+    \setfontwrapdefaultfont{Bitstream Cyberbit}
+
+    % set specific unicode groups
+    \setunicodegroupfont{Arabic}{Traditional Arabic}
+    \setunicodegroupfont{Latin}{Palatino Linotype}
+    \setunicodegroupfont{Japanese}{Ume Mincho}
+    \setunicodegroupfont{Chinese}{SimHei}
+    \setunicodegroupfont{Korean}{BatangChe}
+    \setunicodegroupfont{Cyrillic}{Dotum}
+    \setunicodegroupfont{Greek}{Arno Pro}
+    
+    % thai and hebrew have no group, just a block
+    \setunicodeblockfont{Thai}{Cordia New}
+    \setunicodeblockfont{Hebrew}{Times New Roman}
+  \end{verbatim}
+  
+  Of course, you can set as few or as many as you like, or more importantly as
+  is appropriate. If you're using a bilingual document, setting the catch-all
+  binding and an extra font for the "foreign" bits is all you have to do. After
+  having set up the font bindings in this way, all that's left is to type in
+  whichever mix of languages you please, and surround your text with the
+  \textbackslash fontwrap macro:
+  
+  \begin{verbatim}
+    \fontwrap{
+      the verbatim environment used to make this
+      block of text only supports Latin, but you
+      would be free to type whatever you like in
+      this macro.
+    }
+  \end{verbatim}
+  
+  The only downside to this is that I cannot show the actual text from
+  example paragraph 1, because the \{ verbatim\}\ environment cannot
+  handle more than just Latin, and is one of the few blocks where
+  fontwrap should not be used - adding font tags inside a verbatim
+  block means you're going to get the \TeX\ commands in your final
+  output, instead of having them processed, because that's what
+  verbatim does!
+  
+  Moving on, \textbackslash fontwrap does not look into other macros
+  and environments by default. If you want it to process text in macros
+  such as \textbackslash emph or \textbackslash caption then you need
+  to explicitly tell it that it is allowed to do this. This command,
+  and the equivalent command for environments, goes in the preamble:
+  
+  \begin{verbatim}
+    % allow processing of content for the following macros:
+    \setfontwrapallowedmacros{section,subsection,
+                              subsubsection,paragraph,
+                              subparagraph,emph, caption,
+                              ... }
+    % allow processing of content for the following environments:
+    \setfontwrapallowedenvironments{tabular, ... }
+  \end{verbatim}
+  
+  whenever \textbackslash fontwrap is now used, it will process text
+  in general document structure macros, as well as the tabular environment,
+  which is useful if we use "foreign" text in any tables we're bound to
+  end up using.
+  
+  And with that the basic use is pretty much covered.
+  
+  \section{Available commands}
+  
+  First off, \textbackslash fontwrap of course:
+  
+  \begin{verbatim}
+    \fontwrap{ ... }
+  \end{verbatim}
+
+  and wrapped in the fontwrap verbatim environment in case whitespace really, really matters:
+  
+  \begin{verbatim}
+    \begin{fontwrapverbatim}
+      \fontwrap{ ... }
+    \end{fontwrapverbatim}
+  \end{verbatim}
+
+  Secondly, the allowances:
+  
+  \begin{verbatim}
+    \setfontwrapallowedmacros{comma delimited list}
+    \setfontwrapallowedenvironments{comma delimited list}
+  \end{verbatim}
+  
+  Thirdly, the font setup commands:
+  
+  \begin{verbatim}
+    \setunicodegroupfont{block name}{font name}
+    \setunicodeblockfont{block name}{font name}
+  \end{verbatim}
+
+  \begin{block}
+    Arabic, Chinese, CJK (which combines all Chinese, Japanese
+    and Korean blocks), Cyrillic, Diacritics, Greek (including some
+    Coptic), Korean, Japanese, Latin, Mathematics, Phonetics, Punctuation,
+    Symbols, Yi and finally, Other, which is just a lump category for everything
+    else, really\dots
+    \caption{All available informal group names}
+  \end{block}
+  
+  There are several informal groups available, which are listed
+  in block 2. Also not unimportant to note: these are all case
+  sensitive. The "other" group is a bit of an eyesore, but for
+  now it will have to do. Of course, Linear B and Ethiopian form
+  informal groups too, but I just don't use them, so they will be
+  given their own group when I'm done refining fontwrap, really.
+  
+  In addition to these groups, there are also the individual
+  blocks, in case there is no group for what you want to set
+  a font for, such as Hebrew, Thai, or really exotic things
+  like Cuneiform or Byzantine musical symbols! There are a total
+  of 158 blocks available for font binding, listed in block 3.
+
+  \begin{block}  
+    AegeanNumbers, AlphabeticPresentationForms, AncientGreekMusicalNotation,
+    AncientGreekNumbers, Arabic, ArabicPresentationFormsA,
+    ArabicPresentationFormsB, ArabicSupplement, Armenian, Arrows,
+    Balinese, BasicLatin, Bengali, BlockElements, Bopomofo,
+    BopomofoExtended, BoxDrawing, BraillePatterns, Buginese,
+    Buhid, ByzantineMusicalSymbols, Cherokee, CJKCompatibility,
+    CJKCompatibilityForms, CJKCompatibilityIdeographs,
+    CJKCompatibilityIdeographsSupplement, CJKRadicalsSupplement,
+    CJKStrokes, CJKSymbolsandPunctuation, CJKUnifiedIdeographs,
+    CJKUnifiedIdeographsExtensionA, CJKUnifiedIdeographsExtensionB,
+    CombiningDiacriticalMarks, CombiningDiacriticalMarksforSymbols,
+    CombiningDiacriticalMarksSupplement, CombiningHalfMarks, ControlPictures,
+    Coptic, CountingRodNumerals, Cuneiform, CuneiformNumbersandPunctuation,
+    CurrencySymbols, CypriotSyllabary, Cyrillic, CyrillicExtendedA,
+    CyrillicExtendedB, CyrillicSupplement, Deseret, Devanagari, Dingbats,
+    DominoTiles, EnclosedAlphanumerics, EnclosedCJKLettersandMonths,
+    Ethiopic, EthiopicExtended, EthiopicSupplement, GeneralPunctuation,
+    GeometricShapes, Georgian, GeorgianSupplement, Glagolitic, Gothic,
+    GreekandCoptic, GreekExtended, Gujarati, Gurmukhi, HalfwidthandFullwidthForms,
+    HangulCompatibilityJamo, HangulJamo, HangulSyllables, Hanunoo, Hebrew,
+    HighPrivateUseSurrogates, HighSurrogates, Hiragana, IdeographicDescriptionCharacters,
+    IPAExtensions, Kanbun, KangxiRadicals, Kannada, Katakana, KatakanaPhoneticExtensions,
+    Kharoshthi, Khmer, KhmerSymbols, Lao, LatinExtendedAdditional, LatinExtendedA,
+    LatinExtendedB, LatinExtendedC, LatinExtendedD, LatinSupplement,
+    LetterlikeSymbols, Limbu, LinearBIdeograms, LinearBSyllabary, LowSurrogates,
+    MahjongTiles, Malayalam, MathematicalAlphanumericSymbols, MathematicalOperators,
+    MiscellaneousMathematicalSymbolsA, MiscellaneousMathematicalSymbolsB,
+    MiscellaneousSymbols, MiscellaneousSymbolsandArrows, MiscellaneousTechnical,
+    ModifierToneLetters, Mongolian, MusicalSymbols, Myanmar, NewTaiLue, NKo,
+    NumberForms, Ogham, OldItalic, OldPersian, OpticalCharacterRecognition,
+    Oriya, Osmanya, PhagsPa, Phoenician, PhoneticExtensions, PhoneticExtensionsSupplement,
+    PrivateUseArea, Runic, Shavian, Sinhala, SmallFormVariants,
+    SpacingModifierLetters, Specials, SuperscriptsandSubscripts,
+    SupplementalArrowsA, SupplementalArrowsB, SupplementalMathematicalOperators,
+    SupplementalPunctuation, SupplementaryPrivateUseAreaA,
+    SupplementaryPrivateUseAreaB, SylotiNagri, Syriac, Tagalog,
+    Tagbanwa, Tags, TaiLe, TaiXuanJingSymbols, Tamil, Telugu,
+    Thaana, Thai, Tibetan, Tifinagh, Ugaritic, UnifiedCanadianAboriginalSyllabics,
+    VariationSelectors, VariationSelectorsSupplement, VerticalForms,
+    YiRadicals, YiSyllables, and finally YijingHexagramSymbols.
+    \caption{All 158 blocks available in unicode 5.0}
+  \end{block}
+
+  These, too, are case sensitive.
+
+  \section{Running Perl\TeX\ and possible errors}
+  
+  Running \TeX\ files that use fontwrap means you have to use Perl\TeX\ to
+  get it all to work. Luckily, Perl\TeX\ is just a \TeX\ wrapper, so you can
+  tell it which \TeX\ engine to use and it will. Because fontwrap relies on
+  the fontspec package, we have to use Xe\TeX :
+  
+  \begin{verbatim}
+    perltex --latex=xelatex myfile.tex
+  \end{verbatim}
+  
+  This should run fine, but there are three problems you might run into.
+  
+  \paragraph{No unicode mapping available}
+  
+  You get this error when \TeX\ uses a font that cannot represent the
+  unicode glyphs you have written. For instance, using something other
+  than Latin text in a verbatim block will cause this error. It's
+  not fatal in any way, it just means that you will see empty blocks
+  in your final document.
+
+  \paragraph{Free to wrong pool}
+  
+  Perl\TeX\ uses Perl \emph{(fairly obviously)}\ but it does so sort
+  of multithreaded. It also uses the Perl "safe" module, and that's
+  where things go funky. The combination of multithread perl and "safe"
+  can lead to perl trying to free the memory it used, but failing 
+  at this because it tries to do so in entirely the wrong thread.
+  This is completely inconsequential, other than that it can lead
+  to memory leaks. Now, I made sure to unset all the perl variables
+  I use once fontwrap is done, so you shouldn't run into any problems
+  \emph{(unless maybe you were counting the bytes by hand)} .
+  
+  \paragraph{Overfull/underfull hbox}
+  
+  The boon of \TeX , this means that a particular sentence is
+  made up of letters and spaces in such a way that \TeX\ cannot
+  really get the glue stretched properly for it to look nice
+  in your final document. You're going to have to go in, and
+  fix the problem yourself by rephrasing the sentence... either
+  that or leave it in and turn off whatever visual notification
+  for problematic hboxes you use during draft generation.
+  
+  \section{The end\ldots}
+  
+  And\ldots\ I think that's it. I can't think of anything more
+  to tell you with respects to using fontwrap. If you have any
+  questions you can always check out the .sty file, or contact
+  me through the contact page on my website, http://www.nihongoresources.com.
+  
+  \bigskip
+  
+  Enjoy!
+
+  \bigskip
+  \bigskip
+  
+  - Mike Kamermans
+\end{document}

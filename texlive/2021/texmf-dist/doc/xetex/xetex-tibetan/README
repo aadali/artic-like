@@ -1,0 +1,58 @@
+xetex-tibetan 0.1
+=================
+
+TECkit input mappings for typesetting of Unicode Tibetan (0F00-0FFF)
+with the LateX PDF-engine XeTeX. Created by Daniel Stender
+<daniel@danielstender.com>.
+
+wylie.map
+---------
+
+Input following Turrell Wylie: A standard system of Tibetan
+transliteration (Harvard Journal of Asiatic Studies 22, 1959, pp. 261
+sq.):
+
+-   ka kh g ng c ch j ny t th d n p ph b m
+-   ts tsh dz w zh z 'a y r l sh s h a
+
+Usage like:
+
+      \documentclass{article}
+      \usepackage{fontspec}
+      \setmainfont[Script=Tibetan,Mapping=wylie]{DDC Uchen}
+      \begin{document}
+      mkhas.pa.yon.dan.mdzod.'dzin.pa | \\ 
+      de.dag.legs.bshad.rin.chen.sdud | \\
+      rga.mtsho.chen.po.chu.yi.bder | \\
+      yin.phir.chu.bo.thams.cad.'bab || \\
+      skye.bo.yon.dan.yod.med.pa'i | \\
+      blang.dor.blo.gros.ldan.pa.mkhas | \\
+      rdul.dang.'dres.pa'i.lcags.phye.rnams | \\
+      khab.len.rdo.yis.len.par.shes ||
+      \end{document}
+
+loctib.map
+----------
+
+Input following the Library of Congress input scheme (cf. Herbert Franke
+(Hrsg.): Wörterbuch der tibetischen Schriftsprache. 1. Lieferung: ka-kun
+chub par byed pa. München 2005, p. xx):
+
+-   ka kh g ṅ (U+1E45) c ch j ñ (U+00F1) t th d n p ph b m
+-   ts tsh dz w ź (U+017A) z 'a y r l ś (U+015B) s h a
+
+Usage like:
+
+      \documentclass{article}
+      \usepackage{fontspec}
+      \setmainfont[Script=Tibetan,Mapping=loctib]{DDC Uchen}
+      \begin{document}
+      mkhas.pa.yon.dan.mdzod.'dzin.pa | \\ 
+      de.dag.legs.bśad.rin.chen.sdud | \\
+      rga.mtsho.chen.po.chu.yi.bder | \\
+      yin.phir.chu.bo.thams.cad.'bab || \\
+      skye.bo.yon.dan.yod.med.pa'i | \\
+      blaṅ.dor.blo.gros.ldan.pa.mkhas | \\
+      rdul.dang.'dres.pa'i.lcags.phye.rnams | \\
+      khab.len.rdo.yis.len.par.śes ||
+      \end{document}

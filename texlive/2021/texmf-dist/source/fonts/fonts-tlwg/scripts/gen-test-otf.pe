@@ -1,0 +1,7 @@
+Open($1)
+SetFontNames("OTF"+$fontname, "OTF"+$familyname, "OTF"+$fullname)
+pref_fam=GetTTFName(0x409, 16)
+if (pref_fam != "")
+  SetTTFName(0x409, 16, "OTF"+pref_fam)
+endif
+Generate($fontname + ".otf")

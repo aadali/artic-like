@@ -1,0 +1,32 @@
+\input docstrip
+\keepsilent
+\ifToplevel{\askonceonly}
+\usedir{tex/uplatex/base}
+
+\Msg{*** Generating the upLaTeX files for making the documents ***}
+
+\preamble
+
+Copyright (c) 2010 ASCII MEDIA WORKS
+Copyright (c) 2016 Takuji Tanaka
+Copyright (c) 2016-2018 Japanese TeX Development Community
+
+This file is part of the upLaTeX2e system (community edition).
+--------------------------------------------------------------
+
+\endpreamble
+
+\generate{
+  \file{uplatex.ltx}{\from{uplatex.dtx}{plcore}}
+  \file{uplcore.ltx}{\from{uplvers.dtx}{plcore}
+          \from{uplvers.dtx}{plfinal}}
+  \file{ukinsoku.tex}{\from{ukinsoku.dtx}{plcore}}
+  \file{upldefs.ltx}{\from{uplfonts.dtx}{pldefs,xpt}}
+  \file{jy2mc.fd}{\from{uplfonts.dtx}{JY2mc}}
+  \file{jy2gt.fd}{\from{uplfonts.dtx}{JY2gt}}
+  \file{jt2mc.fd}{\from{uplfonts.dtx}{JT2mc}}
+  \file{jt2gt.fd}{\from{uplfonts.dtx}{JT2gt}}
+  \file{uptrace.sty}{\from{uplfonts.dtx}{trace}}
+}
+
+\endbatchfile

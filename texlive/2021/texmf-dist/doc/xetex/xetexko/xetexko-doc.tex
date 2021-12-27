@@ -1,0 +1,816 @@
+%% !tex program = xelatex
+%%
+%% xetexko-doc.tex
+%%
+%% This file is in the public domain
+
+\documentclass[a4paper]{article}
+\usepackage[hmargin=3.8cm]{geometry}
+\usepackage[hangul]{xetexko}
+\setmainhangulfont{Noto Serif CJK KR}[
+  UprightFont=* Light, BoldFont=* Bold,
+  Script=Hangul, Language=Korean, AutoFakeSlant,
+]
+\setsanshangulfont{Noto Sans CJK KR}[
+  UprightFont=* DemiLight,
+  Script=Hangul, Language=Korean
+]
+\setmathhangulfont{Noto Sans CJK KR}[
+  SizeFeatures={
+    {Size=-6,  Font=* Medium},
+    {Size=6-9, Font=*},
+    {Size=9-,  Font=* DemiLight},
+  },
+  Script=Hangul, Language=Korean
+]
+\usepackage{hologo, xcolor, ulem}
+\usepackage[bookmarksnumbered,hidelinks]{hyperref}
+
+\edef\verbatim{\unexpanded\expandafter{\verbatim
+  \linespread{1.1}\selectfont }}
+\def\logoko{\textsf{k}\kern-.2ex\textit{o}}
+\def\XeTeX{\hologo{XeTeX}}
+\def\xetexko{\XeTeX\kern-.1ex -\logoko}
+\def\kotex{\logoko\kern-.1ex .\kern-.1667em \hologo{TeX}}
+\pdfstringdefDisableCommands{\def\xetexko{XeTeX-ko}}
+\renewcommand*\descriptionlabel[1]{\hspace\labelsep\ttfamily\bfseries
+  \color{blue!50!black}#1}
+\def\grayhrule{{\color{white!80!black}\hrule height2pt}}
+\def\grayvrule{{\color{white!80!black}\vrule width 2pt}}
+\newenvironment{plaintex}
+  {\par\medskip
+    \setbox0=\vbox\bgroup\kern5pt\leftskip15pt \small
+    \parindent0pt }
+  {\par \kern5pt\egroup
+    \dimen0=\dimexpr\pagegoal-\pagetotal\relax
+    \ifdim\dimen0<\baselineskip\relax \dimen0\maxdimen \fi
+    \ifdim\ht0<\dimen0
+      \hbox{\grayvrule \box0}%
+    \else
+      \setbox2=\vsplit0 to\dimen0
+      \lineskip0pt
+      \ifvoid2 \else\hbox{\grayvrule \box2}\fi
+      \ifvoid0 \else\hbox{\grayvrule \box0}\fi
+    \fi \par\smallskip
+  }
+\newenvironment{example}
+  {\hbox\bgroup\grayvrule
+    \vbox\bgroup\hsize\dimexpr\textwidth-4pt\relax
+    \grayhrule\kern5pt\leftskip10pt\rightskip10pt
+  }{\par\kern5pt\grayhrule\egroup\grayvrule\egroup}
+\def\cs#1{\texttt{\textbackslash #1}}
+\def\hemph#1{\textsf{\bfseries #1}}
+\def\hparen#1{{\small\hangulparens(#1)}}
+\let\hparens\hparen
+\def\keyword#1{\cs{#1}\marginpar{\hfuzz\maxdimen\footnotesize{\color{blue!80}\cs{#1}}}}
+\def\vernote#1{v#1\marginpar{\hfuzz\maxdimen\footnotesize{\color{red}☜ v#1}}}
+
+\hangingpunctuations
+
+\begin{document}
+
+\latinparens
+
+\title{\xetexko\ 간단 매뉴얼}
+\author{Dohyun Kim \normalsize <\texttt{nomos at ktug org}> \and
+  \normalsize <\url{http://github.com/dohyunkim/xetexko}>}
+\date{Version 4.0\quad 2021/09/06}
+\maketitle
+
+\begin{quote}\small
+  For a summary introduction in English,
+  please see \verb+README+ file in this package.
+\end{quote}
+
+\hangulparens
+
+\section{입력 인코딩}
+입력은 원칙적으로 UTF-8으로 한다.
+BOM (Byte Order Mark)은 있어도 좋고 없어도 좋다.
+EUC-KR이나 CP949 입력도 지원하는데, 다음과 같은 선언이 있으면 된다.
+\begin{verbatim}
+    \XeTeXinputencoding="korean"
+    \XeTeXdefaultencoding="korean"
+\end{verbatim}
+
+\section{\XeTeX\ 자체 기능}
+\XeTeX 은 자체적으로 유니코드를 잘 지원하므로 \xetexko 를 사용하지
+않더라도 한글을 찍는 데 문제가 없다.
+\begin{verbatim}
+    \usepackage{fontspec}
+    \setmainfont{UnBatang}
+    \setsansfont{UnDotum}
+    \setmonofont{UnTaza}
+    \XeTeXlinebreaklocale="ko"
+    \XeTeXlinebreakpenalty=50
+    \XeTeXlinebreakskip=0pt plus.1ex minus.05ex
+\end{verbatim}
+하지만 이렇게 사용하면 영문자와 한글이 같은 글꼴로 식자될 뿐만 아니라,
+한글 사이 자간이나 영문자와 한글 사이 간격 따위의 \xetexko 가 제공하는
+기능을 포기해야 할 것이다.
+
+\section{\xetexko\ 부르기}\label{sec:loading}
+\xetexko\ 로드하기: \cs{usepackage\{xetexko\}} 혹은 \cs{usepackage\{kotex\}}.
+이 명령으로 fontspec 패키지도 함께 불러들인다.
+fontspec에 옵션을 주려면 \xetexko를 부르기 전에 fontspec을 따로 로드하면 된다.
+
+\begin{plaintex}
+플레인텍이라면 \verb|\input xetexko.sty| 혹은 \verb|\input kotex.sty|.
+\end{plaintex}
+
+패키지 옵션:
+\begin{description}\hangulquotes
+\item[ hangul ] `제~1~장' `표' `차례' 등 한글 표제를 이용한다.
+  절 제목 이하에는 한글 표제가 붙지 않고 숫자로만 표현된다.
+  한글이 주된 언어라고 인식하여 줄간격 조정도 수행한다.
+\item[ hanja ]  `第~1~章' `表' `目次' 등 한자 표제를 이용한다.
+  절 제목 이하에는 한자 표제가 붙지 않고 숫자로만 표현된다.
+  한글이 주된 언어라고 인식하여 줄간격 조정도 수행한다.
+\end{description}
+
+
+\section{글꼴 명령}\label{sec:fontcmds}
+\begin{verbatim}
+    \setmainfont      {Linux Libertine}
+    \setmainhangulfont{NanumMyeongjo}
+    \setmainhanjafont {UnBatang}
+\end{verbatim}
+각 명령의 의미는 이름이 뜻하는 그대로이며, fontspec 매뉴얼에 따라
+설정한다.  마찬가지로 다음 명령들도 제공한다.
+\begin{verbatim}
+    \setsansfont \setsanshangulfont \setsanshanjafont
+    \setmonofont \setmonohangulfont \setmonohanjafont
+\end{verbatim}
+main/sans hangul/hanja 폰트에는 따로 \verb|Ligatures=TeX| 옵션을 지시하지
+않더라도 자동으로 주어진다.
+
+\hemph{프리앰블}에서 한글 폰트를 지정하지 않으면 영문폰트가 한글에도 적용되고
+한자폰트를 지정하지 않으면 한글폰트가 한자에도 적용된다.
+영문폰트에 한글·한자 글리프가 없고 한글·한자 폰트도 따로
+지시하지 않았다면 \hemph{은바탕/은돋움 트루타입}을 한글·한자 글꼴의 기본값으로
+사용한다.
+
+\bigskip
+
+※ \vernote{3.1} 및 \vernote{3.4}부터 플레인텍에 주요 변경사항이 있다:
+\begin{plaintex}
+플레인텍에서도 기본값으로 은바탕을 한글에 사용한다. 한글폰트를 지시하는 방법은 다음과 같다.
+\begin{verbatim}
+    \font\tenrm="[lmroman10-regular]:mapping=tex-text" at 10pt
+    \hangulfont="[UnBatang]:mapping=tex-text" at 10pt
+    \hanjafont ="Naver Dictionary:mapping=tex-text" at 10pt
+\end{verbatim}
+  \sout{그런데 3.1 버전부터는 이렇게 하면 문서 중간에 영문글꼴을 바꾸더라도
+  \cs{hangulfont} 선언시의 영문글꼴이 계속 적용되도록 바뀌었다.}
+  또한 다음과 같은 새로운 명령을 제공한다.
+\begin{verbatim}
+    \sethangulfont\untaza ="[UnTaza.ttf]"  at 10pt
+    \sethanjafont \undotum="[UnDotum.ttf]" at 10pt
+    \expandafter\def\expandafter\tt\expandafter{\tt\untaza\undotum}
+\end{verbatim}
+  \sout{이 경우 \cs{untaza}, \cs{undotum} 명령에 \cs{set...font} 실행시의 현재폰트 명령이
+  자동으로 포함된다. 뒤에서 설명할 글꼴옵션이 포함되는 것과 같은 개념이다.}
+  그리하여 예의 \cs{tt} 명령으로 이제 한글, 한자, 영문 글꼴을 동시에 바꿀 수 있게 된다.
+\end{plaintex}
+
+\keyword{fallbackhanjafont}를 정의해두면 \hemph{한자 글꼴에도 없는 한자}를
+이 글꼴에서 찾아 식자한다. \cs{newfontfamily} 명령 등으로 정의한다.
+
+\section{글꼴 명령 (계속)}
+\begin{verbatim}
+    \hangulfontspec{NanumGothic}[Ligatures=TeX]
+    \hanjafontspec {UnGungseo}[Ligatures=TeX]
+\end{verbatim}
+임시로 사용할 한글·한자 글꼴을 지시한다.
+\cs{adhochangulfont}와 \cs{adhochanjafont}는 이들 명령의 다른 이름이다.
+
+\begin{verbatim}
+    \newhangulfontfamily\myhangul{NanumGothic}[Ligatures=TeX]
+    \newhanjafontfamily \myhanja {UnGungseo}[Ligatures=TeX]
+    \newhangulfontface  \myhangul{NanumGothic Bold}[Ligatures=TeX]
+    \newhanjafontface   \myhanja {UnDotumBold}[Ligatures=TeX]
+\end{verbatim}
+fontspec 패키지의 \cs{setfontfamily} \cs{setfontface} 명령에 해당한다.
+
+\begin{verbatim}
+    \addhangulfontfeature{Color=FF0000,InterHangul=-.1em}
+    \addhanjafontfeature {Color=00FF00}
+\end{verbatim}
+fontspec의 \cs{addfontfeature} 명령을 구현한 것이다.
+fontspec과 마찬가지로 각 명령의 끝에 `s'를 붙여도 된다.
+
+참고로, 한자와 한글을 같은 글꼴로 식자하고 싶을 때 글꼴 설정을
+번거롭게 두 번 할 필요 없이 한글 글꼴만 설정한 뒤 간단히
+\keyword{hanjabyhangulfont}를 선언하면 된다.%
+\footnote{프리앰블의 main/sans/mono 글꼴 명령들과 달리 새로 지정한 한글 폰트가
+  한자에도 자동으로 적용되지는 않는다는 말이다.}
+
+
+\section{기호 글꼴 명령}\label{sec:symbolfont}
+라틴 문자나 CJK 기호를 어떤 폰트로 식자할 것인가를 사용자가 지정할 수 있다.
+\begin{verbatim}
+    \xetexkofontregime{hangul}[parens=latin, puncts=prevfont]
+\end{verbatim}
+모든 라틴 문자와 CJK 기호들을 원칙적으로 한글 폰트로 식자하되,
+괄호류는 라틴 폰트로 찍고 마침표 따위는 현재 폰트를 따라간다는 의미이다.
+명령의 인자에는 latin, hangul, hanja, prevfont 중 하나가 올 수 있어서
+각각 라틴 폰트, 한글 폰트, 한자 폰트로 식자하라는 뜻이며
+마지막의 prevfont는 \hemph{현재 활성화된 폰트를 그대로 이어받도록} 지시한다.
+현재 폰트가 직전 문자의 폰트가 아닐 수 있음에 주의할 것.
+
+옵션 키의 종류와 의미는 다음과 같으며 각 키 값은 인자의 경우와 같다.
+\begin{description}\itemsep0pt
+\item[alphs] 라틴 알파벳, 숫자, 아래에 해당않는 모든 non-CJK 문자
+\item[parens] 라틴 괄호, 중괄호, 대괄호, 꺽쇠, 인용부호 및 그 리거쳐
+\item[colons] 라틴 콜론, 세미콜론
+\item[hyphens] 하이픈 및 그  리거쳐, 슬래시, en dash, em dash
+\item[puncts] 마침표, 물음표, 느낌표, 쉼표
+\item[cjksymbols] CJK 구두점, 괄호 및 상징기호
+\end{description}
+
+종전에
+라틴숫자에 적용되던 \verb|nums| 옵션과
+라틴 인용부호에 적용되던 \verb|quotes| 옵션이
+\vernote{3.0}부터는
+각각 \verb|alphs| 옵션과 \verb|parens| 옵션에 통합되었음에 유의하라.
+또한 en dash, em dash가 종래 \verb|colons|에 속하던 것이 이제
+\verb|hyphens|에 속하게 되었다.
+
+기본값은 다음 명령을 준 것과 동일하다.
+\vernote{3.0}부터 괄호류의 기본글꼴이 한글이 되었음도 유의하라.
+\begin{verbatim}
+    \xetexkofontregime {latin}%
+      [ puncts=prevfont, colons=prevfont,
+        parens=hangul, cjksymbols=hangul ]
+\end{verbatim}
+\begin{plaintex}
+플레인텍에서는 다음 명령을 사용한다. \LaTeX에서도 쓸 수 있다.
+\begin{verbatim}
+    \latinalphs      \hangulalphs      \hanjaalphs      \prevfontalphs
+    \latinparens     \hangulparens     \hanjaparens     \prevfontparens
+    \latincolons     \hangulcolons     \hanjacolons     \prevfontcolons
+    \latinhyphens    \hangulhyphens    \hanjahyphens    \prevfonthyphens
+    \latinpuncts     \hangulpuncts     \hanjapuncts     \prevfontpuncts
+    \latincjksymbols \hangulcjksymbols \hanjacjksymbols \prevfontcjksymbols
+\end{verbatim}
+다음 명령은 이상의 모든 라틴 문자를 식자할 폰트를 지시한다.
+\begin{verbatim}
+    \latinmarks      \hangulmarks      \hanjamarks      \prevfontmarks
+\end{verbatim}
+\end{plaintex}
+
+\section{글꼴 옵션}\label{sec:fontopts}
+\dotemph{고정폭 글꼴을 제외한} 한글·한자 글꼴 명령에 미세 간격 옵션을
+쓸 수 있다. 예컨대
+\begin{verbatim}
+    \setsanshangulfont{NanumGothic}[InterHangul=-.04em]
+\end{verbatim}
+이 때 나눔고딕 글꼴에 한글 마이너스 자간이 작동한다.
+
+허용되는 옵션은 다음과 같다.
+\begin{description}\itemsep0pt
+\item[InterLatinCJK, hu]\quad
+  {\addhangulfontfeature{InterLatinCJK=.5em} Latin문자와} 한글 사이 간격을 지시한다.
+    기본값 \verb|0.05em|이며
+    수식과 CJK 문자 사이에는 이 값의 두 배가 적용된다.
+    아래에서 설명할 고문헌조판 모드에서는 기본값이 \verb|0.25em|이며
+    수식 직후에 들어가는 값도 동일하다.
+
+\item[InterHangul, interhchar]\quad
+  {\addhangulfontfeature{InterHangul=0.3em} 한글자간을} 지시한다.
+  기본값은 \verb|0pt|.%
+  \footnote{한자 자간 옵션은 제공하지 않는다.
+  혹시 한자 자간을 조절하고 싶다면 \cs{XKinterhanjabreak}을 재정의하라.
+  참고로 한글 자간을 조절하는 저수준 명령은 \cs{XKinterhangulbreak} 이다.}
+
+\item[CharRaise, charraise]\quad
+  글자의 {\addhangulfontfeature{charraise=.5ex}수직 위치}를 조절한다.
+  기본값은 \verb|0pt|.%
+    \footnote{%
+      세로쓰기에서는 이 옵션의 값을 고정길이(가령 pt 단위)로 주어야
+      크기가 다른 폰트들 간에 중앙정렬이 이루어진다.
+    }
+  고정폭 글꼴에서도 이 옵션은 작동한다.
+\end{description}
+\vernote{3.0}부터는 다음 옵션들이 아무 효과도 가져오지 않게
+변경되었음을 주의하라.
+\begin{verbatim}
+    lowerperiod         lowerquestion
+    lowerexclamation    lowercomma
+    preperiodkern       postperiodkern
+    prequestionkern     postquestionkern
+    preexclamationkern  postexclamationkern
+    precommakern        postcommakern
+    quoteraise          quotewidth
+    postmathskip        PunctRaise
+\end{verbatim}
+
+\begin{plaintex}
+  플레인텍에서는 다음과 같은 방법으로 제어할 수 있다. 기본값은 \LaTeX에서와 같다.
+\begin{verbatim}
+    \def\xetexkohu{0.05em }
+    \def\xetexkointerhchar{-0.04em }
+    \def\xetexkocharraise{-0.1ex }
+\end{verbatim}
+  이것들을 선언해두고나서 \cs{hangulfont} 명령 등으로 글꼴을
+  지정하면 기 정의된 옵션들이 한글폰트 명령에 자동 포함된다.
+  한자폰트의 경우도 같다. 따라서 한글폰트 옵션과
+  한자폰트 옵션을 서로 달리 지시할 수 있다.
+\end{plaintex}
+
+종전에 한글·한자 글꼴의 옵션 기본값을 지정하던
+\cs{defaulthangulfontfeatures} 및 \cs{defaulthanjafontfeatures} 명령이
+\vernote{3.0}부터는
+아무런 기능을 하지 않게 변경되었음에 유의하라.
+폰트옵션의 수가 적어졌기 때문에 이 명령의 유용성도 거의 사라졌다고 판단했다.
+
+\section{그밖의 명령들}\label{sec:etccmds}
+\begin{description}
+  \item[\cs{everyhangul}, \cs{everyhanja}]
+    한글 또는 한자에 대해 글자마다 지시한 명령을 수행한다. 예컨대
+    \verb|\everyhangul{\fbox{#1}}| 명령은 모든
+    {\everyhangul{\fbox{#1}}\fboxsep=1pt 한글 주위에 박스}를
+    두른다.
+
+  \item[\cs{disablekoreanfonts}]
+    한글폰트를 따로 설정하지 않고 영문 폰트를 따라간다.
+    이 때  \cs{setmainfont} 따위가 한글과 한자에도 적용된다.
+
+  \item[\cs{disablecjksymbolspacing}]
+    CJK 구두점의 폭을 \verb|0.5em|으로 강제설정하는 것을 방지한다.
+    \xetexko는 낡은 고정폭 한글 폰트들을 고려하여 이 기능을 구현하였으나
+    현대적인 한글 폰트는 이러한 과잉친절이 오히려 성가실 경우가 있다.
+
+    \cs{nocompresspunctuations}는 이 명령과 동의어이다.\\
+    반대로
+    \keyword{compresspunctuations}는 반각을 강제하라는 명령이다.
+    이것이 기본값이므로 특별한 경우가 아니면 따로 선언할 필요가 없다.
+
+  \item[\cs{disablehangulspacing}]
+    한글조판에 관련된 모든 미세간격을 영(zero)으로 돌린다. 한글 자간,
+    영문자와 한글 사이 간격, 구두점과 한글^^b7한자 사이 간격 등이 작동하지 않는다.
+    그러나 CJK 글자 사이의 줄바꿈 허용만은 유지된다. 또한
+    \verb|CharRaise|는 자간과 무관하므로 여전히 작동한다.
+
+  \item[\cs{disablehangulspacingandlinebreak}]
+    위 명령과 마찬가지로 모든 간격을 금지할 뿐만 아니라 CJK 글자 사이의
+    줄바꿈까지도 먹지 않게 한다.
+    일부 고급 오픈타입 기능을 사용하기 위해서 이 명령이 필요할 때가 있다.
+    이를테면, 폰트가 지원하는 한글 리거쳐가 동작하지 않을 때 이 명령을
+    선언하면 문제가 해결된다.%
+    \footnote{%
+      이 명령은 그룹 안에서 실행해야 할 것이다. 그렇더라도
+      \cs{enablehangulspacingandlinebreak} 명령을 그룹을 닫고나서 선언해야
+      원래 기능이 완전히 복구된다.
+      }
+
+\end{description}
+\vernote{3.0}부터는 종전의
+\cs{disableautojosa} 및 \cs{disablejamoautojosa} 명령이 아무 기능도 하지 않게
+변경되었음을 유의하라.
+
+\section{옛한글}
+
+옛한글을 사용하기 위해선 \verb|Script=Hangul| 옵션을 주는 것으로 족하다.
+옛한글 식자는 고급 오픈타입 기능을 이용하므로
+폰트가 이런 기능을 제공해야만 가능한 일이다.\footnote{%
+이런 기능을 제공하는 폰트로는 윈도즈~8에 번들된 맑은고딕이
+있으며 공개폰트로는 은바탕, 함초롬~LVT, Source Han Sans (본고딕),
+Source Han Serif (본명조), Noto Sans CJK, Noto Serif CJK,
+나눔명조옛한글, 나눔바른고딕옛한글, KoPubWorld 바탕, KoPubWorld 돋움 등이 있다.
+또한
+\textsf{^^^^1112^^^^119e^^^^11ab글}에 번들된 함초롬 글꼴에도
+최근 옛한글 지원이 추가되었다.}
+
+\begin{figure}
+  \begin{example}
+    \sffamily \obeylines\leftskip10em
+뎨 가ᄂᆞᆫ 뎌 각시 본 듯도 ᄒᆞᆫ뎌이고.
+天텬上상白ᄇᆡᆨ玉옥京경을 엇디ᄒᆞ야 離니別별ᄒᆞ고
+ᄒᆡ 다 져믄 날의 눌을 보라 가시ᄂᆞᆫ고
+\medbreak
+어와 네여이고 내 ᄉᆞ셜 드러보오.
+내 얼굴 이 거동이 님 괴얌즉 ᄒᆞᆫ가마ᄂᆞᆫ
+엇딘디 날 보시고 네로다 녀기실ᄉᆡ
+나도 님을 미더 군 ᄠᅥ디 전혀 업서
+이ᄅᆡ야 교ᄐᆡ야 어ᄌᆞ러이 구돗ᄯᅥᆫ디
+반기시ᄂᆞᆫ ᄂᆞᆺ비치 녜와 엇디 다ᄅᆞ신고.
+  \end{example}
+  \caption{옛한글 조판 보기}\label{fig:yethangul}
+\end{figure}
+
+\begin{verbatim}
+    \setmainhangulfont{Malgun Gothic}[ Script=Hangul ]
+\end{verbatim}
+\begin{plaintex}
+플레인텍이라면, \cs{hangulfont="Malgun Gothic:script=hang" at 10pt}.
+\end{plaintex}
+
+\section{세로쓰기}\label{sec:verttype}
+
+세로쓰기를 위한 글꼴 지정은 다음과 같다.
+역시 고급 오픈타입 기능을 이용하는 것이므로 폰트가 이를 지원해야 한다.
+\begin{verbatim}
+    \newhangulfontfamily\vertfont{Noto Sans CJK KR}
+      [Vertical=Alternates, RawFeature=vertical]
+\end{verbatim}
+
+문서 전체를 세로쓰기할 때 \keyword{verticaltypesetting}을 선언하면
+면주는 그대로 두고 본문만 세로쓰기한다.\footnote{면주의 글꼴에는
+  \texttt{vertical} 옵션이 없어야 할 것이다.
+  면주 글꼴을 따로 지정하는 것은 사용자의 몫이다. }
+
+\vernote{3.6}부터 \verb|verticaltypesetting| 환경을 이용하여
+몇몇 페이지만 세로쓰기로 조판할 수 있다.
+역시 면주는 가로로 조판되며, 환경의 앞뒤에서 쪽나눔이 행해진다.
+
+문서의 일부를 세로쓰기 하려면 \verb|vertical| 환경을 이용한다.
+vertical 환경에는 세로쓰기 박스의 높이를 인자로 준다.
+\vernote{3.6}부터는 만약 인자가 비어있거나 \cs{empty}이면
+본문을 한 줄짜리 박스로 식자하도록 했다. 이때 높이는 natural height가 된다.
+
+\begin{figure}
+\begin{example}
+\hfil\begin{vertical}{18em}
+  \linespread{1.5}\sffamily
+  \addhangulfontfeatures{Vertical=Alternates,CharRaise=.5ex,RawFeature=vertical}
+  \hanjabyhangulfont
+  \typesetclassic \latinparens
+  \parindent0pt \everypar{\hangindent1em \hangafter1 }
+  \spaceskip=.5em plus .25em minus .125em
+  \quad 님의 침묵 (The Silent Beloved)
+\smallbreak
+\hfil\hfil 한 용 운\hfil
+\bigbreak
+님은 갓슴니다 아아 사랑하는나의님은 갓슴니다\par
+푸른산빗을깨치고 단풍나무숩을향하야난 적은길을 거러서 참어떨치고 갓슴니다\par
+黃金의꽃가티 굿고빗나든 옛盟誓는 차듸찬띠끌이되야서 한숨의 微風에 나러갓슴니다\par
+날카로은 첫〈키쓰〉의追憶은 나의運命의指針을 돌너노코 뒷거름처서 사러젓슴니다\par
+\hellipsis\par
+아아 님은갓지마는 나는 님을보내지 아니하얏슴니다\par
+제곡조를못이기는 사랑의노래는 님의沈默을 휩싸고돔니다\par
+\end{vertical}\hfil
+\end{example}
+  \caption{\linespread{1.2}\selectfont
+  세로쓰기 보기.
+  Noto Sans CJK KR 글꼴을 이용했다. 이 글꼴의 세로쓰기 어간이 1em으로
+  매우 커서 \cs{spaceskip=0.5em plus.25em minus.125em}을 강제했다.
+  \texttt{CharRaise=.5ex}도 글꼴 옵션에 추가했다.
+  또한 \cs{latinparens}를 선언했는데
+  제목 다음의 괄호가 CJK 괄호가 아니라 아스키 괄호이기 때문이다.
+  }\label{fig:vertical}
+\end{figure}
+
+\begin{verbatim}
+    \begin{vertical}{12em}
+      \vertfont
+      \hanjabyhangulfont
+      세로쓰기로 植字할 부분
+    \end{vertical}
+\end{verbatim}
+
+혹시 세로로 식자되지 않는 라틴문자 부분이 있다면
+베이스라인이 한글과 어울리지 않을 수 있다. 이를 교정하려면
+\verb|CharRaise| 옵션을 한글 폰트에 준다.\footnote{%
+  세로쓰기에서는 일반적으로 \texttt{CharRaise} 옵션을 주는 쪽이 권장된다.
+  이 방법이 여의치 않으면 라틴문자 부분을 \cs{vertlatin} 명령으로 감쌀 수도
+  있는데, 이때 인자가 박스로 처리되어 줄바꿈이 일어나지 않는다.}
+
+세로쓰기 도중에 문서의 일부를 가로쓰기로 삽입하려면
+\verb|horizontal| 환경을 이용한다.
+horizontal 환경에는 가로쓰기 박스의 너비를 인자로 준다.
+\vernote{3.6}부터는 만약 인자가 비어있거나 \cs{empty}이면
+본문을 한 줄짜리 박스로 식자하도록 했다. 이때 너비는 당연히 natural width가 된다.
+
+\begin{plaintex}
+  플레인텍에서 문서 전체를 세로쓰기하려면 문서 첫머리에 \cs{verticaltypesetting}.
+
+  몇몇 페이지만 세로로 쓰려면 \cs{beginverticaltypesetting} \ldots\ \cs{endverticaltypesetting}.
+
+  문서 일부를 세로쓰기하려면 가령,
+\begin{verbatim}
+    \vertical{}
+      \hangulfont="Noto Sans CJK KR:vertical;+vert"
+      \hanjabyhangulfont
+      세로쓰기로 植字할 부분
+    \endvertical
+\end{verbatim}
+
+  세로쓰기 중에 잠시 가로로 식자하려면 \cs{horizontal\{\}} \ldots\ \cs{endhorizontal}.
+\end{plaintex}
+
+\section{고문헌 조판}
+
+\verb|typesetclassic| 환경은 고문헌 조판에 적합한 환경이다.
+
+불필요한 공백을 없애주는 기능은
+\vernote{3.0}부터는 자동으로 동작하지 않는다.  사용자가
+\keyword{removeclassicspaces} 명령을 주어야 CJK 글자간 공백을
+제거하기 시작한다.
+
+간단한 일본어, 중국어 문단 정도를 식자하는 데도 이 환경을 이용할 수 있으나
+각 언어의 전용 패키지들에 비해 기능이 많이 모자란다.\footnote{%
+  그러나 \texttt{japanese}, \texttt{Schinese}, \texttt{Tchinese} 환경이 여전히 제공된다.
+  \texttt{chinese}는 \texttt{Schinese}의 다른 이름이다.
+  특히 중국어 폰트를 사용할 때는 \texttt{Schinese}나 \texttt{Tchinese}를 명시하는 게 좋다.
+  }
+
+\begin{plaintex}
+  플레인텍에서는 다음 방식으로 사용한다.
+\begin{verbatim}
+    \begingroup \typesetclassic
+      ...
+    \endgroup
+\end{verbatim}
+\end{plaintex}
+
+
+\keyword{inhibitglue} 명령은
+해당 지점에 자동 삽입되는 공백을 영(zero)으로 만들어준다.
+
+현대문서 조판에는 \verb|typesetmodern| 환경이 쓰인다. 이 환경은 기본값이므로
+특별한 경우가 아니면 따로 선언할 필요가 없다.
+
+\def\analect{%
+  \removeclassicspaces
+  子曰：「學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？」\par
+  有子曰：「其爲人也 孝弟，而好犯上者，鮮矣！不好犯上，而好作亂者，未之有也！
+  君子務本，本立而道生；孝弟也者，其爲仁之本與？」\par
+  子曰：「巧言令色，鮮矣仁！」\par
+  曾子曰：「吾日三省吾身：爲人謀，而不忠乎？與朋友交，而不信乎？傳，不習乎？」\par
+  子曰：「道千乘之國，敬事而信，節用而愛人，使民以時。」\par
+  子曰：「弟子入則孝，出則弟；謹而信，汎愛衆；而親仁，行有餘力，則以學文。」
+}
+\begin{figure}
+  \begin{example}\linespread{1.3}
+    \sffamily\typesetclassic
+    \analect
+  \end{example}
+\caption{\linespread{1.2}\selectfont
+  고문헌 조판 보기.
+  typesetclassic 환경을 이용했다.
+  \cs{removeclassicspaces}도 선언했다.
+  }\label{fig:ancientdoc}
+\end{figure}
+
+\begin{figure}
+  \begin{example}\linespread{1.3}
+    \hfil\begin{vertical}{19em}
+      \linespread{1.5}\sffamily\typesetclassic
+      \addhangulfontfeatures{Vertical=Alternates,CharRaise=.5ex,RawFeature=vertical}
+      \hanjabyhangulfont \parindent0pt \everypar{\hangindent1em \hangafter1 }
+      \analect
+    \end{vertical}\hfil
+  \end{example}
+  \caption{\linespread{1.2}\selectfont
+  고문헌 세로쓰기 조판 보기.
+  vertical 환경을 이용했다.
+  \cs{hangingpunctuations}가 선언되어 있어서 구두점이
+  행 끝에 걸린 것을 볼 수 있다.
+  }\label{fig:ancientdocvertical}
+\end{figure}
+
+\section{매달린 구두점}
+\hemph{하이픈을 제외한} 문장부호들를 판면 바깥에 식자하여 행 끝에 매달리게 만들 수 있다.
+
+\vernote{3.0}부터는 \keyword{hangingpunctuations} 명령으로 활성화한다.
+\cs{hangingpunctuation}은 이 명령과 동의어이다.
+당분간 xetexko-hanging.sty을 로드하는 것으로도 활성화되도록 해 두었다.
+이렇게 활성화되면 기본값으로 온점, 반점, 고리점, 모점에 대해서 전부 내밀기가 작동한다.
+
+\vernote{3.2}부터는 사용자가 원하는 문장부호를 원하는 만큼 판면 밖으로 내밀 수 있다.
+\begin{verbatim}
+    \sethangingratio"28=0.5 %
+    \sethangingratio"3002=1 %
+\end{verbatim}
+등호 앞의 숫자는 유니코드 코드포인트이고 뒤의 숫자는 글자폭에 대한 비율을 뜻한다.
+따라서 위 예는 여는괄호(U+0028)를 절반만 내밀고 고리점(U+3002)은 완전히 밀어내라는 지시다.
+어느 방향으로 내밀지는 \xetexko 가 알아서 판단한다.
+이러한 지시를 취소하려면,
+\begin{verbatim}
+    \unsethangingratio"28
+    \unsethangingratio"3002
+\end{verbatim}
+
+microtype 패키지의 protrusion 기능이 잘 작동하지 않는 경우가 있어,%
+\footnote{%
+  원시명령 \cs{lpcode} \cs{rpcode} 등 엔진이 제공하는 기능을 말한다.
+  이들 원시명령에는 글리프 인덱스를 지시해야 하는데 어떤 글자의 글리프 인덱스를
+  알아내는 일은 간단치가 않다.
+  \XeTeX\ reference guide를 참고하라.
+  }
+어쩔 수 없이 제공하게 되었으므로 예외적으로만 사용할 것을 권한다.
+
+%\begin{figure}
+%\Large
+%\hangingpunctuation
+%\setbox0\hbox{줄 끝에 매달린 구두점}
+%\vbox{\hfil\hbox{\vrule\vbox{\hsize\wd0
+%  줄 끝에 매달린 구두점.
+%  줄 끝에 매달린 구두점,
+%  줄 끝에 매달린 구두점、
+%  줄 끝에 매달린 구두점。
+%  줄 끝에 매달린 구두점
+%  }\vrule}\hfil}
+%\caption{기본값이 적용된 매달린 구두점}\label{fig:hanging}
+%\end{figure}
+
+\section{수식 한글}
+수식 모드에서도 한글을 \hparens{hbox로 감싸지 않고} 직접 입력할 수 있다.
+\begin{quote}
+  \verb|$가^{나^다}$|\quad$\Rightarrow\quad가^{나^다}$
+\end{quote}
+\vernote{3.0}부터는
+자동으로 수식한글을 잡아주지 않으므로 사용자가 다음과 같이 명시적으로 선언해야 한다.
+\begin{verbatim}
+    \setmathhangulfont{Noto Sans CJK KR}[
+      SizeFeatures={ {Size=-6,  Font=* Medium},
+                     {Size=6-9, Font=*},
+                     {Size=9-,  Font=* DemiLight} }
+    ]
+\end{verbatim}
+\begin{plaintex}
+  플레인텍에서는 \cs{mathhangulfont="[UnBatang.ttf]"}와 같이 설정한다.
+
+  또는 좀 더 그럴듯하게 하려면:\par
+  \leftskip=3em\noindent
+\begin{verbatim}
+    \font\texthangul="Noto Sans CJK KR DemiLight" at 10pt
+    \font\scripthangul="Noto Sans CJK KR Regular" at 7pt
+    \font\scriptscripthangul="Noto Sans CJK KR Medium" at 5pt
+    \setmathhangulfonts\texthangul\scripthangul\scriptscripthangul
+\end{verbatim}
+\end{plaintex}
+
+현재 한글만 쓸 수 있게 설정되어 있다.
+한자도 수식에 직접 입력하려면 사용자는
+\begin{verbatim}
+    \setmathhangulblock{4E00}{9FC3}
+\end{verbatim}
+명령으로 유니코드 블럭을 추가 지정해야 한다.
+
+\section{자동조사}
+자동조사는 \kotex 의 경우와 대체로 동일하게 동작한다.
+게다가 문장 중에서도 동작하고
+플레인텍에서까지 사용할 수 있다.
+그럼에도 불구하고 사용자가 임의로 제어할 필요가 생긴다면
+\cs{jong} \cs{jung} \cs{rieul} 중 하나를
+미리 선언해 둘 수 있다. 이를테면,
+\begin{verbatim}
+    \def\mypage{페이지\jung}
+    \def\mypage{쪽\jong}
+    \def\mystar{별\rieul}
+\end{verbatim}
+
+\section{드러냄표}
+\keyword{dotemph} 명령을 사용하는
+\dotemph{드러냄표} 강조도 \kotex 과 대동소이하다.
+기본은 글자 위에 점을 찍는 형태이나 다음 명령을 이용해 개인적으로 선호하는
+기호를 드러냄표로 쓸 수 있다.
+\begin{verbatim}
+    \def\dotemphraise{0.4em }
+    \def\dotemphchar{\bfseries ^^^^02d9}
+\end{verbatim}
+전자는 드러냄표를 피강조 글자 위로 끌어올리는 길이를,
+후자는 드러냄표 기호 자체를 정의한다.
+\verb|^^^^02d9|는 유니코드 코드포인트를 뜻하는 16진수이고
+숫자 대신 직접 문자를 입력해도 된다.
+플레인텍에서도 드러냄표 강조를 사용할 수 있다.
+
+\section{고아글자 문제}
+어느 정도는 고아글자가 생기지 않게 만들어 두었으나,
+\XeTeX 에서는 고아글자를 자동으로 완전히 회피하기는 어렵다.
+필요하다면 사용자가 적당한 곳에 \cs{nobreak} 명령을 삽입해야 한다.
+
+\section{한국어 번호}
+항목 번호를 한국어 기호로 붙일 수 있다. \kotex과 마찬가지로
+\cs{jaso} \cs{gana} \cs{ojaso} \cs{ogana} \cs{pjaso}
+\cs{pgana} \cs{onum} \cs{pnum} \cs{oeng} \cs{peng}
+\cs{hnum} \cs{Hnum} \cs{hroman} \cs{hRoman} \cs{hNum}
+\cs{hanjanum}
+따위를 사용한다.
+
+\section{밑줄긋기}
+\LaTeX 에서는 \uwave{ulem 패키지}를 로드하는 것만으로 자동 지원된다.
+
+\cs{xetexkoulemsupport} 명령이 \vernote{3.3}부터 부활하였으므로
+플레인텍에서는 이 명령을 명시해야 할 경우가 있을 것이다.%
+\footnote{%
+  ulem 명령어의 인자 안에서도 \cs{dotemph} 명령을 쓸 수 있다.
+}
+
+
+%\hfill \fboxsep=-\fboxrule \fbox{\vbox to1em{\hbox to1em{\hss}\vss}}
+
+\bigskip
+\centerline{\hfil\vrule width.5\textwidth height.4pt \relax\hfil}
+
+\section*{주요 변경 이력}
+
+\begin{small}\linespread{1.2}\selectfont
+\begin{description}\itemsep=0pt
+    \item[v4.0] 2021-09-06
+      \begin{itemize}
+        \item \xetexko 가 제공하는 대부분의 기능은 폰트 인코딩이
+          유니코드 인코딩(\texttt{TU})이거나 플레인텍처럼 폰트 인코딩 개념이 없는
+          경우에만 동작한다.
+      \end{itemize}
+    \item[v3.6] 2021-06-10
+      \begin{itemize}
+        \item \hyperref[sec:verttype]
+          {\cs{verticaltypesetting}을 환경으로도 쓸 수 있다}.
+        \item \hyperref[sec:verttype]
+          {\texttt{vertical} 및 \texttt{horizontal} 환경의 인자를 비워둘 수 있다}.
+      \end{itemize}
+    \item[v3.4] 2021-05-15
+      \begin{itemize}
+        \item \hyperref[sec:fontcmds]
+          {글꼴 전환 방식의 내부적 변화 및 그에 따른 플레인텍 한글 폰트 명령의 의미 변경}
+      \end{itemize}
+    \item[v3.3] 2021-04-20
+      \begin{itemize}
+        \item \cs{xetexkoulemsupport} 명령 부활
+        \item `㉾' 등 한글기호를 \verb=cjksymbols=에 할당
+      \end{itemize}
+    \item[v3.2] 2021-04-08
+      \begin{itemize}
+        \item 매달린 구두점이 기본값으로 따옴표에는 작동하지 않고 마침표^^b7쉼표에만 작동한다.
+        \item \cs{sethangingratio}, \cs{unsethangingratio} 명령 추가
+      \end{itemize}
+    \item[v3.1] 2021-03-22
+      \begin{itemize}
+        \item 플레인텍 명령 \cs{sethangulfont}, \cs{sethanjafont} 추가
+      \end{itemize}
+    \item[v3.0] 2021-03-20
+      \begin{itemize}
+        \item \verb|typesetclassic|, \verb|typesetmodern| 환경이 추가되었다.
+        \item \cs{removeclassicspaces} 명령이 추가되었다.
+        \item \cs{compresspunctuations}, \cs{nocompresspunctuations} 명령이 추가되었다.
+        \item \cs{hangingpunctuations} 명령이 추가되었다.
+        \item 디폴트 고정폭 한글 폰트의 메트릭을 Latin Modern Mono에
+          맞추어 조정하였다.
+        \item 글꼴옵션이 \verb|InterLatinCJK|, \verb|InterHangul|, \verb|CharRaise|
+          외에는 모두 무력화되었다.
+        \item \cs{xetexkofontregime}의 키값 \verb|nums|와 \verb|quotes|가
+          각각 \verb|alphs|와 \verb|parens|에 통합되었다.
+        \item \cs{xetexkoulemsupport} 명령이 무력화되었다.
+        \item \cs{disableautojosa}, \cs{disablejamoautojosa} 명령이 무력화되었다.
+        \item \cs{defaulthangulfontfeatures} \cs{defaulthanjafontfeatures}
+          명령이 무력화되었다.
+        \item 수식한글을 자동으로 잡아주지 않는다.
+      \end{itemize}
+    \item[v2.23] 2020-02-17
+      \begin{itemize}
+        \item \hyperref[sec:fontcmds]
+          {디폴트 한글 폰트가 나눔글꼴에서 은글꼴로 변경되었다.}
+      \end{itemize}
+    \item[v2.13] 2015-06-16
+      \begin{itemize}
+        \item \hyperref[sec:verttype]
+          {\texttt{horizontal} 환경이 추가되었다.}
+      \end{itemize}
+    \item[v2.10] 2015-01-16
+      \begin{itemize}
+        \item 패키지 옵션 \texttt{[unfonts]}를 더는 지원하지 않는다. 이 옵션을
+          사용한 기존 문서는 기본 글꼴인 은글꼴 트루타입으로 식자될 것이다.
+      \end{itemize}
+    \item[v2.7] 2014-06-17
+      \begin{itemize}
+        \item \hyperref[sec:fontcmds]
+          {main/sans hangul/hanja 글꼴에는 디폴트 옵션
+          \texttt{Ligatures=TeX}이 주어진다.}
+        \item \hyperref[sec:fontopts]
+          {\cs{defaulthangulfontfeatures}와 \cs{defaulthanjafontfeatures}
+          명령이 생겼다.}
+      \end{itemize}
+    \item[v2.4] 2014-02-02
+      \begin{itemize}
+        \item Variation Selector를 이용한 한자 변형 글리프 접근을 허용한다.
+      \end{itemize}
+    \item[v2.2] 2013-12-06
+      \begin{itemize}
+        \item \hyperref[sec:fontopts]
+          {글꼴 옵션 \texttt{CharRaise}를 추가했다.}
+        \item \hyperref[sec:fontcmds]
+          {\cs{fallbackhanjafont} 명령을 인식한다.}
+        \item \hyperref[sec:etccmds]
+          {\cs{everyhangul}, \cs{everyhanja} 명령이 추가되었다.}
+        \item \hyperref[sec:symbolfont]
+          {하이픈 문자를 \hparen{직전 글꼴이 아니라} 라틴 글꼴에서 찾는
+          것이 기본값이 되었다.}
+      \end{itemize}
+    \item[v2.0] 2013-03-27
+      \begin{itemize}
+        \item \hyperref[sec:loading]
+          {플레인텍에서 xetexko.tex이 아니라 xetexko.sty를 불러야 한다.}
+        \item \hyperref[sec:symbolfont]
+          {CJK 기호문자를 \hparen{한자가 아니라} 한글 글꼴에서 찾는 것이
+          기본값이 되었다.}
+        \item \hyperref[sec:fontopts]
+          {\texttt{interpunctskern} 글꼴 옵션을 없애고 \texttt{quoteraise}를
+          추가했다.}
+      \end{itemize}
+  \end{description}
+\end{small}
+
+\end{document}

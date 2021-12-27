@@ -1,0 +1,104 @@
+                              piechartMP
+     Terms And Conditions For Copying, Distribution And Modification
+             Like LaTeX Project Public License Version 1.0
+
+
+WARRANTY
+========
+
+There is no warranty for piechartMP, to the extent permitted by
+applicable law. Except when otherwise stated in writing, the
+Copyright holder provides piechartMP `as is' without warranty of any
+kind, either expressed or implied, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular
+purpose. The entire risk as to the quality and performance of the
+program is with you. Should piechartMP prove defective, you assume
+the cost of all necessary servicing, repair or correction.
+
+In no event unless required by applicable law or agreed to in writing
+will the Copyright holder, or any of the individual authors named in
+the source for piechartMP, be liable to you for damages, including
+any general, special, incidental or consequential damages arising out
+of any use of piechartMP or out of inability to use piechartMP
+(including but not limited to loss of data or data being rendered
+inaccurate or losses sustained by you or by third parties as a result
+of a failure of The Program to operate with any other programs), even
+if such holder or other party has been advised of the possibility of
+such damages.
+
+
+DISTRIBUTION
+============
+
+Redistribution of unchanged files is allowed provided that all files
+that make up the distribution of piechartMP are distributed.
+In particular this means that piechartMP has to be distributed
+including the files in the piechartMP-README.
+If you distribute piechartMP together with a installation programm
+or installation programms, you have to take care, that users cannot
+skip or delete parts of piechartMP without be well informed about
+this action.
+
+The distribution of piechartMP contain a listing of all the files
+covered by this license at README.
+
+If you receive only some of these files from someone, complain!
+
+The distribution of changed versions of certain files included in the
+piechartMP, and the reuse of code from piechartMP, are allowed
+under the following restrictions:
+
+ * It is allowed only if the legal notice in the file does not
+   expressly forbid it.
+   See note below, under "Conditions on individual files".
+ 
+ * You rename the file before you make any changes to it, unless the
+   file explicitly says that renaming is not required.  Any such changed
+   files must be distributed under a license that forbids distribution
+   of those files, and any files derived from them, under the names used
+   by the original files in the distribution of piechartMP.
+
+ * You change any `identification string' in piechartMP to clearly 
+   indicate that the file is not part of the standard system.
+
+ * You change the `error report address' in any modified versions of
+   piechartMP, so that reports for files not maintained by the
+   original program maintainers are directed to the maintainers of the
+   changed files. 
+
+ * You acknowledge the source and authorship of the original version
+   in the modified file.
+
+ * You also distribute the unmodified version of the file.
+ 
+ * You distribute an appropriate documentation.
+
+The above restrictions are not intended to prohibit, and hence do
+not apply to, the updating, by any method, of a file so that it
+becomes identical to the latest version of that file in piechartMP.
+
+========================================================================
+
+
+Conditions on individual files
+==============================
+
+The individual files may bear additional conditions which supersede
+the general conditions on distribution and modification contained in
+this file.
+
+Typical examples of files with more restrictive modification
+conditions would be files that contain the text of copyright notices.
+
+ * The conditions on individual files differ only in the
+   extent of *modification* that is allowed.
+
+ * The conditions on *distribution* are the same for all the files.
+   Thus a (re)distributor of a complete, unchanged copy of The Program
+   need meet only the conditions in this file; it is not necessary to
+   check the header of every file in the distribution to check that a
+   distribution meets these requirements.
+
+Such files are:
+
+ * LEGAL, README: You are not allowed to modify these files.

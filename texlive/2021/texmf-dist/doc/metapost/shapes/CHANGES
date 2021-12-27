@@ -1,0 +1,6 @@
+v1.1, released on 1 August 2015:  updated; now allows ticks
+around the circle of the modular shapes at arbitrary
+intervals.  The ticks can be styled by length and pen.
+
+v1.0, released on 18 July 2015:  initial release.  All basic
+functionality implemented.

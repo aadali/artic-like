@@ -1,0 +1,394 @@
+% \iffalse meta-comment
+% 
+% This is file `caption-light.dtx'.
+% 
+% Copyright (C) 2020 Axel Sommerfeldt (axel.sommerfeldt@f-m.fm)
+% 
+% --------------------------------------------------------------------------
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+% 
+% This work has the LPPL maintenance status "maintained".
+% 
+% This Current Maintainer of this work is Axel Sommerfeldt.
+% 
+% This work consists of the files
+%   caption.ins, caption.dtx, caption-light.dtx, caption2.dtx, caption3.dtx,
+%   caption-ams-smf.dtx, caption-beamer.dtx, caption-elsarticle.dtx,
+%   caption-koma.dtx, caption-memoir.dtx, caption-ntg.dtx,
+%   caption-thesis.dtx, bicaption.dtx, ltcaption.dtx, subcaption.dtx,
+% the derived files
+%   caption.sty, caption-light.sty, caption2.sty, caption3.sty,
+%   caption-ams-smf.sto, caption-beamer.sto, caption-elsarticle.sto,
+%   caption-koma.sto, caption-memoir.sto, caption-ntg.sto,
+%   caption-thesis.sto, bicaption.sty, ltcaption.sty, subcaption.sty,
+% and the user manuals
+%   caption-deu.tex, caption-eng.tex, caption-rus.tex.
+% 
+% \fi
+% \CheckSum{84}
+%
+% \iffalse
+%<*driver>
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesFile{caption-light.drv}[2020/08/24 v1.0 Customizing captions (AR)]
+\hbadness=9999 \newcount\hbadness \hfuzz=74pt % Make TeX shut up.
+%\errorcontextlines=3
+%
+\documentclass{ltxdoc}
+\setlength\parindent{0pt}
+\setlength\parskip{\smallskipamount}
+%
+\newcommand\LineBreak{\linebreak[3]}
+\newcommand\PageBreak{\pagebreak[3]}
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage{mathptmx,courier}
+  \usepackage[scaled=0.90]{helvet}
+  \addtolength\marginparwidth{15pt}
+  \ifdim\paperheight=297mm % a4paper
+    \renewcommand\LineBreak{\\}
+    \renewcommand\PageBreak{\clearpage}
+  \fi
+\fi
+%
+\usepackage[bottom]{footmisc}
+%
+\PassOptionsToPackage{breaklinks=true}{hyperref}
+\usepackage{hypdoc}
+\ifpdf\usepackage{hypdestopt}\fi
+\hypersetup{pdfkeywords={LaTeX, package, subcaption},pdfstartpage={},pdfstartview={}}
+%
+\usepackage{caption-light}[2020/08/23] % needs v1.0 or newer
+%
+\newcommand*\purerm[1]{{\upshape\mdseries\rmfamily #1}}
+\newcommand*\puresf[1]{{\upshape\mdseries\sffamily #1}}
+\newcommand*\purett[1]{{\upshape\mdseries\ttfamily #1}}
+\let\package\puresf
+\let\env\purett \let\opt\purett
+%
+\newcommand*\csmarg[1]{\texttt{\char`\{#1\char`\}}}
+\newcommand*\csoarg[1]{\texttt{\char`\[#1\char`\]}}
+\newcommand*\version[2][]{v$#2$}
+%
+\usepackage{marvosym}
+\makeatletter
+\newcommand*\INFO{\@ifstar{\@INFO{}}{\@INFO{\vbox to \ht\strutbox}}}
+\newcommand*\@INFO[1]{\MARGINSYM{#1{\LARGE\Info}}}
+\makeatother
+%
+\newcommand*\MARGINSYM[1]{\hskip 1sp \marginpar{\raggedleft\textcolor{blue}{{#1}}}}
+\newcommand*\NEW[2]{\MARGINSYM{\vskip2pt\footnotesize#1\\#2}}
+%
+\begin{document}
+  \DocInput{caption-light.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \let\subsectionautorefname\sectionautorefname
+% \let\subsubsectionautorefname\sectionautorefname
+%
+% \def\thispackage{the \package{caption-light} package}
+% \def\Thispackage{The \package{caption-light} package}
+%
+% \newcommand\NEWfeature{\NEW{New feature}}
+% \newcommand\NEWdescription{\NEW{New description}}
+%
+% \makeatletter
+% \def\Ref{\@ifstar{\@Ref\ref}{\@Ref\autoref}}
+% \def\@Ref#1#2{#1{#2}: \textit{\nameref{#2}}}
+% \makeatother
+% \def\See#1{\nopagebreak{\small (See #1)}}
+%
+% \GetFileInfo{caption-light.drv}
+% \let\docdate\filedate
+% \let\docversion\fileversion
+% \GetFileInfo{caption-light.sty}
+%
+% \title{\texorpdfstring{\Thispackage\thanks{%^^A
+%          This package has version number \docversion.}}%^^A
+%        {The caption-light package}}
+% \author{Axel Sommerfeldt\\
+%         \url{https://gitlab.com/axelsommerfeldt/caption}}
+% \date{\docdate}
+% \maketitle
+% 
+% \begin{abstract}
+% \Thispackage\ offers (limited) customization of captions
+% in floating environments such |figure| and |table|.
+% \par\smallskip
+% \textit{Please note:} Many document classes already have build-in options and
+% commands for customizing captions.
+% If these possibilities are sufficient for you, there is usually no need for
+% you to use the \package{caption} package at all.
+% And if you are just interested in using the command \cs{captionof}, loading
+% of the very small \package{capt-of} package is usually sufficient.
+% \end{abstract}
+%
+% \iffalse\clearpage\fi
+% \setcounter{tocdepth}{2}
+% \tableofcontents
+%
+% \clearpage
+% \section{Loading the package}
+%
+% Load this package using
+% \begin{quote}
+%   |\usepackage|\oarg{options}|{caption-light}|
+% \end{quote}
+% or
+% \begin{quote}
+%   |\usepackage{caption-light}|\\
+%   \ldots\\
+%   |\captionsetup|\marg{options}
+% \end{quote}
+% As opposite to the \package{caption} package only a limited set of options is
+% supported by \thispackage:
+% |aboveskip=|\ldots,
+% |belowskip=|\ldots,
+% |font=|\ldots,
+% |justification=|\ldots,
+% |labelfont=|\ldots,
+% |labelseparator=|\ldots,
+% |position=|\ldots,
+% |singlelinecheck=|\ldots,
+% |skip=|\ldots, and
+% |textfont=|\ldots
+%
+% See \package{caption} package documentation for the meaning and usage of
+% these options.
+%
+% \section{Commands}
+%
+% This package offers |\caption|\-|setup|, |\set|\-|caption|\-|type|, and
+% |\caption|\-|of| as well.
+%
+% \section{Why this package?}
+%
+% This package offers some advantages over the \package{caption} package:
+% \begin{itemize}
+% \item It does not depend on correct |\hsize| for "long" captions,
+% just like the original definition included in |article|, |report|, and |book|.
+% \item If the caption is typeset as "short" (centered), the content of
+% the caption is evaluated only once,
+% just like the original definition included in |article|, |report|, and |book|.
+% \item It does not re-define |\caption| and floating environments,
+% therefore avoiding incompatibilities.
+% \item It does not patch any other packages, therefore avoiding
+% incompatibilities.
+% \end{itemize}
+%
+% In short it's a more compatible and less troublesome variant of the
+% \package{caption} package, but (much) less powerful.
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \StopEventually{%^^A
+% }
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \DoNotIndex{\\,\_,\ ,\@@par}
+% \DoNotIndex{\@bsphack}
+% \DoNotIndex{\@car,\@cdr,\@classoptionslist,\@cons,\@currext,\@currname}
+% \DoNotIndex{\@ehc,\@ehd,\@empty,\@esphack,\@expandtwoargs}
+% \DoNotIndex{\@for,\@firstofone,\@firstoftwo}
+% \DoNotIndex{\@gobble,\@gobblefour,\@gobbletwo,\@hangfrom}
+% \DoNotIndex{\@ifnextchar,\@ifpackagelater,\@ifpackageloaded}
+% \DoNotIndex{\@ifstar,\@ifundefined,\@latex@error,\@namedef,\@nameuse}
+% \DoNotIndex{\@onlypreamble,\@parboxrestore,\@plus,\@ptionlist}
+% \DoNotIndex{\@removeelement,\@restorepar,\@secondoftwo,\@setpar}
+% \DoNotIndex{\@tempa,\@tempboxa,\@tempdima,\@tempdimb,\@tempdimc,\@tempb,\@tempc}
+% \DoNotIndex{\@testopt}
+% \DoNotIndex{\@undefined,\@unprocessedoptions,\@unusedoptionlist}
+% \DoNotIndex{\p@,\z@}
+% \DoNotIndex{\active,\addtocounter,\addtolength,\advance,\aftergroup}
+% \DoNotIndex{\baselineskip,\begin,\begingroup,\bfseries,\box}
+% \DoNotIndex{\catcode,\centering,\changes,\csname,\def,\divide,\do,\downarrow}
+% \DoNotIndex{\edef,\else,\empty,\end,\endcsname,\endgraf,\endgroup,\expandafter}
+% \DoNotIndex{\fi,\footnotesize,\global}
+% \DoNotIndex{\hangindent,\hbox,\hfil,\hsize,\hskip,\hspace,\hss}
+% \DoNotIndex{\ifcase,\ifdim,\ifnum,\ifodd,\ifvoid,\ifvmode}
+% \DoNotIndex{\ifx,\ignorespaces,\itshape}
+% \DoNotIndex{\Large,\large,\leavevmode,\leftmargini,\leftskip,\let,\linewidth}
+% \DoNotIndex{\llap,\long,\m@ne,\margin,\mdseries,\message}
+% \DoNotIndex{\newcommand,\newdimen,\newlength,\newline,\newif,\newsavebox}
+% \DoNotIndex{\next,\nobreak,\nobreakspace,\noexpand,\noindent,\numberline}
+% \DoNotIndex{\normalcolor,\normalfont,\normalsize,\or,\par,\parbox,\parfillskip}
+% \DoNotIndex{\parindent,\parskip,\prevdepth,\protect,\protected@edef,\protected@write}
+% \DoNotIndex{\providecommand,\quad}
+% \DoNotIndex{\raggedleft,\raggedright,\relax,\renewcommand,\RequirePackage}
+% \DoNotIndex{\rightskip,\rmfamily}
+% \DoNotIndex{\sbox,\scriptsize,\scshape,\setbox,\setlength,\sffamily,\slshape}
+% \DoNotIndex{\small,\string,\space,\strut}
+% \DoNotIndex{\textheight,\the,\toks@,\typeout,\ttfamily}
+% \DoNotIndex{\unvbox,\uparrow,\upshape,\usebox,\usepackage}
+% \DoNotIndex{\value,\vbox,\vsize,\vskip,\wd,\width,\z@skip}
+% \DoNotIndex{\AtBeginDocument,\AtEndOfPackage,\CurrentOption,\DeclareOption}
+% \DoNotIndex{\ExecuteOptions,\GenericWarning,\IfFileExists,\InputIfFileExists}
+% \DoNotIndex{\NeedsTeXFormat,\MessageBreak}
+% \DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\PackageWarningNoLine}
+% \DoNotIndex{\PassOptionsToPackage,\ProcessOptions,\ProvidesPackage}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \setlength{\parskip}{0pt plus 1pt}
+% \changes{v1.0}{2020/08/24}{First version}
+%
+% \newcommand*\Note[2][Note]{\par{\small\emph{#1:} #2}}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \clearpage
+% \section{The implementation}
+% \iffalse
+%<*package>
+% \fi
+%
+% \subsection{Identification}
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{caption-light}[2020/08/24 v1.0 Customizing captions (AR)]
+%    \end{macrocode}
+%
+% \section{Loading the kernel}
+%
+%    \begin{macrocode}
+\RequirePackage{caption3}[2020/08/23] % needs v2.0 or newer
+%    \end{macrocode}
+%
+% \section{Check against unknown document classes}
+%
+%    \begin{macrocode}
+\caption@ifbool{documentclass}{}{%
+  \caption@WarningNoLine{%
+    Unknown document class (or package),\MessageBreak
+    standard defaults will be used}}
+%    \end{macrocode}
+%
+% \section{Check against incompatible packages}
+%
+%    \begin{macrocode}
+\@ifpackageloaded{caption2}{%
+  \caption@Error{%
+    You can't use both, the (obsolete) caption2 *and*\MessageBreak
+    the caption-light package}%
+  \endinput
+}{}
+%    \end{macrocode}
+%
+% \section{Processing of options}
+%
+%    \begin{macrocode}
+\caption@SetupOptions{caption-light}{\caption@setkeys{caption}{#2}}
+\caption@ProcessOptions*{caption-light}
+%    \end{macrocode}
+%
+% \section{\cs{@makecaption}}
+%
+% If the \package{caption} package is loaded, we abort processing this file.
+%    \begin{macrocode}
+\caption@ifdefined\caption@makecaption
+  {\caption@Info{\noexpand\caption@makecaption is already defined}%
+   \endinput}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\caption@makecaption}
+%   |\@makecaption|\marg{label}\marg{text}\\
+%   We do basically the same as the original code (from the standard
+%   \LaTeX\ document classes), but take care of selected settings
+%   offered by the \package{caption3} kernel.
+%    \begin{macrocode}
+\long\def\caption@makecaption#1#2{%
+  \caption@iftop\caption@belowskip\caption@aboveskip
+  \caption@labelseparator % defines \caption@iflabelfont and \caption@labelsep
+  \caption@singlelinecheck
+    {\sbox\@tempboxa{\caption@@makecaption{#1}{#2}}%
+     \ifdim \wd\@tempboxa >\hsize}%
+    {\iftrue}%
+    \caption@@makecaption{#1}{#2}\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \caption@iftop\caption@aboveskip\caption@belowskip}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand\caption@@makecaption[2]{%
+  \caption@applyfont
+  {\captionlabelfont #1}%
+  {\caption@iflabelfont\captionlabelfont
+   \relax\caption@labelsep}%
+  {\captiontextfont #2}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@makecaption}
+%   Patch |\@makecaption|, so our definition will be used.
+%    \begin{macrocode}
+\let\@makecaption\caption@makecaption
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{\cs{setcaptiontype}}
+%
+% We offer the options |type=| and |type*=|, too:
+%    \begin{macrocode}
+\caption@AtBeginDocument{%
+%    \end{macrocode}
+%    \begin{macrocode}
+  \DeclareCaptionOption{type}{\setcaptiontype{#1}}%
+  \DeclareCaptionOption{type*}{\setcaptiontype*{#1}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+% \begin{macro}{\setcaptiontype}
+%   |\setcaptiontype*|\marg{type}\\
+%   For compatibility reasons we offer a starred variant as well,
+%   but it does not differ from the non-starred variant here.
+%    \begin{macrocode}
+\newcommand*\setcaptiontype{%
+  \caption@teststar{\def\@captype}{}{}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\captionof}
+%   |\captionof*|\marg{type}\oarg{list-entry}\marg{text}\\
+%   For compatibility reasons we offer a starred variant as well.
+%    \begin{macrocode}
+\caption@AtBeginDocument{%
+  \def\captionof{\caption@teststar\caption@of{\caption*}\caption}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\caption@of[2]{\setcaptiontype*{#2}#1}
+%    \end{macrocode}
+% \end{macro}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \Finale
+%
+\endinput

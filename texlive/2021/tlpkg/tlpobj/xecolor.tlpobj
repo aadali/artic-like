@@ -1,0 +1,21 @@
+name xecolor
+category Package
+revision 29660
+shortdesc Support for color in XeLaTeX
+longdesc This is a simple package which defines about 140 different
+longdesc colours using XeTeX's colour feature. The colours can be used
+longdesc in bidirectional texts without any problem.
+containersize 2300
+containerchecksum 0ab23e651b36f06256fab5acb14effc93296948aecf7c7f11c81f4db89a58bfd8e038dd857a1da3a86ab573cf0ffb1d1bc188789e0d493ab0d0c1c9d96d593f3
+doccontainersize 1092
+doccontainerchecksum 9441eff384f57e8714cc543ade380ecc321e6c0e7dd0ae69c71337458e2607a43f793b490bfa6752c1c70bdb17be92488b89ff848ab9a3a1700907c15ed857c2
+docfiles size=1
+ texmf-dist/doc/xelatex/xecolor/README details="Readme"
+runfiles size=2
+ texmf-dist/tex/xelatex/xecolor/xecolor.sty
+catalogue-contact-bugs https://github.com/bidi-tex/xecolor/issues
+catalogue-contact-repository https://github.com/bidi-tex/xecolor
+catalogue-ctan /macros/xetex/latex/xecolor
+catalogue-license lppl1.3
+catalogue-topics colour xetex
+catalogue-version 0.1

@@ -1,0 +1,6 @@
+xetex-tibetan (0.1) UNRELEASED; urgency=low
+
+  * Initial release, includes wylie.map.
+
+ -- Daniel Stender <daniel@danielstender.com>  Fri, 11 Jan 2013 16:33:21 +0100
+

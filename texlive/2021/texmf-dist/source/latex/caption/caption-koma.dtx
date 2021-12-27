@@ -1,0 +1,519 @@
+% \iffalse meta-comment
+% 
+% This is file `caption-koma.dtx'.
+% 
+% Copyright (C) 2004-2020 Axel Sommerfeldt (axel.sommerfeldt@f-m.fm)
+% 
+% --------------------------------------------------------------------------
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+% 
+% This work has the LPPL maintenance status "maintained".
+% 
+% This Current Maintainer of this work is Axel Sommerfeldt.
+% 
+% This work consists of the files
+%   caption.ins, caption.dtx, caption-light.dtx, caption2.dtx, caption3.dtx,
+%   caption-ams-smf.dtx, caption-beamer.dtx, caption-elsarticle.dtx,
+%   caption-koma.dtx, caption-memoir.dtx, caption-ntg.dtx,
+%   caption-thesis.dtx, bicaption.dtx, ltcaption.dtx, subcaption.dtx,
+% the derived files
+%   caption.sty, caption-light.sty, caption2.sty, caption3.sty,
+%   caption-ams-smf.sto, caption-beamer.sto, caption-elsarticle.sto,
+%   caption-koma.sto, caption-memoir.sto, caption-ntg.sto,
+%   caption-thesis.sto, bicaption.sty, ltcaption.sty, subcaption.sty,
+% and the user manuals
+%   caption-deu.tex, caption-eng.tex, caption-rus.tex.
+% 
+% \fi
+% \CheckSum{273}
+%
+% \iffalse
+%<*driver>
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesFile{caption-koma.drv}[2018/05/24 v2.0 Implementation of the caption-koma package]
+\hbadness=9999 \newcount\hbadness \hfuzz=100pt % Make TeX shut up.
+%\errorcontextlines=3
+%
+\documentclass{ltxdoc}
+\setlength\parindent{0pt}
+\setlength\parskip{\smallskipamount}
+%
+\makeatletter % make room for subsections like 2.16.14 in the TOC
+%\newcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.7em}}
+\makeatother
+%
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage{mathptmx,courier}
+  \usepackage[scaled=0.90]{helvet}
+  \addtolength\marginparwidth{15pt}
+\fi
+%
+\usepackage{hypdoc}
+\ifpdf\usepackage{hypdestopt}\fi
+\hypersetup{pdfkeywords={LaTeX, package, caption},pdfstartpage={},pdfstartview={}}
+%
+\DeclareRobustCommand*\KOMAScript{\texorpdfstring
+  {\textsf{K\kern.05em O\kern.05em M\kern.05em A\kern.1em-\kern.1em Script}}%
+  {KOMA-Script}}
+%
+\begin{document}
+  \DocInput{caption-koma.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \newcommand*\purerm[1]{\texorpdfstring{{\upshape\mdseries\rmfamily #1}}{#1}}
+% \newcommand*\puresf[1]{\texorpdfstring{{\upshape\mdseries\sffamily #1}}{#1}}
+% \newcommand*\purett[1]{\texorpdfstring{{\upshape\mdseries\ttfamily #1}}{#1}}
+% \let\class\puresf \let\package\puresf
+% \let\env\purett \let\opt\purett
+%
+% \newcommand*\csmarg[1]{\texttt{\char`\{#1\char`\}}}
+% \newcommand*\csoarg[1]{\texttt{\char`\[#1\char`\]}}
+% \newcommand*\version[2][]{v$#2$}
+%
+% \GetFileInfo{caption-koma.drv}
+% \let\docdate\filedate
+% \let\docversion\fileversion
+% \GetFileInfo{caption-koma.sto}
+%
+% \title{\texorpdfstring
+%   {The adaption of the \package{caption} package to the \KOMAScript\ document classes\thanks{%^^A
+%    This adaption has version number \docversion.}}%^^A
+%   {The adaption of the caption package to the KOMA-Script document classes}}
+% \author{Axel Sommerfeldt\\
+%         \url{https://gitlab.com/axelsommerfeldt/caption}}
+% \date{\docdate}
+% \maketitle
+%
+% \begin{abstract}
+% This package adapts the \package{caption} package to the \KOMAScript\ document classes.
+% \end{abstract}
+% 
+% \section*{User manual}
+%
+% This document is describing the code implementation only.
+% The user documentation can be found in
+% \nopagebreak\begin{quote}
+% \begin{tabular}{ll}
+% \href{http://mirror.ctan.org/macros/latex/contrib/caption/caption-eng.pdf}%
+%      {\texttt{caption-eng.pdf}} & The caption package bundle documentation \\
+% \end{tabular}
+% \end{quote}
+%
+% \StopEventually{}
+% \iffalse
+% \clearpage
+% \tableofcontents
+% \fi
+% 
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \DoNotIndex{\\,\_,\ ,\@@par}
+% \DoNotIndex{\@bsphack}
+% \DoNotIndex{\@car,\@cdr,\@classoptionslist,\@cons,\@currext,\@currname}
+% \DoNotIndex{\@ehc,\@ehd,\@empty,\@esphack,\@expandtwoargs}
+% \DoNotIndex{\@for,\@firstofone,\@firstoftwo}
+% \DoNotIndex{\@gobble,\@gobblefour,\@gobbletwo,\@hangfrom}
+% \DoNotIndex{\if@minipage\@ifnextchar,\@ifpackagelater,\@ifpackageloaded}
+% \DoNotIndex{\@ifstar,\@ifundefined,\@latex@error,\@minipagefalse,\@minipagetrue}
+% \DoNotIndex{\@namedef,\@nameuse}
+% \DoNotIndex{\@onlypreamble,\@parboxrestore,\@plus,\@ptionlist}
+% \DoNotIndex{\@removeelement,\@restorepar,\@secondoftwo,\@setminipage,\@setpar}
+% \DoNotIndex{\@tempa,\@tempboxa,\@tempdima,\@tempdimb,\@tempdimc,\@tempb,\@tempc}
+% \DoNotIndex{\@testopt}
+% \DoNotIndex{\@undefined,\@unprocessedoptions,\@unusedoptionlist}
+% \DoNotIndex{\p@,\z@}
+% \DoNotIndex{\active,\addtocounter,\addtolength,\advance,\aftergroup}
+% \DoNotIndex{\baselineskip,\begin,\begingroup,\bfseries,\box}
+% \DoNotIndex{\catcode,\centering,\changes,\csname,\def,\divide,\do,\downarrow}
+% \DoNotIndex{\edef,\else,\empty,\end,\endcsname,\endgraf,\endgroup,\expandafter}
+% \DoNotIndex{\fi,\footnotesize,\global}
+% \DoNotIndex{\hangindent,\hbox,\hfil,\hsize,\hskip,\hspace,\hss}
+% \DoNotIndex{\ifcase,\ifdim,\ifnum,\ifodd,\ifvoid,\ifvmode}
+% \DoNotIndex{\ifx,\ignorespaces,\itshape}
+% \DoNotIndex{\Large,\large,\leavevmode,\leftmargini,\leftskip,\let,\linewidth}
+% \DoNotIndex{\llap,\long,\m@ne,\margin,\mdseries,\message}
+% \DoNotIndex{\newcommand,\newdimen,\newlength,\newline,\newif,\newsavebox}
+% \DoNotIndex{\next,\nobreak,\nobreakspace,\noexpand,\noindent,\numberline}
+% \DoNotIndex{\normalcolor,\normalfont,\normalsize,\or,\par,\parbox,\parfillskip}
+% \DoNotIndex{\parindent,\parskip,\prevdepth,\protect,\protected@edef,\protected@write}
+% \DoNotIndex{\providecommand,\quad}
+% \DoNotIndex{\raggedleft,\raggedright,\relax,\renewcommand,\RequirePackage}
+% \DoNotIndex{\rightskip,\rmfamily}
+% \DoNotIndex{\sbox,\scriptsize,\scshape,\setbox,\setlength,\sffamily,\slshape}
+% \DoNotIndex{\small,\string,\space,\strut}
+% \DoNotIndex{\textheight,\the,\toks@,\typeout,\ttfamily}
+% \DoNotIndex{\unvbox,\uparrow,\upshape,\usebox,\usepackage}
+% \DoNotIndex{\value,\vbox,\vsize,\vskip,\wd,\width,\z@skip}
+% \DoNotIndex{\AtBeginDocument,\AtEndOfPackage,\CurrentOption,\DeclareOption}
+% \DoNotIndex{\ExecuteOptions,\GenericWarning,\IfFileExists,\InputIfFileExists}
+% \DoNotIndex{\NeedsTeXFormat,\MessageBreak}
+% \DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\PackageWarningNoLine}
+% \DoNotIndex{\PassOptionsToPackage,\ProcessOptions,\ProvidesPackage}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \setlength{\parskip}{0pt plus 1pt}
+% \newcommand*\Note[2][Note]{\par{\small\emph{#1:} #2}\par}
+%
+% \changes{v1.0a}{2004/01/18}{Minimum adaptation to \KOMAScript\ added}
+% \changes{v1.0h}{2005/08/22}{\KOMAScript\ compatibility options added}
+% \changes{v1.0i}{2005/11/17}{\KOMAScript\ compatibility commands added}
+% \changes{v1.0l}{2007/02/18}{\KOMAScript\ compatibility revised}
+% \changes{v1.1}{2007/03/17}{\KOMAScript\ compatibility options removed}
+% \changes{v1.1}{2007/03/31}{\KOMAScript\ classes support added}
+% \changes{v1.1}{2007/04/05}{\KOMAScript\ compatibility revised \& enhanced}
+% \changes{v2.0}{2020/07/27}{\KOMAScript\ class support adapted to \package{caption3}~\version{2.0}}
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \clearpage
+%
+% \iffalse
+%<*package>
+% \fi
+%
+% \section{Identification}
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesFile{caption-koma.sto}[2020/09/21 v2.0b Adaption of the caption package to the KOMA-Script document classes (AR)]
+%    \end{macrocode}
+%
+% \section{Margin resp. width}
+%
+% \begin{macro}{\setcapwidth}
+% \changes{v1.9}{2018/12/26}{Bugfix: Missing curly braces added}
+% Patch |\setcapwidth| so it will set the \package{caption3} width setting, too.
+%    \begin{macrocode}
+\expandafter\let\expandafter\caption@koma@setcapwidth
+                \csname\string\setcapwidth\endcsname
+\@namedef{\string\setcapwidth}[#1]#2{%
+  \caption@koma@setcapwidth[{#1}]{#2}%
+  \caption@setcapwidth@opt{#1}%
+  \caption@setcapwidth}
+%    \end{macrocode}
+% The optional argument of \cs{setcapwidth} if not supported (yet),
+% so we issue a warning if used.
+% (Since this does not seem to have an negative effect when used
+%  by the \texttt{captionbeside} environment, we suppress the warning here.)
+%    \begin{macrocode}
+\newcommand*\caption@setcapwidth@opt[1]{}
+\AtCaptionPackage{\renewcommand*\caption@setcapwidth@opt[1]{%
+  \ifx\\#1\\\else
+    \caption@ifdefined\cap@margin{%
+      \def\@tempa{captionbeside}%
+      \ifx\@tempa\@currenvir\else\caption@Warning{%
+        Ignoring optional argument [#1] of \string\setcapwidth\MessageBreak}%
+      \fi}{}%
+  \fi}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\caption@setcapwidth{%
+  \captionsetup{width=\cap@width}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\caption@tempa{\hsize}%
+\ifx\caption@tempa\cap@width \else
+  \caption@setcapwidth
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \emph{TODO:} |\setcapdynwidth|
+%
+% \begin{macro}{\setcapmargin}
+% Patch |\setcapmargin| so it will set the \package{caption3} margin setting, too.
+%    \begin{macrocode}
+\expandafter\let\expandafter\caption@koma@setcapmargin
+                \csname\string\@setcapmargin\endcsname
+\@namedef{\string\@setcapmargin}[#1]#2{%
+  \caption@koma@setcapmargin[{#1}]{#2}%
+  \caption@setcapmargin}
+%    \end{macrocode}
+%    \begin{macrocode}
+\expandafter\let\expandafter\caption@koma@@setcapmargin
+                \csname\string\@@setcapmargin\endcsname
+\@namedef{\string\@@setcapmargin}[#1]#2{%
+  \caption@koma@@setcapmargin[{#1}]{#2}%
+  \caption@setcapmargin}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\caption@setcapmargin{%
+  \begingroup
+    \let\onelinecaptionsfalse\relax
+    \def\@twoside{0}%
+    \def\if@twoside{\def\@twoside{1}\iffalse}%
+    \cap@margin
+    \def\@tempa{\endgroup}%
+    \ifx\cap@left\hfill\else\ifx\cap@right\hfill\else
+      \def\hspace##1##{\@firstofone}%
+      \edef\@tempa{\endgroup
+        \noexpand\captionsetup{%
+          twoside=\@twoside,slc=0,%
+          margin={\cap@left,\cap@right}}}%
+    \fi\fi
+    \@tempa}
+%    \end{macrocode}
+%    \begin{macrocode}
+\ifx\cap@margin\relax \else
+  \caption@setcapmargin
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Indentions}
+%
+% \begin{macro}{\setcapindent}
+% Patch |\setcapindent| so it will set the \package{caption3} indention setting, too.
+%    \begin{macrocode}
+\let\caption@koma@setcapindent\@setcapindent
+\renewcommand*\@setcapindent[1]{%
+  \caption@koma@setcapindent{#1}%
+  \caption@setcapindent}
+%    \end{macrocode}
+%    \begin{macrocode}
+\let\caption@koma@@setcapindent\@@setcapindent
+\renewcommand*\@@setcapindent[1]{%
+  \caption@koma@@setcapindent{#1}%
+  \caption@setcapindent}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\caption@setcapindent{%
+  \captionsetup{indent=\ifdim\cap@indent<\z@\z@\else\cap@indent\fi}}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\caption@ifdefined\cap@indent{\caption@setcapindent}{}
+%    \end{macrocode}
+%
+% \changes{v1.0f}{2005/08/22}{Increased compatibility to KOMA-Script: A special version of options `parindent' and `parskip' added}
+% \changes{v1.0g}{2006/01/03}{Bugfix 06-01-03: KOMA-Script variants of `parskip' and `parindent' options revised and moved into caption kernel}
+% \changes{v1.0h}{2006/02/23}{KOMA-Script variants of `parskip' and `parindent' are obsolete now, removed}
+% \changes{v1.0m}{2007/03/30}{KOMA-Script variants of `parskip' and `parindent' re-added, since they still collide with the current version of the subfig package (Sigh!)}
+%
+% There is an option clash between the \KOMAScript\ document classes
+% and the \package{caption} kernel, both define the options |parindent| and
+% |parskip| but with different meaning.
+% Furthermore the ones defined by the \package{caption} kernel take a
+% value as parameter but the \KOMAScript\ ones do not.
+%
+% So we need special versions of the options |parindent| and |parskip| here
+% which determine if a value is given (and therefore should be treated as
+% our option) or not (and therefore should be ignored by us).\footnote{%^^A
+% This problem was completely solved due a change of \cs{caption@ProcessOptions}
+% in \package{caption3}~\version{1.0h}, but we still need this workaround since
+% these options would otherwise still collide with the current version $1.3$
+% of the \package{subfig} package (Sigh!)}
+%
+%    \begin{macrocode}
+\let\caption@koma@parindent\KV@caption@parindent
+\DeclareCaptionOption{parindent}[]{%
+  \ifx,#1,%
+    \caption@Debug{Option `parindent' ignored}%
+  \else
+    \caption@koma@parindent{#1}%
+  \fi}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\let\caption@koma@parskip\KV@caption@parskip
+\DeclareCaptionOption{parskip}[]{%
+  \ifx,#1,%
+    \caption@Debug{Option `parskip' ignored}%
+  \else
+    \caption@koma@parskip{#1}%
+  \fi}%
+%    \end{macrocode}
+%
+% \section{Single-line-check}
+%
+% \begin{macro}{\ifonelinecaptions}
+% \changes{v1.1g}{2008/03/01}{\cs{def} changed to \cs{g@addto@macro}}
+% Patch |\onelinecaptionstrue| and |onelinecaptionsfalse| so they will set the corresponding \package{caption3} setting, too.
+%    \begin{macrocode}
+\g@addto@macro\onelinecaptionstrue{\caption@setsinglelinecheck{true}}%
+\g@addto@macro\onelinecaptionsfalse{\caption@setsinglelinecheck{false}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\ifonelinecaptions
+  \onelinecaptionstrue
+\else
+  \onelinecaptionsfalse
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Format}
+%
+% The `default' caption format was taken from \KOMAScript\ \cs{@makecaption} and adapted.
+%    \begin{macrocode}
+\DeclareCaptionFormat{default}[#1#2#3\par]{%
+  \ifdofullc@p
+    \caption@useformat{hang}{#1}{#2}{#3}%
+  \else
+    #1#2%
+    \ifdim\cap@indent<\z@
+      \par
+      \noindent\hspace*{-\cap@indent}%
+    \else\if@capbreak
+      \par
+    \fi\fi
+    #3\par
+  \fi}
+%
+% \section{Label format}
+%
+% The `fallback' caption label format maps to `autodot'.
+%    \begin{macrocode}
+\SetCaptionFallback{labelformat}{autodot}
+%    \end{macrocode}
+%
+% \section{Label separator}
+%
+% The `default' caption label separator maps to \cs{captionformat}.
+%    \begin{macrocode}
+\DeclareCaptionLabelSeparator{default}{\captionformat}
+%    \end{macrocode}
+%
+% \section{Fonts}
+%
+% The `default' fonts map to \cs{scr@fnt@caption} resp. \cs{scr@fnt@captonlabel}.
+%    \begin{macrocode}
+\DeclareCaptionFont{scr@font}{\scr@fnt@caption}
+\DeclareCaptionFont{scr@labelfont}{\scr@fnt@captionlabel}
+\SetCaptionDefault{font}{scr@font}
+\SetCaptionDefault{labelfont}{scr@labelfont}
+%    \end{macrocode}
+%
+% \section{Positioning}
+%
+% Here we patch the caption related \KOMAScript\ commands to set \package{caption} package settings as well.
+% Furthermore we take over the caption related settings from the \KOMAScript\ classes.
+%
+% \begin{macro}{\if@captionabove}
+% \changes{v1.0j}{2006/03/21}{Bugfix 2006-03-21: \cs{let}\cs{caption@setposition}\cs{@gobble} added}
+% \changes{v1.0n}{2006/03/09}{Accidentally this got broken in \version{1.0m}, fixed}
+% \changes{v1.1}{2007/03/31}{We redefine \cs{captionabovetrue/false} now instead of \cs{captionabove/below}}
+% \changes{v1.1a}{2007/09/14}{Bugfix 2007-09-14: Redefinition of \cs{@captionabovetrue} \& \cs{@captionabovefalse} for \env{longtable} added}
+% \changes{v1.1g}{2008/03/01}{\cs{def} changed to \cs{g@addto@macro}}
+% \changes{v1.1k}{2009/10/09}{\opt{figureposition} and \opt{tableposition} will issue a warning now}
+% \changes{v1.8e}{2019/09/11}{\opt{figureposition} and \opt{tableposition} will now set the position anyway since it could be used by other packages}
+% \changes{v2.0a}{2020/09/12}{Faulty \cs{AtBeginCaption} replaced with correct \cs{AfterCaptionPackage}}
+% Patch |\@captionabovetrue| and |\@captionabovefalse| so they will set the \package{caption3} position setting, too.
+% Note that these are stronger than the \opt{position} setting, therefore we override the options
+% \opt{figureposition} and \opt{tableposition} to typeout a warning.
+%    \begin{macrocode}
+\g@addto@macro\@captionabovetrue{\caption@setposition{t}}%
+\g@addto@macro\@captionabovefalse{\caption@setposition{b}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\if@captionabove
+  \@captionabovetrue
+\else
+  \@captionabovefalse
+\fi
+%    \end{macrocode}
+% |\captionabove| \& |\captionbelow| for longtable:
+%    \begin{macrocode}
+\AfterCaptionPackage{\caption@AtBeginLongtable{%
+  \def\@captionabovetrue{\LT@captionsetup{position=t}}%
+  \def\@captionabovefalse{\LT@captionsetup{position=b}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\if@tablecaptionabove}
+% \changes{v1.1g}{2008/03/01}{\cs{def} changed to \cs{g@addto@macro}}
+% Patch |\@tablecaptionabovetrue| and |\@tablecaptionabovefalse| so they will set the \package{caption3} position setting, too.
+%    \begin{macrocode}
+\g@addto@macro\@tablecaptionabovetrue{\captionsetup*[table]{position=t}}%
+\g@addto@macro\@tablecaptionabovefalse{\captionsetup*[table]{position=b}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\if@tablecaptionabove
+  \@tablecaptionabovetrue
+\else
+  \@tablecaptionabovefalse
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\if@figurecaptionabove}
+% \changes{v1.5}{2013/02/15}{Support of \cs{if@figurecaptionabove} added}
+% Patch |\@figurecaptionabovetrue| and |\@figurecaptionabovefalse| so they will set the \package{caption3} position setting, too.
+%    \begin{macrocode}
+\caption@ifdefined\@figurecaptionabovetrue{%
+  \g@addto@macro\@figurecaptionabovetrue{\captionsetup*[figure]{position=t}}%
+  \g@addto@macro\@figurecaptionabovefalse{\captionsetup*[figure]{position=b}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+  \if@figurecaptionabove
+    \@figurecaptionabovetrue
+  \else
+    \@figurecaptionabovefalse
+  \fi}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% Since the \KOMAScript\ position setting overwrites the one from the \package{caption} package,
+% we re-define the options |figure|\-|position| and |table|\-|position| to issue a warning.
+% \Note{But we set the value anyway since it will be used by sub-captions.}
+%
+%    \begin{macrocode}
+\AtCaptionPackage{%
+  \let\caption@koma@figureposition\KV@caption@figureposition
+  \DeclareCaptionOption{figureposition}{%
+    \caption@WarningNoLine{%
+      Option `figureposition=#1' has no effect\MessageBreak
+      when used with a KOMA-Script document class}%
+    \caption@koma@figureposition{#1}}
+%    \end{macrocode}
+%    \begin{macrocode}
+  \let\caption@koma@tableposition\KV@caption@tableposition
+  \DeclareCaptionOption{tableposition}{%
+    \caption@WarningNoLine{%
+      Option `tableposition=#1' has no effect\MessageBreak
+      when used with a KOMA-Script document class}%
+    \caption@koma@tableposition{#1}}}
+%    \end{macrocode}
+%
+% \section{Adaption of \cs{caption} command}
+%
+% \begin{macro}{\scr@caption}
+% \KOMAScript\ contains the code
+% |\AtBeginDocument{\let\scr@caption\caption}|
+% so we need to update |\scr@caption| after the \package{caption} package has re-defined |\caption|.
+%    \begin{macrocode}
+\AtBeginDocument{\let\scr@caption\caption}
+%    \end{macrocode}
+% \end{macro}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \iffalse
+% --------------------------------------------------------------------------- %
+% \fi
+%
+% \clearpage
+% \Finale
+%
+\endinput
+

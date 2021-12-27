@@ -1,0 +1,41 @@
+% This material is subject to the LaTeX Project Public License. See
+% http://www.ctan.org/tex-archive/help/Catalogue/licenses.lppl.html
+% for the details of that license.
+
+package: bpolynomial v0.5 2007/12/12
+author: Stephan Hennig (stephanhennig@arcor.de)
+
+
+Description
+-----------
+The MetaPost package bpolynomial helps drawing polynomial functions
+of up to degree three.  It provides macros to calculate Bezier curves
+exactly matching a given constant, linear, quadratic or cubic polynomial.
+Additionally, paths of derivatives and tangents can be calculated.
+
+
+Installation
+------------
+To install the package put the files into the following
+directories in a local texmf tree and update the file
+name data base.
+
+<localtexmftree>/doc/metapost/bpolynomial:
+ bpolynomial.pdf
+ bpolynomial.tex
+ examples.mp
+ README
+ CHANGES
+ TODO
+ 
+<localtexmftree>/metapost/bpolynomial:
+ bpolynomial.mp
+
+
+Usage Notes
+-----------
+See file bpolynomial.pdf.
+
+
+Happy TeXing!
+Stephan Hennig

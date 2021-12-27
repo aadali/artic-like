@@ -1,0 +1,58 @@
+name ntgclass
+category Package
+revision 56959
+shortdesc "European" versions of standard classes
+longdesc The bundle offers versions of the standard LaTeX article and
+longdesc report classes, rewritten to reflect a more European design,
+longdesc and the a4 package, which is better tuned to the shape of a4
+longdesc paper than is the a4paper class option of the standard classes.
+longdesc The classes include several for article and report
+longdesc requirements, and a letter class. The elements of the bundle
+longdesc were designed by members of the Dutch TeX Users Group NTG.
+containersize 16060
+containerchecksum bb1cd3532f91bde7768a027d51216bd56c8401cbcec4996587760e3289d892d2f1d4efe834d55146026ecab413b04d1f4e8e132a53e3b6f925f4aaf0bc1124f9
+doccontainersize 1711884
+doccontainerchecksum a58debb1c6a07c63dfb45ea6647db75bb09217a2c7680318cd6ee56575dfde985ae88ba361ea9ed1adb26ecea430e851599ccfa900292e4847b70e02eff65887
+docfiles size=482
+ texmf-dist/doc/latex/ntgclass/CATALOG
+ texmf-dist/doc/latex/ntgclass/ChangeLog
+ texmf-dist/doc/latex/ntgclass/MANIFEST
+ texmf-dist/doc/latex/ntgclass/README details="Readme"
+ texmf-dist/doc/latex/ntgclass/a4.pdf
+ texmf-dist/doc/latex/ntgclass/artdoc.pdf details="The artikel (article) classes" language="nl"
+ texmf-dist/doc/latex/ntgclass/artdoc.tex
+ texmf-dist/doc/latex/ntgclass/brief-sample.pdf
+ texmf-dist/doc/latex/ntgclass/brief-sample.tex
+ texmf-dist/doc/latex/ntgclass/brief.pdf
+ texmf-dist/doc/latex/ntgclass/briefdoc.pdf details="The brief (letter) class" language="nl"
+ texmf-dist/doc/latex/ntgclass/briefdoc.tex
+ texmf-dist/doc/latex/ntgclass/classdoc.pdf details="Introduction to the classes"
+ texmf-dist/doc/latex/ntgclass/classdoc.tex
+ texmf-dist/doc/latex/ntgclass/ntgclass.pdf
+ texmf-dist/doc/latex/ntgclass/rapdoc.pdf details="The rapport (report) classes" language="nl"
+ texmf-dist/doc/latex/ntgclass/rapdoc.tex
+srccontainersize 55656
+srccontainerchecksum 989942960e4cc5320f3bc877cecec195dca4f8263b3de1b0d2a233adedef0380cabc5d017cb256ff8c46889df8878bc68a855a754cdc8b9dd0cd6a7b05242c08
+srcfiles size=76
+ texmf-dist/source/latex/ntgclass/a4.dtx
+ texmf-dist/source/latex/ntgclass/a4.ins
+ texmf-dist/source/latex/ntgclass/brief.dtx
+ texmf-dist/source/latex/ntgclass/ntgclass.dtx
+ texmf-dist/source/latex/ntgclass/ntgclass.ins
+runfiles size=71
+ texmf-dist/tex/latex/ntgclass/a4.sty
+ texmf-dist/tex/latex/ntgclass/artikel1.cls
+ texmf-dist/tex/latex/ntgclass/artikel2.cls
+ texmf-dist/tex/latex/ntgclass/artikel3.cls
+ texmf-dist/tex/latex/ntgclass/boek.cls
+ texmf-dist/tex/latex/ntgclass/boek3.cls
+ texmf-dist/tex/latex/ntgclass/brief.cls
+ texmf-dist/tex/latex/ntgclass/ntg10.clo
+ texmf-dist/tex/latex/ntgclass/ntg11.clo
+ texmf-dist/tex/latex/ntgclass/ntg12.clo
+ texmf-dist/tex/latex/ntgclass/rapport1.cls
+ texmf-dist/tex/latex/ntgclass/rapport3.cls
+catalogue-ctan /macros/latex/contrib/ntgclass
+catalogue-license lppl1.3
+catalogue-topics class letter
+catalogue-version 2.1e

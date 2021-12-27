@@ -1,0 +1,28 @@
+name philokalia
+category Package
+revision 45356
+shortdesc A font to typeset the Philokalia Books
+longdesc The philokalia package has been designed to ease the use of the
+longdesc Philokalia-Regular OpenType font with XeLaTeX. The font started
+longdesc as a project to digitize the typeface used to typeset the
+longdesc Philokalia books.
+containersize 76140
+containerchecksum 6a7b76995074ec233d4922de96f727ed031b21abbaf1a423bded6bcd964e8e503d7d3d84d8d4eb1ca42ebd99e1af50a244238f668db245ff4810176abefb0976
+doccontainersize 92820
+doccontainerchecksum 8cefb15592711d19d3fbe5fbbe6efb219ce081dac6d8bfb12ebc57ac807a30aefbaa37f371e70b7141876333ef408ae5fde177add749faf2302b2d7f60a1bf00
+docfiles size=25
+ texmf-dist/doc/xelatex/philokalia/README details="Readme"
+ texmf-dist/doc/xelatex/philokalia/philokalia.pdf details="Package documentation"
+srccontainersize 6900
+srccontainerchecksum 975d97494ed2fceefd6d7fae5cd7916689087d5f51136398b19d233e88335c373bbd572aeca930e3be212ae30b7d8b34e0070650aac5a9c391793fd6a5c1e394
+srcfiles size=6
+ texmf-dist/source/xelatex/philokalia/philokalia.dtx
+ texmf-dist/source/xelatex/philokalia/philokalia.ins
+runfiles size=33
+ texmf-dist/fonts/opentype/public/philokalia/Philokalia-Regular.otf
+ texmf-dist/tex/xelatex/philokalia/philokalia.sty
+ texmf-dist/tex/xelatex/philokalia/tuplk.fd
+catalogue-ctan /fonts/philokalia
+catalogue-license lppl1.3c
+catalogue-topics font-greek font-supp
+catalogue-version 1.2

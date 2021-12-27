@@ -1,0 +1,25 @@
+name book-of-common-prayer
+category Package
+revision 59742
+shortdesc Typeset in the style of "Book of Common Prayer"
+longdesc This a package for the typesetting of liturgical documents in
+longdesc the style of the 1979 "Book of Common Prayer". It provides
+longdesc macros for common liturgical situations (e.g. versicle and
+longdesc response, longer prayers, etc.). This package is designed to
+longdesc work with the Sabon font, but it is not necessary to run the
+longdesc macros.
+containersize 2528
+containerchecksum 0760350b49c1487d35ae04ff0ee57d552f6ffa0c7df9d02c7f74147d3c459926881a0252fd95d5b7acf3064fc63eca92f72aa088f8fca418d86f5e6f9b9febca
+doccontainersize 97136
+doccontainerchecksum ae73dba4c8bd043772ea4bf78ff9cfb0fa210d3de15b2e045356522349f11930e34dede648022be75d015893a91ecf9d57812b19475352f59a4f84de5a520055
+docfiles size=29
+ texmf-dist/doc/xelatex/book-of-common-prayer/README.md details="Readme"
+ texmf-dist/doc/xelatex/book-of-common-prayer/book-of-common-prayer.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/book-of-common-prayer/book-of-common-prayer.tex
+runfiles size=2
+ texmf-dist/tex/xelatex/book-of-common-prayer/book-of-common-prayer.sty
+catalogue-contact-repository https://gitlab.com/cwtc/book-of-common-prayer
+catalogue-ctan /macros/xetex/latex/book-of-common-prayer
+catalogue-license lppl1.3c
+catalogue-topics theology
+catalogue-version 1.0.0

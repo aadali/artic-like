@@ -1,0 +1,74 @@
+Multilingual bibliographies: The babelbib package
+=================================================
+
+
+This package enables to generate multilingual bibliographies in
+cooperation with babel. Two approaches are possible: Each citation
+may be written in another language, or the whole bibliography can 
+be typeset in a language chosen by the user. The current version 
+supports Afrikaans, Bahasa, Catalan, Croatian, Danish, Dutch, English,
+Esperanto, Finnish, French, Galician, German, Greek, Italian, Norwegian,
+Portuguese, Romanian, Russian, Serbian, Spanish, Swedish, and Turkish.
+  In addition, the package supports commands to change the typography
+of the bibliographies.
+  Many of the standard and extended bibliography styles are available.
+
+Please help me to add more languages to babelbib.
+
+The file tugboat-babelbib.pdf is a draft of an article that has been
+published in TUGboat Volume 23 (2002), No. 3/4. Thanks to the open
+access policy of TUG, the published article is availabe from
+	https://www.tug.org/TUGboat/tb23-3-4/
+	https://www.tug.org/TUGboat/tb23-3-4/tb75harders.pdf
+It contains a detailed documentation of the babelbib package and how
+to extend it. The source code for this file is not included.
+This article is about version 0.40 of this package but is up-to-date
+in most parts.
+
+Copyright 2003--2021 Harald Harders
+Copyright 2019--2021 Norbert Preining
+
+This program can be redistributed and/or modified under the terms
+of the LaTeX Project Public License Distributed from CTAN
+archives in directory macros/latex/base/lppl.txt; either
+version 1 of the License, or any later version.
+
+
+Maintainance and bug reports
+----------------------------
+Current maintainer is Norbert Preining, and development/bug fixes are
+done via the github repository https://github.com/TeX-Live/babelbib
+Please report issues there.
+
+
+Installation:
+
+automatic: - run make
+	   - run make install
+	 or
+           - run make
+           - copy *.sty, *.bst, and *.bdf to the correct places in the
+             texmf tree
+           - run texhash or the corresponding command of your distribution
+
+by hand: - execute latex on babelbib.ins
+         - execute latex on babelbib.dtx (2x)
+         - copy *.sty, *.bst, and *.bdf to the correct places in the
+           texmf tree
+         - run texhash or the corresponding command of your distribution
+
+
+To do:
+- Add more languages.
+- Test the different BibTeX styles.
+- Add definition of \btxurldatecomment to Esperanto.
+
+2012-01-03
+Harald Harders
+h.harders@tu-bs.de
+
+2019-03-14
+Norbert Preining
+norbert@preining.info
+
+(last changed 2021-01-06 NP)

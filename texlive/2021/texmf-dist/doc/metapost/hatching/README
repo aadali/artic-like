@@ -1,0 +1,52 @@
+-------------------------------------+-------------------------------------
+           ENGLISH                   |           POLSKI
+-------------------------------------+-------------------------------------
+The file HATCHING.MP contains a set  | Plik HATCHING.MP zawiera zestaw makr
+of METAPOST macros for hatching      | METAPOST-owych do zakreskowywania
+interior of closed paths.            | wn/etrza zamkni/etych /scie/zek.
+
+                               made in BOP s.c.
+                       e-mail: B.Jackowski@gust.org.pl
+                            public domain software
+         (no copyrights, copylefts, copyups, copydowns, or whatsoever)
+
+                         21.09.2000 -- ver 0.11 (pre-release)
+
+The basic macro, hatchfill, works    | Podstawowym makrem pakietu jest makro
+very much like the standard fill     | hatchfill, dzia/laj/ace bardzo
+command. The general form of the     | podobnie do makra fill. Og/olna
+hatchfill command call is as         | posta/c u/zycia polecenia hatchfill
+follows:                             | wygl/ada nast/epuj/aco:
+                                     
+       hatchfill path_expression withcolor c1 withcolor c2 ...
+
+The trick is that for hatching       | Trick polega u/zyciu specjalnych
+special ``colors'' are used, namely, | ,,kolor/ow'' -- je/sli mianowicie
+if bluepart(c)<0, the colour c is    | bluepart(c)<0, to sk/ladowe koloru c
+interpreted as hatching data:        | s/a traktowane jako informacja
+                                     | o zakreskowaniu:
+
+               hatching angle    redpart(c)     k/at nachylenia
+       distance between lines    greenpart(c)   odleg/lo/s/c mi/edzy kreskami
+           thickness of lines   -bluepart(c)    grubo/s/c kresek
+
+Dashing and colouring of the hatch   | Za pomoc/a makra hatchoptions mo/zna 
+pattern can be accomplished by       | zdefiniowa/c kolor kresek a tak/ze
+using hatchoptions command (cf.      | wz/or w przypadku linii przerywanych
+drawoptions in plain.mp). Actually,  | (por. makro drawoptions, plain.mp).
+an arbitrary pattern can be used     | W istocie dowolny obiekt mo/ze zosta/c
+instead of straight lines: it        | u/zyty do wype/lnienia /scie/zki: w tym
+suffices to redefine the macro       | celu nale/zy zdefiniowa/c w odpowiedni
+draw_hatched_band (cf. htchuse.mp,   | spos/ob makro draw_hatched_band (por.
+figure 103), although one should be  | htchuse.mp, ilustracja 103), jednak/ze
+aware that METAPOST memory can be    | nale/zy pami/eta/c, /ze w ten spos/ob
+easily overloaded and that the       | mo/zna /latwo wyczerpa/c zasoby
+resulting EPS files are usually      | pami/eciowe METAPOST-a i /ze na og/o/l
+annoyingly large.                    | otrzymuje si/e pliki irytuj/aco du/ze.
+                                     |
+The examples of usage can be found   |  Przyk/lady u/zycia mo/zna znale/x/c
+in htchuse.mp; for convenience,      |  w pliku htchuse.mp; dla wygody
+a trivial TeX file for typesetting   |  do/l/aczony zosta/l trywialny pliczek
+the figures, htchuse_.tex, is        |  TeX-owy (htchuse_.tex), sk/ladaj/acy
+included.                            |  jedn/a stron/e z tymi przyk/ladami.
+

@@ -1,0 +1,812 @@
+\documentclass[11pt,a4paper,english]{article}
+
+% To compile:
+% (pdf)latex mptrees-doc.tex
+% mpost mptrees-doc.mp
+% mpost mptrees-doc.mp
+% (pdf)latex mptrees-doc.tex
+
+  \usepackage{calc,ifthen}
+
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  \usepackage{textcomp}
+  \usepackage{mathtools}
+
+  \usepackage{geometry}
+  \geometry{twoside,hmargin=2cm,vmargin={1.5cm,1.8cm},includefoot}
+  
+  \usepackage[bottom]{footmisc}
+
+  \usepackage{mflogo}
+  
+
+  \usepackage{multicol}
+  \setlength{\multicolsep}{3pt}
+  \setlength{\columnsep}{0pt}
+  
+  \usepackage[toc]{multitoc}
+  
+  \usepackage{enumitem}
+  \setlist[description]{font=\ttfamily\bfseries\color{blue}}
+  
+  \usepackage[svgnames]{xcolor}
+
+  \usepackage{graphicx}
+  \usepackage{ifpdf}
+    \ifpdf
+      \DeclareGraphicsRule{*}{mps}{*}{}
+    \fi
+
+  \usepackage{url}
+  \usepackage{verbatim}
+  \usepackage{fancyvrb}
+  
+%  \usepackage{array}
+%  \usepackage{tabularx}
+%  \renewcommand{\tabularxcolumn}[1]{>{\arraybackslash}m{#1}}
+  
+  \usepackage{tcolorbox}
+  \tcbset{colframe=black,boxsep=0pt,left=3pt,right=3pt,top=0pt,bottom=0pt,boxrule=0.4pt,colback=LightGoldenrod}
+  
+  \usepackage{listings}
+  \lstset{columns=flexible,%
+          language=MetaPost,%
+          showstringspaces=false,%
+          basicstyle=\ttfamily,
+          literate={é}{{\'e}}1}
+
+
+  \usepackage{babel}
+  \usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+
+
+%%%%%%%%%%%%%%%%%%% moreverb.sty
+\makeatletter
+\newwrite\verbatim@out
+  \immediate\openout \verbatim@out \jobname.mp
+\newwrite\temp@code
+\def\verbatimwrite{%
+  \@bsphack
+  \immediate\openout \temp@code figtmp.mp
+  \let\do\@makeother\dospecials
+  \catcode`\^^M\active \catcode`\^^I=12
+  \def\verbatim@processline{%
+    \immediate\write\verbatim@out
+      {\the\verbatim@line}%
+    \immediate\write\temp@code
+          {\the\verbatim@line}
+     }%
+  \immediate\write\temp@code{beginfig(\thenumfig)}
+  \verbatim@start}
+
+\def\endverbatimwrite{%
+  \immediate\closeout\temp@code
+  \@esphack
+  }%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\largeurcode}
+\newlength{\largeurfig}
+\newcounter{numfig}
+\setcounter{numfig}{-1}
+
+\newcommand{\codedeuxcol}{%
+                  \begin{tcolorbox}
+                     \begin{minipage}[c]{\largeurcode}
+                       \begin{multicols}{2}
+                         \lstinputlisting{figtmp.mp}
+                       \end{multicols}
+                     \end{minipage}
+                   \end{tcolorbox}
+                     \par\noindent
+                    }
+                    
+                    
+\newcommand{\codehoriz}{%
+                   \begin{minipage}[c]{\largeurcode}
+                        \lstinputlisting[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]{figtmp.mp}
+                    \end{minipage}
+                    \hfill
+                 }
+
+\newcommand{\codevert}{%
+                   {\centering
+                   \begin{minipage}[c]{\largeurcode}
+                        \lstinputlisting[frame=single,frameround=tttt,backgroundcolor=\color{LightGoldenrod}]{figtmp.mp}
+                    \end{minipage}
+                    \par\noindent}
+                 }
+
+\makeatletter
+\newenvironment{codefigure}[3]%
+               {%
+               \refstepcounter{numfig}
+               \setlength{\largeurcode}{#2\linewidth}
+               \ifnum#1=0
+                  \setlength{\largeurfig}{\linewidth-\largeurcode-2\fboxsep-2\fboxrule}
+                  \def\inscode{\codehoriz}
+               \else
+                  \setlength{\largeurfig}{\linewidth}
+                  \def\inscode{\codevert}
+                  \ifnum#3=1
+                   \relax
+                  \else
+                    \def\inscode{\codedeuxcol}
+                  \fi
+               \fi
+                 \immediate\write\verbatim@out{beginfig(\thenumfig)}
+               \verbatimwrite
+               }%
+               {%
+                 \immediate\write\temp@code{endfig;}
+                 \immediate\write\verbatim@out{endfig;}
+                   
+               \endverbatimwrite
+               \par
+               \noindent
+                 \inscode
+               \IfFileExists{\jobname.\thenumfig}%
+                   {\begin{minipage}[c]{\largeurfig}
+                        \centering \includegraphics{\jobname.\thenumfig}\par
+                    \end{minipage}}{}
+               \par}
+\makeatother
+
+\newenvironment{codecache}%
+            {\verbatimwrite}{\endverbatimwrite}
+            
+\newcounter{reptmp}
+
+
+\newcounter{repexemple}
+\setcounter{repexemple}{0}
+
+\newcommand{\debutexemple}{\par\vspace{2ex}
+                   \refstepcounter{repexemple}
+                   \noindent {\bfseries \color{blue!20!black} 
+                   Example \arabic{repexemple}}
+                   \par\nopagebreak\vspace{1ex}
+                   }
+
+
+\newenvironment{exemple}[1][0.5]%
+                   {\debutexemple
+                   \codefigure{0}{#1}{1}
+                   }%
+                   {\endcodefigure
+                   \par\vspace{2ex}}
+
+\newenvironment{exemplev}[2][1]%
+                   {\debutexemple
+                   \codefigure{1}{#1}{#2}
+                   }%
+                   {\endcodefigure
+                   \par\vspace{2ex}}
+                   
+                   
+\newenvironment{figreperedoc}%
+                  {\refstepcounter{numfig}
+                   \verbatimwrite}%
+                   {%
+                   \endverbatimwrite%
+                   \IfFileExists{\jobname.\thenumfig}%
+                      {\includegraphics{\jobname.\thenumfig}}{}
+                   }
+
+
+
+\begin{document}
+\title{Documentation of \texttt{mptrees.mp}}
+\date{\today}
+\author{Olivier \textsc{Péault}%
+\footnote{E-mail : \href{mailto:o.peault@posteo.net}{\texttt{o.peault@posteo.net}}}}
+\maketitle
+
+\setcounter{tocdepth}{2}
+
+\setlength{\columnsep}{25pt}
+\tableofcontents
+\setlength{\columnsep}{10pt}
+
+
+\newcommand{\ijc}{[i][j]}
+
+\begin{codecache}
+input mptrees;
+%input latexmp;
+setupLaTeXMP(inputencoding="utf8",
+             packages="fourier,amsmath,nicefrac,babel[english]");
+dirtree:=0;
+\end{codecache}
+
+
+
+
+\section{Overview}
+
+This package is intended to simplify the drawing of probability trees with \MP. It provides one main command and several parameters to control the output.
+
+It can be used in standalone files with two compilations (\verb|latexmp| package is loaded) but it can also be used with Lua\LaTeX{} and \verb|luamplib| package.
+
+
+\begin{description}
+\item[tree\ijc (dim1,dim2,...)(ev1,prob1,ev2,prob2,...)] probability tree located in column \verb|i| and row \verb|j| (see figure below). \verb|dim1|, \verb|dim2|,... can be numerics or pairs and control the dimension of the tree. \verb|ev1|, \verb|prob1|... can be strings or pictures and will be printed (using \verb|latexmp| if strings) at the end of the edge (the event) and above the edge (the probability).
+
+%\item[shiftev, scaleprob, posprob, typeprob, proboffset, dirtree] numerics controlling the scale and position of the probability label, the direction of the tree...
+
+\end{description}
+
+\begin{center}
+\begin{figreperedoc}
+beginfig(0)
+draw tree[1][1](3cm,2cm)("$A$","$p$","$\overline{A}$","$q$");
+draw tree[2][1](3cm,1cm)("$B$","$\nicefrac{1}{4}$","$\overline{B}$","$\nicefrac{3}{4}$");
+draw tree[2][2](3cm,1cm)("$B$","$0.5$","$\overline{B}$","$0.5$");
+draw tree[3][2](3cm,1cm)("$C$","$c$","$\overline{C}$","$1-c$");
+draw tree[4][2](3cm,1cm)("$D$","$a$","$\overline{D}$","$b$");
+drawoptions(dashed evenly);
+draw (Orig_arbre[2][1]+(0,0.5cm))--(Orig_arbre[2][2]-(0,0.5cm))--(Orig_arbre[2][2]-(3.5cm,0.5cm))--(Orig_arbre[2][1]+(-3.5cm,0.5cm))--cycle withcolor red;
+label.bot(textext("\verb|tree[1][1]|"),0.5[Orig_arbre[2][2]-(0,0.5cm),Orig_arbre[2][2]-(3.5cm,0.5cm)]) withcolor red;
+draw (Orig_arbre[3][1]+(0,0.5cm))--(Orig_arbre[3][2]-(0,0.5cm))--(Orig_arbre[2][1]-(0,1cm))--(Orig_arbre[2][1]+(0,1cm))--cycle withcolor 0.5green;
+label.top(textext("\verb|tree[2][1]|"),0.5[Orig_arbre[3][1]+(0,0.5cm),Orig_arbre[2][1]+(0,1cm)]) withcolor 0.5green;
+draw (Orig_arbre[3][3]+(0,0.5cm))--(Orig_arbre[3][4]-(0,0.5cm))--(Orig_arbre[2][2]-(0,1cm))--(Orig_arbre[2][2]+(0,1cm))--cycle withcolor 0.5green;
+label.bot(textext("\verb|tree[2][2]|"),0.5[Orig_arbre[3][4]-(0,0.5cm),Orig_arbre[2][2]-(0,1cm)]) withcolor 0.5green;
+draw (Orig_arbre[4][1]+(0,0.5cm))--(Orig_arbre[4][2]-(0,0.5cm))--(Orig_arbre[3][2]-(0,1cm))--(Orig_arbre[3][2]+(0,1cm))--cycle withcolor blue;
+label.bot(textext("\verb|tree[3][2]|"),0.5[Orig_arbre[4][2]-(0,0.5cm),Orig_arbre[3][2]-(0,1cm)]) withcolor blue;
+draw (Orig_arbre[5][1]+(0,0.5cm))--(Orig_arbre[5][2]-(0,0.5cm))--(Orig_arbre[4][2]-(0,1cm))--(Orig_arbre[4][2]+(0,1cm))--cycle withcolor red;
+label.bot(textext("\verb|tree[4][2]|"),0.5[Orig_arbre[5][2]-(0,0.5cm),Orig_arbre[4][2]-(0,1cm)]) withcolor red;
+endfig;
+
+\end{figreperedoc}
+
+\end{center}
+
+
+\section{Trees}
+\subsection{Different kinds of trees}
+
+\begin{description}
+\item[tree\ijc (width,vspace)(ev1,prob1,ev2,prob2,...)] regular tree where \verb|width| is the horizontal width of the tree and \verb|vspace| the vertical space between two consecutive nodes.
+
+\begin{codecache}
+string dim[];
+dim[4]:="4 cm";dim[3]:="3 cm";dim[2]:="2 cm";dim[1]:="1 cm";
+dim[15]:="1.5 cm";dim[25]:="2.5 cm";dim[11]:="-1 cm";
+dim[22]:="-2 cm";dim[7]:="7cm";
+
+\end{codecache}
+
+\begin{codecache}
+extra_endfig:="drawoptions(withcolor red);";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(4cm,0)) shifted (0,2.25cm);label.top(textext(dim[4]),(2cm,2.25cm));";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(0,2.5cm)) shifted (Orig_arbre[2][2]-(5cm,0));label.lft(textext(dim[25]),(-1cm,0));";
+extra_endfig:=extra_endfig & "drawoptions(withcolor 0.5green);";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(3cm,0)) shifted (Orig_arbre[2][1]+(0,1cm));label.top(textext(dim[3]),(6cm,2.25cm));";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(0,1.5cm)) shifted (Orig_arbre[3][2]+(0.25cm,0));label.rt(textext(dim[15]),Orig_arbre[3][2]+(0.25cm,0.75cm));";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(0,1cm)) shifted (Orig_arbre[3][4]+(0.25cm,0));label.rt(textext(dim[1]),Orig_arbre[3][4]+(0.25cm,0.5cm));";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(0,1cm)) shifted (Orig_arbre[3][5]+(0.25cm,0));label.rt(textext(dim[1]),Orig_arbre[3][5]+(0.25cm,0.5cm));";
+
+\end{codecache}
+ 
+{\small \begin{exemplev}{1}
+draw tree[1][1](4cm,2.5cm)("$A_1$","$\nicefrac{1}{3}$","$A_2$","$\nicefrac{2}{3}$");
+draw tree[2][1](3cm,1.5cm)("$B$","$\nicefrac{1}{4}$","$C$","$\nicefrac{3}{4}$");
+draw tree[2][2](3cm,1cm)("$D$","$p$","$E$","$q$","$F$","$r$");
+\end{exemplev}
+}
+
+\item[tree\ijc (width,vspace1,vspace2...)(ev1,prob1,ev2,prob2,...)]  tree where \verb|width| is the horizontal width of the tree while each \verb|vspace| indicates the vertical space between the node and the origin of the tree.
+
+\begin{codecache}
+extra_endfig:="drawoptions(withcolor 0.5green);";
+extra_endfig:=extra_endfig & "draw Orig_arbre[2][1] -- (Orig_arbre[2][1]+(4.5cm,0)) dashed evenly;";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(3cm,0)) shifted (Orig_arbre[2][1]+(0,2.25cm));label.top(textext(dim[3]),(5cm,3.25cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,-2cm)--(0,0)) shifted (Orig_arbre[3][1]+(0.25cm,0));label.rt(textext(dim[2]),Orig_arbre[3][1]+(0.25cm,-0.7cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,-1cm)--(0,0)) shifted (Orig_arbre[3][2]+(0.5cm,0));label.rt(textext(dim[1]),Orig_arbre[3][2]+(0.5cm,-0.5cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,1cm)--(0,0)) shifted (Orig_arbre[3][3]+(0.75cm,0));label.rt(textext(dim[11]),Orig_arbre[3][3]+(0.75cm,0.5cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,0)--(0,-2cm)) shifted (Orig_arbre[3][4]+(0.25cm,0));label.rt(textext(dim[22]),Orig_arbre[3][4]+(0.25cm,-1cm));";
+\end{codecache}
+\begin{exemplev}{1}
+draw tree[1][1](3cm,2cm)("$A$","$p$","$\overline{A}$","$q$");
+draw tree[2][1](3cm,2cm,1cm,-1cm)("$B$","$p$","$C$","$q$","$D$","$r$");
+draw tree[2][2](3cm,0cm,-2cm)("$E$","$0.5$","$F$","$0.5$");
+\end{exemplev}
+
+\begin{codecache}
+extra_endfig:="";
+\end{codecache}
+
+\item[tree\ijc (pair1,pair2,...)(ev1,prob1,ev2,prob2,...)] tree where \verb|pair1|, \verb|pair2|... indicate the coordinates of each node from the origin of the tree.
+
+
+\begin{codecache}
+extra_endfig:="drawoptions(withcolor 0.5green);";
+extra_endfig:=extra_endfig & "draw Orig_arbre[2][1] -- (Orig_arbre[2][1]+(5cm,0)) dashed evenly;";
+extra_endfig:=extra_endfig & "drawarrow ((0,0)--(3cm,0)) shifted (Orig_arbre[2][1]+(0,2.25cm));label.top(textext(dim[3]),(5cm,3.25cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,-2cm)--(0,0)) shifted (Orig_arbre[3][1]+(0.25cm,0));label.rt(textext(dim[2]),Orig_arbre[3][1]+(0.25cm,-0.7cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,0)--(4cm,0)) shifted (Orig_arbre[2][1]+(0,-1.25cm));label.bot(textext(dim[4]),(5.5cm,-0.25cm));";
+extra_endfig:=extra_endfig & "drawarrow ((0,0)--(0,-1cm)) shifted (Orig_arbre[3][2]+(0,1cm));label.rt(textext(dim[11]),Orig_arbre[3][2]+(0,0.5cm));";
+\end{codecache}
+
+\begin{exemplev}{1}
+draw tree[1][1](3cm,2cm)("$A$","$p$","$\overline{A}$","$1-p$");
+draw tree[2][1]((3cm,2cm),(4cm,-1cm))("$B$","$q$","$C$","$r$");
+\end{exemplev}
+
+\begin{codecache}
+extra_endfig:="";
+\end{codecache}
+\end{description}
+
+\subsection{Start and end labels}
+\begin{description}
+\item[startlabel(s)] Print \verb|s| (can be a string or a picture) at the origin of the tree.
+
+\begin{exemple}[0.65]
+ draw startlabel("$S$");
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\item[endlabel\ijc(s)] Print \verb|s| at the end of a branch. The space between the previous label ans \verb|s| is controlled by the numeric \verb|endlabelspace| which defaults to \verb|1cm|.
+
+\begin{exemplev}{1}
+ draw startlabel("$S$");
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+ draw tree[2][2](2cm,1cm)("$A$","$p$","$B$","$q$");
+ draw endlabel[2][1]("$SA$");
+ draw endlabel[3][1]("$SBA$");
+ draw endlabel[3][2]("$SBB$");
+\end{exemplev}
+
+\end{description}
+
+\section{Direction}
+\begin{description}
+\item[dirtree] All trees are construct horizontally by default. \verb|ditree| indicates the angle in degrees between the horizontal and the main direction of the tree. Default is $0$.
+
+
+
+\begin{exemplev}{1}
+dirtree:=135;
+draw tree[1][1](3cm,2cm)("$A_1$","$a_1$","$A_2$","$a_2$");
+draw tree[2][1](3cm,1cm)("$B$","$b$","$C$","$c$");
+draw tree[2][2](3cm,1cm)("$D$","$p$","$E$","$q$");
+\end{exemplev}
+
+
+\begin{exemplev}{1}
+dirtree:=-60;
+draw tree[1][1](3cm,2cm)("$A_1$","$a_1$","$A_2$","$a_2$");
+draw tree[2][1](3cm,1cm)("$B$","$b$","$C$","$c$");
+draw tree[2][2](3cm,1cm)("$D$","$p$","$E$","$q$");
+\end{exemplev}
+
+\begin{codecache}
+dirtree:=0;dirlabel:=0;
+\end{codecache}
+
+\item[dirlabel] With dirtree, the whole tree is rotated. With \verb|dirlabel|, only the position of the labels is changed so the given coordinates are the real ones. May be useful for vertical trees.
+
+\begin{exemplev}{1}
+dirlabel:=90;
+draw tree[1][1]((-1cm,2cm),(1cm,2cm))("$A$","$p$","$B$","$q$");
+draw tree[2][1]((-0.5cm,2cm),(0.5cm,2cm))("$C$","$c$","$D$","$d$");
+draw tree[2][2]((-0.5cm,2cm),(0.5cm,2cm))("$E$","$e$","$F$","$f$");
+\end{exemplev}
+
+\begin{codecache}
+dirlabel:=0;
+\end{codecache}
+
+\end{description}
+
+\section{Dealing with alignment}
+\begin{description}
+\item[shiftev] The origin of each tree is located where the bounding box of the previous event's name ends. Thus subtrees may begin at different places. The numeric \verb|shiftev| indicates the horizontal space between the end of the edges and the beginning of following trees.
+
+It can be used inside the first set of parameters of the tree (see example below) or as a global variable.
+
+
+\begin{exemplev}{1}
+ draw tree[1][1](80,120)("$A$","$0.5$","$\overline{A}$","$0.5$");
+ draw tree[2][1](70,40)("Yes","$p$","No","$q$","Maybe","$r$");
+ draw tree[2][2](70,40,"shiftev:=1.5cm")("Yes","$p$","No","$q$","Maybe","$r$");
+ draw tree[3][1](50,20)("$B$","$b$","$C$","$c$");
+ draw tree[3][2](50,20)("$B$","$b$","$C$","$c$");
+ draw tree[3][3](50,20)("$B$","$b$","$C$","$c$");
+ draw tree[3][4](50,20)("$B$","$b$","$C$","$c$");
+ draw tree[3][5](50,20)("$B$","$b$","$C$","$c$");
+ draw tree[3][6](50,20)("$B$","$b$","$C$","$c$");
+\end{exemplev}
+
+
+\item[abscoord] With the boolean \verb|abscoord| set to \verb|true|, all the coordinates are given from the origin of the \emph{first} tree instead of the origin of the subtree, which makes easier the alignment of all the subtrees. 
+\end{description}
+
+
+\begin{codecache}
+extra_endfig:="drawoptions(withcolor red);";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(7cm,0)) shifted (0,2.25cm);label.top(textext(dim[7]),(3.5cm,2.25cm));";
+extra_endfig:=extra_endfig & "drawdblarrow ((0,0)--(0,2cm)) shifted (-0.5cm,0);label.lft(textext(dim[2]),(-0.5cm,1cm));";
+\end{codecache}
+
+\begin{exemplev}{1}
+abscoord:=true;
+draw tree[1][1](3cm,2cm)("$A$","$p$","Blabla","$q$");
+draw tree[2][1]((7cm,2cm),(7cm,0.5cm))("$A$","$p$","$B$","$q$");
+draw tree[2][2]((7cm,-0.5cm),(7cm,-2cm))("$A$","$p$","$B$","$q$");
+\end{exemplev}
+
+\begin{codecache}
+extra_endfig:="";
+abscoord:=false;
+\end{codecache}
+
+
+\section{Parameters}
+
+\subsection{Event}
+\begin{description}
+\item[scaleev] numeric controlling the scale of the label at the end of the edge (the event). Default is $1$.
+
+\begin{exemple}[0.65]
+ scaleev:=2;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{codecache}
+scaleev:=1;
+\end{codecache}
+
+
+\end{description}
+
+\subsection{Probability}
+\begin{description}
+
+
+\item[scaleprob] numeric controlling the scale of the label above the edge (the probability). Default is $0.85$.
+
+\begin{exemple}[0.65]
+ scaleprob:=1.5;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{codecache}
+scaleprob:=0.85;
+\end{codecache}
+
+
+
+\item[posprob] numeric controlling the position of the label above the edge. Default is $0.6$.
+
+
+\begin{exemple}[0.65]
+ posprob:=0.8;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\item[typeprob] numeric controlling how the label is printed. Values can be 1 (the default, label is printed above the edge), 2 (the label is printed on the edge), 3 (the label is printed above the edge and rotated) or 4 (the label is printed on the edge and rotated).
+
+\begin{codecache}
+posprob:=0.6;
+\end{codecache}
+
+\begin{exemple}[0.7]
+ typeprob:=2;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$1-p$");
+\end{exemple}
+
+\begin{exemple}[0.7]
+ typeprob:=3;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$1-p$");
+\end{exemple}
+
+\begin{exemple}[0.7]
+ typeprob:=4;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$1-p$");
+\end{exemple}
+
+
+\item[proboffset] numeric controlling the amount by which the label above the edge is offset. Default is \verb|labeloffset| (\verb|3bp|).
+
+\begin{codecache}
+typeprob:=1;
+\end{codecache}
+
+\begin{exemple}[0.75]
+ draw tree[1][1](3cm,3cm)("$A$","$p+q+r$","$B$","$s$");
+\end{exemple}
+
+
+
+\begin{exemple}[0.75]
+ proboffset:=6bp;
+ draw tree[1][1](3cm,3cm)("$A$","$p+q+r$","$B$","$s$");
+\end{exemple}
+
+\begin{codecache}
+proboffset:=3bp;
+\end{codecache}
+
+\end{description}
+
+\subsection{Edge}
+\begin{description}
+\item[endedgeshift] vertical space added at the end of the edge. Default is $0$. Useful when various edges end at the same point
+
+\begin{exemple}[0.65]
+ draw startlabel("$S$");
+ draw tree[1][1]((3cm,-1cm))("$A$","$p$");
+\end{exemple}
+
+
+\begin{exemple}[0.65]
+ endedgeshift:=10;
+ draw startlabel("$S$");
+ draw tree[1][1]((3cm,-1cm))("$A$","$p$");
+\end{exemple}
+
+\begin{codecache}
+endedgeshift:=0;
+\end{codecache}
+
+
+
+\item[edgearrow] When the boolean \verb|edgearrow| is set to true, edges end with an arrow. Default is \verb|false|.
+
+\begin{exemple}[0.65]
+ edgearrow:=true;
+ draw tree[1][1](3cm,2cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{codecache}
+edgearrow:=false;
+\end{codecache}
+
+\item[branchtype] string which controls the shape of the edge. Possible values are  \verb|segment| (default), \verb|curve|, \verb|broken|. With the last one, the length of the first segment of the broken line depends on a numeric parameter, \verb|brokenlineratio| which indicates the ratio between the length of this segment and the length of the horizontal space. Default value is \verb|0.2|.
+\end{description}
+
+\begin{exemple}[0.65]
+ branchtype:="curve";
+ draw tree[1][1](3cm,3cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{exemple}[0.65]
+ branchtype:="broken";
+ draw tree[1][1](3cm,3cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{exemple}[0.65]
+ branchtype:="broken";
+ posprob:=0.8;
+ brokenlineratio:=0.5;
+ draw tree[1][1](3cm,3cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+
+\begin{exemple}[0.65]
+ branchtype:="broken";
+ posprob:=0.8;
+ brokenlineratio:=0.75;
+ draw tree[1][1](3cm,3cm)("$A$","$p$","$B$","$q$");
+\end{exemple}
+
+\begin{codecache}
+ posprob:=0.6;
+ branchtype:="segment";
+ brokenlineratio:=0.2;
+\end{codecache}
+
+\section{Binomial trees}
+
+\begin{description}
+\item[bernoulliprocess(n)(l,h)] tree describing the Bernoulli process with $n$ trials. \verb|l| is the length of the first edges and \verb|h| is the space between two final nodes.
+\item[bernoulliprocessL(n)(L,H)] same as above where \verb|L| is the whole width of the tree and \verb|H| its height.
+\end{description}
+
+Several parameters control the output:
+
+\begin{description}
+\item[bernoullisuccessevent] string printed at every node representing a success. Default is \verb|"$S$"|.
+\item[bernoullifailureevent] string printed at every node representing a failure. Default is \verb|"$\overline{S}$"|.
+\item[bernoullisuccessprob] string printed above every edge representing a success. Default is \verb|"$p$"|.
+\item[bernoullifailureprob] string printed above every edge representing a success. Default is \verb|"$q$"|.
+\item[bernoulliscalebranch] ratio between width of consecutive edges. Default is \verb|0.8|.
+\end{description}
+
+\begin{exemple}[0.45]
+draw bernoulliprocess(3)(3cm,0.7cm);
+\end{exemple}
+
+\begin{exemple}[0.45]
+typeprob:=4;
+bernoullisuccessevent:="$A$";
+bernoullifailureevent:="$B$";
+bernoullisuccessprob:="$0.7$";
+bernoullifailureprob:="$0.3$";
+draw bernoulliprocess(3)(3cm,0.7cm);
+\end{exemple}
+
+\begin{codecache}
+typeprob:=1;
+bernoullisuccessevent := "$S$";
+bernoullifailureevent := "$\overline{S}$";
+bernoullisuccessprob := "$p$";
+bernoullifailureprob := "$q$";
+\end{codecache}
+
+\begin{description}
+\item[binomialtree(n)(l,h)] tree describing the binomial distribution with $n$ trials. \verb|l| is the length of the first edges and \verb|h| is the space between two final nodes. It uses \verb|bernoullisuccesprob| and \verb|bernoullifailureprob| but \verb|bernoulliscalebranch| is set to \verb|1|.
+\item[binomialtreeL(n)(L,H)] same as above where \verb|L| is the whole width of the tree and \verb|H| its height.
+\end{description}
+
+\begin{exemplev}{1}
+draw binomialtree(4)(3cm,1.5cm);
+\end{exemplev}
+
+
+\section{Embedded code in \LaTeX{} files}
+
+You can embed your code in \LaTeX{} files.
+
+\subsection{With \texttt{pdftex}}
+
+\medskip
+
+\begin{minipage}[t]{0.45\linewidth}
+{\centering \textbf{Using \texttt{emp} package}\par}
+
+
+
+\verb|pdflatex myfile.tex|
+
+\verb|mpost myfile.mp|
+
+\verb|mpost myfile.mp|
+
+\verb|pdflatex myfile.tex|
+
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage{emp}
+\usepackage{ifpdf}
+ \ifpdf % allows pdflatex compilation
+  \DeclareGraphicsRule{*}{mps}{*}{}
+ \fi
+\begin{document}
+\begin{empfile}
+\begin{empcmds}
+ input mptrees;
+\end{empcmds}
+\begin{emp}(0,0)
+ draw tree[1][1](3cm,3cm)(...);
+\end{emp}
+\end{empfile}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\linewidth}
+{\centering \textbf{Using \texttt{mpgraphics} package}\par}
+
+
+\verb|pdflatex -shell-escape myfile.tex|
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage[runs=2]{mpgraphics}
+\begin{document}
+\begin{mpdefs}
+ input mptrees;
+\end{mpdefs}
+\begin{mpdisplay}
+ draw tree[1][1](3cm,3cm)(...);
+\end{mpdisplay}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+
+\subsection{With \texttt{luatex}}
+
+\begin{center}
+\begin{minipage}[t]{0.6\linewidth}
+{\centering \textbf{Using Lua\LaTeX}\par}
+
+
+\verb|lualatex myfile.tex|
+
+\begin{lstlisting}[frame=single,frameround=tttt,backgroundcolor=\color{LightSteelBlue},language={[LaTeX]TeX}]
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{luamplib}
+\begin{document}
+\everymplib{input mptrees;}
+\begin{mplibcode}
+beginfig(1);
+ draw tree[1][1](3cm,3cm)("$A$","$p$","$B$","$q$");
+endfig;
+\end{mplibcode}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\section{Examples}
+
+\begin{exemplev}[0.9]{1}
+u:=0.4cm;
+branchtype:="curve";
+dirlabel:=90;
+abscoord:=true;
+endlabelspace:=0.5cm;
+draw startlabel("S");
+draw tree[1][1]((-5.5u,4u),(5.5u,8u))("NP","","VP","");
+draw tree[2][1]((-8.5u,12u),(-2.5u,8u))("A","","NP","");
+draw tree[2][2]((3.5u,12u),(7.5u,12u))("V","","Adv","");
+draw tree[3][2]((-4.5u,12u),(-0.5u,12u))("A","","N","");
+draw endlabel[3][1]("Colorless");
+draw endlabel[4][1]("green");
+draw endlabel[4][2]("ideas");
+draw endlabel[3][3]("sleep");
+draw endlabel[3][4]("furiously");
+\end{exemplev}
+
+\begin{codecache}
+endlabelspace:=1cm;
+\end{codecache}
+
+\begin{exemplev}[0.9]{1}
+u:=1cm;
+branchtype:="broken";
+dirlabel:=-90;
+abscoord:=true;
+scaleev:=2;
+label.top(textext("\Large Tree diagram of $(2x+1)(x-3)$"),(0,1cm));
+draw startlabel("$\times$");
+draw tree[1][1]((-2u,-1.5u),(2u,-1.5u))("$+$","","$-$","");
+draw tree[2][1]((-3u,-3.5u),(-1u,-3.5u))("$\times$","","$1$","");
+draw tree[2][2]((1u,-3.5u),(3u,-3.5u))("$x$","","$3$","");
+draw tree[3][1]((-4u,-5.5u),(-2u,-5.5u))("$2$","","$x$","");
+\end{exemplev}
+
+\begin{codecache}
+branchtype:="segment";
+dirlabel:=0;
+abscoord:=false;
+scaleev:=1;
+\end{codecache}
+
+\begin{exemplev}{1}
+posprob:=0.5;
+typeprob:=3;
+shiftev:=1.5cm;
+edgearrow:=true;
+u:=0.2cm;
+vardef paral = ((2,-2)--(6,2)--(0,2)--(-4,-2)--cycle) scaled u enddef;
+vardef rhombus = ((3,0)--(0,6)--(-3,0)--(0,-6)--cycle) scaled u enddef;
+vardef rectangle = ((3,5)--(-3,5)--(-3,-5)--(3,-5)--cycle) scaled u enddef;
+vardef square = ((3,3)--(-3,3)--(-3,-3)--(3,-3)--cycle) scaled u enddef;
+draw startlabel(paral);
+draw tree[1][1](5cm,4cm)(rhombus,"Diagonals perpendicular",%
+                            rectangle,"Diagonals of equal length");
+endedgeshift:=5;
+draw tree[2][1]((5cm,-2cm))("","Diagonals of equal length");
+draw tree[2][2]((5cm,2cm))(square,"Diagonals perpendicular");
+\end{exemplev}
+ 
+\begin{codecache}
+end
+\end{codecache}
+
+\makeatletter
+\immediate\closeout\verbatim@out
+\makeatother
+\end{document}
+
+

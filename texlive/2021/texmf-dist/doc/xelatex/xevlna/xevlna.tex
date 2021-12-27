@@ -1,0 +1,51 @@
+%% $Id: xevlna.tex 535 2017-03-25 16:38:58Z zw $
+\documentclass[12pt]{article}
+\usepackage[a4,margins=25mm,footskip=30pt,title=xevlna,author={Zdeněk Wagner},
+            keywords={vlna, XeTeX}]{zwpagelayout}
+\RequireXeTeX
+\usepackage{fontspec,polyglossia,verbatim,rotating}
+\setmainfont[Script=Devanagari,Language=Hindi]{FreeSerif}% needed for one example
+\setmonofont{FreeMono}
+\setsansfont{FreeSans}
+
+\setmainlanguage{english}
+\setotherlanguage{czech}
+
+\pagestyle{plain}
+\newif\ifeng
+
+\DeclareRobustCommand\xevlna{X\kern-.125em\lower.5ex\hbox{\csname
+              reflectbox\endcsname{E}}\kern-.0666em Vlna}
+\DeclareRobustCommand\XeTeX{X\kern-.125em\lower.5ex\hbox{\csname
+              reflectbox\endcsname{E}}\kern-.1667em\TeX}
+\DeclareRobustCommand\XeLaTeX{X\kern-.125em\lower.5ex\hbox{\csname
+              reflectbox\endcsname{E}}\LaTeX}
+
+
+\DeclareRobustCommand*\cmd[1]{\texttt{\char`\\#1}}
+\usepackage[bookmarks,bookmarksopenlevel=2,bookmarksopen]{hyperref}
+\usepackage{xevlna} % You need the egg before having the hen :-(
+\begin{document}
+\title{\textsf{\xevlna}\\Vlna implemented in \XeTeX}
+\author{Zdeněk Wagner\\\url{http://icebearsoft.euweb.cz}}
+\date{25 March 2017}
+\maketitle
+\def\contentsname{Contents\,/\,Obsah}
+\tableofcontents
+
+\clearpage
+
+\xevlnaDisable
+
+\engtrue\input{xevlna-inc}
+
+\clearpage
+
+\xevlnaEnable
+
+\begin{czech}
+\engfalse\input{xevlna-inc}
+\end{czech}
+
+\end{document}
+

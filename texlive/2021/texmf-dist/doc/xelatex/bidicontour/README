@@ -1,0 +1,28 @@
+_____________________
+The bidicontour package
+v0.1
+
+Bidi-aware coloured contour around text
+
+If you want to report any bugs or typos and corrections in the documentation,
+or ask for any new features, or suggest any improvements, or ask any questions
+about the package, then please do not send any direct email to me; I will not
+answer any direct email. Instead please use the issue tracker:
+  <https://github.com/vafa/bidicontour/issues>
+In doing so, please always explain your issue well enough, always include
+a minimal working example showing the issue, and always choose the appropriate
+label for your query (i.e. if you are reporting any bugs, choose `Bug' label).
+
+Current version release date: 2014/07/14
+
+___________________
+Vafa Khalighi
+persian-tex@tug.org
+
+Copyright © 2014
+It may be distributed and/or modified under the LaTeX Project Public License,
+version 1.3c or higher (your choice). The latest version of
+this license is at: http://www.latex-project.org/lppl.txt
+
+This work is “author-maintained” (as per LPPL maintenance status)
+by Vafa Khalighi.

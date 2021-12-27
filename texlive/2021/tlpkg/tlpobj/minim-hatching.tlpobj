@@ -1,0 +1,23 @@
+name minim-hatching
+category Package
+revision 59531
+shortdesc Create tiling patterns with the minim-mp MetaPost processor
+longdesc This is a small proof-of-concept library of tiling patterns for
+longdesc use with the minim-mp MetaPost processor.
+containersize 2240
+containerchecksum 2ef4fdef86cc308d2202fc2a60a410679b6f4974f2770d7e7a348dab5f26059c652a65a7cac0832781f29b5eeb389d7a5ace0ebeedc65a5ba6efce03c705a48b
+doccontainersize 27364
+doccontainerchecksum 2535f5d3958d099a8f1f8be8da0c871b1149346f700b2b9c5c6bab873facf659549491df979c805b7e328bbcacf0e3e679e39ebdab64f9395486099dd39507e3
+docfiles size=23
+ texmf-dist/doc/latex/minim-hatching/EUPL-1.2-EN.txt
+ texmf-dist/doc/latex/minim-hatching/README details="Readme"
+ texmf-dist/doc/latex/minim-hatching/minim-hatching-doc.mp
+ texmf-dist/doc/latex/minim-hatching/minim-hatching-doc.pdf details="Package documentation"
+runfiles size=2
+ texmf-dist/metapost/minim-hatching/minim-hatching.mp
+catalogue-also minim hatching
+catalogue-contact-repository https://gitlab.com/renkema/minim
+catalogue-ctan /graphics/minim-hatching
+catalogue-license other-free
+catalogue-topics luatex graphics-subpic
+catalogue-version 2021/1.0

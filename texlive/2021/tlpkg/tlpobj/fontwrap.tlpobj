@@ -1,0 +1,23 @@
+name fontwrap
+category Package
+revision 15878
+shortdesc Bind fonts to specific unicode blocks
+longdesc The package (which runs under XeLaTeX) lets you bind fonts to
+longdesc specific unicode blocks, for automatic font tagging of
+longdesc multilingual text. The package uses Perl (via perltex) to
+longdesc construct its tables.
+containersize 12740
+containerchecksum 5bad0487f5cfa4119d7baafccc6178925baea12f1cbed5912211c52f2c4ea01eb00f9dacd300c24b93f48e5f13197a86ba1e37c35ed69fb1031281fdeb08edf2
+doccontainersize 270912
+doccontainerchecksum 857be54c81d9bfb14277c17638ec24c643c278d660b56e18a4701aea0ad28e496df0aec191b12d93bb29b7ab326b39ad9cc7ddc3615871d1b70fdf6e44ccdc6e
+docfiles size=77
+ texmf-dist/doc/xelatex/fontwrap/README details="Readme"
+ texmf-dist/doc/xelatex/fontwrap/fontwrap.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/fontwrap/fontwrap.tex
+ texmf-dist/doc/xelatex/fontwrap/fontwrap_example.pdf details="Examples of use"
+ texmf-dist/doc/xelatex/fontwrap/fontwrap_example.tex
+runfiles size=18
+ texmf-dist/tex/xelatex/fontwrap/fontwrap.sty
+catalogue-ctan /macros/xetex/latex/fontwrap
+catalogue-license gpl
+catalogue-topics font-sel font-supp unicode

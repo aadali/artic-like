@@ -1,0 +1,29 @@
+name thumbpdf
+category Package
+revision 48625
+shortdesc Thumbnails for pdfTeX and dvips/ps2pdf
+longdesc A Perl script that provides support for thumbnails in pdfTeX
+longdesc and dvips/ps2pdf. The script uses ghostscript to generate the
+longdesc thumbnails which get represented in a TeX readable file that is
+longdesc read by the package thumbpdf.sty to automatically include the
+longdesc thumbnails. This arrangement works with both plain TeX and
+longdesc LaTeX.
+depend thumbpdf.ARCH
+containersize 18876
+containerchecksum f3eaaa9ad4287d58ab89b98e1889f99dbabd82153f99921a9249b2cfb741c0cc45bfdd1903590c66bf0b63c77490017c36f552e34d7d15290cbc5904e57a3bc8
+doccontainersize 14604
+doccontainerchecksum fa2a7cbf80f7b76e63aff8ce5584e698e9f88a0d5a902895afa22a100202fb30bc857f5a1b88e190ff2dbf5ca9cf2338f6ca96a7b80a6d3e6e549040fc3ece7d
+docfiles size=10
+ texmf-dist/doc/generic/thumbpdf/README
+ texmf-dist/doc/man/man1/thumbpdf.1
+ texmf-dist/doc/man/man1/thumbpdf.man1.pdf
+runfiles size=19
+ texmf-dist/scripts/thumbpdf/thumbpdf.pl
+ texmf-dist/tex/generic/thumbpdf/thumbpdf.sty
+ texmf-dist/tex/generic/thumbpdf/thumbpdf.tex
+catalogue-contact-bugs https://github.com/ho-tex/thumbpdf/issues
+catalogue-contact-repository https://github.com/ho-tex/thumbpdf
+catalogue-ctan /support/thumbpdf
+catalogue-license lppl1.3
+catalogue-topics pdf-feat
+catalogue-version 3.17

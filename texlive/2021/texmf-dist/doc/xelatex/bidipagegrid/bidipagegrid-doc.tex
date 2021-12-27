@@ -1,0 +1,41 @@
+\documentclass{ltxdoc}
+\usepackage{holtxdoc}
+\begin{document}
+\title{The \xpackage{bidipagegrid} package}
+\author{Vafa Khalighi\\\xemail{persian-tex@tug.org}}
+\maketitle
+\vskip 0pt plus 3fill
+\fbox{%
+\begin{minipage}{\dimexpr(\textwidth-2\fboxsep-2\fboxrule)}
+If you want to report any bugs or typos and corrections in the documentation,
+or ask for any new features, or suggest any improvements, or ask any questions
+about the package, then please do not send any direct email to me; I will not 
+answer any direct email. Instead please use the issue tracker:
+
+\medskip
+  \centerline{\url{https://github.com/vafa/bidipagegrid/issues}}
+
+\medskip
+In doing so, please always explain your issue well enough, always include
+a minimal working example showing the issue, and always choose the appropriate
+label for your query (i.e. if you are reporting any bugs, choose `Bug' label). 
+\end{minipage}
+}
+\tableofcontents
+\section{Introduction}
+The \xpackage{pagegrid} package of Heiko Oberdiek, prints page grid in the background. Unfortunately, this package does not play nicely with \xpackage{bidi} package.
+The \xpackage{bidipagegrid} package modifies \xpackage{pagegrid} package to allow bidirectional (both right to left and left to right) page grid in the background. 
+
+\section{Documentation}
+The \xpackage{bidipagegrid} package provides all the options and user commands of \xpackage{pagegrid} package; in addition, it provides an option for the direction of the page grid, namely \texttt{direction} (for entire document). There are only two values for this option, \texttt{RTL}, and \texttt{LTR}. By default, \texttt{RTL} is active. If you want LTR page grid, you will load the package in this way:
+\begin{verbatim}
+\usepackage[direction=LTR]{bidipagegrid}
+\end{verbatim}
+
+
+The following two commands are also provided:
+\begin{description}
+\item[\cs{setLTRpagegrid}] sets the direction of the page grid to LTR.
+\item[\cs{setRTLpagegrid}] sets the direction of the page grid to RTL.
+\end{description}
+\end{document}

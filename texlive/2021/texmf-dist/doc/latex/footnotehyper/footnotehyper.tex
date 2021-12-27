@@ -1,0 +1,29 @@
+%%
+%% Package: footnotehyper
+%% Version: 1.1e (2021/08/13)
+%% License: LPPL 1.3c
+%% Copyright (C) 2016-2021 Jean-Francois Burnol <jfbu at free dot fr>.
+%%
+\def\pkgname        {footnotehyper}
+\def\pkgdate        {2021/08/13}
+\def\docdate        {2021/08/13}
+\def\pkgversion     {v1.1e}
+\def\pkgdescription {hyperref aware footnote.sty (JFB)}
+%%
+%% run latex twice on this file footnotehyper.tex then dvipdfmx on
+%% footnotehyper.dvi to produce the documentation footnotehyper.pdf, with
+%% source code included.
+%%
+\chardef\Withdvipdfmx 1 % replace 1 by 0 for using latex+dvips or pdflatex
+\chardef\NoSourceCode 0 % replace 0 by 1 for the doc *without* the source code
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile {\pkgname.tex}[Driver for \pkgname\space documentation]%
+\PassOptionsToClass   {a4paper,fontsize=11pt,oneside}{scrdoc}
+\PassOptionsToPackage {english}{babel}
+\input \pkgname.dtx
+%%% Local Variables:
+%%% mode: latex
+%%% End:
+\endinput
+%%
+%% End of file `footnotehyper.tex'.

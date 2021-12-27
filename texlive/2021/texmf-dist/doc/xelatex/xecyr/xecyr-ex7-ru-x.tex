@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+
+\setmainfont{CMU Serif}
+
+\title{Распространенные русские кодировки}
+\author{Из русской <<Википедии>>}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+% Does not work with LuaLaTeX!
+% Обратите внимание на названия кодировок! Они берутся отсюда: http://www.iana.org/assignments/character-sets
+
+\XeTeXdefaultencoding "IBM866"
+\input inputs/866
+
+\XeTeXdefaultencoding "KOI8-R"
+\input inputs/koi8-r
+
+\XeTeXdefaultencoding "windows-1251"
+\input inputs/1251
+
+\XeTeXdefaultencoding "ISO-8859-5"
+\input inputs/iso
+
+\XeTeXdefaultencoding "UTF-8"
+
+\vspace{\stretch{1}}
+
+Конец документа :)
+
+\end{document}

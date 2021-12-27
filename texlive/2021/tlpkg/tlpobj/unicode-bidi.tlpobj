@@ -1,0 +1,21 @@
+name unicode-bidi
+category Package
+revision 42482
+shortdesc Experimental unicode bidi package for XeTeX
+longdesc The experimental unicode-bidi package allows to mix non-RTL
+longdesc script with RTL script without any markup.
+containersize 1120
+containerchecksum 35e32b9959e698ab0d32ef578376fdeaac54c1acb9abc584e742a7caafbb2cf82364d58d73ad07de4cd273a5c9c60e4468df74fc4c21fb6552ddb5be725e384d
+doccontainersize 992
+doccontainerchecksum 44b76c810988c541c5dc6cc85a56fb81e8c2aa97afb84192477e57f59423e508e34aaa0542009ceb5ddbf74c95cd662697544af1cdda1d0c114bb3f0507493d5
+docfiles size=1
+ texmf-dist/doc/xelatex/unicode-bidi/README.md details="Readme"
+runfiles size=1
+ texmf-dist/tex/xelatex/unicode-bidi/unicode-bidi.sty
+catalogue-also bidi
+catalogue-contact-bugs https://github.com/bidi-tex/unicode-bidi/issues
+catalogue-contact-repository https://github.com/bidi-tex/unicode-bidi
+catalogue-ctan /macros/xetex/latex/unicode-bidi
+catalogue-license lppl1.3
+catalogue-topics bidi
+catalogue-version 0.01

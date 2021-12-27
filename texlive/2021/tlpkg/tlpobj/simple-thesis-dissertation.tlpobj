@@ -1,0 +1,31 @@
+name simple-thesis-dissertation
+category Package
+revision 43058
+shortdesc Template for a simple thesis or dissertation (Ph.D. or master's degree) or technical report, in XeLaTeX
+longdesc Template for a simple thesis or dissertation (Ph.D. or master's
+longdesc degree) or technical report, in XeLaTeX. Simple template that
+longdesc can be further customized or extended, with numerous examples.
+longdesc Consistent style for figures, tables, mathematical theorems,
+longdesc definitions, lemmas, etc.
+containersize 5208
+containerchecksum 201826e649acbc8dde933da3d141408ef3e4f3bc5daffbd520a19885af612f17de2618fe7e8c78a419b6e5e4eeeaa36a2fcb3db6f610df2189e01e0b4a66e9e3
+doccontainersize 198560
+doccontainerchecksum 8dd82147b1096f728fd52a56c39309d0f421abdd972a1297b88b516e0a5ecf8387a3accc508047bcd3996ab81d778dbdd221934e2bb4c96e1ef2a59cd0fc6995
+docfiles size=70
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Figures/Figure-SampleVectorGraphic.odg
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Figures/Figure-SampleVectorGraphic.pdf
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/LICENSE
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/README.md details="Readme"
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis-BackMatter.tex
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis-Chapter-ChapAbbr.tex
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis-Chapter-Intro.tex
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis-Chapter-Summary.tex
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis-FrontMatter.tex
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis.bib
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/simple-thesis-dissertation/Thesis.tex
+runfiles size=5
+ texmf-dist/tex/xelatex/simple-thesis-dissertation/simplethesisdissertation.cls
+catalogue-ctan /macros/xetex/latex/simple-thesis-dissertation
+catalogue-license pd
+catalogue-topics dissertation class

@@ -1,0 +1,1149 @@
+% D. Roegel, 25/2/1997 : first draft
+%            26/2/1997
+%            23/4/1997 : appendix, types added
+%            24/4/1997 : better formatting of appendix
+%            25/4/1997 : two columns
+%            27/4/1997 : some improvements
+%            28/4/1997 : changes to take new syntax into account 
+%            30/4/1997 : cleaning and additions
+%             1/5/1997 : ltugboat macros
+%                        addition of appendix b
+%                        all overfull hboxes removed; this needed a lot
+%                        of rephrasing!
+%                        lots of cleaning
+%             2/5/1997 : extension of future part
+%            12/5/1997 : several small improvements to take Ulrik Vieth's
+%                        comments into account.
+%            17/5/1997 : some corrections to take modifications in
+%                        the source code into account
+%            18/5/1997 : commas in the syntax have been put in \texttt
+%                        some renamings in order to get rid of the overfull
+%                        hboxes resulting from the comma changes ...
+%            29/5/1997 : some renamings of ``object'' into ``obj'' to
+%                        be in accordance with the code (version 0.993)
+%                        some reformatting of pieces of code with respect
+%                        to the indentation
+%            19/6/1997 : - the `future' part has been corrected with respect
+%                        to the general algorithm for drawing the faces
+%                        (thanks to Dominique Larchey)
+%                        - reference to the ``LaTeX Graphics Companion''
+%            11/2/1998 : - description of draw_contours and contour_width
+%                        - acknowledgment of Denis Barbier and Boguslaw
+%                          Jackowski
+%                        - one_image changed to an_image at the beginning
+%                          of the paper, in order to avoid being misleading
+%                          by comparison with the real one_image macro
+%                        - a few more lines describing the parameters of
+%                          one_image
+%                        - ghostscript -> Ghostscript
+%                        - footnote added to explain why Ghostscript
+%                          has not been used to generate the excerpts
+%                          of the images.
+%                        - some lines to explain why the color type 
+%                          was not used for 3d vectors
+%            12/2/1998 : - rewording to avoid overfull hboxes
+%            19/2/1998 : - minor ``english'' editing  (RF) 
+%                           and file sent to author for review   (mb)
+%            04/03/1998: -  EM fonts removed/ not to be used this issue
+%            04/08/1998: - TUB-specific inputs modified for portability to
+%                            CTAN archives   (mb)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[nonumber,harvardcite]{ltugboat}
+\usepackage{mflogo}
+
+\usepackage{url}
+\usepackage[dvips]{graphicx}
+
+\newcommand{\AVN}{\meta{avn}}
+\newcommand{\LVN}{\meta{lvn}}
+\newcommand{\APN}{\meta{apn}}
+\newcommand{\LPN}{\meta{lpn}}
+\newcommand{\AFN}{\meta{afn}}
+\newcommand{\LFN}{\meta{lfn}}
+\newcommand{\CN}{\meta{cl}}
+\newcommand{\IN}{\meta{obj}}
+\newcommand{\VL}{\meta{vl}}
+\newcommand{\VSL}{\meta{vsl}}
+\newcommand{\HEXCOL}{\meta{hc}}
+\newcommand{\COL}{\meta{col}}
+\newcommand{\STR}{\meta{str}}
+\newcommand{\PAIR}{\meta{pair}}
+\newcommand{\NUM}{\meta{num}}
+\newcommand{\BOOL}{\meta{bool}}
+
+\newcommand{\tc}{\texttt{,}}
+
+\newenvironment{todo}{\begin{bfseries}}{\end{bfseries}}
+
+%% this command is already defined in ltugboat.cls and is more robust
+%%  I think....
+%\newcommand\meta[1]{$\langle$\mbox{\textit{#1}}$\rangle$}
+%%% the following is the ltugboat.cls definition 
+%\DeclareRobustCommand\meta[1]{%
+%  \ensuremath{\langle}\emph{#1}\ensuremath{\rangle}}
+
+\let\m=\meta    % <-- this command is never used.
+
+%%%%%TUGboat production-specific files
+\vol 18, 4.				% volume, issue.
+\issueseqno=57				% sequential issue number
+\issdate December 1997.	 		% month, year of publication
+\setcounter{page}{274}
+\NoBlackBoxes
+\PrelimDraftfalse
+
+\widowpenalty=10000
+\clubpenalty=10000
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.5}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.8}
+\pretolerance=500
+\tolerance=1000 
+\hbadness=3000
+\vbadness=3000
+\hyphenpenalty=400
+%%%%%%%END of TUGboat production-specific files
+
+\begin{document}
+
+\sectitle{Graphics Applications}
+
+\title{Creating 3D animations with \MP}
+\author{Denis Roegel}
+\address{CRIN (Centre de Recherche en Informatique de Nancy)\\
+         B\^atiment LORIA\\
+         BP 239\\
+         54506 Vand\oe uvre-l\`es-Nancy\\ 
+         FRANCE}
+\netaddress{roegel@loria.fr}
+\personalURL{http://www.loria.fr/~roegel}
+
+
+
+\maketitle
+
+\begin{abstract}
+\MP{} can be used to create animations. We show here an example
+of animation of polyhedra, introducing the \texttt{3d} package.
+\end{abstract}
+
+\section{Introduction}
+
+%%%RF 1998/02/19: N-forms of cite
+\MP{} (\citeN{hobby1992}; see also the description in 
+\shortciteN{Goossens:LGC97}) 
+is a drawing language very similar to \MF,
+but whose output is \PS. \MP{} is especially suited for geometrical
+and technical drawings, where a drawing can naturally be decomposed
+in several parts, related in some logical way.
+%%%RF 1998/02/19: active voice for passive
+Knuth is using \MP{}  for the revisions of and additions to 
+\emph{The Art Of Computer Programming}~\cite{knuth1997},
+and it is or will be a component of every standard \TeX{} distribution.
+
+Unfortunately, \MP{} is still quite bare and the user is only offered
+%%%RF 1998/02/19: revamped a bit
+the raw power\Dash a little bit like the \TeX{} user who only has
+plain \TeX{} at his/her disposal. The lack of libraries is certainly 
+due to the infancy of \MP{} (which came in the public domain at the 
+beginning of 1995) and thus to the small number of its users.
+
+In this paper, we present a way to produce animations using \MP.
+The technique is quite general and we illustrate it through the \texttt{3d}
+package.
+
+\section{Animations}
+
+The World Wide Web has accustomed us to various animations, 
+especially \texttt{java} animations. 
+Common components of web pages are animated GIF images.
+
+Producing animations in \MP{} is actually quite easy. A number of
+$n$ images will be computed and their sequence produces the animation. 
+The animation will be similar to a movie, with no interaction. More precisely, 
+if \verb|an_image(|$i$\verb|)|
+produces a picture parameterized by $i$, 
+it suffices to wrap this macro
+between \verb|beginfig| and \verb|endfig|:
+
+\begin{verbatim}
+def one_image_out(expr i)=
+  beginfig(<figure number>);
+    an_image(i);
+  endfig;
+enddef;
+\end{verbatim}
+
+\noindent and to loop over \verb|one_image_out|:
+
+\begin{verbatim}
+for j:=1 upto 100:one_image_out(j);endfor;
+\end{verbatim}
+
+Assuming that \verb|<figure number>| 
+is equal to the parameter of \verb|an_image|, 
+the compilation of this program will produce
+a hundred files with extensions \verb|.1|, \verb|.2|, \ldots, \verb|.100|.
+All these files are \PS{} files and all we need to do is to find a way
+to collate them in one piece. How to do this depends on the operating
+system. On UNIX for instance, one can use \texttt{Ghostscript} 
+to transform a \PS{} file
+into \texttt{ppm} and then transform each \texttt{ppm} file into
+GIF with \texttt{ppmtogif}. These programs are part of the
+\texttt{NETPBM} package~\cite{netpbm}. Finally, a program such as 
+\texttt{gifmerge}~\cite{gifmerge}
+creates an animated GIF file (GIF89A) 
+out of the hundred individual simple GIFs.
+However, various details must be taken care of. For instance,
+%%%RF 1998/02/19: reorganised around `grabbed'->`needed'
+only a part of \texttt{Ghostscript}'s output is needed
+and selection can be made with \texttt{pnmcut}.
+%(which is also part of \texttt{NETPBM}).
+
+The whole process of creating an animation out of \MP's outputs can
+be summed up in a shell script, similar to the one 
+in figure~\ref{animation-script}. As we will see, this script (including
+the arguments of \texttt{awk} and \texttt{pnmcut}) can be generated 
+automatically by \MP{} itself.
+
+%%fig 1
+\begin{figure*}
+\begin{verbatim}
+#! /bin/sh
+
+/bin/rm -f animpoly.log
+for i in `ls animpoly.*| grep 'animpoly.[0-9]'`;do
+echo $i
+echo '=============='
+# shift each picture so that it lies in the page:
+awk  < $i '{print} /^%%Page: /{print "172 153 translate\n"}' > $i.ps
+# produce ppm format:
+gs -sDEVICE=ppmraw -sPAPERSIZE=a4 -dNOPAUSE -r36 -sOutputFile=$i.ppm -q -- $i.ps
+/bin/rm -f $i.ps
+# produce gif:
+ppmquant 32 $i.ppm | pnmcut 15 99 141 307 | ppmtogif > `expr $i.ppm : '\(.*\)ppm'`gif
+/bin/rm -f $i.ppm
+done
+/bin/rm -f animpoly.gif
+# merge the gif files:
+gifmerge -10 -l1000 animpoly.*.gif > animpoly.gif
+/bin/rm -f animpoly.*.gif
+\end{verbatim}
+\caption{Script created by \MP{} (with some additional comments)}
+\label{animation-script}
+\end{figure*}
+
+
+\section{Objects in space}
+
+\subsection{Introduction}
+
+The author applied this idea to the animation of objects
+in space. The macros in the \texttt{3d.mp} package\footnote{On CTAN, 
+under \texttt{graphics/metapost/macros/3d}. The code is documented
+with \texttt{MFT}~\cite{knuth1989} 
+and illustrated with \MP. This paper describes version 1.0 of the macros.} 
+provide a basis for the
+representation of three-dimensional objects. The basic components of
+the objects are the points or the vectors. Both are stored as triplets.
+More precisely, we have three 
+arrays\footnote{\MP{} has a few simple types such as \texttt{numeric}, 
+\texttt{boolean}, \texttt{string}, \texttt{path}, \ldots. 
+It also has pairs (\texttt{pair}) and triples (\texttt{color}). We might
+have cheated and stored points as colors, but instead, we found it
+interesting to illustrate a construction equivalent
+to \textsc{Pascal}'s records or C's structures. In \MP, instead of
+having a list or an array of structures, we use several lists or arrays,
+so that a record is a cross-section over several arrays.}
+of type \verb|numeric|:
+
+\begin{verbatim}
+numeric vect[]x,vect[]y,vect[]z;
+\end{verbatim} 
+
+Vector $i$'s components are \verb|vect[|$i$\verb|]x|, \verb|vect[|$i$\verb|]y| 
+and \verb|vect[|$i$\verb|]z|. It is then straightforward to define the usual
+operations on vectors using this convention. For instance, 
+vector addition is defined as:
+
+\begin{verbatim}
+def vect_sum(expr k,i,j)=
+  vect[k]x:=vect[i]x+vect[j]x;
+  vect[k]y:=vect[i]y+vect[j]y;
+  vect[k]z:=vect[i]z+vect[j]z;
+enddef;
+\end{verbatim}
+
+Often, we need some scratch vectors or vectors local to a macro.
+A simple vector allocation mechanism solves the problem: we use a stack
+of vectors and we reserve and free vectors only on top of the stack. 
+For instance, the allocation of a vector is defined by:
+
+\begin{verbatim}
+def new_vect=incr(last_vect_) enddef;
+\end{verbatim}
+
+\noindent where \verb|last_vect_| is the index of the top of the stack.
+Hence, a vector is manipulated by its index on the stack. 
+Writing \verb|v:=new_vect;| lets \verb|v| be the index of the newly allocated
+vector. 
+
+Freeing a vector is also easy and is only allowed at the top of the stack:
+
+\begin{verbatim}
+def free_vect(expr i)=
+  if i=last_vect_: 
+     last_vect_:=last_vect_-1;
+  else: errmessage("Vector " & 
+     decimal i & " can't be freed!");
+  fi;
+enddef;
+\end{verbatim}
+
+How these macros are used is made explicit in the \verb|vect_rotate| macro
+which does a rotation of a vector \verb|v| around a vector \verb|axis|
+by an angle \verb|alpha|. This rotation is illustrated 
+in figure~\ref{vector-rotation}.
+$\vec{v}$ is written as the sum of $\vec{h}$ and $\vec{a}$ where
+$\vec{h} \perp \vec{a}$. If $\vec{b}$ is 
+$\overrightarrow{axis}/{\|\overrightarrow{axis}\|}$, $\vec{c}$ is computed
+as the vector product of $\vec{b}$ and $\vec{a}$ and $\vec{a}$ is then
+rotated in a simple way resulting in $\vec{f}$.
+
+The vectors declared with \verb|new_vect| are freed in the inverse order.
+The \verb|vect_rotate| macro makes use of a few other macros:
+\verb|vect_mod| computes the modulus of a vector; \verb|vect_dprod(a,b)| is 
+the dot product of vectors \texttt{a} and \texttt{b}; \verb|vect_mult(b,a,x)|
+lets vector \texttt{b} equal vector \texttt{a} multiplied by the scalar 
+\texttt{x}; \verb|vect_sum| and \verb|vect_diff| compute as their first
+argument the sum or the difference of the two other vectors; 
+\verb|vect_prod(c,a,b)| lets vector \texttt{c} equal the vectorial
+product of vectors \texttt{a} and \texttt{b}. These macros are
+described in appendix A.
+
+%% fig2
+\begin{figure*}
+\begin{center}
+\includegraphics{vect-fig.9}\hspace{1cm}\includegraphics{vect-fig.10}
+\end{center}
+\caption{Vector rotation}\label{vector-rotation}
+\end{figure*}
+
+\begin{verbatim}
+vardef vect_rotate(expr v,axis,alpha)=
+  save v_a,v_b,v_c,v_d,v_e,v_f;
+  v_a:=new_vect;v_b:=new_vect;
+  v_c:=new_vect;v_d:=new_vect;
+  v_e:=new_vect;v_f:=new_vect;
+  v_g:=new_vect;v_h:=new_vect;
+  vect_mult(v_b,axis,1/vect_mod(axis));
+  vect_mult(v_h,v_b,vect_dprod(v_b,v)); 
+  vect_diff(v_a,v,v_h);
+  vect_prod(v_c,v_b,v_a);
+  vect_mult(v_d,v_a,cosd(alpha));
+  vect_mult(v_e,v_c,sind(alpha));
+  vect_sum(v_f,v_d,v_e);
+  vect_sum(v,v_f,v_h);
+  free_vect(v_h);free_vect(v_g);
+  free_vect(v_f);free_vect(v_e);
+  free_vect(v_d);free_vect(v_c);
+  free_vect(v_b);free_vect(v_a);
+enddef;
+\end{verbatim}
+
+The \verb|3d| package defines other macros in order to set the observer,
+%%%RF 1998/02/19: was `to manipulate'
+to compute a reference matrix, etc. Provision is given for
+manipulating objects.
+
+\subsection{Objects and classes}
+
+The \texttt{3d} package understands a notion of \emph{class}. 
+A \emph{class} is a parameterized object. For instance, we have the class
+of regular tetrahedra, the class of regular cubes, etc. Our classes
+%%%RF 1998/02/19: `first level of genericity'->... abstraction
+are the lowest level of abstraction and classes can not be composed.
+They can only be \emph{instanciated}. When we need a specific tetrahedron,
+we call a generic function to create a tetrahedron, but with an identifier
+specific to one instance.
+
+A class is a set of vertices in space, together with a way to draw
+faces, and therefore edges. 
+The author's focus was to manipulate (and later animate) polyhedra. 
+As an example, the \verb|poly.mp| package provides the definition of
+each of the five regular convex polyhedra. 
+
+%%%RF 1998/02/19: `is defining'->defines, etc, `both macros'->`each macro'
+Each class consists of two macros: one defines the points,
+the other calls the first macro and defines the faces.
+Each macro has a parameter which is a string identifying
+the particular instance of that class.
+
+\tolerance=4500
+The points of a regular tetrahedron are defined in 
+\verb|set_tetrahedron_points|, 
+%%%RF 1998/02/19: second half sentence rewritten
+an example of the general macro name \verb|set_|\meta{class}\verb|_points|.
+Five points are defined, four of
+them with \verb|set_obj_point|, a macro which defines points \emph{local}
+to an object. The first four points are the vertices and the fifth
+is the center of the tetrahedron. \verb|set_obj_point|'s first parameter
+is the point number and the other three are the cartesian coordinates.
+The first three points are in a plane and the fourth is obtained with
+the \verb|new_face_point| macro, which folds a face
+%%%RF 1998/02/19: tagged reference sentence on to end in parens
+(see the description in appendix A for more details).
+The \verb|new_face_point| macro
+is used with the angle \verb|an| which is computed in advance.
+Once the four points are set, the object is normalized, which means
+that it is centered with respect to the list of vertices given
+as parameter (here \verb|1,2,3,4|) and the last vertex is put on a sphere
+of radius 1, centered on the origin. Therefore, point 5 is the center
+of the tetrahedron, and the tetrahedron is set symmetrically
+with respect to the origin.
+
+\tolerance=1000
+%%%RF 1998/02/19: was `are hence inscriptible'
+All five convex regular polyhedra are defined in this way and may
+therefore be inscribed in a sphere of radius 1.
+
+\begin{verbatim}
+def set_tetrahedron_points(expr inst)=
+  set_obj_point(1,0,0,0);
+  set_obj_point(2,1,0,0);
+  set_obj_point(3,cosd(60),sind(60),0);
+  sinan=1/sqrt(3);
+  cosan=sqrt(1-sinan**2);
+  an=180-2*angle((cosan,sinan));
+  new_face_point(4,1,2,3,an);
+  normalize_obj(inst)(1,2,3,4);
+  set_obj_point(5,0,0,0);
+enddef;
+\end{verbatim}
+
+The second macro, \verb|def_tetrahedron| defines the number of points and
+faces of the instance, calls the previous macro and defines the faces
+with the macro \verb|set_obj_face|. 
+The first argument of that macro is a \emph{local}
+face number, the second is a list of vertices such that the list goes clockwise
+when the face is visible. The last argument is the color of the face in RGB.
+
+\begin{verbatim}
+vardef def_tetrahedron(expr inst)=
+  new_obj_points(inst,5);
+  new_obj_faces(inst,4);
+  set_tetrahedron_points(inst);
+  set_obj_face(1,"1,2,4","b4fefe");
+  set_obj_face(2,"2,3,4","b49bc0");
+  set_obj_face(3,"1,4,3","b4c8fe");
+  set_obj_face(4,"1,3,2","b4fe40");
+enddef;
+\end{verbatim}
+
+The result of the drawing is:
+
+\begin{center}
+\includegraphics{tetra.ps}
+\end{center}
+
+A more complex example is the icosahedron which is defined below.
+
+\begin{verbatim}
+def set_icosahedron_points(expr inst)=
+  set_obj_point(1,0,0,0);
+  set_obj_point(2,1,0,0);
+  set_obj_point(3,cosd(60),sind(60),0);
+  cosan=1-8/3*cosd(36)*cosd(36);
+  sinan=sqrt(1-cosan*cosan);
+  an=180-angle((cosan,sinan));
+  new_face_point(4,1,2,3,an);
+  new_face_point(5,2,3,1,an);
+  new_face_point(6,3,1,2,an);
+  new_face_point(7,2,4,3,an);
+  new_face_point(8,3,5,1,an);
+  new_face_point(9,1,6,2,an);
+  new_face_point(10,3,4,7,an);
+  new_face_point(11,3,7,5,an);
+  new_face_point(12,1,8,6,an);
+  % 1 and 10 are opposite vertices
+  normalize_obj(inst)(1,10);
+  % center of icosahedron
+  set_obj_point(13,0,0,0);
+enddef;
+\end{verbatim}
+
+\begin{verbatim}
+vardef def_icosahedron(expr inst)=
+  save cosan,sinan,an;
+  new_obj_points(inst,13);
+  new_obj_faces(inst,20);
+  set_icosahedron_points(inst);
+  set_obj_face(1,"3,2,1","b40000");
+  set_obj_face(2,"2,3,4","ff0fa1");
+  set_obj_face(3,"3,7,4","b49b49");
+  set_obj_face(4,"3,5,7","b49bc0");
+  set_obj_face(5,"3,1,5","b4c8fe");
+  set_obj_face(6,"1,8,5","b4fefe");
+  set_obj_face(7,"1,6,8","b4fe40");
+  set_obj_face(8,"1,2,6","45d040");
+  set_obj_face(9,"2,9,6","45a114");
+  set_obj_face(10,"2,4,9","45a1d4");
+  set_obj_face(11,"9,4,10","4569d4");
+  set_obj_face(12,"4,7,10","112da1");
+  set_obj_face(13,"7,5,11","b4fefe");
+  set_obj_face(14,"5,8,11","b49bc0");
+  set_obj_face(15,"8,6,12","45a114");
+  set_obj_face(16,"6,9,12","b49b49");
+  set_obj_face(17,"8,12,11","b40000");
+  set_obj_face(18,"7,11,10","45a1d4");
+  set_obj_face(19,"12,10,11","b4c8fe");
+  set_obj_face(20,"9,10,12","ff0fa1");
+enddef;
+\end{verbatim}
+
+Since all points of the objects are stored in a unique global array,
+they are internally 
+accessed by the local numbers and an offset defined by the 
+macro \verb|new_obj_points|.
+The icosahedron example shows a systematic use of the
+\verb|new_face_point| macro to compute a point on an adjacent face.
+Displaying such an icosahedron results in the figure~\ref{icosahedron}.
+%% fig3
+\begin{figure}[h]
+\begin{center}
+\includegraphics{icosa.ps}
+\end{center}
+\caption{An icosahedron}\label{icosahedron}
+\end{figure}
+
+The other three regular convex polyhedra are:
+\begin{center}
+\includegraphics{cube.ps}
+\end{center}
+
+\begin{center}
+\includegraphics{octa.ps}\hfill\includegraphics{dodeca.ps}
+\end{center}
+
+The dodecahedron code is a bit special, since the vertices are built
+using ten additional points corresponding to face centers. These points
+are defined as an array of variables \verb|fc1| through \verb|fc10| 
+with \verb|new_points(fc)(10)|. 
+\verb|free_points(fc)(10)| frees them when they are no longer
+necessary. An excerpt of the dodecahedron code is:
+
+\begin{verbatim}
+def set_dodecahedron_points(expr inst)=
+  new_points(fc)(10);% face centers
+  set_point(fc1,0,0,0);
+  set_obj_point(1,1,0,0);
+  set_obj_point(2,cosd(72),sind(72),0);
+  rotate_in_plane(3,fc1,1,2);
+  ...
+  free_points(fc)(10);
+enddef;
+\end{verbatim}
+
+
+Finally, wire drawings can be obtained by setting the boolean
+\verb|filled_faces| to false:
+
+\begin{center}
+\includegraphics{icosa-w.ps}
+\end{center}
+
+\subsection{Animating objects}
+
+The animation of one or several objects involves the object(s) and an observer.
+The animation is a set of images and from an image to the next one,
+the observer as well as the objects can move. For instance
+the macro \verb|one_image| in \verb|3d.mp| is:
+
+\begin{verbatim}
+def one_image(expr name,i,a,rd,ang)=
+  beginfig(i);
+    set_point(Obs,
+     -rd*cosd(a*ang),-rd*sind(a*ang),1);
+    Obs_phi:=90;Obs_dist:=2;
+    % fix point 1 of object |name|
+    point_of_view_obj(name,1,Obs_phi);
+    draw_obj(name);
+    rotate_obj_pv(name,1,vect_I,ang);
+    % show the rotation point      
+    draw_point(name,1);
+    draw_axes(red,green,blue);
+  endfig;
+enddef;
+\end{verbatim}
+
+The parameters of this macro are a name of an object (\verb|name|),
+an image index (\verb|i|), and three values defining the position
+of the observer.
+The observer (\verb|Obs| is a global point and set with \verb|set_point|,
+not with \verb|set_obj_point|)
+follows a circle of radius \verb|rd|. 
+%%%RF 1998/02/19: reversed `usually is'
+The parameter \verb|a|, which is usually a function of \verb|i|, 
+determines the number of rotation steps
+of the observer, each step being a rotation of angle \verb|ang|. 
+The distance between the observer and the 
+projection plane is $2$ (see figure~\ref{proj-screen}).
+
+%% fig4
+\begin{figure*}
+\begin{center}
+  \includegraphics{vect-fig.8}
+\end{center}
+\caption{Projection on the screen}\label{proj-screen}
+\end{figure*}
+
+%% fig5
+\begin{figure*}
+\begin{center}
+  \includegraphics{vect-fig.16}
+\end{center}
+\caption{Orientation of the observer}\label{obs-orientation}
+\end{figure*}
+
+
+The orientation of the observer is defined by three angles 
+(see figure~\ref{obs-orientation}). The \verb|Obs_phi| angle
+is given and the two others are computed with a call to 
+\verb|point_of_view_obj(name,1,Obs_phi)| which constrains the observer
+to look towards point 1 of object \verb|name|. Therefore, this 
+point will seem fixed on the animation and \verb|draw_point(name,1)| 
+draws it later so that this feature can be observed.
+There is nothing special about that point, except that it
+remains fix when the object is rotated. The object is drawn
+with \verb|draw_obj(name)| and 
+%%%RF 1998/02/19: `does rotate'->rotates -- these arguments aren't
+%%%               described here, which seems wrong, but i don't think
+%%%               it's easy to do better....
+\verb|rotate_obj_pv|  rotates the object \verb|name|
+by \verb|ang| degrees around an axis going through point 1 
+and directed by vector \verb|vect_I| ($\vec{\imath}$). 
+The reference vectors ($\vec\imath$,
+$\vec\jmath$ and $\vec k$) are drawn in red, green and blue with 
+\verb|draw_axes|.
+
+Finally, a complete animation of an icosahedron is obtained
+with
+
+\begin{verbatim}
+animate_object("icosahedron",1,100,100);
+\end{verbatim}
+
+%%%RF 1998/02/19: `and this'->`which'
+\noindent which generates files \verb|anim.101|, 
+%%%RF 1998/02/19: `if ... is'->`from ...'
+\ldots,  \verb|anim.200| from the main file \verb|anim.mp|. 
+The first parameter of \verb|animate_object| is the name of the object
+to animate, the second and third parameters are minimal and maximal
+values of the index loop and the fourth parameter is an offset added
+to the index loop in order to get the file extension, which must lie
+in the interval $0..4096$.
+
+After each image is drawn, the values of the current bounding box
+are used to compute the bounding box of the sequence of images.
+The internal values \verb|xmin_|, \verb|ymin_|, \verb|xmax_|
+and \verb|ymax_| hold the minimal and maximal values of the coordinates
+of the past images' corners. 
+They are updated just before each image is shipped out.
+
+\subsection{Putting the pieces together}
+
+Once all the views have been computed, they can be used separately
+(see for instance the five views of figure~\ref{anim-five-views})
+or more interestingly, they can be merged.
+This task is made almost straightforward by \MP{} itself.
+Indeed, every time \verb|animate_object| is used, a shell script
+named \verb|create_animation.sh|
+is generated, as a side-effect of a call to
+\verb|show_animation_bbox|. The script is
+similar to that shown in figure~\ref{animation-script}. 
+This script uses the values 
+computed for the global bounding box of the sequence of images,
+for these values are necessary in order to extract the right parts
+of the images and get correct alignments; the parts are extracted
+with \texttt{pnmcut}.\footnote{One might think of using
+\texttt{Ghostscript} for generating an excerpt of an image,
+but if \texttt{Ghostscript} is used to generate the bounding box
+of an image, it will in general not be possible to have a good alignment
+between all images. The sizes of the excerpts are only known when all images
+have been produced.} 
+If you have the programs
+used in this script (\texttt{Ghostscript}, etc.), you can just run
+it with \verb|sh create_animation.sh| on UNIX. You may need
+to adapt it to your needs, and for that purpose, you can modify the macro
+\verb|write_script| in \verb|3d.mp|. 
+
+Some examples are included in the \verb|3d| distribution, and they
+can be viewed for instance with \texttt{netscape} or
+special programs such as \verb|xanim|.
+
+%% fig6
+\begin{figure*}
+\includegraphics[scale=0.5]{anim.1}\hfill
+\includegraphics[scale=0.5]{anim.2}\hfill
+\includegraphics[scale=0.5]{anim.3}\hfill
+\includegraphics[scale=0.5]{anim.4}\hfill
+\includegraphics[scale=0.5]{anim.5}
+
+\caption{Five views of an animation}\label{anim-five-views}
+\end{figure*}
+
+\section{Future}
+
+It is quite easy to improve and extend the \verb|3d| macros but the
+author decided to go no further for the moment. Other objects can
+be implemented easily and new algorithms can be added. For instance
+in order to take light sources or shadows into account, one can compute
+the angles under which a face gets its light, and the angle under which
+this very face is seen, in order to decide how much darker or lighter
+it must be rendered. Another problem is to represent
+overlapping objects correctly. In the current implementation, each
+object is drawn
+independently from the other objects, so that the overlapping may be wrong.
+One solution is to sort all the faces according to their distance
+to the observer and, if two faces can not be ordered, to split them.
+Then, the faces can be drawn starting with the most distant, and
+ending with the closest one.
+Appendix B explains the internal representation of the objects and
+shows that this algorithm can be implemented without much surgery to 
+the present code. 
+
+\section{Acknowledgments}
+
+Thanks to John Hobby who always answers all my queries on the \MF{} mailing
+list. Thanks to Alain Filbois who helped me with the shell script
+syntax, to Thomas Lambolais and Thomas Genet who gave some feedback
+on this work, and to Dominique Larchey who pointed out a shortcoming
+in the conclusion. Thanks to Denis Barbier who 
+was one of the first users of these
+macros and contributed the animated crayons in the distribution. Thanks to
+Bogus\l aw Jackowski who made valuable comments on some peculiarities of
+the code.
+And finally, special thanks to Ulrik Vieth who not only
+pushed me to polish my code and this paper more than I had first intended,
+but also made it possible to use \MP{} under \texttt{web2c}.
+
+\bibliography{paper}
+
+\appendix
+
+\section{Appendix A\\
+Summary of the \texttt{3d} package}
+
+\subsection{Types}
+
+The commands in the \texttt{3d} package take parameters
+of several different types. The types are described here.
+
+\begin{itemize}
+\item An \AVN{} (\emph{Absolute Vector Number}) is the internal
+number identifying a vector in the \verb|vect| array (an integer).
+\item An \APN{} (\emph{Absolute Point Number}) refers to a vector
+in the same way as an \AVN{} (an integer). 
+\item A \LPN{} (\emph{Local Point Number}) is a number identifying a
+point \emph{within} an object (an integer). Two \LPN{}s with the same value
+can correspond to different points in different objects.
+\item An \AFN{} (\emph{Absolute Face Number}) is the internal
+number identifying a face.
+\item A \LFN{} (\emph{Local Face Number}) is a number identifying a face
+\emph{within} an object (an integer). As for points, two \LFN{}s with
+the same value
+can correspond to different faces in different objects.
+\item A \CN{} (\emph{Class}) is a string representing a class,
+for instance \verb|"tetrahedron"|. It may only contain
+letters and underscores.
+\item An \IN{} (\emph{Object}) is a string representing an object, that is
+an instance of a class. Such a string may only contain
+letters and underscores.
+\item A \VL{} (\emph{Vertex List}) is a list
+of integers, where each integer identifies a vertex. For instance, \verb|1,7|
+is the list of vertices 1 and 7.
+\item A \VSL{} (\emph{Vertex String List}) is a string corresponding to a list
+of integers, where each integer identifies a vertex. For instance, 
+\verb|"1,2,6,5"| is the list of vertices 1, 2, 6 and 5.
+\item \HEXCOL{} (\emph{Hex Color}) is a string representing a color with
+the three RGB components in hexadecimal and in the range
+$0..255$. For instance, \verb|"b4fe40"|.
+\item \COL{} (\emph{Color}) is a standard \MP{} color 
+(a triplet of RGB components in the range $0..1$), 
+such as \verb|red|.
+\item \STR{} (\emph{String}) is a string.
+\item \PAIR{} (\emph{Pair}) is a pair of numerics.
+\item \NUM{} (\emph{Numeric}) is a number.
+\item \BOOL{} (\emph{Boolean}) is a boolean.
+\end{itemize}
+
+\subsection{Low level vector commands}
+
+The low level vector commands define the classical operations in vector
+algebra.
+
+\begin{itemize}
+%\item \verb|vect_def(|\AVN\tc$x$\tc$y$\tc$z$\verb|)|; defines vector \AVN{}
+\item \verb|vect_def(|\AVN\tc$x$\tc$y$\tc$z$\verb|)|: defines vector \AVN{}
+as $(x,y,z)$;
+
+%\item \verb|set_point|: synonym of \verb|vect_def|; a point is stored in the
+\item \verb|set_point|; synonym of \verb|vect_def|: a point is stored in the
+same array as vectors.
+
+%\item \verb|set_obj_point(|\LPN\tc$x$\tc$y$\tc$z$\verb|)|; 
+\item \verb|set_obj_point(|\LPN\tc$x$\tc$y$\tc$z$\verb|)|: 
+this defines the point \LPN{} as $(x,y,z)$;
+
+%\item \verb|vect_def_vect(|\AVN$_1$\tc\AVN$_2$\verb|)|; 
+\item \verb|vect_def_vect(|\AVN$_1$\tc\AVN$_2$\verb|)|: 
+vector \AVN$_1$ becomes equal to vector \AVN$_2$;
+
+\item \verb|vect_sum(|\AVN$_1$\tc\AVN$_2$\tc\AVN$_3$\verb|)|:
+the vector \AVN$_1$ becomes the sum of vectors \AVN$_2$ and \AVN$_3$.
+
+\item \verb|vect_translate(|\AVN$_1$\tc\AVN$_2$\verb|)|: 
+add  vector \AVN$_2$
+to vector \AVN$_1$; vector \AVN$_2$ remains unchanged.
+
+\item \verb|vect_diff(|\AVN$_1$\tc\AVN$_2$\tc\AVN$_3$\verb|)|: 
+the vector \AVN$_1$
+becomes the difference between vectors \AVN$_2$ and \AVN$_3$.
+
+\item \verb|vect_dprod(|\AVN$_1$\tc\AVN$_2$\verb|)| $\rightarrow $ \NUM{}:
+returns the dot product of vectors \AVN$_1$ and \AVN$_2$.
+
+\item \verb|vect_mod(|\AVN\verb|)| $\rightarrow $ \NUM{}: returns the
+modulus of vector \AVN. 
+
+\item \verb|vect_prod(|\AVN$_1$\tc\AVN$_2$\tc\AVN$_3$\verb|)|: 
+the vector \AVN$_1$
+becomes the vector product of vectors \AVN$_2$ and \AVN$_3$.
+
+\tolerance=1000
+\item \verb|vect_mult(|\AVN$_1$\tc\AVN$_2$\tc\NUM\verb|)|: \AVN$_1$
+becomes vector \AVN$_2$ scaled by \NUM.
+
+\item \verb|mid_point(|\AVN$_1$\tc\AVN$_2$\tc\AVN$_3$\verb|)|: 
+vector (or point) \AVN$_1$ becomes the mid-point of vectors (or of the
+line joining the points) 
+\AVN$_2$ and \AVN$_3$.
+
+\item \verb|vect_rotate(|\AVN$_1$\tc\AVN$_2$\tc$a$\verb|)|: vector \AVN$_1$ is
+rotated around vector \AVN$_2$ by the angle $a$. 
+\end{itemize}
+
+\tolerance=1000
+\subsection{Operations on objects}
+
+Several operations apply globally on objects:
+
+\begin{itemize}
+\item \verb|assign_obj(|\IN\tc\CN\verb|)|: 
+           create \IN{} as an instance of class \CN.
+\item \verb|reset_obj(|\IN\verb|)|: put \IN{} back where it 
+      was just after it was initialized.
+\item \verb|put_obj(|\IN\tc\AVN\tc$s$\tc$\psi$\tc$\theta$\tc$\phi$\verb|)|:
+    object \IN{} is scaled by $s$, shifted by vector \AVN{} and
+    oriented with the angles $\psi$, $\theta$, $\phi$,
+    as for the observer orientation (figure~\ref{obs-orientation}).
+\item \verb|rotate_obj_pv(|\IN\tc\LPN\tc\AVN\tc$a$\verb|)|:
+    object \IN{} is rotated 
+    around an axis going through local point \LPN{}
+    and directed by vector \AVN; the rotation is by $a$ degrees.
+\item \verb|rotate_obj_abs_pv(|\IN\tc\APN\tc\AVN\tc$a$\verb|)|:\break
+    the object \IN{} is rotated around an axis going through absolute 
+    point \APN{} and directed by vector \AVN; the rotation is by $a$ degrees.
+\item \verb|rotate_obj_pp(|\IN\tc\LPN$_1$\tc\LPN$_2$\tc$a$\verb|)|:
+    \IN{} is rotated around an axis going through local points
+    \LPN$_1$ and \LPN$_2$; the rotation is by $a$ degrees.
+\item \verb|translate_obj(|\IN\tc\AVN\verb|)|: object \IN{} is translated
+    by vector \AVN.
+\item \verb|scale_obj(|\IN\tc$v$\verb|)|: object~\IN{}~is~scaled~by~$v$.
+\end{itemize}
+
+\subsection{Building new points in space}
+
+Three macros are especially useful for the definition of regular polyhedra:
+
+\begin{itemize}
+\item \verb|rotate_in_plane(|$k$\tc$o$\tc$i$\tc$j$\verb|)|:
+get point $k$ from point $j$ by rotation 
+around point $o$ by an angle $\alpha$ equal to the angle from $i$ to $j$;
+$i$, $j$ and $k$ are of type \LPN, whereas $o$ is of type \APN.
+
+\begin{center}
+  \includegraphics{vect-fig.11}
+\end{center}
+
+\item \verb|new_face_point(|$c$\tc$o$\tc$i$\tc$j$\tc$\alpha$\verb|)|:
+the middle $m$ of points $i$ and $j$ is such that
+$\widehat{(\overrightarrow{om},\overrightarrow{mc})}=\alpha$
+and $\overrightarrow{mc}$ is $\overrightarrow{om}$ rotated around
+$\overrightarrow{ji}$. $c$, $o$, $i$ and $j$ are of type \LPN.
+
+\begin{center}
+  \includegraphics{vect-fig.7}
+\end{center}
+
+\item \verb|new_abs_face_point(|$c$\tc$o$\tc$i$\tc$j$\tc$\alpha$\verb|)|:
+similar to the previous definition, but $c$ and $o$ are of type \APN.
+
+\end{itemize}
+
+\subsection{Drawing points, axes, objects}
+
+\begin{itemize}
+\item \verb|draw_point(|\IN\tc\LPN\verb|)|: draw point \LPN{} in
+     object \IN.
+\item \verb|draw_axes(|\COL$_1$\tc\COL$_2$\tc\COL$_3$\verb|)|: 
+    draw vectors $\vec\imath$, $\vec\jmath$ and $\vec{k}$ in colors
+    \COL$_1$, \COL$_2$ and \COL$_3$.
+\item \verb|draw_obj(|\IN\verb|)|: draw object \IN.
+\end{itemize}
+
+\subsection{Setting faces}
+
+\begin{itemize}
+\item \verb|set_face(|\AFN\tc\VSL\tc\HEXCOL\verb|)|: 
+set absolute face \AFN{} as
+delimited by the vertex list \VSL{} (local point numbers) and colored by
+color \HEXCOL.
+\item \verb|set_obj_face(|\LFN\tc\VSL\tc\HEXCOL\verb|)|: 
+set local face \LFN{} as
+delimited by the vertex list \VSL{} (local point numbers) and colored by
+color \HEXCOL. 
+
+\end{itemize}
+
+\break
+
+\subsection{View points, distance}
+
+\begin{itemize}
+\item \verb|compute_reference(|$\psi$\tc$\theta$\tc$\phi$\verb|)|: defines
+the orientation of the observer by the three angles $\psi$, 
+$\theta$ and $\phi$. See figure~\ref{obs-orientation}.
+
+\item \verb|point_of_view_obj(|\IN\tc\LPN\tc$\phi$\verb|)|: the orientation 
+of the observer is defined as looking local point \LPN{} of object \IN,
+with an angle of $\phi$;
+\item \verb|point_of_view_abs(|\APN\tc$\phi$\verb|)|: the observer's 
+orientation is defined as looking absolute point \APN{},
+with an angle of $\phi$;
+\item \verb|obs_distance(|$v$\verb|)(|\IN\tc\LPN\verb|)|: let $v$ equal
+the distance between the observer and local point \LPN{} in object \IN{}.
+\end{itemize}
+
+\subsection{Vector and point allocation}
+
+\begin{itemize}
+\item \verb|new_vect|$\rightarrow $ \AVN{}: return a new vector;
+\item \verb|new_point|: synonym of \verb|new_vect|;
+\item \verb|new_points(|$v$\verb|)(|$n$\verb|)|: defines the absolute points
+   $v_1, \ldots, v_n$, using \verb|new_point|; 
+\item \verb|free_vect(|\AVN\verb|)|: free vector \AVN;
+\item \verb|free_point(|\APN\verb|)|: free point \APN;
+\item \verb|free_points(|$v$\verb|)(|$n$\verb|)|: frees the absolute points
+   $v_1, \ldots, v_n$, using \verb|free_point|.
+\end{itemize}
+
+\subsection{Debugging}
+
+\begin{itemize}
+\item \verb|show_vect(|\STR\tc\AVN\verb|)|: 
+shows vector \AVN, with string \STR.
+\item \verb|show_point|: synonym of \verb|show_vect|
+\item \verb|show_pair(|\STR\tc\PAIR\verb|)|: this shows a numeric pair,
+   with string \STR.
+\end{itemize}
+
+\subsection{Normalization}
+
+\begin{itemize}
+\item \verb|normalize_obj(|\IN\tc\VL\verb|)|: normalize object \IN{}
+with respect to the list of vertices \VL.
+\end{itemize}
+
+\subsection{Parameters}
+
+\begin{itemize}
+\item \verb|Obs_dist| $\rightarrow$ \NUM: distance between the observer
+    and the projection plane.
+\item \verb|h_field| $\rightarrow$ \NUM: horizontal field of view 
+      (default: 100 degrees)
+\item \verb|v_field|  $\rightarrow$ \NUM: vertical field of view 
+      (default: 70 degrees)
+\item \verb|Obs_phi| $\rightarrow$ \NUM: angle $\phi$ for the orientation
+      of the observer;
+\item \verb|Obs_theta| $\rightarrow$ \NUM: angle $\theta$ for the orientation
+      of the observer;
+\item \verb|Obs_psi| $\rightarrow$ \NUM: angle $\psi$ for the orientation
+      of the observer;
+\item \verb|drawing_scale| $\rightarrow$ \NUM: scale factor applied for
+      drawing;
+\item \verb|filled_faces| $\rightarrow$ \BOOL: if \texttt{true}, the faces
+      are drawn filled; if \texttt{false}, only the edges are drawn, 
+      and hidden edges are drawn dashed;
+\item \verb|draw_contours| $\rightarrow$ \BOOL: if \texttt{true}, the contours
+      of the faces are drawn, and the lines have the thickness 
+      \verb|contour_width|; if \texttt{false}, the contours are not drawn;
+\item \verb|contour_width| $\rightarrow$ \NUM: dimension used for drawing
+      contours of faces (default: 1pt).
+\end{itemize}
+
+\subsection{Constants}
+
+These values represent constant objects such
+as reference vectors, and should not be changed.
+
+\begin{itemize}
+\item \verb|vect_null| $\rightarrow$ \AVN: internal index for $\vec0$.
+\item \verb|vect_I| $\rightarrow$ \AVN: internal index for $\vec\imath$.
+\item \verb|vect_J| $\rightarrow$ \AVN: internal index for $\vec\jmath$.
+\item \verb|vect_K| $\rightarrow$ \AVN: internal index for $\vec k$.
+\item \verb|point_null| $\rightarrow$ \APN: internal index for $\vec0$.
+\item \verb|Obs| $\rightarrow$ \APN: observer's internal point number.
+\end{itemize}
+
+\subsection{Defining new object points and faces}
+
+\begin{itemize}
+\item \verb|new_obj_points(|\IN\tc\NUM\verb|)|: 
+      defines points $1$ to \NUM{} in object \IN; must be used before setting 
+      the points;
+\item \verb|new_obj_faces(|\IN\tc\NUM\verb|)|: 
+      defines \NUM{} faces in object \IN; must be used before setting 
+      the faces;
+\end{itemize}
+
+\subsection{Offsets}
+
+\begin{itemize}
+\item \verb|pnt(|\LPN\verb|)| $\rightarrow$ \APN: returns the absolute point 
+number for a given local point index. 
+\item \verb|face(|\LFN\verb|)| $\rightarrow$ \AFN: returns the absolute face
+number for a given local face index. 
+\end{itemize}
+
+\subsection{Standard classes}
+
+Five standard classes are defined in \texttt{poly.mp}:
+they define the five regular convex polyhedra. For each class \meta{class},
+there are two macros:
+
+\begin{itemize}
+
+\item \verb|set_|\meta{class}\verb|_points|  
+      (e.g. \verb|set_cube_points|)
+
+\item \verb|def_|\meta{class} (e.g. \verb|def_cube|)
+
+\end{itemize}
+
+Each of these macros is defined with a parameter which is the instance
+name.
+
+\subsection{Standard animations}
+
+The \texttt{3d} package provides a few standard animations using
+the convex polyhedra. In each of these animations, the observer
+follows a circular path pictured in figure~\ref{observer-motion}.
+Each standard animation is divided into two macros. The first,
+such as \verb|animate_object|, defines the class(es) that are used
+and sets the objects. The second, such as \verb|one_image|, sets
+the observer, draws the object(s) and moves the object(s) and the
+observer. The file \verb|animpoly.mp| gives examples of the use
+of the standard animations.
+
+\iffalse
+\begin{itemize}
+\item \verb|one_image(name,i,a)|
+\item \verb|one_image_two_objects(name_a,name_b,i,a)|
+\item \verb|one_image_three_objects(name_a,name_b,name_c,i,a)|
+\item \verb|one_image_two_identical_objects(name_a,name_b,i,a)|
+\item \verb|animate_object(name,imin,imax,index)|
+\item \verb|animate_two_objects(name_a,name_b,imin,imax,index)|
+\item \verb|animate_three_objects(name_a,name_b,name_c,imin,imax,index)|
+\item \verb|animate_two_identical_objects(name,imin,imax,index)|
+\end{itemize}
+\fi
+
+%% fig7
+\begin{figure*}
+\begin{center}
+  \includegraphics{vect-fig.17}
+\end{center}
+\caption{Motion of the observer}\label{observer-motion}
+\end{figure*}
+
+\section{Appendix B\\ 
+Coding an object}
+
+In order to extend the \texttt{3d} package, it is necessary to
+understand how the objects are coded. We give here an overview of
+this coding, but the reader is advised to peek in the code to get
+a better understanding on how all the functions interact.
+
+First, an object has a name, for instance \verb|"box"|.
+The macro \verb|box_class| (which can be called with \verb|obj_class_("box")|)
+is the string corresponding to the class of
+\verb|"box"|, for instance \verb|"cube"|.
+The variable \verb|cube_point_offsetbox|, of type \texttt{numeric},
+and obtained with \verb|obj_point_offset_("box")|,
+is equal to the absolute index of the last
+point of the previous object. A cube is defined with $8+1$ points. Assuming
+it was defined after an icosahedron ($12+1$ points) named
+\verb|"ico"|, \verb|cube_point_offsetbox| will be a \verb|numeric| 
+equal to $13$. \verb|cube_pointsbox|
+(obtained with \verb|obj_points_("box")|) 
+is a macro equal to $9$.
+%(\verb|current_point_offset_| is equal to \verb|cube_point_offsetbox|.)
+The variable \verb|cube_face_offsetbox|, 
+similar to \verb|cube_point_offsetbox|, 
+obtained with a call to \verb|obj_face_offset_("box")|,
+equals $20$.
+The macro \verb|cube_facesbox|  
+(obtained by \verb|obj_faces_("box")|) 
+is equal to $6$.
+%(\verb|current_face_offset_| is equal to \verb|cube_face_offsetbox|.)
+
+The \verb|obj_name| macro is extended each time a new object is defined.
+To an absolute face number, it associates an object name. Hence, it is possible
+to go through all faces. \verb|last_point_offset_| and
+\verb|last_face_offset_| are the absolute numbers of the last points and faces
+defined up to now.
+
+\begin{verbatim}
+def obj_name(expr i)=
+  if i<1: elseif i<=20:"ico"
+          elseif i<=26:"box"
+  fi;
+enddef;
+\end{verbatim}
+
+\verb|pnt(i)| gives the absolute vector corresponding to local point $i$.
+\verb|ipnt_(i)| is the absolute point number, that is $i$ plus the number
+of points defined beforehand in other objects.
+\verb|points_[j]| is the absolute vector corresponding to absolute object
+point $j$. Similarly, \verb|face(i)| 
+is the absolute face corresponding to local face $i$.
+
+The list of vertices of absolute face number $i$ is \verb|face_points_[i]|.
+The color of absolute face number $i$ is \verb|face_color_[i]|.
+
+
+When the macros \verb|pnt| or \verb|face| are to be used, the calls
+\verb|define_current_point_offset_("box")| and
+\verb|define_current_face_offset_("box")| must be issued.
+
+
+\makesignature
+
+\end{document}
+

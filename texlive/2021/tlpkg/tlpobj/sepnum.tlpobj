@@ -1,0 +1,25 @@
+name sepnum
+category Package
+revision 20186
+shortdesc Print numbers in a "friendly" format
+longdesc Provides a command to print a number with (potentially
+longdesc different) separators every three digits in the parts either
+longdesc side of the decimal point (the point itself is also
+longdesc configurable). The macro is fully expandable and not fragile
+longdesc (unless one of the separators is). There is also a command
+longdesc \sepnumform, that may be used when defining \the<counter>
+longdesc macros.
+containersize 2680
+containerchecksum 4ba90558d397f0c047ffeb01620d2d5ed4bc38431ddbd75d9a381fac58360d78270b8f22e761693a8a39176d1ab92c9da3b6bf92aaaa90b8ee20490f5b70f50d
+doccontainersize 354104
+doccontainerchecksum 080b081b101ea57480e4c958e997f5b10d22c5de56a60c1f415248ba0564046560650ae589b29c73d185fa88334a26ca3412e996fcc1214ef0b9d20e71bf18fa
+docfiles size=87
+ texmf-dist/doc/latex/sepnum/sepnum-doc.pdf details="Package documentation"
+ texmf-dist/doc/latex/sepnum/sepnum-doc.tex
+runfiles size=2
+ texmf-dist/tex/latex/sepnum/sepnum.sty
+catalogue-also comma numprint
+catalogue-ctan /macros/latex/contrib/sepnum
+catalogue-license lppl
+catalogue-topics numbers
+catalogue-version 2.0

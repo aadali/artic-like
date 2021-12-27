@@ -1,0 +1,206 @@
+% File: lapictures.tex
+% A part of mfpic 1.10 2012/12/03
+%
+% Magnify to same scale as pictures.tex :
+% (Use of \mag is against the law of LaTeX, but Bugs Bunny set a precedent.)
+\mag=1200
+\documentclass{article}
+
+%%!!!!!!!!!!!!!!!!!!!!!!!!!!!
+% adjust these to your liking:
+\setlength{\paperheight}{11truein}
+\setlength{\paperwidth}{8.5truein}
+
+% Default plainTeX margins
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2truein}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-2.1truein}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\footskip}{\baselineskip}
+
+% Use the metafont option if you prefer.
+\usepackage[metapost,raggedcaptions]{mfpic}
+
+\ifx\pdfoutput\UndEfInEd
+\else
+  \setlength{\pdfpageheight}{\paperheight}
+  \setlength{\pdfpagewidth}{\paperwidth}
+\fi
+
+\opengraphsfile{pics}
+
+\setlength{\mfpframesep}{0pt}
+\headshape{1}{1}{true}
+\newcommand{\vs}{\bigskip\filbreak}
+%\renewcommand\raggedright{\rightskip 0pt plus2em \spaceskip.3333em \xspaceskip.5em\relax}
+\begin{document}
+\mftitle{Commutative Diagram example.}
+
+%  A-----D
+%  |\   /|
+%  | C-F |
+%  |/   \|
+%  B.....E
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[12]{0}{10}{0}{10}
+\tlabeljustify{cc}
+\tcaption[2.0,1.0]{{\it Figure 1:}  Commutative diagram example.}
+\tlabels{(1,9){A}
+         (1,1){B}
+         (3,5){C}
+         (9,9){D}
+         (9,1){E}
+         (7,5){F}}
+\setrender{\arrow\draw\trimpath{6pt}}
+\lines{(1,9), (1,1)}  % A -> B.
+\lines{(1,9), (3,5)}  % A -> C.
+\lines{(3,5), (1,1)}  % C -> B.
+\lines{(1,9), (9,9)}  % A -> D.
+\lines{(9,9), (9,1)}  % D -> E.
+\lines{(9,9), (7,5)}  % D -> F.
+\lines{(7,5), (9,1)}  % F -> E.
+\lines{(3,5), (7,5)}  % C -> F.
+% B- - ->E :
+%\dotted\arrow[r90][b-12pt]\arrow[b15pt]\reverse\arrow\lines{(1.5,1), (8.5,1)}
+\arrow\arrow[b10pt]\reverse\arrow\dotted\trimpath{6pt}\lines{(1,1), (9,1)}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Function Plot with Cartesian Axes.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[20]{-3}{3}{-3}{3}
+\axes
+\function{-2,2,0.1}{((x**3)-x)/3}
+\tcaption{{\it Figure 2:}  Function Plot with Cartesian Axes.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Parametric Function Plot, and Filled Circle.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[30]{-1.5}{1.5}{-1}{1}
+\parafcn{0,6,0.1}{cosd(150t)*dir(90t)}
+\gfill\circle{(0,0),0.25}
+\tcaption{{\it Figure 3:}  Parametric Function Plot, and Filled Circle.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Bar Graph.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[20]{-0.5}{4}{-0.5}{4}
+\axes
+\shade\draw\rect{(0,0),(1,0.5)}
+\darkershade
+\shade\draw\rect{(1,0),(2,1)}
+\hatch\draw\rect{(2,0),(3,2)}
+\tcaption{{\it Figure 4:}  Bar Graph.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Pie Chart.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[30]{-1.3}{1.7}{-1}{1.1}
+\gfill\sector{(0.3,0.2), 1, 0, 60}
+\shade\sector{(0,0), 1, 60, 105}
+\turtle{(0,0), \plr{(1, 105)}}
+\sector{(0,0), 1, 60, 360}
+\tcaption{{\it Figure 5:}  Pie Chart.}
+\end{mfpic}
+\end{mfpframe}
+
+\noindent Unindented text here.
+
+\vs
+
+\mftitle{Circle with Arrow.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[20]{-2}{2}{-1}{1}
+\arrow\circle{(0,0),1}
+\tcaption{{\it Figure 6:}  Circle with Arrow.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Use of hatch, draw, lclosed, connect, curve, point, lines,
+  dotted, reverse.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[20]{-3}{3}{-3}{3}
+\hatch\draw\lclosed\connect
+\curve{(1,0), (1,0.5), (1,1), (0,1.5)}
+\point{(0,0)}
+\endconnect
+\lines{(-1,1), (-1,-1), (1,-1.5)}
+\point{(0,0)}
+\dotted\reverse\lines{(-2,2), (-2,-2), (2,-3)}
+\tcaption{{\it Figure 7:}  Use of hatch, draw, lclosed, connect,
+  curve, point, lines, dotted, reverse.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Simpler variant of the previous figure.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[40]{-1}{1}{-1}{1}  % Was `[20]'.
+\tcaption{{\it Figure 8:} Simpler variant of the previous figure.}
+\hatch\draw\lclosed\connect
+\curve{(1,0), (0.5,0.25), (0.5,0.5), (0,0.75)}
+\point{(0,0)}
+\endconnect
+\reverse\lines{(-0.5,0.5), (-0.5,-0.5), (0.5,-0.75)}
+\tcaption{{\it Figure 8:} Simpler variant of the previous figure.}
+\end{mfpic}
+\end{mfpframe}
+
+\vs
+
+\mftitle{Graph of data from file.}
+
+\noindent
+\begin{mfpframe}
+\begin{mfpic}[6]{-10}{10}{-2}{12}
+  \makepercentother
+    \using{#1% #2 #3}{(#1,#2)}
+  \makepercentcomment
+  \mfpdatacomment\#
+  \fcncurve\datafile{data.dat}
+  \axes
+\tcaption{{\it Figure 9:} Example of a graph drawn from data in a file}
+\end{mfpic}
+\end{mfpframe}
+
+\closegraphsfile
+
+\end{document}
+
+%%%
+%%%  EOF  lapictures.tex
+%%%

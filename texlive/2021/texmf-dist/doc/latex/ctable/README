@@ -1,0 +1,27 @@
+|
+-------:|:--------------------------------------
+ ctable:| Flexible typesetting of table and figure floats using key/value directives
+Version:| 1.31
+ Author:| Wybo Dekker
+ E-mail:| wybo@dekkerdocumenten.nl
+License:| Released under the LaTeX Project Public License v1.3c or later
+    See:| http://www.latex-project.org/lppl.txt
+
+Short description:
+ctable.sty provides commands to easily typeset centered or left or right
+aligned tables and (multiple-)figure floats, with footnotes. Instead of an
+environment, a command with 4 arguments is used; the first is optional and
+is used for key,value pairs generating variations on the defaults and
+offering a route for future extensions.
+
+Full documentation:
+https://bitbucket.org/wybodekker/ctable/downloads/ctable.pdf
+
+Installation:
+Execute the inst script with the --help option for more information.
+
+Changes in version 1.31:
+ - comments about tmark in captions
+ - use expandonce from etoolbox
+ - use \AtBeginDocument, not \AtEndPreamble from etoolbox
+   (problems with tikz)

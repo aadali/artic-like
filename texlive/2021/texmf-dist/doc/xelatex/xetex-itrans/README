@@ -1,0 +1,144 @@
+% README for ITRANS and Baraha mapping files to be used with XeLaTeX.
+% Copyright (C) 2010-2014, Abhinandan S. Prasad and Shrisha Rao.
+% 
+% Version 4.2, Time-stamp: <2014-09-01 11:47:23 shrao>
+%
+%   This work may be distributed and/or modified under the
+%   conditions of the LaTeX Project Public License, either version 1.3
+%   of this license or (at your option) any later version.
+%   The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+%   and version 1.3 or later is part of all distributions of LaTeX
+%   version 2005/12/01 or later.
+%
+%   This work has the LPPL maintenance status `maintained'.
+% 
+%   The Current Maintainer of this work is Shrisha Rao.
+%
+%   This work consists of the files brh-kan.map, brh-kan.tec,
+%   itrans-dvn.map, itrans-dvn.tec, itrans-sdvn.map, itrans-sdvn.tec,
+%   itrans-iast.map, itrans-iast.tec, itrans-kan.map, itrans-kan.tec,
+%   itrans-sankan.map, itrans-sankan.tec, itrans-santel.map,
+%   itrans-santel.tec, itrans-tamil.map, itrans-tamil.tec,
+%   itrans-tamil-sample.pdf, itrans-tamil-sample.tex, itrans-tel.map,
+%   itrans-tel.tec, and README.
+
+The following files are mappings that can be used with XeLaTeX for
+codings done in the ITRANS and Baraha formats.  In each instance, the
+*.map file is the actual (ASCII) mapping, while the *.tec file is the
+compiled version used by the software.
+
+The itrans-tel mapping is by Kattamuri Ekanadham.
+
+brh-kan:       This mapping should be used with codings done in Baraha,
+               where the output is desired in Kannada script.
+
+itrans-dvn:    This mapping should be used with codings done in ITRANS, 
+               where the output is desired in Devanagari script.  The
+               codings are typically, but not necessarily, of Sanskrit
+               texts (they could also be, e.g., Hindi or Marathi).
+
+itrans-sdvn:   This mapping is very similar to the above, but does not
+               need the use of a vowel `a' at the ends of words; thus,
+               `rAm' can be used rather than `rAma'.
+
+itrans-iast:   This mapping should be used with codings done in ITRANS,
+	       where the output is desired in accented Roman (IAST)
+	       script.
+
+itrans-kan:    This mapping should be used with codings done in ITRANS
+               of Kannada texts, where the output is desired in Kannada
+               script.
+
+itrans-sankan: This mapping should be used with codings done in ITRANS
+               of Sanskrit texts, where the output is desired in Kannada
+               script.
+
+itrans-santel: This mapping should be used with codings done in ITRANS
+	       of Sanskrit texts, where the output is desired in Telugu
+	       script.
+
+itrans-tamil:  This mapping should be used with codings done in ITRANS
+               of Tamil texts, where the output is desired in Tamil
+               script.
+
+itrans-tel:    This mapping should be used with codings done in ITRANS 
+               of Telugu texts, where the output is desired in Telugu
+               script.
+
+Note that `e' and `o' get mapped to the long-vowels with itrans-sankan
+and in itrans-santel, but to the short vowels in itrans-kan and
+itrans-tel (where `E' and `O' are needed for the long vowels).
+
+To use these mappings, insert one or more of the following sets of
+lines in your *.tex files after the \documentclass command and
+appropriate other includes and settings.
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Kannada,Mapping=brh-kan]{<fontname>}}   
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Devanagari,Mapping=itrans-dvn]{<fontname>}}   
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Devanagari,Mapping=itrans-sdvn]{<fontname>}} 
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Roman,Mapping=itrans-iast]{<fontname>}}
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Kannada,Mapping=itrans-kan]{<fontname>}}
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Kannada,Mapping=itrans-sankan]{<fontname>}}
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Mapping=itrans-santel]{<fontname>}}
+
+\newcommand\abc{\catcode`\^=11
+            \catcode`\~=11
+           \fontspec[Script=Tamil,Mapping=itrans-tamil]{<fontname>}}
+
+\newcommand\abc{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Mapping=itrans-tel]{<fontname>}}
+
+Replace `abc' by the desired macro name, and <fontname> by the name of
+an appropriate Unicode font in that script (e.g., Sanskrit 2003 for
+Devanagari, Kedage for Kannada, Pothana for Telugu).
+
+The following is a small example using the Kannada `Kedage' font.
+Save the following as a *.tex file; if your installation and settings
+(including fonts) are correct, it will compile and produce a proper
+PDF output.  (See itrans-tamil-sample.tex and itrans-tamil-sample.pdf
+for a Tamil usage example.)
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{ifxetex}
+\RequireXeTeX
+\usepackage{xltxtra}
+
+\setlength{\parindent}{0mm}
+
+\newcommand\ked{\catcode`\^=11
+           \catcode`\~=11
+           \fontspec[Script=Kannada,Mapping=itrans-sankan]{Kedage}}
+
+\begin{document}
+
+{\ked
+OM ||  nArAyaNaM suraguruM jagadekanAthaM \\
+bhaktapriyaM sakalalokanamaskR^itaM cha | \\
+traiguNyavarjitamajaM vibhumAdyamIshaM \\
+vande bhavaghnamamarAsurasiddhavandyam.h  ||
+}
+
+\end{document}

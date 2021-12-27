@@ -1,0 +1,777 @@
+% \iffalse meta-comment
+%
+%% File: l3pdfpdffield-pushbutton.dtx
+%
+% Copyright (C) 2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,siunitx}
+\usepackage{l3pdffield-testphase,bearwear}
+\hypersetup{pdfauthor=The LaTeX Project,
+ pdftitle=l3pdffield (LaTeX PDF management testphase bundle)}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \providecommand\hook[1]{\texttt{#1}}
+% \ExplSyntaxOn
+% \pdffield_appearance:nn {pdffield/bear}
+%  {
+%    \tikz\bear\bearwear[shirt=red,body~deco={\node[font=\tiny\bfseries,white]~at~(beartummy){Push};}];
+%  }
+% \ExplSyntaxOff
+% \title{^^A
+%   The \pkg{l3pdffield-pushbutton} module\\ Commands to create pushbutton form fields   ^^A
+%   \\ \LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+% \section{\pkg{l3pdffield-pushbutton} Introduction}
+% This is the documentation for pushbutton fields, for general information about form fields
+% check the documentation l3pdffield.
+%
+%
+%
+% Please keep in mind
+% \begin{itemize}
+% \item Not every PDF viewer supports pushbuttons.
+% \item The handling can depend on settings in the PDF viewer. In adobe reader for
+% example I had to disable an option to avoid that it tries to create an appearance
+% itself
+% \item Standards like pdf/A disable features of form fields too
+% (as you typically can't change the PDF).
+% \item The compilations involving postscript/pdfmark (dvips with ps2pdf or dvips
+% with distiller) can require special setups.
+% \end{itemize}
+% \section{Pushbuttons}
+% Click me:
+% \ExplSyntaxOn
+%  \group_begin:
+%  \tl_set:Nn\l_tmpa_tl{app.alert('Hello!~I\'m~Bär!',3,0);}
+%  \regex_replace_once:nnN{ä}{\x5Cu00E4}\l_tmpa_tl{}
+%  \pdf_object_unnamed_write:nx{stream}{{}{\exp_not:o{\l_tmpa_tl}}}
+%  \pdfannot_dict_put:nnx{widget}{A}{<</S/JavaScript /JS~\pdf_object_ref_last:>>}
+%  \pdffield_pushbutton:n{name=bear,appearance=pdffield/bear,width=23pt,height=30pt,depth=10pt}
+%  \group_end:
+% \ExplSyntaxOff
+%^^A  ps2pdf doesn't like the I\'m, need to find out the right escape.
+%^^A  ps2pdf also requires an indirection (but distiller will probably require /Action
+%^^A instead of /A)
+%^^A  \group_begin:
+%^^A  \tl_set:Nn\l_tmpa_tl{app.alert('Hello!~Im~Bär!',3,0);}
+%^^A  \regex_replace_once:nnN{ä}{\x5Cu00E4}\l_tmpa_tl{}
+%^^A  \pdf_object_unnamed_write:nx{stream}{{}{\exp_not:o{\l_tmpa_tl}}}
+%^^A  \pdf_object_unnamed_write:nx{dict}{/S/JavaScript /JS~\pdf_object_ref_last:}
+%^^A  \pdfannot_dict_put:nnx{widget}{A}{\pdf_object_ref_last:}
+%^^A  \pdffield_pushbutton:n{name=bear,appearance=pdffield/bear,width=23pt,height=30pt,depth=10pt}
+%^^A  \group_end:%
+% \bigskip
+% \subsection{Commands}
+% \begin{function}{\pdffield_push:n}
+% \begin{syntax}
+%  \cs{pdffield_push:n}\Arg{key val list}
+% \end{syntax}
+% This creates a pushbutton. Unlike radio buttons and checkboxes pushbuttons
+% don't change their state and they don't store or represent a value.
+% Instead their purpose is to trigger an \emph{action}. Important
+% actions are for example Submit and Reset.
+%
+% Interfaces for such actions will be setup in another module later.
+% For now actions should be added through the widget dictionary. The following
+% for example setups a named action.
+%
+% \begin{verbatim}
+% \group_begin:
+% \pdfannot_dict_put:nnn {widget}{A}{<</S/Named /N/LastPage>>}
+% \sffamily\bfseries
+% \pdffield_pushbutton:n
+%   {name=my/go,
+%    width=4cm,
+%    caption=go~to~last~page,
+%    rollover-caption=click~me!}
+% \group_end:
+% \end{verbatim}
+% \begin{center}
+% \ExplSyntaxOn
+% \group_begin:
+% \pdfannot_dict_put:nnn {widget}{A}{<</S/Named /N/LastPage>>}
+% \sffamily\bfseries\pdffield_pushbutton:n
+%   {name=my/go,width=4cm,caption=GO~TO~LAST~PAGE,rollover-caption=click~me!}
+% \group_end:
+% \ExplSyntaxOff
+% \end{center}
+% The list of allowed keys is described below.
+% The \meta{key val list} should at least set the name, without it the default name
+% |pushbutton| is used.
+% \end{function}
+%
+% \subsection{The look of the button}
+% Pushbuttons have no value. PDF compensates this by giving much more options to setup
+% the appearance. Beside the standard |AP| key there are number of settings in the
+% dynamic appearance dictionary |MK|. Sadly it is quite unclear how all this settings
+% interact (or should interact), and PDF viewers don't honor all of them. I was for
+% example not able to get the down appearance to show off.
+%
+% By default the code will draw (with l3draw) a button and place the caption and
+% rollover-caption on it. The caption will honor the surrounding font, fontsize and
+% the color, and will be placed on the baseline as described by the height and depth
+% keys.
+%
+%
+%
+% \subsection{Keys}
+%
+% The new pushbutton command accept all field and annot keys from l3pdffield.
+% A few keys are disabled or are forced to specific values.
+% The |appearance| keys have a more pushbutton specific
+% behaviour, other keys have other defaults than with the basic commands.
+% Additionally there
+% are a small number of keys specific  to a pushbutton.
+% For convenience a number of important keys are documented here too, even if
+% they are already in the document from l3pdffield.
+%
+% Disabled keys are
+%  \begin{itemize}
+%  \item |V|, |DV|. As a pushbutton has no permanent state,
+%  the keys should not be used.
+%  \item |FT| is overwritten.
+%  \item For pushbuttons only the field flags  |ReadOnly|, |Required| and |NoExport|
+%   make sense.
+%  |Pushbutton| is set automatically by the code
+% as this is required for a pushbutton.
+%  \end{itemize}
+%
+% \begin{function}{preset-pushbutton}
+%  \begin{syntax}
+%   |preset-pushbutton| = \Arg{key-val-list}
+%  \end{syntax}
+% This allows to set default keys for a pushbutton.
+% \end{function}
+%
+% \begin{function}{name,T}
+%  \begin{syntax}
+%   |name| = \meta{partial name}\\
+%   |T| = \meta{partial name}
+%  \end{syntax}
+% This sets the partial name of the field. The value
+% shouldn't contain a period, be not empty and sensibly consist of simple chars.
+% Additionally the value is used to create the field ID.
+% This means that pushbuttons with the same partial name are annotations
+% with the same field as parent.
+% The field ID is then internal and can not be used to
+% attach another annotation.
+% For explicit control of the field ID  use the |fieldID| key.
+% \end{function}
+%
+% \begin{function}{fieldID}
+%  \begin{syntax}
+%   |fieldID| = \meta{field ID}\\
+%  \end{syntax}
+% \emph{For experts only!}
+% This allows to give the pushbutton field a specific ID. This is only useful
+% in the context of a larger fieldset or if you want to attach another annotation
+% to the field with \cs{pdffield_annot:n}. If used wrongly you can
+% easily create invalid fieldset. It allows you to create to fields with the
+% same partial name, but if you want to see both
+% you need to ensure that their full names are
+% different---for example by adding some parent fields.
+% \end{function}
+%
+% \begin{function}{parent}
+%  \begin{syntax}
+%   |parent| = \meta{field ID}\\
+%  \end{syntax}
+% This is only needed if the field should be part
+% of a larger fieldset. The value should be a field ID of a field created previously
+% with \cs{pdffield_field:nn}.
+% \end{function}
+%
+% \begin{function}{altname,TU}
+%  \begin{syntax}
+%   |altname| = \meta{string}\\
+%   |TU| = \meta{string}\\
+%  \end{syntax}
+% This is sets an alternative name for user interaction.
+% This name can only be set at the first pushbutton instance, when the field is initialized.
+% \end{function}
+%
+% \begin{function}{mappingname,TM}
+%  \begin{syntax}
+%   |mappingname| = \meta{string}\\
+%   |TM| = \meta{string}\\
+%  \end{syntax}
+% This is sets an alternative name for export.
+% This name can only be set at the first pushbutton instance, when the field is initialized.
+% \end{function}
+%
+% \begin{function}{width,height,depth}
+% \begin{syntax}
+% |width| = \meta{dim expression}\\
+% |height| = \meta{dim expression}\\
+% |depth| = \meta{dim expression}
+% \end{syntax}
+% These keys allow to set the dimensions of the pushbutton instance.
+% The value should be a dimension expression. By default
+% |width| is \qty{3}{\centi\meter}, |height| uses 1.05\cs{normalbaselineskip}, and
+% |depth| is 0.45\cs{normalbaselineskip}.
+% \end{function}
+%
+% \begin{function}{AP/N,appearance,AP/R,rollover-appearance,AP/D,down-appearance}
+%  \begin{syntax}
+%   |AP/N| = \meta{appearance name}\\
+%   |appearance| = \meta{appearance name}\\
+%   |AP/R| = \meta{appearance name}\\
+%   |rollover-appearance| = \meta{appearance name}\\
+%   |AP/D| = \meta{appearance name}\\
+%   |down-appearance| = \meta{appearance name}
+%  \end{syntax}
+% This keys sets the normal appearance, the rollover appearance (when the
+% mouse hovers over the pushbutton) and the down appearance (when the
+% mouse clicks). They take as value a
+% \meta{appearance name} and expects that one form Xobjects
+% with this name has been created before.
+% It depends on the PDF viewer if such appearances
+% are shown. adobe reader for example ignores the down appearance.
+% \end{function}
+%
+% \begin{function}{action}
+%  \begin{syntax}
+%   |action| = .....\\
+%  \end{syntax}
+% This key doesn't exist yet. It will (probably) be added when a interface
+% for actions are added.
+% \end{function}
+%
+% \subsection{Using with hyperref}
+% The \cs{Pushbutton} command from hyperref also adds a label. Something like
+% this could more or less fake it. But be aware that the options are not
+% identical.
+%
+% \begin{verbatim}
+% \ExplSyntaxOn\makeatletter
+% \def\@PushButton[#1]#2{\LayoutPushButtonField{#2}{\pdffield_pushbutton:n {name=#2,#1}}}
+% \ExplSyntaxOff\makeatother
+% \end{verbatim}
+%
+%
+% \end{documentation}
+%
+% \begin{implementation}
+% \DoNotIndex
+%  {\\
+% ,\bitset_clear:N
+% ,\bitset_new:Nn
+% ,\bitset_set_false:Nn
+% ,\bitset_set_true:Nn
+% ,\bitset_to_arabic:N
+% ,\bool_new:N
+% ,\box_dp:N
+% ,\box_ht:N
+% ,\l_tmpa_box
+% ,\clist_map_inline:nn
+% ,\color_export:nnN
+% ,\color_set:nn
+% ,\color_set:nnn
+% ,\cs_new_protected:Npn
+% ,\cs_new_protected:cpn
+% ,\cs_set_eq:NN
+% ,\cs_gset_eq:cN
+% ,\cs_set_protected:Npn
+% ,\cs_generate_variant:Nn
+% ,\cs_gset_eq:NN
+% ,\csname
+% ,\dim_eval:n
+% ,\dim_new:N
+% ,\dim_set:N
+% ,\endcsname
+% ,\exp_args:Ne
+% ,\exp_args:Nnx
+% ,\exp_args:Nx
+% ,\fboxsep
+% ,\group_begin:
+% ,\group_end:
+% ,\hbox_to_wd:nn
+% ,\hbox_set:Nn
+% ,\hfill
+% ,\hook_gput_code:nnn
+% ,\int_eval:n
+% ,\int_gincr:N
+% ,\int_new:N
+% ,\int_use:N
+% ,\l_keys_choice_int
+% ,\keys_define:nn
+% ,\keys_set:nn
+% ,\mode_leave_vertical:
+% ,\makebox
+% ,\msg_error:nnn
+% ,\msg_error:nnnn
+% ,\msg_new:nnn
+% ,\msg_warning:nn
+% ,\msg_warning:nnn
+% ,\msg_warning:nnnnn
+% ,\NeedsTeXFormat
+% ,\normalsize
+% ,\pdf_name_from_unicode_e:n
+% ,\pdf_object_if_exist:nTF
+% ,\pdf_object_if_exist:nF
+% ,\pdf_object_new:nn
+% ,\pdf_object_ref:n
+% ,\pdf_object_ref_last:
+% ,\pdf_object_unnamed_write:nn
+% ,\pdf_object_write:nn
+% ,\pdf_string_from_unicode:nnN
+% ,\pdfannot_box_ref_last:
+% ,\pdfannot_dict_put:nnn
+% ,\pdfannot_dict_put:nnx
+% ,\pdfannot_dict_remove:nn
+% ,\pdfannot_widget_box:nnn
+% ,\pdfdict_if_empty:nTF
+% ,\pdfdict_get:nnN
+% ,\pdfdict_new:n
+% ,\pdfdict_put:nnn
+% ,\pdfdict_remove:nn
+% ,\pdfdict_use:n
+% ,\pdfmanagement_add:nnn
+% ,\pdfmeta_standard_verify:nTF
+% ,\pdfxform_if_exist:nTF
+% ,\pdfxform_new:nnn
+% ,\pdfxform_ref:n
+% ,\phantom
+% ,\prg_do_nothing:
+% ,\ProvidesExplPackage
+% ,\rule
+% ,\seq_gput_right:Nn
+% ,\seq_if_exist:NTF
+% ,\seq_new:N
+% ,\seq_use:Nn
+% ,\str_if_empty:NTF
+% ,\str_if_in:NnTF
+% ,\str_new:N
+% ,\strut
+% ,\strutbox
+% ,\tl_if_empty:NTF
+% ,\tl_if_empty:NT
+% ,\tl_if_empty:NF
+% ,\tl_put_left:Nn
+% ,\tl_if_empty:nTF
+% ,\tl_if_head_eq_charcode:nNTF
+% ,\tl_put_right:Nn
+% ,\tl_new:N
+% ,\tl_set:Nn
+% ,\tl_to_str:n
+% ,\use:c
+%   }
+% \section{\pkg{l3pdffield-pushbutton} Implementation}
+%    \begin{macrocode}
+%<*package>
+%<@@=pdffield>
+%    \end{macrocode}
+% \subsection{Variables}
+% A variable to store the appearance code, and two dimensions
+% for the appearances. We can't use a single default
+% appearance, so we use a count.
+% \begin{variable}
+%  {
+%     ,\l_@@_pushbutton_appearance_code_tl
+%     ,\l_@@_pushbutton_linewidth_dim
+%     ,\l_@@_pushbutton_totalht_dim
+%     ,\g_@@_pushbutton_cnt_int
+%  }
+% A pushbutton can setup the appearance only after the texts are known,
+% so the code is stored and executed later.
+%    \begin{macrocode}
+\tl_new:N   \l_@@_pushbutton_appearance_code_tl
+\dim_new:N  \l_@@_pushbutton_linewidth_dim
+\dim_new:N  \l_@@_pushbutton_totalht_dim
+\int_new:N  \g_@@_pushbutton_cnt_int
+%    \end{macrocode}
+% \end{variable}
+% \subsection{Appearances}
+% The default appearances are a rectangular frame with some text.
+%
+%  \begin{macro}
+%   {
+%    \@@_pushbutton_default_appearances:,
+%    pdffield/pushbutton/default-n,
+%    pdffield/pushbutton/defaultrollover-n,
+%    pdffield/pushbutton/defaultdown-n,
+%   }
+%  This defines the standard appearances. They are setup at the first
+%  use of a pushbutton, and will adapt to the font family in use then.
+%    \begin{macrocode}
+\dim_set:Nn \l_@@_pushbutton_linewidth_dim {0.4pt}
+\color_set:nn {pdffield/push/text}{black}
+\color_set:nn {pdffield/push/border}{black!95!white}
+\color_set:nn {pdffield/push/bordertop}{yellow!5!white}
+\color_set:nn {pdffield/push/borderbot}{black!50!white}
+\color_set:nn {pdffield/push/fill}{black!20!white}
+
+\cs_new_protected:Npn \@@_pushbutton_default_appearances:
+  {
+     \int_gincr:N \g_@@_pushbutton_cnt_int
+     \exp_args:Nx
+     \pdffield_appearance:nn {pdffield/pushbutton/default-\int_use:N \g_@@_pushbutton_cnt_int}
+       {
+         \draw_begin:
+         \color_set:nn {pdffield/push/text}{.}
+         \dim_set:Nn \l_@@_pushbutton_totalht_dim
+           {\l_@@_annot_ht_dim + \l_@@_annot_dp_dim}
+         \draw_linewidth:n {\l_@@_pushbutton_linewidth_dim}
+         \draw_path_rectangle_corners:nn
+            {0.5\l_@@_pushbutton_linewidth_dim,0.5\l_@@_pushbutton_linewidth_dim}
+            {
+             \l_@@_annot_wd_dim-0.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-0.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/border}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+            {2\l_@@_pushbutton_linewidth_dim,2\l_@@_pushbutton_linewidth_dim}
+            {
+              \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+              \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/bordertop}
+         \draw_path_use_clear:n { fill }
+         \draw_path_moveto:n
+           {
+             2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {5\l_@@_pushbutton_linewidth_dim,5\l_@@_pushbutton_linewidth_dim}
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-5\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_close:
+         \color_fill:n {pdffield/push/borderbot}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+           {
+             1.5\l_@@_pushbutton_linewidth_dim,
+             1.5\l_@@_pushbutton_linewidth_dim
+           }
+           {
+             \l_@@_annot_wd_dim-1.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-1.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_stroke:n {pdffield/push/border}
+         \draw_path_use_clear:n { stroke }
+         \draw_path_rectangle_corners:nn
+           {4\l_@@_pushbutton_linewidth_dim,4\l_@@_pushbutton_linewidth_dim}
+           {
+             \l_@@_annot_wd_dim-4\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-4\l_@@_pushbutton_linewidth_dim
+           }
+           \color_fill:n {pdffield/push/fill}
+          \draw_path_use_clear:n { fill }
+          \color_fill:n {pdffield/push/text}
+          \draw_transform_shift:n
+            {0.5 \l_@@_annot_wd_dim, \l_@@_annot_dp_dim }
+          \hbox_set:Nn \l_tmpa_box { \makebox[0pt]{\l_@@_caption_tl} }
+          \draw_box_use:N \l_tmpa_box
+         \draw_end:
+       }
+    \exp_args:Nx
+    \pdffield_appearance:nn {pdffield/pushbutton/defaultrollover-\int_use:N \g_@@_pushbutton_cnt_int}
+       {
+         \draw_begin:
+         \dim_set:Nn \l_@@_pushbutton_totalht_dim
+           {\l_@@_annot_ht_dim + \l_@@_annot_dp_dim}
+         \draw_linewidth:n {\l_@@_pushbutton_linewidth_dim}
+         \draw_path_rectangle_corners:nn
+            {0.5\l_@@_pushbutton_linewidth_dim,0.5\l_@@_pushbutton_linewidth_dim}
+            {
+             \l_@@_annot_wd_dim-0.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-0.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/border}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+            {2\l_@@_pushbutton_linewidth_dim,2\l_@@_pushbutton_linewidth_dim}
+            {
+              \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+              \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/borderbot}
+         \draw_path_use_clear:n { fill }
+         \draw_path_moveto:n
+           {
+             2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {5\l_@@_pushbutton_linewidth_dim,5\l_@@_pushbutton_linewidth_dim}
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-5\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_close:
+         \color_fill:n {pdffield/push/bordertop}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+           {
+             1.5\l_@@_pushbutton_linewidth_dim,
+             1.5\l_@@_pushbutton_linewidth_dim
+           }
+           {
+             \l_@@_annot_wd_dim-1.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-1.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_stroke:n {pdffield/push/border}
+         \draw_path_use_clear:n { stroke }
+         \draw_path_rectangle_corners:nn
+           {4\l_@@_pushbutton_linewidth_dim,4\l_@@_pushbutton_linewidth_dim}
+           {
+             \l_@@_annot_wd_dim-4\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-4\l_@@_pushbutton_linewidth_dim
+           }
+           \color_fill:n {pdffield/push/fill}
+          \draw_path_use_clear:n { fill }
+          \color_fill:n {pdffield/push/text}
+          \draw_transform_shift:n
+            {0.5 \l_@@_annot_wd_dim, \l_@@_annot_dp_dim }
+          \hbox_set:Nn \l_tmpa_box { \makebox[0pt]{\l_@@_rollover_caption_tl} }
+          \draw_box_use:N \l_tmpa_box
+         \draw_end:
+       }
+     \exp_args:Nx
+     \pdffield_appearance:nn {pdffield/pushbutton/defaultdown-\int_use:N \g_@@_pushbutton_cnt_int}
+       {
+         \draw_begin:
+         \dim_set:Nn \l_@@_pushbutton_totalht_dim
+           {\l_@@_annot_ht_dim + \l_@@_annot_dp_dim}
+         \draw_linewidth:n {\l_@@_pushbutton_linewidth_dim}
+         \draw_path_rectangle_corners:nn
+            {0.5\l_@@_pushbutton_linewidth_dim,0.5\l_@@_pushbutton_linewidth_dim}
+            {
+             \l_@@_annot_wd_dim-0.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-0.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/border}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+            {2\l_@@_pushbutton_linewidth_dim,2\l_@@_pushbutton_linewidth_dim}
+            {
+              \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+              \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+            }
+         \color_fill:n {pdffield/push/borderbot}
+         \draw_path_use_clear:n { fill }
+         \draw_path_moveto:n
+           {
+             2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {5\l_@@_pushbutton_linewidth_dim,5\l_@@_pushbutton_linewidth_dim}
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-5\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_lineto:n
+           {
+             \l_@@_annot_wd_dim-2\l_@@_pushbutton_linewidth_dim,
+             2\l_@@_pushbutton_linewidth_dim
+           }
+         \draw_path_close:
+         \color_fill:n {pdffield/push/bordertop}
+         \draw_path_use_clear:n { fill }
+         \draw_path_rectangle_corners:nn
+           {
+             1.5\l_@@_pushbutton_linewidth_dim,
+             1.5\l_@@_pushbutton_linewidth_dim
+           }
+           {
+             \l_@@_annot_wd_dim-1.5\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-1.5\l_@@_pushbutton_linewidth_dim
+            }
+         \color_stroke:n {pdffield/push/border}
+         \draw_path_use_clear:n { stroke }
+         \draw_path_rectangle_corners:nn
+           {4\l_@@_pushbutton_linewidth_dim,4\l_@@_pushbutton_linewidth_dim}
+           {
+             \l_@@_annot_wd_dim-4\l_@@_pushbutton_linewidth_dim,
+             \l_@@_pushbutton_totalht_dim-4\l_@@_pushbutton_linewidth_dim
+           }
+           \color_fill:n {pdffield/push/fill}
+          \draw_path_use_clear:n { fill }
+          \color_fill:n {pdffield/push/text}
+          \draw_transform_shift:n
+            {0.5 \l_@@_annot_wd_dim, \l_@@_annot_dp_dim }
+          \hbox_set:Nn \l_tmpa_box { \makebox[0pt]{\l_@@_down_caption_tl} }
+          \draw_box_use:N \l_tmpa_box
+         \draw_end:
+       }
+    }
+%    \end{macrocode}
+% \end{macro}
+%
+%\subsection{Creating the field}
+% A field should be created if the name doesn't exist
+%  \begin{macro}{ \@@_pushbutton_field:n }
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_pushbutton_field:n #1 %name
+  {
+    \pdf_object_if_exist:nF {@@/field/@@/pushbutton/#1}
+      {
+        \@@_field:n { @@/pushbutton/#1 }
+      }
+    \keys_set:nn {pdffield}{parent=@@/pushbutton/#1}
+  }
+\cs_generate_variant:Nn \@@_pushbutton_field:n {V}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Assembling the Pushbutton}
+%
+% \begin{macro}{\@@_pushbutton:n}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_pushbutton:n #1
+  {
+    \group_begin:
+    \tl_set:Nn\l_@@_pushbutton_appearance_code_tl{}
+    \cs_set_eq:NN\@@_appearance_handler:nnn \@@_pushbutton_appearance_handler:nnn
+%    \end{macrocode}
+% Setting up the defaults.
+%    \begin{macrocode}
+    \keys_set:nn {pdffield}
+      {
+        fieldID=,
+        name=pushbutton,
+        width  = 3cm,
+        height = 1.05\normalbaselineskip,
+        depth  = 0.45\normalbaselineskip,
+      }
+%    \end{macrocode}
+% Value keys should be undefined.
+%    \begin{macrocode}
+    \keys_set:nn { pdffield }{@@/preset/pushbutton,#1}
+    \keys_set:nn { pdffield }
+      {
+        ,V=
+        ,DV=
+        ,setFf={Pushbutton}
+        ,FT= Btn
+      }
+    \tl_if_empty:NT\l_@@_fieldID_tl
+      {
+        \pdfdict_get:nnN {l_@@/field}{T}\l_@@_fieldID_tl
+        \tl_put_left:Nn \l_@@_fieldID_tl {@@/pushbutton/}
+      }
+   \tl_if_empty:NT\l_@@_pushbutton_appearance_code_tl
+      {
+        \@@_pushbutton_default_appearances:
+        \exp_args:Nnx
+         \keys_set:nn {pdffield}
+           {
+             appearance          = pdffield/pushbutton/default-\int_eval:n{ \g_@@_pushbutton_cnt_int},
+             down-appearance     = pdffield/pushbutton/defaultdown-\int_eval:n{ \g_@@_pushbutton_cnt_int},
+             rollover-appearance = pdffield/pushbutton/defaultrollover-\int_eval:n{ \g_@@_pushbutton_cnt_int},
+           }
+      }
+    \l_@@_pushbutton_appearance_code_tl
+    \@@_pushbutton_field:V\l_@@_fieldID_tl
+    \@@_annot:
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Keys}
+% Most keys are inherited from the generic field and annot keys.
+% We only need to handle the appearance in a special way.
+%
+% \begin{macro}{\@@_pushbutton_appearance_handler:nnn}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_pushbutton_appearance_handler:nnn #1 #2 #3 %name, type, text
+  {
+    \tl_put_right:Nn \l_@@_pushbutton_appearance_code_tl
+      {
+        \pdfxform_if_exist:nTF {  #1  }
+           {
+            \pdfannot_dict_put:nnx {widget/AP}{#2}{\pdfxform_ref:n{#1}}
+           }
+           {
+              \msg_error:nnnn{pdffield}{appearance-missing}{#1}{#3}
+           }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{user commands}
+% \begin{macro}{\pdffield_pushbutton:n}
+%    \begin{macrocode}
+\cs_set_eq:NN \pdffield_pushbutton:n \@@_pushbutton:n
+%</package>
+%    \end{macrocode}
+% \end{macro}
+%\end{implementation}
+
+% \PrintIndex

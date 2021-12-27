@@ -1,0 +1,13 @@
+----- seminar.cls
+1.63a 2021-07-01  - fix for semsamp3.tes
+1.63  2021-06-30  - make it run with current latex version (seminar.ls†|.sty)
+1.62a 2021-06-12  - added statement in README 
+1.62  2014-05-12  - moved code into pst-ovl 
+1.61  2014-01-17  - added missing file seminar.con 
+                  - added ed one more example
+                  - added script for creating example
+1.6   2012-12-27  - use the macros from package pst-ovl (hv)
+
+
+----- seminar.sty
+1.71 2021-06-30   - exists only for compatibility

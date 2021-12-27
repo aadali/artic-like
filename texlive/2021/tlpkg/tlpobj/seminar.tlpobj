@@ -1,0 +1,58 @@
+name seminar
+category Package
+revision 59801
+shortdesc Make overhead slides
+longdesc A class that produces overhead slides (transparencies), with
+longdesc many facilities. The class requires availability of the
+longdesc fancybox package. Seminar is also the basis of other classes,
+longdesc such as prosper. In fact, seminar is not nowadays reckoned a
+longdesc good basis for a presentation -- users are advised to use more
+longdesc recent classes such as powerdot or beamer, both of which are
+longdesc tuned to 21st-century presentation styles. Note that the
+longdesc seminar distribution relies on the xcomment package, which was
+longdesc once part of the bundle, but now has a separate existence.
+containersize 30320
+containerchecksum 28795c64e4af5296e228986c28115305cb76087d241e91312cfff351f7e51833a0d76b2acd667fc5f7616dcb1685cd02b2d9352ef7f0e36d5bffdaa5f421e6eb
+doccontainersize 348624
+doccontainerchecksum 8b7364dc568d1fd78cce21ff1846a6369fe3fccf07bf16ece8383c941492404d6fdf3be1607aa2279a10d670803536474d7cc318b9b3dda24142fbcc69fe69e0
+docfiles size=154
+ texmf-dist/doc/latex/seminar/Changes
+ texmf-dist/doc/latex/seminar/README details="Readme"
+ texmf-dist/doc/latex/seminar/run.sh
+ texmf-dist/doc/latex/seminar/sem-code.tex
+ texmf-dist/doc/latex/seminar/sem-make.tex
+ texmf-dist/doc/latex/seminar/seminar-doc.pdf details="Package documentation"
+ texmf-dist/doc/latex/seminar/seminar-doc.tex
+ texmf-dist/doc/latex/seminar/seminar.con
+ texmf-dist/doc/latex/seminar/seminar.doc
+ texmf-dist/doc/latex/seminar/semlayer.doc
+ texmf-dist/doc/latex/seminar/semsamp1.pdf
+ texmf-dist/doc/latex/seminar/semsamp1.tex
+ texmf-dist/doc/latex/seminar/semsamp2.pdf
+ texmf-dist/doc/latex/seminar/semsamp2.tex
+ texmf-dist/doc/latex/seminar/semsamp3.pdf
+ texmf-dist/doc/latex/seminar/semsamp3.tex
+runfiles size=53
+ texmf-dist/tex/latex/seminar/npsfont.sty
+ texmf-dist/tex/latex/seminar/sem-a4.sty
+ texmf-dist/tex/latex/seminar/sem-dem.sty
+ texmf-dist/tex/latex/seminar/sem-page.sty
+ texmf-dist/tex/latex/seminar/semcolor.sty
+ texmf-dist/tex/latex/seminar/semhelv.sty
+ texmf-dist/tex/latex/seminar/seminar.bg2
+ texmf-dist/tex/latex/seminar/seminar.bg3
+ texmf-dist/tex/latex/seminar/seminar.bug
+ texmf-dist/tex/latex/seminar/seminar.cls
+ texmf-dist/tex/latex/seminar/seminar.sty
+ texmf-dist/tex/latex/seminar/semlayer.sty
+ texmf-dist/tex/latex/seminar/semlcmss.sty
+ texmf-dist/tex/latex/seminar/semrot.sty
+ texmf-dist/tex/latex/seminar/slidesec.sty
+ texmf-dist/tex/latex/seminar/tvz-code.sty
+ texmf-dist/tex/latex/seminar/tvz-hax.sty
+ texmf-dist/tex/latex/seminar/tvz-user.sty
+catalogue-also foiltex slidenotes
+catalogue-ctan /macros/latex/contrib/seminar
+catalogue-license lppl1.2
+catalogue-topics presentation
+catalogue-version 1.63a

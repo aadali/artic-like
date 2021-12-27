@@ -1,0 +1,59 @@
+name ctable
+category Package
+revision 38672
+shortdesc Flexible typesetting of table and figure floats using key/value directives
+longdesc Provides commands to typeset centered, left- or right-aligned
+longdesc table and (multiple-)figure floats, with footnotes. Instead of
+longdesc an environment, a command with 4 arguments is used; the first
+longdesc is optional and is used for key,value pairs generating
+longdesc variations on the defaults and offering a route for future
+longdesc extensions.
+containersize 3620
+containerchecksum 3192df463eb4d307ba886b82d586580a741da8d901dc560c06d293e04c5d5af9efff56a1482bc41b03aeaade2cc25cdf6f4dda3e1baa26da1f7d4d138f44bebc
+doccontainersize 698160
+doccontainerchecksum a32bc9c82a87f1f9327d5cbf4c15052124608f970ecda1909aa67abcc2fb4f10bdfcbb5568d8af9332687817f6f5bd6aaa0ce4843490e8ffac22526bbe123fdd
+docfiles size=243
+ texmf-dist/doc/latex/ctable/01a
+ texmf-dist/doc/latex/ctable/01b
+ texmf-dist/doc/latex/ctable/02k
+ texmf-dist/doc/latex/ctable/02l
+ texmf-dist/doc/latex/ctable/02m
+ texmf-dist/doc/latex/ctable/03a
+ texmf-dist/doc/latex/ctable/03b
+ texmf-dist/doc/latex/ctable/04a
+ texmf-dist/doc/latex/ctable/04b
+ texmf-dist/doc/latex/ctable/05a
+ texmf-dist/doc/latex/ctable/05b
+ texmf-dist/doc/latex/ctable/05c
+ texmf-dist/doc/latex/ctable/06a
+ texmf-dist/doc/latex/ctable/06b
+ texmf-dist/doc/latex/ctable/07a
+ texmf-dist/doc/latex/ctable/07b
+ texmf-dist/doc/latex/ctable/08a
+ texmf-dist/doc/latex/ctable/08b
+ texmf-dist/doc/latex/ctable/09b
+ texmf-dist/doc/latex/ctable/10a
+ texmf-dist/doc/latex/ctable/10b
+ texmf-dist/doc/latex/ctable/12a
+ texmf-dist/doc/latex/ctable/12b
+ texmf-dist/doc/latex/ctable/13a
+ texmf-dist/doc/latex/ctable/13b
+ texmf-dist/doc/latex/ctable/13c
+ texmf-dist/doc/latex/ctable/14a
+ texmf-dist/doc/latex/ctable/README details="Readme"
+ texmf-dist/doc/latex/ctable/ctable.pdf details="Package documentation"
+ texmf-dist/doc/latex/ctable/doit
+ texmf-dist/doc/latex/ctable/inst
+ texmf-dist/doc/latex/ctable/lion.png
+ texmf-dist/doc/latex/ctable/penguin.jpg
+srccontainersize 14844
+srccontainerchecksum 9886347fdf0a1a7105ab33bba00877ce22df66b1d82a60b8818af063da371d8c0c6d8f60252342dfe44bbaa65ba9a93ac8f972c64439bea7296b9e98e1be4b41
+srcfiles size=14
+ texmf-dist/source/latex/ctable/ctable.dtx
+ texmf-dist/source/latex/ctable/ctable.ins
+runfiles size=3
+ texmf-dist/tex/latex/ctable/ctable.sty
+catalogue-ctan /macros/latex/contrib/ctable
+catalogue-license lppl
+catalogue-topics table float
+catalogue-version 1.31

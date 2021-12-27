@@ -1,0 +1,25 @@
+name vtable
+category Package
+revision 51126
+shortdesc Vertical alignement of table cells
+longdesc The package allows vertical alignement of table cell by
+longdesc providing: Z, L, C, R, J and I column types \nextRow and \lb
+longdesc commands \setMultiColRow, \setMultiColumn, \setMultiRow and
+longdesc \tableFormatedCell commands for tabular and similar
+longdesc environment.
+containersize 3708
+containerchecksum ed8dee287daa32719b6650f43b963fa66cc55572526162978fc5245d3c253f027548ef5f1cbb38423c30e6cbe93b3418c373615ab92532be40d947c979f14b47
+doccontainersize 59744
+doccontainerchecksum 12626485ed74fdaee2aff65e97f59d14fad8f856bc2a84dda96010985b039d48850a07ef08525d74b155a699d44b1e173923e0f67716f47e392fa7558760076a
+docfiles size=19
+ texmf-dist/doc/latex/vtable/README details="Readme"
+ texmf-dist/doc/latex/vtable/vtable.pdf details="Package documentation"
+ texmf-dist/doc/latex/vtable/vtable.tex
+runfiles size=3
+ texmf-dist/tex/latex/vtable/vtable.sty
+catalogue-contact-bugs https://bitbucket.org/OpCode-eu-org/latex-libs/issues
+catalogue-contact-repository https://bitbucket.org/OpCode-eu-org/LaTeX-libs/
+catalogue-ctan /macros/latex/contrib/vtable
+catalogue-license mit
+catalogue-topics table
+catalogue-version 1.0

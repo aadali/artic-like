@@ -1,0 +1,11 @@
+Baseball score card
+
+This card can be used to score any baseball game which lasts fewer
+than twelve innings. Dave Rebnord added the little grey diamonds.
+
+To generate:
+  mpost scorecard
+and the card will be written to scorecard.ps.
+
+You are free to enhance this file or integrate it with other packages
+if you like.

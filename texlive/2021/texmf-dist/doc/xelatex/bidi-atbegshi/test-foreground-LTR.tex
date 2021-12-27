@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage{bidi-atbegshi}
+\usepackage{bidi}
+\setbox0\hbox{\Huge\textbf{Upper Left}}
+\setbox1\hbox{\Huge\textbf{Upper Right}}
+\setbox2\hbox{\Huge\textbf{Lower Left}}
+\setbox3\hbox{\Huge\textbf{Lower Right}}
+\AtBeginShipout{%
+\AtBeginShipoutUpperLeftForeground{%
+\put(0,\LengthToUnit{-\ht0}){\usebox0}
+}
+\AtBeginShipoutUpperRightForeground{%
+\put(\LengthToUnit{-\wd1},\LengthToUnit{-\ht1}){\usebox1}
+}
+\AtBeginShipoutLowerLeftForeground{%
+\put(0,\LengthToUnit{\dp2}){\usebox2}
+}
+\AtBeginShipoutLowerRightForeground{%
+\put(\LengthToUnit{-\wd3},\LengthToUnit{\dp3}){\usebox3}
+}
+}
+\begin{document}
+\lipsum
+\end{document}

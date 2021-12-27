@@ -1,0 +1,92 @@
+name pdfmanagement-testphase
+category Package
+revision 60347
+shortdesc LaTeX PDF management testphase bundle
+longdesc This is a temporary package, which is used during a test phase
+longdesc to load the new PDF management code of LaTeX. The new PDF
+longdesc management code offers backend independant interfaces to
+longdesc central PDF dictionaries, tools to create annotations, form
+longdesc Xobjects, to embed files, and to handle PDF standards. The code
+longdesc is provided, during a testphase, as an independant package to
+longdesc allow users and package authors to safely test the code. At a
+longdesc later stage it will be integrated into the LaTeX kernel (or in
+longdesc parts into permanent support packages), and the current
+longdesc testphase bundle will be removed.
+containersize 48572
+containerchecksum f63501fdc8184135bb649fa15e22d055a4e17a66e57411c31f6c455cfaa6680d0047eebaf34969c031ebf3f55fcce341ed1f6c0365dccf8bf86c808ff2465b4c
+doccontainersize 8488156
+doccontainerchecksum 0107d3ebfa15c1701a0fb2d25fa0ae19c32a38add6866dd262f0db71b59dd194b5c3127c56242c756db990a0cf6af674c9dec67f892aa6354273439b0d98341a
+docfiles size=2756
+ texmf-dist/doc/latex/pdfmanagement-testphase/CHANGELOG.md
+ texmf-dist/doc/latex/pdfmanagement-testphase/README.md details="Readme"
+ texmf-dist/doc/latex/pdfmanagement-testphase/hyperref-generic.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3backend-testphase.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdfannot.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdfdict.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-action.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-checkbox.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-choice.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-pushbutton.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-radiobutton.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield-textfield.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffield.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdffile.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdfmanagement.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdfmeta.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdftools.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/l3pdfxform.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/ltdocinit.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/output-patches-tmp-ltx.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/pdfmanagement-firstaid.pdf
+ texmf-dist/doc/latex/pdfmanagement-testphase/pdfmanagement-testphase.pdf details="Package documentation"
+srccontainersize 122488
+srccontainerchecksum 4c45ceb89d8625c7d7a7a264bf1d31eaa89a31f5ad4e5d956f6a312853132eb1e550ccee23aab53ae03850a691c1bd8f4154b8a7273f4b4ac4150735e219ac31
+srcfiles size=179
+ texmf-dist/source/latex/pdfmanagement-testphase/hyperref-generic.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3backend-testphase.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdfannot.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdfdict.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-action.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-checkbox.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-choice.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-pushbutton.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-radiobutton.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield-textfield.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffield.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdffile.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdfmanagement.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdfmeta.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdftools.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/l3pdfxform.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/ltdocinit.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/output-patches-tmp-ltx.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/pdfmanagement-firstaid.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/pdfmanagement-testphase.dtx
+ texmf-dist/source/latex/pdfmanagement-testphase/pdfmanagement-testphase.ins
+runfiles size=94
+ texmf-dist/tex/latex/pdfmanagement-testphase/color-ltx.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/hgeneric-testphase.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/hyperref-colorschemes.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/hyperxmp-patches-tmp-ltx.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-dvipdfmx.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-dvips.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-dvisvgm.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-luatex.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-pdftex.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase-xetex.def
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3backend-testphase.lua
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3pdffield-testphase.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/l3ref-tmp.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/output-patches-tmp-ltx.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/pdflscape-ltx.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/pdfmanagement-firstaid.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/pdfmanagement-testphase.ltx
+ texmf-dist/tex/latex/pdfmanagement-testphase/pdfmanagement-testphase.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/transparent-ltx.sty
+ texmf-dist/tex/latex/pdfmanagement-testphase/xcolor-patches-tmp-ltx.sty
+catalogue-contact-bugs https://github.com/latex3/pdfresources/issues
+catalogue-contact-repository https://github.com/latex3/pdfresources
+catalogue-ctan /macros/latex/contrib/pdfmanagement-testphase
+catalogue-license lppl1.3c
+catalogue-topics latex-devel pdf-feat
+catalogue-version 0.95i

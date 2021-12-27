@@ -1,0 +1,12 @@
+Package vtable allow vertical alignement of table cell by providing:
+ * Z, L, C, R, J and I column types 
+ * \nextRow and \lb commands
+ * \setMultiColRow, \setMultiColumn, \setMultiRow and \tableFormatedCell commands
+for tabular and similar environment.
+
+Version 1.0 (2019-05-13): first public release
+
+
+Copyright (C) 2015-2019, Robert Ryszard Paciorek <rrp@opcode.eu.org>
+
+This is free software distributed under terms of The MIT License.

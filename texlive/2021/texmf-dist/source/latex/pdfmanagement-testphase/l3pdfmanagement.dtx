@@ -1,0 +1,1664 @@
+% \iffalse meta-comment
+%
+%% File: l3pdfmanagement.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{tabularx}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=l3pdfmanagement (LaTeX PDF management testphase bundle)}
+
+\providecommand\potentialclash{\noindent\llap{\dbend\ }}
+
+% Fixing footnotes in  functions and variables: this should be in l3doc!
+\newcommand\fixfootnote[2]{\footnotemark
+  \AddToHookNext{env/#1/after}{\footnotetext{#2}}}
+\AddToHook{env/function/begin}{\def\footnote{\fixfootnote{function}}}
+\AddToHook{env/variable/begin}{\def\footnote{\fixfootnote{variable}}}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3pdfmanagement} module\\ Managing central PDF resources ^^A
+%   \\\LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{l3pdfmanagement} documentation}
+% When creating a pdf a number of objects, dictionaries and entries to
+% central \enquote{core} dictionaries must be created.
+%
+% The commands in this module offer interfaces to this core PDF dictionaries
+% They unify a number of primitives like the pdftex
+% registers and commands \cs{pdfcatalog}, \cs{pdfpageattr},
+% \cs{pdfpagesattr}, \cs{pdfinfo}, \cs{pdfpageresources}
+% and similar commands of the other backends in a backend independant way.
+%
+% The supported backends are pdflatex, lualatex, (x)dvipdfmx (latex, xelatex
+% and---starting in texlive 2021--lualatex)
+% and dvips with ps2pdf (not completely yet). dvips with distiller could work too
+% but is untested.
+%
+% That the interfaces are backend independent doesn't mean that the results and even
+% the compilation behavior is identical. The backends are too different to allow
+% this. Some backends expand arguments e.g. in a \cs{special} while other don't.
+% Some backends can insert a resource at the first compilation, while another uses
+% the aux-file and a label and so needs at least two. Some backends create and
+% manage resources automatically which must be managed manually by other backends.
+%
+% The dictionaries and resources handled by this module are inserted only
+% once in a PDF or only once per page. Examples are the Catalog dictionary,
+% the Info dictionary, the page resources. For these dictionaries and resources
+% management by the \LaTeX{} kernel is necessary to avoid
+% that packages overwrite settings from
+% other packages which would lead to clashes and incompatibilities.
+% It is therefore necessary that \emph{all} packages which want to add content to these
+% dictionaries and resources use the interface provided by this module.
+%
+% As these dictionaries and resources are so central for the PDF format values to these
+% dictionaries are always added globally. Through the interface values
+% can be added (and in many cases also removed) by users and packages,
+% but the actually writing of the
+% dictionary entries and resources to the PDF is handled by
+% the kernel code.
+%
+% The interface uses as main name to address the resources \emph{Paths}
+% which follow the names and structure described in the PDF reference. This
+% should make it easy to identify the names needed to insert a specific
+% PDF resources with the new interfaces.
+% All \emph{Paths} have names starting with an uppercase letter.
+%
+% The following tabular summarize the \emph{Paths} and which pdftex primitive they
+% replace:
+%
+% \begin{tabular}{ll}
+%  Info                                  & \cs{pdfinfo}           \\
+%  Catalog \&  various subdictionaries   & \cs{pdfcatalog}        \\
+%  Pages                                 & \cs{pdfpagesattr}      \\
+%  Page, ThisPage                        & \cs{pdfpageattr}       \\
+%  Page/Resources/ExtGState              & \cs{pdfpageresources}  \\
+%  Page/Resources/Shading                & \cs{pdfpageresources}  \\
+%  Page/Resources/Pattern                & \cs{pdfpageresources}  \\
+%  Page/Resources/ColorSpace             & \cs{pdfpageresources}  \\%
+%  \end{tabular}
+%
+%  There is no \texttt{Page/Resources/Properties} dictionary in the list,
+%  because this dictionary is not filled directly, but
+%  managed through side effects when setting BDC-marks.
+%
+%  \subsection{User Commands}
+%  To avoid problems with older documents the resource management of this
+%  module is not activated unconditionally. The values are pushed out to the
+%  dictionaries only if a boolean has been set to true. The state can be tested
+%  with a conditional.
+%  \begin{function}[EXP,pTF,added=2020-07-04]
+%   {\pdfmanagement_if_active:}
+%   This conditional tests if the resource management code is active.
+%  \end{function}
+%  \begin{function}[added=2021-07-23]
+%   {\IfPDFManagementActiveTF}
+%   This is a LaTeX2e version of the conditional
+%  \end{function}
+
+% \begin{function}[added = 2020-04-06,updated=2021-07-23]
+%   {\pdfmanagement_add:nnn,\pdfmanagement_add:nnx,\pdfmanagement_add:nxx,\pdfmanagement_add:xxx,
+%    \PDFManagementAdd}
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \Arg{resource path} \Arg{name} \Arg{value}
+%   \end{syntax}
+% This function puts \Arg{name} \Arg{value} in the PDF resource described by
+% the symbolic name \Arg{resource path}. Technically it stores it globally in an internal
+% property lists and writes it later into the right PDF dictionary\footnote{Currently all
+% resources are PDF dictionaries, so resource and dictionary mean the same.}
+% Which values for \Arg{resource path} exist is described in the following.
+% \Arg{name} should be a PDF Name without the starting slash. Like with all
+% keys used in PDF dictionaries (see the l3pdfdict module) the name is escaped
+% with \cs{str_convert_pdfname:n} when stored.
+% \Arg{value} should be a valid PDF value for this Name in the
+% target dictionary. |\PDFManagementAdd| is a copy of |\pdfmanagement_add:xxx|
+% and so expands all its arguments.
+%
+%
+% The code works with all major engines but not necessarily
+% in the same way. Most importantly
+% \begin{itemize}
+% \item The expansion behaviour of the backends can differ. Some backends expand a
+% value always fully when writing to the PDF, with other backends command names
+% could end as strings in the PDF. So one should neither rely on \Arg{name}
+% \Arg{value} to be expanded nor not expanded by the backend commands.
+% \item The number of compilations needed can differ between the engines and
+% backends. Some engines have to use labels and the aux-file to setup
+% the dictionaries and so need at least two compilations to put everything
+% in place.
+% \item dvips doesn't support everything. It is for example not possible
+% to add manually or through side effects
+% a name tree like /AP or /JavaScript, pdfmark doesn't provide a handler
+% here---at least I didn't find anything suitable.
+% \end{itemize}
+% \end{function}
+%
+% \begin{function}[added = 2020-04-08]
+%   {\pdfmanagement_show:n }
+%   \begin{syntax}
+%     \cs{pdfmanagement_show:n}  \Arg{resource path}
+%   \end{syntax}
+%   This shows the content of the dictionary targetted by
+%   \Arg{resource path} in the log and on the terminal if possible.
+%
+%   It is not reliable for page resources as these are filled at shipout.
+%
+%   It also doesn't show necessarly all the content.
+%   For example most backends add automatically
+%   entries to the Info dictionary.
+% \end{function}
+%
+% \begin{function}[added = 2020-04-07]
+%   {
+%     \pdfmanagement_remove:nn,
+%   }
+%   \begin{syntax}
+%     \cs{pdfmanagement_remove:nn} \Arg{resource path} \Arg{name}
+%   \end{syntax}
+%   Removes  |/|\meta{name} and its associated \meta{value} from the
+%   dictionary described with \Arg{resource path}
+%   The removal is global.
+%   If \meta{name} is not found no change occurs,
+%   \emph{i.e}~there is no need to test for the existence of a name before
+%   trying to remove it.
+%   Values from the special Catalog entries where the values are collected in arrays
+%   can't be removed (but should ever a use case appear it could be added).
+% \end{function}
+%
+% \subsection{Description of the resource pathes}
+% \subsubsection{Info: The Info dictionary}
+% \begin{NOTE}{UF}
+% path: Info
+% The info dictionary is filled by e.g. \cs{pdfinfo}. Multiple appearances of
+% \cs{pdfinfo} are concatenated, so one could end with multiple /Title or /Author entries.
+% It is then viewer dependent which one is showed, so it is better to avoid this.
+% We therefore setup a property which is filled and written to the info
+% directory in one go. According to hyperref a few odd drivers (hvtex, dvipsone, dviwind)
+% don't support arbitrary keys, but this should be handle elsewhere.
+% As entries with empty content
+% should be omitted we add a test. The string command should perhaps escape the argument,
+% but for now we are assuming that the argument is pdf safe.
+% hyperref writes to the info dictionary at the shipout of the first page --
+% probably to catch the  case that \cs{title} is issued after the begin of the document.
+% We are outputting at the last page -- this needs a second compilation but
+% this is needed anyway.
+% \end{NOTE}
+% \potentialclash If the primitive commands of the engines are used too there will
+% be double entries in the pdf (at least with the backend pdftex and luatex).
+% How pdf viewer handles this is unpredictable.
+%
+%  \begin{function}
+%   {
+%     pdfmanagement: Info
+%   }
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \{Info\} \Arg{name} \Arg{value}
+%   \end{syntax}
+%   Adds |/|\meta{name} and the \meta{value} to the Info dictionary.
+%   \meta{name} should be a PDF name without the leading slash,
+%   Like with all
+%   keys used in PDF dictionaries (see the l3pdfdict module) the name is escaped
+%   with \cs{str_convert_pdfname:n} when stored.
+%   \meta{value} should be a valid pdf value. Any escaping or (re)encoding must be
+%   done explicitly.
+%   If a \meta{name} is used twice, only the last \meta{value}
+%   set will be used. The Info dictionary is written at the end of the compilation,
+%   so values can be set at any time.
+%   The Info dictionary expects utf16be in the strings, so a conversion like this is
+%   normally sensible:
+%   \begin{verbatim}
+%    \str_set_convert:Nnnn \l_tmpa_str { Grüße }{ default } {utf16/string}
+%    \pdfmanagement_add:nnx {Info} {Title}{(\l_tmpa_str)}
+%   \end{verbatim}
+% \end{function}
+%
+%  The entries in Info dictionary are rather special as the engines/backends adds some
+%  core entries, and changing or removing these entries is not always possible.
+%
+%  The special entries are
+%  \begin{description}
+%  \item[Producer] Added by all engines and backends. Removing the entry is only possible
+%  with luatex with |\pdfvariable suppressoptionalinfo 128|. Changing is possible
+%  with \cs{pdfmanagement_add:nnn} with the exception of dvips/pstopdf where the entry is
+%  always something like |GPL Ghostscript 9.53.3|.
+%  \item[Creator] Added by all engines and backends. Removal only possible in luatex by adding
+%  16 to the bitset. Changing is possible with the management command.
+%  \item[CreationDate] Added by all engines and backends. With the exception of |dvips/ps2pdf|
+%  |SOURCE_DATE_EPOCH| is honored. With pdftex it is possible to suppress it with
+%  |\pdfinfoomitdate = 1|, and in luatex by adding 32 to the bitset.
+%  Changing is possible with the management command and will overwrite an epoch setting.
+%  \item[ModDate] Added by all engines and backends with the exception of xdvipdfmx.
+%  With the exception of |dvips/ps2pdf| |SOURCE_DATE_EPOCH| is honored.
+%   Suppressing it is possible in pdftex with
+%  |\pdfinfoomitdate = 1|, and in luatex by adding 64 to the bitset. Changing is possible with
+%  the management command.
+%  \item[Trapped] Added by pdftex and luatex. Removal only possible in
+%  luatex by adding 256 to the bitset. Changing (and adding in the other backends) is
+%  possible with the management command.
+%  \item[PTEX.Fullbanner] Added by pdftex and luatex. Removal possible in pdftex with
+%  |\pdfsuppressptexinfo-1|, in luatex by adding 512 to the bitset.
+%  Changing is not possible.
+%  \item[Title] Added by dvips/ps2pdf and set to |filename.dvi|. Removal is probably
+%  not possible, but it can be overwritten with the management command.%
+%  \end{description}
+% \subsubsection{Pages: The \enquote{Pages} dictionary}
+% \potentialclash As the content of this dictionary is written at the end it will
+% in pdftex and luatex overwrite values added with the primitive commands (e.g.
+% \cs{pdfpagesattr}.
+% Package authors should use the management commands instead.
+
+% By using this path with the pdfmanagement interface,
+% values can be added to the /Pages object.
+% This replaces for example \cs{pdfpagesattr}.
+%
+% \begin{function}{pdfmanagement: Pages}
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \{Pages\} \Arg{name} \Arg{value}
+%   \end{syntax}
+%
+%   Adds |/|\meta{name} \meta{value} to the |/Pages| dictionary.
+%   It is always stored globally. The content is written to the pdf
+%   at the end of the compilation, so values can be added, changed or
+%   removed until then.
+%   \meta{name} should be a valid pdf name without the leading slash,
+%   \meta{value} should be a valid pdf value. Any escaping or (re)encoding must
+%   be done explicitly. Some backends expand the value but this should not be
+%   relied on. If a \meta{name} is used twice, only the last \meta{value}
+%   set will be used.
+%
+% \end{function}
+%
+% \subsubsection{\enquote{Page} and \enquote{ThisPage}}
+% \begin{NOTE}{UF}
+% Open is the question if one need a command to set attribute on a page by page number.
+% Open is the setter for /AF (and perhaps /OutputIntents).
+% See also https://tex.stackexchange.com/questions/479812/extension-of-rotating-package-to-set-pdf-rotation
+% (should work now)
+% \end{NOTE}
+% \begin{function}[added = 2020-04-12]
+%   {pdfmanagement: Page}
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \{Page\} \Arg{name} \Arg{value}
+%   \end{syntax}
+%   Values added with the path \texttt{Page} are added to the page dictionary
+%   of the current page and the following pages. The current page means the page
+%   on which the command is \emph{executed}. \meta{name} should be a valid pdf name
+%   without the leading slash. Typical names used here are e.g.
+%   \texttt{Rotate} and \texttt{CropBox}.
+%   \meta{value} should be a valid pdf value.
+%   Any escaping or (re)encoding must be done explicitly. Some backends expand the
+%   value but this should not be relied on.
+%   To avoid problems with the asynchronous page breaking
+%   the command should be used after \cs{newpage} or in the header.
+%   It should not be used in a float, as it will then quite probably be executed
+%   on the wrong page.
+%   The value is assigned directly and is always stored globally.
+%   If a \meta{name} is used twice, only the last \meta{value}
+%   set will be used. Names set with \cs{pdfmanagement_add:nnn}|{ThisPage}| will overwrite
+%   names set with \cs{pdfmanagement_add:nnn}|{Page}| if there is a clash.
+%   Values can be removed again with \cs{pdfmanagement_remove:nn}.
+%   This replaces \cs{pdfpageattr}.
+% \end{function}
+% \begin{function}[added = 2020-04-12]
+%   { pdfmanagement: ThisPage}
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \{ThisPage\} \Arg{name} \Arg{value}
+%   \end{syntax}
+%   Adds |/|\meta{name} \meta{value} at \emph{shipout} to the page dictionary of the
+%   current page. Current page means here the \emph{shipout} page.
+%   It is always stored globally.
+%   If \Arg{name} has already a value set in the \texttt{Page}
+%   dictionary it will be overwritten for this page.
+%   \meta{name} should be a valid pdf name without the leading slash,
+%   \meta{value} should be a valid pdf value. Any escaping or (re)encoding must be
+%   done explicitly. If a \meta{name} is used twice, only the last \meta{value}
+%   set will be used.
+%   With the engine pdflatex (at least) a second compilation is needed.
+%   Values added to \texttt{ThisPage} can not be removed. It is not possible to
+%   show the content of this dictionary with \cs{pdfmanagement_show:n}.
+% \end{function}
+% \subsubsection{\enquote{Page/Resources}: ExtGState, ColorSpace, Shading, Pattern}
+% \begin{NOTE}{UF}
+% Only for pdf/luatex and xdvipdfmx backend- and pdf-code is needed to add values
+% to these resources.
+% With dvips the resources are added through high-level code (e.g. transparency), so the
+% backend/pdf commands are no-ops.
+% For every resources there is only one object. References to these objects are added to
+% all pages starting from the page where the first time something has been added to the
+% resource and to all XObjects. For luatex and pdftex it must be done together
+% with the /Properties, see above.
+% I don't see a need to set e.g. /ColorSpace page wise: preflight handles this
+% fine, see experiment colorspace-resources.
+% As pgf does the same, there is a need to patch it for now. Ditto for package colorspace.
+% \end{NOTE}
+% \begin{function}[updated = 2020-04-10]
+%   {
+%    pdfmanagement: Page/Resources/ExtGState,
+%    pdfmanagement: Page/Resources/ColorSpace,
+%    pdfmanagement: Page/Resources/Shading,
+%    pdfmanagement: Page/Resources/Pattern,
+%   }
+%   \begin{syntax}
+%     \cs{pdfmanagement_add:nnn} \{Page/Resources/\meta{resource}\} \Arg{name} \Arg{value}
+%   \end{syntax}
+%   Adds |/|\meta{name} \meta{value} to the page resource \meta{resource}.
+%   \meta{resource} can be |ExtGState|, |ColorSpace|, |Pattern| oder |Shading|.
+%   The values are always stored globally. The content is written to the pdf
+%   at the end of the compilation, so values can be added until then.
+%   \meta{name} should be a valid pdf name without the leading slash,
+%   \meta{value} should be a valid pdf value for the resource.
+%   Any escaping or (re)encoding must be done explicitly. If a \meta{name} is
+%   used twice, only the last \meta{value} set will be used.
+%
+%   With the dvips backend the command does nothing: these resources are managed by
+%   ghostscript or the distiller if e.\,g. transparency is used.
+%
+%   The resources are added to all pages starting with the first where something has
+%   been added to a resources. That means that for example
+%   all ExtGState resources are combined in one
+%   dictionary object and every page with a ExtGState resource refer to this object%
+%   \footnote{This is similar to how pgf handles this resources}.
+%
+%   \potentialclash The primitive commands (e.g. \cs{pdfpageresources})
+%   to set the resources should not be used
+%   together with this code as the calls will overwrite each other and values
+%   will be lost. This means that currently there are clashes with the packages tikz,
+%   transparent and colorspace.
+% \end{function}
+% \subsubsection{\enquote{Catalog} \& subdirectories}
+% \begin{NOTE}{UF}
+% Perhaps some tools to create the AF-file specification dictionaries is useful.
+% Open for now:
+% /Extensions               (dict, pdf 2.0)
+% /Dests ? difference to subdict in Names?
+% /DSS                      (dict, pdf 2.0)
+% /Acroform/DR/ExtGState etc probably unneeded.
+% \end{NOTE}
+% The catalog is a central dictionary in a PDF with a number of subdictionaries.
+% Entries to the top level of the catalog can be added with\\
+% |\pdfmanagement_add:nnn {Catalog}|\Arg{Name}\Arg{Value}.
+% Entries to subdictionaries by using in the first
+% argument one of the pathes described later.
+% The entries in the catalog have varying requirements regarding the
+% PDF management. Some entries (like \texttt{/Lang}) are simple values
+% where new values should
+% overwrite existing values, other like for example \texttt{/OutputIntents}
+% can contain a number of values and can be filled from more than one source.
+% In some cases the values that needs to be added are not at the top-level
+% but in some subsubdictionary or are actually part of an array.
+% To handle the pdf management uses a variety of internal, special handlers.
+%
+% \potentialclash In some cases entries are added implicitly.
+% For example entries to the name
+% tree of the \texttt{/EmbeddedFiles} key in the \texttt{/Names} directory are
+% added with the commands of the \texttt{l3pdffile} module. This clashes with
+% e.g. the embedfile package which should not be used!
+%
+%
+%   \paragraph{Entries at the top level of the catalog}
+%   The Names in the following tabular are entries that are added to the
+%   top level of the catalog.
+%
+%   If \meta{Name} gets assigned a value more than once the last one wins.
+%   There is no check that the values have the correct type and format.
+%   It is up to the user to ensure that the value does what is intended.
+%
+%   The required PDF version is only mentioned if it is larger than 1.5.
+%
+%   Example: |\pdfmanagement_add:nnn {Catalog}{PageMode}{/UseNone}|
+%
+%   \medskip
+%   \noindent
+%   \begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X}
+%    \bfseries Name          &  \bfseries Value  & \bfseries Remark \\\midrule
+%    Collection              &  objref or dict     & the content should be
+%     build by external packages (see eg embedfile)                   \\
+%    DPartRoot               &  objref or dict     & PDF 2.0           \\
+%    Lang                    &  string             & e.g. \texttt{(de-DE)} \\
+%    Legal                   &  objref or dict                             \\
+%    Metadata                &  objref or stream                       \\
+%    NeedsRendering          &  boolean            & PDF 1.7\\
+%    OpenAction              &  array (dest) or dict (action) \\
+%    PageLabels              &  objref or dict     &  number tree \\
+%    PageLayout              &  name               & one of /SinglePage, /OneColumn,
+%                                        /TwoColumnLeft, /TwoColumnRight,
+%                                        /TwoPageLeft,
+%                                        /TwoPageRight \\
+%    PageMode                &  name               & one of /UseNone, /UseOutlines, /UseThumbs,
+%                                    /UseOC, /UseAttachments (PDF 1.6)\\
+%    Perms                   &  objref or dict     & permissions\\
+%    PieceInfo               &  objref or dict \\
+%    SpiderInfo              &  objref or dict \\
+%    StructTreeRoot          &  objref or dict \\
+%    Threads                 &  objref to an array\\
+%    URI                     &  objref or dict \\
+%    Version                 &  name           & eg. \texttt{/1.7} \\
+%    \meta{unknown}          &                 & an unknown \meta{name} will be
+%                                                inserted without a warning.\\
+%   \end{tabularx}
+%   \par\medskip
+%
+%   \paragraph{Simple entries in subdictionaries of the catalog}
+%   The following resource pathes have been predeclared and allow to
+%   add values to the respective subdictionaries of the catalog. The
+%   names of the dictionaries follow the naming and location of the dictionaries
+%   in the PDF reference.
+%   If \meta{Name} gets assigned two values the last one wins.
+%
+%   Example: |\pdfmanagement_add:nnn {Catalog/MarkInfo}{Marked}{true}|
+%
+%   \medskip
+%   \noindent
+%   \begin{tabularx}{\linewidth}{lll>{\raggedright\arraybackslash}X}
+%    \bfseries Path/dictionary    & \bfseries Names & \bfseries Value  & \bfseries Remark
+%    \\\midrule
+%    Catalog/AA              &WC, WS, DS, WP,DP& all dict    \\
+%    Catalog/AcroForm        &  NeedAppearances&  boolean & In pdf 2.0
+%                                                           NeedAppearances
+%                                                           is deprecated,
+%                                                           it is then required
+%                                                           that every widget has
+%                                                           an appearance streams.\\
+%                            &  SigFlags       & Integer\\
+%                            &  DA             & String \\
+%                            &  Q              & Integer\\
+%                            &  XFA            & stream or array & pdf 1.5\\
+%  Catalog/AcroForm/DR       & \meta{name}     &            & probably unneeded \\
+%  Catalog/AcroForm/DR/Font  & \meta{name}     & dict       & \\
+%  Catalog/MarkInfo          & Marked          & boolean      \\
+%                            & UserProperties  & boolean      \\
+%                            & Suspects        & boolean      \\
+%  Catalog/ViewerPreferences & HideToolbar     & boolean      \\
+%                            & Direction       & /R2L or /L2R \\
+%                            & \ldots          &              & many more, see the reference \\
+% \end{tabularx}
+%
+%
+% \paragraph{Catalog entries with multiple values in arrays}
+% The following entries are special: Their values are arrays and
+% it must be possible to append to such arrays. This means that a new
+% call to set this value doesn't replace the value but appends it.
+% The value is an object reference. It is sensible to declare the object
+% first. E.g.
+%  \begin{verbatim}
+%  \pdf_object_new:nn   {module/intent}{dict}
+%  \pdf_object_write:nn {module/intent}{...}
+%  \pdfmanagement_add:nnx  {Catalog} {OutputIntents}{\pdf_object_ref:n {module/intent}}
+%  \end{verbatim}
+%
+%  or
+%  \begin{verbatim}
+%  \pdf_object_unnamed_write:nn   {dict} { ... }
+%  \pdfmanagement_add:nnx  {Catalog} {OutputIntents}{\pdf_object_ref_last:}
+%  \end{verbatim}
+%
+%
+%   \medskip
+%   \noindent
+%   \begin{tabularx}{\linewidth}{lll>{\raggedright\arraybackslash}X}
+%    \bfseries Path/dictionary &\bfseries Name        & \bfseries Value   & \bfseries Remark \\\midrule
+%    Catalog/AcroForm     & Fields               & object reference\\
+%    Catalog/AcroForm     & CO                   & object reference\\
+%    Catalog              & AF                   & object reference & PDF 2.0, associated files\\
+%    Catalog/OCProperties & OCGs                 & object reference  &if there are OCProperties, OCGs and D are required.\\
+%    Catalog/OCProperties & Configs              & object reference \\
+%    Catalog/OCProperties & D                    & object reference & This is actually a single value as
+%                                         there can be only one default.
+%                                         If the value is set twice, the
+%                                         second wins, and the first is
+%                                         added to OCProperties/Configs.\\
+%    Catalog              & OutputIntents        & object reference\\
+%    Catalog              & Requirements         & object reference & PDF 1.7 \\
+%    Catalog/Names        & EmbeddedFiles        & object reference & This should reference a filespec dictionary. It will
+%                                                  attach the file to the file panel.
+%   \end{tabularx}
+%
+% \paragraph{Catalog entries for name trees}
+%
+% \emph{Not supported in the dvips backend, pdfmark doesn't have an interface here}.
+%
+% In various places the PDF format allows to reference objects by name instead
+% of by object reference. The relationship between a name and the object reference
+% are store in so-called \emph{name trees}, which are stored in the
+% Catalog/Names dictionary. The |/Dests| and the |/EmbeddedFiles| name trees are
+% handled implicitly if destinations or files are added. Names to the other
+% name trees can be added with |\pdfmanagement_add:nnn|, e.g. to add an value to
+% the AP names (for appearance streams) use
+%
+% \begin{verbatim}
+% \pdfmanagement_add:nnx  { Catalog / Names / AP } {myAPname} {\pdf_object_ref_last:}
+% \end{verbatim}
+%
+% Remarks:
+% \begin{itemize}
+% \item The name |myAPname| is processed through |\pdf_string_from_unicode:nnN{utf8/string}|
+% and parentheses are added automatically. Ensure that the use of the name
+% handles it in the same way.
+% \item It is currently not possible to test if a name has already been used
+% by another package or previous code,
+% so use names where you can be confident that they are unique.
+% (It would be possible to split up the first part and test, but it would slow
+% down the compilation and I'm not sure if it is worth the trouble)
+% \item The value is not preprocessed, it is up-to-you to ensure that it does the
+% right thing.
+% \item Currently the structure of the name tree is flat, it doesn't use
+% Kids. But this can be changed if the need arise.
+% \end{itemize}
+%
+% The following name trees can be filled with this method. Currently only the
+% first three are activated. For  the first, |EmbeddedFiles| there are two methods
+% to add a value:\\
+% |\pdfmanagement_add:nnn{Catalog/Names/EmbeddedFiles}{name}{reference}|
+% and
+% |\pdfmanagement_add:nnn{Catalog/Names}{EmbeddedFiles}{reference}|.
+% This is intended, the second methods creates a name on the fly (with the prefix l3ef)
+%
+% \medskip
+% \noindent
+% \begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X}
+% Catalog/Names/EmbeddedFiles & A name tree mapping name strings to file
+% specifications for embedded file streams. The value should be a reference to a filespec
+% dictionary\\
+% Catalog/Names/AP & A name tree mapping name strings to annotation appearance streams\\
+% Catalog/Names/JavaScript & A name tree mapping name strings to documentlevel ECMAScript actions\\
+% (inactive) Catalog/Names/Pages & A name tree mapping name strings to visible pages for use in interactive forms\\
+% (inactive) Catalog/Names/Templates & A name tree mapping name strings to invisible pages for use in interactive forms\\
+% (inactive) Catalog/Names/IDS & A name tree mapping digital identifiers to Web.Capture content sets\\
+% (inactive) Catalog/Names/URLS & A name tree mapping name strings to documentlevel ECMAScript actions\\
+% (inactive) Catalog/Names/Renditions & A name tree mapping name strings (which shall have Unicode encoding) to rendition objects
+%  (it is not quite clear yet, what unicode encoding means here. Perhaps this string will need special handling)\\
+% \end{tabularx}
+% \end{documentation}
+%
+% \begin{implementation}
+%  \section{\pkg{l3pdfmanagement} implementation}
+%    \begin{macrocode}
+%<@@=pdfmanagement>
+%<*header>
+%
+\ProvidesExplPackage{l3pdfmanagement}{2021-08-28}{0.95i}
+  {Management of core PDF dictionaries (LaTeX PDF management testphase bundle)}
+%</header>
+%    \end{macrocode}
+% \subsection{Messages}
+%    \begin{macrocode}
+%<*package>
+\msg_new:nnn  { pdfmanagement } { unknown-dict }
+              { The~PDF~management~resource~'#1'~is~unknown. }
+
+\msg_new:nnn  { pdfmanagement } { empty-value }
+              { The~value~for~#1~is~empty~and~will~be~ignored }
+
+\msg_new:nnn  { pdfmanagement } { no-removal }
+              { It~is~not~possible~to~remove~values~from~'#1'.}
+
+\msg_new:nnn  { pdfmanagement } { no-show }
+              { It~is~not~possible~to~show~the~content~of~'#1'.}
+
+\msg_new:nnn  { pdfmanagement } { name-exist }
+              { The~name~'#1'~has~already~been~used~for~name~tree~'#2'.}
+
+\msg_new:nnn  { pdfmanagement } { show-dict }
+  {
+    The~PDF~resource~'#1'~
+    \tl_if_empty:nTF {#2}
+      { is~empty \\>~ . }
+      { contains~the~pairs~(without~outer~braces): #2 . }
+  }
+\msg_new:nnn  { pdfmanagement } { dict-already-defined  }
+  {
+    The~path~'#1'~is~already~defined.
+  }
+\msg_new:nnn  { pdfmanagement } { inactive  }
+  {
+    The~PDF~resources~management~is~not~active\\
+    command~'#1'~ignored.
+  }
+%    \end{macrocode}
+%
+% \begin{variable}{\l_@@_tmpa_tl,\l_@@_tmpb_tl,\l_@@_tmpa_seq}
+% Some temp variables
+%    \begin{macrocode}
+\tl_new:N \l_@@_tmpa_tl
+\tl_new:N \l_@@_tmpb_tl
+\seq_new:N \l_@@_tmpa_seq
+%    \end{macrocode}
+% \end{variable}
+
+% \begin{variable}{\g_@@_active_bool}
+% This boolean will control the activation of the management code.
+% It is used in the hooks, and in some backend files.
+% % \cs{DeclareDocumentMetadata} should set it to true
+%    \begin{macrocode}
+\bool_new:N \g_@@_active_bool
+%    \end{macrocode}
+% \end{variable}
+% A user predicate to test if the management code is active
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_if_active:  { p , T , F , TF }
+  {
+    \bool_if:NTF \g_@@_active_bool
+      { \prg_return_true:  }
+      { \prg_return_false: }
+  }
+\prg_set_eq_conditional:NNn
+  \pdfmanagement_if_active: \@@_if_active: { p , T , F , TF }
+
+\cs_set_eq:NN \IfPDFManagementActiveTF\pdfmanagement_if_active:TF
+%    \end{macrocode}
+% We use a hook, to collect value added before the backend is ready.
+%    \begin{macrocode}
+\hook_new:n {pdfmanagement/add}
+\cs_new_protected:Npn \pdfmanagement_add:nnn #1 #2 #3
+  {
+    \@@_if_active:TF
+      {
+        \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+          {
+            \hook_gput_code:nnn
+              {pdfmanagement/add}
+              {pdfmanagement}
+              {
+                \@@_handler_gput:nnn { #1 }{ #2 }{ #3 }
+              }
+          }
+          {
+            \msg_error:nnn{pdfmanagement}{unknown-dict}{#1}
+          }
+      }
+      {
+        \msg_warning:nnx {pdfmanagement}{inactive}
+          {\tl_to_str:n {\pdfmanagement_add:nnn}}
+      }
+  }
+
+\cs_generate_variant:Nn \pdfmanagement_add:nnn {nnx,nxx,xxx}
+\cs_set_eq:NN \PDFManagementAdd \pdfmanagement_add:xxx
+%    \end{macrocode}
+% \subsection{Hooks -- shipout and end of run code}
+% Code is executed in three places: At shipout of every page,
+% at shipout of the last page, at the end of the document
+% (after the last clearpage). Due to backend differences the code in the
+% three places (and the exact timing) can be different: pdflatex/lualatex
+% can execute code after the last \cs{clearpage} which the dvi-based
+% drivers have to add on a shipout page.
+%
+% \begin{variable}
+%   {
+%      \g__kernel_pdfmanagement_thispage_shipout_code_tl
+%      \g__kernel_pdfmanagement_lastpage_shipout_code_tl
+%      \g__kernel_pdfmanagement_end_run_code_tl
+%   }
+% This variables contain the code run in the three places.
+%    \begin{macrocode}
+\tl_new:N \g__kernel_pdfmanagement_thispage_shipout_code_tl
+\tl_new:N \g__kernel_pdfmanagement_lastpage_shipout_code_tl
+\tl_new:N \g__kernel_pdfmanagement_end_run_code_tl
+%    \end{macrocode}
+% \end{variable}
+%    \begin{macrocode}
+\tl_gset:Nn \g__kernel_pdfmanagement_thispage_shipout_code_tl
+  {
+     \bool_if:NT \g_@@_active_bool
+       {
+         \exp_args:NV \__pdf_backend_ThisPage_gpush:n      { \g_shipout_readonly_int }
+         \exp_args:NV \__pdf_backend_PageResources_gpush:n { \g_shipout_readonly_int }
+       }
+  }
+
+\tl_gset:Nn \g__kernel_pdfmanagement_end_run_code_tl
+  {
+    \bool_if:NT \g_@@_active_bool
+       {
+         \__pdf_backend_PageResources_obj_gpush:          %ExtGState etc
+         \@@_Pages_gpush:            %pagesattr
+         \@@_Info_gpush:             %pdfinfo
+         \@@_Catalog_gpush:
+       }
+  }
+%    \end{macrocode}
+% \subsection{Naming convention}
+
+%  Currently the following names are used: ^^A!!!!! check, compare with g_@@_gnames_seq
+%  All have internally additionally a \texttt{Core} before the slash, to
+%  hide the real name a bit.
+%  \begin{verbatim}
+%  /Info                      %    (\pdfinfo)
+%  /Catalog                   %    (\pdfcatalog)
+%  /Catalog/AA                %
+%  /Catalog/AcroForm
+%  /Catalog/OCProperties
+%  /Catalog/OutputIntents
+%  /Catalog/AcroForm/DR
+%  /Catalog/AcroForm/DR/Font
+%  /Catalog/MarkInfo
+%  /Catalog/ViewerPreferences
+%  /Pages                     %    (\pagesattr)
+%  /Page                      %    (\pageattr)
+%  /ThisPage                  %    (\pageattr)
+%  /backend_PageN/Resources/Properties % this is only internal.
+%  /Page/Resources/ExtGState
+%  /Page/Resources/ColorSpace
+%  /Page/Resources/Pattern
+%  /Page/Resources/Shading
+%  /Page/Resources/Properties
+%  /Xform/Resources/Properties
+%  \end{verbatim}
+
+%  \begin{macro}{
+%                \@@_handler_gput:nnn,
+%                \@@_get:nnN,
+%                \@@_gremove:nn,
+%                \@@_show:n
+%                }
+%  \cs{@@_handler_gput:nnn} is the main command to fill the dictionaries.
+%  In simple cases it directly fill the property list, but if a handler exists
+%  this is called. It is important to use it only in places where this make sense.
+%
+%    \begin{macrocode}
+
+%global
+\cs_new_protected:Npn \@@_handler_gput:nnn #1 #2 #3  %#1 dict, #2 name, #3 value
+  {
+    \tl_if_empty:nTF { #3 }
+      {
+        \msg_none:nnn { pdfmanagement }{ empty-value }{ /#1/#2 }
+      }
+      {
+        \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+          {
+            \cs_if_exist:cTF
+              { @@_handler/#1/?_gput:nn } %general, name independant handler
+              { \use:c {@@_handler/#1/?_gput:nn} {#2} {#3} }
+              {
+                \cs_if_exist:cTF
+                  { @@_handler/#1/#2_gput:n }
+                  { \use:c {@@_handler/#1/#2_gput:n} {#3} } %special handler
+                  {
+                    \exp_args:Nnx
+                    \prop_gput:cnn
+                      { \__kernel_pdfdict_name:n { g__pdf_Core/#1 } }
+                      { \str_convert_pdfname:n { #2 } }
+                      { #3 }
+                  }
+              }
+          }
+          {
+            \msg_error:nnn { pdfmanagement } { unknown-dict } { #1 }
+          }
+      }
+  }
+
+
+\cs_generate_variant:Nn \@@_handler_gput:nnn {nxx}
+
+\cs_new_protected:Npn \@@_get:nnN  #1 #2 #3 %path,key,macro
+  {
+    \exp_args:Nnx
+    \prop_get:cnN
+      { \__kernel_pdfdict_name:n { g__pdf_Core/#1 } }
+      { \str_convert_pdfname:n {#2} } #3
+  }
+
+
+\cs_new_protected:Npn \@@_handler_gremove:nn #1 #2 %path,key
+  {
+    \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+          {
+            \cs_if_exist:cTF
+              { @@_handler/#1/?_gremove:n } %general, name independant handler
+              { \use:c {@@_handler/#1/?_gremove:n} {#2} }
+              {
+                \cs_if_exist:cTF
+                  { @@_handler/#1/#2_gremove: }
+                  { \use:c {@@_handler/#1/#2_gremove:} } %special handler
+                  {
+                    \exp_args:Nnx
+                    \prop_gremove:cn
+                      { \__kernel_pdfdict_name:n { g__pdf_Core/#1 } }
+                      { \str_convert_pdfname:n {#2} }
+                  }
+              }
+          }
+          {
+            \msg_error:nnn { pdfmanagement } { unknown-dict } { #1 }
+          }
+  }
+
+\cs_new_protected:Npn \@@_gremove:nn #1 #2 %path,key
+  {
+    \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+          {
+            \exp_args:Nnx
+            \prop_gremove:cn
+              { \__kernel_pdfdict_name:n { g__pdf_Core/#1 } }
+              { \str_convert_pdfname:n{#2} }
+          }
+          {
+            \msg_error:nnn { pdfmanagement } { unknown-dict } { #1 }
+          }
+  }
+
+
+\cs_new_protected:Npn \@@_show:Nn #1#2
+  {
+    \cs_if_exist:cTF
+      { @@_handler/#2/?_show: } %general, name independant handler
+      { \use:c {@@_handler/#2/?_show:} }
+      {
+        \prop_if_exist:cTF { \__kernel_pdfdict_name:n { g__pdf_Core/#2 } }
+          {
+             #1
+               { pdfmanagement } { show-dict }
+               { \tl_to_str:n {#2} }
+               {
+                 \prop_map_function:cN
+                  {\__kernel_pdfdict_name:n { g__pdf_Core/#2 }}
+                  \msg_show_item:nn
+               }
+               { } { }
+          }
+          {
+            #1 { pdfmanagement } { unknown-dict } {#2}{}{}{}
+          }
+       }
+  }
+
+\cs_new_protected:Npn \@@_show:n #1  %path
+  {
+    \prop_show:c { \__kernel_pdfdict_name:n { g__pdf_Core/#1 } }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdfmanagement_show:n #1
+  {
+    \@@_show:Nn \msg_show:nnxxxx {#1}
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdfmanagement_remove:nn #1 #2
+  {
+    \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+      {
+        \@@_handler_gremove:nn { #1 }{ #2 }
+      }
+      {
+        \msg_error:nnn{pdfmanagement}{unknown-dict}{#1}
+      }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdfmanagement_get:nnN #1 #2 #3
+  {
+    \pdfdict_if_exist:nTF { g__pdf_Core/#1 }
+      {
+        \@@_get:nnN { #1 }{ #2 } #3
+      }
+      {
+        \msg_error:nnn{pdfmanagement}{unknown-dict}{#1}
+      }
+  }
+%    \end{macrocode}
+% \subsection{The Info dictionary}
+% Initialization of the dictionary:
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Info}
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_Info_gpush:}
+% \cs{@@_Info_gpush:} is the command that outputs the info dictionary (currently
+% in the end-of-run hooks).
+%    \begin{macrocode}
+% push to the register command / issue the special
+\cs_new_protected:Npn \@@_Info_gpush:
+  {
+    \prop_map_function:cN
+      { \__kernel_pdfdict_name:n { g__pdf_Core/Info} }
+      \__pdf_backend_info_gput:nn
+    \prop_gclear:c { \__kernel_pdfdict_name:n { g__pdf_Core/Info} }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \subsection{The Pages dictionary code}
+% \begin{NOTE}{UF}
+% The register is normally used only a few times in a document, so it would be
+% okay to update the register/add the special at every change,
+% but with dvips/dvipdfmx this would disable removing entries.
+% So we issue the push code only at the end of the document.
+% \end{NOTE}
+% At first the initialisation
+%     \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Pages}
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_Pages_gpush:}
+% This is the command that outputs the Pages dictionary. It is used
+% at the end of the document in \cs{g__pdf_backend_end_run_tl}
+%    \begin{macrocode}
+% push to the register command / issue the special
+\cs_new_protected:Npn \@@_Pages_gpush:
+  {
+    \pdfdict_if_empty:nF { g__pdf_Core/Pages}
+      {
+        \exp_args:Nx \__pdf_backend_Pages_primitive:n
+          {
+            \pdfdict_use:n { g__pdf_Core/Pages}
+          }
+      }
+  }
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{The Page and ThisPage dictionary}
+% At first the initialisation.
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Page }
+\pdfdict_new:n { g__pdf_Core/ThisPage }
+
+%handler for pdfmanagement
+\cs_new_protected:cpn { @@_handler/Page/?_gput:nn } #1 #2
+  {
+    \__pdf_backend_Page_gput:nn { #1 }{ #2 }
+  }
+% remove:
+\cs_new_protected:cpn { @@_handler/Page/?_gremove:n } #1
+  {
+    \__pdf_backend_Page_gremove:n { #1 }
+  }
+
+% handler for pdfmanagement
+\cs_new_protected:cpn { @@_handler/ThisPage/?_gput:nn } #1 #2
+  {
+    \prop_gput:cnn  { \__kernel_pdfdict_name:n { g__pdf_Core/ThisPage } }{ #1 } { #2 }
+    \bool_if:NT \g_@@_active_bool
+      {
+        \__pdf_backend_ThisPage_gput:nn { #1 }{ #2 }
+      }
+  }
+
+\cs_new_protected:cpn { @@_handler/ThisPage/?_gremove:n } #1
+  {
+    \msg_warning:nnn { pdfmanagement } { no-removal }{ThisPage}
+  }
+
+\cs_new_protected:cpn { @@_handler/ThisPage/?_show: }
+  {
+    \msg_warning:nnn { pdfmanagement } { no-show }{ThisPage}
+  }
+
+%    \end{macrocode}
+% \subsubsection{\enquote{Page/Resources}: ExtGState, ColorSpace, Shading, Pattern}
+%    \begin{macrocode}
+\clist_const:Nn \c_@@_PageResources_clist
+  {
+    ExtGState,
+    ColorSpace,
+    Pattern,
+    Shading,
+  }
+
+\clist_map_inline:Nn \c_@@_PageResources_clist
+  {
+    \pdfdict_new:n { g__pdf_Core/Page/Resources/#1}
+  }
+%
+% setter:  #1 is the name of the resource
+\cs_new_protected:cpn { @@_handler/Page/Resources/ExtGState/?_gput:nn } #1 #2
+  {
+    \__pdf_backend_PageResources_gput:nnn {ExtGState} { #1 }{ #2 }
+  }
+
+\cs_new_protected:cpn { @@_handler/Page/Resources/ColorSpace/?_gput:nn } #1 #2
+  {
+    \__pdf_backend_PageResources_gput:nnn {ColorSpace} { #1 }{ #2 }
+  }
+
+\cs_new_protected:cpn { @@_handler/Page/Resources/Shading/?_gput:nn } #1 #2
+  {
+    \__pdf_backend_PageResources_gput:nnn {Shading} { #1 }{ #2 }
+  }
+
+\cs_new_protected:cpn { @@_handler/Page/Resources/Pattern/?_gput:nn } #1 #2
+  {
+    \__pdf_backend_PageResources_gput:nnn {Pattern} { #1 }{ #2 }
+  }
+%    \end{macrocode}
+% \subsubsection{\enquote{Catalog}}
+% The catalog has mixed entries: toplevel, subdictionaries, and entries
+% which must build arrays.
+% \begin{variable}[added=2019-08-24]
+%     {
+%      \c_@@_Catalog_toplevel_clist,
+%      \c_@@_Catalog_sub_clist,
+%      \c_@@_Catalog_seq_clist,
+%     }
+%  This variables hold the list of the various types of entries. With it
+%  the various \verb=_gput= commands are generated.
+%  \end{variable}
+%  \begin{macro}{ \@@_catalog_XX_gput:n }
+% Various commands to handle subentries and special cases.
+% At first we set up a few lists of the various types.
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Catalog}
+
+\clist_const:Nn \c_@@_Catalog_toplevel_clist
+  {
+    Collection,
+    DPartRoot,
+    Lang,
+    Legal,
+    Metadata,
+    NeedsRendering,
+    OCProperties/D,
+    OpenAction,
+    PageLabels,
+    PageLayout,
+    PageMode,
+    Perms,
+    PieceInfo,
+    SpiderInfo,
+    StructTreeRoot,
+    Threads,
+    URI,
+    Version
+  }
+
+\clist_const:Nn \c_@@_Catalog_sub_clist
+  {
+    AA,
+    AcroForm,
+    AcroForm/DR,
+    AcroForm/DR/Font,
+    MarkInfo,
+    ViewerPreferences,
+    OCProperties
+  }
+
+\clist_map_inline:Nn \c_@@_Catalog_sub_clist
+  {
+    \pdfdict_new:n { g__pdf_Core/Catalog/#1}
+  }
+
+
+\clist_const:Nn \c_@@_Catalog_seq_clist
+  {
+    AF,
+    OCProperties/OCGs,
+    OCProperties/Configs,
+    OutputIntents,
+    Requirements,
+    AcroForm/Fields,
+    AcroForm/CO
+  }
+
+%    \end{macrocode}
+% Names trees in Catalog/Names. We prepare the full list
+% but activate only AP and JavaScript for now.
+% /EmbeddedFiles has special code and so is not in the name list.
+%    \begin{macrocode}
+\clist_const:Nn \c_@@_Catalog_nametree_clist
+  {
+    AP,
+    JavaScript,
+%   Pages,
+%   Templates,
+%   IDS,
+%   URLS,
+%   Renditions
+  }
+%    \end{macrocode}
+% now we create the handler. The entries in the seq-list store in a seq
+%    \begin{macrocode}
+\clist_map_inline:Nn \c_@@_Catalog_seq_clist
+ {
+   \seq_new:c { g_@@_/Catalog/#1_seq } % new name later
+   \cs_new_protected:cpn { @@_handler/Catalog/#1_gput:n } ##1
+     {
+       \seq_gput_right:cn { g_@@_/Catalog/#1_seq } {  ##1  }
+     }
+ }
+
+%    \end{macrocode}
+% OCProperties/D is special: it handles a default. This is done by adding to
+% the left of the seq
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_handler/Catalog/OCProperties/D_gput:n } #1
+  {
+    \seq_gput_left:cn
+      { g_@@_/Catalog/OCProperties/Configs_seq }
+      {  #1  }
+  }
+%    \end{macrocode}
+% The name tree keys store in a property and check for duplicates. This is done
+% with an auxiliary.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_nametree_add_aux:nnn #1 #2 #3
+  %#1 name tree, #2 sanitized name #3 value
+  {
+     \prop_get:coNTF
+       { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/Names/#1 }}
+       { #2 }
+       \l_@@_tmpb_tl
+       {
+         \msg_error:nnnn{pdfmanagement}{name-exist}{#2}{#1}
+       }
+       {
+         \prop_gput:con
+           { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/Names/#1 }}
+           { #2 }
+           { #3 }
+       }
+  }
+%    \end{macrocode}
+% This is the standard handler for most names trees:
+%    \begin{macrocode}
+\clist_map_inline:Nn \c_@@_Catalog_nametree_clist
+ {
+   \pdfdict_new:n { g__pdf_Core/Catalog/Names/#1}
+   \cs_new_protected:cpn { @@_handler/Catalog/Names/#1/?_gput:nn } ##1 ##2
+     {
+       \pdf_string_from_unicode:nnN {utf8/string}{##1}\l_@@_tmpa_tl
+       \exp_args:Nno
+         \@@_nametree_add_aux:nnn {#1}{\l_@@_tmpa_tl}{##2}
+     }
+ }
+%    \end{macrocode}
+% EmbeddedFiles is a bit special. For once there is special backend code
+% needed by dvips. Beside this we also want the option to create the file name
+% on the fly, so they are actually two access methods:
+% |\pdfmanagement_add:nnn{Catalog/Names/EmbeddedFiles}{name}{reference}|
+% and
+% |\pdfmanagement_add:nnn{Catalog/Names}{EmbeddedFiles}{reference}|
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Catalog/Names/EmbeddedFiles}
+\cs_new_protected:cpn { @@_handler/Catalog/Names/EmbeddedFiles/?_gput:nn } #1 #2
+  {
+    \pdf_string_from_unicode:nnN {utf8/string}{#1}\l_@@_tmpa_tl
+    \exp_args:Nno
+    \@@_nametree_add_aux:nnn
+      {EmbeddedFiles}{\l_@@_tmpa_tl}{#2}
+    \exp_args:No
+    \__pdf_backend_NamesEmbeddedFiles_add:nn {\l_@@_tmpa_tl}{#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+% % \paragraph {Building the catalog: Push order}
+% \begin{macro}{\@@_Catalog_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_Catalog_gpush:
+  {
+    \use:c { @@_/Catalog/AA_gpush: }
+    \use:c { @@_/Catalog/AcroForm_gpush: }
+    \use:c { @@_/Catalog/AF_gpush: }
+    \use:c { @@_/Catalog/MarkInfo_gpush: }
+    \pdfmeta_standard_verify:nT {Catalog_no_OCProperties}
+      {
+        \use:c { @@_/Catalog/OCProperties_gpush: }
+      }
+    \use:c { @@_/Catalog/OutputIntents_gpush: }
+    \use:c { @@_/Catalog/Requirements_gpush: }
+    \use:c { @@_/Catalog/ViewerPreferences_gpush: }
+    % output the single values:
+    \prop_map_function:cN
+      { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog} }
+      \__pdf_backend_catalog_gput:nn
+    % output names tree:
+    \use:c{ @@_/Catalog/Names_gpush:n } {EmbeddedFiles}
+    \clist_map_inline:Nn \c_@@_Catalog_nametree_clist
+     {
+      \use:c{ @@_/Catalog/Names_gpush:n } {##1}
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \paragraph{Building catalog entries: AA}
+% \begin{macro}{\@@_/Catalog/AA_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/AA_gpush: }
+  {
+    \prop_if_empty:cF
+     { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AA } }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/AA } { dict }
+       \__pdf_backend_object_write:nx
+            { @@/Catalog/AA }
+            { \pdfdict_use:n { g__pdf_Core/Catalog/AA } }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {AA}
+           {
+             \__pdf_backend_object_ref:n { @@/Catalog/AA }
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Building catalog entries: AcroForm}
+% This is the most complicated case.
+% The entries is build from
+% /Catalog/AcroForm/Fields  (array),
+% /Catalog/AcroForm/CO      (array),
+% /Catalog/AcroForm/DR/Font (dict),
+% /Catalog/AcroForm/DR      (dict),
+% /Catalog/AcroForm
+%
+% \begin{macro}{\@@_/Catalog/AcroForm_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/AcroForm_gpush: }
+  {
+    \seq_if_empty:cF { g_@@_/Catalog/AcroForm/Fields_seq }
+      {
+        \__pdf_backend_object_new:nn  { @@/Catalog/AcroForm/Fields } { array }
+        \__pdf_backend_object_write:nx
+            { @@/Catalog/AcroForm/Fields }
+            { \seq_use:cn { g_@@_/Catalog/AcroForm/Fields_seq } {~} }
+        \exp_args:Nnnx
+          \prop_gput:cnn %we have to use \prop here to avoid the handler ...
+            { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm } }
+            { Fields }
+            { \__pdf_backend_object_ref:n { @@/Catalog/AcroForm/Fields } }
+      }
+    \seq_if_empty:cF { g_@@_/Catalog/AcroForm/CO_seq }
+      {
+        \__pdf_backend_object_new:nn  { @@/Catalog/AcroForm/CO } { array }
+        \exp_args:Nnx
+          \__pdf_backend_object_write:nn
+            { @@/Catalog/AcroForm/CO }
+            { \seq_use:cn { g_@@_/Catalog/AcroForm/CO_seq } {~} }
+        \exp_args:Nnnx
+          \prop_gput:cnn %we have to use \prop here to avoid the handler ...
+            { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm } }
+            { CO }
+            { \__pdf_backend_object_ref:n { @@/Catalog/AcroForm/CO } }
+      }
+     \prop_if_empty:cF { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm/DR/Font}}
+       {
+         \__pdf_backend_object_new:nn { @@/Catalog/AcroForm/DR/Font } {dict}
+         \exp_args:Nnx
+           \__pdf_backend_object_write:nn
+             { @@/Catalog/AcroForm/DR/Font }
+             { \pdfdict_use:n { g__pdf_Core/Catalog/AcroForm/DR/Font } }
+         \exp_args:Nnnx
+           \prop_gput:cnn %we have to use \prop here to avoid the handler ...
+             { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm/DR } }
+             { Font }
+             { \__pdf_backend_object_ref:n { @@/Catalog/AcroForm/DR/Font } }
+       }
+     \prop_if_empty:cF { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm/DR}}
+       {
+         \__pdf_backend_object_new:nn { @@/Catalog/AcroForm/DR } {dict}
+         \exp_args:Nnx
+           \__pdf_backend_object_write:nn
+             { @@/Catalog/AcroForm/DR }
+             { \pdfdict_use:n { g__pdf_Core/Catalog/AcroForm/DR } }
+         \exp_args:Nnnx
+           \prop_gput:cnn %we have to use \prop here to avoid the handler ...
+             { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm } }
+             { DR }
+             { \__pdf_backend_object_ref:n { @@/Catalog/AcroForm/DR } }
+       }
+     \prop_if_empty:cF { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/AcroForm} }
+       {
+         \__pdf_backend_object_new:nn { @@/Catalog/AcroForm } {dict}
+         \exp_args:Nnx
+           \__pdf_backend_object_write:nn
+             { @@/Catalog/AcroForm }
+             { \pdfdict_use:n { g__pdf_Core/Catalog/AcroForm } }
+         \exp_args:Nnnx
+           \@@_handler_gput:nnn
+             { Catalog }
+             { AcroForm }
+             { \__pdf_backend_object_ref:n { @@/Catalog/AcroForm } }
+       }
+  }
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Building catalog entries: AF}
+% AF is an array.
+% \begin{macro}{\@@_/Catalog/AF_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/AF_gpush: }
+  {
+    \seq_if_empty:cF
+     { g_@@_/Catalog/AF_seq }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/AF } { array }
+       \exp_args:Nnx
+         \__pdf_backend_object_write:nn
+            { @@/Catalog/AF }
+            { \seq_use:cn { g_@@_/Catalog/AF_seq } {~} }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {AF}
+           {
+             \__pdf_backend_object_ref:n {@@/Catalog/AF}
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+% %
+% \paragraph{Building catalog entries: MarkInfo}
+% \begin{macro}{\@@_/Catalog/MarkInfo_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/MarkInfo_gpush: }
+  {
+    \prop_if_empty:cF
+     { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/MarkInfo } }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/MarkInfo } { dict }
+       \exp_args:Nnx
+         \__pdf_backend_object_write:nn
+            { @@/Catalog/MarkInfo }
+            { \pdfdict_use:n { g__pdf_Core/Catalog/MarkInfo } }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {MarkInfo}
+           {
+             \__pdf_backend_object_ref:n {@@/Catalog/MarkInfo}
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%\paragraph{Building catalog entries: OCProperties}
+%  This is a dictionary with three entries:
+%  \begin{description}
+%  \item[/OCGs] (required) An array of indirect references,
+%               access needed for more than one package.
+%  \item[/D] (required) a dict (given as an object name) to the default
+%            configuration
+%  \item[/Configs] (optional) an array of indirect references to more
+%        configurations.
+%  \end{description}
+%  The /D entry is also a config, it is the first of the seq.
+%  The overall structure is nested: a dict with arrays.
+% \begin{macro}{\@@_/Catalog/OCProperties_gpush:}
+%    \begin{macrocode}
+% Catalog/OCProperties: OCGs + D is required
+\cs_new_protected:cpn { @@_/Catalog/OCProperties_gpush: }
+  {
+   \int_compare:nNnT
+      {
+        ( \seq_count:c { g_@@_/Catalog/OCProperties/OCGs_seq }  )*
+        ( \seq_count:c { g_@@_/Catalog/OCProperties/Configs_seq } )
+      }
+      >
+      { 0 }
+      {
+        \__pdf_backend_object_new:nn  { @@/Catalog/OCProperties } { dict }
+        \seq_gpop_left:cN { g_@@_/Catalog/OCProperties/Configs_seq} \l_@@_tmpa_tl
+        \exp_args:Nnx
+          \__pdf_backend_object_write:nn {@@/Catalog/OCProperties}
+            {
+              /OCGs~[ \seq_use:cn { g_@@_/Catalog/OCProperties/OCGs_seq } {~} ]
+              /D~\l_@@_tmpa_tl~
+              \seq_if_empty:cF { g_@@_/Catalog/OCProperties/Configs_seq }
+                {
+                  /Configs~
+                  [ \seq_use:cn { g_@@_/Catalog/OCProperties/Configs_seq} {~} ]
+                }
+            }
+        \exp_args:Nnx
+          \__pdf_backend_catalog_gput:nn
+            { OCProperties }
+            { \__pdf_backend_object_ref:n {@@/Catalog/OCProperties} }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Building catalog entries: OutputIntents}
+% OutputIntents is an array.
+% \begin{macro}{\@@_/Catalog/OutputIntents_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/OutputIntents_gpush: }
+  {
+    \seq_if_empty:cF
+     { g_@@_/Catalog/OutputIntents_seq }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/OutputIntents } { array }
+       \exp_args:Nnx
+         \__pdf_backend_object_write:nn
+            { @@/Catalog/OutputIntents }
+            { \seq_use:cn { g_@@_/Catalog/OutputIntents_seq } {~} }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {OutputIntents}
+           {
+             \__pdf_backend_object_ref:n {@@/Catalog/OutputIntents}
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Building catalog entries: Requirements}
+% Requirements  is an array.
+% \begin{macro}{\@@_/Catalog/Requirements_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/Requirements_gpush: }
+  {
+    \seq_if_empty:cF
+     { g_@@_/Catalog/Requirements_seq }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/Requirements } { array }
+       \exp_args:Nnx
+         \__pdf_backend_object_write:nn
+            { @@/Catalog/Requirements }
+            { \seq_use:cn { g_@@_/Catalog/Requirements_seq } {~} }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {Requirements}
+           {
+             \__pdf_backend_object_ref:n { @@/Catalog/Requirements }
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \paragraph{Building catalog entries: ViewerPreferences}
+% \begin{macro}{\@@_/Catalog/ViewerPreferences_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn { @@_/Catalog/ViewerPreferences_gpush: }
+  {
+    \prop_if_empty:cF
+     { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/ViewerPreferences } }
+     {
+       \__pdf_backend_object_new:nn  { @@/Catalog/ViewerPreferences } { dict }
+       \exp_args:Nnx
+         \__pdf_backend_object_write:nn
+            { @@/Catalog/ViewerPreferences }
+            { \pdfdict_use:n { g__pdf_Core/Catalog/ViewerPreferences } }
+       \exp_args:Nnx
+         \__pdf_backend_catalog_gput:nn
+           {ViewerPreferences}
+           {
+             \__pdf_backend_object_ref:n {@@/Catalog/ViewerPreferences}
+           }
+     }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \paragraph{Building catalog entries: Names/EmbeddedFiles}
+% \begin{NOTE}{UF}
+% TODO access function for the name in the name tree
+% \end{NOTE}
+% \begin{variable}{\g_@@_EmbeddedFiles_int}
+% We want to create names for files on the fly. For this we use an int.
+%    \begin{macrocode}
+\int_new:N \g_@@_EmbeddedFiles_int
+%    \end{macrocode}
+% \end{variable}
+% \begin{macro}{\@@_EmbeddedFiles_name:}
+% We use the prefix l3ef, and pad numbers below 9999.
+%    \begin{macrocode}
+\cs_new:Npn \@@_EmbeddedFiles_name:
+ {
+   (
+    l3ef
+    \int_compare:nNnT {\g_@@_EmbeddedFiles_int} < {10}
+     {0}
+    \int_compare:nNnT {\g_@@_EmbeddedFiles_int} < {100}
+     {0}
+    \int_compare:nNnT {\g_@@_EmbeddedFiles_int} < {1000}
+     {0}
+    \int_use:N \g_@@_EmbeddedFiles_int
+   )
+ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{ Handler}
+% EmbeddedFiles is an array and needs a special handler to add values.
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Catalog/Names }
+
+\cs_new_protected:cpn { @@_handler/Catalog/Names/EmbeddedFiles_gput:n } #1
+  {
+    \int_gincr:N \g_@@_EmbeddedFiles_int
+    \exp_args:Nnx
+    \prop_gput:cnn
+      { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/Names/EmbeddedFiles }}
+      { \@@_EmbeddedFiles_name: }
+      { #1 }
+     \exp_args:Nx
+     \__pdf_backend_NamesEmbeddedFiles_add:nn {\@@_EmbeddedFiles_name:} { #1 }
+  }
+%    \end{macrocode}
+% \end{macro}
+% This pushes out the other names trees (but not with dvips).
+% TODO: currently it simply write in the root of the name tree.
+% That is the fastest.
+% If they get longer we perhaps need to build something with Kids and Limits.
+% \begin{macro}{\@@_/Catalog/Names/?_gpush:}
+%    \begin{macrocode}
+\cs_new_protected:cpn  { @@_/Catalog/Names_gpush:n } #1 %#1 name of name tree
+ {
+   \pdfdict_if_empty:nF { g__pdf_Core/Catalog/Names/#1 }
+     {
+       \seq_clear:N \l_@@_tmpa_seq
+       \prop_map_inline:cn
+         {\__kernel_pdfdict_name:n { g__pdf_Core/Catalog/Names/#1 }}
+         { \seq_put_right:Nn \l_@@_tmpa_seq {##1~##2}}
+       \seq_sort:Nn  \l_@@_tmpa_seq
+         {
+           \str_compare:nNnTF {##1} > {##2}
+             { \sort_return_swapped: }
+             { \sort_return_same: }
+         }
+       \exp_args:Nnx \__pdf_backend_Names_gpush:nn
+         {#1}
+         {
+           \seq_use:Nn \l_@@_tmpa_seq {~}
+         }
+     }
+ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{@@_handler/Catalog/?_show:}
+% A handler to show the catalog.
+%    \begin{macrocode}
+\cs_new_protected:cpn {@@_handler/Catalog/?_show:}
+  {
+    \iow_term:x
+      {
+        \iow_newline:
+        The~Catalog~contains~in~the~top~level~the~single~value~entries
+        \prop_map_function:cN
+          {\__kernel_pdfdict_name:n { g__pdf_Core/Catalog }}
+          \msg_show_item:nn
+      }
+    \clist_map_inline:Nn \c_@@_Catalog_seq_clist
+     {
+       \seq_if_empty:cF {  g_@@_/Catalog/##1_seq }
+         {
+           \iow_term:x
+             {
+               The~'##1'~array~contains~the~entries
+               \seq_map_function:cN { g_@@_/Catalog/##1_seq } \msg_show_item:n
+             }
+         }
+      }
+    \clist_map_inline:Nn \c_@@_Catalog_sub_clist
+      {
+        \prop_if_empty:cF { \__kernel_pdfdict_name:n { g__pdf_Core/Catalog/##1 } }
+          {
+            \iow_term:x
+              {
+                The~Catalog~subdirectory~'##1'~contains~the~single~value~entries
+                \prop_map_function:cN
+                  {\__kernel_pdfdict_name:n { g__pdf_Core/Catalog/##1 }}
+                  \msg_show_item:nn
+              }
+          }
+      }
+    \tl_show:x {\tl_to_str:n{\pdfmanagement_show:n{Catalog}}}
+  }
+%    \end{macrocode}
+% \end{macro}
+% \subsection{ xform / Properties }
+%    \begin{macrocode}
+\pdfdict_new:n { g__pdf_Core/Xform/Resources/Properties}
+%    \end{macrocode}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

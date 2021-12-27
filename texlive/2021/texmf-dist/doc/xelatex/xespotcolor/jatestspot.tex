@@ -1,0 +1,53 @@
+%
+% testspot.tex
+% platex testspot.tex
+% dvipdfmx testspot
+%
+\documentclass{jsarticle}
+\usepackage[hks,pantone]{xespotcolor}
+\begin{document}
+	\color{blue}
+	\bf\Huge カラーパッケージを用いた青いテキスト
+	
+	\clearpage
+        \pagecolor{white}     
+  
+	\SetPageColorSpace{PANTONE}
+	\SpotColor{PANTONEGreenPC}{1.0}
+	\bf\Huge Pantone スポットカラー
+	
+	\clearpage
+	\SetPageColorSpace{HKS}
+	\SpotColor{HKS68N}{1.0}
+	\bf\Huge HKS スポットカラー
+	
+	\clearpage
+	\NewSpotColorSpace{SOMECOLORSPACE}
+        \AddSpotColor{SOMECOLORSPACE} {SOMECOLOR} {Spot\SpotSpace Color\SpotSpace Name\SpotSpace in\SpotSpace PDF} {0.5 1.0 0.51 0}
+	\SetPageColorSpace{SOMECOLORSPACE}
+	\definecolor{Spots}{spotcolor}{SOMECOLOR,1.0}
+	
+	\SpotColor{SOMECOLOR}{1.0}
+	\bf\Huge ここで定義したスポットカラー\\
+	シェーディングも可能:\\
+	\SpotColor{SOMECOLOR}{1.0}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.9}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.8}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.7}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.6}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.5}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.4}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.3}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.2}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.1}\rule{1cm}{1cm}\\
+	\SpotColor{SOMECOLOR}{0.0}\rule{1cm}{1cm}
+
+	\clearpage
+	\pagecolor{Spots} 
+	\SpotColor{SOMECOLOR}{0.1}
+	背景色としてのスポットカラー
+
+	\clearpage
+	\pagecolor{white}
+	\colorbox{Spots}{日日日}
+\end{document}

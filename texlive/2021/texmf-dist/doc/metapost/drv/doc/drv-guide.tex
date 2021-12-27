@@ -1,0 +1,2243 @@
+%\enlargethispage
+%\pagebreak
+
+% Any piece of code related to font selection in the following preamble
+% (document class, font package, font selection commands ...) should be
+% reported in `drv-guide.mp'.
+
+\documentclass[twoside,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+% Choose your favourite fonts combination (if available).
+% See "http://ctan.tug.org/tex-archive/info/Free_Math_Font_Survey".
+%
+%\usepackage{cmbright}			% CM text & CM Bright math
+%\usepackage{ccfonts,eulervm}		% Concrete text & Euler math
+%\usepackage{ccfonts}			% Concrete text & math
+%\usepackage[math]{iwona}		% Iwona text & math
+%\usepackage[math]{kurier}		% Kurier text & math
+%\usepackage[math]{anttor}		% Antykwa Torunska text & math
+%\usepackage{kmath,kerkis}		% Kerkis text & math
+%\usepackage{fouriernc}			% New Century Schoolbook & Fourier math
+%\usepackage{pxfonts}			% Palatino & pxfonts math
+%\usepackage{mathpazo}			% Palatino & Pazo math
+%\usepackage{mathpple}			% Palatino & Euler math
+\usepackage[varg]{txfonts}		% Times & txfonts math
+%\usepackage{mathtime}			% Times & Belleek math
+%\usepackage{mathptmx}			% Times & Symbol math
+%\usepackage{mbtimes}			% Omega Serif text & Omega math
+%\usepackage{arev}			% Arev Sans text with Arev math
+%\usepackage[charter]{mathdesign}	% Bitstream Charter & Math Design math
+%\usepackage{comicsans}			% Comic Sans text & math
+%\usepackage[garamond]{mathdesign}	% Garamond & Math Design math
+%\usepackage{fourier}			% Utopia & Fourier math
+%\usepackage[utopia]{mathdesign}	% Utopia & Math Design math
+
+\usepackage{mflogo}
+\usepackage{array}
+\usepackage{multicol}
+\raggedcolumns
+\usepackage{fancyvrb}
+\fvset{fontsize=\small}
+\usepackage{color}
+\definecolor{myblue}{rgb}{.0,.0,.5}
+\definecolor{mygrey}{rgb}{.75,.75,.75}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\hypersetup{citecolor=myblue}
+\hypersetup{linkcolor=myblue}
+\hypersetup{urlcolor=myblue}
+\hypersetup{pdftitle={drv - derivation trees with MetaPost}}
+\hypersetup{pdfauthor={Laurent M\'ehats}}
+\hypersetup{pdfkeywords={%
+derivation trees,
+proof trees,
+deduction trees,
+sequent proofs,
+natural deduction,
+latex,
+metapost}}
+% Picture inclusion macro: \drv
+%
+% \drv includes a picture file in such a way that the baseline of the included
+% picture coincides with the baseline of the inclusion point. The code for \drv
+% was suggested by Josselin Noirel on the fr.comp.text.tex usenet group.
+
+\usepackage{graphicx}
+\makeatletter
+\def\Gin@def@bp#1\relax#2#3{\gdef#2{#3}}
+\newsavebox{\graphicsbox}
+\newcommand*{\drv}[1]{%
+\sbox{\graphicsbox}{\includegraphics{#1}}%
+\raisebox{\Gin@lly bp}%
+{\usebox{\graphicsbox}}}
+\makeatother
+
+\newcommand{\param}[1]{\textrm{\textit{$\langle$#1\/$\rangle$}}}
+\newcommand{\default}[1][]{\emph{$*$ default#1 $*$}}
+\newcommand{\tbs}{\textbackslash}
+\newcommand{\resplap}{\llap{\textrm{\emph{resp. }}}}
+
+\title{\texttt{drv}\\
+derivation trees with \MP%
+\thanks{Available on
+\href{http://www.ctan.org/tex-archive/graphics/metapost/contrib/macros/drv/}
+{CTAN}. You don't need to know \MP\ to use this package.}\\
+{\small almost a user's guide%
+\thanks{Feel free to improve! (E.g., by correcting the poor English.)
+Last update: \today.}}}
+\author{Laurent \textsc{M\'ehats}\\
+{\small\href{mailto:laurent.mehats@gmail.com?subject=[drv 0.97]}
+{\texttt{laurent.mehats@gmail.com}}}}
+\date{documented version: 0.97}
+
+\pagestyle{myheadings}
+\renewcommand{\sectionmark}[1]{%
+\markboth{\upshape\sc#1}{}}
+\renewcommand{\subsectionmark}[1]{%
+\markright{\upshape\thesubsection\quad#1}}
+
+\begin{document}
+\maketitle
+%
+%
+\begin{gather*}
+\drv{drv-guide.100}
+\end{gather*}
+%
+%
+\pdfbookmark[1]{\contentsname}{}%
+\tableofcontents
+%
+%
+\section{Usage\label{sec-usage}}
+%
+%
+\subsection{Structure of a \MP\ file using \texttt{drv}%
+\label{sec-structure}}
+%
+%
+\begin{description}
+\item[Preamble]\
+  \begin{Verbatim}[commandchars=\\\{\}]
+  input drv;
+  verbatimtex%&latex
+  \param{\LaTeX\ preamble}
+  \texttt{\tbs{}begin\{document\}}
+  etex;
+  \end{Verbatim}
+\item[Figures]\
+  \begin{Verbatim}[commandchars=\\\{\}]
+  \param{optional \texttt{drv} tunings}
+  beginfig(\param{index})
+    \param{judgment and inference declarations}
+    draw drv_tree;
+    \param{optional extra \MP\ code}
+  endfig;
+  \end{Verbatim}
+\item[Postamble]\
+  \begin{Verbatim}
+  end
+  \end{Verbatim}
+\end{description}
+For each ``\texttt{beginfig(\param{index})}, \texttt{endfig;}'' pair in a file
+\texttt{\param{jobname}.mp}, \MP\ generates an Encapsulated PostScript file
+\texttt{\param{jobname}.\param{index}}.
+%
+%
+\subsection{Running \MP\label{sec-running}}
+%
+%
+You have to run \emph{at least twice}
+\begin{center}
+\texttt{mpost \param{jobname}.mp}
+\end{center}
+(once more if you use sub-tree delimiters, see~\S~\ref{sec-sub-tree}). On the
+first run \MP\ collects the \LaTeX\ code generated by \texttt{drv}
+declaration macros and writes it to the file
+\texttt{\param{jobname}-delayed.mp}. On the second run \MP\ preprocesses the
+\LaTeX\ code in \texttt{\param{jobname}-delayed.mp} and then typesets the
+derivation trees.
+
+If you get an error on the first run then it comes from the
+\texttt{drv}/\MP\ code. If you get an error on the second run then it comes
+from the \LaTeX\ code. In both cases, correct the error (see
+Appendix~\ref{sec-debugging}), delete \texttt{\param{jobname}-delayed.mp} and
+run ``\texttt{mpost \param{jobname}.mp}'' twice again (a \texttt{makefile} can
+do that for you).
+%
+%
+\subsection{\LaTeX\ inclusion commands\label{sec-inclusion}}
+%
+%
+Encapsulated PostScript files \texttt{\param{jobname}.\param{index}} generated
+by \MP\ can be included in \LaTeX\ documents using the
+\texttt{\tbs{}includegraphics\{\param{jobname}.\param{index}\}}
+command from the \texttt{graphicx.sty} (or \texttt{graphics.sty}) package%
+\footnote{You may get standalone picture files (e.g., transparent \textsc{png}
+for inclusion in a webpage) from each \texttt{\param{jobname}.\param{index}}
+file as described in Appendix~\ref{sec-standalone}.}.
+
+However \texttt{drv} provides ways to set the baseline of
+derivation tree pictures  (see~\S~\ref{sec-axis-reference}
+ and~\S~\ref{sec-axis}). Then I suggest using the following
+\texttt{\tbs{}drv\{\param{jobname}.\param{index}\}} command which is
+such that the baseline of the included picture coincides with the baseline of
+the inclusion point.
+\begin{Verbatim}
+\usepackage{graphicx}
+\makeatletter
+\def\Gin@def@bp#1\relax#2#3{\gdef#2{#3}}
+\newsavebox{\graphicsbox}
+\newcommand*{\drv}[1]{%
+\sbox{\graphicsbox}{\includegraphics{#1}}%
+\raisebox{\Gin@lly bp}%
+{\usebox{\graphicsbox}}}
+\makeatother
+\end{Verbatim}
+The code for \texttt{\tbs{}drv} was suggested by Josselin
+\textsc{Noirel} on the \texttt{fr.comp.text.tex} Usenet group.
+%
+%
+\section{Judgment and inference declarations\label{sec-declarations}}
+%
+%
+\subsection{\texttt{jgm} and \texttt{nfr}\label{sec-jgm-nfr}}
+%
+%
+\texttt{jgm \param{nat} \param{str list}}\\
+\begin{tabular}{ll}
+\param{nat}&		judgment index\\
+\param{str list}&	sub-judgments \emph{math-mode} \LaTeX\ code
+\end{tabular}\\[1ex]
+\texttt{nfr \param{nat} (\param{nat list}) (\param{str}, \param{id})}\\
+\begin{tabular}{ll}
+\param{nat}&		inference index\\
+\param{nat list}&	list of premise indices\\
+\param{str}&		inference label \emph{math-mode} \LaTeX\ code\\
+\param{id}&		inference line style identifier ({\tt0}, {\tt1},
+			{\tt2}, {\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}\\[1ex]
+``\texttt{jgm} \param{nat}'' declares a judgment which index is
+\param{nat} while ``\texttt{nfr} \param{nat}'' declares an inference which
+conclusion is the index \param{nat} judgment (you can declare a judgment
+before or after the corresponding inference, no matter).
+
+A premise index \param{nat} refers to the sub-tree ending with the index
+\param{nat} judgment. A list of premise indices may be arbitrary long.
+%
+%
+\begin{multicols}{2}
+\paragraph{First example\label{fig-110}}
+%
+%
+%\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(110)
+jgm 0 "A\vdash B";
+jgm 1 "B\vdash C";
+jgm 2 "A\vdash C";
+nfr 0 () ("f", 1);
+nfr 1 () ("g", 1);
+nfr 2 (0, 1) ("\circ", 1);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.110}
+\end{gather*}
+\end{multicols}
+%
+%
+\paragraph{Sub-judgments}
+%
+%
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(111)
+jgm 0 "A\vdash B";
+jgm 1 "A", "\vdash", "B";
+nfr 0 () ("f", 1);
+nfr 1 (0) ("f", 1);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.111}
+\end{gather*}
+\end{multicols}
+\noindent
+The outputs induced by
+\begin{center}
+\texttt{jgm 0 "A\tbs{}vdash B";}\qquad and\qquad
+\texttt{jgm 1 "A", "\tbs{}vdash", "B";}
+\end{center}
+are the same. Using the latter declaration, you can manipulate sub-judgments
+independently from each-other (see \S~\ref{sec-inside}).
+%
+%
+\paragraph{Inference line styles}
+%
+%
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(120)
+jgm 0 "\text{none}";
+jgm 1 "\text{simple}";
+jgm 2 "\text{double}";
+jgm 3 "\text{dotted}";
+jgm 4 "\text{dashed}";
+jgm 5 "\text{waved}";
+jgm 6 "\text{\TeX-dotted}";
+jgm 7 "\text{default}";
+nfr 0 ( ) ("\leftarrow 0", 0);
+nfr 1 (0) ("\leftarrow 1", 1);
+nfr 2 (1) ("\leftarrow 2", 2);
+nfr 3 (2) ("\leftarrow 3", 3);
+nfr 4 (3) ("\leftarrow 4", 4);
+nfr 5 (4) ("\leftarrow 5", 5);
+nfr 6 (5) ("\leftarrow 6", 6);
+nfr 7 (6) ("\leftarrow\_", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.120}
+\end{gather*}
+\end{multicols}
+\noindent
+The default inference line style is set by the \texttt{drv\_path\_style} macro
+(see \S~\ref{sec-path-style}).
+%
+%
+\paragraph{Declarations order}
+%
+%
+Declarations may occur in any order.
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(130)
+% preorder declarations
+jgm 0 "0";
+  jgm 1 "00";
+    jgm 2 "000";
+    jgm 3 "001";
+    jgm 4 "002";
+  jgm 5 "01";
+    jgm 6 "010";
+    jgm 7 "011";
+    jgm 8 "012";
+  jgm 9 "02";
+    jgm 10 "020";
+    jgm 11 "021";
+    jgm 12 "022";
+nfr 0 (1, 5, 9) ("a", _);
+  nfr 1 (2, 3, 4) ("b", _);
+    nfr 2 () ("c", _);
+    nfr 3 () ("d", _);
+    nfr 4 () ("e", _);
+  nfr 5 (6, 7, 8) ("f", _);
+    nfr 6 () ("g", _);
+    nfr 7 () ("h", _);
+    nfr 8 () ("i", _);
+  nfr 9 (10, 11, 12) ("j", _);
+    nfr 10 () ("k", _);
+    nfr 11 () ("l", _);
+    nfr 12 () ("m", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+\begin{Verbatim}
+beginfig(131)
+% postorder declarations
+    jgm 0 "000";
+    jgm 1 "001";
+    jgm 2 "002";
+  jgm 3 "00";
+    jgm 4 "010";
+    jgm 5 "011";
+    jgm 6 "012";
+  jgm 7 "01";
+    jgm 8 "020";
+    jgm 9 "021";
+    jgm 10 "022";
+  jgm 11 "02";
+jgm 12 "0";
+    nfr 0 () ("a", _);
+    nfr 1 () ("b", _);
+    nfr 2 () ("c", _);
+  nfr 3 (0, 1, 2) ("d", _);
+    nfr 4 () ("e", _);
+    nfr 5 () ("f", _);
+    nfr 6 () ("g", _);
+  nfr 7 (4, 5, 6) ("h", _);
+    nfr 8 () ("i", _);
+    nfr 9 () ("j", _);
+    nfr 10 () ("k", _);
+  nfr 11 (8, 9, 10) ("l", _);
+nfr 12 (3, 7, 11) ("m", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\end{multicols}
+\begin{gather*}
+\drv{drv-guide.130}\tag{130}\\[1ex]
+\drv{drv-guide.131}\tag{131}
+\end{gather*}
+%
+%
+\paragraph{Code for the title page derivation tree}
+%
+%
+\begin{Verbatim}
+beginfig(100)
+jgm 0 "\Gamma, \Delta, \Theta, \Pi, \Upsilon\vdash F";
+  jgm 1 "\Pi\vdash (A\to D)\to E";
+  jgm 2 "\Gamma, \Delta, \Theta, (A\to D)\to E, \Upsilon\vdash F";
+    jgm 3 "\Gamma, \Delta, \Theta\vdash A\to D";
+      jgm 4 "A, \Gamma, \Delta, \Theta\vdash D";
+        jgm 5 "A, \Gamma, \Delta\vdash B\wedge C";
+          jgm 6 "A, \Gamma\vdash B";
+          jgm 7 "\Delta\vdash C";
+        jgm 8 "B\wedge C, \Theta\vdash D";
+    jgm 9 "E, \Upsilon\vdash F";
+nfr 0 (1, 2) ("\text{cut}", 1);
+  nfr 1 () ("\pi", 4);
+  nfr 2 (3, 9) ("\to_L", 1);
+    nfr 3 (4) ("\to_R", 1);
+      nfr 4 (5, 8) ("\text{cut}", 1);
+        nfr 5 (6, 7) ("\wedge_R", 1);
+          nfr 6 () ("\gamma", 2);
+          nfr 7 () ("\delta", 1);
+        nfr 8 () ("\theta", 3);
+    nfr 9 () ("\upsilon", 2);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+%
+%
+\subsection{\texttt{dcl}\label{sec-dcl}}
+%
+%
+\texttt{dcl} enables the simultaneous declarations of a judgment and of the
+corresponding inference:
+%\begin{center}
+``\texttt{dcl \param{nat} (\param{nat list})
+(\param{str}, \param{id}) \param{str list}}''
+%\end{center}
+is a shorthand for
+``\texttt{jgm \param{nat} \param{str list}; nfr \param{nat} (\param{nat list})
+(\param{str}, \param{id})}''.
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(140)
+dcl 0 () ("f", 1) "A\vdash B";
+dcl 1 () ("g", 1) "B\vdash C";
+dcl 2 (0, 1) ("\circ", 1) "A\vdash C";
+draw drv_tree;
+endfig;
+
+beginfig(141)
+dcl 0 () ("f", 1) "A\vdash B";
+dcl 1 (0) ("f", 1) "A", "\vdash", "B";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.140}
+\end{gather*}
+\vfill
+\begin{gather*}
+\drv{drv-guide.141}
+\end{gather*}
+\end{multicols}
+\begin{Verbatim}
+beginfig(150)
+dcl 0 (1, 5, 9) ("a", _)     "0";
+  dcl 1 (2, 3, 4) ("b", _)     "00";
+    dcl 2 () ("c", _)            "000";
+    dcl 3 () ("d", _)            "001";
+    dcl 4 () ("e", _)            "002";
+  dcl 5 (6, 7, 8) ("f", _)     "01";
+    dcl 6 () ("g", _)            "010";
+    dcl 7 () ("h", _)            "011";
+    dcl 8 () ("i", _)            "012";
+  dcl 9 (10, 11, 12) ("j", _)  "02";
+    dcl 10 () ("k", _)            "020";
+    dcl 11 () ("l", _)            "021";
+    dcl 12 () ("m", _)            "022";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.150}
+\end{gather*}
+%
+%
+\subsection{\texttt{bxd} and \texttt{mvd}\label{sec-bxd-mvd}}
+%
+%
+\paragraph{\texttt{bxd}}
+%
+%
+A premise index \param{nat} can be replaced with ``\texttt{bxd \param{nat}}''
+so that the whole sub-tree ending with the index \param{nat} judgment behaves
+as if it was enclosed within a box.
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(160)
+dcl 0 (1, 4) ("", _)     "a";
+\resplap{}dcl 0 (bxd 1, 4) ("", _) "a";
+  dcl 1 (2) ("", _)      "a";
+    dcl 2 (3) ("", _)    "a";
+      dcl 3 () ("", _)   "aaaaaaa";
+  dcl 4 () ("", _)       "aaaaa";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.160}\quad\text{resp.}\quad
+\drv{drv-guide.161}\quad\text{typeset as}\quad
+\drv{drv-guide.162}
+\end{gather*}
+%
+%
+\paragraph{\texttt{mvd}}
+%
+%
+A premise index \param{nat 1} in an inference declaration can be replaced with
+``\texttt{mvd \param{nat 1} (\param{nat 2}, \param{id})}'' so as to declare
+\param{nat 2} ``phantom'' inference steps starting from the index \param{nat 1}
+judgment. The ``phantom'' inference steps are intended to be drawn as
+a path using the path-style \param{id}.\\[1ex]
+\texttt{mvd \param{nat 1} (\param{nat 2}, \param{id})}\\
+\begin{tabular}{ll}
+\param{nat 1}&	index of the origin judgment\\
+\param{nat 2}&	number of phantom steps\\
+\param{id}&	phantom steps path-style identifier ({\tt0}, {\tt1}, {\tt2},
+		{\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}
+\begin{multicols}{2}
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(170)
+jgm 1 "aaa";
+jgm 2 "bbb";
+jgm 3 "ccc";
+jgm 4 "d";
+nfr 1 () ("", _);
+nfr 2 () ("", _);
+nfr 3 () ("", _);
+nfr 4 (mvd 1 (2, 3), 2, 3) ("", _);
+\resplap{}nfr 4 (1, mvd 2 (2, 4), 3) ("", _);
+\resplap{}nfr 4 (1, 2, mvd 3 (2, 6)) ("", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+\begin{gather*}
+\drv{drv-guide.170}\\[1ex]
+\drv{drv-guide.171}\\[1ex]
+\drv{drv-guide.172}
+\end{gather*}
+\end{multicols}
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(180)
+jgm 0 "\tbs{}textsc\{Size matters -- Part 1\}";
+jgm 1 "\tbs{}text\{Here is a rather long judgment"&\textrm{\emph{
+ % string concatenation}}
+      " that I don't want to shorten.\}";
+jgm 2 "\tbs{}text\{Will the derivation tree fit on the page?\}";
+jgm 3 "\tbs{}text\{It does.\}";
+nfr 0 () ("", 0);
+nfr 1 (0) ("", 1);
+nfr 2 () ("", 1);
+nfr 3 (mvd 1 (2, 3), 2) ("", 1);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.180}
+\end{gather*}
+%The default phantom steps path-style ``''is set by the
+%\texttt{drv\_path\_style} macro (see~\S~\ref{sec-path-style}).
+%
+%
+\subsection{Sub-tree delimiters and labels\label{sec-sub-tree}}
+%
+%
+\paragraph{\texttt{Nfr}}
+%
+%
+The \texttt{Nfr} declaration macro is an alternative for \texttt{nfr} that
+enables the typesetting of delimiters.\\[1ex]
+\texttt{Nfr \param{nat} (\param{nat list})
+(\param{str 1}, \param{str 2}, \param{str 3}, \param{id})}\\
+\begin{tabular}{ll}
+\param{nat}&		inference index\\
+\param{nat list}&	list of premise indices\\
+\param{str 1}&		inference label \emph{math-mode} \LaTeX\ code\\
+\param{str 2}&		left delimiter label \emph{math-mode} \LaTeX\ code\\
+\param{str 3}&		right delimiter label \emph{math-mode} \LaTeX\ code\\
+\param{id}&		inference line style identifier ({\tt0}, {\tt1},
+			{\tt2}, {\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}\\[1ex]
+If both \param{str 2} and \param{str 3} are the empty string
+\texttt{""} then \texttt{Nfr} behaves exactly the same way as \texttt{nfr}.
+However, if \param{str 2} is a non-empty string then a delimiter is placed to
+the left of the sub-tree ending with the index \param{nat} judgment and
+\param{str 2} is attached to it as a label. The same way, if \param{str 3} is
+a non-empty string then a delimiter is placed to the right of the sub-tree
+ending with the index \param{nat} judgment and \param{str 3} is attached to it
+as a label. Both \param{str 2} and \param{str 3} may be non-empty strings. You
+may use \texttt{"\{\}"} as a string argument to get a delimiter without a
+label.
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(190)
+jgm 0 "a";
+jgm 1 "b";
+jgm 2 "c";
+jgm 3 "d";
+Nfr 0 () ("0", "", "", _);
+Nfr 1 () ("1", "", "", _);
+Nfr 2 (0, 1) ("2", "E", "", _);
+Nfr 3 (2) ("3", "", "F", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.190}
+\end{gather*}
+\end{multicols}
+%
+%
+\paragraph{\texttt{Dcl}}
+%
+%
+The \texttt{Dcl} declaration macro is a shorthand for \texttt{jgm} and
+\texttt{Nfr} in the same way as \texttt{dcl} is a shorthand for \texttt{jgm}
+and \texttt{nfr}.
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(200)
+Dcl 0 () ("", "", "", _) "a";
+Dcl 1 (0) ("", "", "B", _) "c";
+Dcl 2 () ("", "", "", _) "d";
+Dcl 3 (1, 2) ("", "E", "", _) "f";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.200}
+\end{gather*}
+\end{multicols}
+%
+%
+\paragraph{\texttt{Mvd}}
+%
+%
+The \texttt{Mvd} macro is an alternative for \texttt{mvd} that enables the
+attachment of labels to phantom steps paths.\\[1ex]
+\texttt{Mvd \param{nat 1}
+(\param{nat 2}, \param{str 1}, \param{str 2}, \param{id})}\\
+\begin{tabular}{ll}
+\param{nat 1}&	index of the origin judgment\\
+\param{nat 2}&	number of phantom steps\\
+\param{str 1}&	left label \emph{math-mode} \LaTeX\ code\\
+\param{str 2}&	right label \emph{math-mode} \LaTeX\ code\\
+\param{id}&	phantom steps path-style identifier ({\tt0}, {\tt1}, {\tt2},
+		{\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}\\[1ex]
+If \param{str 1} is a non-empty string then it is attached as a label to the
+left of the phantom steps path. The same way, if \param{str 2} is a non-empty
+string then it is attached as a label to the right of the phantom steps path.
+Both \param{str 1} and \param{str 2} may be non-empty strings.
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(210)
+jgm 1 "aaa";
+jgm 2 "bbb";
+jgm 3 "ccc";
+nfr 1 () ("", _);
+nfr 2 () ("", _);
+nfr 3 (Mvd 1 (2, "d", "", 3), 2) ("", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\drv{drv-guide.210}
+\end{gather*}
+\end{multicols}
+%
+%
+\section{\texttt{drv} tunings\label{sec-tunings}}
+%
+%
+\texttt{drv} tuning macros set the parameters according to which derivation
+trees are typeset. You have to call these macros \emph{outside} figure
+environments (delimited by ``\texttt{beginfig(\param{index})},
+\texttt{endfig;}'' pairs).
+%
+%
+\begin{multicols}{2}
+\subsection{\texttt{drv\_font\_size}\label{sec-font-size}}
+%
+%
+\texttt{drv\_font\_size \param{str}}\\
+\begin{tabular}{ll}
+\param{str}&	\LaTeX\ font-size command\\
+&		\begin{tabular}{l}
+		\texttt{"\tbs{}tiny"}\\
+		\texttt{"\tbs{}scriptsize"}\\
+		\texttt{"\tbs{}footnotesize"}\\
+		\texttt{"\tbs{}small"}\\
+		\texttt{"\tbs{}normalsize"}\rlap{\quad\default}\\
+		\texttt{"\tbs{}large"}\\
+		\texttt{"\tbs{}Large"}\\
+		etc.
+		\end{tabular}
+\end{tabular}
+\columnbreak
+\begin{gather*}
+\texttt{"\tbs{}tiny"}\\
+\drv{drv-guide.220}\\
+\texttt{"\tbs{}small"}\\
+\drv{drv-guide.221}\\
+\texttt{"\tbs{}Large"}\\
+\drv{drv-guide.222}
+\end{gather*}
+\end{multicols}
+%
+%
+\subsection{\texttt{drv\_math\_style}\label{sec-math-style}}
+%
+%
+\texttt{drv\_math\_style (\param{id}, \param{str})}\\
+\begin{tabular}{ll}
+\param{id}&	component identifier ({\tt drv}, {\tt jdg}, {\tt ilb},
+		{\tt dlb} or {\tt plb})\\
+&		\begin{tabular}{lll}
+		{\tt drv}&	derivation trees&
+                  \default[ style: \texttt{"\tbs{}displaystyle"}]\\
+		{\tt jdg}&	judgments&
+                  \default[ style: \texttt{"\tbs{}textstyle"}]\\
+		{\tt ilb}&	inference labels&
+                  \default[ style: \texttt{"\tbs{}scriptstyle"}]\\
+		{\tt dlb}&	delimiter labels&
+                  \default[ style: \texttt{"\tbs{}textstyle"}]\\
+		{\tt plb}&	phantom steps labels&
+                  \default[ style: \texttt{"\tbs{}textstyle"}]
+		\end{tabular}\\
+\param{str}&	\LaTeX\ math-style command
+\end{tabular}\\[1ex]
+%
+%
+``\texttt{drv\_math\_style (drv, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{"\tbs{}displaystyle"}&
+\texttt{"\tbs{}textstyle"}&
+\texttt{"\tbs{}scriptstyle"}&\\[1ex]
+\drv{drv-guide.230}&
+\drv{drv-guide.231}&
+\drv{drv-guide.232}&
+\end{array}
+\end{gather*}
+%
+%
+``\texttt{drv\_math\_style (jdg, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{"\tbs{}displaystyle"}&
+\texttt{"\tbs{}textstyle"}&
+\texttt{"\tbs{}scriptstyle"}&\\[1ex]
+\drv{drv-guide.240}&
+\drv{drv-guide.241}&
+\drv{drv-guide.242}&
+\end{array}
+\end{gather*}
+%
+%
+``\texttt{drv\_math\_style (ilb, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{"\tbs{}textstyle"}&
+\texttt{"\tbs{}scriptstyle"}&
+\texttt{"\tbs{}scriptscriptstyle"}&\\[1ex]
+\drv{drv-guide.250}&
+\drv{drv-guide.251}&
+\drv{drv-guide.252}&
+\end{array}
+\end{gather*}
+Notice that the math-style of derivation trees determines the math-style of
+judgments (and of labels) in the same way as the math-style of fractions
+determines the math-style of numerators and denominators.
+%
+%
+\subsection{\texttt{drv\_scale}\label{sec-scale}}
+%
+%
+\texttt{drv\_scale (\param{id}, \param{float})}\\
+\begin{tabular}{ll}
+\param{id}&	scale identifier ({\tt clr}, {\tt prm}, {\tt jdg} or
+		{\tt ilb})\\
+&		\begin{tabular}{lll}
+		{\tt clr}&nice explanation soon
+		(see examples)&\default[ scale: 1]\\
+		{\tt prm}&nice explanation soon
+		(see examples)&\default[ scale: 1]\\
+		{\tt jdg}&nice explanation soon
+		(see examples)&\default[ scale: 1]\\
+		{\tt ilb}&nice explanation soon
+		(see examples)&\default[ scale: 1]
+		\end{tabular}\\
+\param{float}&scale value
+\end{tabular}\\[1ex]
+%
+%
+``\texttt{drv\_scale (clr, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{4}{@{}>{\centering}p{.25\textwidth}}@{}l@{}}
+\texttt{0}&
+\texttt{1}&
+\texttt{2.5}&
+\texttt{4}&\\[1ex]
+\drv{drv-guide.260}&
+\drv{drv-guide.261}&
+\drv{drv-guide.262}&
+\drv{drv-guide.263}&
+\end{array}
+\end{gather*}
+%
+%
+``\texttt{drv\_scale (prm, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{4}{@{}>{\centering}p{.25\textwidth}}@{}l@{}}
+\texttt{0}&
+\texttt{1}&
+\texttt{2.5}&
+\texttt{4}&\\[1ex]
+\drv{drv-guide.270}&
+\drv{drv-guide.271}&
+\drv{drv-guide.272}&
+\drv{drv-guide.273}&
+\end{array}
+\end{gather*}
+%
+%
+``\texttt{drv\_scale (jgm, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{4}{@{}>{\centering}p{.25\textwidth}}@{}l@{}}
+\texttt{0}&
+\texttt{1}&
+\texttt{2.5}&
+\texttt{4}&\\[1ex]
+\drv{drv-guide.280}&
+\drv{drv-guide.281}&
+\drv{drv-guide.282}&
+\drv{drv-guide.283}&
+\end{array}
+\end{gather*}
+%
+%
+``\texttt{drv\_scale (ilb, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{4}{@{}>{\centering}p{.25\textwidth}}@{}l@{}}
+\texttt{0}&
+\texttt{1}&
+\texttt{2.5}&
+\texttt{4}&\\[1ex]
+\drv{drv-guide.290}&
+\drv{drv-guide.291}&
+\drv{drv-guide.292}&
+\drv{drv-guide.293}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_junction\_style}\label{sec-junction-style}}
+%
+%
+This macro sets the default way the premises of an inference are
+horizontally joined.\\[1ex]
+\texttt{drv\_junction\_style \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&junction style identifier ({\tt 0}, {\tt 1} or {\tt 2})\\
+&		\begin{tabular}{ll}
+		{\tt 0}&``fully-interlacing''\\
+		{\tt 1}&``semi-interlacing''\quad\default\\
+		{\tt 2}&``non-interlacing''
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{0}&
+\texttt{1}&
+\texttt{2}&\\[1ex]
+\drv{drv-guide.300}&
+\drv{drv-guide.301}&
+\drv{drv-guide.302}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_alignment\_style}\label{sec-alignment-style}}
+%
+%
+This macro sets the default way a judgment is horizontally aligned
+relatively to its premises.\\[1ex]
+\texttt{drv\_alignment\_style \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	alignment style identifier ({\tt l}, {\tt c} or {\tt r})\\
+&		\begin{tabular}{ll}
+		{\tt l}&left\\
+		{\tt c}&centered\quad\default\\
+		{\tt r}&right
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{l}&
+\texttt{c}&
+\texttt{r}&\\[1ex]
+\drv{drv-guide.310}&
+\drv{drv-guide.311}&
+\drv{drv-guide.312}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_path\_style}\label{sec-path-style}}
+%
+%
+\texttt{drv\_path\_style (\param{id 1}, \param{id 2})}\\
+\begin{tabular}{ll}
+\param{id 1}&	path-type identifier ({\tt iln} or {\tt phm})\\
+&		\begin{tabular}{lll}
+		{\tt iln}	&inference lines&\default[ style: {\tt1}]\\
+		{\tt phm}	&phantom steps paths&\default[ style: {\tt3}]
+		\end{tabular}\\
+\param{id 2}&	path-style identifier ({\tt0}, {\tt1}, {\tt2}, {\tt3}, {\tt4},
+		{\tt5} or {\tt6})
+\end{tabular}
+%
+%
+\subsection{\texttt{drv\_labels\_position}\label{sec-labels-position}}
+%
+%
+\texttt{drv\_labels\_position (\param{id 1}, \param{id 2})}\\
+\begin{tabular}{ll}
+\param{id 1}&	label-type identifier ({\tt ilb}, {\tt plb} or {\tt dlb})\\
+&		\begin{tabular}{lll}
+		{\tt ilb}	&inference labels&
+		\default[ position: {\tt r}]\\
+		{\tt dlb}	&delimiter labels&
+		\default[ position: {\tt l}]\\
+		{\tt plb}	&phantom steps labels&
+		\default[ position: {\tt l}]
+		\end{tabular}\\
+\param{id 2}&	position identifier ({\tt l} or {\tt r})\\
+&		\begin{tabular}{ll}
+		{\tt l}&left\\
+		{\tt r}&right
+		\end{tabular}
+\end{tabular}\\[1ex]
+``\texttt{drv\_labels\_position (ilb, {\rm ---});}''
+\begin{gather*}
+\begin{array}{*{2}{@{}>{\centering}p{.24\textwidth}}@{}l@{}}
+{\tt l}&{\tt r}&\\[1ex]
+\drv{drv-guide.320}&
+\drv{drv-guide.321}&
+\end{array}
+\end{gather*}
+Setting a default position for delimiter labels (thus for delimiters) and for
+phantom steps labels may be useful in conjunction with declaration macros
+taking optional label arguments (see~\S~\ref{sec-labels}).
+%
+%
+\begin{multicols}{2}
+\subsection{\texttt{drv\_roots\_position}\label{sec-roots-position}}
+%
+%
+\texttt{drv\_roots\_position \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	position identifier ({\tt t} or {\tt b})\\
+&		\begin{tabular}{ll}
+		{\tt t}&top\\
+		{\tt b}&bottom\quad\default
+		\end{tabular}
+\end{tabular}
+\columnbreak
+
+\begin{gather*}
+\begin{array}{*{2}{@{}>{\centering}p{.24\textwidth}}@{}l@{}}
+\drv{drv-guide.330}&
+\drv{drv-guide.331}&
+\end{array}
+\end{gather*}
+\end{multicols}
+%
+%
+\subsection{\texttt{drv\_axis\_reference}\label{sec-axis-reference}}
+%
+%
+The baseline of derivation tree pictures is set in such a way that their
+math axis coincides either with the axis of their root inference line or with
+the math axis of their root judgment according to the default behaviour set by
+\texttt{drv\_axis\_reference}.\\[1ex]
+\texttt{drv\_axis\_reference \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	reference identifier ({\tt iln} or {\tt jdg})\\
+&		\begin{tabular}{lll}
+		{\tt iln}&root inference line axis&\default\\
+		{\tt jdg}&root judgment math axis
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\frac{\qquad}{}\textit{math axis}\frac{\qquad}{}
+\drv{drv-guide.340}\frac{\qquad}{}
+\drv{drv-guide.341}\frac{\qquad}{}
+\end{gather*}
+Notice that \texttt{drv\_axis\_reference} is irrelevant if you don't use the
+\texttt{\tbs{}drv} inclusion command (see \S~\ref{sec-inclusion}).
+%
+%
+\subsection{\texttt{drv\_left\_delimiter} and \texttt{drv\_right\_delimiter}%
+\label{sec-delimiters}}
+%
+%
+\texttt{drv\_left\_delimiter \param{str}}\\
+\begin{tabular}{ll}
+\param{str}&	left delimiter math-mode \LaTeX\ code\\
+&		\begin{tabular}{llll}
+		\texttt{"("}&				$($\\
+		\texttt{"["}&				$[$\\
+		\texttt{"\tbs{}lbrace"}&	$\lbrace$&\default\\
+		\texttt{"\tbs{}langle"}&	$\langle$\\
+		etc.
+		\end{tabular}
+\end{tabular}\clearpage\noindent%\\[1ex]
+\texttt{drv\_right\_delimiter \param{str}}\\
+\begin{tabular}{ll}
+\param{str}&	right delimiter math-mode \LaTeX\ code\\
+&		\begin{tabular}{llll}
+		\texttt{")"}&				$)$\\
+		\texttt{"]"}&				$]$\\
+		\texttt{"\tbs{}rbrace"}&	$\rbrace$&\default\\
+		\texttt{"\tbs{}rangle"}&	$\rangle$\\
+		etc.
+		\end{tabular}
+\end{tabular}\\[1ex]
+``\texttt{drv\_left\_delimiter {\rm ---};}''
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{"("}&
+\texttt{"\tbs{}lfloor"}&
+\texttt{"."}&\\[1ex]
+\drv{drv-guide.350}&
+\drv{drv-guide.351}&
+\drv{drv-guide.352}&
+\end{array}
+\end{gather*}
+``\texttt{drv\_right\_delimiter {\rm ---};}''
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{"\tbs{}rangle"}&
+\texttt{"\tbs{}uparrow"}&
+\texttt{"."}&\\[1ex]
+\drv{drv-guide.360}&
+\drv{drv-guide.361}&
+\drv{drv-guide.362}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_box\_mode}\label{sec-box-mode}}
+%
+%
+When in ``box mode'', derivation trees are typeset in such a way that all
+sub-trees behave as if they were enclosed within boxes (that is as if all
+premise indices were prefixed with \texttt{bxd},
+see~\S~\ref{sec-bxd-mvd}).\\[1ex]
+%
+%
+\texttt{drv\_box\_mode \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	status identifier ({\tt on} or {\tt off})\\
+&		\begin{tabular}{ll}
+		{\tt on}\\
+		{\tt off}&\default
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{on}&
+typeset as&
+\texttt{off}&\\[1ex]
+\drv{drv-guide.370}&
+\drv{drv-guide.371}&
+\drv{drv-guide.372}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_fraction\_mode}\label{sec-fraction-mode}}
+%
+%
+\texttt{drv} typesets derivation trees in
+such a way that: the distance from the axis of an inference line to the
+math axis of a judgment above it is always the same (\texttt{num\_hg},
+see~\S~\ref{sec-components}); the distance from the axis of an inference line
+to the math axis of a judgment below it is always the same (\texttt{den\_dp},
+see~\S~\ref{sec-components}). When in ``fraction mode'', if roots are at bottom
+then the height of leaf judgments above which there is no inference line is
+ignored (the depth of root judgments is always ignored); if roots are at top
+then the depth of leaf judgments below which there is no inference line is
+ignored (the height of root judgments is always ignored). This mode may cause
+overlaps when used in conjunction with
+interlacing junction-styles (\texttt{0} and \texttt{1}).\\[1ex]
+\texttt{drv\_fraction\_mode \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	status identifier ({\tt on} or {\tt off})\\
+&		\begin{tabular}{ll}
+		{\tt on}&\default\\
+		{\tt off}
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{on}&
+\texttt{off}&
+typeset as&\\[1ex]
+\drv{drv-guide.380}&
+\drv{drv-guide.381}&
+\drv{drv-guide.382}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_proof\_mode}\label{sec-proof-mode}}
+%
+%
+\texttt{drv\_proof\_mode \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	status identifier ({\tt on} or {\tt off})\\
+&		\begin{tabular}{ll}
+		{\tt on}\\
+		{\tt off}&\default
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{2}{@{}>{\centering}p{.5\textwidth}}@{}l@{}}
+\texttt{on}&
+\texttt{off}&\\[1ex]
+\drv{drv-guide.390}&
+\drv{drv-guide.391}&
+\end{array}\\[1ex]
+\end{gather*}
+Red numbers (resp. dots) refer to judgment indices (resp. central points,
+see~\S~\ref{sec-components}) while blue numbers (resp. dots) refer to
+sub-judgment indices (resp. central points, see~\S~\ref{sec-components}).
+%
+%
+\subsection{\texttt{drv\_labels\_mode}\label{sec-labels-mode}}
+%
+%
+This macro turns the typesetting of labels on or off, whether labels are
+specified or~not.\\[1ex]
+\texttt{drv\_labels\_mode (\param{id 1}, \param{id 2})}\\
+\begin{tabular}{ll}
+\param{id 1}&	label-type identifier ({\tt ilb}, {\tt plb} or {\tt dlb})\\
+&		\begin{tabular}{lll}
+		{\tt ilb}	&inference labels&
+		\default[ status: {\tt on}]\\
+		{\tt dlb}	&delimiter labels&
+		\default[ status: {\tt on}]\\
+		{\tt plb}	&phantom steps labels&
+		\default[ status: {\tt on}]
+		\end{tabular}\\
+\param{id 2}&	status identifier ({\tt on} or {\tt off})
+\end{tabular}
+%
+%
+\subsection{\texttt{drv\_verbatimtex}\label{sec-verbatimtex}}
+%
+%
+This macro enables the use of \LaTeX{} material that is not intended
+to be typeset (e.g. \texttt{\tbs{}renewcommand} statements) by adding a
+\MP{} \texttt{verbatimtex}/\texttt{etex} block to
+\texttt{\param{jobname}-delayed.mp}.\\[1ex]
+\texttt{drv\_verbatimtex \param{str}}\\
+\begin{tabular}{ll}
+\param{str}&	\LaTeX\ material
+\end{tabular}
+%
+%
+\section{Pictures, bounding boxes and math axis\label{sec-pictures}}
+%
+%
+\subsection{\texttt{drv\_freeze} and \texttt{drv\_tree}}
+%
+%
+\texttt{drv} composes derivation trees with respect to judgment and
+inference declarations only once the \texttt{drv\_freeze} macro is called.
+This is usually done by \texttt{drv\_tree} which is a macro that
+returns a picture. You may however call \texttt{drv\_freeze} yourself if you
+have no need for the whole derivation tree picture that \texttt{drv\_tree}
+would otherwise return (Section~\ref{sec-components} illustrates such a
+situation).
+
+\texttt{drv} composes derivation trees essentially according to the
+algorithm for composing fractions described in Appendix~G of the {\TeX}book
+(see~\cite{jackowski06,knuth84}). In particular, \texttt{drv} uses
+``\texttt{\tbs{}fontdimen}'' parameters so that the derivation tree pictures
+it generates should integrate smoothly within any document, whatever the fonts
+you use. As an example, compare the following fractions (the first one is
+composed by \texttt{drv} while the second one is composed by the standard
+\texttt{\tbs{}frac} command).\\[1ex]\mbox{}{\hfill%
+\drv{drv-guide.400}\quad{\huge$\displaystyle\frac{\gamma}{\delta}$}\hfill}
+%
+%
+\subsection{\texttt{drv\_bbox}\label{sec-bbox}}
+%
+%
+\texttt{drv\_bbox \param{nat}}\\
+\begin{tabular}{ll}
+\param{nat}&	sub-tree root index
+\end{tabular}\\[1ex]
+``\texttt{drv\_bbox \param{nat}}'' returns a \MP\ closed path
+(see~\cite[Section~4]{hobby09}) standing for the bounding box of the sub-tree
+ending with the index \param{nat} judgment. \texttt{drv\_bbox} calls
+\texttt{drv\_freeze} if necessary.
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(410)
+dcl 0 (1, 5) ("", _)      "a";
+\resplap{}dcl 0 (bxd 1, 5) ("", _)  "a";
+  dcl 1 (2, 3, 4) ("", _)   "b";
+    dcl 2 () ("", _)          "c";
+    dcl 3 () ("", _)          "d";
+    dcl 4 () ("", _)          "e";
+  dcl 5 () ("", _)          "f";
+fill drv_bbox 1 withcolor (255, 230, 205)/255;\textrm{\emph{
+ % rgb color}}
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.410}\quad\text{resp.}\quad\drv{drv-guide.411}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_axis}\label{sec-axis}}
+%
+%
+\texttt{drv\_axis} locally overrides \texttt{drv\_axis\_reference} (see
+\S~\ref{sec-axis-reference}), enabling the explicit setting of
+the math axis of a tree once it has been drawn.\\[1ex]
+\texttt{drv\_axis (\param{id}, \param{nat})}\\
+\begin{tabular}{ll}
+\param{id}&	reference type identifier ({\tt iln}, {\tt jdg} or {\tt dlm})\\
+&		\begin{tabular}{ll}
+		{\tt iln}&inference line axis\\
+                {\tt jdg}&judgment math axis\\
+                {\tt dlm}&delimiter axis
+                \end{tabular}\\
+\param{nat}&	reference index
+\end{tabular}
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(420)
+Dcl 0 ( ) ("",   "", "", _) "a";
+Dcl 1 (0) ("", "\{\}", "", _) "b";
+draw drv_tree;
+drv_axis (iln, 0);
+\resplap{}drv_axis (jdg, 1);
+\resplap{}drv_axis (dlm, 1);
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\frac{\qquad}{}\textit{ math axis }\frac{\qquad}{}
+\drv{drv-guide.420}\frac{\qquad}{}\text{ resp. }\frac{\qquad}{}
+\drv{drv-guide.421}\frac{\qquad}{}\text{ resp. }\frac{\qquad}{}
+\drv{drv-guide.422}
+\end{gather*}
+Notice that \texttt{drv\_axis} is irrelevant if you don't use the
+\texttt{\tbs{}drv} inclusion command.% (see \S~\ref{sec-inclusion}).
+%
+%
+\section{Low level inference declaration macros\label{sec-low-level}}
+%
+%
+\subsection{\texttt{NFR}, \texttt{DCL} and \texttt{MVD}\label{sec-NFR-DCL-MVD}}
+%
+%
+\paragraph{\texttt{NFR}}
+%
+%
+The \texttt{NFR} declaration macro is the lowest level one. It enables the
+specification of all the labels and styles of an inference.\\[1ex]
+\texttt{NFR
+\param{nat}
+(\param{nat\;list})
+(\param{str~1},\;\param{str~2},\;\param{str~3},\;\param{str~4},\;%
+\param{id~1},\;\param{id~2},\;\param{id~3})}
+\begin{tabular}{ll}
+\param{nat}&		inference index\\
+\param{nat list}&	list of premise indices\\
+\param{str 1}&		left inference label \emph{math-mode} \LaTeX\ code\\
+\param{str 2}&		right inference label \emph{math-mode} \LaTeX\ code\\
+\param{str 3}&		left delimiter label \emph{math-mode} \LaTeX\ code\\
+\param{str 4}&		right delimiter label \emph{math-mode} \LaTeX\ code\\
+\param{id 1}&		junction style identifier ({\tt0}, {\tt1}, {\tt2},
+			{\tt3} or {\tt\_})\\
+&			\begin{tabular}{ll}
+			{\tt0}&fully-interlacing\\
+			{\tt1}&semi-interlacing\\
+			{\tt2}&non-interlacing\\
+			{\tt3}&user specified (tricky,
+			see~\S~\ref{sec-user-specified})\\
+			{\tt\_}&default (set by \texttt{drv\_junction\_style},
+			see~\S~\ref{sec-junction-style})
+			\end{tabular}\\
+\param{id 2}&		alignment style identifier ({\tt l}, {\tt c}, {\tt r},
+			{\tt u} or {\tt\_})\\
+&			\begin{tabular}{ll}
+			{\tt l}&left\\
+			{\tt c}&centered\\
+			{\tt r}&right\\
+			{\tt u}&user specified (tricky,
+			see~\S~\ref{sec-user-specified})\\
+			{\tt\_}&default (set by \texttt{drv\_alignment\_style},
+			see~\S~\ref{sec-alignment-style})
+			\end{tabular}\\
+\param{id 3}&		inference line style identifier ({\tt0}, {\tt1},
+			{\tt2},	{\tt3}, {\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}
+\begin{multicols}{3}
+\begin{Verbatim}
+beginfig(430)
+jgm 0 "a";
+NFR 0 () ("1", "2", "3", "4", _, _, _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak\ \columnbreak
+
+\begin{gather*}
+\drv{drv-guide.430}
+\end{gather*}
+\end{multicols}
+%
+%
+\paragraph{\texttt{DCL}}
+%
+%
+The \texttt{DCL} declaration macro is a shorthand for \texttt{jgm} and
+\texttt{NFR} in the same way as \texttt{dcl} is a shorthand for \texttt{jgm}
+and \texttt{nfr}.
+\begin{multicols}{3}
+\begin{Verbatim}
+beginfig(440)
+DCL 0 ()     ("1", "", "", "", _, _, _) "a";
+DCL 1 ()     ("", "2", "", "", _, _, _) "b";
+DCL 2 (0, 1) ("", "", "3", "", _, _, _) "c";
+DCL 3 (2)    ("", "", "", "4", _, _, _) "d";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak\ \columnbreak
+
+\begin{gather*}
+\drv{drv-guide.440}
+\end{gather*}
+\end{multicols}
+%
+%
+\paragraph{\texttt{MVD}}
+%
+%
+The \texttt{MVD} macro is a generalization of \texttt{Mvd} that enables the
+specification of the alignment style of phantom inferences.\\[1ex]
+\texttt{MVD \param{nat 1}
+(\param{nat 2}, \param{str 1}, \param{str 2}, \param{id 1}, \param{id 2})}\\
+\begin{tabular}{ll}
+\param{nat 1}&	index of the origin judgment\\
+\param{nat 2}&	number of phantom steps\\
+\param{str 1}&	left label \emph{math-mode} \LaTeX\ code\\
+\param{str 2}&	right label \emph{math-mode} \LaTeX\ code\\
+\param{id 1}&	alignment style identifier ({\tt l}, {\tt c} or {\tt r})\\
+\param{id 2}&	phantom steps path-style identifier ({\tt0}, {\tt1}, {\tt2},
+		{\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}
+\begin{multicols}{3}
+\begin{Verbatim}
+beginfig(450)
+jgm 0 "a";
+  jgm 1 "b";
+    jgm 2 "cccccc";
+    jgm 3 "ddd";
+  jgm 4 "eeeeeeeee";
+nfr 0 (1, MVD 4 (5, "", "F", r, 4)) ("", _);
+  nfr 1 (MVD 2 (2, "G", "", l, 3), 3) ("", _);
+    nfr 2 () ("", _);
+    nfr 3 () ("", _);
+  nfr 4 () ("", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak\ \columnbreak
+
+\begin{gather*}
+\drv{drv-guide.450}
+\end{gather*}
+\end{multicols}\clearpage
+\begin{Verbatim}
+beginfig(460)
+jgm 0 "\textsc{Size matters -- Part 2}";
+jgm 1 "\text{Here is an even longer judgment"&
+      " that I don't want to shorten either.}";
+jgm 2 "\text{This time I'm pretty sure that the"&
+      " derivation tree won't fit on the page.}";
+jgm 3 "\text{It does! Amazing.}";
+nfr 0 () ("", 0);
+nfr 1 (0) ("", 1);
+nfr 2 () ("", 1);
+nfr 3 (MVD 1 (2, "", "", l, 3), 2) ("", 1);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.460}
+\end{gather*}
+%
+%
+\subsection{Optional labels\label{sec-labels}}
+%
+%
+\paragraph{\texttt{NFR\_opt}}
+%
+%
+The \texttt{NFR\_opt} declaration macro is an alternative for \texttt{NFR}
+that lets you specify labels at your option.\\[1ex]
+\texttt{NFR\_opt
+\param{nat}
+(\param{nat list})
+(\param{str list 1})
+(\param{str list 2})
+(\param{id 1}, \param{id 2}, \param{id 3})}
+\begin{tabular}{ll}
+\param{nat}&		inference index\\
+\param{nat list}&	list of premise indices\\
+\param{str list 1}&	list of inference labels \emph{math-mode}
+			\LaTeX\ code\\
+\param{str list 2}&	list of delimiter labels \emph{math-mode}
+			\LaTeX\ code\\
+\param{id 1}&		junction style identifier ({\tt0}, {\tt1}, {\tt2},
+			{\tt3} or {\tt\_})\\
+\param{id 2}&		alignment style identifier ({\tt l}, {\tt c}, {\tt r},
+			{\tt u} or {\tt\_})\\
+\param{id 3}&		inference line style identifier ({\tt0}, {\tt1},
+			{\tt2},	{\tt3}, {\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}\\[1ex]
+%
+%
+The list \param{str list 1} may contain zero, one or two
+strings specifying inference labels. If no label is specified then no label
+is attached to the inference line. If two labels are specified then the first
+one is attached to the left and the second one to the right. Finally, if one
+label only is specified then it is attached either to the left or to the right
+of the inference line depending on the default inference labels position set by
+\texttt{drv\_labels\_position} (see~\S~\ref{sec-labels-position}).
+
+The same way, \param{str list 2} may contain zero, one or two strings
+specifying delimiter labels. If one label only is specified then it is attached
+to a delimiter placed either to the left or to the right of the sub-tree ending
+with the index \param{nat} judgment depending on the default delimiter labels
+position set by \texttt{drv\_labels\_position}.
+
+As an example, ``\texttt{nfr \param{nat} (\param{nat list})
+(\param{str}, \param{id})}'' behaves exactly the same way as
+``\texttt{NFR\_opt \param{nat} (\param{nat list}) (\param{str}) ()
+(\_, \_, \param{id})}''.
+%
+%
+\paragraph{\texttt{DCL\_opt}}
+%
+%
+The \texttt{DCL\_opt} declaration macro is a shorthand for \texttt{jgm} and
+\texttt{NFR\_opt} in the same way as \texttt{DCL} is a shorthand for
+\texttt{jgm} and \texttt{NFR}.
+%
+%
+\paragraph{\texttt{MVD\_opt}}
+%
+%
+The \texttt{MVD\_opt} macro is an alternative for \texttt{MVD} that lets you
+specify labels at your option.\\[1ex]
+\texttt{MVD\_opt \param{nat 1} (\param{nat 2})
+(\param{str list}) (\param{id 1} \param{id 2})}\\
+\begin{tabular}{ll}
+\param{nat 1}&		index of the origin judgment\\
+\param{nat 2}&		number of phantom steps\\
+\param{str list}&	list of labels \emph{math-mode} \LaTeX\ code\\
+\param{id 1}&		alignment style identifier ({\tt l}, {\tt c}
+			or {\tt r})\\
+\param{id 2}&		phantom steps path-style identifier ({\tt0}, {\tt1},
+			{\tt2},	{\tt3},	{\tt4}, {\tt5}, {\tt6} or {\tt\_})
+\end{tabular}\\[1ex]
+The list \param{str list} may contain zero, one or two
+strings specifying labels. If one label only is specified then it is attached
+either to the left or to the right of the phantom steps path depending on the
+default phantom steps labels position set by
+\texttt{drv\_labels\_position} (see~\S~\ref{sec-labels-position}).
+%
+%
+\subsection{User defined declaration macros (tricky)\label{sec-user-defined}}
+%
+%
+Here are the \MP\ headers for \texttt{NFR}, \texttt{MVD}, \texttt{NFR\_opt} and
+\texttt{MVD\_opt}.
+\begin{Verbatim}[commandchars=\\\{\}]
+NFR[](text PRM)(expr lilb, \!rilb, \!ldlb, \!rdlb)(suffix jsty, \!asty, \!isty)
+MVD[](expr num, lplb, rplb)(suffix asty, psty)
+NFR_opt[](text PRM)(text ILB)(text DLB)(suffix jsty, asty, isty)
+MVD_opt[](expr num)(text PLB)(suffix asty, psty)
+\end{Verbatim}
+``\texttt{[]}'' in the header of a macro indicates that this macro expects a
+numeric argument referred to as ``\texttt{@}'' in its body.
+``\texttt{text}'', ``\texttt{expr}'' and ``\texttt{suffix}'' specify argument
+types (see~\cite[Section 10]{hobby09}). You may use \texttt{NFR}, \texttt{MVD},
+\texttt{NFR\_opt} and \texttt{MVD\_opt} to define your own declaration macros.
+As an example, here are possible definitions for \texttt{Nfr} and \texttt{Mvd}.
+\begin{Verbatim}
+vardef Nfr[](text PRM)(expr ilb, ldlb, rdlb)(suffix isty)=
+  NFR_opt[@](PRM)(ilb)(ldlb, rdlb)(_, _, isty);
+enddef;
+\end{Verbatim}
+\begin{Verbatim}
+vardef Mvd[](expr num, lplb, rplb)(suffix psty)=
+  MVD[@](num, lplb, rplb, _, psty) % Mvd returns an index, no `;'!
+enddef;
+\end{Verbatim}
+%
+%
+\section{Inside derivation trees\label{sec-inside}}
+%
+%
+\subsection{Components, distinguished points and
+dimensions\label{sec-components}}
+%
+%
+\paragraph{Components}
+%
+%
+Once \texttt{drv\_freeze} has been called, all the components of a derivation
+tree are accessible independently from each-other. Given an inference
+index~\param{nat}, you can access the inference components (provided they were
+declared) via the following indentifiers.
+\begin{center}
+\begin{tabular}{lr}
+judgment			&\texttt{jdg[\param{nat}]}\\
+sub-judgments			&\texttt{sbj[\param{nat}][\param{nat$'$}]}\\
+inference line			&\texttt{iln[\param{nat}]}\\
+left inference label		&\texttt{l\_ilb[\param{nat}]}\\
+right inference label		&\texttt{r\_ilb[\param{nat}]}\\
+left delimiter			&\texttt{l\_dlm[\param{nat}]}\\
+left delimiter label		&\texttt{l\_dlb[\param{nat}]}\\
+right delimiter			&\texttt{r\_dlm[\param{nat}]}\\
+right delimiter label		&\texttt{r\_dlb[\param{nat}]}\\
+phantom steps path		&\texttt{phm[\param{nat}]}\\
+left phantom steps label	&\texttt{l\_plb[\param{nat}]}\\
+right phantom steps label	&\texttt{l\_plb[\param{nat}]}
+\end{tabular}
+\end{center}
+The sub-judgment index \param{nat$'$} ranges from 0 to the number of sub-judgments minus 1.
+%
+%
+\enlargethispage{\baselineskip}
+\begin{Verbatim}
+beginfig(470) % components
+DCL 5 () ("", "", "", "", _, _, 0) "A";
+DCL 6 (5) ("(1)", "(2)", "(3)", "(4)", _, _, 1) "B", "C";
+DCL 7 (MVD 6 (2, "(5)", "(6)", _, 6)) ("", "", "", "", _, _, 1) "D";
+drv_freeze; % usually called by drv_tree
+draw jdg[5];                          % judgment                   A
+draw sbj[6][0] withcolor (3, 0, 0)/3; % sub-judgment               B
+draw sbj[6][1] withcolor (2, 0, 0)/3; % sub-judgment               C
+draw iln[6]    withcolor (0, 4, 0)/4; % inference line
+draw l_ilb[6]  withcolor (0, 3, 0)/4; % left inference label      (1)
+draw r_ilb[6]  withcolor (0, 2, 0)/4; % right inference label     (2)
+draw l_dlm[6]  withcolor (0, 0, 3)/3; % left delimiter
+draw l_dlb[6]  withcolor (0, 0, 2)/3; % left delimiter label      (3)
+draw r_dlm[6]  withcolor (3, 0, 3)/3; % right delimiter
+draw r_dlb[6]  withcolor (2, 0, 2)/3; % right delimiter label     (4)
+draw phm[6]    withcolor (0, 3, 3)/4; % phantom steps path
+draw l_plb[6]  withcolor (0, 2, 2)/4; % left phantom steps label  (5)
+draw r_plb[6]  withcolor (0, 1, 1)/4; % right phantom steps label (6)
+draw jdg[7];                          % judgment                   D
+draw iln[7];                          % inference line
+endfig;
+\end{Verbatim}
+%
+%
+\paragraph{Distinguished points}
+%
+%
+Three distinguished points are associated with each component \param{cpn},
+namely \texttt{\param{cpn}.l}, \texttt{\param{cpn}.c} and
+\texttt{\param{cpn}.r} that lie respectively to the left, at the center and to
+the right of the component math axis.
+\begin{gather*}
+\begin{array}{cc}
+\text{components}&\text{central points}\\[1ex]
+\drv{drv-guide.470}&\drv{drv-guide.471}
+\end{array}
+\end{gather*}
+%
+%
+\paragraph{Dimensions}
+%
+%
+Two dimensions are associated with each component \param{cpn}, a depth
+\texttt{\param{cpn}.dp} and a height \texttt{\param{cpn}.hg} that both are
+relative to the component math axis. Two overall dimensions are associated with
+each derivation tree, \texttt{den\_dp} and \texttt{num\_hg}. The former
+refers to the depth of a judgment math axis relatively to the axis of an
+inference line above it while the latter refers to the height of a judgment
+math axis relatively to the axis of an inference line below it. Depths are
+negative while heights are positive.
+\begin{Verbatim}
+beginfig(470)
+dcl 0 ()  ("", 0) "\gamma";
+dcl 1 (0) ("", 1) "\delta";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+(The picture below may look weird if you don't use scalable fonts.)
+\begin{gather*}
+\drv{drv-guide.480}
+\end{gather*}
+%
+%
+\subsection{\texttt{drv\_styled}\label{sec-styled}}
+%
+%
+\texttt{drv\_styled} enables the drawing of \MP\ paths
+%(see~\cite[Section~4]{hobby09})
+using \texttt{drv} path-styles.\\[1ex]
+\texttt{\param{path} drv\_styled \param{id}}\\
+\begin{tabular}{ll}
+\param{path}&	\MP\ path expression\\
+\param{id}&	path style identifier ({\tt0}, {\tt1}, {\tt2}, {\tt3},
+		{\tt4}, {\tt5} or {\tt6})
+\end{tabular}
+\begin{Verbatim}
+beginfig(490)
+jgm 4 "A", "\vdash", "A";
+jgm 5 "B", "_2", "\vdash", "B", "_3";
+jgm 6 "A", ",", "A", "\multimap", "B", "_1", "\vdash", "B", "_4";
+jgm 7 "A", "\multimap", "B", "_0", "\vdash", "A", "\multimap", "B", "_5";
+nfr 4 () ("1", _);
+nfr 5 () ("1", _);
+nfr 6 (4, 5) ("\multimap_{L}", _);
+nfr 7 (6) ("\multimap_{R}", _);
+drv_freeze;                               % B
+draw (sbj[7][2].c shifted (0, -num_hg) .. % 0
+      sbj[7][2].c {up} ..                 % 0
+      sbj[6][4].c ..                      % 1
+      sbj[5][0].c .. tension 1.2 ..       % 2
+      sbj[5][3].c ..                      % 3
+      sbj[6][7].c ..                      % 4
+      sbj[7][7].c {down} ..               % 5
+      sbj[7][7].c shifted (0, -num_hg))   % 5
+drv_styled 2 withcolor (1, 0, 0);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.490}
+\end{gather*}
+%
+%
+\subsection{User specified junction and alignment styles
+(tricky)\label{sec-user-specified}}
+%
+%
+\texttt{drv} composes derivation trees by stating geometrical constraints to
+be solved by \MP. These constraints express how the components of a derivation
+tree must be arranged with respect to each-other. In the example about
+dimensions (see above), such a constraint could be that the vertical
+distance from
+\texttt{iln[1].c} to \texttt{jdg[0].c} has to be \texttt{num\_hg}, which could
+be \emph{stated} in the \MP\ syntax as
+``\texttt{ypart jdg[0].c=ypart iln[1].c+num\_hg}'' (this is \emph{not} an
+affectation).
+
+You can prevent \texttt{drv} from stating \emph{horizontal}
+constraints about premises junction or judgments alignment by using the
+junction style~\texttt{3} or the alignment style~\texttt{u} of the \texttt{NFR}
+and \texttt{NFR\_opt} macros
+(see~\S~\ref{sec-NFR-DCL-MVD},~\ref{sec-labels}). In such cases, you have
+to state your own constraints. All the constraints related to a derivation tree
+must be stated \emph{before} \texttt{drv\_freeze} is called. \MP\ will complain
+if the constraints you state are insufficient, redundant or inconsistent.
+%
+%
+\paragraph{User specified junction style}
+%
+%
+The \emph{horizontal} constraints you state should express how the premises
+of the inference have to be joined.
+\begin{Verbatim}
+beginfig(500)
+jgm 0 "{\cdot}";
+jgm 1 "{\cdot}";
+jgm 2 "\text{You may check that the distance"&
+      " between the two dots above is 5 cm.}";
+NFR 0 () ("", "", "", "", _, _, _);
+NFR 1 () ("", "", "", "", _, _, _);
+NFR 2 (0, 1) ("", "", "", "", 3, _, _); % caution: 3
+xpart jdg[1].c=xpart jdg[0].c+5cm;
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.500}
+\end{gather*}
+%
+%
+\paragraph{User specified alignment style}
+The \emph{horizontal} constraints you state should express how the inferred
+judgment has to be aligned with respect to its premises.
+%
+%
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(510)                                          % "\tbs{}vdash":
+jgm 0 "B, A, \tbs{}Gamma", "\tbs{
+}vdash", "C";                   % sbj[0][1]
+jgm 1 "A, \tbs{}Gamma", "\tbs{
+}vdash", "B\tbs{}multimap C";           % sbj[1][1]
+jgm 2 "\tbs{}Gamma", "\tbs{
+}vdash", "A\tbs{}multimap(B\tbs{}multimap C)";  % sbj[2][1]
+NFR_opt 0 () () () (_, _, 0);
+NFR_opt 1 (0) ("\tbs{}multimap_{R}") () (_, u, 1);            % caution: u
+NFR_opt 2 (1) ("\tbs{}multimap_{R}") () (_, u, 1);            % caution: u
+xpart sbj[1][1].c=xpart sbj[0][1].c;
+\resplap{}xpart sbj[1][1].l=xpart sbj[0][1].r;
+xpart sbj[2][1].c=xpart sbj[1][1].c;
+\resplap{}xpart sbj[2][1].l=xpart sbj[1][1].r;
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\label{fig-510}
+\begin{gather*}
+\drv{drv-guide.510}\quad\text{resp.}\quad\drv{drv-guide.511}
+\end{gather*}
+%
+%
+\addcontentsline{toc}{section}{References}
+%
+%
+\begin{thebibliography}{1}
+\bibitem{hobby09}
+John~D. \textsc{Hobby}.
+\href{http://tug.org/docs/metapost/mpman.pdf}
+{\emph{A User's Manual for \MP}}, 2009
+\bibitem{jackowski06}
+Bogus{\l}aw \textsc{Jackowski}.
+\href{http://tug.org/TUGboat/Articles/tb27-1/tb86jackowski.pdf}
+{\emph{Appendix G illuminated}}. \emph{TUGboat}, 27(1):83--90, 2006.
+\bibitem{knuth84}
+Donald~E. \textsc{Knuth}.
+\emph{The {\TeX}book}.
+Addison-Wesley, 1984.
+\bibitem{restall06}
+Greg \textsc{Restall}.
+\href{http://consequently.org/papers/ptp.pdf}
+{\emph{Proof Theory and Philosophy}}. Book in progress, 2006.
+\bibitem{roegel02}
+Denis \textsc{Roegel}.
+\href{http://www.ctan.org/get/graphics/metapost/contrib/macros/%
+metaobj/doc/momanual.pdf}{\emph{The MetaObj tutorial and reference manual}},
+2002.
+\bibitem{lutz06}
+Lutz \textsc{Stra\ss{}burger}.
+\href{http://www.lix.polytechnique.fr/~lutz/papers/RR-6013.pdf}
+{\emph{Proof Nets and the Identity of Proofs}}. \textsc{Inria}, 2006.
+\end{thebibliography}
+%
+%
+\appendix
+\section{Debugging and proofing\label{sec-debugging}}
+%
+%
+\subsection*{Debugging}
+%
+%
+Recall that you have to run ``\texttt{mpost \param{jobname}.mp}'' \emph{at
+least twice} (once more if you use sub-tree delimiters). If you get an error on
+the first run then it comes from the \texttt{drv}/\MP\ code. If you get an
+error on the second run then it comes from the \LaTeX\ code.
+%
+%
+\paragraph{Error on the first run}
+\MP\ behaves essentially as \TeX/\LaTeX\ when it finds and error
+(see~\cite[Debugging]{hobby09}). It stops, ``explains'' the error in some way
+(look for the line starting with an exclamation mark \texttt{!}), shows some
+lines of context, and asks you what to do next (answer \texttt{h} to get some
+help or \texttt{x} to terminate the run). If you're lucky, the error comes from
+an inconsistency that \texttt{drv} can detect. In such a case the
+explanation should be quite understandable.
+\begin{multicols}{2}
+\begin{Verbatim}[numbers=left,firstnumber=46]
+beginfig(520)
+jgm 0 "A\vdash B";
+jgm 1 "B\vdash C";
+jgm 2 "A\vdash C";
+jgm 3 "C\vdash D";
+jgm 4 "A\vdash D";
+nfr 0 () ("f", _);
+nfr 1 () ("g", _);
+nfr 2 (0, 1) ("\circ", _);
+nfr 3 () ("h", _);
+nfr 4 (0, 3) ("\circ", _);
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+\MP\ error message.
+\begin{Verbatim}[commandchars=\\\{\}]
+! drv (fig. 520): 0 has been used
+already as a premise index for
+inference declaration 2.
+\param{error context}
+l.56 nfr 4 (0, 3) ("{\tbs}circ", 1)
+                              ;
+?
+\end{Verbatim}
+\end{multicols}
+%
+%
+\paragraph{Error on the second run}
+\MP\ fails to preprocess the \LaTeX\ code in
+\texttt{\param{jobname}-delayed.mp} and suggests that you ``\texttt{see
+mpxerr.log}'' which is a regular \LaTeX\ log-file. This file shows you which
+part of the \LaTeX\ code is faulty but unfortunately not where to find it in
+\texttt{\param{jobname}.mp}.
+%
+%
+\subsection*{Proofing}
+%
+%
+Recall that for each ``\texttt{beginfig(\param{index})}, \texttt{endfig;}''
+pair in a file \texttt{\param{jobname}.mp}, \MP\ generates an Encapsulated
+PostScript file \texttt{\param{jobname}.\param{index}}. In addition,
+\texttt{drv} generates a \LaTeX\ file \texttt{\param{jobname}-proof.tex}
+that contains a copy of the \LaTeX\ preamble in \texttt{\param{jobname}.mp}
+and includes each \texttt{\param{jobname}.\param{index}}%
+\footnote{To \MP\ users: proof file generation does not take
+\texttt{outputtemplate} into account yet.}
+picture file using the \texttt{\tbs{}drv} inclusion command, together with
+some information about its text size, math style and math axis. As an example,
+regarding the first figure on page~\pageref{fig-110}, processing
+\texttt{drv-guide-proof.tex} produces:\\[1ex]
+\texttt{drv-guide.110}
+  (\verb+\normalsize+, \verb+\displaystyle+)
+    {\normalsize
+      \[\displaystyle
+        \frac{\quad}{}\drv{drv-guide.110}\frac{\quad}{}
+      \]}
+%
+%
+\section{Derivation forests\label{sec-forests}}
+%
+%
+You may declare several derivation trees within a single figure environment.
+Then trees are drawn from left to right in the order their roots are
+declared, and in such a way that: root judgments are horizontally aligned; the
+distance between two trees is the same as the distance between two
+non-interleaving premises (and thus is affected by \texttt{drv\_scale}, see
+\S~\ref{sec-scale}).
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(530)
+% first tree
+dcl 10 () ("", _) "a";
+% second tree
+dcl 20 (21, 22) ("", _) "d";
+  dcl 21 () ("", _) "b";
+  dcl 22 () ("", _) "c";
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\textcolor{mygrey}{\frac{\quad}{}\textit{math axis}\frac{\quad}{}}
+\drv{drv-guide.530}
+\end{gather*}
+\end{multicols}
+\noindent You can however state constraints (horizontal or vertical, at your
+option) specifying the relative positioning of trees before
+\texttt{drv\_freeze} is called.
+\begin{multicols}{2}
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(531)
+% first tree
+dcl 10 () ("", _) "a";
+% second tree
+dcl 20 (21, 22) ("", _) "d";
+  dcl 21 () ("", _) "b";
+  dcl 22 () ("", _) "c";
+% relative positionning
+ypart jdg[10].c=ypart jdg[22].c;
+\resplap{}xpart iln[10].r=xpart iln[20].l;
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\textcolor{mygrey}{\frac{\quad}{}\textit{math axis}\frac{\quad}{}}
+\drv{drv-guide.531}
+\end{gather*}
+\begin{gather*}
+\textcolor{mygrey}{\frac{\quad}{}\textit{math axis}\frac{\quad}{}}
+\drv{drv-guide.532}
+\end{gather*}
+\end{multicols}
+\noindent Notice that the math axis of a forest is set according to
+\texttt{drv\_axis\_reference} (see \S~\ref{sec-axis-reference}) relatively to
+the first declared root (you can override this behaviour by using
+\texttt{drv\_axis}, see \S~\ref{sec-axis}).
+%
+%
+\subsection*{\texttt{drv\_root}}
+%
+%
+\texttt{drv\_root} locally overrides \texttt{drv\_roots\_position} (see
+\S~\ref{sec-roots-position}), enabling the explicit setting of
+the position of a root.\\[1ex]
+\texttt{drv\_root (\param{nat}, \param{id})}\\
+\begin{tabular}{ll}
+\param{nat}&	root index\\
+\param{id}&	position identifier ({\tt t} or {\tt b})\\
+&		\begin{tabular}{ll}
+		{\tt t}&top\\
+		{\tt b}&bottom
+		\end{tabular}
+\end{tabular}
+\begin{multicols}{2}
+\begin{Verbatim}
+beginfig(533)
+% first tree
+dcl 10 () ("", _) "a";
+% second tree
+dcl 20 (21, 22) ("", _) "d";
+  dcl 21 () ("", _) "b";
+  dcl 22 () ("", _) "c";
+drv_root (20, t); % root at top!
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\columnbreak
+
+\begin{gather*}
+\textcolor{mygrey}{\frac{\quad}{}\textit{math axis}\frac{\quad}{}}
+\drv{drv-guide.533}
+\end{gather*}
+\end{multicols}
+\noindent Then again, you can state constraints specifying the relative
+positioning (e.g., the overlapping) of trees before \texttt{drv\_freeze} is
+called\label{code-overlapping}.
+\begin{Verbatim}
+drv_left_delimiter "\downarrow";
+drv_right_delimiter "\uparrow";
+
+beginfig(540)
+% first tree
+jgm 10 "A\vdash D";
+Nfr 10 (11, 14) ("\circ", "h\circ (g\circ f)", "", 1);
+  dcl 11 (12, 13) ("\circ", 1) "A\vdash C";
+    dcl 12 () ("f", 2) "A\vdash B";
+    dcl 13 () ("g", 3) "B\vdash C";
+  dcl 14 () ("h", 4) "C\vdash D";
+% second tree
+jgm 20 "\phantom{A\vdash D}"; % hidden judgment
+Nfr 20 (21, 22) ("\circ", "", "(h\circ g)\circ f", 1);
+  dcl 21 () ("f", 2) "A\vdash B";
+  dcl 22 (23, 24) ("\circ", 1) "B\vdash D";
+    dcl 23 () ("g", 3) "B\vdash C";
+    dcl 24 () ("h", 4) "C\vdash D";
+drv_root (20, t); % root at top!
+% overlapping
+jdg[10].c=jdg[20].c;
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\enlargethispage{\baselineskip}
+(The resulting figure is in Appendix~\ref{sec-gallery} on
+page~\pageref{fig-overlapping}.)
+%
+%
+\section{Radial mode (beta version)\label{sec-radial}}
+%
+%
+A few more tuning macros (see~\S~\ref{sec-tunings}) are available that enable
+the manipulation of \emph{radial} trees rather than ``linear'' ones.
+%
+%
+\subsection*{\texttt{drv\_radial\_mode}}
+%
+%
+\texttt{drv\_radial\_mode \param{id}}\\
+\begin{tabular}{ll}
+\param{id}&	status identifier ({\tt on} or {\tt off})\\
+&		\begin{tabular}{ll}
+		{\tt on}\\
+		{\tt off}&\default
+		\end{tabular}
+\end{tabular}
+\begin{gather*}
+\begin{array}{*{2}{@{}>{\centering}p{.5\textwidth}}@{}l@{}}
+\texttt{on}&
+\texttt{off}&\\[1ex]
+\drv{drv-guide.550}&
+\drv{drv-guide.552}&\\[4ex]
+\drv{drv-guide.551}&
+\drv{drv-guide.553}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection*{\texttt{drv\_scale (crv, {\rm ---})}}
+%
+%
+\texttt{drv\_scale (crv, \param{float})}\\
+\begin{tabular}{lll}
+{\tt crv}&	scale identifier\\
+\param{float}&scale value&\default[: 1]
+\end{tabular}
+%
+%
+\begin{gather*}
+\begin{array}{*{4}{@{}>{\centering}p{.25\textwidth}}@{}l@{}}
+\texttt{0.5}&
+\texttt{1}&
+\texttt{2}&
+\texttt{4}&\\[1ex]
+\drv{drv-guide.560}&
+\drv{drv-guide.561}&
+\drv{drv-guide.562}&
+\drv{drv-guide.563}&
+\end{array}
+\end{gather*}
+%
+%
+\subsection*{\texttt{drv\_azimuth}}
+%
+%
+\texttt{drv\_azimuth \param{float}}\\
+\begin{tabular}{lll}
+\param{float}&azimuth degree&\default[: 90]
+\end{tabular}
+%
+%
+\begin{gather*}
+\begin{array}{*{3}{@{}>{\centering}p{.33\textwidth}}@{}l@{}}
+\texttt{120}&
+\texttt{90}&
+\texttt{60}&\\[1ex]
+\drv{drv-guide.570}&
+\drv{drv-guide.571}&
+\drv{drv-guide.572}&
+\end{array}
+\end{gather*}
+The azimuth of a derivation tree is that of the central point of its root
+judgment. Notice that both \texttt{drv\_scale (crv, {\rm ---})} and
+\texttt{drv\_azimuth} are irrelevant when not in radial mode.
+%
+%
+\begin{gather*}
+\drv{drv-guide.580}
+\end{gather*}
+%
+%
+\subsection*{User specified junction and alignment styles (tricky)}
+%
+%
+When in radial mode, \texttt{drv} composes derivation trees by stating
+\emph{angular} constraints rather than horizontal ones. To this end, three
+distinguished angles are associated with each component \param{cpn}, namely
+\texttt{\param{cpn}.lng}, \texttt{\param{cpn}.cng} and \texttt{\param{cpn}.rng}
+that refer to the relative angles of \texttt{\param{cpn}.l},
+\texttt{\param{cpn}.c} and \texttt{\param{cpn}.r} respectively. (Radial
+constraints are essentially the same as vertical ones; however, each component
+comes also with a radius \texttt{\param{cpn}.rad} and an origin point
+\texttt{\param{cpn}.org}.)
+
+You can prevent \texttt{drv} from stating angular constraints about
+premises junction or judgments alignment by using the junction
+style~\texttt{3} or the alignment style~\texttt{u} of the \texttt{NFR} and
+\texttt{NFR\_opt} macros (see~\S~\ref{sec-NFR-DCL-MVD},~\ref{sec-labels}).
+Then again, you have to state your own constraints. As an example, compare the
+code below with the one for figure~510 on page~\pageref{fig-510}.
+%
+%
+\begin{Verbatim}[commandchars=\\\{\}]
+beginfig(590)                                          % "\tbs{}vdash":
+jgm 0 "B, A, \tbs{}Gamma", "\tbs{
+}vdash", "C";                   % sbj[0][1]
+jgm 1 "A, \tbs{}Gamma", "\tbs{
+}vdash", "B\tbs{}multimap C";           % sbj[1][1]
+jgm 2 "\tbs{}Gamma", "\tbs{
+}vdash", "A\tbs{}multimap(B\tbs{}multimap C)";  % sbj[2][1]
+NFR_opt 0 () () () (_, _, 0);
+NFR_opt 1 (0) ("\tbs{}multimap_{R}") () (_, u, 1);            % caution: u
+NFR_opt 2 (1) ("\tbs{}multimap_{R}") () (_, u, 1);            % caution: u
+sbj[1][1].cng=sbj[0][1].cng;
+\resplap{}sbj[1][1].lng=sbj[0][1].rng;
+sbj[2][1].cng=sbj[1][1].cng;
+\resplap{}sbj[2][1].lng=sbj[1][1].rng;
+draw drv_tree;
+endfig;
+\end{Verbatim}
+\begin{gather*}
+\drv{drv-guide.590}\quad\text{resp.}\quad\drv{drv-guide.591}
+\end{gather*}
+%
+%
+\section{Gallery\label{sec-gallery}}
+%
+%
+Here are two simple derivation trees (figures~600,~601).
+\begin{gather*}
+\drv{drv-guide.600}\quad
+\drv{drv-guide.601}
+\end{gather*}
+%
+%
+Here are the \texttt{drv} version of a derivation tree found
+in~\cite[p.~57]{restall06} and an alternative for it (figures~610,~611).
+\begin{gather*}
+\hbox to 0pt{\hss{\drv{drv-guide.610}}\hss}
+\end{gather*}
+\begin{gather*}
+\drv{drv-guide.611}
+\end{gather*}
+%
+%
+Here are overlapping trees with opposite directions (figure~540, code on
+page~\pageref{code-overlapping}).
+\begin{gather*}
+\drv{drv-guide.540}\label{fig-overlapping}
+\end{gather*}
+%
+%
+Here is the \texttt{drv} version of a derivation tree found
+in~\cite[p.~86]{roegel02} (figure~620).
+\begin{gather*}
+\drv{drv-guide.620}
+\end{gather*}
+%
+%
+Here are the \texttt{drv} versions of derivation trees found
+in~\cite[p.~50]{lutz06} (figures~630,~631).
+\begin{gather*}
+\drv{drv-guide.630}\quad\to\quad\drv{drv-guide.631}
+\end{gather*}
+%
+%
+Here is a continued fraction (figure~640).
+\begin{gather*}
+\drv{drv-guide.640}
+\end{gather*}
+%
+%
+\section{Standalone picture files\label{sec-standalone}}
+%
+%
+Given a PostScript file \texttt{\param{jobname}.\param{index}} generated by
+\MP, you may get a standalone \textsc{pdf} file (with embedded fonts)
+\texttt{\param{jobname}-\param{index}.pdf} by running
+\begin{center}
+\texttt{mptopdf \param{jobname}.\param{index}}
+\end{center}
+(\texttt{mptopdf} should be part of your \TeX\ distribution). Next you may
+get a standalone \textsc{ps} file \texttt{\param{jobname}-\param{index}.ps} by
+running
+\begin{center}
+\texttt{pdftops \param{jobname}-\param{index}.pdf}
+\end{center}
+(\texttt{pdftops} is part of the Xpdf software package). Finally you may get a
+standalone \emph{transparent} \textsc{png} file
+\texttt{\param{jobname}-\param{index}.png} by running
+\begin{center}
+\texttt{convert \param{jobname}-\param{index}.ps
+\param{jobname}-\param{index}.png}
+\end{center}
+(\texttt{convert} is part of the ImageMagick software package). Notice that you
+can run \texttt{convert} on \texttt{\param{jobname}-\param{index}.pdf} but then
+the \textsc{png} file you get is not transparent.
+%
+%
+\section{Related packages\label{sec-related}}
+%
+%
+\begin{itemize}
+\item
+\href{http://math.ucsd.edu/~sbuss/ResearchWeb/bussproofs/}
+{\texttt{bussproofs.sty}}
+(Samuel R. \textsc{Buss});
+\item
+\href{http://cristal.inria.fr/~remy/latex/}
+{\texttt{mathpartir.sty}}
+(Didier \textsc{R\'emy});
+\item
+\href{http://research.nii.ac.jp/~tatsuta/proof-sty.html}
+{\texttt{proof.sty}}
+(Makoto \textsc{Tatsuta});
+\item
+\href{http://www.paultaylor.eu/proofs/index.html}
+{\texttt{prooftree.sty}}
+(Paul \textsc{Taylor});
+\item
+the \texttt{Ptree} constructor from
+\href{http://tug.ctan.org/tex-archive/graphics/%
+metapost/contrib/macros/metaobj/}{\texttt{metaobj.mp}}
+(Denis \textsc{Roegel}, see~\cite{roegel02});
+\item
+\href{http://tug.ctan.org/tex-archive/macros/latex/contrib/semantic/}
+{\texttt{semantic.sty}}
+(Peter M\o ller \textsc{Neergaard} and Arne John \textsc{Glenstrup});
+\item
+\href{http://www.utdallas.edu/~hamlen/projects.html}
+{\texttt{trfrac.sty}}
+(Kevin W. \textsc{Hamlen});
+\item
+\href{http://alessio.guglielmi.name/res/vl/}
+{\texttt{virginialake.sty}}
+(Alessio \textsc{Guglielmi}).
+\end{itemize}
+Some of these are described on Peter \textsc{Smith}'s
+``\href{http://www.logicmatters.net/latex-for-logicians/}
+{\LaTeX\ for Logicians}'' webpage.
+\end{document}

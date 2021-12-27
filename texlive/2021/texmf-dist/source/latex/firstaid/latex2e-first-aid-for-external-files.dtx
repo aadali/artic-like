@@ -1,0 +1,629 @@
+% \iffalse meta-comment
+%
+%% File: latex2e-first-aid-for-external-files.dtx (C) Copyright 2020-2021
+%%
+%% The LaTeX Project and any individual authors listed elsewhere
+%% in this file.
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    https://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008 or later.
+%
+% This file has the LPPL maintenance status "maintained".
+%
+%
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\begin{document}
+  \DocInput{latex2e-first-aid-for-external-files.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+%
+% \providecommand\pkg[1]{\texttt{#1}}
+%
+% \title{First aid for external files and packages that need updating}
+% \author{Frank Mittelbach, \LaTeX{} Project}
+%
+% \maketitle
+%
+%
+% \begin{abstract}
+%    This file contains some first aid for packages or classes that
+%    require updates because of internal changes to \LaTeX{} but that
+%    aren't yet reflected in the package/class code.
+% \end{abstract}
+%
+% \tableofcontents
+%
+% \section{Introduction}
+%
+%    Over the years package writers have hooked into
+%    various parts of internal \LaTeX{} commands (largely because
+%    proper interfaces were missing in important places) and if
+%    we are now gradually adding such interfaces these internal
+%    commands do change and as a result patching into them stops
+%    working.
+%
+%    As part of making such internal changes the \LaTeX{} Project team
+%    attempts to check for such usage in packages, alert the package
+%    maintainers and ensures that the packages get updated alongside
+%    the core \LaTeX{} system. However it is not always possible to
+%    get packages that will fail with a new kernel updated in time and
+%    if that is the case we try to provide a temporary fix in this
+%    file for them.
+%    Once the package gets updated the fix will then be removed again.
+%
+%    For that reason, it is put into a separate bundle so that we can
+%    update it easily without requiring the CTAN maintainers to
+%    install a new full LaTeX system just because we take out (or add)
+%    a fix for a package here.
+%
+%    In the best case scenario the file documented here should be
+%    empty. In practice it will probably always contain one or the
+%    other fix while we are waiting for the package to get updated.
+%
+%    \begin{quote} \textbf{Important notice:} The fixes provided here
+%    are not meant to be a permanent solution, but are only provided
+%    to support the transition period. They are (usually) neither
+%    complete nor necessarily the best solution! Furthermore, as they
+%    are done from the ``outside'', they usually add some burden and
+%    slow down \LaTeX{} processing, even if the package/class is not
+%    used in the document.
+%
+%    We will therefore remove such code as soon as possible
+%    again. In practice this means that if some package never gets
+%    updated/corrected, then it will eventually fail to work, because
+%    after one or at most two \LaTeX{} releases we will take out the
+%    transition code to ensure that this ``first aid patching''
+%    doesn't get out of bounds.
+%    \end{quote}
+%
+%  \subsection{Minor kernel fixes}
+%
+%    If we encounter issues with the kernel code that should get fixed
+%    before the next main release we normally generate a patch release
+%    for \LaTeX{}.  However, depending on the complexity of the fix we
+%    might first add the fix here and generate a full patch release
+%    only when a number of such issues have accumulated. This way we
+%    lessen the impact on CTAN maintainers because for each tach
+%    release we have to make and distribute also a matching
+%    development release.
+%
+% \StopEventually{\setlength\IndexMin{200pt}  \PrintIndex  }
+%
+%
+% \section{The Implementation}
+%
+%    This file is meant to be loaded during format generation which is
+%    why we give it the extension \texttt{.ltx}.
+%    \begin{macrocode}
+%<*kernel>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\LaTeXFirstAidDate{2021/11/11}
+\def\LaTeXFirstAidVersion{v1.0q}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ProvidesFile{latex2e-first-aid-for-external-files.ltx}
+             [\LaTeXFirstAidDate\space \LaTeXFirstAidVersion\space
+               LaTeX kernel fixes to external files and packages]
+%    \end{macrocode}
+%
+%             
+%  \begin{macro}{\FirstAidNeededT}
+%    This is a very simple help to ensure that we only apply first aid
+%    to an unmodified package or class. It only works in the case the
+%    file has already been loaded and the csname \cs{ver@\#1.\#2} got
+%    defined (holding the current date, version, and short description
+%    info). We then compare its content to a frozen string and make
+%    the modification \verb=#3= only if both agree. If they differ we
+%    assume that the package/class in question got updated by its
+%    maintainer.
+%    \begin{macrocode}
+\ExplSyntaxOn             
+\cs_new:Npn\FirstAidNeededT#1#2#3{
+  \exp_args:Ncx\str_if_eq:onF{ver@#1.#2}{#3}
+      { \typeout{==>~ First~ Aid~ for~ #1.#2~ no~ longer~ applied!^^J
+          \@spaces Expected:^^J
+          \@spaces\@spaces #3^^J
+          \@spaces but~ found:^^J
+          \@spaces\@spaces \use:c{ver@#1.#2}^^J
+          \@spaces so~ I'm~ assuming~ it~ got~ fixed.
+      } }
+  \exp_args:Ncx\str_if_eq:onT{ver@#1.#2}{#3}
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%  \end{macro}
+%    
+%    \begin{macrocode}
+%</kernel>
+%    \end{macrocode}
+%
+%
+% \subsection{The \pkg{filehook} package first aid}
+%     
+%    The \pkg{filehook} package implements hooks into file loading
+%    commands. These days this is already provided by the kernel
+%    albeit not with the same user interface. Until that package gets
+%    updated (to use the kernel interfaces) we provide a
+%    substitution. This does not offer all hooks from \pkg{filehook}
+%    but all that have been used in packages available in \TeX{} Live.
+%
+%    Note that this doesn't fix \pkg{currfile} because that package
+%    uses \pkg{filehook} but relies on the internals of the old
+%    implementation.
+%
+%    The package has now got an update so we aren't activating the
+%    first aid. However, at the moment it basically bypasses the new
+%    hook mechanism and puts the old hooks in thereby disabling, for
+%    example, the possibility to re-order code through rules.
+%
+%    We therefore keep \texttt{filehook-ltx.sty} around as a guideline
+%    for further updates.
+%
+%    Replacing \pkg{filehook} with a leaner version would then work
+%    like this:
+%    \begin{macrocode}
+%<*kernel>
+%\declare@file@substitution{filehook.sty}{filehook-ltx.sty}
+%</kernel>
+%    \end{macrocode}
+%
+%    What follows is a simplified (partial) implementation of the  \pkg{filehook}
+%    interfaces.
+%    Not implemented are:
+%\begin{verbatim}
+%  \AtBeginOfFiles      \AtEndOfFiles
+%  \AtBeginOfInputs     \AtEndOfInputs
+%  \AtBeginOfInputFile  \AtEndOfInputFile
+%\end{verbatim}
+%
+%    \begin{macrocode}
+%<*filehook-ltx>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand\AtBeginOfEveryFile [1]
+  {\AddToHook{file/before}{#1}}
+\newcommand\AtEndOfEveryFile [1]
+  {\AddToHook{file/after}{#1}}
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+\newcommand\AtBeginOfIncludes [1]
+  {\AddToHook{include/before}{#1}}
+\newcommand\AtEndOfIncludes [1]
+  {\AddToHook{include/end}{#1}}
+\newcommand\AfterIncludes [1]
+  {\AddToHook{include/after}{#1}}
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+\newcommand\AtBeginOfPackages [1]
+  {\AddToHook{package/before}{#1}}
+\newcommand\AtEndOfPackages [1]
+  {\AddToHook{package/after}{#1}}
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+\newcommand\AtBeginOfClasses [1]
+  {\AddToHook{class/before}{#1}}
+\newcommand\AtEndOfClasses [1]
+  {\AddToHook{class/after}{#1}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand\AtBeginOfFile [2]
+  {\AddToHook{file/#1/before}{#2}}
+\newcommand\AtEndOfFile [2]
+  {\AddToHook{file/#1/after}{#2}}
+%    \end{macrocode}
+%
+%    Some commands offered a starred form  
+%    \begin{macrocode}
+\DeclareDocumentCommand \AtBeginOfPackageFile {smm}
+   {\IfBooleanTF{#1}%
+     {\@ifpackageloaded{#2}%
+         {#3}%
+         {\AddToHook{package/#2/before}{#3}}}%
+     {\AddToHook{package/#2/before}{#3}}%
+   }
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+\DeclareDocumentCommand \AtEndOfPackageFile {smm}
+   {\IfBooleanTF{#1}%
+     {\@ifpackageloaded{#2}%
+         {#3}%
+         {\AddToHook{package/#2/after}{#3}}}%
+     {\AddToHook{package/#2/after}{#3}}%
+   }
+%    \end{macrocode}
+%
+%    Are the * forms here of any use? I know they are use 3--4 times
+%    on CTAN but I wonder if those are real or mistaken usages.  
+%    \begin{macrocode}
+\DeclareDocumentCommand \AtBeginOfClassFile {smm}
+   {\IfBooleanTF{#1}%
+     {\@ifclassloaded{#2}%
+         {#3}%
+         {\AddToHook{class/#2/before}{#3}}}%
+     {\AddToHook{class/#2/before}{#3}}%
+   }
+\DeclareDocumentCommand \AtEndOfClassFile {smm}
+   {\IfBooleanTF{#1}%
+     {\@ifclassloaded{#2}%
+         {#3}%
+         {\AddToHook{class/#2/after}{#3}}}%
+     {\AddToHook{class/#2/after}{#3}}%
+   }
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+\newcommand\AtBeginOfIncludeFile [2]
+  {\AddToHook{include/#1/before}{#2}}
+\newcommand\AtEndOfIncludeFile [2]
+  {\AddToHook{include/#1/end}{#2}}
+\newcommand\AfterIncludeFile [2]
+  {\AddToHook{include/#1/after}{#2}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</filehook-ltx>
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection{The \pkg{bidi} package first aid}
+%
+%     The \pkg{bidi} package adds a lot of hooks in various places and
+%    those added to \cs{document} and \cs{enddocument} are now no
+%    longer necessary as the kernel already provides the right hooks
+%    there.
+%
+%    However, we aren't trying to change that but instead only make
+%    sure that the existing patches still work by adding some first
+%    aid after \pkg{biditools} has been loaded.
+%
+%    If the package gets updated one can easily take that out simply
+%    through
+%\begin{verbatim}
+%  \RemoveFromHook{file/biditools.sty/after}[firstaid]
+%\end{verbatim}
+%    This makes it easy to test new bidi code while the first aid code
+%    is still in the kernel.
+%
+%    \begin{macrocode}
+%<*kernel>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AddToHook{file/biditools.sty/after}[firstaid]{%
+  \FirstAidNeededT{biditools}{sty}%
+                  {2020/05/13 v2 Programming tools for bidi package}%
+  {%
+%    \end{macrocode}
+%    \pkg{bidi} adds some code to the beginning of \cs{document} which
+%    contains \cs{endgroup} and \cs{begingroup} which is no longer
+%    correct.
+%  
+%    Patching \cs{document} using \cs{bidi@patchcmd} doesn't work so
+%    we take the extra groups out by hand:
+%    \begin{macrocode}
+  \def\firstaid@bidi@document@patch
+          \endgroup#1\begingroup#2\firstaid@bidi@document@patch
+          {\unexpanded{#1#2}}%
+  \edef\document{\expandafter\firstaid@bidi@document@patch\document
+            \firstaid@bidi@document@patch}%
+%    \end{macrocode}
+%    There are also some patches into \cs{enddocument}, some continue
+%    to go in but one fails, so we add that now into the right place.
+%    \begin{macrocode}
+  \AddToHook{enddocument/info}%
+            {\let\bidi@AfterEndDocumentCheckLabelsRerun\@firstofone
+              \bidi@afterenddocumentchecklabelsrerunhook}%
+  }%
+}
+%    \end{macrocode}
+%    
+%
+%
+% \subsection{The \pkg{dinbrief} class first aid}
+%
+%    Again a case of a no longer correct \cs{endgroup} in document.
+%    Here the fix is simply though.
+%    \begin{macrocode}
+\AddToHook{file/dinbrief.cls/after}[firstaid]{%
+  \FirstAidNeededT{dinbrief}{cls}{2000/03/02 LaTeX2e class}%
+                  {\AddToHook{env/document/begin}{\begingroup}}%
+}
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection{The \pkg{pgfpages} and \pkg{pgfmorepages} first aid}
+%
+%    \pkg{pgfpages} alters the \cs{shipout} primitive to support
+%    multiple page up scenarios. If used together with \pkg{atbegshi}
+%    that worked because the alterations done by  \pkg{atbegshi} came
+%    later and so used the new definition provide by
+%    \pkg{pgfpages}. Now that the code from  \pkg{atbegshi} is already
+%    in the kernel this further redefinition doesn't happen with the
+%    result that the change to \cs{shipout} comes to late and
+%    breaks the kernel processes.
+%
+%    \begin{macrocode}
+\ExplSyntaxOn
+\AddToHook{file/pgfpages.sty/after}[firstaid]{%
+%    \end{macrocode}
+%    Undo overwriting \cs{shipout}:
+%    \begin{macrocode}
+  \cs_gset_eq:NN \shipout \pgfpages@originalshipout 
+%    \end{macrocode}
+%    Instead overwrite the L3 programming layer name of the
+%    primitive. This is really an absolute no-go, but for now the
+%    simplest solution to keep the original code running.
+%
+%    It will be replaced when the ``configuration points'' interface
+%    for \LaTeX{} becomes available. At that point the package will be
+%    able to set up a different strategy for doing shipouts and
+%    without the need to overrite a primitive (which it did in the
+%    past and which we do below) and then this code here can be taken
+%    out again.
+%    \begin{macrocode}
+  \cs_set_eq:NN \pgfpages@originalshipout \tex_shipout:D
+  \cs_set_eq:NN \tex_shipout:D \pgfpages@interceptshipout
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+% Same issue with \pkg{pgfmorepages} but slightly different implementation (sigh).
+%
+%    \begin{macrocode}
+\ExplSyntaxOn
+\AddToHook{file/pgfmorepages.sty/after}[firstaid]{
+  \cs_set_nopar:Npn \pgfhookintoshipout {
+    \cs_set_eq:NN \pgfpages@originalshipout \tex_shipout:D
+    \cs_set_eq:NN \tex_shipout:D \pgfpages@interceptshipout
+  }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</kernel>
+%    \end{macrocode}
+%
+%
+%
+%
+%
+% \subsection{The \pkg{everysel} package first aid}
+%     
+%
+%    The \cs{selectfont} command got a hook (with the 2021/05 release) which
+%    was originally provided by the \pkg{everysel}
+%    package. Now that it is in the kernel this package is no longer
+%    needed (or only in a simplified manner).
+%
+%    If it is requested we replace it with a simplified package
+%    (until) it gets updated at which point this line can be removed.
+% \changes{v2.2k}{2020/12/04}{Emulate everysel package}
+%    \begin{macrocode}
+%<*kernel>
+% this has been updated
+%\declare@file@substitution{everysel.sty}{everysel-ltx.sty}
+%</kernel>
+%    \end{macrocode}
+%
+%
+%
+%    \begin{macrocode}
+%<*everysel-ltx>
+\ProvidesPackage{everysel-ltx}
+   [2020/12/04 v1.0a
+     Emulation of the original everysel^^Jpackage with kernel methods]
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand*{\EverySelectfont}[1]
+   {\AddToHook{selectfont}{#1}}
+\newcommand*{\AtNextSelectfont}[1]
+   {\AddToHookNext{selectfont}{#1}}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</everysel-ltx>
+%    \end{macrocode}
+%
+%
+%
+%    \begin{macrocode}
+%<*kernel>
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection{The \pkg{bigfoot} first aid}
+%
+%    The \pkg{bigfoot} packages makes the assumption that two
+%    \cs{newinsert} allocations have a recognisable order in their
+%    numbers, the second one has a lower number. This was correct in
+%    the classic \TeX{} implementation but with the extended
+%    allocation possibilities of all modern engines is no longer the
+%    case and there is a point where the allocations take a ``jump''
+%    breaking the odering assumption. These days we are fairly close
+%    to that point and depending on how many packages are loaded
+%    before \pkg{bigfoot} the package breaks.
+%
+%    This firstaid therefore jumps over the problematical point by
+%    pushing the count allocation to a safe value if necessary.
+%    \begin{macrocode}
+\AddToHook{file/bigfoot.sty/after}{%
+   \ifnum\count10<\insc@unt
+     \global\count10=\insc@unt
+   \fi
+%    \end{macrocode}
+%    We also correct a bug that \pkg{bigfoot} tries to shift mark
+%    registers, but in \LaTeX{} (at least since 2015) the allocation
+%    number is not 266, so it does that to a random number of mark
+%    registers (which sometimes blows up depending on the value in 266).
+%    \begin{macrocode}
+    \def\FN@allmarks#1{\@elt{#1}%
+      \ifnum#1<\count256 %<--- problem: 266 isn't the counter for marks
+        \expandafter\FN@allmarks\expandafter{\number\numexpr#1+\@ne}%
+        \fi}%
+}
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection{\pkg{ulem} first aid}
+%
+%    In 2020 we fixed various kernel commands to accept \pkg{calc}
+%    syntax. The \pkg{ulem} package redefines some internals and that
+%    now conflicts with the new definitions as they involve an extra
+%    group. So we alter the definition of \cs{@hspace} if \pkg{ulem}
+%    was loaded. This is not perfect, obviously, so it will go out the
+%    moment \pkg{ulem} gets adjusted.
+%
+%    \begin{macrocode}
+\AddToHook{file/ulem.sty/after}[firstaid]{%
+   \def\@hspace#1{\begingroup\setlength\skip@{#1}%
+                  \edef\x{\endgroup\hskip\the\skip@\relax}\x}%
+   }
+%    \end{macrocode}
+%
+%
+% \subsection{\pkg{varwidth} first aid}
+%
+%    The \pkg{varwidth} package does a lot of low-level paragraph
+%    manipulation assuming traditional \TeX{} paragraphs. However, with
+%    the paragraph hooks we end up with one extra glue 0pt item on the
+%    vertical list and if that isn't removed then the package doesn't
+%    find its penalties.
+%
+%    So this needs to be removed as well by adding an additional
+%    \cs{unskip}.
+%     
+%    \begin{macrocode}
+\AddToHook{file/varwidth.sty/after}[firstaid]{%
+  \FirstAidNeededT{varwidth}{sty}%
+       {2009/03/30 ver 0.92; \space Variable-width minipages}%
+     {%
+\def\@vwid@sift{%
+  \skip@\lastskip\unskip
+  \ifdim\lastskip=\z@\unskip\fi   % <---- the first aid here (not just unskip)
+  \dimen@\lastkern\unkern
+  \count@\lastpenalty\unpenalty
+  \setbox\z@\lastbox
+  \ifvoid\z@ \advance\sift@deathcycles\@ne \else \sift@deathcycles\z@ \fi
+  \ifnum\sift@deathcycles>33 
+    \let\@vwid@sift\relax
+    \PackageWarning{varwidth}{Failed to reprocess entire contents}%
+  \fi
+  \ifnum\count@=\@vwid@preeqp \@vwid@eqmodefalse\fi
+  \ifnum\count@=\@vwid@posteqp \@vwid@eqmodetrue\fi
+  \ifnum\count@=\@vwid@toppen % finished
+    \let\@vwid@sift\relax
+  \else\ifnum\count@=\@vwid@offsets
+    \@vwid@setoffsets
+  \else
+    \ifnum\count@=\@vwid@postw
+    \else
+      \@vwid@resetb % reset box \z@ or measure it
+    \fi
+    \@vwid@append
+  \fi\fi
+  \@vwid@sift}%
+     }%
+   }
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection[Temporary fixes for the kernel (until the next
+%             patch-level release)]
+%    {Temporary fixes for the kernel \\
+%     (until the next patch-level release)}
+%
+% This fixes GitHub issue 591. It is only needed in Lua\TeX\ and replaces just one
+% instance of \cs{tex\_par:D} with the following version which removes
+% other nodes in the current list first.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\sys_if_engine_luatex:T
+  {
+    \newluafunction \g__para_end_empty_par_id_int
+    \exp_args:Nx \everyjob {
+      \exp_not:V \everyjob
+      \exp_not:N \lua_now:n {
+        local~texnest, flush_list, par_token = tex.nest, node.flush_list, token.create'tex_par:D'~
+        lua.get_functions_table()[\int_use:N \g__para_end_empty_par_id_int] = function()
+          local~nest_level = texnest.top~
+          local~cur_head = nest_level.head~
+          flush_list(cur_head.next)
+          nest_level.tail, cur_head.next = cur_head, nil~
+          token.put_next(par_token)
+        end
+      }
+    }
+    \protected \luadef \__para_end_empty_par: \g__para_end_empty_par_id_int
+    \group_begin:
+    \cs_set:Npn \__para_extract_everypar:w #1 \the \toks #2 \s_stop
+      {
+        \tl_gset:Nn \g__para_standard_everypar_tl {
+          \box_gset_to_last:N \g_para_indent_box
+          \group_begin:
+            \__para_end_empty_par:
+          \group_end:
+          \tex_everypar:D { \msg_error:nnnn { hooks }{ para-mode }{before}{vertical} }
+          \@kernel@before@para@before
+          \hook_use:n {para/before}
+          \group_begin:
+            \tex_everypar:D {}
+            \skip_zero:N \tex_parskip:D
+            \tex_noindent:D
+          \group_end:
+          \tex_everypar:D{\g__para_standard_everypar_tl}
+          \@kernel@before@para@begin
+          \hook_use:n {para/begin}
+          \if_mode_horizontal: \else:
+            \msg_error:nnnn { hooks }{ para-mode }{begin}{vertical} \fi:
+          \__para_handle_indent:
+          \the \toks #2
+        }
+      }
+    \exp_last_unbraced:No \__para_extract_everypar:w \g__para_standard_everypar_tl \s_stop
+    \group_end:
+  }
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</kernel>
+%    \end{macrocode}
+%
+% \Finale
+%

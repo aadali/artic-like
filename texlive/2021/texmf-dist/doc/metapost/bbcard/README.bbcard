@@ -1,0 +1,45 @@
+Bullshit Bingo
+
+This is a metapost implementation of Bullshit Bingo. It's based on
+http://www.perkigoth.com/home/kermit/stuff/BullshitBingo. I've taken
+additional phrases from http://www.lssu.edu/banished.
+
+To be perfectly honest, I wrote this because I needed a meaningful,
+client-focused playing card which could be the best of breed. I
+basically felt that I could use my best practices to bring a total
+quality approach to the challenge. Having said that, the actual fact is
+I also wanted to control the list of words. This version is not
+web-enabled, but it has a few value-added features which should empower
+employees, and put them on the critical path towards realising their
+core competencies:
+
+-- dynamic logo-style heading
+-- four grids per card -- speaks to serious play
+-- user-friendly method of generating many cards at once
+-- more than 100 very unique bullshit phrases
+-- it's easy to add and remove phrases, so you can be proactive,
+   not reactive
+
+--
+
+To generate a single card:
+  mpost bbcard
+and the card will be written to bbcard.ps
+
+To generate 12 cards:
+  mpost '\nocards:=12; input bbcard'
+and the cards will be written to bbcard.1, bbcard.2, .., bbcard.12
+
+Those command-lines assume a recent Unix installation. On your
+machine, metapost might be called mp rather than mpost, and the
+single-quotes might not be necessary. bbcard requires your installation
+to be configured to use the font ptmr8r (Times Roman). It is not
+suitable for use with the CM fonts.
+
+bbcard.mp contains instructions for adding additional phrases.
+breakwidth.mp can be used to perform simple-minded line breaking
+with other metapost routines.
+
+bbcard.mp is released to the public domain
+breakwidth.mp is copyright by patrick mcphee, but there are
+no limitations on its use

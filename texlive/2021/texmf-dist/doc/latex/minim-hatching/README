@@ -1,0 +1,24 @@
+Version: 2021/1.0
+
+SUMMARY
+
+This is a small proof-of-concept library of tiling patterns for use with the 
+minim-mp MetaPost processor.
+
+
+DOCUMENTATION
+
+In order to obtain the typeset manual of this package, simply say:
+
+    luatex -fmt minim-mp minim-hatching-doc.mp
+
+
+COPYING
+
+(c) 2021 Esger Renkema
+
+These files may be distributed under the terms of the European Union Public 
+Licence (EUPL) version 1.2 or later. A copy can be obtained at:
+
+https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+

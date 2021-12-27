@@ -1,0 +1,90 @@
+===========================================================
+=
+=         THIS PACKAGE IS IN NEED OF A MAINTAINER         =
+=   SEE https://github.com/Pomax/ucharclasses/issues/23   =
+=
+===========================================================
+
+
+            ucharclasses package for XeLaTex
+         --------------------------------------
+         Michiel Kamermans, v2.4, February 2021
+
+The brief
+---------
+
+ Sometimes you don't want to have to bother with font
+ switching just because you're using languages that are
+ distinct enough to use different unicode blocks, but
+ aren't covered by the polyglossia package. Where normal
+ word processing packages such as Microsoft Word or
+ OpenOffice Writer handle this for you, LATEX (because it
+ needs you to tell it what to do) has no default behaviour
+ for this, and so we arrive at a need for a package that
+ does this for us. You probably already discovered that
+ regular LATEX has no understanding of unicode, and ended
+ up going for Xe(La)TeX as your TeX compiler of choice,
+ which means you now have two excellent resources available:
+ fontspec, and ucharclasses.
+
+ The first of these lets you pick fonts based on what your
+ system calls them, without needing to do anything special
+ such as turning them into metafonts. This is convenient,
+ user friendly, and the way of the future (at least, it
+ should be).
+
+ The second lets you define what should happen when your
+ text changes from a character in one unicode block, to a
+ character in another. This is also convenient, and paired
+ with fontspec it offers automatic font switching in the
+ same way that normal Office applications perform, with
+ one big difference: you stay in control. If at some point
+ you need the switch rule to do something different,
+ you will be out of luck using an Office application.
+ In Xe(La)TeX, you stay on top of things and still get to
+ say exactly what happens, and when.
+
+So what is it?
+--------------
+
+ This package sets up XeTeX character classes based on
+ which  unicode block a character is found in. It then
+ allows transition rules to be defined when entering or
+ leaving particular unicode blocks, the code of which
+ gets inserted automatically when a transition from a
+ character from one unicode block to a character from
+ another unicode block is encountered by XeTeX
+
+Unicode Compatibility
+---------------------
+
+ Current compatibility is Unicode 13.0
+
+Changelog
+---------
+
+ v2.4: Unicode 11, 12, and 13 support
+ v2.3: Unicode 10 support
+ v2.2: Unicode 8.0 and LaTeX2e support
+ v2.1: Uplift for the updates introduced in XeTeX 0.99994
+ v2.0: Rewritten to Vastly improve performance + Unicode 6.0
+ v1.0: Unicode block switching using XeTeX intercharclasses.
+
+Contributors
+------------
+
+ v2.4: Werner Lemberg
+ v2.1-2.3: Qing Lee, Werner Lemberg
+ v2.0: Enrico Gregorio
+ v1.0: Mike "Pomax" Kamermans
+
+License?
+--------
+
+ Public Domain
+ https://www.ctan.org/license/pd
+
+Repository?
+-----------
+
+ https://github.com/Pomax/ucharclasses

@@ -1,0 +1,43 @@
+
+#!/usr/local/bin/perl -w
+
+###################################################################
+# Perl script: n2mpsprl.prl
+# Call as: n2mpsprl.prl filename
+# If filename is of the form basename.N, where N is an integer,
+# copies file basename.N to file basenameN.mps
+#
+# Copyright 2000, Mauro S. Costa and Peter R. Wilson
+##################################################################
+
+# Test for correct number of input parameters
+die "Invalid command line arguments.\nTry $0 <src> \n" if($#ARGV > 1);
+die "Invalid command line arguments.\nTry $0 <src> \n" if($#ARGV < 0);
+
+# Assign input file name to variable
+$input_file = $ARGV[0];
+
+## test if ends with a number, exit if not
+if ($input_file =~ /\w\.\d/) { ; } else { exit; }
+
+# Remove the "dot" from the string variable
+# holding the input file name
+$input_file =~ s/\.// ;
+
+# Create a list variable composed of the string variable holding
+# the concatenated input file name and the extension ".mps"
+@name_list = ($input_file,'.mps') ;
+
+# Join the string variables in the name_list variable into
+# a single string variable
+$output_file = join("",@name_list) ;
+
+# create a list variable composed to the parameters needed
+# for the system copy command excution
+@exec_list = ('cp', $ARGV[0], $output_file) ;
+
+# Execute the system copy  ("cp") command
+system(@exec_list) ;
+
+############################ end perl script ##########################
+

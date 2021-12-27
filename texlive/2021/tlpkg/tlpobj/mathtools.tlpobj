@@ -1,0 +1,47 @@
+name mathtools
+category Package
+revision 58856
+shortdesc Mathematical tools to use with amsmath
+longdesc Mathtools provides a series of packages designed to enhance the
+longdesc appearance of documents containing a lot of mathematics. The
+longdesc main backbone is amsmath, so those unfamiliar with this
+longdesc required part of the LaTeX system will probably not find the
+longdesc packages very useful. Mathtools provides many useful tools for
+longdesc mathematical typesetting. It is based on amsmath and fixes
+longdesc various deficiencies of amsmath and standard LaTeX. It
+longdesc provides: Extensible symbols, such as brackets, arrows,
+longdesc harpoons, etc.; Various symbols such as \coloneqq (:=); Easy
+longdesc creation of new tag forms; Showing equation numbers only for
+longdesc referenced equations; Extensible arrows, harpoons and
+longdesc hookarrows; Starred versions of the amsmath matrix environments
+longdesc for specifying the column alignment; More building blocks:
+longdesc multlined, cases-like environments, new gathered environments;
+longdesc Maths versions of \makebox, \llap, \rlap etc.; Cramped math
+longdesc styles; and more... Mathtools requires mhsetup.
+containersize 20024
+containerchecksum ceb283012776179cdec04899c28cd55c76811d9ece89b3ea188ae47619296db94983f8b768dbd0cf0909c9e7da4b0f1b1bae7e3de4a96193249ed57fc987683a
+doccontainersize 986072
+doccontainerchecksum c4ae884edb6c26c832d920b8f04b31641359fcba68e208b9f0eafaf37ba3ab7f465a39869b9890d0b8431861062414be52d9233836ea60a6255731a17374bc9a
+docfiles size=248
+ texmf-dist/doc/latex/mathtools/README.md details="Package README"
+ texmf-dist/doc/latex/mathtools/empheq.pdf
+ texmf-dist/doc/latex/mathtools/mathtools.pdf details="Package documentation"
+ texmf-dist/doc/latex/mathtools/mhsetup.pdf
+srccontainersize 87984
+srccontainerchecksum 46a21e495a34fc85d59d7952f3089e59f28d5aaa85e980c49c6b61df49c6e7582d98c2da1092be80a2a6191f6186395ad8d7086d3638176933843a6592c2c8c2
+srcfiles size=107
+ texmf-dist/source/latex/mathtools/empheq.dtx
+ texmf-dist/source/latex/mathtools/empheq.ins
+ texmf-dist/source/latex/mathtools/mathtools.dtx
+ texmf-dist/source/latex/mathtools/mathtools.ins
+ texmf-dist/source/latex/mathtools/mhsetup.dtx
+runfiles size=29
+ texmf-dist/tex/latex/mathtools/empheq.sty
+ texmf-dist/tex/latex/mathtools/mathtools.sty
+ texmf-dist/tex/latex/mathtools/mhsetup.sty
+catalogue-also mhsetup empheq
+catalogue-contact-repository https://github.com/latex3/mathtools
+catalogue-ctan /macros/latex/contrib/mathtools
+catalogue-license lppl1.3c
+catalogue-topics maths
+catalogue-version 1.27

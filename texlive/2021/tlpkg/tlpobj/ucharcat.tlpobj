@@ -1,0 +1,27 @@
+name ucharcat
+category Package
+revision 38907
+shortdesc Implementation of the (new in 2015) XeTeX \Ucharcat command in lua, for LuaTeX
+longdesc The package implements the \Ucharcat command for LuaLaTeX.
+longdesc \Ucharcat is a new primitive in XeTeX, an extension of the
+longdesc existing \Uchar command, that allows the specification of the
+longdesc catcode as well as character code of the character token being
+longdesc constructed.
+containersize 1184
+containerchecksum 333e8f92394d89bdc3492606e467d4b664c5d87eb464e1c16ff293e3f87931c3c70308aeb523fb40f2e76e5d0aa2c1635402f40fc36ecfbb7ced98d232b8bcb5
+doccontainersize 159876
+doccontainerchecksum b4615cefd26201509c908c2719519f927d61ad96367a612d654917819b2ac973fff85d081dad6e1d092e634388b16e83e440d3cbad4fc7c16f638f5e2853bb7f
+docfiles size=40
+ texmf-dist/doc/latex/ucharcat/README details="Readme"
+ texmf-dist/doc/latex/ucharcat/ucharcat.pdf details="Package documentation"
+srccontainersize 2324
+srccontainerchecksum 6ac34b38f4e0908d841ded4981d649c9202bd3bc277843e6e82bce629a245cea9c6ef1336d575d77139584f3940181c5e6f0abadf4ff71c42a97ccc33be59d9d
+srcfiles size=3
+ texmf-dist/source/latex/ucharcat/ucharcat.dtx
+ texmf-dist/source/latex/ucharcat/ucharcat.ins
+runfiles size=1
+ texmf-dist/tex/latex/ucharcat/ucharcat.sty
+catalogue-ctan /macros/latex/contrib/ucharcat
+catalogue-license lppl
+catalogue-topics lua-supp luatex
+catalogue-version 0.03

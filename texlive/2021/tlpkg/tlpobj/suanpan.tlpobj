@@ -1,0 +1,20 @@
+name suanpan
+category Package
+revision 15878
+shortdesc MetaPost macros for drawing Chinese and Japanese abaci
+longdesc These macros are described in Denis Roegel: MetaPost macros for
+longdesc drawing Chinese and Japanese abaci, TUGboat (volume 30, number
+longdesc 1, 2009, pages 74-79)
+containersize 4528
+containerchecksum a9fd27694ea7491321580ee325f8b151bbcfcf6da14ecce85b6d4e68b09cdf125c810a5170aacc966835fad8f2aaefd78916920cc3e896cad7738d026450ed83
+doccontainersize 544
+doccontainerchecksum 667d3c5590468170acfded106a2a468d9abe7b4b34a9b56d153d401a60e8f24bce99a4f6c5f2761572a42b85c7faae5741ee5b6f22c3f1004e6d6685463b9350
+docfiles size=2
+ texmf-dist/doc/metapost/suanpan/README details="Readme"
+ texmf-dist/doc/metapost/suanpan/article.txt
+runfiles size=5
+ texmf-dist/metapost/suanpan/abacus.mp
+ texmf-dist/metapost/suanpan/suanpan.mp
+catalogue-ctan /graphics/metapost/contrib/macros/suanpan
+catalogue-license lppl
+catalogue-topics games mp-use

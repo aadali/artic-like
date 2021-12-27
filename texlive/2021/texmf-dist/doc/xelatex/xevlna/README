@@ -1,0 +1,27 @@
+=============================================================================
+Package: xevlna   Version 1.1                                   25 March 2017
+=============================================================================
+
+The purpose of the package is to insert nonbreakable spaces (in Czech vlna or
+vlnka) after nonsyllabic prepositions and single letter conjuctions directly
+while TeXing the document. The macros recognise math and verbatim by TeX
+means. Inserting nonbreakable spaces by a preprocessor may never be fully
+reliable because user defined macros and environments cannot be recognised.
+It can be used by both XeLaTeX and plain XeTeX.
+
+
+Installation:
+
+1. put xevlna.sty to the directory where both xetex and xelatex expect
+   included files, preferably texmf-dist/tex/xelatex/xevlna/
+
+2. put xevlna.pdf to a directory where texdoc looks for documentation,
+   preferably texmf-dist/doc/xevlna
+
+
+Changes:
+
+Version 1.1 reflects the increased number of character classes and is backward
+compatible with the previous versions of XeTeX.
+
+License: LPPL

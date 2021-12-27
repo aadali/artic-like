@@ -1,0 +1,37 @@
+name expressg
+category Package
+revision 29349
+shortdesc Diagrams consisting of boxes, lines, and annotations
+longdesc A MetaPost package providing facilities to assist in drawing
+longdesc diagrams that consist of boxes, lines, and annotations.
+longdesc Particular support is provided for creating EXPRESS-G diagrams,
+longdesc for example IDEF1X, OMT, Shlaer-Mellor, and NIAM diagrams. The
+longdesc package may also be used to create UML and most other
+longdesc Box-Line-Annotation charts, but not Gantt charts directly.
+containersize 18616
+containerchecksum d380b7ca2efad2cdafc3ea6f2265452a85035765a221dd5cfeb33a03859dfca0e4cd01219995870c8943657d2525e25d32bf7e5b9fe8aa9afa8d17c1ac4703df
+doccontainersize 467740
+doccontainerchecksum 9287376ba5aa36088b4a99455b727c0f60648d50421ebf2fd125542f208f490c5b57af256bf2b704f01a3e00e85e6023c69cb6dad529fb7521ee8cde74ae9559
+docfiles size=137
+ texmf-dist/doc/metapost/expressg/README details="Package Readme"
+ texmf-dist/doc/metapost/expressg/aamfigs.pdf details="Examples of use"
+ texmf-dist/doc/metapost/expressg/aamfigs.tex
+ texmf-dist/doc/metapost/expressg/expeg.pdf
+ texmf-dist/doc/metapost/expressg/expeg.tex
+ texmf-dist/doc/metapost/expressg/expressg.pdf details="Package documentation"
+ texmf-dist/doc/metapost/expressg/n2mps.sh
+ texmf-dist/doc/metapost/expressg/n2mpsprl.prl
+srccontainersize 45000
+srccontainerchecksum 4fc193835f6b283ebeb0906d847d54e99e5026ae53929b8855d78208212bc4ce6133359191830803298c1dfd07bcf7eb1e163fa12f8bf799a9eba381e11f7f82
+srcfiles size=53
+ texmf-dist/source/metapost/expressg/expressg.dtx
+ texmf-dist/source/metapost/expressg/expressg.ins
+runfiles size=23
+ texmf-dist/metapost/expressg/aam.mp
+ texmf-dist/metapost/expressg/expeg.mp
+ texmf-dist/metapost/expressg/expressg.mp
+catalogue-also metauml
+catalogue-ctan /graphics/metapost/contrib/macros/expressg
+catalogue-license lppl
+catalogue-topics diagram graphics-in-tex
+catalogue-version 1.5

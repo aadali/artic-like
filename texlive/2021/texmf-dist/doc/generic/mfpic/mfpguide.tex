@@ -1,0 +1,1640 @@
+% File: mfpguide.tex
+% A part of mfpic 1.10 2012/12/03
+%
+%  Tutorial on mfpic
+\documentclass[letterpaper]{article}
+
+\usepackage[chapters]{mfpdoc}
+
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+
+\newenvironment{mfpfig}[1]
+{\figure[htb] \centering \refstepcounter{figure} \label{#1}}
+{\par\medskip Figure \thefigure. \endfigure}
+
+\ifpdf
+  \usepackage[pdftex,final]{graphics}
+\else
+  \usepackage[dvips,final]{graphics}
+\fi
+
+\usepackage[metapost]{mfpic}
+\opengraphsfile{guide}
+
+\dotsize1pt
+
+\ifpdf
+\expandafter\usepackage\expandafter
+  [\mfpHyOpts,plainpages=false,naturalnames=true]{hyperref}
+\expandafter\pdfstringdefDisableCommands\expandafter
+  {\mfpHyDisable}
+
+\fi
+
+\def\theHfigure{\thefigure}
+
+\begin{document}
+
+\title{\Mfp: A Short Introduction}
+\author{Daniel H. Luecking\thanks{luecking at uark dot edu}}
+\date{\mfpfiledate}
+
+\maketitle
+\tableofcontents
+
+\chapter{Introduction}\label{sec:intro}
+
+As this document aims only to instruct the reader in the building of
+figures with \mfp{}, we will not be too concerned with the intricacies
+of running programs in various operating systems and \TeX{}
+distributions. What will be described here is the simplest case: a
+command-line system in which commands are typed at a keyboard. To
+simplify things further, we will assume that \mfp{} is used with the
+\opt{metapost} option, in a \LaTeX{} document, with \pdfLaTeX{} as the
+compiler. An appendix will discuss some of the differences when these
+assumptions are not satisfied.
+
+We will start right out with the ``Hello, world'' of \mfp{}. Construct a
+\LaTeX{} document by typing the following in a text editor and saving it
+as \file{first.tex}.
+\begin{verbatim}
+% first.tex
+\documentclass{article}
+  \usepackage[metapost]{mfpic}
+  \opengraphsfile{myfigs}
+\begin{document}
+  My first figure:
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \ellipse{(0,0),1,.5}
+  \end{mfpic}
+  \closegraphsfile
+\end{document}
+\end{verbatim}
+Run the command
+\begin{ex}
+    \texttt{pdflatex first}
+\end{ex}
+which should create several files, the two most important being
+\file{first.pdf} and \file{myfigs.mp}. You can go ahead and open
+\file{first.pdf}. You should see a 2 inch by 2 inch square with
+something similar to `\texttt{\#1}' in the lower left corner. This shows
+where the picture will be when it has been created.
+
+Now run the command
+\begin{ex}
+    \texttt{mpost myfigs}
+\end{ex}
+which should create the file \file{myfigs.1}. This is an EPS file
+(Encapsulated PostScript) and can be opened in GhostScript or GSview or
+similar Postscript viewing program to see an ellipse.
+
+If you are viewing \file{first.pdf} in Acrobat Reader or Adobe Reader,
+you will need to close it. Now repeat the \pdfLaTeX{} step:
+\begin{ex}
+    \texttt{pdflatex first}
+\end{ex}
+and then view the file \file{first.pdf}. You should see something very
+close to figure~\ref{fig1}.
+\begin{mfpfig}{fig1}
+  My first figure:
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \ellipse{(0,0),1,.5}
+  \end{mfpic}
+\end{mfpfig}
+
+What can go wrong? According to Murphy's Law: anything. If \mfp{} is not
+properly installed, one could obtain messages of files not found. If
+that happens, determine (from your \TeX{} system's documentation) where
+\TeX{} input files should go and make sure that \file{mfpic.sty},
+\file{mfpic.tex} and \file{mfpicdef.tex} reside there. Similarly, find
+out where \MP{} inputs should go and make sure that \file{grafbase.mp}
+and \file{dvipsnam.mp} reside there. Then run whatever command your
+\TeX{} system might require to ``update the filename database''. You may
+safely ignore the message from \mfp{} itself that \file{myfigs.1} is not
+found (on the first run of \pdfLaTeX). This file should be created only
+after running \texttt{mpost}.
+
+If you get an error message from \LaTeX{}, carefully check your typing.
+Also check whether an older version of \mfp{} might have been used
+instead of the current version. If you get an error message from \MP{}
+do the same, especially checking the typing within the \env{mfpic}
+environment. If you get a message from \MP{} that ``Grafbase'' believes
+your \mfp{} installation may be broken, check the log files
+(\file{first.log} and \file{myfigs.log}) to find out the locations of
+these input files:
+\begin{ex}
+    \file{mfpic.tex} and \file{grafbase.mp}
+\end{ex}
+and make sure that both these files are from the most recently installed
+\mfp{} package. If you are only evaluating \mfp{} without committing to
+installing it, just make sure all the files mentioned in the previous
+paragraphs are in the current directory.
+
+If \pdfLaTeX{} complains it can't write on the file \file{first.pdf},
+unload \file{first.pdf} from your pdf viewer and try again.
+
+If the figures look a little choppy in Acrobat Reader, turn on ``smooth
+line art'' in the edit preferences dialogue.
+
+I will assume that eventually all went well and you are now able to
+obtain the ellipse of figure~\ref{fig1}. Each time you change an
+\env{mfpic} environment or the options to the package, you potentially
+change the file \file{myfigs.mp} produced and you should repeat the
+sequence:
+\begin{verbatim}
+pdflatex first
+mpost myfigs
+pdflatex first
+\end{verbatim}
+to be sure of seeing the changes.
+
+One thing you might notice about figure~\ref{fig1} is that the ellipse
+is positioned quite a bit above the base line of the text. This is
+because \mfp{} reserves the amount of space specified in the arguments
+of the \env{mfpic} environment. These arguments were
+\verb$[72]{-1}{1}{-1}{1}$, which means that each unit in the picture is
+72 times the value of \cs{mfpicunit}, that is, about one inch. The first
+pair of mandatory arguments, \verb${-1}{1}$, indicate the
+$x$-coordinates run from $-1$ to $1$. Since these differ by 2, they
+indicate a width of two inches. The second pair similarly represents a
+height of two inches. But the ellipse is centered at $(0,0)$, which is
+one inch above the bottom (bottom is at $y = -1$), and its vertical
+radius is .5. So the lowest point on the ellipse should be 0.5 inches
+above the bottom of the space reserved. \Mfp{} provides a way to fit the
+space reserved to the actual extent of `ink' in the picture. That is by
+the option \opt{truebbox}:
+\begin{verbatim}
+\usepackage[metapost,truebbox]{mfpic}
+\end{verbatim}
+This would then produce something like figure~\ref{fig2}.
+From now on, this option will be in effect in our examples.
+\usetruebbox
+\begin{mfpfig}{fig2}
+  My first figure:
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \ellipse{(0,0),1,.5}
+  \end{mfpic}
+\end{mfpfig}
+
+Even though the arguments to the \env{mfpic} environment are ignored in
+determining the size of the figure (under \opt{truebbox}), they are
+still needed in order to establish the coordinate system that the
+ordered pairs refer to (for example \texttt{(0,0)} in the \cs{ellipse}
+arguments).
+
+\chapter{Positioning text}\label{sec:text}
+
+By now you are probably thinking: ``This so-called `Hello, world'
+of \mfp{} doesn't say `Hello, world' anywhere!'' We correct that
+with the following example:
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \ellipse{(0,0),1,.5}
+  \tlabel[cc](0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+This should give you figure~\ref{fig3}.
+\begin{mfpfig}{fig3}
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \ellipse{(0,0),1,.5}
+    \tlabel[cc](0,0){Hello, world.}
+  \end{mfpic}
+\end{mfpfig}
+
+The \cs{tlabel} command places the given text at the given position
+($(0,0)$) adjusted according to the optional argument \texttt{[cc]},
+which says to center the text (both vertically and horizontally) at that
+location. The \texttt{[cc]} is optional. Without it, the text would have
+the leftmost point of its baseline (the imaginary line that most letters
+sit on) placed at $(0,0)$.
+
+You are no doubt thinking: ``The ellipse doesn't really match the
+text. What you need is some macro that measures the text and produces an
+oval with similar dimensions.'' For that we have the \cs{tlabeloval}
+command. The \cs{tlabeljustify} command in the example below is to
+communicate to both the text placement and the curve generation
+procedures that they are to be centered at the point $(0,0)$. (We'll see
+an easier way to do this later.)
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \tlabeljustify{cc}
+  \tlabeloval(0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+This produces figure~\ref{fig4}.
+\begin{mfpfig}{fig4}
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \tlabeljustify{cc}
+    \tlabeloval(0,0){Hello, world.}
+  \end{mfpic}
+\end{mfpfig}
+
+This would be better still if a little space is left around the text so
+the ellipse doesn't touch it. The \cs{tlpathsep} command can do that:
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \tlabeljustify{cc}
+  \tlpathsep{3pt}
+  \tlabeloval(0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+producing figure~\ref{fig5}.
+\begin{mfpfig}{fig5}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \tlabeljustify{cc}
+  \tlpathsep{3pt}
+  \tlabeloval(0,0){Hello, world.}
+\end{mfpic}
+\end{mfpfig}
+
+It would be nice to make the text pop out a bit with some color%
+    \footnote{Colors are included in this document only to give
+    examples of their use in \prog{mfpic}. I do not necessarily
+    recommend any of them.}%
+. You can do that by adding \verb$\gfill[yellow]$ in front of either
+\verb$\ellipse$ or \verb$\tlabeloval$:
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \tlpathsep{3pt}
+  \tlabeljustify{cc}
+  \gfill[yellow]\tlabeloval(0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+This will produce figure~\ref{fig6}.
+\begin{mfpfig}{fig6}
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \tlpathsep{3pt}
+    \tlabeljustify{cc}
+    \gfill[yellow]\tlabeloval(0,0){Hello, world.}
+  \end{mfpic}
+\end{mfpfig}
+
+Notice that now the boundary of the oval has not been drawn. This is the
+standard behavior of \mfp{}. A figure command alone will draw the
+figure. If you want some other rendering than that, you must explicitly
+provide all of it. To get the boundary back, simply add \verb$\draw$
+before the \verb$\gfill$. You can draw the curve in a color other than
+black with an optional argument. We can also make the line thicker with
+the command \verb$\penwd$:
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \penwd{1.5pt}
+  \tlpathsep{3pt}
+  \tlabeljustify{cc}
+  \draw[blue]\gfill[yellow]\tlabeloval(0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+This will produce figure~\ref{fig7}.
+\begin{mfpfig}{fig7}
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \penwd{1.5pt}
+    \tlpathsep{3pt}
+    \tlabeljustify{cc}
+    \draw[blue]\gfill[yellow]\tlabeloval(0,0){Hello, world.}
+  \end{mfpic}
+\end{mfpfig}
+
+This last version doesn't look too bad, but it seems that the oval ought
+to be a little fatter (slightly higher than it is now). By default,
+\verb$\tlabeloval$ will make the ratio of width to height the same as
+that of the text, or rather of the text plus the additional space
+specified by \verb$\tlpathsep$. This can be changed with an optional
+argument, a number that multiplies the width-to-height ratio. Decreasing
+this ratio will decrease the width (slightly) and increase the height.
+Here we have also omitted the \cs{tlabeljustify} command and shown that
+\cs{tlabeloval} takes a second optional argument that can be used to
+`justify' both the curve and the text. To use this, one must explicitly
+include the first optional argument; if the default is intended, an
+empty pair of brackets may be used.
+\begin{verbatim}
+\begin{mfpic}[72]{-1}{1}{-1}{1}
+  \penwd{1.5pt}
+  \tlpathsep{3pt}
+  \draw[blue]\gfill[yellow]\tlabeloval[.8][cc](0,0){Hello, world.}
+\end{mfpic}
+\end{verbatim}
+This will produce figure~\ref{fig8}.
+\begin{mfpfig}{fig8}
+  \begin{mfpic}[72]{-1}{1}{-1}{1}
+    \penwd{1.5pt}
+    \tlpathsep{3pt}
+    \draw[blue]\gfill[yellow]\tlabeloval[.8][cc](0,0){Hello, world.}
+  \end{mfpic}
+\end{mfpfig}
+
+The \cs{tlabeloval} command places the label last, after the action of
+all the preceding macros; therefore the text ends up on top of
+everything else. The \cs{tlabeloval} command also has a \mbox{`*-form'} that
+does everything \emph{except} place the text. Finally, ovals are not the
+only thing that can be used to surround text. See the manual
+(\file{mfpic-doc.pdf}) and below for others.
+
+Here is a more common use of \verb$tlabel$ commands: labeling a graph
+and axes. In the following example we have given \cs{tlabel} the option
+\texttt{[bl]} to place the bottom left corner of the text at the given
+coordinates. However, we have used \verb$\tlpointsep{3pt}$, which has
+the effect of shifting text away from its nominal location, to prevent the
+text from colliding with the curve.%
+    \footnote{One can also use \cs{tlabelsep}, which is equivalent to
+    \cs{tlpathsep} plus \cs{tlpointsep}.}
+The value set by \cs{tlpointsep} has an effect only if the point is on
+the edge of the text, so there would be no shifting with the
+\texttt{[cc]} placement used earlier.
+\begin{verbatim}
+\begin{mfpic}[72]{0}{2.5}{0}{1}
+  \tlpointsep{3pt}
+  \polyline{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+  \tlabel[bl](.5,1){Max output}
+  \dashed\polyline{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+  \tlabel[bl](1.5,.7){Max input}
+\end{mfpic}
+\end{verbatim}
+This will produce figure~\ref{fig9}.
+\begin{mfpfig}{fig9}
+  \begin{mfpic}[72]{0}{2.5}{0}{1}
+    \tlpointsep{3pt}
+    \polyline{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \tlabel[bl](.5,1){Max output}
+    \dashed\polyline{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+    \tlabel[bl](1.5,.7){Max input}
+  \end{mfpic}
+\end{mfpfig}
+
+Notice that \verb$\polyline$ alone produces a solid line while
+\verb$\dashed\polyline$ makes a dashed line. Let us close this section
+by dressing up this figure with axes, some fat dots marking the
+keypoints, and hash marks on the axes:
+\begin{verbatim}
+\begin{mfpic}[72]{0}{2.5}{0}{1}
+  \tlpointsep{3pt}
+  \polyline{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+  \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+  \tlabel[bl](.5,1){Max output}
+  \dashed\polyline{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+  \pointfillfalse
+  \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+  \tlabel[bl](1.5,.7){Max input}
+  \axes
+  \xmarks{0,0.5,1,1.5,2}
+  \axislabels x{{$50$} .5, {$100$} 1, {$150$} 1.5, {$200$} 2}
+\end{mfpic}
+\end{verbatim}
+This will produce figure~\ref{fig10}.
+\begin{mfpfig}{fig10}
+  \begin{mfpic}[72]{0}{2.5}{0}{1}
+    \tlpointsep{3pt}
+    \polyline{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \tlabel[bl](.5,1){Max output}
+    \dashed\polyline{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+    \pointfillfalse
+    \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+    \tlabel[bl](1.5,.7){Max input}
+    \axes
+    \xmarks{0,0.5,1,1.5,2}
+    \axislabels x{{$50$} .5, {$100$} 1, {$150$} 1.5, {$200$} 2}
+  \end{mfpic}
+\end{mfpfig}
+
+The optional argument of \verb$\point$ specifies the diameter of the
+points to draw. The command \verb$\pointfillfalse$ forces the points to
+be drawn as open circles. The axes configure themselves to the size
+specified in the argument of the \env{mfpic} environment. The
+\verb$axislabels$ command takes as arguments a letter, to specify the
+axis, and a comma separated list of labels, each of which is specified
+by some text to place (in braces) and the x-coordinate to place it at.
+
+\chapter{Drawing figures}
+
+\Mfp{} has several predefined figures and commands to obtain essentially
+any curve (provided one can obtain enough points on it with sufficient
+precision). We've already seen \verb$\polyline$ and \verb$\ellipse$. The
+former needs a list of points to connect with line segments and the
+latter needs the center and radii of the ellipse. The \verb$\ellipse$
+also takes an optional argument: the number of degrees to rotate the
+ellipse. Here we list some of the more common such figures. Remember
+that all of them will produce some sort of line drawing if used alone.
+They can be preceded by \verb$\dashed$ to make the lines dashed or
+\verb$\dotted$ to make them dotted. If the figure is a closed curve,
+\verb$\gfill$ will fill it in.
+\begin{verbatim}
+\begin{mfpic}[72]{0}{4}{0}{1}
+  \rect{(0,0),(1,.75)}
+  \circle{(1.5,.5),.45}
+  \arc[s]{(3,0),(2,1),45}
+  \ellipse[20]{(3.5, 0.5), 0.6, 0.4}
+\end{mfpic}
+\end{verbatim}
+This produces figure~\ref{fig11}. The \verb$\arc$ command has several
+forms. The optional argument picks the form to use. This one specifies
+the endpoints of the circular arc and the angle of the arc (the angle
+between the radii from the center of the circle to those two points).
+Other possibilities are a three-point form (option \texttt{[t]}), a
+polar form (option \texttt{[p]}), and a center-point-sweep form (option
+\texttt{[c]}, specify a center, starting point, and angle). See the
+manual for details. The default (what would be assumed if no optional
+argument is given) is \oarg{s} and is called the ``point-sweep'' form.
+\begin{mfpfig}{fig11}
+  \begin{mfpic}[72]{0}{4}{0}{1}
+    \rect{(0,0),(1,.75)}
+    \circle{(1.5,.5),.45}
+    \arc[s]{(3,0),(2,1),45}
+    \ellipse[20]{(3.5, 0.5), 0.6, 0.4}
+  \end{mfpic}
+\end{mfpfig}
+
+The \cs{polyline} command draws straight lines connecting points. We can
+also draw smooth curves. Lets take the same points from our
+\cs{polyline} example (figure~\ref{fig9}), but change \cs{polyline} to
+\cs{curve}, omit the text, and add the points from figure~\ref{fig10}:
+\begin{verbatim}
+\begin{mfpic}[72]{0}{2.5}{0}{1}
+  \curve{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+  \dashed\curve{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+    \pointfillfalse
+    \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+\end{mfpic}
+\end{verbatim}
+This should produce figure~\ref{fig12}.
+\begin{mfpfig}{fig12}
+  \begin{mfpic}[72]{0}{2.5}{0}{1}
+    \curve{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+      \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \dashed\curve{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+      \pointfillfalse
+      \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+  \end{mfpic}
+\end{mfpfig}
+
+This is somewhat unsatisfying. One could improve the result by selecting
+more points, or by increasing the `tension' in the curve.
+
+Roughly speaking, tension determines how straight the segments between
+the points are, and how sharp the turns at each point. High tension
+makes the curve look a little more like a polyline. The default tension
+is 1, a tension of about 5 makes the result look somewhat like a
+polyline with very slightly rounded corners, very high tensions make the
+curve indistinguishable from a polyline. Tension must (almost) always be
+greater than $0.75$.
+
+Another effect of increased tension is to reduce the little wobbles we
+can see in the first curve. Let's try a tension of 1.5, which can be
+specified as an optional argument to \cs{curve}:
+\begin{verbatim}
+\begin{mfpic}[72]{0}{2.5}{0}{1}
+  \curve[1.5]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+  \dashed\curve[1.5]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+    \pointfillfalse
+    \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+\end{mfpic}
+\end{verbatim}
+This give figure~\ref{fig13}.
+\begin{mfpfig}{fig13}
+  \begin{mfpic}[72]{0}{2.5}{0}{1}
+    \curve[1.5]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+      \point[3pt]{(0,.2),(.5,1),(1,.7),(1.5,0),(2,.3)}
+    \dashed\curve[1.5]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+      \pointfillfalse
+      \point[3pt]{(0,.2),(.5,.6),(1,.3),(1.5,.7),(2,.1)}
+  \end{mfpic}
+\end{mfpfig}
+
+When we use \cs{curve}, there is no way \MP{} can tell if we are just
+connecting points or if we are trying to graph a function.
+It \emph{cannot} enforce the requirement, which every function must
+satisfy, that the curve should travel left-to-right. The command
+\cs{fcncurve} does enforce this (assuming the points to be connected are
+listed in left-to-right order). This command also permits an optional
+tension argument. The dotted line in figure~\ref{fig14} is produced with
+\cs{curve}, the solid one with \cs{fcncurve}. One might conceivably want
+to decrease the tension a bit here.
+\begin{verbatim}
+\begin{mfpic}[72]{0}{2.5}{0}{1}
+  \dotted\curve{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+  \fcncurve{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+    \pointfillfalse
+    \point[3pt]{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig14}
+  \begin{mfpic}[72]{0}{2.5}{0}{1}
+    \dotted\curve{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+    \fcncurve{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+      \pointfillfalse
+      \point[3pt]{(0,.2),(.5,0),(.85,.5),(1,1),(1.5,0),(2,.3)}
+  \end{mfpic}
+\end{mfpfig}
+
+Other figures available include\leftmargini=2\leftmargini
+\begin{description}
+\item[\cs{cyclic}] Used just like \cs{curve} but closes the path
+    (connects the last point smoothly to the starting point).
+\item[\cs{polygon}] Used just like \cs{polyline} except it connects the
+    last point to the first with a straight line.
+\item[\cs{sector}] Makes a wedge with two straight lines and an arc. The
+    arguments are almost the same as \cs{arc}\oarg{p}, but the order is
+    different: center, radius and two angles.
+\end{description}
+
+Here are some other curves that, like \cs{tlabeloval}, are proportioned
+to fit given text. All have a \texttt{*}-form that draws the path
+without placing the text.
+\begin{description}
+\item[\cs{tlabelrect}]  This produces a rectangle. It has the same usage
+    as \cs{tlabeloval}, except the first optional argument specifies
+    the radius of quarter-circles used to make rounded corners.
+\item[\cs{tlabelellipse}] This is similar to \cs{tlabeloval}
+    except that instead of modifying the width-to-height ratio, the
+    first optional argument \emph{is} the width-to-height ratio. If that
+    argument is 1 (the default) you get a circle.
+\item[\cs{tlabelcircle}] This produces a circle, of course.
+\end{description}
+
+
+\chapter{Functions}
+
+\CMP{} is able to calculate a number of functions natively, and still
+more have been defined in \mfp{}. Also available are the usual
+arithmetic operations. Any valid \MP{} expression, containing
+one unknown \gbc{x} and producing a numerical result can be graphed.
+
+Here is an example of the graphs of $y = x^2$ and $y = \pm\sqrt{x}$.
+Note that exponentials are denoted by \texttt{**} and it is important to
+note that it has the same precedence as multiplication (denoted by a
+single \texttt{*}). That is, in a formula like \mfc{3*3**2}, the
+operations are performed in order, left to right, producing $(3\cdot
+3)^2 = 81$ and not $3\cdot 3^2 = 27$. Parentheses are needed if the
+latter is intended: \mfc{3*(3**2)}.
+\begin{verbatim}
+\setlength{\mfpicunit}{1cm}
+\begin{mfpic}{-2.5}{2.5}{-1.5}{4}
+  \function{-2,2,.1}{x**2}
+  \function{0,2,.1}{sqrt x}
+  \function{0,2,.1}{-sqrt x}
+  \axes
+  \xmarks{-2,-1,1,2}
+  \ymarks{-1,1,2,3}
+  \tlpointsep{3pt}
+  \axislabels x{{$-2$}-2,{$-1$}-1,{$1$}1,{$2$}2}
+  \axislabels y{{$-1$}-1,{$1$}1,{$2$}2,{$3$}3}
+\end{mfpic}
+\end{verbatim}
+This produces figure~\ref{fig15}.
+\begin{mfpfig}{fig15}
+  \setlength{\mfpicunit}{1cm}
+  \begin{mfpic}{-2.5}{2.5}{-1.5}{4}
+    \function{-2,2,.1}{x**2}
+    \function{0,2,.1}{sqrt x}
+    \function{0,2,.1}{-sqrt x}
+    \axes
+    \xmarks{-2,-1,1,2}
+    \ymarks{-1,1,2,3}
+    \tlpointsep{3pt}
+    \axislabels x{{$-2$}-2,{$-1$}-1,{$1$}1,{$2$}2}
+    \axislabels y{{$-1$}-1,{$1$}1,{$2$}2,{$3$}3}
+  \end{mfpic}
+\end{mfpfig}
+
+The command \cs{function} has two arguments. The first contains the
+starting and ending x-values of the desired graph, followed by a
+\emph{step size}. Generally the smaller the steps the better the
+accuracy, but \MP{} has a limit on the number of steps (usually about
+2000). There is also an optional argument which can be \oarg{s}, the
+default, which means the graph is to be smooth, or \oarg{p}, which means
+the graph is constructed by connecting the calculated points with
+straight lines. Here is the same example with larger step size to
+emphasize the difference (see figure~\ref{fig16})
+\begin{verbatim}
+\setlength{\mfpicunit}{1cm}
+\begin{mfpic}{-2.5}{2.5}{-1.5}{4}
+  \function[p]{-2,2,.5}{x**2}
+  \function[p]{0,2,.5}{sqrt x}
+  \function[p]{0,2,.5}{-sqrt x}
+  \axes
+  \xmarks{-2,-1,1,2}
+  \ymarks{-1,1,2,3}
+  \tlpointsep{3pt}
+  \axislabels x{{$-2$}-2,{$-1$}-1,{$1$}1,{$2$}2}
+  \axislabels y{{$-1$}-1,{$1$}1,{$2$}2,{$3$}3}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig16}
+  \setlength{\mfpicunit}{1cm}
+  \begin{mfpic}{-2.5}{2.5}{-1.5}{4}
+    \function[p]{-2,2,.5}{x**2}
+    \function[p]{0,2,.5}{sqrt x}
+    \function[p]{0,2,.5}{-sqrt x}
+    \axes
+    \xmarks{-2,-1,1,2}
+    \ymarks{-1,1,2,3}
+    \tlpointsep{3pt}
+    \axislabels x{{$-2$}-2,{$-1$}-1,{$1$}1,{$2$}2}
+    \axislabels y{{$-1$}-1,{$1$}1,{$2$}2,{$3$}3}
+  \end{mfpic}
+\end{mfpfig}
+
+In addition, one can increase the tension in the curve drawn by putting
+a tension value after the \gbc{s} in \oarg{s}. For a tension of 2.4:
+\cs{function}\oarg{s2.4}\marg{\dots}.
+
+The functions available include \gbc{sqrt} and all the trig functions:
+\gbc{sin x} assumes \gbc{x} is an angle in radians, \mfc{sind x} assumes
+it is in degrees, with a similar naming convention for the remaining
+trig functions. The inverses are \gbc{asin x}, \gbc{acos x}, and
+\gbc{atan x}, which produce angles in degrees, and \gbc{invsin x}, etc.,
+which produce angles in radians. There is also \gbc{ln~x} or \gbc{log~x}
+for the natural logarithm, \gbc{exp~x} for $e^x$, \gbc{logten}~\gbc{x}
+for the base 10 logarithm, \gbc{logtwo}~\gbc{x} for base 2, and
+\gbc{logbase} for other bases:
+\gbc{logbase(16)}~\gbc{x} (for example) for base 16. The general syntax of
+these functions is the following: if the argument is \gbc{x} alone or a
+pure number alone or the particular case of a number followed by \gbc{x}
+(no \gbc{*} in between!) then parentheses are not needed. Example:
+\gbc{sin~2x}. For almost anything else, parentheses are required:
+\gbc{sin(3*x)} or \gbc{sin(x**2)}.
+
+Some other functions available are the hyperbolic functions, \gbc{sinh x},
+\gbc{cosh x}, etc. (all 6 of them), and the inverses of three of them:
+\gbc{asinh x}, \gbc{acosh x}, and \gbc{atanh x}.
+
+These functions (or any \MP{} numeric expression) can also be used in
+any of the coordinates of points in drawing commands like \cs{polyline}
+(but not usually in text placement commands like \cs{tlabeloval}). For
+example (from now on the value of \cs{mfpicunit} is set to
+\texttt{1cm}):\setlength{\mfpicunit}{1cm}
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-1.5}{1.5}
+  \polyline{(2,-sqrt 2),(1,-1),(.5,- sqrt .5),(0,0),
+      (.5,sqrt .5),(1,1),(2,sqrt 2)}
+  \axes
+  \xmarks{1,2}
+  \ymarks{-1,1}
+  \tlpointsep{3pt}
+  \axislabels x{{$1$}1,{$2$}2}
+  \axislabels y{{$-1$}-1,{$1$}1}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig17}
+  \begin{mfpic}{-.5}{2.5}{-1.5}{1.5}
+    \polyline{(2,-sqrt 2),(1,-1),(.5,- sqrt .5),(0,0),
+        (.5,sqrt .5),(1,1),(2,sqrt 2)}
+    \axes
+    \xmarks{1,2}
+    \ymarks{-1,1}
+    \tlpointsep{3pt}
+    \axislabels x{{$1$}1,{$2$}2}
+    \axislabels y{{$-1$}-1,{$1$}1}
+  \end{mfpic}
+\end{mfpfig}
+
+There are other types of functions: parametric functions, and polar
+coordinate versions. \Mfp{} provides \cs{parafcn} and \cs{plrfcn} to
+graph these. The \cs{parafcn} requires a starting value, and ending
+value and a step size just as in \cs{function}, but in the second
+argument there must be either a pair of expressions in the variable
+\gbc{t}, separated by a comma and enclosed in parentheses, or a single
+\emph{pair-valued} expression. \CMP{} and \mfp{} provide only a few
+pair-valued functions; one is used below.
+
+The second argument of \cs{plrfcn} must contain a single numeric
+expression in the variable \gbc{t}, and indicates a function of $\theta$
+to be graphed in polar coordinates: $r = f(\theta)$. In the following
+example (figure~\ref{fig22}), we draw a portion of the graph of $x =
+y^2$ by representing it as the graph of the parametric equations $x =
+t^2$, $y = t$, and a portion of a circle of radius $1.5$ by representing
+it as the graph of the pair-valued function \mfc{dir(t)}. The expression
+\mfc{dir(t)} gives the point whose distance from $(0,0)$ is $1$ in the
+direction given by the angle \mfc{t}.
+\begin{verbatim}
+\begin{mfpic}{-2}{4}{-2}{2}
+  \parafcn{-2,2,.1}{(t**2,t)}
+  \dotted\parafcn{45,315,5}{1.5*dir(t)}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig22}
+  \begin{mfpic}{-2}{4}{-2}{2}
+    \parafcn{-2,2,.1}{(t**2,t)}
+    \dotted\parafcn{45,315,5}{1.5*dir(t)}
+  \end{mfpic}
+\end{mfpfig}
+
+
+Here is an example of a graph of the polar coordinate function
+$r=2\sin 3\theta$ (figure~\ref{fig23}). We use the degree version
+\mfc{sind} in order to work with integers.
+\begin{verbatim}
+\begin{mfpic}{-2}{2}{-2}{2}
+  \plrfcn{0,180,5}{2*sind 3t}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig23}
+  \begin{mfpic}{-2}{2}{-2}{2}
+    \plrfcn{0,180,5}{2*sind 3t}
+  \end{mfpic}
+\end{mfpfig}
+
+
+\chapter{Transforming figures}
+
+\CMP{} is capable of any affine transformation (things like shifting,
+rotating, scaling, reflecting and slanting) of any path. The figures
+we've been dealing with so far (\cs{ellipse}, \cs{curve}, \cs{function},
+etc.) all produce, in the \MP{} code, the definition of some path (as
+well as a drawing of that path). \Mfp{} provides for different methods
+of `drawing' the path with \emph{prefix macros}. We've seen \cs{dashed},
+\cs{dotted}, \cs{gfill} so far, in addition to the default \cs{draw}.
+\Mfp{} also provides for modifying the shape and position of the path
+with other prefixes. Here's a simple example.
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+  \rotatepath{(1,.5), 45}\rect{(0,0),(2,1)}
+  \point{(1,.5)}
+\end{mfpic}
+\end{verbatim}
+The command \cs{rotatepath} obviously rotates the path that follows, but
+it needs to know what the center of rotation will be, and how much to
+rotate. These are given in its mandatory argument, separated by a comma.
+The example above (pictured in figure~\ref{fig18}) rotates 45 degrees
+around the center of the rectangle.
+\begin{mfpfig}{fig18}
+  \begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+    \rotatepath{(1,.5), 45}\rect{(0,0),(2,1)}
+    \point{(1,.5)}
+  \end{mfpic}
+\end{mfpfig}
+
+Notice that we have no drawing prefix. A combination of
+transformation-plus-figure is treated as a figure in its own right and
+behaves the same. If we want the figure dashed, we could write
+\begin{verbatim}
+\dashed\rotatepath{(1,.5),45}\rect{(0,0),(2,1)}
+\end{verbatim}
+It may not be obvious, but we can also write a drawing macro between
+the rotation and the figure, producing figure~\ref{fig19}
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+  \rotatepath{(1,.5), 45}\draw\rect{(0,0),(2,1)}
+  \point{(1,.5)}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig19}
+  \begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+    \rotatepath{(1,.5), 45}\draw\rect{(0,0),(2,1)}
+    \point{(1,.5)}
+  \end{mfpic}
+\end{mfpfig}
+
+This illustrates another property of \mfp{} macros: the combination of a
+rendering prefix and a figure is also treated the same as a figure in
+its own right: the same figure as the one that follows. In fact, the
+only difference between \cs{rect} and \cs{draw}\cs{rect} in this
+example is that the second one has a minor(!) side effect: the
+rectangle is drawn.
+
+Finally, try to guess what happens if we add another prefix at the
+front:
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+  \dotted\rotatepath{(1,.5), 45}
+    \draw\rect{(0,0),(2,1)}
+\end{mfpic}
+\end{verbatim}
+and if we add another rotation in front of that.
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+  \rotatepath{(0,0),45}
+    \dotted\rotatepath{(1,.5), 45}
+      \draw\rect{(0,0),(2,1)}
+\end{mfpic}
+\end{verbatim}
+
+
+Available transformations include
+\begin{display}\raggedright
+  \cs{scalepath}, \cs{shiftpath}, \cs{xscalepath}, \cs{yscalepath},
+  \cs{slantpath}, and \cs{reflectpath}.
+\end{display}
+See the manual for a description of what arguments are required for
+each. Here's a final example, producing figure~\ref{fig20}
+\begin{verbatim}
+\begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+  \shiftpath{(-1,1)}\draw[red]\slantpath{.5,1}\dotted
+  \rotatepath{(0,0), 90}\dashed\rect{(0,0),(2,1)}
+  \point{(0,0),(2,1)}
+  \tlpointsep{2pt}
+  \tlabel[tr](0,0){$(0,0)$}
+  \tlabel[bl](2,1){$(2,1)$}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig20}
+  \begin{mfpic}{-.5}{2.5}{-.5}{2.5}
+    \shiftpath{(-1,1)}\draw[red]\slantpath{.5,1}\dotted
+    \rotatepath{(0,0), 90}\dashed\rect{(0,0),(2,1)}
+    \point{(0,0),(2,1)}
+    \tlpointsep{2pt}
+    \tlabel[tr](0,0){$(0,0)$}
+    \tlabel[bl](2,1){$(2,1)$}
+  \end{mfpic}
+\end{mfpfig}
+
+\chapter{Rendering figures}
+
+\emph{Rendering} is the act of making a description of a figure visible.
+Examples are: drawing a solid curve, drawing a dashed curve, or filling
+its interior, For \mfp{} figure macros the default, in the absence of
+explicit commands, is to use \cs{draw}. That is,
+\begin{verbatim}
+\rect{(0,0),(1,2)}
+\end{verbatim}
+has the same result as
+\begin{verbatim}
+\draw\rect{(0,0),(1,2)}
+\end{verbatim}
+The default rendering can be changed. Just say
+\cs{setrender}\marg{\cs{dashed}}, and all figures afterward will be dashed
+(see figure~\ref{fig21}).
+\begin{verbatim}
+\begin{mfpic}{0}{2}{0}{1}
+\setrender{\dashed}
+  \rect{(0,0),(1,1)}
+  \circle{(1.5,.5),.5}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig21}
+  \begin{mfpic}{0}{2}{0}{1}
+  \setrender{\dashed}
+    \rect{(0,0),(1,1)}
+    \circle{(1.5,.5),.5}
+  \end{mfpic}
+\end{mfpfig}
+The \cs{setrender} command can be inside an \env{mfpic} environment to
+affect only later commands in that figure, or outside to affect all
+later \mfp{} figures.
+
+We give a few examples now of the renderings possible. These divide
+more-or-less into those that trace a path and those that fill in a path.
+In order to fill in a path, it must be a closed path, of course, but
+\MP{} distinguishes between closed paths and those that merely happen to
+end where they began. There is a good reason for this: \MP{} cannot,
+without human aid, know if two points are the same, or merely
+accidentally so close that the accuracy of the program sees them as the
+same. It requires human aid in the form of an explicit request to
+create a closed path. Of the \mfp{} macros we've seen so far,
+\cs{ellipse}, \cs{circle}, \cs{rect}, \cs{polygon}, and \cs{cyclic}
+produce closed paths, but \cs{polyline}, \cs{curve}, \cs{function},
+\cs{parafcn}, and \cs{plrfcn} do not. Also producing closed paths are
+\cs{tlabeloval} and its relatives.
+
+The following example illustrates filling with a hatching pattern
+(parallel lines) and an \emph{unfilling}. Clearing the interior of a
+path may not seem like rendering, but it is treated in exactly the same way
+(think of it as a negative rendering). We first hatch a rectangle, then
+clear out a smaller rectangle with rounded corners to place our text
+inside. The results are in figure~\ref{fig24}.
+\begin{verbatim}
+\begin{mfpic}{0}{2}{0}{2}
+  \draw[red]\lhatch[2pt][blue]\rect{(0,0),(2,2)}
+  \gclear\tlabelrect[6pt][cc](1,1){Hatching!}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig24}
+  \begin{mfpic}{0}{2}{0}{2}
+    \draw[red]\lhatch[2pt][blue]\rect{(0,0),(2,2)}
+    \gclear\tlabelrect[6pt][cc](1,1){Hatching!}
+  \end{mfpic}
+\end{mfpfig}
+This example illustrates that \cs{lhatch} fills with left slanting
+lines. And that it takes two optional arguments. The first is the
+distance between lines, and the second is the color to make the lines.
+There are also \cs{rhatch} which slants the lines the other way,
+\cs{xhatch} which uses both slants, and \cs{thatch} which can draw
+the lines at any angle.
+
+Here is another example of rendering (figure~\ref{fig26}). The new
+macro is \cs{polkadot}. We've repeated this example twice to
+show the effect of changing the order of the prefixes. Each prefix
+applies its rendering to the result of everything to the right of it. In
+the second example the hatching goes over the dots (and a bit of the
+dashes as well). If the \cs{gfill} were first, it would cover almost
+everything else.
+\begin{verbatim}
+\begin{mfpic}{0}{6}{0}{2}
+  \penwd{2pt}
+  \hatchwd{2pt}
+  \drawcolor{blue}
+  \hatchcolor{red}
+  \fillcolor{green}
+  \dashed\polkadot\rhatch[5pt]\gfill[yellow]\rect{(0,0),(2.8,1.8)}
+  \rhatch[5pt]\dashed\polkadot\gfill[yellow]\rect{(3,0),(5.8,1.8)}
+\end{mfpic}
+\end{verbatim}
+We've added a couple of other new features to this example. To emphasize
+effects, we've increased the thickness of the drawing pen (\cs{penwd})
+and the hatch lines (\cs{hatchwd}). We've also used the \cs{drawcolor}
+macro and its relatives to set the colors to be used. The \cs{polkadot}
+macro uses the color set by \cs{fillcolor}; so does \cs{gfill} if no
+optional color is given.
+\begin{mfpfig}{fig26}
+  \begin{mfpic}{0}{6}{0}{2}
+    \penwd{2pt}
+    \hatchwd{2pt}
+    \drawcolor{blue}
+    \hatchcolor{red}
+    \fillcolor{green}
+    \dashed\polkadot\rhatch[5pt]\gfill[yellow]\rect{(0,0),(2.8,1.8)}
+    \rhatch[5pt]\dashed\polkadot\gfill[yellow]\rect{(3,0),(5.8,1.8)}
+  \end{mfpic}
+\end{mfpfig}
+
+If one wants to plot several curves in a single graph, they often need
+to be rendered differently. The three methods we've seen so far,
+\cs{draw}, \cs{dashed}, and \cs{dotted}, may not be enough. The
+\cs{dashed} and \cs{dotted} commands permit an optional argument to
+adjust the length of the dashes and spaces, and size of the dots. One
+can also change the curve thickness with \cs{penwd}. But
+that may not be `different' enough. \Mfp{} provides a few solutions.
+When color is available, they may be drawn in different colors. When
+not, there are two possibilities: \cs{gendashed} and \cs{plot}.
+
+The first, \cs{gendashed}, is a generalized dashing macro. It takes one
+mandatory argument, the name of a dashing pattern. Named dashing
+patterns may be created with the \cs{dashpattern} command, as shown by
+the following example (see figure~\ref{fig27}):
+\begin{verbatim}
+\begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+  \dashpattern{dotdash}{0pt,4pt,3pt,4pt}
+  \gendashed{dotdash}\function{-pi,pi,.2}{sin 2x}
+  \function{-pi,pi,.2}{cos 2x}
+  \axes
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig27}
+  \begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+    \dashpattern{dotdash}{0pt,4pt,3pt,4pt}
+    \gendashed{dotdash}\function{-pi,pi,.2}{sin 2x}
+    \function{-pi,pi,.2}{cos 2x}
+    \axes
+  \end{mfpic}
+\end{mfpfig}
+
+The \cs{dashpattern} command takes a name and an even number of lengths.
+The first, third, etc., lengths represent the lengths of dashes
+(\texttt{0pt} means a dot), and the second, fourth, etc., represent
+spaces. The given pattern is dot-space-dash-space. This pattern, when
+used in a \cs{gendashed} command, is repeated for the length of the
+curve.
+
+This last example illustrates that the predefined \MP{} variable
+\gbc{pi} (equal to 3.14159) can be used pretty much anywhere a number
+can be used (except, often, in text label commands).
+
+Another way to get more distinctive curves is to `dot' them with
+something other than tiny dots. The \cs{plot} command does that. It
+takes one mandatory argument, the name of a symbol to use instead of a
+dot. Here are the same two curves \cs{plot}-ed (figure~\ref{fig28}):
+\begin{verbatim}
+\begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+  \setlength{\pointsize}{2.5pt}
+  \plot{Triangle}\function{-pi,pi,.2}{sin 2x}
+  \plot[2pt,6pt]{SolidCircle}\function{-pi,pi,.2}{cos 2x}
+  \axes
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig28}
+  \begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+    \setlength{\pointsize}{2.5pt}
+    \plot{Triangle}\function{-pi,pi,.2}{sin 2x}
+    \plot[2pt,6pt]{SolidCircle}\function{-pi,pi,.2}{cos 2x}
+    \axes
+  \end{mfpic}
+\end{mfpfig}
+
+The \cs{plot} command takes an optional argument to specify the size of
+the symbols and the spacing between them. The size of the symbols can
+also be adjusted by changing the length command \cs{pointsize} (that also
+adjusts the size of the dots placed with the \cs{point} command).
+
+In this last example, \cs{plotnodes} is similar to \cs{plot}, except it
+placed the symbols at the `nodes' defined by the path command. In the
+case of \cs{function}, these are the points $(x_k, f(x_k))$ with $x_k$
+stepping through all the $x$-values determined by the first argument of
+\cs{function} (figure~\ref{fig29}).
+\begin{verbatim}
+\begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+  \plotnodes[2.5pt]{Square}\function{-pi,pi,pi/16}{sin 2x}
+  \axes
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig29}
+  \begin{mfpic}{-3.5}{3.5}{-1.2}{1.2}
+    \plotnodes[2.5pt]{Square}\function{-pi,pi,pi/16}{sin 2x}
+    \axes
+  \end{mfpic}
+\end{mfpfig}
+
+See the manual for the list of predefined symbols available to the
+\cs{plot} and \cs{plotnodes} command.
+
+\chapter{More on text}
+
+The text positioning commands used so far in this guide are entirely
+handled by \TeX{} or \LaTeX. This is why we have occasionally had to say
+that certain things could be done ``except in text placement commands''.
+It is possible for text positioning to be done within \MP, making many
+things possible that couldn't be done otherwise. For example, text can
+be rotated about the point of placement. You are probably thinking that
+\LaTeX{} can rotate text, but it is not all that easy to arrange for the
+point on the graph where we place the text to be the center of rotation.
+Below are two examples, in which we attempt to place the text separated
+from $(0,0)$ by \texttt{5pt} and rotated 45 degrees around $(0,0)$. In
+the first we try to use \LaTeX's \cs{rotatebox} command, and in the
+second we turn on \MP{} handling of labels and use a rotation option to
+the \cs{tlabel} command.
+\begin{verbatim}
+\begin{mfpic}{0}{1}{0}{1}
+  \point{(0,0)}
+  \polyline{(0,0),(1,1)}
+\tlabel[Bl](0,0){\rotatebox{45}{\hspace{5pt}Test text}}
+\end{mfpic}
+\end{verbatim}
+\begin{verbatim}
+\usemplabels
+\begin{mfpic}{0}{1}{0}{1}
+  \point{(0,0)}
+  \polyline{(0,0),(1,1)}
+  \tlpointsep{5pt}
+  \tlabel[Bl45](0,0){Test text}
+\end{mfpic}
+\end{verbatim}
+\begin{figure}[!hb]
+  \centering
+  \begin{minipage}{4cm}
+    \centering
+    \begin{mfpic}{0}{1}{0}{1}
+      \point{(0,0)}
+      \polyline{(0,0),(1,1)}
+    \tlabel[Bl](0,0){\rotatebox{45}{\hspace{5pt}Test text}}
+    \end{mfpic}\renewcommand\thefigure{\thesection.\arabic{figure}a}
+    \refstepcounter{figure}\label{fig30a}
+    \par\medskip (a)
+  \end{minipage}\addtocounter{figure}{-1}\qquad
+  \begin{minipage}{4cm}\usemplabels
+    \centering
+    \begin{mfpic}{0}{1}{0}{1}
+      \point{(0,0)}
+      \polyline{(0,0),(1,1)}
+      \tlpointsep{5pt}
+      \tlabel[Bl45](0,0){Test text}
+    \end{mfpic}\renewcommand\thefigure{\thesection.\arabic{figure}b}
+    \refstepcounter{figure}\label{fig30b}
+    \par\medskip (b)
+  \end{minipage}
+
+  \medskip Figure \thesection.\arabic{figure}.
+\end{figure}
+
+The first produces figure~\ref{fig30a} and the second produces
+figure~\ref{fig30b}. Our goal was to get the baseline of the text lined
+up with the reference line drawn.
+
+In the first example, \LaTeX's \cs{rotatebox} command produces the
+following result, where we put a frame around both the unrotated text
+and the rotated result to emphasize what \LaTeX{} sees as the
+boundaries:
+$$
+  \hbox{\setlength\fboxsep{0pt}%
+    \fbox{\rotatebox{45}{\fbox{\hspace{5pt}Test text}}}}
+$$
+This is then placed by the \cs{tlabel} command with the lower left
+corner of the \emph{outer} box at $(0,0)$. But \LaTeX's axis of rotation
+was at the lower left corner of the inner box. In the second case, \MP{}
+placed the label. The command \cs{tlpointsep}\marg{5pt} and the parameter
+\oarg{Bl45} explicitly request that the label be placed with its left
+baseline 5 points from $(0,0)$ and rotated 45 degrees \emph{about the
+point $(0,0)$}.
+
+The \cs{usemplabels} command used above asks \MP{} to arrange for the
+setting of labels. Adding the option \opt{mplabels} to the
+\cs{usepackage} command that loads \mfp{} has the same effect for the
+whole document.  There can be problems with using \MP{} to set labels.
+One is that \MP{} has to call a \file{tex} program to do the actual
+typesetting, and then one must either make arrangements that ensure
+\MP{} will call \LaTeX, or never use any macros in the labels that are
+not defined in plain\TeX. If one does arrange for \LaTeX{} to be used,
+one needs to arrange that a \LaTeX{} preamble is prepended to the output
+\file{.mp} file. The \cs{mfpverbtex} command can be used for this.
+
+The command \cs{nomplabels} can be used to return to having labels set
+at the document level. For the rest of this guide, we have
+\opt{mplabels} in effect.
+
+There are a few more commands that place text on the picture. All of
+them pass the final responsability for text placement to \MP{} if
+\opt{mplabels} is in effect. See the manual for more details.
+
+
+\chapter{Arrows}
+
+The command \cs{arrow} adds an arrowhead onto the \emph{end} of any path
+that follows. For this to have predictable effects, you need to know
+which part of a curve is the end, and which the start. Not surprisingly,
+for the commands that connect a list of points in order the first point
+in the list is the start point and the last point is the end. Except the
+closed paths (\cs{cyclic}, \cs{polygon}, etc.); for them, the start and
+the end points are the same, but the order of the points gives a
+direction to the arrowhead. The default \cs{circle} has an anticlockwise
+direction, but if the circle is defined by three points (for example)
+the direction of the circle is determined by the order in which the
+points are written.
+
+Anyway, here are a few examples, illustrating the use of \cs{arrow}, and
+some of its optional arguments.
+\begin{verbatim}
+\begin{mfpic}{0}{4}{0}{4}
+  \arrow[r-5]\circle{(1,1),.5}
+  \arrow[b4pt]\arrow\polyline{(3,2),(3,0)}
+  \arrow[cred]\reverse\arrow\polyline{(0,3),(2,3)}
+  \arrow[l 5pt]\rect{(4,2),(2,4)}
+\end{mfpic}
+\end{verbatim}
+See figure~\ref{fig31} for the  results of this example. There are four
+possible optional arguments, the first character inside the brackets
+tells what option the rest of the argument applies to. The first example
+above starts with `\texttt{r}', which stands for `rotate' and asks for
+the arrowhead to be rotated $-5$ degrees (positive rotation means
+anticlockwise, negative means clockwise). This is frequently useful for
+arrows on curved paths, as the default direction (tangent to the path)
+often just looks wrong). The second example starts with `\texttt{b}',
+which stands for `backset' and it moves the head back \texttt{4pt} from
+where it would otherwise be placed. In the example, this is used to put
+a double arrowhead on the line. In the third example we put an arrow at
+both ends by reversing the sense of the curve in between the two
+\cs{arrow} prefixes. We also used the letter `\texttt{c}' in the
+optional argument of one arrowhead. This stands for `color' and the
+requested color is `\texttt{red}'. Finally, the \texttt{l} option
+(that's a lowercase `ell', not the number `one') changes the length of
+the arrowhead to 5 points (from the \verb$3pt$ default).%
+    \footnote{I have put a space between the \texttt{l} and the
+      \texttt{5pt} so it won't be mistaken for `$15$pt. Normally one
+      should avoid spaces in \mfp{} optional arguments, but this is one
+      case where it will cause no harm.}
+\begin{mfpfig}{fig31}
+  \begin{mfpic}{0}{4}{0}{4}
+    \arrow[r-5]\circle{(1,1),.5}
+    \arrow[b4pt]\arrow\polyline{(3,2),(3,0)}
+    \arrow[cred]\reverse\arrow\polyline{(0,3),(2,3)}
+    \arrow[l 5pt]\rect{(4,2),(2,4)}
+  \end{mfpic}
+\end{mfpfig}
+
+The options can be combined in one command:
+\cs{arrow}\oarg{cblue}\oarg{b4pt}\oarg{r25}\oarg{l6pt} would produce a
+\texttt{6pt} long blue arrowhead rotated 25 degrees anticlockwise, set
+back \texttt{4pt}. The setting back is done in the direction determined
+\emph{after} rotation. The order of the options is not significant.
+
+The shape of the arrowhead can be changed with the \cs{headshape}
+command. The following example draws the arrowhead first normally, and
+then after an instance of this command. We draw it a third time, exactly
+like the second time, except we use the *-form. We have increased the
+length of head and the thickness of the pen to emphasize the effects.
+\begin{verbatim}
+\begin{mfpic}{0}{4}{0}{4}
+  \setlength{\headlen}{20pt}
+  \penwd{3pt}
+  \arrow\polyline{(0,3),(4,3)}
+    \headshape{.5}{2}{true}
+  \arrow\polyline{(0,2),(4,2)}
+  \arrow*\polyline{(0,1),(4,1)}
+\end{mfpic}
+\end{verbatim}
+The results are pictured in figure~\ref{fig32}. The first argument to
+\cs{headshape} sets the ratio of width to height for the head. We have
+cut it in half here. The second argument sets the tension in the curves
+that form the sides of the head. This reduces the curvature in the
+sides. The third argument can be only \texttt{true} or \texttt{false}
+and determines whether the head is a solid shape, or only the two
+`barbs'. The defaults correspond to \verb$\headshape{1}{1}{false}$. The
+filled form does not draw the outline so what we see is the pointy
+arrowhead on top of a thick line. The *-form tries to erase part of the
+line so that one sees an actual pointy arrow.
+\begin{mfpfig}{fig32}
+  \begin{mfpic}{0}{4}{0}{4}
+    \setlength{\headlen}{20pt}
+    \penwd{3pt}
+    \arrow\polyline{(0,3),(4,3)}
+      \headshape{.5}{2}{true}
+    \arrow\polyline{(0,2),(4,2)}
+    \arrow*\polyline{(0,1),(4,1)}
+  \end{mfpic}
+\end{mfpfig}
+
+
+\chapter{Color}
+
+We saw the use of color in earlier sections, and now it's time to be
+systematic about it. The several rendering commands have a color option;
+examples are \cs{draw}, \cs{gfill}, \cs{arrow}, and the hatching
+commands. However, even those commands that don't provide such an option
+can have the color of their rendering changed. \Mfp{} provides the
+following commands to change certain colors. Those commands with a
+color option can be used without that option and then they will the use
+the appropriate color described here. Each of these color-changing
+commands takes a mandatory argument containing the color to change to,
+and an optional argument to be described later.
+
+\begin{description}
+\item[\cs{backgroundcolor}] This sets the color to be used by \cs{gclear}.
+        It is the same color used by \cs{point} for the inside of the
+        points when \cs{pointfillfalse} has been used.  In \MP{}, the
+        only way to clear the inside of a region is to cover it up. The
+        default color for this purpose is \mfc{white}. Use this command
+        to change that default.
+\item[\cs{drawcolor}] This sets the default color used by those rendering
+        commands that draw a path. This includes \cs{draw}, but also
+        includes \cs{dashed}, \cs{dotted}, \cs{plot} and \cs{plotnodes}.
+        It is also used by other commands that produce lines or curves:
+        figure macros used without any rendering prefix, as well as
+        \cs{axes} and related commands.
+\item[\cs{fillcolor}] This sets the default color used by \cs{gfill}. It
+        is also used by \cs{polkadot} (which has no color option).
+\item[\cs{hatchcolor}] This sets the default color used by any hatching
+        command.
+\item[\cs{headcolor}] This sets the default color for arrowheads added
+        by the \cs{arrow} command. It is also the color of
+        arrowheads on any coordinate axis.
+\item[\cs{pointcolor}] This sets the color used by \cs{point}, \cs{grid},
+        and \cs{plotsymbol} (the last one will be described later).
+\item[\cs{tlabelcolor}] This sets the color used for all text labels if
+        the \opt{mplabels} option is turned on.
+\end{description}
+
+The color can be a common name for a color, provided that name is one of
+the following: \texttt{white}, \texttt{black}, \texttt{red},
+\texttt{green}, \texttt{blue}, \texttt{cyan}, \texttt{magenta}, or
+\texttt{yellow}. We have already seen this usage. It can also be a color
+name defined in the file \file{dvipsnam.mp} that accompanies \mfp. It can
+also be an explicit color formula, where color formulas are described in
+the \mfp{} manual.
+
+The optional argument is one of the \emph{color models}. See the manual
+for details, but the syntax is just like that of the \prog{color}
+package's \cs{color} command. For example,
+\begin{verbatim}
+\pointcolor[rgb]{0,1,0}
+\end{verbatim}
+would use the color model \opt{rgb} with parameters 0, 1, and 0 (this is
+green). After each of these commands a certain color name is assigned a
+value. For example, a use of the \cs{pointcolor} command assigns a value
+to the color named \gbc{pointcolor}. Also \cs{drawcolor} sets
+\gbc{drawcolor} and this pattern is followed for all the color setting
+commands above except \cs{backgroundcolor}, which assigns its value to
+the color named \gbc{background}.
+
+Color names for \mfp{} use can be defined using the \cs{mfpdefinecolor}
+command. Here's an example (figure~\ref{fig33}). Note the use of the
+color name \gbc{pointcolor} to make arrowheads and points have the same
+color.
+\begin{verbatim}
+\begin{mfpic}{0}{3.5}{0}{3.5}
+  \tlabelcolor{red}
+  \pointcolor{rgb(0,1,0)}% green
+  \drawcolor[rgb]{0,0,1} % blue
+  \fillcolor{Goldenrod}  % from dvipsnam.mp
+  \headcolor{pointcolor} % will be green after above
+  \mfpdefinecolor{DarkerRed}{rgb}{.67,0,0}
+  \hatchcolor{DarkerRed}
+  \penwd{1pt}
+  \gfill\circle{(1,1),.5}
+  \point[3pt]{(1,.5),(1,1.5),(.5,1),(1.5,1)}
+  \hatch\rect{(2.5,2.5),(3.5,3.5)}
+  \arrow[l 5pt]\polyline{(1,1),(3,3)}
+  \tlabel[cc](1,3){Examples\\of\\colors}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig33}
+  \begin{mfpic}{0}{3.5}{0}{3.5}
+    \tlabelcolor{red}
+    \pointcolor{rgb(0,1,0)}% green
+    \drawcolor[rgb]{0,0,1} % blue
+    \fillcolor{Goldenrod}  % from dvipsnam.mp
+    \headcolor{pointcolor} % will be green after above
+    \mfpdefinecolor{DarkerRed}{rgb}{.67,0,0}
+    \hatchcolor{DarkerRed}
+    \penwd{1pt}
+    \gfill\circle{(1,1),.5}
+    \point[3pt]{(1,.5),(1,1.5),(.5,1),(1.5,1)}
+    \hatch\rect{(2.5,2.5),(3.5,3.5)}
+    \arrow[l 5pt]\polyline{(1,1),(3,3)}
+    \tlabel[cc](1,3){Examples\\of\\colors}
+  \end{mfpic}
+\end{mfpfig}
+
+\chapter{Closing paths}
+
+There are many different ways to modify a figure. We have already seen
+\cs{arrow}, which appends an arrowhead, \cs{reverse} which reverses the
+sense, and several that apply an affine transformation
+(\cs{rotatepath}, \cs{shiftpath}, etc.).  Now we will see the simple
+operation of closing a path.
+
+All methods of closing a path have to connect the end to the start, but
+simply drawing a connection is not enough. \MP{} has to be told to close
+the path, and what kind of connection is desired. We have several macros
+that can do the job, the simplest being \cs{lclosed}, which closes with
+a straight line. Putting \cs{lclosed} in front of \cs{polyline}, for
+example, produces the same result as \cs{polygon}. Another macro is
+\cs{sclosed} which produces a smooth closure. Putting it in front of
+\cs{curve} gives (almost) the same result as \cs{cyclic}. There is one
+other useful macro, \cs{bclosed}, which also informs \MP{} to make a
+smooth closure. The difference between \cs{sclosed} and \cs{bclosed} is
+that the first modifies slightly the original path (in order to achieve
+the effect that \cs{sclosed}${}+{}$\cs{curve}${}\approx{}$\cs{cyclic}),
+the second just asks \MP{} to do its best to connect the ends smoothly.
+Here's an example comparing the two smooth methods (figure~\ref{fig34}).
+\begin{verbatim}
+\begin{mfpic}{0}{4}{0}{4}
+ % an open curve:
+  \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+ % \sclosed a shifted copy:
+  \draw\gfill[green]\sclosed\shiftpath{(2,0)}
+      \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+ % \bclosed another copy:
+  \draw\gfill[yellow]\bclosed\shiftpath{(2,-2)}
+      \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+ % \cyclic with same points, shifted:
+  \draw\gfill[red]\shiftpath{(0,-2)}
+      \cyclic{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+  \tlabeljustify{bc}
+  \nomplabels
+  \tlabels{
+    (1,2.4){\cs{curve}}
+    (3,2.4){\cs{sclosed}}
+    (1,0.4){\cs{cyclic}}
+    (3,0.4){\cs{bclosed}}
+  }
+ % Some points to help illustrate
+  \point{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+  \point{(2.49,3),(2.5,3.7),(3,4),(3.5,3.7),(3.51,3)}
+  \point{(0.49,1),(.5,1.7),(1,2),(1.5,1.7),(1.51,1)}
+  \point{(2.49,1),(2.5,1.7),(3,2),(3.5,1.7),(3.51,1)}
+\end{mfpic}
+\end{verbatim}
+\begin{mfpfig}{fig34}
+  \begin{mfpic}{0}{4}{0}{4}
+    \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+    \draw\gfill[green]\sclosed\shiftpath{(2,0)}
+        \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+    \draw\gfill[yellow]\bclosed\shiftpath{(2,-2)}
+        \curve{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+    \draw\gfill[red]\shiftpath{(0,-2)}
+        \cyclic{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+    \tlabeljustify{bc}
+    \nomplabels
+    \tlabels{
+      (1,2.4){\cs{curve}}
+      (3,2.4){\cs{sclosed}}
+      (1,0.4){\cs{cyclic}}
+      (3,0.4){\cs{bclosed}}
+    }
+    \point{(0.49,3),(.5,3.7),(1,4),(1.5,3.7),(1.51,3)}
+    \point{(2.49,3),(2.5,3.7),(3,4),(3.5,3.7),(3.51,3)}
+    \point{(0.49,1),(.5,1.7),(1,2),(1.5,1.7),(1.51,1)}
+    \point{(2.49,1),(2.5,1.7),(3,2),(3.5,1.7),(3.51,1)}
+  \end{mfpic}
+\end{mfpfig}
+
+A word about the labels: we turned off \opt{mplabels} with the command
+\verb$\nomplabels$, because we used a command (\verb$\cs$) defined for
+this document and not known to basic \TeX{} or \LaTeX. The labels
+therefore are positioned by \LaTeX{} while it assembles this document,
+instead of by \MP{} which would call a separate instance of \TeX{} or
+\LaTeX{} where \cs{cs} was unknown. We could have kept \opt{mplabels},
+provided we had used \verb$\mfpverbtex$ to write the appropriate
+\LaTeX{} preamble to the \file{.mp} output. It would need to be some
+subset of the preamble of this document.
+
+
+\chapter*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+
+In addition to \pdfLaTeX, \Mfp{} works with plain \pdfTeX, \LaTeX, and
+plain \TeX{}. Instead of \MP{} as the figure processor, \MF{} can also
+be used. Let's start with the difference between using \mfp{} in a
+plain~\TeX{} document and using it in a \LaTeX{} document.
+
+\renewcommand\thesubsection{\Alph{subsection}}
+
+\section{\Mfp{} in plain \TeX}
+
+Here is a sample plain \pdfTeX{} document with results the same as our
+first ``Hello, world'' example. Let's call this file \file{plfirst}
+\begin{verbatim}
+\input mfpic
+  \usemetapost
+\opengraphsfile{myfigs}
+  My first figure:
+  \mfpic[72]{-1}{1}{-1}{1}
+    \ellipse{(0,0),1,.5}
+  \endmfpic
+\closegraphsfile
+\end
+\end{verbatim}
+The main difference is the lack of \LaTeX{} commands. The crucial
+difference is in the first two lines. There we simply
+\verb$\input mfpic$ and we turn on \MP{} support with the
+\verb$\usemetapost$ command instead of an option to \verb$\usepackage$.
+
+Since \verb$\usepackage$ and its options don't exist in plain \TeX{},
+all those features that we select with options in \LaTeX{} must be
+selected by some command in plain. For example, the \opt{mplabels}
+option is replaced with the command \verb$\usemplabels$ (which can also
+be used in \LaTeX).
+
+Also, plain \TeX{} doesn't have environments, so instead of
+\verb$\begin{mfpic}$ we just use \verb$\mfpic$ and instead of
+\verb$\end{mfpic}$ we use \verb$\endmfpic$.
+
+The external processing is essentially the same:
+\begin{verbatim}
+pdftex plfirst
+mpost myfigs
+pdftex plfirst
+\end{verbatim}
+should produce \texttt{plfirst.pdf} with the same picture of an ellipse.
+
+
+\section{\Mfp{} without PDF}
+
+If we wish to use nonPDF versions of \LaTeX{} or plain \TeX, the only
+difference is in the processing steps. To process \file{first.tex} with
+\LaTeX, run the command
+\begin{verbatim}
+latex first
+\end{verbatim}
+followed by
+\begin{verbatim}
+mpost myfigs
+\end{verbatim}
+followed by latex again.
+\begin{verbatim}
+latex first
+\end{verbatim}
+Then run the dvi processor of your choice. It should be one that can
+successfully handle eps figures (or at least the simple eps produced by
+\MP). Certainly \prog{dvips} can do it:
+\begin{verbatim}
+dvips first
+\end{verbatim}
+will produce \file{first.ps}. The file{.ps} file can be viewed with
+\prog{gsview} or printed, or converted to PDF with some distillation
+program like \prog{ps2pdf}. Also \prog{dvipdfm} (if properly
+configured) can be used convert the \file{.dvi} file to PDF.
+
+\section{\Mfp{} without \MP}
+
+\Mfp{} can produce figures using \MF{} instead of \MP. What it does is
+work with \MF{} to produce a made-to-order font, where each picture is a
+large character in that font.
+
+Since \pdfTeX{} and \pdfLaTeX{} do not work well with the fonts produced
+by \MF, and many PDF viewers don't display them well anyway, I do not
+recommend using \mfp{} to produce PDF without turning on \MP{} support.
+However, all dvi viewers and \prog{dvips} \emph{do} work well with such
+fonts, so it can make sense to use \mfp{} with \MF{} \emph{if} you don't
+need the features that \MP{} enables: color and rotation of labels. One
+advantage of doing this is the smaller number of files produced. If
+there are 100 \mfp{} figures in a document, \MP{} produces 100 files
+(apart from a couple of temporary files and the \file{.log} file), but
+the \MF{} procedure produces only four files no matter how many figures
+are present.
+
+To use \mfp{} without \MP{}, omit the \opt{metapost} option or the
+\verb$\usemetapost$ command. If you want a visible reminder of the fact
+that \MF{} is being used, you can use the \opt{metafont} option or the
+\verb$\usemetafont$ command. Of course, you may not use \opt{mplabels}
+without \MP. You may use the color commands and options, but the only
+colors actually produced will be black and white (and occasionally a
+pattern of pixels that simulate gray). The processing steps are
+different. After
+\begin{ex}
+\texttt{latex first} \quad(or \texttt{tex plfirst})
+\end{ex}
+run \MF:
+\begin{ex}
+    \texttt{mf myfigs}
+\end{ex}
+This should produce three files: \texttt{myfigs.log},
+\texttt{myfigs.tfm}, and \texttt{myfigs.600gf}. The last one (which
+might have a different number on your system) is called a \emph{generic
+font} (GF) file and contains the bitmap descriptions. If the file
+produced is \texttt{myfigs.2602gf}, and the \file{.tfm} is not produced,
+that indicates a configuration problem with your system that we'll get
+to later. If this did work, one needs to convert the GF file to a
+PK font file, the standard format for bitmap fonts in the \TeX{} world.
+This may be done with
+\begin{ex}
+    \texttt{gftopk myfigs.600gf}
+\end{ex}
+Some systems may require you to name the output file on the command
+line:
+\begin{ex}
+    \texttt{gftopk myfigs.600gf myfigs.600pk}
+\end{ex}
+And some systems may require the extension to be simply \file{.pk}:
+\begin{ex}
+    \texttt{gftopk myfigs.600gf myfigs.pk}
+\end{ex}
+Finally, some systems may have a \prog{makepk} or \prog{mktexpk} command
+that can be used in place of the combination of \MF{} and \prog{gftopk}.
+You'll have to check what your system has and what its usage might be,
+and what it might do with the PK file produced.
+
+After the above, one again runs `\texttt{latex first}' (or `\texttt{tex
+plfirst}'), and then the \file{.dvi} can be viewed or processed with dvips.
+The two files \file{myfigs.log} and \file{myfigs.600gf} can be deleted;
+only \file{myfigs.tfm} and \file{myfigs.600pk} are needed. If the viewed
+image shows the pictures at a far different size than you expect, this can
+also indicate a configuration problem.
+
+Some systems permit on-the-fly creation of PK files by various
+\file{.dvi} processing programs. It is not wise to allow this to happen
+when working with \mfp. The problem is that this automatic creation
+process is \emph{not} repeated when a figure is edited unless the old PK
+files are deleted, and it may take some hunting to even locate them. One
+should \emph{always} follow the \MF{} step with the \prog{gftopk} step.
+You might even want to write a batch script or makefile to ensure that
+this happens.
+
+Another problem (more an annoyance) that can occur comes from the
+behavior of most dvi viewers: most will reload a \file{.dvi} file if
+they detect that it has changed (or if asked to), but none that I know
+of will reload any fonts even if they have changed. So if one is going
+through a edit-compile-view cycle involving \mfp{} figures, one usually
+has to close the viewer and open it again before one can see changes
+that were made in the figures after starting the viewer. It is also
+possible that PK fonts are cached and shared by other programs, so you
+may need to close other programs to ensure the cache is cleared and the
+new figures loaded.
+
+\section{\MF{} configuration problems}
+
+To diagnose these problems it important to know something about
+\emph{printer modes}. \CMF{} produces bitmap images of characters. This
+means a description of a block of pixels, telling which ones are black
+and which are white. If the description says that 60 pixels in a row are
+black, that produces a thin black line. How long that line is depends on
+the size of a printer's pixels. For the LaserJet IV, there are 600
+pixels to the inch, so 60 pixels makes 1/10 of an inch. The LaserJet~II,
+however, has 300 pixels to the inch, so 60 pixels is 1/5 of an inch
+long. What \MF{} needs in order to produce an image that is the correct
+size is (at a minimum) the \emph{resolution} of the intended printer.
+This is typically reported in DPI (dots per inch) and \MF{} keeps the
+value in the variable \mfc{pixels_per_inch}.
+
+As part of the configuration of your DVI viewer or of \prog{dvips} you
+may have needed to select a printer from a list, or edit a line in some
+configuration file (e.g., \file{config.ps}). What was going on then was
+the assigning of a default \MF{} printer mode. There is a file on most
+\TeX{} systems named \file{modes.mf} which assigns symbolic names to a
+set of parameters that enable \MF{} to tune its output to a particular
+printer. For example, the LaserJet~IV is given the name
+`\texttt{ljfour}' and that name is associated with the value 600 for
+\mfc{pixels_per_inch}. In order to tell \MF{} to make output for the
+LaserJet~IV, one can put that information on the command line:
+\begin{ex}
+    \texttt{mf \cs{mode}:=ljfour; input myfigs}
+\end{ex}
+Your operating system or \TeX{} distribution may require you to quote
+the backslash in the above command.
+
+There is a system for making the selection of the correct mode
+semi-automatic, not requiring a command line specification. Near the end
+of \file{modes.mf} is a line similar to
+\begin{ex}
+    \mfc{localfont:=ljfour;}
+\end{ex}
+This is intended to equate the symbolic name \mfc{localfont} with the
+user's default printer. If the LaserJet~IV is your default printer, the
+line above would be the correct one. If it is not, then that line should
+be changed. This can be done with an ordinary text editor, or your
+\TeX{} system may have a configuration utility to take care of it.
+
+If you say ``\texttt{mf myfigs}'' on an \mfp{} file \file{myfigs.mf}, \mfp's
+internal code will detect that no mode was defined on the command line.
+It will then check if \mfc{localfont} is defined and if so, use that for
+the printer mode. If that fails, it will try to select \mfc{ljfour}.
+If even that is unknown, \mfp{} will define its own generic 600 DPI mode.
+
+\Mfp{} doesn't need to know all the parameters associated to a printer
+mode, only the value of \mfc{pixels_per_inch}. If you get a GF file that
+indicates an incorrect DPI value for your printer, you should arrange
+for the line in \file{modes.mf} that sets \mfc{localfont} to be
+corrected. At the very least it should equate \mfc{localfont} to a name
+defined in \file{modes.mf} and associated to a printer with the same DPI
+as yours. After changing \file{modes.mf}, you need to run whatever
+programs your \TeX{} system requires to remake the \MF{} format.
+
+\end{document}

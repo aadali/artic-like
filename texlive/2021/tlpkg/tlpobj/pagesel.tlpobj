@@ -1,0 +1,26 @@
+name pagesel
+category Package
+revision 56105
+shortdesc Select pages of a document for output
+longdesc Selects single pages, ranges of pages, odd pages or even pages
+longdesc for output. The package is part of the oberdiek bundle.
+containersize 2488
+containerchecksum c07cd3b48fd5cd59ca685b1ae39da7e7d8774348241c26d29a74b41ee6c29fdae0c01a47a79aa669cf6651b0b83a5b79f8424c139c17db5bca20d30186e5b655
+doccontainersize 331604
+doccontainerchecksum eeb70877276b393cccb1c0e301c191480e5aa52715738ac6d01b58be864b065b3b72afdbd90d3a398284671682370300537d4953aa2adf4355fc6d2278d2819e
+docfiles size=83
+ texmf-dist/doc/latex/pagesel/README.md details="Readme"
+ texmf-dist/doc/latex/pagesel/pagesel.pdf details="Package documentation" language="en"
+srccontainersize 7128
+srccontainerchecksum 457c52df8dca820c8ee39494630a077d0a14f58f7308805dd0b5f5dc374fdaee83581cab3543d7a9ded91ef94f7555f2d2b2420a6ff2c9ddf7c790b5407f468a
+srcfiles size=7
+ texmf-dist/source/latex/pagesel/pagesel.dtx
+runfiles size=4
+ texmf-dist/tex/latex/pagesel/pagesel-2016-05-16.sty
+ texmf-dist/tex/latex/pagesel/pagesel.sty
+catalogue-also selectp
+catalogue-contact-bugs https://github.com/ho-tex/pagesel/issues
+catalogue-ctan /macros/latex/contrib/pagesel
+catalogue-license lppl1.3c
+catalogue-topics page-control
+catalogue-version 1.10

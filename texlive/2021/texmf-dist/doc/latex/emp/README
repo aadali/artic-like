@@ -1,0 +1,51 @@
+# $Id: README,v 1.3 1997/11/12 21:19:24 ohl Exp $
+########################################################################
+
+    This is emp, a package for encapsulated MetaPost pictures in LaTeX.
+    This is very useful for keeping illustrations in sync with the
+    text.  It also frees the user from inventing descriptive  names
+    for PostScript files that fit into the confines of file system
+    conventions.
+
+    You are invited to share, use, abuse, and improve it, see the file
+    COPYING for details.
+
+    Enjoy,
+    -Thorsten
+
+
+########################################################################
+
+    Comments, bug reports and improvements are welcome at:
+
+        Thorsten.Ohl@Physik.TH-Darmstadt.de
+        (aka: ohl@crunch.ikp.physik.th-darmstadt.de)
+
+    New versions can be found in:
+
+        crunch.ikp.physik.th-darmstadt.de:/pub/ohl/emp
+
+    or at CTAN:
+
+        {ftp.tex.ac.uk,ftp.dante.de}:
+          ... macros/latex/contrib/supported/emp
+
+########################################################################
+
+NEWS for Version 0.01
+
+    *  Created.
+
+########################################################################
+
+WARNING:
+
+    If LaTeX fails with `Unknown graphics extension: 3', you have a
+    severely out-of-date graphics.sty file (LaTeX will have issued a
+    warning in this case).  There has been a change to the user
+    interface, which makes it very hard to support both versions.
+
+########################################################################
+# Local Variables:
+# mode:indented-text
+# End:

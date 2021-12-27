@@ -1,0 +1,26 @@
+name fontbook
+category Package
+revision 23608
+shortdesc Generate a font book
+longdesc The package provides a means of producing a 'book' of font
+longdesc samples (for evaluation, etc.).
+containersize 1452
+containerchecksum 55ee9dc22aefcf91c7fe30f516bfbaea5d0b8c5423cec204bfb208ebfb4b2331ebdd65032eb6f2a9f8958f15fd47433a9c7884f49ff1f3900f1538f9f25d4fe4
+doccontainersize 1245344
+doccontainerchecksum 65eb7d3f6426d3dcb13ac9a0d5b396eb4c03586d9d2b3d842af9ae4ad98119e8721034de499eae485c5803873946f04af992ddd860d09a7131021027c14b5d4b
+docfiles size=371
+ texmf-dist/doc/xelatex/fontbook/README details="Readme"
+ texmf-dist/doc/xelatex/fontbook/fontbook-freefonts.pdf details="Sample usage (free fonts book)"
+ texmf-dist/doc/xelatex/fontbook/fontbook-freefonts.tex
+ texmf-dist/doc/xelatex/fontbook/fontbook.pdf details="Package documentation"
+srccontainersize 3272
+srccontainerchecksum 8ecb0b7b4e5f00806a377acfa0198ef217faf0573930be1272d13d743d1e84db76f067afa7e7a665c4540536c1d888bdb702ea9c203a2a405389079aa49f71f7
+srcfiles size=3
+ texmf-dist/source/xelatex/fontbook/fontbook.dtx
+ texmf-dist/source/xelatex/fontbook/fontbook.ins
+runfiles size=1
+ texmf-dist/tex/xelatex/fontbook/fontbook.sty
+catalogue-ctan /macros/xetex/latex/fontbook
+catalogue-license lppl1.3
+catalogue-topics font-devel
+catalogue-version 0.2

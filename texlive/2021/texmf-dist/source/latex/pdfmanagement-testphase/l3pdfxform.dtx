@@ -1,0 +1,210 @@
+% \iffalse meta-comment
+%
+%% File: l3pdfxform.dtx
+%
+% Copyright (C) 2018-2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "LaTeX PDF management testphase bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/pdfresources
+%
+% for those people who are interested.
+%
+%<*driver>
+\RequirePackage{pdfmanagement-testphase}
+\DeclareDocumentMetadata{pdfstandard=A-2b}
+\makeatletter
+\declare@file@substitution{doc.sty}{doc-v3beta.sty}
+\makeatother
+\documentclass[full]{l3doc}
+\usepackage{array,booktabs,hyperxmp}
+\hypersetup{pdfauthor=The LaTeX Project,pdftitle=l3pdfxform (LaTeX PDF management testphase bundle)}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3pdfxform} module\\ Commands for form XObjects   ^^A
+%   \\ \LaTeX{} PDF management testphase bundle
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Version 0.95i, released 2021-08-28}
+%
+% \maketitle
+% \begin{documentation}
+%
+% \section{\pkg{l3pdfxform} documentation}
+% This module contains a number of commands to create \enquote{form XObjects},
+% for which pdf\TeX{} introduced the short name \enquote{xforms}.
+%
+% The status is still beta.
+% The dvips route is now better supported but there are open issus
+% if landscape pages are involved or if the objects are larger than the page.
+% With dvips the creation of a form involves typesetting and so can affect spacing.
+%
+% Probably some of the function will also need to be enhanced by hooks.
+%
+%  \begin{function}[added = 2019-08-05,updated=2021-02-14]
+%   {
+%     \pdfxform_new:nnn
+%   }
+%   \begin{syntax}
+%     \cs{pdfxform_new:nnn} \Arg{name} \Arg{attributes} \Arg{content}
+%   \end{syntax}
+%    This command create a new form XObject that can be used as appearance or
+%    directly later.
+%    If the \meta{content} contains BDC-marks it should \emph{not} be given as a
+%    previously typeset box, but directly so that the names of the
+%    BDC-marks can be added to the resources of the xform. The xform will automatically
+%    include the resources of the current page.
+%    The content will be typeset in a hbox. With pdflatex and luatex
+%    the surrounding color is \emph{not} stored in the form XObject
+%    but should be if wanted added e.g. with |\color_select:n{.}|. This keeps
+%    the option of color injection open.
+%   \end{function}
+%   \begin{function}[added = 2019-08-05]
+%     {
+%      \pdfxform_use:n
+%     }
+%   \begin{syntax}
+%     \cs{pdfxform_use:n} \Arg{name}
+%   \end{syntax}
+%    This command uses (typesets) a previously created form XObject.
+%    If the surrounding color is different, it is injected in the form XObject with the
+%    engines pdftex or luatex.
+%   \end{function}
+%   \begin{function}[EXP,added = 2019-08-05]
+%     {
+%       \pdfxform_ref:n
+%     }
+%   \begin{syntax}
+%     \cs{pdfxform_ref:n} \Arg{name}
+%   \end{syntax}
+%   Inserts the appropriate information to reference the xform \meta{name}
+%   in for example appearance dictionaries.
+%   \end{function}
+%   \begin{function}[EXP,added = 2019-08-05]
+%     {
+%       \pdfxform_wd:n, \pdfxform_ht:n, \pdfxform_dp:n
+%     }
+%   \begin{syntax}
+%     \cs{pdfxform_wd:n} \Arg{name}
+%   \end{syntax}
+%    These command give back the sizes of the form XObject. The values are stored in
+%    tl-variables with the unit pt and not in dimensions!
+%   \end{function}
+%   \begin{function}[EXP,pTF,added = 2020-04-29]
+%     {
+%       \pdfxform_if_exist:n
+%     }
+%   \begin{syntax}
+%     \cs{pdfxform_if_exist_p:n} \Arg{name}
+%     \cs{pdfxform_if_exist:nTF} \meta{name} \Arg{true code} \Arg{false code}
+%   \end{syntax}
+%    These command tests if an xform with name \Arg{name} has been already defined.
+%   \end{function}%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3pdfxform} implementation}
+%
+%    \begin{macrocode}
+%<@@=pdf>
+%<*header>
+\ProvidesExplPackage{l3pdfxform}{2021-08-28}{0.95i}
+  {command to create xforms (beta)---LaTeX PDF management testphase bundle}
+%</header>
+%    \end{macrocode}
+% \subsection{Form XObject (pdfxform)}
+% \begin{NOTE}{UF}
+%  - As in dvi mode the xform is immediate, this is done for pdftex/luatex too.
+%    If needed a delayed version can be added later.
+%  - the argument for attributes is needed to add e.g. /StructParents
+%  - it is not clear if an argument for additional resources is needed, probably they
+%    should / need to be added automatically.
+%  - code for adding ExtGState etc to the local resource is missing, will be
+%    added when the object name is clear.
+%  - should the size be stored in dim or tl?
+%  - dvips implementation is missing for ideas: pdfbase, atfi-dvips.def,
+%  \end{NOTE}
+% \begin{macro}{\pdfxform_new:nnn}
+%    \begin{macrocode}
+%<*package>
+\cs_new_protected:Npn  \pdfxform_new:nnn #1 #2 #3
+  {
+    \@@_backend_xform_new:nnnn { #1 } { #2 } {  } { #3 }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pdfxform_use:n}
+%    \begin{macrocode}
+\cs_new_protected:Npn \pdfxform_use:n #1
+  {
+    \@@_backend_xform_use:n { #1 }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pdfxform_ref:n,\pdfxform_ref:o}
+%    \begin{macrocode}
+% expansion?
+\cs_new:Npn \pdfxform_ref:n #1
+  {
+    \@@_backend_xform_ref:n { #1 }
+  }
+
+\cs_generate_variant:Nn \pdfxform_ref:n {o}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pdfxform_wd:n,\pdfxform_ht:n,\pdfxform_dp:n,}
+%    \begin{macrocode}
+\cs_new:Npn \pdfxform_wd:n #1
+  {
+    \tl_use:c { c_@@_backend_xform_wd_ \tl_to_str:n { #1 } _tl }
+  }
+
+\cs_new:Npn \pdfxform_ht:n #1
+  {
+    \tl_use:c { c_@@_backend_xform_ht_ \tl_to_str:n { #1 } _tl }
+  }
+
+\cs_new:Npn \pdfxform_dp:n #1
+  {
+    \tl_use:c { c_@@_backend_xform_dp_ \tl_to_str:n { #1 } _tl }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[pTF]{\pdfxform_if_exist:n}
+% The command is defined in the backend (to avoid timing problems).
+% \end{macro}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

@@ -1,0 +1,35 @@
+# Changes
+
+## v0.20 (2011-07-14)
+
+* Change package name: `colordef` => `mpcolornames`.
+
+* First upload to CTAN.
+
+* Color specification files are translated into MetaPost code via
+  scripts.
+
+* Remove 'smart colors'.
+
+* Remove generalization of `background`.
+
+
+## v0.15 (2009-02-10)
+
+* Rename color model contants.
+
+* Show proof tables.
+
+
+## v0.14 (2009-02-05)
+
+* First public preview.
+
+
+
+<!--
+%%% Local Variables: 
+%%% coding: utf-8
+%%% mode: markdown
+%%% End: 
+-->

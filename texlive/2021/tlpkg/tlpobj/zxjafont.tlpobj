@@ -1,0 +1,20 @@
+name zxjafont
+category Package
+revision 53884
+shortdesc Set up Japanese font families for XeLaTeX
+containersize 5124
+containerchecksum bb6047e07b1d3c326cdee875809053b90b7e753078ae1e6c0b3cad19cb645e7e46321b07509f86b8d8dc2eb331be8e50588a2f9c926afd413aed20c99f4f6a40
+doccontainersize 179452
+doccontainerchecksum c1cc759857b60c123ae798e1a9168f85e7fa663b875f241a8d5160b14cf366bcc282d09b9e527469986ee268b160cadc89a906facf8f38bd76ffb9d07e0a7ffa
+docfiles size=51
+ texmf-dist/doc/latex/zxjafont/LICENSE
+ texmf-dist/doc/latex/zxjafont/README-ja.md details="Readme" language="ja"
+ texmf-dist/doc/latex/zxjafont/README.md details="Readme" language="en"
+ texmf-dist/doc/latex/zxjafont/zxjafont.pdf details="Package documentation"
+ texmf-dist/doc/latex/zxjafont/zxjafont.tex
+runfiles size=6
+ texmf-dist/tex/latex/zxjafont/zxjafont.sty
+catalogue-ctan /language/japanese/zxjafont
+catalogue-license mit
+catalogue-topics japanese font-supp xetex
+catalogue-version 1.2

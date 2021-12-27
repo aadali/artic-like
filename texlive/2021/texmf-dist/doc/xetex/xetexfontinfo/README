@@ -1,0 +1,16 @@
+__________________________
+ opentype-info & aat-info 
+     By Jonathan Kew
+
+These documents are used to reveal the various
+font features supported by fonts useable in XeTeX.
+
+Use 'opentype-info.tex' with OpenType fonts and
+'aat-info.tex' with AAT fonts (Mac OS X only).
+
+Input the font name and compile them with plain 
+`xetex`; the output will be a listing of the
+supported font features.
+
+These documents are distributed under the Apache License v2: 
+  <http://www.apache.org/licenses/LICENSE-2.0.html>

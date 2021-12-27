@@ -1,0 +1,5 @@
+The metapost macros are described in the following article:
+
+Denis Roegel: An introduction to nomography: Garrigues' nomogram 
+              for the computation of Easter, 
+              TUGboat (volume 30, number 1, 2009, pages 88-104) 

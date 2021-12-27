@@ -1,0 +1,56 @@
+name mpcolornames
+category Package
+revision 23252
+shortdesc Extend list of predefined colour names for MetaPost
+longdesc The MetaPost format plain.mp provides only five built-in colour
+longdesc names (variables), all of which are defined in the RGB model:
+longdesc red, green and blue for the primary colours and black and
+longdesc white. The package makes more than 500 colour names from
+longdesc different colour sets in different colour models available to
+longdesc MetaPost. Colour sets include X11, SVG, DVIPS and xcolor
+longdesc specifications.
+containersize 6792
+containerchecksum 9808706010059e8d2683f88a47535b8039049681e5a9fdc013cc384bcacb1910cc7ab2f7614d35ed964c28507bf5fc062fe4db852afa45f9d9383c367838eeba
+doccontainersize 108768
+doccontainerchecksum bfb9ce4c85de655b890948897deba96a5ff60cb7518b3e198cd0b088b63670531f29bd84dbde4837298a24f36dac0652f2d2d3491dbcd7ac8f9e57de6500c6dd
+docfiles size=50
+ texmf-dist/doc/metapost/mpcolornames/CHANGES
+ texmf-dist/doc/metapost/mpcolornames/LICENSE
+ texmf-dist/doc/metapost/mpcolornames/README details="Readme"
+ texmf-dist/doc/metapost/mpcolornames/expl-array-index.mp
+ texmf-dist/doc/metapost/mpcolornames/fig-clash-svg-dvips.mp
+ texmf-dist/doc/metapost/mpcolornames/mpcolornames.pdf details="Package documentation"
+ texmf-dist/doc/metapost/mpcolornames/mpcolornames.tex
+ texmf-dist/doc/metapost/mpcolornames/proof-mpcolornames.mp
+ texmf-dist/doc/metapost/mpcolornames/proof-spec-dvipsnam-def.mp
+ texmf-dist/doc/metapost/mpcolornames/proof-spec-plain-mp.mp
+ texmf-dist/doc/metapost/mpcolornames/proof-spec-svgnam-def.mp
+ texmf-dist/doc/metapost/mpcolornames/proof-spec-x11nam-def.mp
+ texmf-dist/doc/metapost/mpcolornames/proof-spec-xcolor-sty.mp
+ texmf-dist/doc/metapost/mpcolornames/tab-clash-svg-dvips.tex
+ texmf-dist/doc/metapost/mpcolornames/tab-spec-dvipsnam-def.tex
+ texmf-dist/doc/metapost/mpcolornames/tab-spec-plain-mp.tex
+ texmf-dist/doc/metapost/mpcolornames/tab-spec-svgnam-def.tex
+ texmf-dist/doc/metapost/mpcolornames/tab-spec-x11nam-def.tex
+ texmf-dist/doc/metapost/mpcolornames/tab-spec-xcolor-sty.tex
+srccontainersize 3364
+srccontainerchecksum ec29085382f6464b10323680488140b483aa09c9df050806a154fce60bf92feb7d4e04de444d0fb4b1623c6ea3506ba619bf0fb2477f048fd4c5f2f0be9f272c
+srcfiles size=8
+ texmf-dist/source/metapost/mpcolornames/Makefile
+ texmf-dist/source/metapost/mpcolornames/spec-dvipsnam-def.awk
+ texmf-dist/source/metapost/mpcolornames/spec-plain-mp.awk
+ texmf-dist/source/metapost/mpcolornames/spec-svgnam-def.awk
+ texmf-dist/source/metapost/mpcolornames/spec-x11nam-def.awk
+ texmf-dist/source/metapost/mpcolornames/spec-xcolor-sty.awk
+ texmf-dist/source/metapost/mpcolornames/tab-clash-svg-dvips.awk
+runfiles size=9
+ texmf-dist/metapost/mpcolornames/mpcolornames-spec-dvipsnam-def.mp
+ texmf-dist/metapost/mpcolornames/mpcolornames-spec-plain-mp.mp
+ texmf-dist/metapost/mpcolornames/mpcolornames-spec-svgnam-def.mp
+ texmf-dist/metapost/mpcolornames/mpcolornames-spec-x11nam-def.mp
+ texmf-dist/metapost/mpcolornames/mpcolornames-spec-xcolor-sty.mp
+ texmf-dist/metapost/mpcolornames/mpcolornames.mp
+catalogue-ctan /graphics/metapost/contrib/macros/mpcolornames
+catalogue-license lppl
+catalogue-topics colour
+catalogue-version 0.20

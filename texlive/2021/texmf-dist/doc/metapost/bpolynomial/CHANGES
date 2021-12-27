@@ -1,0 +1,28 @@
+Version 0.5 released on 2007-12-12:
+* New:
+  + The package can now compute paths of square and cubic roots.
+  + Added a plain interface.
+  + Improved documentation.
+
+
+Version 0.4 released on 2007-11-28:
+* New:
+  + The package can now compute paths of derivatives and tangents.
+  + Improved documentation.
+
+
+Version 0.3 released on 2007-11-26:
+* Changed:
+  + Improved documentation.
+  + Slightly improved numeric stability.
+
+
+Version 0.2 pre-released on 2007-11-25:
+* New:
+  + Added documentation.
+* Changed:
+  + New user-interface.
+
+
+Version 0.1 of 2007-11-24:
+* First working version.

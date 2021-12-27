@@ -1,0 +1,87 @@
+name xecyr
+category Package
+revision 54308
+shortdesc Using Cyrillic languages in XeTeX
+longdesc Helper tools for using Cyrillic languages with XeLaTeX and
+longdesc babel.
+containersize 3564
+containerchecksum 0429aa515115ef69811069b08567c97ce40a8be68ebe72f26b8e94947abd86394204b21bbf25ae44c616a806878fe9900f5a639bb8707106836103ec06663454
+doccontainersize 654252
+doccontainerchecksum 555ef35f9e50450a796c24b87295eeac319d087a61e4fc7cedafbc398cb9a5c0add8b93318b8afadd82bbd2ca90dac9ade02dfbf286ba825c1d697b58110fe5e
+docfiles size=240
+ texmf-dist/doc/xelatex/xecyr/NEWS
+ texmf-dist/doc/xelatex/xecyr/README details="Readme"
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/README details="Readme"
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/combined_hyphenation_ruen-x.pdf
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/combined_hyphenation_ruen-x.tex
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/combined_hyphenation_ruen.pdf
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/combined_hyphenation_ruen.tex
+ texmf-dist/doc/xelatex/xecyr/combined_hyphenation/examples.zip
+ texmf-dist/doc/xelatex/xecyr/grafika_v_tex.pdf
+ texmf-dist/doc/xelatex/xecyr/grafika_v_tex.tex
+ texmf-dist/doc/xelatex/xecyr/howto-tex-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/howto-tex-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/inputs/1251.tex
+ texmf-dist/doc/xelatex/xecyr/inputs/866.tex
+ texmf-dist/doc/xelatex/xecyr/inputs/iso.tex
+ texmf-dist/doc/xelatex/xecyr/inputs/koi8-r.tex
+ texmf-dist/doc/xelatex/xecyr/listings-utf8-ex.pdf
+ texmf-dist/doc/xelatex/xecyr/listings-utf8-ex.tex
+ texmf-dist/doc/xelatex/xecyr/old/1251.tex
+ texmf-dist/doc/xelatex/xecyr/old/866.tex
+ texmf-dist/doc/xelatex/xecyr/old/iso.tex
+ texmf-dist/doc/xelatex/xecyr/old/koi8-r.tex
+ texmf-dist/doc/xelatex/xecyr/old/listings-utf8-ex.pdf
+ texmf-dist/doc/xelatex/xecyr/old/listings-utf8-ex.tex
+ texmf-dist/doc/xelatex/xecyr/old/pict2e-ex.pdf
+ texmf-dist/doc/xelatex/xecyr/old/pict2e-ex.tex
+ texmf-dist/doc/xelatex/xecyr/old/rubibtex-ex-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/rubibtex-ex-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/rubibtex-ex.bib
+ texmf-dist/doc/xelatex/xecyr/old/rumakeindex-ex-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/rumakeindex-ex-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-doc-ru.pdf details="Package documentation (Russian)" language="ru"
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-doc-ru.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex1-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex1-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex2-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex2-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex3-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex3-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex4-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex4-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex5-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex5-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex6-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex6-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex7-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/old/xecyr-ex7-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/pict2e-ex.pdf
+ texmf-dist/doc/xelatex/xecyr/pict2e-ex.tex
+ texmf-dist/doc/xelatex/xecyr/rubibtex-ex-x.pdf
+ texmf-dist/doc/xelatex/xecyr/rubibtex-ex-x.sh
+ texmf-dist/doc/xelatex/xecyr/rubibtex-ex-x.tex
+ texmf-dist/doc/xelatex/xecyr/rubibtex-ex.bib
+ texmf-dist/doc/xelatex/xecyr/rumakeindex-ex-x.pdf
+ texmf-dist/doc/xelatex/xecyr/rumakeindex-ex-x.tex
+ texmf-dist/doc/xelatex/xecyr/rumakeindex.sh
+ texmf-dist/doc/xelatex/xecyr/sample2e-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/sample2e-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-doc-ru.pdf details="Package documentation (Russian)" language="ru"
+ texmf-dist/doc/xelatex/xecyr/xecyr-doc-ru.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex3-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex3-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex4-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex4-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex5-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex5-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex6-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex6-ru-x.tex
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex7-ru-x.pdf
+ texmf-dist/doc/xelatex/xecyr/xecyr-ex7-ru-x.tex
+runfiles size=4
+ texmf-dist/tex/xelatex/xecyr/xecyr.sty
+catalogue-ctan /macros/xetex/latex/xecyr
+catalogue-license lppl1.3
+catalogue-topics cyrillic xetex
+catalogue-version 1.2

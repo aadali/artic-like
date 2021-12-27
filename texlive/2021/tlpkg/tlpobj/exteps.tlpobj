@@ -1,0 +1,24 @@
+name exteps
+category Package
+revision 19859
+shortdesc Include EPS figures in MetaPost
+longdesc Exteps is a module for including external EPS figures into
+longdesc MetaPost figures. It is written entirely in MetaPost, and does
+longdesc not therefore require any post processing of the MetaPost
+longdesc output.
+containersize 2988
+containerchecksum 1991bc0b471276ca3db68a8ba7611becc4557de4335a321b5c3e92c1fefbe34dc0488ab44850835b5ceb1684ce429e7756fb86d885e2da2177e0d9081797aa0c
+doccontainersize 108708
+doccontainerchecksum aac2e20a993818576f9e1efb153e9285b17b48827a1547a0c1033f22fa1a52f84ede214b4322ce4c6ddff69b8736f214f27370b3f1c006ea6e5fe2ab9fd64304
+docfiles size=55
+ texmf-dist/doc/metapost/exteps/LICENSE
+ texmf-dist/doc/metapost/exteps/README
+ texmf-dist/doc/metapost/exteps/delfin
+ texmf-dist/doc/metapost/exteps/exteps.pdf details="Package documentation"
+ texmf-dist/doc/metapost/exteps/exteps.tex
+runfiles size=3
+ texmf-dist/metapost/exteps/exteps.mp
+catalogue-ctan /graphics/metapost/contrib/macros/exteps
+catalogue-license gpl
+catalogue-topics graphics-prep
+catalogue-version 0.41

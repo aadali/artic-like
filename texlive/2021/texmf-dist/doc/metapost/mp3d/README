@@ -1,0 +1,87 @@
+              3d/3dgeom version 1.34
+              ======================
+
+This entire package is released under the LPPL, version 1 or (at your
+option) any later version.
+
+This release is a intermediary release of the 3d metapost package.
+It updates the 3d package (CTAN:graphics/metapost/macros/3d)
+and adds features facilitating the creation of space geometry drawings.
+
+There have been a number of changes, and as a consequence we had
+to slightly update the description published in TUGboat in 1998.
+See the doc directory. The doc directory contains both
+the old 1998 article, a corrected version, the 2001 GUTenberg
+article on geometry in space and its translation which appeared in 2003
+(TUGboat 2001).
+
+The 1998 package is completely contained in this release in the directory
+v1.0, except that some files have been renamed in order to prevent
+a conflict. For istance, 3d.mp has been renamed into 3d-1.0.mp
+when necessary. Also, the doc directory from the 1.0 version has been
+transferred to the current doc directory. 
+
+The 1.0 version should still be of interest for the documentation
+of its file, which used mft (see for instance v1.0/doc/3d-1.0.ps).
+
+As version 1.34 is an intermediate release, it may lack some
+uniformity which might be added later. Also, the sources do contain
+preliminary and documented material.
+
+This release contains three directories:
+
+  doc : documentation
+  examples : all the examples from the Space Geometry article
+  inputs : the files needed for metapost
+
+
+HOW TO CREATE AN ANIMATION
+--------------------------
+
+Details are given to produce the standard animation
+under UNIX, with the binaries listed below.
+For other architectures, you may have to adapt the
+write_script macro in the 3d.mp file.
+
+  1) create a directory and copy the .mp files from the
+     inputs directory to it.
+  2) apply metapost to animpoly.mp ; this will create 100 files
+     named animpoly.101, animpoly.102, ..., animpoly.200.
+     It will also have created a script file named
+     create_animation.sh
+  3) copy the gifmerge utility (as well as programs such as pnmcut,...)
+     in this directory or let it be reachable through PATH.
+  4) apply sh to create_animation.sh; this will create the animation;
+     first the metapost outputs are converted to gif, then
+     they are collated with gifmerge.
+  5) the result is animpoly.gif which is a GIF89A animation file;
+     it can be viewed under netscape or simply with a program like xanim.
+
+                 Binaries required by the 3D package
+                 -----------------------------------
+
+As it is, the generation of animated gifs requires the following
+programs:
+
+  awk
+  gs (ghostscript)
+  pnmcut
+  ppmquant
+  ppmtogif
+  gifmerge
+
+These executables are not part of that distribution.
+
+The first two are widely available on UNIX. 
+The three p* programs are part of the NETPBM toolkit.
+You can find this toolkit on the web through any search tool.
+And gifmerge can be found at http://www.iis.ee.ethz.ch/~kiwi/GIFMerge.
+
+I have no idea how to port all this on other architectures,
+but I assume there are similar tools for PCs or Macs.
+I'd be interested to get feedback and details so that i can 
+include instructions in future releases of my package.
+
+========================================================================
+Denis Roegel, 17 August 2003
+roegel@loria.fr

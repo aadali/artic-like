@@ -1,0 +1,30 @@
+The ptext package
+
+A package similar to the lipsum package for the Persian language
+with 100 paragraphs of the Shahnameh
+
+Author: Vahid Damanafshan <vdamanafshan@kut.ac.ir>
+Copyright (C) 2012-2013 by Vahid Damanafshan <http://www.damanafshan.ir>
+
+============================================================
+1. Contents of the package
+--------------------------
+
+   ptext.sty
+   ptext.tex 
+   ptext.pdf
+   README   (this file)
+
+To run the documentation, you must have the XB Niloofar and the Yas fonts on your computer.
+
+
+
+2. License
+--------------------------
+This material is subject to the LaTeX Project Public License. See 
+ 
+ http://www.ctan.org/tex-archive/help/Catalogue/licenses.lppl.html 
+
+for the details of that license. 
+
+To get help, please explore http://forum.parsilatex.com

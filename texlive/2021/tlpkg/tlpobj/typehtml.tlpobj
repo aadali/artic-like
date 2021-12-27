@@ -1,0 +1,23 @@
+name typehtml
+category Package
+revision 17134
+shortdesc Typeset HTML directly from LaTeX
+longdesc Can handle almost all of HTML2, and most of the math fragment
+longdesc of the draft HTML3.
+containersize 6928
+containerchecksum 9a158c2fd4c16a5dda1f8828ba32e082f5839fb841a8479563828b0085db4fbe28cb91674c6f22ab4965f8bf6f6cdc0f5b3113743113ca0188ff8bb851845ae3
+doccontainersize 155096
+doccontainerchecksum 0001ed86af90c4fba458d299a2651a200ece010ec76bd8e934afcbacb7d7684fcd6c9514d280bac886a41eb38b4630fa52b1ea18da70ef9c29bc04618e392673
+docfiles size=47
+ texmf-dist/doc/latex/typehtml/README details="Readme"
+ texmf-dist/doc/latex/typehtml/typehtml.pdf details="Package documentation"
+srccontainersize 16928
+srccontainerchecksum 729bb6acd2e6ec28bb18972cc58b7ef8efae136bea2d96a38cedb4b0d40b02e00e2b21143706325bcf9add879e8adcc6b0194b6cbef3803c5566e7f6f0e63ca7
+srcfiles size=17
+ texmf-dist/source/latex/typehtml/typehtml.dtx
+ texmf-dist/source/latex/typehtml/typehtml.ins
+runfiles size=7
+ texmf-dist/tex/latex/typehtml/typehtml.sty
+catalogue-ctan /macros/latex/contrib/typehtml
+catalogue-license lppl
+catalogue-topics foreign-import

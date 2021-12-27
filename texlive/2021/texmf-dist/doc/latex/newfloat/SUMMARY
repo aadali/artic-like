@@ -1,0 +1,1 @@
+This LaTeX package offers the command \DeclareFloatingEnvironment for defining new floating environments which behave like the existing floating environments "figure" and "table".

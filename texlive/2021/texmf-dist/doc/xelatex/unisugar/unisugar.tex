@@ -1,0 +1,707 @@
+\documentclass{ltxdoc} % Process with xelatex -shell-esc
+\usepackage{unisugar}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{bashful}
+\usepackage{varioref}
+
+⌘let⌘use␣package=⌘usepackage
+⌘use␣package{xspace}
+⌘let⌘new␣command=⌘newcommand
+⌘new␣command⌘unisugar{⌘texttt{unisugar}⌘xspace}
+
+⌘use␣package{graphicx}
+⌘use␣package{metalogo}
+⌘use␣package{hyperref}
+⌘use␣package{polyglossia}
+  ⌘setmainlanguage{english}
+  ⌘setotherlanguage{hebrew}
+  ⌘newfontfamily⌘hebrewfont[Script=Hebrew]{David CLM}
+  ⌘newfontfamily⌘codefont{DejaVu Sans Mono}
+
+⌘let⌘new␣environment=⌘newenvironment
+
+⌘new␣command⌘command␣key{{⌘codefont⌘⌘}}
+⌘new␣command⌘return␣key{{⌘codefont⌘⏎}⌘xspace}
+
+⌘new␣command⌘Unicode{⌘textsc{Unicode}⌘xspace}
+⌘new␣environment{code}{%
+  ⌘begingroup
+  ⌘quote
+  ⌘small
+  ⌘codefont
+  ⌘tt
+}{%
+  ⌘endquote
+  ⌘endgroup
+}
+⌘new␣command⌘me{unisugar}
+⌘title{The ⌘textsf{⌘me} Package\thanks{
+  Copyright ⌘copyright{} 2011 by Yossi Gil  
+    ⌘url{mailto:yogi@cs.technion.ac.il}.
+  This work may be distributed and/or modified under the conditions of the
+    ⌘emph{⌘LaTeX{} Project Public License} (LPPL), either version 1.3 of this 
+    license or (at your option) any later version.  
+The latest version of this license is in 
+  ⌘url{http://www.latex-project.org/lppl.txt} and version 1.3 or later 
+  is part of all distributions of ⌘LaTeX{} version 2005/12/01 or later.
+This work has the LPPL maintenance status `maintained'.
+The Current Maintainer of this work is Yossi Gil. 
+This work consists of the files ⌘texttt{⌘me.tex} and ⌘texttt{⌘me.sty} 
+  and the derived file
+  ⌘texttt{⌘me.pdf}
+}}
+
+⌘author{Yossi Gil⌘thanks{⌘url{mailto:yogi@cs.Technion.ac.IL}}⏎
+   ⌘normalsize Department of Computer Science⏎
+   ⌘normalsize The Technion---Israel Institute of Technology⏎
+   ⌘normalsize Technion City, Haifa 32000, Israel
+}
+
+⌘date{{⌘makeatletter
+     ⌘date@unisugar\thanks{
+        This document describes ⌘unisugar ⌘version@unisugar.}}}
+        
+        
+
+⌘begin{document}
+⌘bash[stdoutFile=README]
+cat << EOF
+The unisugar package 0.92
+=========================
+
+This package requires a TeX-alike system that uses native Unicode input system;
+current examples are XeTeX and LuaTeX. The package provides syntactic sugar for 
+selected LaTeX commands, allowing these to be replaced with their Unicode- 
+character counterpart, e.g., a Unicode bullet can be used instead of a \item,
+and a pilcrow can be used instead of \paragraph.
+
+The intent is to minimize the use of English left-to-right characters in 
+documents whose main language is written right-to-left, since mixing characters
+of different directionality confuses both text editors and human beings.
+
+Using this package, you may find yourself typing a bit less, provided you can 
+configure your text editor or keyboard driver to generate the handful of Unicode
+characters defined by this package. More importantly, the package is useful in 
+defining macros whose name is composed of right-to-left characters and in 
+minimizing mixed directionality text in right-to-left documents.
+
+This package may be distributed and/or modified under the LaTeX Project Public 
+License (LPPL), version 1.3 or higher (your choice). The latest version of this 
+license can be found at: http://www.latex-project.org/lppl.txt
+
+This work is author-maintained(as per LPPL maintenance status) by Yossi Gil
+<yogi@cs.Technion.ac.IL>
+EOF
+\END
+
+⌘maketitle
+⌘begin{abstract}
+This package provides syntactic sugar
+  for ⌘LaTeX{} commands, using selected 
+    ⌘href{http://www.unicode.org/standard/standard.html}⌘Unicode 
+    characters:
+Selected ⌘Unicode characters can be used as shorthand for certain 
+  ⌘LaTeX{} commands.
+The package also makes it possible to use the familiar 
+  command key symbol,~⌘command␣key{} as a prefix of ⌘TeX{}'s 
+  macros (the backlash character,~⌘textbackslash, can
+  still be used).
+And it allows the use of visual space,~⌘␣, 
+  within the names of macros, thus making it easier to 
+  write macros whose names are composed of more than one word.
+  
+In this document I describe these syntactical extensions,
+  and explain why they make it easier to compose
+  right-to-left documents.
+⌘end{abstract}
+
+{⌘small⌘tableofcontents}
+
+⌘parindent 1.5ex
+⌘parskip 0.5em
+
+§ Introduction
+You do not really ⌘emph{need} this package. 
+As its name implies, all it offers is what people call 
+  ``syntactic sugar''---the ability to use a selected
+    number of ⌘textsc{⌘Unicode} characters instead of and within 
+    the most common ⌘LaTeX{} commands.
+    
+Some may appreciate the fact that using this package, 
+  the text you type---the input to ⌘LaTeX{}---will look 
+  a bit more neat
+  and infinitesimally closer to the output.
+Others will argue against it, mentioning that the input document 
+  will be less portable,
+  and less ``⌘LaTeX-like'' (whatever this term means).
+ 
+Still, using this package, 
+  you will find yourself typing a bit less, 
+  provided you can configure your text editor or 
+  keyboard driver to generate
+  the handful of ⌘Unicode characters defined by this package.
+  
+More importantly, if your input files include right-to-left text,
+  you are likely to find this package indispensable.
+If your document is indeed going to include right-to-left text, please
+  pay special attention to Section~☝{Section:rtl:divisions},
+    which describes how ⌘unisugar should help you with
+    your document divisioning directives, and 
+    to Section~☝{Section:rtl:commands},
+    which explains how ⌘unisugar makes it easier
+    to intermix ⌘LaTeX{} commands with your text.
+If however you are not likely to include right-to-left text in 
+  your documents,
+  you do not need to read these sections.
+
+    
+§ User Guide
+Simply apply a ⌘verb+\usepackage+ directive to use
+  this package.
+⌘begin{code}
+⌘verb+\usepackage{unisugar}+
+⌘end{code}
+
+There are no package options at this time.
+
+You would then have to use a ⌘Unicode based version of ⌘LaTeX{}, 
+  that is ⌘XeLaTeX{} or ⌘LuaLaTeX{}
+  to process your input file, e.g., for processing the document 
+    you are now reading,   
+  I typed at my shell command prompt
+⌘begin{code}
+xelatex unisugar.tex
+⌘end{code}
+
+§§ Document Divisioning Commands
+
+Two of ⌘Unicode's typographical characters,~⌘texttt{⌘¶}
+   (code point B6, the pilcrow sign) and~⌘texttt{⌘§}
+   (code point A7, the section sign) are employed
+   in ⌘unisugar to make shorthands 
+  for ⌘LaTeX{} traditional document divisionining commands:
+  ⌘verb+\section+, 
+  ⌘verb+\subsection+, ⌘verb+\subsubsection+, and the lesser units,
+  ⌘verb+\paragraph+, 
+  and ⌘verb+\subparagraph+ commands.
+  
+Thus, instead of writing 
+⌘begin{code}
+⌘textbackslash section⌘{User Guide⌘}
+⌘end{code}
+at the beginning of this section, I typed just 
+⌘begin{code}
+⌘§ User Guide
+⌘end{code}
+Similarly, instead of
+⌘begin{code}
+⌘textbackslash subsection⌘{Document Divisioning Commands⌘}
+⌘end{code}
+I typed 
+⌘begin{code}
+⌘§⌘§ Document Divisioning Commands
+⌘end{code} 
+to generate the header of this subsection.
+
+Observe that I did not need to type nor an opening curly
+  bracket,~⌘verb+{+, neither a closing curly bracket,~⌘verb+}+.
+The division's title extends from the~⌘texttt{⌘§}
+  character (in case of a section), or the~⌘texttt{⌘§⌘§} 
+  characters pair (in case of a subsection)
+    until the end of the line.
+  
+  
+Table ☝{Table:divisions} summarizes the shorthands for the document 
+  divisioning commands.
+The original versions are always there, in case you need
+   to use the starred version of the divisioning command, 
+   or pass an optional argument to it.
+    
+⌘begin{table}[!Hht]
+⌘small
+⌘begin{center}
+⌘begin{tabular}{lll}
+Division            & ⌘LaTeX{}              & ⌘unisugar ⏎
+\hline
+\hline
+part                & ⌘verb+\part+          &  --- ⏎
+chapter             & ⌘verb+\chapter+       &  --- ⏎
+section             & ⌘verb+\section+       & ⌘texttt{\§} ⏎
+sub-section         & ⌘verb+\section+       & ⌘texttt{\§\§} ⏎
+sub-sub-section     & ⌘verb+\subsection+    & ⌘texttt{\§\§\§} ⏎
+paragraph           & ⌘verb+\paragraph+     & ⌘texttt{\¶} ⏎
+sub-paragraph       & ⌘verb+\subparagraph+  & ⌘texttt{\¶\¶} ⏎
+\hline
+⌘end{tabular}
+\caption{Shorthands for divisioning commands}
+⌖{Table:divisions}
+⌘end{center}
+⌘end{table}
+
+§§ Right-to-left Text Editing
+⌖{Section:rtl:divisions}
+There is a great advantage of using these sugared replacements 
+  in composing left-to-right documents.
+Think of a a Hebrew document including a section 
+  named ⌘texthebrew{מבוא} (Which means ``Introduction'' in Hebrew).
+Then, with plain ⌘XeLaTeX{}, the document would start with 
+  a directive
+⌘begin{code}
+⌘textbackslash{}section⌘{⌘fontspec{Courier New}
+מבוא%
+⌘rm⌘tt⌘}
+⌘end{code}
+Even if your text editor can manage well mixed directionality text,
+  you will find editing the above line a bit  confusing.
+The reason is that the character following the opening 
+  curly brackets is 
+  not~⌘texthebrew{א} but rather ⌘texthebrew{מ}.
+  
+As the cursor moves forward beginning at the first character in
+  the line, it hits the opening curly brackets, and then you may
+  expect it to proceed to the adjacent 
+  letter ⌘texthebrew{א}.
+This so called ⌘emph{visual} flow is 
+  in incorrect. 
+The more correct ⌘emph{logical} flow prescribes 
+  that the cursor should instead ``jump'' to the 
+  to the letter ⌘texthebrew{מ}, which is the first letter of 
+  the word ⌘texthebrew{מבוא}.
+
+Some editors adhere to the visual flow, others, more modern
+  editors, to the logical flow.
+But experience shows that both are quite confusing.
+  
+Our sugared version of the divisioning directives 
+  offer a more sane alternative.
+You can write instead
+⌘begin{hebrew}
+⌘begin{code}
+\§ ⌘fontspec{Courier New} מבוא
+⌘end{code} 
+⌘end{hebrew}
+
+To understand why the latter is so much better than the former,
+  you need to know a bit about the manner in which ⌘Unicode deals with 
+  text directionality.
+Broadly speaking, characters come
+  in three major varieties:
+⌘begin{enumerate}
+• Left-to-right directed characters, including e.g., Latin characters.
+• Right-to-left directed characters, including e.g., 
+      characters of the Hebrew
+  alphabet.
+• Undirected characters, including the digits 0-9, punctuation characters, 
+    and characters such as ⌘§, ⌘¶, ⌘␣, and ⌘command␣key{}
+    which are not part of specific writing script.
+⌘end{enumerate}
+⌘Unicode assigns a direction to each line
+  according to the first strongly directed character of that line, and then
+  proceeds to assigning directionality to subsequences of characters 
+    occurring in that line.⌘footnote{%
+The full algorithm is fairly complicated, taking into account
+  ``weak'' directionality of some of the undirected characters,
+    explicit directionality markers and nested directionality levels;
+    details can be found here ⌘url{http://unicode.org/reports/tr9}.}
+    
+Most text editors follow ⌘Unicode's algorithm.
+The line 
+⌘begin{code}
+⌘textbackslash{}section\{\fontspec{Courier New} מבוא%
+⌘rm⌘tt⌘}
+⌘end{code}
+will thus be classified as left-to-right, with
+  the ⌘texthebrew{מבוא} portion classified right-to-left, leading
+  to the visual vs.\ logical confusion and to irritating 
+  cursor jumps.
+  
+Further, the fact that the entire line is left-to-right will
+   lead text editors such as ⌘texttt{gedit} to place
+   the first character of that line at the left most position
+   in the window.
+This might be confusing even further since the section body will, 
+  most likely,
+  be classified as right-to-left, and hence will be laid out
+  on the screen with the first character at the right-most 
+  position.
+  
+  
+⌘begin{figure}[!htbp]
+⌘begin{center}
+	⌘includegraphics[scale=0.3]{traditional.png}
+⌘end{center}
+⌘caption{Using traditional sectioning directive with right-to-left text}
+⌖{Figure:traditional}
+⌘end{figure}
+  
+Figure~☝{Figure:traditional} depicting the use of ⌘texttt{gedit}
+  to compose a Hebrew ⌘LaTeX{} document
+  may help in visualizing the difficulty.
+Line~18 containing the section title is laid out left-to-right,
+  despite the fact that the title is written Hebrew, in
+  visual discrepancy with lines~19 and on, containing the section body,
+  which are laid out right-to-left.
+  
+In contrast, the sugared version of our document divisioning command
+⌘begin{hebrew}
+⌘begin{code}
+\fontspec{Courier New}
+\§ ⌘fontspec{Courier New} מבוא
+⌘end{code} 
+⌘end{hebrew}
+has no left-to-right characters, and hence will be classified 
+  as being entirely right-to-left:
+The cursor will not jump as it moves 
+  across that line.
+  
+  
+Compare Figure~☝{Figure:traditional} with Figure~☝{Figure:sugar}
+  in which the sugared version of the ⌘verb+\section+ directive is used.
+We see that in  Figure~☝{Figure:sugar} ⌘emph{all} lines
+  are laid out right-to-left.
+  
+  
+⌘begin{figure}[!hbtp]
+⌘begin{center}
+	⌘includegraphics[scale=0.3]{sugar.png}
+⌘end{center}
+⌘caption{Using sugared sectioning directive with right-to-left text}
+⌖{Figure:sugar}
+⌘end{figure}
+
+§§ Other Useful ⌘Unicode Characters
+The above sugar replacement for divisioning commands
+  does not scale well.
+With the exception of mathematical symbols, it is difficult 
+  to find reasonable substitutes for ⌘Unicode replacements 
+  for the majority of ⌘LaTeX{} commands.
+  
+Still, four more ⌘Unicode characters are used by ⌘unisugar
+  as aliases for common ⌘LaTeX{} commands:
+⌘begin{enumerate}
+• Code point 2022, the bullet, rendered as ⌘•, is
+  yet another name for the ⌘verb+\item+ command.
+To obtain this item, I typed
+⌘begin{code}
+\• Code point 2022, the bullet, rendered as ⌘textbackslash\•,⏎ 
+is yet another name for the ⌘verb-\verb+\item+- command.⏎
+  To obtain this item, I typed:⏎
+⌘end{code}
+• Code point 23CE, the return symbol, rendered 
+  as~⌘return␣key is an alias for ⌘verb+\\+.
+  The ⌘verb+\author+ directive of this manuscript was
+  typed out as 
+⌘begin{code}
+⌘verb+\author{+\\
+⌘verb+  Yossi Gil+\\
+⌘verb+    ⌘thanks{\url{mailto:yogi@cs.technion.ac.il}}+⌘return␣key⏎
+⌘verb+  ⌘normalsize Department of Computer Science+⌘return␣key⏎
+⌘verb+  ⌘normalsize The Technion---Israel Institute+\\
+⌘verb+                   of Technology+⌘return␣key⏎
+⌘verb+  ⌘normalsize Technion City, Haifa 32000, Israel+\\
+⌘verb+}+
+⌘end{code}  
+• Code point 2316 (position indicator), rendered as 
+      {\fontspec{DejaVu Sans Mono}\⌖}
+      is an alias for ⌘LaTeX's ⌘verb+\label+ command.
+  To generate a label for Table ☝{Table:divisions},
+  I wrote:
+⌘begin{code}
+{\fontspec{Courier New}\⌖}⌘verb+{Table:divisions}+
+⌘end{code} 
+• Code point 261D  (white up pointing index) rendered as 
+    {\fontspec{DejaVu Sans Mono}\☝}
+    is an alias ⌘LaTeX{}'s ⌘verb+\ref+ command.
+    To reference Table ☝{Table:divisions}, I wrote
+⌘begin{code}
+   To reference Table {\fontspec{DejaVu Sans Mono}\☝}\{Table:divisions\}, 
+   I wrote
+⌘end{code} 
+
+• Code point 2026 (horizontal ellipsis), rendered as \verb+…+, serves as a sugar nickname for 
+  \verb+\ldots+, the lower ellipsis command.
+  
+⌘end{enumerate}
+ 
+
+§§ Extended Syntax for Commands
+It is futile to try to introduce an pictorial, easy to remember, 
+  symbol for each of the
+  ⌘LaTeX{} commands in ordinary use, or even for a substantial
+  portion of these.
+As large as it is, the ⌘Unicode character repertoire
+  simply does not include icons that associated visually with notions
+  such as ⌘verb-\verb+-, ⌘verb+\begin{description}+, etc.
+And even if it was, such a large set would be difficult to 
+  memorize.
+Worse, methods for producing so many characters would be cumbersome.
+
+Thus, you would have to type ⌘LaTeX{} commands every so often.
+This package offers a slightly better syntax for writing these.
+  
+
+First, ⌘Unicode's code point 2318, rendered as ⌘command␣key, 
+  is used in many computing systems
+   to denote the command key. 
+With ⌘unisugar,the~⌘command␣key{}
+  character can be used as a control sequence
+  prefix,
+So, instead of writing at the beginning of this document
+⌘begin{code}
+⌘verb+\begin{document}+⏎
+⌘verb+\maketitle+⏎
+⌘verb+\begin{abstract}+⏎
+⌘verb+This package provides syntactic sugar+⌘ldots
+⌘end{code}
+I wrote
+⌘begin{code}
+⌘command␣key⌘verb+begin{document}+⏎
+⌘command␣key⌘verb+maketitle+⏎
+⌘command␣key⌘verb+begin{abstract}+⏎
+⌘verb+This package provides syntactic sugar+⌘ldots
+⌘end{code}
+
+Second, ⌘unisugar, extends to the usual set of~52 letters (a--z and A--Z)
+  ⌘Unicode character 2423,
+  the open box, which looks like like visible space in its 
+  rendering~⌘␣.
+This character can thus participate in control sequences. 
+The intention is that it will serve for separating words
+  in the case that your control sequence is composed of 
+  several words.
+  
+ 
+The names of a large number of  ⌘LaTeX{} commands are made 
+  from two words.
+There are even a dozen or so control sequences whose
+  name consists of three words, e.g., ⌘verb+\enlargethispage+
+  and ⌘verb+\addcontentsline+.
+Although ⌘unisugar does not provide aliases for any of
+  these multi-word commands, you can do so yourself.
+For example, at the preamble of this document, right after
+  ⌘verb+\usepackage{unisugar}+, 
+I wrote
+⌘begin{code}
+⌘command␣key{}let⌘command␣key{}use␣package=⌘command␣key{}usepackage⏎
+⌘command␣key{}use␣package⌘{xspace⌘}⏎
+⌘command␣key{}let⌘command␣key{}new␣command=⌘command␣key{}newcommand⏎
+⌘command␣key{}new␣command⌘command␣key{}%
+  unisugar⌘{⌘command␣key{}texttt⌘{unisugar⌘}⌘command␣key{}xspace⌘}⏎
+⌘end{code}
+
+§§ Intermixing Commands with Right-to-Left Text
+⌖{Section:rtl:commands}
+You may not appreciate so much the advantage of 
+  typing ⌘Unicode's~⌘command␣key{}
+  instead of plain ASCII's~⌘texttt{⌘textbackslash}.
+Granted, on most keyboards, typing~⌘texttt{⌘textbackslash}
+  would be easier.
+  
+However, the nice property of ⌘command␣key{} is that it directionally 
+  neutral.
+You would have to think about a sentence 
+  involving at least one ⌘LaTeX⌘ control sequence
+  and/or a slash character to understand what I mean.
+You would not have to think so hard,
+  since, this last sentence, namely,
+⌘begin{quote}
+``⌘emph{You would have to think about a sentence 
+  involving at least one ⌘LaTeX{} control sequence
+  and/or a slash character to understand what I mean.}''
+⌘end{quote} 
+is a perfect example, since
+  it is a sentence which involves a ⌘LaTeX{} control sequence,
+  since the ⌘LaTeX⌘ logo is printed out using
+  the ``⌘verb+\LaTeX\+" control sequence.
+Further, this sentence includes the slash character.
+
+Typing this sentence in English is fairly straightforward. 
+⌘begin{code}
+You would have to think about a sentence 
+  involving at least one ⌘verb+\LaTeX\ +control sequence
+  and/or a slash character to understand what I mean.
+⌘end{code}
+
+Let me translate this sentence into Hebrew for you. 
+
+⌘begin{hebrew}
+יהיה עליך לחשוב על משפט המכיל לפחות פקודת בקרה אחת 
+של ⌘LaTeX⌘ ו/או לוכסן בכדי להבין למה אני מתכוון.
+⌘end{hebrew}
+
+
+What input does ⌘LaTeX{} require in order to produce the above? 
+Using backslashes and traditional ⌘LaTeX{} notation I would have written
+⌘begin{hebrew}
+⌘begin{code}⌘fontspec{Courier New}
+יהיה עליך לחשוב על משפט המכיל לפחות פקודת בקרה 
+אחת ⏎ 
+של 
+⌘verb+\LaTeX\+ 
+ו/או לוכסן בכדי להבין למה אני מתכוון.
+⌘end{code}
+⌘end{hebrew}
+
+Figure~☝{Figure:gedit-mixed-traditional} shows what this might look on
+  an actual text editor.
+This may not seem too complicated, but a closer look 
+  would reveal that the production and inspection of this ⌘LaTeX{} 
+  is hindered by two or three annoying hidden issues.
+
+
+⌘begin{figure}[!htbp]
+⌘begin{center}
+%Produced from:
+%
+%
+%Let me translate this sentence into Hebrew for you.
+%
+%⌘begin{hebrew}
+%יהיה עליך לחשוב על משפט המכיל לפחות פקודת בקרה אחת 
+%של ⌘LaTeX\ ו/או לוכסן בכדי להבין למה אני מתכוון.
+%⌘end{hebrew}
+%
+%
+%
+%
+⌘includegraphics[scale=0.3]{gedit-mixed-traditional.png}
+⌘end{center}
+⌘caption{A Hebrew sentence containing a control sequence (without ⌘unisugar).}
+⌖{Figure:gedit-mixed-traditional}
+⌘end{figure}
+
+
+First, the two backslash characters in the figure are not really 
+  ⌘emph{back}slashes. 
+The reason is that Hebrew is written right-to-left, and the ⌘textbackslash{} 
+  character leans in the text direction, and should therefore be considered 
+  a ⌘emph{forward} slash in this context.
+  
+The second annoyance is the distinction between the 
+  two occurrences of this character:
+  the first is at the beginning of the control sequence ⌘verb+\LaTeX+,
+  denoting that the control sequence starts at that point.
+The second occurrence is at the end of the same control sequence,
+  with the purpose of
+  escaping the space that follows.
+This escape is required to prevent the control sequence from consuming
+  the spaces that follow.
+  
+The distinction between the first and which is the last ``backslash''
+  is clear in the case that the enclosing sentence is 
+  written left-to-right.
+ But, both humans and text processing devices may be confused
+  when the enclosing sentence is right-to-left.
+
+{⌘small⌘textsl
+(There is yet a third difficulty in the above sentence which I will 
+  not address here.
+  The English forward slash character is used in Hebrew for separating the day, 
+  month and 
+  year components of a date. 
+  This is natural, since dates involve digits, and these are written,
+    even in Hebrew, left to right.
+  Most Hebrew authors extrapolate this convention to the separation of
+  Hebrew words by a ``forward'' (left-leaning) slash as in the phrase
+  ⌘texthebrew{⌘fontspec{Courier New}%
+  ו/או
+  }%
+  in the above. 
+  Other authors would right this phrase with the slash leaning in
+    the text direction, i.e., 
+     ⌘texthebrew{⌘fontspec{Courier New}%
+  ו⌘textbackslash{}או
+  }%
+  )}
+  
+The fact that the ⌘command␣key{} character does not 
+  lean neither left nor right,
+  takes care of the first annoyance.
+  
+The remedy for the second is simpler---use a pair of curly brackets
+  to mark the end of the control sequence.
+  
+Thus, with ⌘unisugar, I would write:
+⌘begin{hebrew}
+⌘begin{code}
+⌘fontspec{Courier New}
+יהיה עליך לחשוב על משפט המכיל לפחות פקודת בקרה 
+אחת ⏎ של 
+⌘setLTR⌘verb+{}+LaTeX⌘command␣key{}⌘setRTL
+ו/או לוכסן בכדי להבין למה אני מתכוון.
+⌘end{code}
+⌘end{hebrew}
+
+Figure~☝{Figure:gedit-mixed-traditional} shows this sugared input as it
+  appears in the gedit editor.
+We can see that the entire control sequence phrase 
+  is written left-to-right, with the escape character
+  first, and the pair of curly brackets last.
+  
+
+⌘begin{figure}[!htbp]
+⌘begin{center}
+%
+%Produced from:
+%
+%Let me translate this sentence into Hebrew for you.
+%
+%⌘begin{hebrew}
+%יהיה עליך לחשוב על משפט המכיל לפחות פקודת בקרה אחת 
+%של {}LaTeX⌘ ו/או לוכסן בכדי להבין למה אני מתכוון.
+%⌘end{hebrew}
+%
+%
+%
+%
+%
+%
+⌘includegraphics[scale=0.3]{gedit-mixed-sugar.png}
+⌘end{center}
+⌘caption{A Hebrew sentence containing a control sequence (with ⌘unisugar).}
+⌖{Figure:gedit-mixed-sugar}
+⌘end{figure}
+
+Evidently, mixed directionality text is slightly easier and clearer.  
+But we can do even better, if we allow Hebrew characters
+in control sequences. 
+This is carried out by (a yet to be published) another package,
+  named ⌘texttt{sukkar}, which, relying on ⌘unisugar does precisely this
+  and more.
+Package ⌘texttt{sukkar} also translates many common ⌘LaTeX{}
+  commands to Hebrew, and since juxtaposition of words looks
+  weird in Hebrew, it uses the~⌘␣{} Unicode character 
+  to separate words.
+With ⌘texttt{sukkar} 
+  one can write, e.g., 
+⌘begin{hebrew}⌘codefont⌘command␣key⌘fontspec{Courier New}
+עשה⌘␣{}כותרת
+⌘end{hebrew}
+  instead of ⌘verb+\make_title+.
+  
+  
+§ History
+⌘begin{description}
+•[Version 0.9] Initial release.
+•[Version 0.91] Placed under LPPL.
+•[Version 0.92] Added U+2026 HORIZONTAL ELLIPSIS, as nickname for ⌘verb+\ldots+.
+⌘end{description}
+    
+
+§ Acknowledgements
+Will Robertson advised gave the advise of 
+	using ⌘XeLaTeX{} and ⌘texttt{polyglossia}
+  to circumvent a bug of ⌘texttt{utf8x}.
+I pay tribute to Bruno Le Floch and Martin Scharrer who together 
+  devised the mechanism that made it possible to 
+  define a command which takes the rest of the line as argument.
+Martin Scharrer and Will Robertson encouraged me to work on this package.
+Vafa Khalighi  
+	devotion to bidirectional text processing with ⌘LaTeX{}
+  was truly inspirational.
+  
+
+
+
+
+⌘end{document}

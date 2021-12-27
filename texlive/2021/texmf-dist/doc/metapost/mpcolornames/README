@@ -1,0 +1,20 @@
+Package: mpcolornames
+Version: v0.20
+Date: 2011-07-14
+License: LPPL
+Maintenance status: maintained
+Current maintainer: Stephan Hennig <stephanhennig@arcor.de>
+
+
+The MetaPost format plain.mp provides only five built-in color names
+(variables), all defined in the RGB model: red, green and blue for the
+primary colors and black and white.  The mpcolornames package makes more
+than 500 color names from different color sets in different color models
+available to MetaPost.  Color sets include X11, SVG, DVIPS and xcolor
+specifications.
+
+
+Documentation can be found in file mpcolornames.pdf.
+
+
+END.

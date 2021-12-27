@@ -1,0 +1,306 @@
+2021-09-06      Dohyun Kim <nomos at ktug org>
+
+	Version 4.0
+
+	* generalize the concept introduced at v3.9, that is
+	\ifx\f@encoding\UTFencname now affects inter-character spacing
+	as well as font substitution.
+	* guard against space character(catcode 12) in parsing code point
+	of next character
+
+2021-08-09      Dohyun Kim <nomos at ktug org>
+
+	Version 3.9
+
+	* Substitution with hangul/hanja fonts will now occur only when
+	\ifx\f@encoding\UTFencname is true. On plain TeX this is normally true
+	as both are undefined.
+
+2021-07-13      Dohyun Kim <nomos at ktug org>
+
+	Version 3.8
+
+	* assign 0xAE and 0xB0 to XeTeXcharclassAA
+
+2021-06-18      Dohyun Kim <nomos at ktug org>
+
+	Version 3.7
+
+	* fix position of dotemph regarding hangul tone marks
+	* enhance compatibility with ulem/ruby packages
+
+2021-06-10      Dohyun Kim <nomos at ktug org>
+
+	Version 3.6
+
+	* LaTeX 2021/06/01 or later is required.
+	* vertical/horizontal environments now honor empty argument, which
+	means natural width.
+	* new LaTeX environment: verticaltypesetting
+	* new plain TeX commands: \beginverticaltypesetting and
+	\endverticaltypesetting
+
+2021-05-20      Dohyun Kim <nomos at ktug org>
+
+	Version 3.5
+
+	* internal changes regarding font-switching method
+	  (remove Xeko@maybe@gobble)
+
+2021-05-15      Dohyun Kim <nomos at ktug org>
+
+	Version 3.4
+
+	* internal changes regarding font-switching method
+
+2021-04-20      Dohyun Kim <nomos at ktug org>
+
+	Version 3.3
+
+	* more fix on ulem package support
+	* suppress linebreak before ellipsis etc.
+	* assign U+327E to cjksymbols class
+
+2021-04-08      Dohyun Kim <nomos at ktug org>
+
+	Version 3.2
+
+	* fix ulem package support
+	* \hangingpunctuation does not work with quotes by default.
+	* new commands \sethangingratio, \unsethangingratio added.
+	* \disablehangulspacing will remove \penalty between Hangul
+	  characters.
+
+2021-03-22      Dohyun Kim <nomos at ktug org>
+
+	Version 3.1
+
+	* new plain TeX commands \sethangulfont, \sethanjafont
+
+2021-03-20      Dohyun Kim <nomos at ktug org>
+
+	Version 3.0
+
+	* Everything is integrated into xetexko.sty. So
+	  xetexko-font.sty, xetexko-space.sty, xetexko-vertical.sty,
+	  xetexko-hanging.sty are now almost empty and provided for
+	  backward compatibility only.
+	* New evironemt 'typesetclassic' is provided for typesetting
+	  classical texts, but almost identical to 'japanese' or
+	  'chinese' environments of previous version. These latters
+	  are kept for backward compatibility.
+	* New command \removeclassicspaces is provided.
+	* Following Hangul font options do not work any longer, but
+	  no error will be raised though :
+	  lowerexclamation, lowerperiod, lowercomma, lowerquestion,
+	  postexclamationkern, postmathskip, postperiodkern,
+	  postcommakern, postquestionkern, preexclamationkern,
+	  preperiodkern, precommakern, prequestionkern, quoteraise,
+	  quotewidth, PunctRaise.
+	* \latinnums and \latinquotes have the same effects as
+	  \latinalphs and \latinparens, repectively.
+	* \defaulthangulfontfeatures is deprecated.
+	* \disableautojosa and \disablejamoautojosa are deprecated.
+	* When lmtt is ttdefault, the metrics of default Hangul
+	  monospaced font are matched with those of lmtt.
+	* \disablehangulspacing will not remove \penalty50 between
+	  Hangul characters.
+
+2020-02-17      Dohyun Kim <nomos at ktug org>
+
+	Version 2.23
+
+	* xetexko-font.sty: unbatang/undotum as default hangul fonts;
+	suppress bx font warnings and make \bfseries work again;
+	use latex's newly introduced \@{rm,sf,tt,default}familyhook
+
+2019-12-01      Dohyun Kim <nomos at ktug org>
+
+	Version 2.22
+
+	* xetexko-font.sty: expl3 deprecation removals
+
+2018-08-08      Dohyun Kim <nomos at ktug org>
+
+	Version 2.21
+
+	* xetexko-font.sty: protect \{rm,sf,tt}family
+
+2018-08-02      Dohyun Kim <nomos at ktug org>
+
+	Version 2.20
+
+	* xetexko-font.sty: adapt to the fontspec v2.6h
+
+2018-04-19      Dohyun Kim <nomos at ktug org>
+
+	Version 2.19
+
+	* xetexko-space.sty: address a conflict with ulem package:
+	see http://www.ktug.org/xe/index.php?document_srl=229398
+
+2018-04-06      Dohyun Kim <nomos at ktug org>
+
+	Version 2.18
+
+	* step copyright year
+	* xetexko-space.sty: synchronize \XKskipstetchshrink with luatexko;
+	suppress glue stretching/shrinking under \disablehangulspacing;
+	\xetexkohu is now 0.05em by default
+	* xetexko-font.sty: use glueexpr
+	* xetexko-vertical.sty: minor bug fix
+
+2017-09-29      Dohyun Kim <nomos at ktug org>
+
+	Version 2.17
+
+	* xetexko-font.sty: zf@enc -> f@encoding
+
+2017-02-06      Dohyun Kim <nomos at ktug org>
+
+	Version 2.16
+
+	* xetexko-font.sty: patching {rm,sf,tt}family of fontspec 2017
+
+2016-04-04      Dohyun Kim <nomos at ktug org>
+
+	Version 2.15
+
+	* xetexko-space.sty: update for xetex 0.99994 or later
+	* xetexko-Josa.sty: fix automatic selection of josa
+
+2016-02-01      Dohyun Kim <nomos at ktug org>
+
+	Version 2.14
+
+	* xetexko-space.sty: updates for latex 2016
+	* xetexko-space.sty: do not compress already narrow cjk parentheses
+	* xetexko-space.sty: assign U+FF62, U+FF63 to cjkopening/closing resp.
+
+2015-06-16      Dohyun Kim <nomos at ktug org>
+
+	Version 2.13
+
+	* xetexko-space.sty: address issue #3 (glue after whatsit)
+	* xetexko-vertical.sty: new environment `horizontal'
+
+2015-03-26      Dohyun Kim <nomos at ktug org>
+
+	Version 2.12
+
+	* xetexko-space.sty: assign catcode 12 to Hangul Jamo
+	* xetexko.sty, xetexko-space.sty, xetexko-font.sty: fix bug #2
+	regarding amsart.cls.
+
+2015-01-18      Dohyun Kim <nomos at ktug org>
+
+	Version 2.11
+
+	* xetexko-space.sty: fix a bug regarding xoblivoir and ulem
+
+2015-01-16      Dohyun Kim <nomos at ktug org>
+
+	Version 2.10
+
+	* xetexko.sty, xetexko-font.sty: package option [unfonts] is removed
+	* *.sty: minor fixes and updated copyright year
+
+2014-08-04      Dohyun Kim <nomos at ktug org>
+
+	Version 2.9
+
+	* xetexko-font.sty: Nanum Truetype fonts, if available, will be used
+	as default hangul/hanja fonts if no hangul/hanja font is specified by
+	users.
+
+2014-07-27      Dohyun Kim <nomos at ktug org>
+
+	Version 2.8
+
+	* xetexko-space.sty: adapt to recent update of unicode-letters.tex.
+	Hangul syllables were of catcode 12 traditionally, and this is deeply
+	interwined with Automatic Josa Selection. So, recent change of
+	unicode-letters.tex, assigning catcode 11 to Hangul, is hereby
+	reverted.
+	* xetexko-font.sty: allow font option only once, as per future release
+	of fontspec
+
+2014-06-17      Dohyun Kim <nomos at ktug org>
+
+	Version 2.7
+
+	* xetexko-font.sty: Ligatures=TeX is now default option for main/sans
+	hangul/hanja fonts. Requires fontspec v2.4
+	* xetexko-font.sty: new macros \defaulthangulfontfeatures and
+	\defaulthanjafontfeatures
+
+2014-05-11      Dohyun Kim <nomos at ktug org>
+
+	Version 2.6
+
+	* xetexko-space.sty: assign U+FE00 block to IVS char as per
+	unicode 6.3
+	* xetexko-font.sty: font option YetHangul is still there, but
+	YetHangul=Off has been removed
+	* xetexko-font.sty: use latex3 syntax for defining font commands;
+	remove dependency on xkeyval package
+
+2014-03-28      Dohyun Kim <nomos at ktug org>
+
+	Version 2.5
+
+	* xetexko-font.sty: fixed a bug wrt hangul in preamble
+	* xetexko-vertical.sty: fixed a bug wrt 'charraise' of CJK symbols
+
+2014-02-02      Dohyun Kim <nomos at ktug org>
+
+	Version 2.4
+
+	* xetexko-space.sty: support Ideographic Variation Selector.
+	* xetexko-font.sty: fix a conflict with everysel.sty, reported by
+	Hoze Yi & Juho Lee
+	* xetexko-font.sty, xetexko-space.sty: fix conflicts with realscripts
+	and xypic packages, reported at
+	http://www.ktug.org/xe/index.php?document_srl=180038 and
+	http://www.ktug.org/xe/index.php?document_srl=180107 respectively.
+
+2013-12-14      Dohyun Kim <nomos at ktug org>
+
+	Version 2.3
+
+	* xetexko-space.sty xetexko.sty: previous release introduced a bug
+	related to ulem package, reported by Insung Cho.
+	* xetexko-space.sty: font-switching had sometimes been confused by
+	everyhangul/everyhanja.
+
+2013-12-06      Dohyun Kim <nomos at ktug org>
+
+	Version 2.2
+
+	* xetexko-space.sty: \latinhyphens is now the default
+	* xetexko-hanging.sty: \hangingpunctuations is not needed any more
+	* xetexko-space.sty: assign missing kana chars including U+30FC to
+	smallkana class
+	* xetexko-space.sty: assign compatibility jamo chars to hangulsyllable
+	class
+	* xetexko-space.sty: new macros \everyhangul and \everyhanja
+	* xetexko-space.sty: same stretch/shrink value for inter-hangul and
+	inter-hanja skip
+	* xetexko-font.sty xetexko-space.sty: new font option `charraise'
+	* xetexko-space.sty: \fallbackhanjafont as a final fallback font
+	* xetexko-josa.sty: fix a bug regarding non-BMP chars
+
+2013-07-03      Dohyun Kim <nomos at ktug org>
+
+	Version 2.1
+
+	* xetexko.sty: move Hangul caption setting to AtBeginDocument
+	* xetexko-space.sty: new macro \disablejamoautojosa, needed for teckit
+	mapping of Jamos.
+	* xetexko-vertical.sty: \verticaltypesetting for plain tex was
+	missing.
+
+2013-03-27      Dohyun Kim <nomos at ktug org>
+
+	Initial release to CTAN. Version 2.0
+

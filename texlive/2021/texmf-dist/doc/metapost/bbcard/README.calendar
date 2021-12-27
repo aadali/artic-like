@@ -1,0 +1,38 @@
+Calendar
+
+This is a metapost calendar, which I use to mark down appointments. 
+It prints one month per page, and can generate an entire year's
+with one command.
+
+To generate the next month's calendar:
+  mpost calendar
+and the card will be written to bbcard.{number}, where {number} is
+the month number. One drawback: some common metapost implementations
+don't determine the month dynamically, but instead report the month
+of compilation or the month of the last change to the code or something
+like that. In that case, you must set theyear and themonth as indicated
+below:
+
+To generate a year's worth:
+  mpost '\theyear:=2003; themonth:=-1; input calendar'
+
+To generate April 2003:
+  mpost '\theyear:=2003; themonth:=4; input calendar'
+
+Those command-lines assume a recent Unix installation. On your
+machine, metapost might be called mp rather than mpost, and the
+single-quotes might not be necessary. calendar requires your installation
+to be configured to use the font pplr8r (Palatino). It is not
+suitable for use with the CM fonts.
+
+I've included a few holidays, which I called brands for some reason
+I don't recall. You can remove them or add more by setting the values
+of the approriate element of the `brands' array. For instance:
+
+  brands[7][4] := "Independance Day";
+
+sets the US independance day, which is July 4.
+
+You are free to enhance this file or integrate it with other packages
+if you like. If you do something splendid like adding support for
+floating holidays, send them to me and I'll update the package on CTAN.

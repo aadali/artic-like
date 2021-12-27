@@ -1,0 +1,30 @@
+Description
+-----------
+
+The forloop package provides the command \forloop for the user.
+
+
+Installation
+------------
+
+To install this package, run forloop.ins through LaTeX.  This will generate 
+a file called forloop.sty.  Put this file somewhere where LaTeX will find 
+it---for instance localtexmf/tex/latex/forloop/  (note that you will need 
+to create the folder forloop).
+
+If you are using MikTeX, you then need to refresh the file name database 
+by using MikTeX Options
+
+
+License
+-------
+
+This pacakge is released under the GNU Lesser General Public License.  See
+http://www.gnu.org/licenses/licenses.html#LGPL for more details.
+
+Contact
+-------
+
+Any bugs may be reported to the author by sending an email to the address with
+the first part being nsetzer, then an at sign, the next part is umd, and 
+finally it ends in dot edu.

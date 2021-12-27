@@ -1,0 +1,18 @@
+name section
+category Package
+revision 20180
+shortdesc Modifying section commands in LaTeX
+longdesc The package implements a pretty extensive scheme to make more
+longdesc manageable the business of configuring LaTeX output.
+containersize 9860
+containerchecksum 8b3eaecd49f8b7046bc35df079541121d76757bc2a1b6a6ffa24357a20e9ec4bf5a7b65fae1673401ebf363e46ecffe3c64a2de9aac104594b2b111cd10426f2
+doccontainersize 357024
+doccontainerchecksum 91defb5391b9e607cfaf74ac3abe53127ddec379d7a7c052f5c8f776bcef1728010a94ef7b590ddac8df140ee11fff4fd843bdbe1a13efd322a9a939ea2df39b
+docfiles size=92
+ texmf-dist/doc/latex/section/section-doc.pdf details="Package documentation"
+ texmf-dist/doc/latex/section/section-doc.tex
+runfiles size=8
+ texmf-dist/tex/latex/section/section.sty
+catalogue-ctan /macros/latex/contrib/section
+catalogue-license lppl
+catalogue-topics headings

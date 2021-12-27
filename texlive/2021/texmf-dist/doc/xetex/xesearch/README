@@ -1,0 +1,33 @@
+This is the README file for xesearch.sty v.0.2.
+Read xesearch.pdf for the documentation.
+t-xeseach.tex is a third party file to use
+XeSearch in ConTeXt.
+
+XeSearch is a string finder for XeTeX
+(and associated formats).
+It searches for words or phrases, possibly
+underspecified, and manipulates them, in
+essence turning every string into a possible
+command.
+
+Both the documentation (xesearch.pdf) and
+the files (xesearch.sty and t-xesearch.tex)
+are produced from xesearch.tex with the CodeDoc class.
+
+To typeset the documentation, run XeLaTeX
+on xesearch.tex with the 'produce' option
+commented out on line 8.
+
+To create xesearch.sty and t-xesearch.teX,
+run (Xe)LaTeX again, but uncomment 'produce'
+on the same line.
+
+Licensing of this package is covered by LPPL.
+
+Originally written by Paul Isambert, the package is
+now maintained by Yuri Robbers.
+
+Any reaction is welcome: yuri.robbers@gmail.com
+
+Yuri Robbers
+

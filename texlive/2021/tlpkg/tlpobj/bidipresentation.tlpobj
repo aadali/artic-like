@@ -1,0 +1,25 @@
+name bidipresentation
+category Package
+revision 35267
+shortdesc Experimental bidi presentation
+longdesc A great portion of the code is borrowed from the texpower
+longdesc bundle, with modifications to get things working properly in
+longdesc both right to left and left to right modes.
+containersize 28048
+containerchecksum a41f98c3f009f7f8de8a41e386cc829c55650e603ccaa8e7e381fae45be2872e0b20e66b68e4d7ef8110abf7c9f6661865d49f7c0cf3ca4ae6f781c3ef5bc0ac
+doccontainersize 75456
+doccontainerchecksum 56993d41b237d25e00536926b3b23f1b1a6940aabe4f636df73cabd5ec27252de9fb8ff17d872cec3cda7a0a3b8b13013ec77477dd89ebba83a8406da3ee144d
+docfiles size=25
+ texmf-dist/doc/xelatex/bidipresentation/README details="Readme"
+ texmf-dist/doc/xelatex/bidipresentation/fig-1.pdf
+ texmf-dist/doc/xelatex/bidipresentation/sample.pdf details="Sample presentation"
+ texmf-dist/doc/xelatex/bidipresentation/sample.tex
+runfiles size=47
+ texmf-dist/tex/xelatex/bidipresentation/bidiprescolors.cfg
+ texmf-dist/tex/xelatex/bidipresentation/bidipresentation.cls
+catalogue-contact-bugs https://github.com/bidi-tex/bidipresentation/issues
+catalogue-contact-repository https://github.com/bidi-tex/bidipresentation
+catalogue-ctan /macros/xetex/latex/bidipresentation
+catalogue-license lppl1.3
+catalogue-topics class presentation bidi
+catalogue-version 0.3

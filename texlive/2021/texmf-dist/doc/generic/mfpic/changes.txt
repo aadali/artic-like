@@ -1,0 +1,839 @@
+% File: changes.txt
+% A part of mfpic 1.10 2012/12/03
+%
+
+                         Summaries of changes.
+
+0.1:
+First version released to network, 30 June 1992.
+
+0.2:
+Second version released to network, 7 Sept. 1992. (Still had 0.1.13.1
+version number in code---oops!) Many new features added, bugs
+worked out, code cleaned up.
+
+
+0.2.5 of Wed 10 Nov. 1993:
+Bug fix release  Primarily work by Geoffrey Tobin.
+
+0.2.5.1 of Wed 13 July 1994:
+Bug fix release  Corrected  "unxconv"  bug which remained in version
+0.2.5's  graphbase.mf.
+
+0.2.9 Alpha of Thu 11 August 1994:
+A test release prior to any official version 0.3, is ready for intrepid
+users. Introduces coordinate transforms, and other novelties.
+
+0.2.9.1 Alpha} of Thu 8 September 1994:
+Fixes a bug in \sclosed and a bug in \white, corrects some omissions and
+typos in the documentation, and adds the \shadewd, \hatchwd, \lhatch and
+\rhatch macros.
+
+0.2.9.3 Alpha of Thu 21 March 1995:
+Renamed \fill to \gfill, in order to avoid conflict with the LaTeX \fill
+macro.
+
+0.2.9.4 Alpha of Thu 13 April 1995:
+Renaming of \label to \tlabel, and \caption to \tcaption, in order to
+avoid conflict with the LaTeX macros with those names.
+
+\white was renamed to \gclear, because \white is a likely name for a
+color macro.
+
+Also, a new macro for defining Metafont functions was introduced,
+because user-defined functions provide more power, and function plotting
+macros were added that accept Metafont function names instead of
+Metafont expressions.
+
+0.2.9.5 Alfa of Wed 19 July 1995:
+Renames  \mfcmd  to  \mfsrc  for clarity.
+
+Renames  \wedge  to  \sector  to avoid conflict with the character name
+defined in plain TeX and LaTeX.
+
+Introduces  \mftitle,  \tmtitle  and  \plr.
+
+Abolishes  \plrpoint,  \plrlines,  \plrcurve  and  \plrcyclic  as
+redundant specializations. The meaning of  \turtle  is changed to a
+Cartesian form, for flexibility.
+
+Rendering macros redesigned, and  \setrender  introduced. Coordinate
+transforms in  grafbase.mf  made slightly more robust. Begin an attempt
+to make  grafbase.mf  compatible with John Hobby's MetaPost drawing
+program.
+
+0.2.9.6 Alfa of Mon 24 July 1995:
+Contributes  \thatch  which provides hatching by lines at any angle.
+
+Modifications to  \pen,  \shadewd  and  \hatchwd,  along with changes to
+grafbase.mf  to make drawing, shading and hatching more independent.
+
+Renamed  \rotate  to  \rotatepath.
+
+Also renamed the affine transform macros, so that they no longer use the
+`s'  of the present tense, which could be mistaken for a plural.
+
+0.2.9.8 alfa, Mon 11 September 1995:
+Retain line separations of user's document's  mfpic  environment when
+writing Metafont file.  This prevents long Metafont commands from
+exceeding Metafont's input buffer.
+
+0.2.10.5 alfa, Sat 9 March 1996:
+Introduced  \polyline  as an alternative name for  \lines.
+
+In order to avoid repetition of side-effects, changed  \tcaption  to use
+\unhbox\@textbox,  instead of repeating its text argument.
+
+0.2.10.6 alfa, (two hours later) on Sat 9 March 1996:
+\polygon  figure has been introduced;
+
+\\  specifies explicit line breaks in tlabels and tcaptions;
+
+\savepic  and  \copypic  allow saving, use and copying of an entire
+mfpic picture, including its tcaptions and tlabels.
+
+Also modified \tcaption code to prevent repeated use of the text
+argument, as that can cause side effects, as reported by Dennis
+Petrovic.
+
+0.2.10.7 alfa, Sat 28 March 1996:
+First release via Geoffrey Tobin's School's local anon ftp site:
+    ftp.ee.latrobe.edu.au : pub/gt/mfpic
+
+0.2.10.8 alfa, Tue 26 May 1996:
+Second, and bug fix, release via Geoffrey Tobin's anonymous ftp area.
+
+0.3.0 alpha, 1998:
+Numbers jump a lot from here because I (Dan Luecking) have been lax in
+keeping track of changes. First version with support for Metapost. Now
+any(?)  .mf  file created by a recent mfpic can be run through Metapost
+to produce a PostScript picture.
+
+Added functions  sin,  cos,  and their inverses  invsin,
+etc., that compute in radian measure. Also  tan  and  cot.
+
+0.3.8 alpha, 1999:
+Color has been added. Default colors for lines/curves  (drawcolor),
+fills  (fillcolor),  hatch patterns  (hatchcolor),  and arrowheads
+(headcolor). Optional arguments for color added to  \gfill, \draw,
+\arrow,  and all the hatching macros. A new macro  \polkadot creates
+polkadot fill patterns.
+
+Changed some of the commands for setting dimensions so that they
+actually worked, and so they are local to mfpic environments.
+
+Added support for LaTeX2e's  \usepackage  command and options. Added
+graphics inclusion code. Added code to detect which TeX format was in
+use.
+
+0.3.9 alpha, 2000:
+Minor change to definition of  \circle to avoid error messages in LaTeX.
+
+Changed the graphic placement code so that it tests for the existence of
+the graphic first.
+
+0.3.10 alpha, 2000:
+Added changes contributed by Jaromir Kuben: An option  centercaptions
+and command  \centercaptions  to center the lines in a  \tcaption.  Also
+\nocentercaptions. Improvements to the code that positions text labels
+(so that)  c  and  b  now take into account the depth of the text. A new
+parameter  B  to align the baseline of the text with the point.
+
+Added option  dvipsnames  to allow color names as in the dvips header
+color.pro. Later removed and made default. Added  color functions
+cmyk,  RGB,  gray  and  rgb.
+
+Added functions  tanh,  its inverse  atanh,  and additional trig
+functions  secd,  sec,  cscd,  csc,  atan,  invtan.  Made  log  a
+synonym for  ln.  Added complex variables functions  Arg,  cis,  zexp
+and  Log.
+
+0.3.11 alpha, 2000:
+Added  \plot  similar to \dotted  but these shapes can be placed:
+   Triangle,  Square,  Circle,  Plus, Cross,  Star,  SolidTriangle,
+   SolidSquare,  or  SolidCircle
+
+0.3.12 alpha, 2000:
+Added macro  \datafile  to read a file of number pairs and create the
+polygonal path connecting them.
+
+Added options  clip,  truebbox, and  debug.
+Command forms:  \clipmfpic,  \noclipmfpic,  \usetruebbox,
+\notruebbox,  \mfpicdebugtrue,  and  \mfpicdebugfalse.
+
+Changed names of various commands to a more imperative form:
+\usemetapost, \usemetafont,
+Changed name of option  centercaptions  to  centeredcaptions.
+
+0.3.13 alpha, 2000:
+\datafile  now ignores leading blank lines and comments,
+and won't gag on commented out EOLs.
+
+Went back to technique of expanding argument of  \tcaption  twice:
+caveat emptor.
+
+New command  \plotdata  reads a data file and draws one (polygonal) path
+for each non-blank sequence of lines in the data file. Exits when a pair
+of blank lines is encountered (or EOF). Cycles through six different
+drawing styles for successive curves. User may elect different colors
+(with  \coloredlines),  different symbols  (\pointedlines),  or
+different dashing patterns  (\dashedlines).
+
+New command  \using  affects what  \datafile  and  \plotdata  write to
+the  .mf  output.
+
+\gendashed{<pattern>}...  is a generalized dashing command;  <pattern>
+is the name of a dashing pattern.
+\dashpat{<name>}{<dim1>,<dim2>,...,<dim2n>} creates a dashing pattern
+with the specified name.
+
+All dots now pixel aligned in shading. Looks infinitely better.
+
+Added  Diamond  and  SolidDiamond  to the symbols available.
+
+A command \fcncurve  that draws a function (i.e., curve doesn't double
+back) if the x-values are unique and listed in order.
+
+0.3.14 alpha, 2000:
+Added optiom  mplabels  to make  \tlabel  write  btex ... etex  groups
+to the .mp file. Commands  \usemplabels  and  \nomplabels.
+Added third part to the optional argument of  \tlabel  to
+rotate the text. Ignored without mplabels
+
+New macro  \mfpdatacomment  so that  \datafile  and  \plotdata  can now
+have their comment character reset. Commands  \makepercentother  and
+\makepercentcomment  created to allow the user to use  `%'  in  \using
+arguments.
+
+Gave  \plotdata  the ability to cycle through 8 colors or 9 symbols
+(instead of only 6).
+
+Draw a frame for figures not yet created. Add command \frame for users.
+
+Added  \fdef,  which seemed to be documented (see Update 0.2.9.4 above),
+but somehow not defined.
+
+Changed  \savepic:  Now use  \newpic{\foo}  to allocate a box,
+\savepic{\foo}  to store the next picture, and  \usepic{\foo}  to copy
+it.
+
+0.3.15 alpha, 2000:
+Added  \mfpverbtex  to write  verbatimtex  block to  .mp  file.
+
+Changed  \newpic  to  \newsavepic  to more closely parallel LaTeX's
+\newsavebox  command.
+
+Allow plotting of a number in a data file against its sequence position
+with  \using{...}{...\sequence...}.
+
+Added \pointdef:  \pointdef{A}(1,3)  makes  \A  expand to  (1,3),  with
+\Ax  and  \Ay  expanding to  1  and  3,  respectively.
+
+
+0.4.0 beta, Aug 2000:
+Released to CTAN.
+
+
+0.4.01 beta, Nov/Dec 2000:
+Generate a time-stamp for the output file.
+
+Added  \penwd  as a synonym for  \pen.
+
+Added macros  \xaxis[<hlen>]  and  \yaxis[<hlen>]  with the obvious
+meanings.
+
+0.4.04 beta, Mar 2001:
+Added  \smoothdata[<tension>]  to cause  \datafile  and  \plotdata  to
+draw smooth curves with optional tension setting. And  \unsmoothdata  to
+restore the default.
+
+0.4.10 beta, May 2001:
+Renamed  \framed  to  \mfpframed, similarly: \mfpframegap  and
+\mfpframethickness.
+
+\tlabeloffset{<hadj>}{<vadj>} and  \tlabelsep{<dimen>}  added to apply
+offsets to label placement.
+
+Added macros for drawing axes along the borders of the picture, and
+tickmarks along those axes. Syntax eventually settled on in 0.4.16:
+
+  \axis{<axis>}, draws an axis (\axis{x} almost equivalent to \xaxis).
+    Allowed values for <axis>: x, y, l, b, r, and t.
+  \axismargin{<axis>}{<num>}, sets the axis margin (lbrt only)
+  \setaxismargins{<num>}{<num>}{<num>}{<num>}, sets all 4 margins.
+  \setallaxismargins{<num>}, sets all 4 margins.
+
+  \xmarks, \ymarks, \lmarks, \bmarks, \rmarks, \tmarks, place the marks.
+  \setaxismarks{<axis>}{<pos>}, sets position of tic marks. Allowed
+    <pos> are inside, outside, ontop, onbottom, and centered. 2
+    abbreviations: \setxmarks and \setymarks.
+  \setbordermarks{<pos>}{<pos>}{<pos>}{<pos>}
+  \setallbordermarks{<pos>}
+
+For arrowheads on the side axis, a dimesion  \sideheadlen  was added.
+
+Added  \gridlines  to draw a regular grid of lines.
+
+Added  \tlabeljustify  to change the default justification of text
+labels.
+
+Added the command  \tlabels  (note the plural). It has one mandatory
+argument which contains a concatenation of arguments for one or more
+\tlabel  commands.
+
+0.4.11--15 beta, July 2001:
+Added support for multiline labels under mplabels.
+
+Added ability to create a curve surrounding some text:
+\tlabelrect  creates a rectangle, with optionally rounded corners,
+\tlabeloval  creates an ellipse with aspect ratio the same as the block
+  of text (optionally multiplied by a given factor),
+\tlabelellipse creates an ellipse with an optional aspect ratio
+  (default = 1),
+\tlablecircle is \tlabelellipse[1].
+
+Added  \axislabels.  This takes a letter indicating the axis, an
+optional justification parameter (as in  \tlabel)  and a comma separated
+list of TeX text and numbers.
+
+Added  \tlabelcolor  to control color of Metapost placed text.
+Added \backgroundcolor  to set the color variable  background,  the
+color used by  \gclear.
+
+Added  \doaxes.  It takes a set of letters chosen from  {xylbrt}, and
+draws the specified axes.
+
+Added optional parameter to  \plotdata  and  \datafile;  can be used
+instead of \(un)smoothdata.
+
+Added \mfpframe...\endmfpframe to frame the contents.
+
+0.4.16 beta, July 28--30 2001:
+Added "star form" of each \tlabel<path> that defines the curve without
+placing the label.
+
+0.4.17 beta, July 28--Aug 10, 2001:
+Commands:  \function,  \parafcn,  \plrfcn,  \btwnfcn  and
+\plrregion  now take an option of the form [s<tension>].
+
+Changed the  \mfpic  command so both optional parameters may be omitted
+(scale 1 is then assumed).
+
+0.4.18 beta, Aug 10--20, 2001:
+Added point size option to  \grid.
+
+Added a macro  \plottext  similar to  \plotsymbol  except instead of a
+symbol, it takes a bit of TeX text.
+
+Added  \plrgrid  and  \plrpatch.
+
+Added  \piechart  and  \piewdge.
+
+0.4.19 beta, Aug 20--26, 2001:
+Added  \mfpicnumber  to set the number of the next character or figure.
+
+0.4.20 beta, Aug 26--Sep 1, 2001:
+Added  \barchart.
+
+0.4.21 beta, Sept 1--10, 2001:
+Added  SolidStar  to symbols available. Changed  Star  to produces an
+open five-pointed star instead of the asterisk previously drawn. Added
+Asterisk  to duplicate the old Star.
+
+Added  \shiftpath{p},  \scalepath{p,sf}, \xscalepath{x,sf},
+\yscalepath{y,sf}  and  \slantpath{y,sl}.  "p"  is a pair  "sf" is a
+scale factor,  "x"  is an x-coordinate,  "y"  is a y-coordinate and "sl"
+is a slant factor.
+
+0.4.22 beta, Sept 11--22, 2001:
+Added  \reflectpath{p1,p2},  \xyswappath  and  \yslantpath{x,sl}; also
+\xslantpath  (a synonym for  \slantpath).
+
+0.5.0 beta, Sept 24--Oct25, 2001:
+Change comment written at the top of the output file.  Now includes the
+name of the output file, as well as the  \jobname  of the TeX source
+that produced it.
+
+Made  \mfpic  and  \endmfpic  write the source line number to the
+output for debugging use.
+
+Added  \everytlabel  for setting commands issued at the outermost level
+at the start of each label.
+
+\mfpic  now writes  "verbatimtex \begingroup etex"  to
+output and  \endmfpic  ends the group (under  mplabels).
+
+Released to CTAN, Oct, 2001.
+
+0.5.01 beta
+Corrects a small bug by adding some braces around the point arguments of
+\tlabel  in a couple of places.
+
+0.5.04 alpha, ???--April 11, 2002:
+Added options  draft,  final,  and  nowrite  (commands \mfpicdraft,
+\mfpicfinal,  and  \mfpicnowrite) which should avoid including the
+pictures  (draft)  or include the pictures (final), overriding automatic
+decisions. Option  nowrite  avoids writing anything to the  .mf  file.
+
+Rewrote  \tlabel  and friends so that the point arguments could
+be enclosed in braces.
+
+All those macros that take a list as last argument can now substitute
+"\datafile{name}" in place of the list.
+
+Collected the common code in  \xmarks,  \ymarks, etc., so that now they
+are implemented with  \marks x,  etc. (Later renamed to  \axismarks.)
+
+Added aliases  \lattice  and  \gridpoints  for  \grid.
+
+0.5.05 alpha, April 16, 2002:
+Corrected bug in  \mfpverbtex  which caused  #  symbols to be doubled in
+the output.
+
+0.5.06 alpha, April 16--May 7, 2002:
+Made changes to avoid MF/MP overflow in \tlabelellipse/oval.
+
+0.5g (= 0.5.07) alpha, May 7--June 25, 2002:
+Added  \usingpairdefault  to reset the  \using  specification to the
+default. Also  \usingnumericdefault  for commands that take numeric
+data.
+
+Changed version numbering scheme so LaTeX file utilities like the
+snapshot package are better served.
+
+0.5h alpha, Aug 1--6, 2002:
+Added  \gclip  rendering macro that clips the current picture to a path.
+
+0.6 beta, Sep 12, 2002:
+Uploaded to CTAN.
+
+0.6a alpha, Sep 12--Nov 5, 2002.
+Added  \let\par\relax (later \@empty) in  \mfpic  to nullify blank lines
+in user code. (Reported by Jaromir Kuben.)  Put in commands to restore
+\par  to its normal meaning in labels and captions.
+
+0.6b beta, Nov 6--, 2002.
+Correct sign on sinh function with negative argument
+
+0.6c beta, Nov 6--, 2002.
+Bounding box had the horizontal and vertical data reversed if all
+of the following three options were selected: metapost, mplabels and
+clip.
+0.63(=0.6c) alpha
+New numbering scheme: increment hundreds (perhaps also thousands) digit
+for alpha, add letters only for patches to released beta version.
+
+Added check that versions match to mfpic and grafbase.
+
+Added a  \partialpath{a,b} (later \partpath) command to produce the
+subpath of the following path  f that goes from  a*length(f)  to
+b*length(f).
+
+Also added  \subpath{a,b}  to give the equivalent of the MF code
+   subpath (a, b) of <following path>
+
+Added tension option to closure commands where it makes sense.
+
+Moved  \fdef  to a global location.
+
+Rewrote \tlabelrect, etc., so that they take a second optional
+parameter: the label justification.
+
+Redid all(?) optional argument handling so that an empty optional
+argument is the same as no optional argument.
+
+Changed  \store  to be usable as a prefix command.
+
+Removed bug reintroduced into filling commands  (shade , polkadot  and
+tess) so they did not respect  aspect_ratio  (affected only MF).
+
+Introduced color to Metafont: color functions (rgb, cmyk, etc.) return a
+numeric. Drawing commands subtract white paths (and simply draw others).
+A process something like \shade is used to produce gray polkadots and
+fills.
+
+Transcribed  documentation to latex.
+
+Packaged mfpic in  mfpic.dtx,  mfpic.ins  and  grafbase.dtx.
+
+0.64 alpha
+Added optional argument to  \circle  (similar to the ones for  \arc). So
+the circle through three points can be easily drawn, filled, etc.
+
+0.65 alpha
+Rewrote  \noship  and added  \stopshipping  and  \resumeshipping  so that
+shipping can be turned off for several figures.
+
+Added  \transformpath , similar to  \applyT  except that it is a
+modification macro for figures. It's argument is a transformer.
+
+Added  \cutoffafter {<obj>}  and  \cutoffbefore {<obj>}  as prefix
+macros that cut the following path after its intersection with the named
+<obj>.
+
+Added  \trimpath{<dim1>,<dim2>} , a prefix macro that removes the part
+of the following path within  <dim1>  of its start and within  <dim2>
+of its end.
+
+0.66 alpha
+Added  \pointcolor , the color in which points are drawn by  \point  and
+in which symbols are drawn by  \plotsymbol.
+
+The optional parameter of  \tlabelrect  may now be the literal word
+"roundends". This will make the radius of the quarter circles equal to
+half the narrower dimension of the rectangle, giving the "rectangle"
+semicircular ends.
+
+0.67 alpha
+Allow the use of  \usetruebbox  in an  mfpic  environment.
+
+Added  \reconfigureplot  which takes the word  `dashes', `colors',  or
+`symbols'  for an argument, followed by a list to be used by  \plotdata.
+Added  \defaultplot  which takes the same arguments and restores the
+builtin defaults.
+
+Added  \regpolygon{n}{P}{<eqn1>}{<eqn2>}.
+
+Moved the loading of the figure to  \endmfpic.
+
+Added  \mpobj  as a synonym for  \mfobj.
+
+Added  \settension  to set the grafbase variable  default_tension.
+and  \setfcntension  to set the grafbase variable  fcn_tension  (this
+second one later removed).
+
+Started  mfpguide.tex,  a beginner's tutorial.
+
+0.68 alpha
+Added complex function  sgn Z : returns (0,0) if  Z = (0,0),
+otherwise unitvector Z.
+
+Added  \makesector,  a  prefix that can make a sector out of
+a following arc.
+
+Added check to  \opengraphsfile  that no previous file is still open.
+
+Added option  clearsymbols  option and commands \clearsymbols  and
+\noclearsymbols.  Open symbols used with  \plotsymbol  can have their
+interiors cleared
+
+Added option:  overlaylabels  and commands  \overlaylabels  and
+\nooverlaylabels.  Saves mplabels in a separate picture added on at
+endmfpic.
+
+Added  \pairarray{<name>}{<list-of-pairs>}  and
+\numericarray{<name>}{<list-of-numbers>} that define an array of pairs
+and an array of numbers.
+
+Added  \mfbezier[<tens>]{<list>}  to produce standard MF bezier path.
+Also  \closedmfbezier.
+
+Add the equivalent of (a sequence of) LaTeX  \qbezier:  \qbeziers  and
+\closedqbeziers.
+
+Added  \ifmfpmpost  so users can use it to write code that adapts to the
+figure processor.
+
+Renamed  \mfp@addto  to  \mfpaddto  and  added  \mfpmultiply  for power
+users.
+
+0.69 alpha and 0.69a
+Make  \gridlines  honor the settings of \axismargin.
+
+Added  \hgridlines  to draw only the horizontal and  \vgridlines  to
+draw only the vertical.
+
+Added  \gridarcs  and  \gridrays  to draw only the arcs or rays of a
+polar grid.
+
+Added  \setmfboolean  and  \setmfnumeric  for the indicated instances of
+\setmfvariable.
+
+Added \InputIfFileExists{mfpic.cfg} in the LaTeX section just before
+\ProcessOptions. Added code to detect and input  mfppatch.tex  if it
+exists.
+
+Renamed manual  to  mfpman.tex.  Provide a linked  mfpman.pdf  with
+TOC, and two indices.
+
+0.69c alpha
+Lowered MF memory usage of \gendashed (and therefore also for \dashed,
+\dotted and \plot). Problem reported by J. Kuben.
+
+0.69d
+\barchart  can now take pair data. Interpreting  (a,b) as an interval
+and creates bars that begin at  a  and end at  b  (Gantt diagrams).
+
+Added  \gantt  (= \barchart)
+
+0.69f
+Made  [cc]  the default for  \tlabelrect,  etc.  Added command
+\tlpathjustify  to change the default.
+
+Added code to input user additions, defaults, etc., in  mfpic.usr,  if
+it exists.
+
+0.69g
+Bug fix to \tlabelrect.
+
+0.7 beta, 14 Nov 2003
+Packed up and put on web page and CTAN.
+
+0.7a beta, 16 Apr 2004
+Change one semicolon (;) in a string written by  \opengraphsfile  to a
+colon (:) to work around a bug in the perl scripts mptopdf and/or
+texexec.
+
+0.71 alpha--0.8 beta, 17 May 2005
+Added
+    \arc[r],  \arc[q],  \circle[r],  circle[q].
+    \arrow*  (star form).
+    \mfpimage...\endmfimage.
+    \globalsetvariable.
+    \levelcurve.
+    \convexcurve,  \convexcyclic.
+    \doubledraw,  \parallelpath.
+    \tlpointsep,  \tlpathsep.
+    \computedspline,  \closedcomputedspline.
+    \fcnspline,  \periodicfcnspline, \btwnplrfcn
+
+Changed the  "\begingroup"  and  "\endgroup"  written  to output
+to "\bgroup"  and  "\egroup".
+
+Added  \assignmfvalue,   \mfpreadlog  and option  mfpreadlog  for
+requesting and receiving values calculated by MF.
+
+Added  \setmfarray  and redefined  \numericarray  and  \pairarray  to
+call it. Added  \colorarray.
+
+Added  \mfpdraftfont,  the font to use in draft when text replaces a
+figure.
+
+Added loop structures
+    \mfpfor{<header>} ... \endmfpfor
+    \mfpwhile{<condition>} ... \endmfpwhile
+    \mfploop ... \mfpuntil{<condition>} ... \endmfploop
+
+Added a  \norender  command.
+
+Added  new.txt  to contain what used to be the part of  changes.txt
+that covers the changes since the last version.
+
+Renamed file  refcard.tex  to  mfpcard.tex.
+
+Rewrote  mfppatch.tex  (formerly empty when there is no patch) to test
+the version info and emit a message if there is a mismatch.
+
+Sent to CTAN 13 May 2005.
+
+0.8a 17 May 2005
+Added forgotton  \belowfcn  plus the documentation of  \btwnplrfcn.
+
+0.8b 27 Sep 2005
+Bug fixed concerning unprintable characters in filenames.
+NOT uploaded.
+
+0.89 08 May 2006
+Added: \arrowhead,  \arrowtail  and  \arrowmid  for arrows.
+
+Added:  \zigzag,  \sinewave  and  \corkscrew  renderings.
+
+Added  \border, a closed rectangle around the border, adjusted inward by
+the axis margin amounts.
+
+Added  \randomizepath  and  \randomlines.
+
+Added  \startbacktext ... \stopbacktext  for background text.
+
+Added  \arccomplement  to produce the complementary arc.
+
+Gave  \arc  a *-form which produces the complementary arc.
+
+Added  \vectorfield  and  \plrvectorfield.
+
+\tlabel  command handles a list of points in either TeX or MP label mode.
+
+Added redefinition of  \mpxshipout  to correct mpost vers 0.901.
+
+Added  \axisline  for maximum flexibility in rendering axes.
+
+Added  \globalassignmfvalue  since  \global\assignmfvalue  didn't work.
+
+New dimension  \griddotsize  for size of grid dots.
+
+\circle  and  \arc  now produce  grafbase command  "fallbackpath"  when
+the optional letter is not a valid choice.
+
+Added  \@safe@activestrue  to the beginning of  \mfpic  and
+\@safe@activesfalse  to each  tlabel  placed by TeX and to  tcaption.
+
+Added  \everymfpic  and  \everyendmfpic.
+
+Added  \closedcurve  as an alias for  \cyclic,  \closedconvexcurve
+for  \convexcyclic  and  \closedpolyline  for \polygon.
+
+Allow loops outside mfpic environments.
+
+Added  \mfppiechart  and  \mfpbarchart  as versions of  \piechart  and
+\barchart  that are available outside the  mfpic environment. The old
+names can still be used inside the environment.
+
+Correct  centeredcaptions  (broken in LaTeX).
+
+Added  \pageref  commands to the  "List of commands by type" in
+mfpman.tex.
+
+Corrected behavior of  mfpic  environments with regard to \everypar.
+
+
+0.90 01 Jun 2006
+Uploaded to CTAN
+
+0.94 09 Sep 2009
+Added support for cmyk and grayscale color models that have been
+available in MetaPost since version 1.000.
+
+0.95
+Added support for filename setting: MetaPost 1.0's filenametemplate
+or 1.2's outputtemplate. Command \setfilenametemplate.
+
+0.96
+Added \mfresolution and \mfmode to set the resolution and/or mf mode
+(only for mfpic's metafont option).
+
+Added pseudohyperbolic circles, \pshcircle and pshcircle().
+
+0.97
+Changed all commands \setmf... that refer to variables in the .mf/.mp
+file (e.g., \setmfvariable \setmfarray, but not \setmfpicgraphic) to
+\set.... Added Easter egg.
+
+Store all 6 arguments of \@mfpic in macros \xfactor, \yfactor, \xmin,
+\xmax, \ymin and \ymax. Use these macros in \mfp@setconv instead of
+passing arguments. Same with \axislabels. Document them.
+
+0.98
+Added \cbeziers, \closedcbeziers and grafbase implementation cbezier and
+mkcbezier. Fixed bug in documentation of \qbeziers (no optional
+argument), and in implementation (less than ideal behavior when list is
+empty).
+
+Changed name of \assignmfvalue to \assignvalue, \globalassignmfvalue to
+\globalassignvalue. But recognize old names.
+
+Command name \setboolean is used by other packages: revert to old
+\..setmf.. commands (and for good measure revert \..assign.. to
+\..assignmf..).
+
+0.99
+Change forceclr so that if the argument is an unknown color of a
+particular model, it returns black _in that model_.
+
+Correct cmyk -> rgb conversion part of makergb to include the blackpart.
+Correct cmykgray(g) (now cmyk(0,0,0,1-g)).
+
+Add \mfpprelabel and \mfppostlabel, then remove them. When \mfpprelabel
+takes an argumemt, it doesn't work with \\ as the line breaker; it needs
+\cr.
+
+Add \brownianmotion (mfpic) and brownianpath (grafbase).
+
+Make \mfpverbtex cumulative before \opengraphsfile.
+
+1.00
+Rearranged the handling of color and color conversion. Added makegray.
+Corrected bug in rgbgray. Added rgbtogray, cmyktogray, rgbtocmyk and
+cmyktorgb. Added colorchoice.
+
+Improved the  message from assignmfvalue (incorrectly invoked figure
+number if used outside a picture).
+
+Simplify non-grafbase code in dvipsname.
+
+Rewrite \mfp@useMP to check for both supp-pdf.tex and supp-pdf.mkii
+under pdfTeX (sufficiently recent pdftex.def will do this under
+pdfLaTeX). Also have it check for both epsf.tex and epsf.sty under
+non-pdf, non-LaTeX (though both files should be identical).
+
+Rename mfpman.tex/pdf to mfpic-doc.tex/pdf.
+Prepared release mfpic100.zip, placed on personal web site.
+Prepared mfpic.tds.zip for release.
+
+
+1.01
+Correct bug in vectorfield (upperbounds of xpos+raxis and ypos+taxis
+should have been xpos-raxis and ypos-taxis). To prevent recurrence,
+added definitions
+  xlow  = xneg+laxis
+  xhigh = xpos-raxis
+  ylow  = yneg+baxis
+  yhigh = ypos-taxis
+Replaced frequent occurence of these combinations with the
+abbreviations.
+
+Correct minor error in mfpic.dtx affecting only the documentation.
+
+1.02
+Add work-around for verbatimtex (added a commented blank line after
+user-supplied verbatimtex material).
+
+1.03
+Correct iscolor in grafbase, adding parentheses.
+
+Change detection of amstex to \ifx\amstexloaded@\relax (don't know why I
+rejected this before). This takes care of formats built on top of
+amstex.
+
+Replaced corrupted PDF files mfpguide.pdf and mfpcard.pdf.
+
+1.04
+Although \mfresolution and \mfmode were defined in mfpic.tex (and
+documented) grafbase did nothing with them. Corrected.
+
+(no change in version; documentation changes only 2010/04/07)
+Correct a wrong checksum and some typos in the dtx. Reformat the source
+files grafbase.dtx and mfpic.dtx.
+
+1.05
+Name changes in grafbase ("GB" prefixed to romannumeral, etc.) \endgroup
+moved in mfpic.
+
+1.06
+Added differential equation plotters \DEgraph and \DEtrajectory and MF
+support macros *RKIV (4-step Runge-Kutta numerical method).
+
+Removed mfppatch.tex from the distribution. Add lcheadings.ist for the
+index.
+
+1.07
+Added mfpicdef.tex for metapost labels and removed token register
+\mfp@commonverbatimtex.
+
+Added \quarterellipse, \halfellipse and \fullellipse.
+
+Use \MFPeverylabel in the metapost file instead of \everylabel in case
+someone uses a LaTeX package that includes such a macro.
+
+Added \gbrace.
+
+Changed the detection of AmS-TeX. Check that both \amstexloaded@=\relax
+and \NoBlackBoxes is defined. The former alone is too easy to occur by
+accident.
+
+Added hyperbolic geodesics. Also a half-plane version of pshdist(,).
+
+Added \browniangraph and \randomwalk.
+
+Added the Kelvin transform, kelvin(z). Also the complex function
+zsqrt(z) and complex number operations zmul and zdiv.
+
+1.08
+Added gradients: \gradient, \areagradient and \radialgradient.
+
+1.09
+Testing...
+
+1.10
+Added commands to interpolate between two paths.
+Added \reversepath=\reverse.
+

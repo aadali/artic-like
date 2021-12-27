@@ -1,0 +1,23 @@
+tb57roeg:
+
+  Denis Roegel: Creating 3D animations with METAPOST,
+     TUGboat volume 18, number 4 (December 1997), pages 274-283. 
+
+    The tb57roeg files in this directory were provided to me on April 8th, 1998
+    by Mimi Burbank. These files were used for the production of the
+    final version of the paper, as it has appeared.
+
+paper1997corrected.pdf: uptodate version of tb57roeg
+
+tugboat-geometry-space.pdf:
+
+  TUGboat (volume 22, number 4, December 2001, pages 298-314)
+
+gut2001.pdf:
+
+  Denis Roegel: La géométrie dans l'espace avec METAPOST, 
+  Cahiers GUTenberg numéro 39-40, May 2001, pages 107-138. 
+  (Original version of tugboat-geometry-space)
+
+
+Denis Roegel, August 17, 2003.

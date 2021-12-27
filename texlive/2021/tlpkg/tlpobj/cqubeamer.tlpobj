@@ -1,0 +1,36 @@
+name cqubeamer
+category Package
+revision 54512
+shortdesc LaTeX Beamer Template for Chongqing University
+longdesc This package provides a LaTeX beamer template designed for
+longdesc researchers of Chongqing University. It can be used for
+longdesc academic reports, conferences, or thesis defense, and can be
+longdesc helpful for delivering a speech. It should be used with the
+longdesc XeTeX engine.
+containersize 3084
+containerchecksum 7c2c4548f8bbb4885680588ff113c8af96d79b5403d6cb01bebc6824745fecdd243af7e14b51bdacc91a6ee2301946ae911aa6c892d248958c1089d3fac383a0
+doccontainersize 2510176
+doccontainerchecksum f11c9d614b75a973cfd0452e283078c5af259127624f7746c0f49152da20ea016acb8842ce343cf342e4fd45f563bdadb48fc4e98cf964bb1c6dd044e610e202
+docfiles size=787
+ texmf-dist/doc/xelatex/cqubeamer/LICENSE
+ texmf-dist/doc/xelatex/cqubeamer/README.md details="Readme"
+ texmf-dist/doc/xelatex/cqubeamer/cqubeamer.pdf details="Package documentation" language="zh"
+ texmf-dist/doc/xelatex/cqubeamer/cqubeamer.tex
+ texmf-dist/doc/xelatex/cqubeamer/demo_code/demo_fontsetting.tex
+ texmf-dist/doc/xelatex/cqubeamer/demo_code/demo_format.tex
+ texmf-dist/doc/xelatex/cqubeamer/demo_code/demo_layout.tex
+ texmf-dist/doc/xelatex/cqubeamer/demo_code/demo_titlepage.tex
+ texmf-dist/doc/xelatex/cqubeamer/figure/CQU_Campus_D.jpg
+ texmf-dist/doc/xelatex/cqubeamer/figure/Wechat.png
+ texmf-dist/doc/xelatex/cqubeamer/figure/go.png
+ texmf-dist/doc/xelatex/cqubeamer/logo/cqulogo.pdf
+ texmf-dist/doc/xelatex/cqubeamer/logo/cquname.pdf
+runfiles size=3
+ texmf-dist/tex/xelatex/cqubeamer/cqubeamer.sty
+catalogue-also cquthesis
+catalogue-contact-bugs https://github.com/CQUtug/CQUBeamer
+catalogue-contact-repository https://github.com/Godblesswz/CQUBeamerTemplate
+catalogue-ctan /macros/xetex/latex/cqubeamer
+catalogue-license mit cc-by-4
+catalogue-topics presentation xetex doc-templ chinese
+catalogue-version 1.0

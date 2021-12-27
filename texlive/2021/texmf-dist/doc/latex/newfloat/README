@@ -1,0 +1,38 @@
+==========================================================================
+
+The `newfloat' package
+Copyright (C) 2011-2019 Axel Sommerfeldt (axel.sommerfeldt@f-m.fm)
+
+License: LPPL = LaTeX Project Public Licence
+Maintenance Status: maintained (by Axel Sommerfeldt)
+
+Home page:
+  https://gitlab.com/axelsommerfeldt/newfloat
+
+If you need help for installation please visit:
+  https://texfaq.org/FAQ-inst-miktexstar
+  https://texfaq.org/FAQ-installthings
+  https://texfaq.org/FAQ-privinst
+
+If you need help using these packages please visit:
+  https://latex.org/forum/
+  https://tex.stackexchange.com/
+  https://golatex.de/               (German)
+  https://texwelt.de/               (German)
+
+If you think you may have found a bug in these packages,
+or want to report a suggestion for improvement, please either visit
+  https://gitlab.com/axelsommerfeldt/newfloat/issues (preferred)
+or send an e-mail to
+  axel.sommerfeldt@f-m.fm
+
+--------------------------------------------------------------------------
+
+The `newfloat' package v1.1 offers the command \DeclareFloatingEnvironment
+for defining new floating environments which behave like the existing
+floating environments "figure" and "table".
+
+User Manual: newfloat.pdf (English)
+
+==========================================================================
+

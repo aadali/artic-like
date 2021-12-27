@@ -1,0 +1,29 @@
+name xevlna
+category Package
+revision 43864
+shortdesc Insert non-breakable spaces using XeTeX
+longdesc The package will directly insert nonbreakable spaces (in Czech,
+longdesc vlna or vlnka), after nonsyllabic prepositions and single
+longdesc letter conjuctions, while the document is being typeset. (The
+longdesc macros recognised maths and verbatim by TeX means.) (Inserting
+longdesc nonbreakable spaces by a preprocessor will probably never be
+longdesc fully reliable, because user defined macros and environments
+longdesc cannot reliably be recognised.) The package works both with
+longdesc (Plain) XeTeX and with XeLaTeX.
+containersize 1344
+containerchecksum 69c80d5243a4af96f2dd8092926d2766bad5d6beaeff94d6aa2f184a68a45fa50bb3abb91a4652d8c5e5617073aee9caddeeb73fd5399965f477be7075b7ca01
+doccontainersize 55384
+doccontainerchecksum d0d033b646314eb250b245575ea2361b6c12f13eefab071c2b9f91524b08bfceb9fec197c3fa5f61e3ed19caaf4198e69ce1305bf1eb2daf1db6e30365eeac48
+docfiles size=21
+ texmf-dist/doc/xelatex/xevlna/License.txt
+ texmf-dist/doc/xelatex/xevlna/README details="Readme"
+ texmf-dist/doc/xelatex/xevlna/xevlna-inc.tex
+ texmf-dist/doc/xelatex/xevlna/xevlna.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/xevlna/xevlna.tex
+runfiles size=1
+ texmf-dist/tex/xelatex/xevlna/xevlna.sty
+catalogue-also encxvlna luavlna
+catalogue-ctan /macros/xetex/generic/xevlna
+catalogue-license lppl1.3
+catalogue-topics typesetting czech
+catalogue-version 1.1

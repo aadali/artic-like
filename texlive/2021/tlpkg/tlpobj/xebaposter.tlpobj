@@ -1,0 +1,36 @@
+name xebaposter
+category Package
+revision 42046
+shortdesc Create beautiful scientific Persian/Latin posters using TikZ
+longdesc This package is designed for making beautiful scientific
+longdesc Persian/Latin posters. It is a fork of baposter by Brian Amberg
+longdesc and Reinhold Kainhofer available at
+longdesc http://www.brian-amberg.de/uni/poster/. baposter's users should
+longdesc be able to compile their poster using xebaposter (instead of
+longdesc baposter) without any problem.
+containersize 12268
+containerchecksum cc264905da875732a3bad46daa31a1f5595e3676ff4d5570554caea40dfd383eac8e9a05121e2211294749770e50fb4d80ca6e735421eb7ca295a10bc666ec3e
+doccontainersize 318872
+doccontainerchecksum 9bf0315e6fa502e0de606bb16c6575997314619f10a8aba312d8062be5f1edf4ba037eff7c23948ba7800bc2abf2fa300b8609287558a0ad6c59d63095b20045
+docfiles size=163
+ texmf-dist/doc/latex/xebaposter/README details="Readme"
+ texmf-dist/doc/latex/xebaposter/images/docs-boxshape.pdf
+ texmf-dist/doc/latex/xebaposter/images/docs-headerborder.pdf
+ texmf-dist/doc/latex/xebaposter/images/docs-headershape.pdf
+ texmf-dist/doc/latex/xebaposter/images/docs-shade.pdf
+ texmf-dist/doc/latex/xebaposter/images/fig3.pdf
+ texmf-dist/doc/latex/xebaposter/images/fig4.pdf
+ texmf-dist/doc/latex/xebaposter/images/fig5.pdf
+ texmf-dist/doc/latex/xebaposter/images/fig6.pdf
+ texmf-dist/doc/latex/xebaposter/images/logo.png
+ texmf-dist/doc/latex/xebaposter/images/shariflogo.png
+ texmf-dist/doc/latex/xebaposter/poster-fa.pdf
+ texmf-dist/doc/latex/xebaposter/poster-fa.tex
+ texmf-dist/doc/latex/xebaposter/xebaposter-doc.pdf details="Package documentation"
+ texmf-dist/doc/latex/xebaposter/xebaposter-doc.tex
+runfiles size=14
+ texmf-dist/tex/latex/xebaposter/xebaposter.cls
+catalogue-ctan /graphics/pgf/contrib/xebaposter
+catalogue-license lppl1.3
+catalogue-topics poster class pgf-tikz
+catalogue-version 2.51

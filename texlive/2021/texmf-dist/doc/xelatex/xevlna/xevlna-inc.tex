@@ -1,0 +1,199 @@
+%% $Id: xevlna-inc.tex 535 2017-03-25 16:38:58Z zw $
+
+\ifeng
+
+\section{English manual}
+This is a manual for “vlna” implemented in \XeTeX. It can be used in plain \XeTeX\ as well as in
+\XeLaTeX.
+
+\else
+
+\section{\texorpdfstring{Český manuál}{Cesky manual}}
+Toto je manuál balíčku „vlna“ implementovaného pomocí \XeTeX u. Lze jej použít jak pro plain
+\XeTeX, tak pro \XeLaTeX.
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Purpose}
+The purpose of the package is to insert nonbreakable spaces (\verb:~:, in Czech \textit{vlna} or
+\textit{vlnka}) after nonsyllabic prepositions and single letter conjuctions directly while \TeX
+ing the document. The macros recognise math and verbatim by \TeX\ means. Inserting nonbreakable
+spaces by a preprocessor may never be fully reliable because user defined macros and environments
+cannot be recognised.
+
+\else
+
+\subsection{Účel}
+Tento balíček slouží ke vkládání nezlomitelných mezer (vlnek) za neslabičné předložky a
+jednopísmenné spojky přímo při \TeX ování dokumentu. Makra rozeznávají matematiku a verbatim \TeX
+ovými prostředky. Vkládání nezlomitelných mezer preprocesorem nikdy nemůže být naprosto
+spolehlivé, protože uživatelsky definovaná makra a prostředí nelze rozpoznat.
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Installation}
+The package consists of the following files:
+\begin{itemize}
+\item \texttt{xevlna.sty} – put it to the directory where both \texttt{xetex} and \texttt{xelatex}
+expect included files, preferably \verb;texmf-dist/tex/xelatex/xevlna/;
+\item \texttt{xevlna.pdf} – compiled manual, put it to a directory where \texttt{texdoc} looks for
+documentation, preferably \verb;texmf-dist/doc/xevlna/;
+\item \texttt{xevlna.tex}, \texttt{xevlna-inc.tex} – source files of the manual
+\end{itemize}
+
+\else
+
+\subsection{Instalace}
+Balíček se skládá z následujících souborů:
+\begin{itemize}
+\item \texttt{xevlna.sty} – uložte jej do adresáře, kde \texttt{xetex} i \texttt{xelatex}
+očekávají vkládané soubory, nejlépe \verb;texmf-dist/tex/xelatex/xevlna/;
+\item \texttt{xevlna.pdf} – zkompilovaný návod, vložte jej do adresáře, odkud \texttt{texdoc} čte
+dokumentaci, nejlépe \verb;texmf-dist/doc/xevlna/;
+\item \texttt{xevlna.tex}, \texttt{xevlna-inc.tex} – zdrojové soubory návodu
+\end{itemize}
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Usage in \texorpdfstring{\XeLaTeX}{XeLaTeX}}
+The package is used in \XeLaTeX\ by:
+
+\else
+
+\subsection{Použití v \texorpdfstring{\XeLaTeX u}{XeLaTeXu}}
+Balíček se použije v \XeLaTeX u:
+
+\fi
+
+\medskip
+\begin{verbatim}
+\usepackage{xevlna}
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Usage in plain \texorpdfstring{\XeTeX}{XeTeX}}
+The package is used in plain \XeTeX\ by:
+
+\else
+
+\subsection{Použití v plain \texorpdfstring{\XeTeX u}{XeTeXu}}
+V plain \XeTeX u se balíček použije takto:
+
+\fi
+
+\medskip
+\begin{verbatim}
+\input xevlna.sty
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Enabling and disabling}
+Insertion of nonbreakable spaces may be undesirable in some parts of a multilingual document. It
+may therefore be disabled by \cmd{xevlnaDisable} and enabled \cmd{xevlnaEnable}. Insertion is
+enabled by default.
+
+\else
+
+\subsection{Zapnutí a vypnutí vlnek}
+Vkládání vlnek může být nežádoucí v některých částech vícejazyčného dokumentu. Lze jej vypnout
+makrem \cmd{xevlnaDisable} a znovu zapnout makrem \cmd{xevlnaEnable}. Po načtení balíčku je
+vkládání vlnek zapnuto.
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+
+\subsection{Implementation details}
+The package makes use of the \cmd{XeTeXinterchartoks} mechanism. New classes for prepositions and
+opening punctuation are allocated by \cmd{newXeTeXintercharclass}. The nonbreakable space is
+inserted whenever a single character belonging to the preposition class is followed by a space. It
+will therefore be inserted in expression \verb;o lišce; but not in expression \verb;po lišce;. The
+preposition itself cannot be typeset in a different font because the space is not recognised in
+such a case. If \verb;\textit{i} v \textbf{lese}; is
+entered, the nonbreakable space will be inserted after \textit{v} but not after italic \textit{i}.
+The text following the preposition may be in a different script. The nonbreakable space will be
+inserted after Czech preposition \textit{v} in:
+\else
+
+\subsection{Implementační detaily}
+V balíčku je využíván mechanismus \cmd{XeTeXinterchartoks} specifický pro \XeTeX. Pomocí příkazu \cmd{newXeTeXintercharclass}
+jsou alokovány nové třídy pro předložky a otevírací interpunkci. Nezlomitelná mezera (vlnka) je
+vložena, pokud za samostatným znakem z třídy předložek následuje mezera. Bude tedy vložena do
+výrazu \verb;o lišce;, ne však do výrazu \verb;po lišce;. Předložka nesmí být sázena jiným fontem.
+Ve výrazu \verb;\textit{i} v \textbf{lese}; bude vlnka vložena za předložku \textit{v}, ale nebude
+vložena za spojku \textit{i} v kurzívě. Text po předložce může býd psán i jiným písmem. Vlnka bude
+vložena za předložkou \textit{v}~i ve výraze:
+\fi
+v दिल्ली.
+
+\ifeng
+
+The package does not use “@” in the macro names\footnote{Usage of “@” is now needed for
+recognitnion of \XeTeX\ version and hence setting the correct boundary class.} in order to make it easily usable in plain \XeTeX.
+This brings a danger of redefining internal macros by a user. The packages defines and immediatelly
+consumes \cmd{next} and makes use of these internal macros:
+
+\else
+
+Balíček nepoužívá „@“ ve jménech maker\footnote{Znak „@“ je nyní nutný pro rozpoznání verze
+\XeTeX{}u a tudíž správnému nastavení hodnoty \emph{boundary class}.}, aby bylo usnadněno použití v plain \XeTeX u. To však
+přináší nebezpečí, že bude interní makro předefinováno uživatelem. Balíček definuje a okamžitě
+použije \cmd{next} a používá tato interní makra:
+
+\fi
+
+\begin{itemize}
+\item \cmd{CSopenpunctuation}
+\item \cmd{CSnonsyllabicpreposition}
+\item \cmd{CSinterchartoks}
+\item \cmd{CSnointerchartoks}
+\item \cmd{PreCSpreposition}
+\item \cmd{ExamineCSpreposition}
+\item \cmd{ProcessCSpreposition}
+\item \cmd{xevlnaXeTeXspace}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifeng
+\subsection{Changes}
+Version 1.1 reflects increased number of character classes and is backward compatible with older
+versions of \XeTeX.
+\else
+
+\subsection{Změny}
+Verze 1.1 bere ohled na zvýšený počet znakových tříd a je zpětně kompatibilní s předchozími verzemi
+\XeTeX u.
+\fi
+
+\ifeng
+\subsection{License}
+The package can be used and distributed according to the LaTeX Project Public License version~1.3 or later the
+text of which can be found at the \texttt{License.txt} or at
+\else
+
+\subsection{Licence}
+Balíček může být používán a šířen podle LaTeX Project Public License verze~1.3 nebo novější, jejíž text najdete
+v souboru \texttt{License.txt} nebo na
+\fi
+\url{http://www.latex-project.org/lppl.txt}

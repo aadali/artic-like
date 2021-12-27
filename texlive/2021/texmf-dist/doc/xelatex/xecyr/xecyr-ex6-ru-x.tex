@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage[russian]{babel}
+
+\usepackage{boxedminipage,xcolor}
+\usepackage[grid,gridcolor=gray!25,subgridcolor=gray!12.5]{eso-pic}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\gridSetup[mm]{1mm}{1}{1}{10}{1}
+\makeatletter\def\ESO@griddeltaY{1}\makeatother
+
+\begin{document}
+
+\begin{boxedminipage}{1.8cm}
+инженерно-строительный\\
+инженерно"-строительный\\
+инженерно"~строительный\\
+инженерно"=строительный
+\end{boxedminipage}
+
+\begin{boxedminipage}{2.2cm}
+Всё лишнее --- детям\\
+Всё лишнее "--- детям
+\end{boxedminipage}
+
+\begin{boxedminipage}{2cm}
+Менделеева---Клапейрона\\
+Менделеева"--~Клапейрона
+\end{boxedminipage}
+
+\begin{boxedminipage}{2.2cm}
+--- Что случилось?
+"--*Ничего страшного.
+\end{boxedminipage}
+
+\begin{boxedminipage}{2.2cm}
+инсталлировать/деинсталлировать\\
+""инсталлировать/""деинсталлировать
+\end{boxedminipage}
+
+\begin{boxedminipage}{2cm}
+М.В.Ломоносов\\
+М. В. Ломоносов\\
+М.\,В.\,Ломоносов\\
+М.",В.",Ломоносов
+\end{boxedminipage}
+
+\begin{boxedminipage}{3cm}
+"Кавычки"\\
+``Кавычки''\\
+`Кавычки'\\
+"<Кавычки">\\
+<<Кавычки>>\\
+<"|<Кавычки>"|>\\
+"`Кавычки"'
+\end{boxedminipage}
+
+\end{document}

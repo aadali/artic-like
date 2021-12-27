@@ -1,0 +1,315 @@
+% \iffalse meta-comment
+%
+%% File: l3backend-opacity.dtx
+%
+% Copyright (C) 2021 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "l3backend bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/latex3
+%
+% for those people who are interested.
+%
+%<*driver>
+\documentclass[full,kernel]{l3doc}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \textsf{l3backend-opacity} package\\ Backend opacity support^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Released 2021-12-14}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3backend-opacity} Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%<@@=opacity>
+%    \end{macrocode}
+%
+% Although opacity is not color, it needs to be managed in a somewhat
+% similar way: using a dedicated stack if possible. Depending on the backend,
+% that may not be possible. There is also the need to cover fill/stroke setting
+% as well as more general running opacity. It is easiest to describe the value
+% used in terms of opacity, although commonly this is referred to as
+% transparency.
+%
+%    \begin{macrocode}
+%<*dvips>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_backend_select:n,\@@_backend_select_aux:n}
+% \begin{macro}{\@@_backend_fill:n, \@@_backend_stroke:n}
+% \begin{macro}{\@@_backend:nnn, \@@_backend:xnn}
+%   No stack so set values directly. The need to deal with Distiller and
+%   Ghostscript separately means we use a common auxiliary: the two
+%   systems require different PostScript for transparency. This is
+%   of course not quite as efficient as doing one test for setting all
+%   transparency, but it keeps things clearer here. Thanks to Alex Grahn
+%   for the detail on testing for GhostScript.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_backend_select:n #1
+  {
+    \exp_args:Nx \@@_backend_select_aux:n
+      { \fp_eval:n { min(max(0,#1),1) } }
+  }
+\cs_new_protected:Npn \@@_backend_select_aux:n #1
+  {
+    \@@_backend:nnn {#1} { fill }   { ca }
+    \@@_backend:nnn {#1} { stroke } { CA }
+  }
+\cs_new_protected:Npn \@@_backend_fill:n #1
+  {
+    \@@_backend:xnn
+      { \fp_eval:n { min(max(0,#1),1) } }
+      { fill }
+      { ca }
+  }
+\cs_new_protected:Npn \@@_backend_stroke:n #1
+  {
+    \@@_backend:xnn
+      { \fp_eval:n { min(max(0,#1),1) } }
+      { stroke }
+      { CA }
+  }
+\cs_new_protected:Npn \@@_backend:nnn #1#2#3
+  {
+    \__kernel_backend_postscript:n
+      {
+        product ~ (Ghostscript) ~ search
+          {
+            pop ~ pop ~ pop ~
+            #1 ~ .set #2 constantalpha
+          }
+          {
+            pop ~
+            mark ~
+            /#3 ~ #1
+            /SetTransparency ~
+            pdfmark
+          }
+        ifelse
+      }
+  }
+\cs_generate_variant:Nn \@@_backend:nnn { x }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</dvips>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*dvipdfmx|luatex|pdftex|xetex>
+%    \end{macrocode}
+%
+% \begin{variable}{\c_@@_backend_stack_int}
+%   Set up a stack.
+%    \begin{macrocode}
+\bool_lazy_and:nnT
+  { \cs_if_exist_p:N \pdfmanagement_if_active_p: }
+  { \pdfmanagement_if_active_p:}
+  {
+    \__kernel_color_backend_stack_init:Nnn \c_@@_backend_stack_int
+      { page ~ direct } { /opacity 1 ~ gs }
+    \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+      { opacity 1 } { << /ca ~ 1 /CA ~ 1 >> }
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\l_@@_backend_fill_tl, \l_@@_backend_stroke_tl}
+%   We use |tl| here for speed: at the backend, this should be reasonable.
+%    \begin{macrocode}
+\tl_new:N \l_@@_backend_fill_tl
+\tl_new:N \l_@@_backend_stroke_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\@@_backend_select:n, \@@_backend_select_aux:n}
+% \begin{macro}{\@@_backend_reset:}
+%   Other than the need to evaluate the opacity as an \texttt{fp}, much the
+%   same as color.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_backend_select:n #1
+ {
+   \exp_args:Nx \@@_backend_select_aux:n
+     { \fp_eval:n { min(max(0,#1),1) } }
+ }
+\cs_new_protected:Npn \@@_backend_select_aux:n #1
+  {
+    \tl_set:Nn \l_@@_backend_fill_tl {#1}
+    \tl_set:Nn \l_@@_backend_stroke_tl {#1}
+    \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+      { opacity #1 }
+      { << /ca ~ #1 /CA ~ #1 >> }
+    \__kernel_color_backend_stack_push:nn \c_@@_backend_stack_int
+      { /opacity #1 ~ gs }
+    \group_insert_after:N \@@_backend_reset:
+  }
+\bool_lazy_and:nnF
+  { \cs_if_exist_p:N \pdfmanagement_if_active_p: }
+  { \pdfmanagement_if_active_p:}
+  {
+    \cs_gset_protected:Npn \@@_backend_select_aux:n #1 { }
+  }
+\cs_new_protected:Npn \@@_backend_reset:
+ { \__kernel_color_backend_stack_pop:n \c_@@_backend_stack_int }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\@@_backend_fill:n, \@@_backend_stroke:n}
+% \begin{macro}{\@@_backend_fillstroke:nn, \@@_backend_fillstroke:xx}
+%   For separate fill and stroke, we need to work out if we need to do
+%   more work or if we can stick to a single setting.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_backend_fill:n #1
+  {
+    \@@_backend_fill_stroke:xx
+      { \fp_eval:n { min(max(0,#1),1) } }
+      \l_@@_backend_stroke_tl
+  }
+\cs_new_protected:Npn \@@_backend_stroke:n #1
+  {
+    \@@_backend_fill_stroke:xx
+      \l_@@_backend_fill_tl
+      { \fp_eval:n { min(max(0,#1),1) } }
+  }
+\cs_new_protected:Npn \@@_backend_fill_stroke:nn #1#2
+  {
+    \str_if_eq:nnTF {#1} {#2}
+      { \@@_backend_select_aux:n {#1} }
+      {
+        \tl_set:Nn \l_@@_backend_fill_tl {#1}
+        \tl_set:Nn \l_@@_backend_stroke_tl {#2}
+        \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+          { opacity.fill #1 }
+          { << /ca ~ #1 >> }
+        \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+          { opacity.stroke #1 }
+          { << /CA ~ #2 >> }
+        \__kernel_color_backend_stack_push:nn \c_@@_backend_stack_int
+         { /opacity.fill #1 ~ gs /opacity.stroke #2 ~ gs }
+        \group_insert_after:N \@@_backend_reset:
+      }
+  }
+\cs_generate_variant:Nn \@@_backend_fill_stroke:nn { xx }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</dvipdfmx|luatex|pdftex|xetex>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*dvipdfmx|xdvipdfmx>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_backend_select:n}
+%   Older backends have no stack support, so everything is done directly.
+%    \begin{macrocode}
+\int_compare:nNnT \c__kernel_sys_dvipdfmx_version_int < { 20201111 }
+  {
+    \cs_gset_protected:Npn \@@_backend_select_aux:n #1
+      {
+        \tl_set:Nn \l_@@_backend_fill_tl {#1}
+        \tl_set:Nn \l_@@_backend_stroke_tl {#1}
+        \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+          { opacity #1 }
+          { << /ca ~ #1 /CA ~ #1 >> }
+        \__kernel_backend_literal_pdf:n { /opacity #1 ~ gs }
+      }
+    \cs_gset_protected:Npn \@@_backend_fill_stroke:nn #1#2
+      {
+        \str_if_eq:nnTF {#1} {#2}
+          { \@@_backend_select_aux:n {#1} }
+          {
+            \tl_set:Nn \l_@@_backend_fill_tl {#1}
+            \tl_set:Nn \l_@@_backend_stroke_tl {#2}
+            \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+              { opacity.fill #1 }
+              { << /ca ~ #1 >> }
+            \pdfmanagement_add:nnn { Page / Resources / ExtGState }
+              { opacity.stroke #1 }
+              { << /CA ~ #2 >> }
+            \__kernel_backend_literal_pdf:n
+             { /opacity.fill #1 ~ gs /opacity.stroke #2 ~ gs }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</dvipdfmx|xdvipdfmx>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*dvisvgm>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_backend_select:n, \@@_backend_fill:n, \@@_backend_stroke:n}
+% \begin{macro}{\@@_backend:nn}
+%   Once again, we use a scope here. There is a general opacity function for
+%   SVG, but that is of course not set up using the stack.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_backend_select:n #1
+  { \@@_backend:nn {#1} { } }
+\cs_new_protected:Npn \@@_backend_fill:n #1
+  { \@@_backend:nn {#1} { fill- } }
+\cs_new_protected:Npn \@@_backend_stroke:n #1
+  { \@@_backend:nn { {#1} } { stroke- } }
+\cs_new_protected:Npn \@@_backend:nn #1#2
+  { \__kernel_backend_scope:x { #2 opacity = " \fp_eval:n { min(max(0,#1),1) } " } }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</dvisvgm>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

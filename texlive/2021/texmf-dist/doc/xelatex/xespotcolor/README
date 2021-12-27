@@ -1,0 +1,16 @@
+A spot color is one that is printed with its own ink. 
+Typically, printers use spot colors in the production 
+of books or other printed material. The spotcolor package
+by Jens Elstner is a first attempt to introduce the use of 
+spot colors with pdfLaTeX. The xespotcolor package is a 
+reimplementation of this package so to be usable with 
+XeLaTeX or LaTeX+dvipdfmx. As such, it has the same user 
+interface and  the same capabilities. Version 2.0a added
+support for the xcolor package and so one can use
+spotcolors in TikZ pictures. In this version one can 
+safely use spotcolors with the tcolorbox package and
+I have updated the package so to use the correct shipout
+hook provided by the LaTeX kernel.
+ 
+Apostolos Syropoulos
+2021/03/01

@@ -1,0 +1,19 @@
+name pxtatescale
+category Package
+revision 43009
+shortdesc Patch to graphics driver for scaling in vertical direction of pTeX
+longdesc Patch for graphics driver 'dvipdfmx' to support correct scaling
+longdesc in vertical direction of Japanese pTeX/upTeX.
+containersize 1020
+containerchecksum 922aabc7fdd35d1b1a6199be0986ad6d42ffc0db138066a7b1607ec521cf22571abc752ce225c9d99e2e9f8685149a5b91c35d6914fbccdb293a2476797dbdc9
+doccontainersize 1620
+doccontainerchecksum be6998e53e5d8d92138e440de1c75e83671ea88316fb9b4dde0188dab198dc65301b4cd4f53368c277b782edf82f17ef89903eddfa6656669a5329a029907249
+docfiles size=2
+ texmf-dist/doc/latex/pxtatescale/LICENSE
+ texmf-dist/doc/latex/pxtatescale/README details="Readme"
+runfiles size=1
+ texmf-dist/tex/latex/pxtatescale/pxtatescale.sty
+catalogue-ctan /macros/latex/contrib/pxtatescale
+catalogue-license mit
+catalogue-topics graphics-drv japanese
+catalogue-version 0.4

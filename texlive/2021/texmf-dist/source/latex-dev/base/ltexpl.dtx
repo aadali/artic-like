@@ -1,0 +1,390 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2021
+% The LaTeX Project and any individual authors listed elsewhere
+% in this file.
+%
+% This file is part of the LaTeX base system.
+% -------------------------------------------
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    https://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008 or later.
+%
+% This file has the LPPL maintenance status "maintained".
+%
+% The list of all files belonging to the LaTeX base distribution is
+% given in the file `manifest.txt'. See also `legal.txt' for additional
+% information.
+%
+% The list of derived (unpacked) files belonging to the distribution
+% and covered by LPPL is defined by the unpacking scripts (with
+% extension .ins) which are part of the distribution.
+%
+% \fi
+%
+% \iffalse
+%%% From File: ltexpl.dtx
+%
+%<*driver>
+% \fi
+\ProvidesFile{ltexpl.dtx}
+             [2021/04/20 v1.3c LaTeX Kernel (expl3-dependent code)]
+% \iffalse
+\documentclass{ltxdoc}
+\GetFileInfo{ltexpl.dtx}
+\title{\filename}
+\date{\filedate}
+\author{%
+  Joseph Wright}
+
+\providecommand\pkg[1]{\texttt{#1}}
+
+\begin{document}
+ \MaintainedByLaTeXTeam{latex}
+ \maketitle
+ \DocInput{ltexpl.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+%
+% \changes{v1.2d}{2020/08/21}{Dropped unused command}
+%
+% \section{\pkg{expl3}-dependent code}
+%
+% \StopEventually{}
+%
+% \changes{v0.0}{2019-10-02}{Initial version}
+%
+% \subsection{Loader}
+%
+% \changes{v1.0a}{2020/03/02}
+%         {Don't load expl3 if already in the format (gh/295)}
+% \changes{v1.1}{2020/03/05}
+%         {Load xparse.ltx if \cs{NewDocumentCommand} is not defined
+%         by expl3.ltx}
+% \changes{v1.2c}{2020/06/04}
+%         {Define a local version of some \LaTeXe{} basic macros to support
+%          package loading}
+%
+% \begin{macro}{\@kernel@after@enddocument,
+%                \@kernel@after@enddocument@afterlastpage}
+%   These two kernel hooks are used by the shipout code.  They are
+%   defined earlier here because the \pkg{lthooks} code adds material
+%   to them.
+% \changes{v1.2h}{2020/12/18}
+%         {Define kernel \cs{enddocument} hooks early}
+%    \begin{macrocode}
+%<*2ekernel|latexrelease>
+%<latexrelease>\IncludeInRelease{2020/10/01}%
+%<latexrelease>  {kernel@enddocument hooks}{Define several kernel hooks}
+%    \end{macrocode}
+%    We only initialize these kernel hooks if they are not already
+%    existing. Otherwise they would be set to \cs{@empty} on rollback
+%    which would be wrong because code that has been added to them
+%    may still have to be executed in the rollback situation . Instead
+%    code that writes to them needs to handle the rollback as needed.
+%    It is likely that we have to change that approach in the future,
+%    but for now it should do.
+%    (It is enough to test only for the existence of one hook, as all
+%    got added at the same time.)
+% \changes{v1.3c}{2021/04/20}{Don't empty kernel hooks on rollback}
+%    \begin{macrocode}
+\ifx\@kernel@after@enddocument\@undefined
+  \let \@kernel@after@enddocument               \@empty
+  \let \@kernel@after@enddocument@afterlastpage \@empty
+%    \end{macrocode}
+%
+%  \begin{macro}{\@kernel@before@begindocument,\@kernel@after@begindocument}
+%    For the similar reasons we also define those that are used in
+%    \cs{document} because they too get material added to in early modules.
+%    \begin{macrocode}
+  \let \@kernel@before@begindocument \@empty
+  \let \@kernel@after@begindocument  \@empty
+\fi
+%<latexrelease>\EndIncludeInRelease
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<latexrelease>\IncludeInRelease{0000/00/00}%
+%<latexrelease>  {kernel@enddocument hooks}{Define several kernel hooks}
+%<latexrelease>\let\@kernel@after@enddocument\@undefined
+%<latexrelease>\let\@kernel@after@enddocument@afterlastpage\@undefined
+%<latexrelease>\let\@kernel@before@begindocument\@undefined
+%<latexrelease>\let\@kernel@after@begindocument\@undefined
+%</2ekernel|latexrelease>
+%<latexrelease>\EndIncludeInRelease
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% First define some blank commands, so that in case something goes wrong while
+% loading \textsf{expl3}, we won't get strange \texttt{Undefined control
+% sequence} errors.
+% \changes{v1.3a}{2021/01/24}{Define \pkg{expl3} hooks conditionally}
+%    \begin{macrocode}
+%<*2ekernel|latexrelease>
+%<latexrelease>\IncludeInRelease{2020/10/01}%
+%<latexrelease>            {\@expl@sys@load@backend@@}{Roll forward support}%
+\def\reserved@a#1{\ifdefined#1\else\def#1{}\fi}
+\reserved@a\@expl@sys@load@backend@@
+\reserved@a\@expl@push@filename@@
+\reserved@a\@expl@push@filename@aux@@
+\reserved@a\@expl@pop@filename@@
+%<latexrelease>\EndIncludeInRelease
+%</2ekernel|latexrelease>
+%    \end{macrocode}
+%
+% \changes{v1.2d}{2020/07/08}
+%         {Add a last-minute hook for \textsf{expl3}}
+% Create a hook for last-minute \pkg{expl3} material.
+%    \begin{macrocode}
+%<*2ekernel>
+\def\@expl@finalise@setup@@{}
+%</2ekernel>
+%    \end{macrocode}
+%
+% Now define some basics to support loading \textsf{expl3}.  These macros can
+% be defined here safely, because they are redefined later on by the kernel,
+% so we define simpler versions just to suit our needs.
+%    \begin{macrocode}
+%<*2ekernel>
+\long\def\@gobble#1{}
+\long\def\@firstofone#1{#1}
+\long\def\@firstoftwo#1#2{#1}
+\long\def\@secondoftwo#1#2{#2}
+\long\def\IfFileExists#1{%
+  \openin\@inputcheck"#1" %
+  \ifeof\@inputcheck
+    \expandafter\@secondoftwo
+  \else
+    \closein\@inputcheck
+    \expandafter\@firstoftwo
+  \fi}
+\long\def\@ifnextchar#1#2#3{%
+  \let\reserved@d=#1%
+  \def\reserved@a{#2}%
+  \def\reserved@b{#3}%
+  \futurelet\@let@token\@ifnch}
+\def\@ifnch{%
+  \ifx\@let@token\reserved@d
+    \expandafter\reserved@a
+  \else
+    \expandafter\reserved@b
+  \fi}
+%</2ekernel>
+%    \end{macrocode}
+%
+%    If we are doing a rollback with a format containing expl3 we
+%    aren't reloading it as that creates havoc. This may need a
+%    refined version!
+%    \begin{macrocode}
+%<*2ekernel|latexrelease>
+%<latexrelease>\IncludeInRelease{2020/10/01}%
+%<latexrelease>                 {expl3}{Pre-load expl3}%
+\expandafter\ifx\csname tex\string _let:D\endcsname\relax
+  \expandafter\@firstofone
+\else
+  \GenericInfo{}{Skipping: expl3 code already part of the format}%
+%<2ekernel>  \expandafter\endinput
+%<latexrelease>  \expandafter\@gobble
+\fi
+%    \end{macrocode}
+%
+%  Check for the required primitive/engine support and the existence of
+%  a loader.
+%    \begin{macrocode}
+  {%
+    \IfFileExists{expl3.ltx}
+      {%
+        \ifnum0%
+          \ifdefined\pdffilesize 1\fi
+          \ifdefined\filesize 1\fi
+          \ifdefined\luatexversion\ifnum\luatexversion>94 1\fi\fi
+          \ifdefined\kanjiskip 1\fi
+            >0 %
+          \expandafter\@firstofone
+        \else
+%    \end{macrocode}
+%
+% In \texttt{2ekernel} mode, an error is fatal and building the format
+% is aborted. Use \verb=\batchmode \read -1 to \tokenlist=, which errors
+% with
+%\begin{verbatim}
+%   ! Emergency stop. (cannot \read from terminal in nonstop modes)
+%\end{verbatim}
+% and aborts the \TeX{} run.  In \texttt{latexrelease} mode, raise an
+% error and do nothing.  Both ways, the error message shows the minimum
+% \textsf{expl3} engine requirements.
+%    \begin{macrocode}
+%<2ekernel>          \def~{ }\def\MessageBreak{^^J~~~~~~~~~~~~~~~}%
+%<2ekernel>          \errmessage{LaTeX Error:
+%<latexrelease>          \@latex@error{%
+            LaTeX requires the e-TeX primitives and additional\MessageBreak
+            functionality available in the engines:\MessageBreak
+              - pdfTeX v1.40\MessageBreak
+              - XeTeX v0.99992\MessageBreak
+              - LuaTeX v0.95\MessageBreak
+              - e-(u)pTeX mid-2012\MessageBreak
+            or later%
+%<latexrelease>          }\@ehd \expandafter\@gobble
+%<2ekernel>          }\batchmode \read -1 to \reserved@a
+        \fi
+      }
+      {%
+%<*2ekernel>
+        \errmessage{LaTeX requires expl3}%
+        \batchmode \read -1 to \reserved@a
+%</2ekernel>
+%    \end{macrocode}
+%    We do not support a roll forward across 2019. You need to start
+%    with 2019 if you want to get to 2020 or beyond.
+% \changes{v1.2g}{2020/11/24}{Support for roll forward (gh/434)}
+%    \begin{macrocode}
+%<*latexrelease>
+        \@latex@warning@no@line
+          {You need a format that already contains a recent\MessageBreak
+           expl3 as part of the kernel, e.g. at least a kernel\MessageBreak
+           from 2019 to roll forward to that date!\MessageBreak
+           --- I'm giving up!\MessageBreak\MessageBreak
+           Note that manually loading the expl3 package\MessageBreak
+           from your distribution is not enough}%
+        \batchmode \read -1 to \reserved@a
+%</latexrelease>
+      }%
+      {\input expl3.ltx }%
+  }
+%<latexrelease>\EndIncludeInRelease
+%<latexrelease>
+%    \end{macrocode}
+% To support roll-forward for the case where \textsf{xparse} is fully
+% integrated into the kernel, we do not need to repeat the complex test
+% above as we can simply look for the marker command.
+%    \begin{macrocode}
+%<latexrelease>\IncludeInRelease{2020/02/02}%
+%<latexrelease>                 {expl3}{Pre-load expl3}%
+%<latexrelease>\IfFileExists{expl3.ltx}
+%<latexrelease>  {%
+%<latexrelease>    \ifnum0%
+%<latexrelease>      \ifdefined\pdffilesize 1\fi
+%<latexrelease>      \ifdefined\filesize 1\fi
+%<latexrelease>      \ifdefined\luatexversion\ifnum\luatexversion>94 1\fi\fi
+%<latexrelease>      >0 %
+%<latexrelease>    \else
+%<latexrelease>      \message{Skipping expl3-dependent extensions}
+%<latexrelease>      \expandafter\@gobbletwo
+%<latexrelease>    \fi
+%<latexrelease>  }
+%<latexrelease>  {%
+%<latexrelease>    \message{Skipping expl3-dependent extensions}%
+%<latexrelease>    \@gobbletwo
+%<latexrelease>  }%
+%<latexrelease>\input{expl3.ltx}
+%<latexrelease>\EndIncludeInRelease
+%    \end{macrocode}
+%
+% \changes{v1.3a}{2021/01/21}
+%                {Move \pkg{xparse} rollback code to \texttt{ltcmd.dtx}}
+%
+%    \subsection{Using expl3 code}
+%
+%    In order to ease the implementation of some new features in
+%    \LaTeXe\ we may (temporarily) use some coding based on the
+%    \pkg{expl3}-code.
+%    Such macros will eventually vanish and may be changed
+%    unannounced. They are there for internal use in the \LaTeXe\
+%    kernel and are not meant to be used in third-party
+%    packages. These macros will always have the \verb|@expl@|
+%    prefix in their name.
+%
+%    The rest of the name matches the \pkg{expl3} name but with all
+%    underscores replaced by \texttt{@}s and the \texttt{:} replaced
+%    by \texttt{@@}, e.g.,
+%\begin{verbatim}
+%  \cs_new_eq:NN \@expl@tl@trim@spaces@apply@@nN \tl_trim_spaces_apply:nN
+%\end{verbatim}
+%    if that \pkg{expl3} command is needed in places that are others
+%    coded in \LaTeXe{} conventions.
+%
+%
+%    In this file, each release of LaTeX adds an \cs{IncludeInRelease}
+%    block, in which the macros copied for that release were defined.
+%    In case a rollback is requested, the entire block is changed.
+%
+%    Each macro copied has a \cs{changes} entry to explain when and why
+%    it was copied, so that further to that may spot it easily.
+%
+%    Here \cs{cs\string_gset\string_eq:NN} is used, instead of the |new|
+%    variant because if different releases use that same name for
+%    different purposes, each can copy the macro without worrying about
+%    redefinitions.
+%
+%    \begin{macrocode}
+%<latexrelease>\IncludeInRelease{2020/10/01}{\@expl@cs@to@str@@N}%
+%<latexrelease>        {expl3 macros added for the 2020-10-01 release}%
+%    \end{macrocode}
+%
+%    The expl3 activation needs to be inside the release guards as
+%    otherwise rolling forward is broken in old kernels that do not
+%    have expl3 loaded.
+% \changes{v1.2g}{2020/11/24}{Support for roll forward (gh/434)}
+%    \begin{macrocode}
+\ExplSyntaxOn
+%    \end{macrocode}
+%
+% \changes{v1.2e}{2020/08/19}
+%         {Add \cs{@expl@cs@to@str@@N} and \cs{@expl@str@if@eq@@nnTF}
+%          for \cs{NewCommandCopy} (gh/239)}
+%    \begin{macrocode}
+\cs_gset_eq:NN \@expl@cs@to@str@@N \cs_to_str:N
+\cs_gset_eq:NN \@expl@str@if@eq@@nnTF \str_if_eq:nnTF
+%    \end{macrocode}
+%
+% \changes{v1.2e}{2020/08/19}
+%         {Add \cs{@expl@cs@\meta{thing}@spec@@N}
+%          for \cs{ShowCommand} (gh/373)}
+%    \begin{macrocode}
+\cs_gset_eq:NN \@expl@cs@prefix@spec@@N \cs_prefix_spec:N
+\cs_gset_eq:NN \@expl@cs@argument@spec@@N \cs_argument_spec:N
+\cs_gset_eq:NN \@expl@cs@replacement@spec@@N \cs_replacement_spec:N
+%    \end{macrocode}
+%
+% \changes{v1.2f}{2020/09/06}
+%         {Add \cs{@expl@str@map@function@@NN
+%          and \cs{@expl@char@generate@@nn}}
+%          for \cs{string@makeletter} (gh/386)}
+%    \begin{macrocode}
+\cs_gset_eq:NN \@expl@str@map@function@@NN \str_map_function:NN
+\cs_gset_eq:NN \@expl@char@generate@@nn \char_generate:nn
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%
+%    Here we can't assume that expl3 is available. It will be if we
+%    roll back but if this code is executed rolling forward it needs
+%    to be pure 2e.
+% \changes{v1.2g}{2020/11/24}{Support for roll forward (gh/434)}
+%    \begin{macrocode}
+%<latexrelease>\EndIncludeInRelease
+%<latexrelease>\IncludeInRelease{0000/00/00}{\@expl@cs@to@str@@N}%
+%<latexrelease>        {expl3 macros added for the 2020-10-01 release}%
+%<latexrelease>\let \@expl@cs@to@str@@N \@undefined
+%<latexrelease>\let \@expl@str@if@eq@@nnTF \@undefined
+%<latexrelease>\let \@expl@cs@prefix@spec@@N \@undefined
+%<latexrelease>\let \@expl@cs@argument@spec@@N \@undefined
+%<latexrelease>\let \@expl@cs@replacement@spec@@N \@undefined
+%<latexrelease>\let \@expl@str@map@function@@NN \@undefined
+%<latexrelease>\EndIncludeInRelease
+%</2ekernel|latexrelease>
+%    \end{macrocode}
+%
+%
+% \Finale

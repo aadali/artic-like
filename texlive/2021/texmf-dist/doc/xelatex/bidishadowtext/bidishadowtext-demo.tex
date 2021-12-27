@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{bidishadowtext}
+\usepackage{xepersian}
+\settextfont{XB Yas}
+\begin{document}
+\bidishadowtext{این یک متن سایه‌دار است}
+
+\bigskip
+\bidishadowoffset{2pt}
+\bidishadowtext{این یک متن سایه‌دار است}
+
+\bigskip
+\bidishadowoffsetx{1pt}
+\bidishadowoffsety{4pt}
+\bidishadowtext{این یک متن سایه‌دار است}
+
+\bigskip
+\bidishadowoffset{2pt}
+\bidishadowcolor{blue!40!white}
+\bidishadowtext{این یک متن سایه‌دار است}
+
+\bigskip
+\bidishadowoffset{2pt}
+\bidishadowrgb{1.0, 0.5, 0.5}
+\bidishadowtext{این یک متن سایه‌دار است}
+
+\bigskip
+\definecolor{navy}{rgb}{0,0,0.5}
+\bidishadowrgb{0.8, 0.8, 1}
+\bidishadowoffset{1pt}
+\bidishadowtext{
+   {\color{navy}
+   \fontsize{16}{16}\selectfont
+بزرگ!%
+}}
+
+\bigskip
+\bidishadowoffset{1pt}
+\bidishadowtext{%
+   \begin{tabular}{|l|l|}
+   \hline
+   1 & 2 \\
+   3 & 4 \\
+   \hline
+   \end{tabular}
+}
+
+\bigskip
+\bidishadowoffset{1pt}
+\bidishadowtext{$\sqrt{2\pi}e^{-n}$}
+
+\bigskip
+\bidishadowoffset{2pt}
+\bidishadowtext{%
+   \fontsize{32}{32}%
+   \selectfont%
+   \textcolor{navy}{%
+ قسمت%
+}
+ \textcolor{red}{۴}%
+}
+\end{document}

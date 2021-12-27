@@ -1,0 +1,1119 @@
+% The author of this work is Amit Raj Dhawan.
+% This work is licensed under the
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% on April 07, 2016. For details visit:
+% http://creativecommons.org/licenses/by-sa/4.0/.
+%
+%%%%%%%%%   Fonts   %%%%%%%%%%
+\font\webomints=WebOMintsGd at40pt
+\font\titlefont=artemisiarg8a at36pt
+
+%%%%%%%%%%   Packages   %%%%%%%%%%
+%%% Eplain
+\input eplain % Add Eplain before AmSTeX
+\beginpackages
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphicx}
+\endpackages
+\enablehyperlinks[dvipdfm] % Enables hyperlinks using Eplain
+%\hlopts{colormodel=named,color=Black} % Produces links in black color
+%% Color
+\definecolor{brown}{rgb}{.7,.2,.2}%
+\definecolor{grey}{rgb}{0.5,0.5,0.5}%
+
+
+%%% AmSTeX
+\input amstex
+\UseAMSsymbols
+
+\catcode`@=12
+
+
+
+
+%%%%%%%%%%  Page characteristics  %%%%%%%%%%
+\magnification=1120
+\parindent=20pt
+\parfillskip=\parindent plus1fil
+\everypar{\looseness=-1}
+\headline{} \footline{}
+\vsize=25truecm
+\hoffset-2mm
+\voffset-3mm
+\settabs 20 \columns
+\exhyphenpenalty10000
+\hyphenpenalty200
+
+
+
+%%%%%%%%%%   Definitions   %%%%%%%%%%
+\def\bs{\bigskip}%
+\def\ms{\medskip}%
+\def\sk{\smallskip}%
+\def\cl{\centerline}%
+\def\ii{\noindent}%
+\def\pic#1#2#3{\bigskip\cl{\epsfxsize#1\epsfbox{#2.eps}}\par\cl{\eightrm #3}}%
+\def\amstex{{\amstexfont  A\kern-.1667em\lower.5ex\hbox{M}\kern-.125em S}-\capstex}%
+\def\xetex{X\lower0.5ex\hbox{\kern-0.11em\reflectbox{E}}\kern-0.165em\TeX}%
+\def\latex{L\setbox0=\hbox{\sc A}\kern-0.5766\wd0\raise0.41ex\hbox{\sc A}\setbox1=\hbox{T}\kern-.177\wd1\TeX}%
+\def\xelatex{X\lower0.5ex\hbox{\kern-0.11em\reflectbox{E}}\kern-0.13em\latex}%
+\def\capstex{{\caps t\kern-.122em\lower.38ex\hbox{e}\kern-.11em x}}%
+\def\capslatex{{\caps l\setbox0=\hbox{\sevencaps a}\kern-0.5888\wd0{\raise0.33ex\hbox{\sevencaps a}}\setbox1=\hbox{t}\kern-.2\wd1\capstex}}%
+\def\capsxetex{{\caps x\lower0.38ex\hbox{\kern-0.1em\reflectbox{e}}\kern-0.13em\capstex}}%
+\def\capsxelatex{{\caps x\lower0.38ex\hbox{\kern-0.1em\reflectbox{e}}\kern-0.122em\capslatex}}%
+\def\footnote#1{\numberedfootnote{\hskip-7mm\hbox to 20cm{\vtop{\hangindent\parindent\hangafter1\eightrm\fontss #1}}}}%
+\def\quote#1{\sk\leftskip10mm{\sl\noindent #1}\sk \leftskip0mm\rightskip0mm}%
+\def\emdash{\hbox{\kern0.15em---\kern0.15em}\relax}%
+\def\endash{\hbox{\kern0.15em--\kern0.15em}\relax}%
+\def\code#1{{\color{brown}\tt #1}}%
+\def\bsl{\char'134}%
+\def\inbox#1{\hbox{\vbox{\hrule\hbox{\strut\vrule\hbox{\kern0.3em #1\kern0.3em}\strut\vrule}\hrule}}}%
+\def\coderesult#1{\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm \vbox{\vskip0.5\baselineskip \parindent=0pt{#1}\vskip0.5\baselineskip}\vrule}}\hrule}}%
+
+
+
+
+\hyphenpenalty200%
+\exhyphenpenalty0%
+\hfuzz=3pt%
+
+%%%%%%%%%%   Chapter, Section   %%%%%%%%%%
+\newcount\sectionno\sectionno=0 % For sections
+\newcount\subsectionno\subsectionno=0 % For subsections
+\newcount\subsubsectionno\subsubsectionno=0 % For subsubsections
+\definecolor{sectioncolor}{rgb}{0.22,0.38,0.62}
+
+
+\def\section#1#2{%
+\subsectionno=0%
+\subsubsectionno=0%
+\global\advance\sectionno by 1
+{\special{pdf: outline 1 << /Title (#2)/F 0 /Dest [@thispage /FitH @ypos ]  >> }}
+\bigskip\bigskip\medskip\goodbreak
+\noindent{\textcolor{sectioncolor}{\sanssixteenbf\fontss \the\sectionno\ \; #1}}
+{\definexref{#2}{\number\sectionno\ #2}{}}
+{\writetocentry{section}{\refs{#2}}}
+\nopagebreak\medskip\nopagebreak\noindent}
+
+\def\subsection#1{%
+\global\advance\subsectionno by 1
+{\special{pdf: outline 2 << /Title (#1)/F 0 /Dest [@thispage /FitH @ypos ]  >> }}
+\bigskip\medskip\goodbreak
+{\definexref{#1}{\number\sectionno.\number\subsectionno\ #1}{}}
+{\writetocentry{subsection}{\kern5mm\refs{#1}}}
+{\noindent{\textcolor{sectioncolor}{\sansfourteenbf\fontss\the\sectionno.\the\subsectionno\ \; #1}}}
+\nopagebreak\medskip\nopagebreak\noindent}
+
+\def\subsubsection#1{%
+\global\advance\subsubsectionno by 1
+{\special{pdf: outline 2 << /Title (#1)/F 0 /Dest [@thispage /FitH @ypos ]  >> }}
+\bigskip\medskip\goodbreak
+{{\definexref{#1}{\number\sectionno.\number\subsectionno.\number\subsubsectionno\ #1}{}}
+{\writetocentry{subsubsection}{\kern5mm\refs{#1}}}
+\noindent{\textcolor{sectioncolor}{\sanstwelvebf\fontss\the\sectionno.\the\subsectionno.\the\subsubsectionno\  \; #1}}}
+\nopagebreak\medskip\nopagebreak\noindent}
+
+
+\input font_kp
+
+%\input multiple-z-font-change-xetex
+\input font-change-xetex
+\def\fontss{\parindent=2em%
+\baselineskip=2.9ex%
+\spaceskip=0.30001em plus0.13em minus0.13em}%
+
+\mysanzfont{Calibri}{11}{}
+\myzfont{Warnock Pro}{10}{}
+\fontss \hangpun \frenchspacing
+\font\tt="Consolas" at 8.7pt%
+\font\eighttt="Consolas" at 7pt%
+%\mymathfont{Warnock Pro}{10}
+
+
+
+
+
+
+%%%%%%%%%%  Cover   %%%%%%%%%%
+{\special{pdf: outline 1 << /Title (Cover)/F 0 /Dest [@thispage /FitH @ypos ]  >> }}
+{\centerline{{\color{brown}\webomints\char'160}\hskip8mm\titlefont\color{sectioncolor} font-change-xetex\hskip8mm{\color{brown}\webomints\char'161}}\bs
+\centerline{{\color{brown}\webomints\char'125\char'126}}
+\bs
+\centerline{Version \ 2016.1}
+\bs\bs
+{\color{sectioncolor}\fourteenbf\fontss\centerline{Macros to use OpenType and TrueType  fonts}\kern3mm
+\centerline{with \XeTeX}}
+
+\vskip2cm
+\centerline{\color{brown}\webomints \char'063}
+\vskip2cm
+\centerline{\twelvebf\fontss Amit Raj Dhawan}\sk
+\centerline{\href{mailto:amitrajdhawan@gmail.com}{\sansrm amitrajdhawan\@gmail.com}}\sk
+\centerline{\rm April 07, 2016}
+
+\vskip7cm
+
+% Licence
+\hrule\kern1pt\hrule\sk
+\ii{\includegraphics[scale=0.5]{creative_commons_sa-il_4.pdf}}
+\vskip-7mm
+\vbox{\leftskip2.5cm\parindent=0pt\eightrm\fontss\ii  This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. You are free to {\eightitbf Share\/} (to copy, distribute and transmit the work) and to {\eightitbf Remix\/} (to adapt the work) provided you follow the {\eightitbf Attribution\/} and {\eightitbf Share Alike\/} guidelines of the licence. For the full licence text, please visit:
+\href{http://creativecommons.org/licenses/by-sa/4.0/}{\eightrm http://creativecommons.org/licenses/by-sa/4.0/}.}\leftskip0cm
+\sk\hrule\kern1pt\hrule
+
+\BlackBoxes
+
+
+\newpage
+
+\cl{\sanstwentycapsbf\fontss {\color{sectioncolor}Table of Contents}}\bs\ms
+{\special{pdf: outline 1 << /Title (Contents)/Dest [@thispage /FitH @ypos ]  >> }}%
+
+\readtocfile
+
+\pageno=-1
+\footline{\cl{\folio}}
+
+
+\newpage
+\pageno=1
+\headline{\textcolor{grey}{\capsxetex\ macro {\tt font-change-xetex}} \hfill\folio}
+\footline{}
+
+\section{Introduction}{Introduction}\capsxetex\ is a typesetting system based on \capstex~\cite{xetex_package} that supports Unicode~\cite{unicode_webpage} and modern fonts like True~Type fonts~({\caps ttf}), Open Type fonts~({\caps otf}), and Apple Advanced Typography ({\caps aat}) fonts~\cite{phinney_2001_ttf_otf}. The possibility of using almost any kind of font format---either installed as a system font or just placed any \capstex\ working-directory---has significantly improved the utility of \capstex. Moreover, the incorporation of Unicode encoding in \capstex\ documents is a progressive step as non-Latin scripts can now easily exploit the power of \capstex. Variants of \capstex\ like \capsxetex, \capsxelatex, and Lua\capstex\ have made this~feasible.
+
+
+
+This document will describe the features of the package \code{font-change-xetex}. The package provides a simple way to use system-installed TrueType or OpenType fonts with \capsxetex. The package \code{fontspec}~\cite{fontspec_package}, which works with \capsxelatex\ and Lua\capstex, is a very good tool for using TrueType and OpenType fonts, but to my knowledge, a similar package has not been proposed for \capsxetex. Following the ``plain \capstex'' way of working, the macro package \code{font-change-xetex} allows users to employ {\it external} fonts with~\capsxetex. The macro has been designed to change the text fonts in \capsxetex\ documents but one definition of the macro can be used to change some math mode fonts. The text fonts called by \code{font-change-xetex} can be used with the math fonts declared by another package called \code{font-change}~\cite{font-change_package} to obtain harmonious text and math font~combinations.
+
+I have been using \code{font-change-xetex} to typeset documents in English and Hindi from the year 2008, and from 2010, the macro has remained almost unchanged. The macro has worked with all the versions of \capsxetex\ so far, and it works with most font families installed on a computer system. Rarely, due to some font file issues, these fonts might not work properly but this is not a problem of the macro as~such.
+
+The macro \code{font-change-xetex} has been tested with the {\tt xdvipdfmx} driver. Please pay attention to driver-related~issues.
+
+
+\section{Using font-change-xetex}{Using font-change-xetex}The package \code{font-change-xetex} can be downloaded from \href{http://www.ctan.org}{\caps ctan} and it will be included in the future versions of MiK\TeX\ and \TeX Live. If \code{font-change-xetex} is installed in the \capstex\ installation on your system, then it can be invoked~by:
+\ms
+\code{\bsl input font-change-xetex}
+\ms
+\ii If the package is not installed in the \capstex\ directory, the package file {\tt font-change-xetex.tex} can be saved on the computer system, say in {\tt C:/}, and can be invoked by typing the following in the {\tt .tex} source~file:
+\ms
+\code{\bsl input C:/font-change-xetex.tex}
+\bs
+Once the package has been invoked, the commands included in it can be used. The following sections will discuss the font-changing commands of \code{font-change-xetex}.
+
+
+\section{Text font selection}{Text font selection}The main font~(font family) of a \capsxetex\ document can be changed by using the following definition:
+\ms
+\ii\inbox{\code{\bsl myzfont\{\textcolor{blue}{\sl font name}\}\{\textcolor{blue}{\sl font size in points}\}\{\textcolor{blue}{\sl optional font features}\}}}
+\sk
+\ii where \textcolor{blue}{\sl font name} is the name of the installed font~family (e.g., Warnock Pro, Minion Pro, Linux Libertine, etc.) or an individual font file (e.g., WarnockPro-Regular, WarnockPro-Semibold, etc.), \textcolor{blue}{\sl font size in points} is the size of the font in points stated as a positive integer without {\tt pt} at the end~(e.g., 9, 10, 31, etc.), and \textcolor{blue}{\sl optional font features} are declared to use or suppress advanced font features like ligatures, proportional figures, etc.~(some of them will be discussed in the following section).
+
+
+The definition \code{\bsl myzfont} can be declared anywhere in the document. It is recommended to declare it only once somewhere at the beginning of the \capstex\ document---this implements a regular change of fonts without exhausting \capstex's memory.\footnote{\ \; The definition \textcolor{brown}{\eighttt \bsl myfont} provides a way to use multiple font families within the same document but only at the declared size. Though all font style and weight variants like {\eightbf boldface}, {\eightit italics}, {\eightsl slanted}, {\eightitbf italic boldface}, {\eightslbf slanted boldface}, {\eightcaps Caps}, {\eightcapsbf Caps in Bold}, {\eightcapssl Slanted Caps}, and {\eightcapsslbf Slanted Caps in Boldface} will be available. Still, if someone wants to use \textcolor{brown}{\eighttt \bsl myzfont} multiple times in a document, please send me an email. I have not included the variant of \textcolor{brown}{\eighttt font-change-xetex} that allows multiple declarations of \textcolor{brown}{\eighttt \bsl myzfont} and \textcolor{brown}{\eighttt \bsl mysanzfont} because the present variant works better with hanging punctuation.} Once a font~family is declared, the font~weight and style commands like {\bf boldface}~(\code{\bsl bf}), {\it italics}~(\code{\bsl it}), {\sl slanted}~(\code{\bsl sl}), {\itbf italic boldface}~(\code{\bsl itbf}), {\slbf slanted boldface}~(\code{\bsl slbf}), {\caps Caps}~({\code{\bsl caps}), {\capsbf Caps in Bold}~(\code{\bsl capsbf}), {\capssl Slanted Caps}~(\code{\bsl capssl}), and {\capsslbf Slanted Caps in Boldface}~(\code{\bsl capsslbf}) automatically use the corresponding fonts. If the declared font~family does~not have all features, then the features of the preceding font are used. \footnote{\ \; This works even with custom definitions like \textcolor{brown}{\eighttt \bsl itbf}, \textcolor{brown}{\eighttt \bsl caps}, etc. if a macro from \textcolor{brown}{\eighttt font-change} is declared before \textcolor{brown}{\eighttt font-change-xetex}.}
+
+With respect to the base font size declared in \code{pt}, for each font weight and style, the definition \code{\bsl myzfont} includes several pre-defined relative font~sizes of 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, and 20\,pt. That is, if we declare a base font size of 10\,pt by \code{\bsl myzfont\{Minion Pro\}\{10\}\{\}}, we will obtain the sizes of 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, and 20\,pts, and if we declare a base font size of 20\,pt by \code{\bsl myzfont\{Minion Pro\}\{20\}\{\}}, we get pre-defined sizes of 10, 12, 14, 16, 18, 20, 22, 24, 28, 32, and 40\,pts.
+
+\code{font-change-xetex} also provides the choice of a sans~serif font through the~definition:
+\ms
+\ii\inbox{\code{\bsl mysanzfont\{\textcolor{blue}{\sl font name}\}\{\textcolor{blue}{\sl font size in points}\}\{\textcolor{blue}{\sl optional font features}\}}}
+\sk
+\ii This definition provides the same font styles, weights, and sizes as \code{\bsl myzfont}. The font~commands are also the same but each command has a prefix \code{sans} like \code{\bsl sansrm}, \code{\bsl sansit}, \code{\bsl sanstwelvebf}, etc. The next section will mention all the included~commands.
+
+To change the font locally, \code{font-change-xetex} provides the following~macro:
+\ms
+\ii\inbox{\code{\bsl myfont\{\textcolor{blue}{\sl font name}\}\{\textcolor{blue}{\sl font size in points}\}\{\textcolor{blue}{\sl optional font features}\}}}
+\sk
+\ii The above command invokes the declared font (or font~family) at the mentioned size with the same font styles and weights as provided by \code{\bsl myzfont}. This command does not provide size variants, thereby easing the burden on \capstex's font~memory.
+
+
+
+
+
+
+\subsection{Examples of use}The following definition selects Warnock Pro as the main document font~family at 10\,pt. The \capstex\ code is given in \code{brown} on the left and the corresponding results are given on the~right.
+
+\ms
+\ii{\code{\bsl myzfont\{Warnock Pro\}\{10\}\{\}}
+\baselineskip21pt
+\+\code{\bsl rm \ This is regular} &&&&&&&&&& \rm This is regular\cr
+\+\code{\bsl bf \ This is bold} &&&&&&&&&& \bf This is bold\cr
+\+\code{\bsl it \ This is italic} &&&&&&&&&& \it This is italic\cr
+\+\code{\bsl sl \ This is slanted} &&&&&&&&&& \sl This is slanted\cr
+\+\code{\bsl itbf \ This is italic bold} &&&&&&&&&& \itbf This is italic bold\cr
+\+\code{\bsl slbf \ This is slanted bold} &&&&&&&&&& \slbf This is slanted bold\cr
+\+\code{\bsl caps \ This is Caps} &&&&&&&&&& \caps This is Caps\cr
+\+\code{\bsl capsbf \ This is Bold Caps} &&&&&&&&&& \capsbf This is Bold Caps\cr
+\+\code{\bsl capssl \ This is Slanted Caps} &&&&&&&&&& \capssl This is Slanted Caps\cr
+\+\code{\bsl capsslbf \ This is Slanted Bold Caps} &&&&&&&&&& \capsslbf This is Slanted Bold Caps\cr
+
+\bs
+
+\+\code{\bsl fiverm \ This is 5\,pt} &&&&&&&&&& \fiverm This is 5\,pt\cr
+\+\code{\bsl sixbf \ This is 6\,pt} &&&&&&&&&& \sixbf This is 6\,pt\cr
+\+\code{\bsl sevenit \ This is 7\,pt} &&&&&&&&&& \sevenit This is 7\,pt\cr
+\+\code{\bsl eightsl \ This is 8\,pt} &&&&&&&&&& \eightsl This is 8\,pt\cr
+\+\code{\bsl nineitbf \ This is 9\,pt} &&&&&&&&&& \nineitbf This is 9\,pt\cr
+\+\code{\bsl slbf \ This is 10\,pt} &&&&&&&&&& \slbf This is 10\,pt\cr
+\+\code{\bsl caps \ This is 11\,pt} &&&&&&&&&& \elevencaps This is 11\,pt\cr
+\+\code{\bsl capsbf \ This is 12\,pt} &&&&&&&&&& \twelvecapsbf This is 12\,pt\cr
+\+\code{\bsl capssl \ This is 14\,pt} &&&&&&&&&& \fourteencapssl This is 14\,pt\cr
+\+\code{\bsl capsslbf \ This is 16\,pt} &&&&&&&&&& \sixteencapsslbf This is 16\,pt\cr\nopagebreak
+\+\code{\bsl eighteenrm \ This is 18\,pt} &&&&&&&&&& \eighteenrm This is 18\,pt\cr\nopagebreak
+\+\code{\bsl twentybf \ This is 20\,pt} &&&&&&&&&& \twentybf This is 20\,pt\cr
+}
+
+\bs\bs
+
+The following statement selects Calibri as the sans~serif font at 11\,pt. The \capstex\ code in \code{brown}, after compilation, gives the result displayed on its~right.
+\ms
+\ii{\code{\bsl mysanzfont\{Calibri\}\{11\}\{\}} %\mysanzfont{Aller}{11}{}
+\baselineskip19pt
+\+\code{\bsl sansrm \ This is regular} &&&&&&&&&& \sansrm This is regular\cr
+\+\code{\bsl sansbf \ This is bold} &&&&&&&&&& \sansbf This is bold\cr
+\+\code{\bsl sansit \ This is italic} &&&&&&&&&& \sansit This is italic\cr
+\+\code{\bsl sanssl \ This is slanted} &&&&&&&&&& \sanssl This is slanted\cr
+\+\code{\bsl sansitbf \ This is italic bold} &&&&&&&&&& \sansitbf This is italic bold\cr
+\+\code{\bsl sansslbf \ This is slanted bold} &&&&&&&&&& \sansslbf This is slanted bold\cr
+\+\code{\bsl sanscaps \ This is Caps} &&&&&&&&&& \sanscaps This is Caps\cr
+\+\code{\bsl sanscapsbf \ This is Bold Caps} &&&&&&&&&& \sanscapsbf This is Bold Caps\cr
+\+\code{\bsl sanscapssl \ This is Slanted Caps} &&&&&&&&&& \sanscapssl This is Slanted Caps\cr
+\+\code{\bsl sanscapsslbf \ This is Slanted Bold Caps} &&&&&&&&&& \sanscapsslbf This is Slanted Bold Caps\cr
+
+\bs\bs
+
+\+\code{\bsl sansfiverm \ This is 5.5\,pt} &&&&&&&&&& \sansfiverm This is 5.5\,pt\cr
+\+\code{\bsl sanssixbf \ This is 6.6\,pt} &&&&&&&&&& \sanssixbf This is 6.6\,pt\cr
+\+\code{\bsl sanssevenit \ This is 7.7\,pt} &&&&&&&&&& \sanssevenit This is 7.7\,pt\cr
+\+\code{\bsl sanseightsl \ This is 8.8\,pt} &&&&&&&&&& \sanseightsl This is 8.8\,pt\cr
+\+\code{\bsl sansnineitbf \ This is 9.9\,pt} &&&&&&&&&& \sansnineitbf This is 9.9\,pt\cr
+\+\code{\bsl sansslbf \ This is 11\,pt} &&&&&&&&&& \sansslbf This is 11\,pt\cr
+\+\code{\bsl sanscaps \ This is 12.1\,pt} &&&&&&&&&& \sanselevencaps This is 12.1\,pt\cr
+\+\code{\bsl sanscapsbf \ This is 13.2\,pt} &&&&&&&&&& \sanstwelvecapsbf This is 13.2\,pt\cr
+\+\code{\bsl sanscapssl \ This is 15.4\,pt} &&&&&&&&&& \sansfourteencapssl This is 15.4\,pt\cr
+\+\code{\bsl sanscapsslbf \ This is 17.6\,pt} &&&&&&&&&& \sanssixteencapsslbf This is 17.6\,pt\cr
+\+\code{\bsl sanseighteenrm \ This is 19.8\,pt} &&&&&&&&&& \sanseighteenrm This is 19.8\,pt\cr
+\+\code{\bsl sanstwentybf \ This is 22\,pt} &&&&&&&&&& \sanstwentybf This is 22\,pt\cr
+}
+
+\bs\bs
+
+\hrule\vbox{\noindent\vrule\NoBlackBoxes\vbox{\vskip2mm\leftskip7mm\rightskip7mm
+{\parindent0pt
+\verbatim
+\myzfont{Warnock Pro}{10}{+pnum:+lnum}
+\mysanzfont{Calibri}{11}{+pnum:+lnum}
+%
+\noindent{\sanstwelvecapsbf Text font change in action}
+\medskip
+\noindent The command {\tt \char'134 myzfont} changes the main text body font family to Warnock Pro at 10\,pt with the current font set to regular. This is {\bf bold} and this is {\sixteenitbf italic bold at 16\,pt}. {\sansrm  The {\sanscaps sans serif} document font is set to Calibri at 11\,pt.} In both the cases we have invoked the {\it proportional figures}~(pnum) and {\it lining figures}~(lnum) features.
+
+We can change the font locally to {\myfont{Tangerine}{20}{}  Tangerine font at 20\,pt} or {\myfont{Chaparral Pro}{11.4}{} Chaparral  Pro at 11.4\,pt (this is {\bf Chaparral bold}).
+|endverbatim
+}
+}\vrule}\hrule\BlackBoxes}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\hrule\vbox{\noindent\vrule\NoBlackBoxes\vbox{\vskip2mm\leftskip7mm\rightskip7mm
+\noindent{\sanstwelvecapsbf Text font change in action}
+\medskip
+\noindent The command {\tt \char'134  myzfont} changes the main text body font family to Warnock Pro at 10\,pt with the current font set to regular. This is {\bf bold} and this is {\sixteenitbf italic bold at 16\,pt}. {\sansrm  The {\sanscaps sans serif} document font is set to Calibri at 11\,pt.} In both the cases we have invoked the {\it proportional figures}~(pnum) and
+{\it lining figures}~(lnum) features.
+
+We can change the font locally to {\myfont{Tangerine}{20}{}  Tangerine font at 20\,pt} or
+{\myfont{Chaparral Pro}{11.4}{} Chaparral  Pro at 11.4\,pt (this is {\bf Chaparral bold}).}
+\medskip}\vrule}\hrule\BlackBoxes\bigskip\bigskip
+
+
+\section{Hanging punctuation}{Hanging punctuation}Utilizing the character protrusion capability of \capsxetex~(also possible with plain \capstex), the \code{\bsl hangpun} command of \code{font-change-xetex} provides a way to employ hanging punctuation, where the punctuation marks fall out of the text margin. From a typographic perspective, the use of hanging punctuation is debatable. In my opinion, it leads to more harmonious text justification and more elegant typesetting. The following text sample includes the same text with and without hanging~punctuation.
+
+
+
+\bs\ms
+\ii\hbox{\vbox{\hrule\hbox{\vrule\hskip2mm\hbox{
+\vbox to 4.3cm{\hsize=6cm \eightrm\fontss \nohangpun
+\ms{\bf\hskip1mm Without hanging punctuation}\sk
+\ii Some people are for using hanging punctuation, and some against. In the end, it is a matter of personal choice. He said, ``I use hanging punctuation.'' ``But does it really lead to better text justification?'' asked~Joe.
+
+\indent One may argue that protruding punctuation marks draw unnecessary attention but this is questionable. You should try it to find it out yourself\,! Well, let's see\dots
+\vfill
+}{\color{green}\vrule} \hskip2mm\vrule}}
+\hrule}
+\hskip1.3cm
+\vbox{\hrule\hbox{\vrule\hskip2mm\hbox{
+\vbox to 4.3cm{\hsize=6cm \eightrm\fontss \hangpun
+\ms{\bf\hskip5mm With hanging punctuation}\sk
+\ii Some people are for using hanging punctuation, and some against. In the end, it is a matter of personal choice. He said, ``I use hanging punctuation.'' ``But does it really lead to better text justification?'' asked~Joe.
+
+\indent One may argue that protruding punctuation marks draw unnecessary attention but this is questionable. You should try it to find it out yourself\,! Well, let's see\dots
+\vfill
+}{\color{green}\vrule} \hskip2mm\vrule}}
+\hrule}\NoBlackBoxes}
+
+
+To activate hanging punctuation, the command \code{\bsl hangpun} has to be declared after declaring \code{\bsl myzfont} or \code{\bsl myfont}. It can be deactivated by \code{\bsl nohangpun}.
+
+
+\section{The OpenType layout}{The OpenType layout}Vector scalable fonts~(which includes most computer fonts) consist of glyph outlines and font layout tables. The glyph outlines of most Windows fonts are either TrueType or PostScript, and these font files are either in TrueType format~({\tt .ttf} extenstion) or OpenType format~({\tt .otf} extension). Generally, most modern PostScript outline fonts are in {\tt .otf} format. The font layout tables of all {\tt .otf} fonts~(e.g., Warnock Pro, Minion Pro, Linux Libertine~O, Calluna, etc.) and many {\tt .ttf} fonts~(e.g., Calibri, Georgia, Constantia, etc.) use the OpenType layout. This means that the OpenType font features included in these {\tt .otf} and {\tt .ttf} fonts can be accessed via OpenType layout tags~\cite{opentype_tag_registry}.
+
+An OpenType layout tag is an {\caps ascii} character string of 4~bytes that is used to identify the writing scripts, language systems, features and baselines of the font. Using \capsxetex's \code{\bsl font} command, the macros included in the package \code{font-change-xetex} can declare these tags by incorporating them as \textcolor{blue}{\sl optional font features}. A knowledge of some of these tags can be quite useful because different fonts have different default features, which the user may want to change. For example, the main font used in this document, Warnock Pro, invokes oldstyle figures~(745.12) by default but scientific texts demand lining figures~({\myfont{Warnock Pro}{10}{:+pnum:+lnum}745.12}). By using the tag {\tt lnum}, which overrides oldstyle figures with lining figures, we can make the desired switch. There are four categories of OpenType layout tags: Script, Language, Feature, and~Baseline.
+
+\subsection{Script tags}Script tags generally correspond to a Unicode script and allow the user to provide information about the writing script. This feature is of great value when using non-Latin writing scripts or typesetting a document using multiple scripts. The sample texts below have been written in Devanagari using the Adobe Devanagari font but in the former case, the Latin script tag~(non-default for this font) has been used. Due to this, the Devanagari ligatures are missing in the first text and the Hindi is syntactically~incorrect.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{
+\vbox{\vskip0.5\baselineskip
+{\myfont{Adobe Devanagari}{12}{:script=latn}
+\verbatim \myfont{Adobe Devanagari}{12}{:script=latn}|endverbatim
+
+विद्या अर्जन का प्रयास
+
+Some vowels are misplaced and the ligatures are missing.}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+\ms
+
+\vbox{\hrule\hbox{\vrule\hbox{
+\vbox{\vskip0.5\baselineskip
+{\myfont{Adobe Devanagari}{12}{:script=deva}
+\verbatim \myfont{Adobe Devanagari}{12}{:script=deva}|endverbatim
+
+विद्या अर्जन का प्रयास
+
+All vowels and ligatures are well placed.}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+\ms
+Generally, font files have a default writing script. For example, all the fonts used in this document, except the ones used to typeset Devanagari, use Latin~({\tt latn}) as the default script. A complete list of script tags can be found~\href{https://www.microsoft.com/typography/otspec/scripttags.htm}{here}.
+
+\subsection{Language tags}Language tags decide how text written in a given script is presented. For example, both English and French typesetting use the same writing script but the presentation of text is language dependent. A list of language tags is available \href{https://www.microsoft.com/typography/otspec/languagetags.htm}{here}.
+
+
+\subsection{Feature tags}Feature tags allow the user to choose between different glyph forms. For example, we can choose whether to use standard ligatures (like ffi) or not~(\hbox{f}\hbox{f}\hbox{i}). A table of feature tags is given \href{https://www.microsoft.com/typography/otspec/featurelist.htm}{here}, and their description on this \href{https://www.microsoft.com/typography/otspec/features_ae.htm}{page}.
+To use a font feature which has a tag called {\tt ftag} via \code{font-change-xetex}, we have to type \code{:+ftag} in the \textcolor{blue}{\sl optional font features}. Suppose that the same feature is a default feature of the font, then in order to deactivate this feature we have to type \code{:-ftag} in the \textcolor{blue}{\sl optional font features}. The following example clarifies this usage.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{
+\vbox{\vskip0.5\baselineskip \parindent=0pt\leftskip7mm\rightskip7mm
+{\hyphenpenalty10000
+\verbatim \myfont{Warnock Pro}{10}{}% Declares Warnock Pro font at 10pt with the default settings
+
+The font Warnock Pro considers {\bf Ţh Ťh ff fi fl ffi ffl fj ffj Th} as {\it standard ligatures} ({\tt liga}), and {\bf st ct sp} as {\it discretionary ligatures}~({\tt dlig}). The default settings of this font allow standard ligatures and suppress
+discretionary ligatures. We will deactivate standard ligatures and turn on discretionary ligatures with
+
+\myfont{Warnock Pro}{10}{:-liga:+dlig}
+% Standard Ligatures deactivated and Discretionary Ligatures activated
+
+Now the standard ligatures ({\bf Ţh Ťh ff fi fl ffi ffl fj ffj Th}) have been turned off and discretionary ligatures ({\bf st ct sp}) have been turned on.
+|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip
+{The font Warnock Pro considers {\bf Ţh Ťh ff fi fl ffi ffl fj ffj Th} as {\it standard ligatures}~({\tt liga}), and {\bf st ct sp} as {\it discretionary ligatures}~({\tt dlig}). The default settings of this font allow standard ligatures and suppress discretionary ligatures. We will deactivate standard ligatures and turn on discretionary ligatures with
+
+\myfont{Warnock Pro}{10}{:-liga:+dlig}
+% Standard ligatures deactivated and discretionary ligatures activated
+
+Now the standard ligatures ({\bf Ţh Ťh ff fi fl ffi ffl fj ffj Th}) have been turned off and discretionary ligatures ({\bf st ct sp}) have been turned on.
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+\bs
+
+The following example shows how the statements of the \code{font-change-xetex} can be used within a paragraph and how \code{\bsl myfont} is used to exploit some features of Bickham Script Pro~font.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\myfont{Bickham Script Pro}{30}{}
+% Declares Bickham Script Pro font at 30pt with default features
+
+This final statement is Crucial.
+
+\myfont{Bickham Script Pro}{30}{:-calt:-clig}
+% Contextual Alternates and Contextual Ligatures deactivated
+
+This final statement is Crucial.
+
+{\myfont{Bickham Script Pro}{30}{:+swsh}
+% Swash glyphs activated
+
+This final statement is Crucial.
+
+% Alternate available fonts are accessed to locally change some glyphs
+{\myfont{Bickham Script Pro}{30}{+aalt}T}his
+{\myfont{Bickham Script Pro}{30}{+aalt=2}f}inal
+statemen{\myfont{Bickham Script Pro}{30}{+aalt=3}t} is Crucial.}
+|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+\myfont{Bickham Script Pro}{30}{}
+% Declares Bickham Script Pro font at 30pt with default features
+
+This final statement is Crucial.
+
+\myfont{Bickham Script Pro}{30}{:-calt:-clig}
+% Contextual Alternates and Contextual Ligatures deactivated
+
+This final statement is Crucial.
+
+{\myfont{Bickham Script Pro}{30}{:+swsh}
+% Swash glyphs activated
+
+This final statement is Crucial.
+
+% Alternate available fonts are accessed to locally change some glyphs
+{\myfont{Bickham Script Pro}{30}{+aalt}T}his {\myfont{Bickham Script Pro}{30}{+aalt=2}f}inal statemen{\myfont{Bickham Script Pro}{30}{+aalt=3}t} is Crucial.}
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+
+
+
+
+
+\subsection{Baseline tags}These convey information about the baseline and about writing modes like horizontal, vertical, and math. More details about these tags can be found \href{https://www.microsoft.com/typography/otspec/baselinetags.htm}{here}.
+
+
+
+\section{Other features}{Other features}This section will describe some font features provided by \capsxetex.
+
+\subsection{Font options}When an installed font is declared using \code{font-change-xetex}, its size and style variant are selected as well. However, if the user would like to force a particular variant of a font family, the following arguments can be~used:\ms
+
+\+/B && Selects the {\bf bold} variant of the declared font.\cr
+\+/I && Selects the {\it italic} variant of the declared font.\cr
+\+/BI && Selects the {\itbf bold italic} or {\itbf italic bold} variant of the declared font.\cr
+\+/IB && Same as /BI.\cr
+\+/S${}=x$ && Uses the font version corresponding to the optical size of $x$\,pt.\cr
+\+/AAT && only for Mac OS~X.\cr
+\+/ICU && only for Mac OS~X.\cr
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+\verbatim {\myfont{Warnock Pro/B}{10}{} sets Warnock Pro bold font as the regular font but it is better to say} \myfont{Warnock Pro}{10}{} and then type {\bf some in bold} and {\rm some in regular.}|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\coderesult{\fontss {\bf sets Warnock Pro bold font as the regular font but it is better to say} and then type {\bf some in bold} and some in regular.}
+
+
+
+\subsubsection{Optical sizes}If a font family includes optical sizes then they can be employed using the {\tt /S} option. Fonts with optical size variants produce finely adjusted typefaces according to type-size---this can improve text legibility and typesetting appeal. The default \capstex\ font---Donald Knuth's Computer Modern font---has eight optical sizes: 5, 6, 7, 8, 9, 10, 12, and 17\,pt. Because of these optical fonts, Computer Modern can typeset subscripts, sub-subscripts, superscripts, super-superscripts, and mathematics with elegance. The font used to typeset this document, Warnock Pro, offers four optical sizes: Caption, Regular, Subhead, and Display. Similar optical fonts are provided by other Adobe Pro fonts like Minion Pro, Chaparral Pro, Adobe Garamond Pro,~etc.
+
+When an installed font family is declared in \capsxetex, the optical sizes are chosen automatically. On my system~(Windows~7 with \capsxetex~version~0.99992), depending on the instructed font~size, the Adobe Pro optical font variant is chosen automatically~as:
+\ms
+\+{\it Caption} (<8.9\,pt) &&&&&& \font\try="WarnockPro-Regular/S=5" at 10pt \try This is at 10\,pt.\cr
+\+{\it Regular} (8.9\,pt, 12.9\,pt] &&&&&& \font\try="WarnockPro-Regular/S=10" at 10pt \try This is at 10\,pt.\cr
+\+{\it Subhead} (12.9\,pt, 22.9\,pt] &&&&&&  \font\try="WarnockPro-Regular/S=13" at 10pt \try This is at 10\,pt.\cr
+\+{\it Display} (>22.9\,pt) &&&&&&  \font\try="WarnockPro-Regular/S=23" at 10pt \try This is at 10\,pt.\cr
+\ms
+If a font family supports optical sizes, then the definitions \code{\bsl myzfont} and \code{\bsl mysanzfont} select the appropriate sizes automatically. Using \code{\bsl myfont}, we can force a particular optical font size~(see the following example) as well. If the declared font family does~not support optical sizes or if \capsxetex\ is not able to use them, then the usual font is used at the instructed~size.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\twentyrm% Uses the 20 pt variant, that is, Subhead
+\noindent Triangles-un-zybfi
+
+\myfont{Warnock Pro/S=5}{20}{}% Forces the 5 pt variant, that is, Caption at 20 pt
+\noindent Triangles-un-zybfi|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+\noindent \twentyrm Triangles-un-zybfi
+
+\noindent \myfont{Warnock Pro/S=5}{20}{}
+Triangles-un-zybfi
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+
+
+
+
+
+
+
+
+\subsection{Color}In the \textcolor{blue}{\sl optional font features} of the definitions of \code{font-change-xetex}, the user can declare the font color using the argument:
+
+\cl{\code{color=RRGGBB}}
+\sk
+\ii where {\tt RR}, {\tt GG}, and {\tt BB} are the three respective pairs of \textcolor{red}{Red}, \textcolor{green}{Green}, and \textcolor{blue}{Blue} hexadecimal values. Many RGB colors and their corresponding hexadecimal values can be found \href{http://cloford.com/resources/colours/500col.htm}{here}.
+
+\bs
+
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+\verbatim \myfont{Warnock Pro}{10}{color=800080} This is somewhat purple.|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}
+\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\coderesult{\font\try="WarnockPro-Regular:color=800080" at 10pt \try This is somewhat purple.}
+
+
+
+\subsection{Letter-spacing}The letters of a declared font~(installed on the system) can be spaced using the \capsxetex's \code{letterspace} option. The following example illustrates~this.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+\verbatim \myfont{Warnock Pro}{10}{letterspace=10} The letters are too spaced.|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}
+\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\coderesult{\font\try="WarnockPro-Regular:letterspace=10" at 10pt \try The letters are too spaced.}
+
+
+
+
+\subsection{Inter-line and inter-word spacing}When a font is declared using \code{\bsl myzfont}, \code{\bsl mysanzfont}, or \code{\bsl myfont} at a given size, the inter-line and inter-word spacing is done automatically depending on size of the font. This is done through the definition \code{\bsl fontss}~(declared in the macro \code{font-change-xetex}), which~is:
+
+\ms
+{\color{brown}
+\verbatim \def\fontss{\parindent=2em%
+\baselineskip=2.8ex%
+\spaceskip=0.30001em plus0.11em minus0.11em}%
+|endverbatim}
+\ms
+
+If other---small or large---font sizes are used via definitions like \code{\bsl fourteenbf} or \code{\bsl sevenrm}, it is recommended to declare \code{\bsl fontss} immediately after declaring font-size commands. If one wants to change the parameters of the \code{\bsl fontss} definition, a new definition with the same name but different parameters can be declared anywhere in the document---this will effect the following text. Also, it is possible to declare the just parameters included in \code{\bsl fontss}~differently.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\myzfont{Warnock Pro}{15}{} The type is large but the inter-line and inter-word space have been taken into account.
+\bigskip\bigskip
+\twentyrm This is 30\,pt; the inter-line and inter-word spacing is not good.
+\bigskip\bigskip
+\twentyrm\fontss This is 30\,pt; the inter-line and inter-word spacing is better.
+|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+{\font\try="WarnockPro-Regular" at 15pt \try \fontss
+The type is large but the inter-line and inter-word space have been taken into account.}
+\bigskip\bigskip
+\font\try="WarnockPro-Regular" at 30pt \try
+\indent This is 30\,pt; the inter-line and inter-word spacing is not good.
+\bigskip\bigskip
+\fontss
+This is 30\,pt; the inter-line and inter-word spacing is better.
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+
+
+\section{Special characters using Unicode}{Special characters using Unicode}The package \code{font-change-xetex} includes several commands to typeset special Unicode characters. If the active font has the required glyph, then the following commands produce the corresponding special characters. Note that there is a prefix {\tt u} before the character's common~name.
+
+\quadcolumns
+{\myfont{Cambria Math}{10}{}
+\settabs5\columns
+\+{\color{brown} \verbatim \uAlpha |endverbatim} &&&{Α}\cr
+\+{\color{brown} \verbatim \uBeta |endverbatim} &&&{Β}\cr
+\+{\color{brown} \verbatim \uGamma |endverbatim} &&&{Γ}\cr
+\+{\color{brown} \verbatim \uDelta |endverbatim} &&&{Δ}\cr
+\+{\color{brown} \verbatim \uEpsilon |endverbatim} &&&{Ε}\cr
+\+{\color{brown} \verbatim \uZeta |endverbatim} &&&{Ζ}\cr
+\+{\color{brown} \verbatim \uEta |endverbatim} &&&{Η}\cr
+\+{\color{brown} \verbatim \uTheta |endverbatim} &&&{Θ}\cr
+\+{\color{brown} \verbatim \uIota |endverbatim} &&&{Ι}\cr
+\+{\color{brown} \verbatim \uKappa |endverbatim} &&&{Κ}\cr
+\+{\color{brown} \verbatim \uLambda |endverbatim} &&&{Λ}\cr
+\+{\color{brown} \verbatim \uMu |endverbatim} &&&{Μ}\cr
+\+{\color{brown} \verbatim \uNu |endverbatim} &&&{Ν}\cr
+\+{\color{brown} \verbatim \uXi |endverbatim} &&&{Ξ}\cr
+\+{\color{brown} \verbatim \uOmicron |endverbatim} &&&{Ο}\cr
+\+{\color{brown} \verbatim \uPi |endverbatim} &&&{Π}\cr
+\+{\color{brown} \verbatim \uRho |endverbatim} &&&{Ρ}\cr
+\+{\color{brown} \verbatim \uSigma |endverbatim} &&&{Σ}\cr
+\+{\color{brown} \verbatim \uTau |endverbatim} &&&{Τ}\cr
+\+{\color{brown} \verbatim \uUpsilon |endverbatim} &&&{Υ}\cr
+\+{\color{brown} \verbatim \uPhi |endverbatim} &&&{Φ}\cr
+\+{\color{brown} \verbatim \uChi |endverbatim} &&&{Χ}\cr
+\+{\color{brown} \verbatim \uPsi |endverbatim} &&&{Ψ}\cr
+\+{\color{brown} \verbatim \uOmega |endverbatim} &&&{Ω}\cr
+\+{\color{brown} \verbatim \ualpha |endverbatim} &&&{α}\cr
+\+{\color{brown} \verbatim \ubeta |endverbatim} &&&{β}\cr
+\+{\color{brown} \verbatim \ugamma |endverbatim} &&&{γ}\cr
+\+{\color{brown} \verbatim \udelta |endverbatim} &&&{δ}\cr
+\+{\color{brown} \verbatim \uepsilon |endverbatim} &&&{ε}\cr
+\+{\color{brown} \verbatim \uzeta |endverbatim} &&&{ζ}\cr
+\+{\color{brown} \verbatim \ueta |endverbatim} &&&{η}\cr
+\+{\color{brown} \verbatim \utheta |endverbatim} &&&{θ}\cr
+\+{\color{brown} \verbatim \uiota |endverbatim} &&&{ι}\cr
+\+{\color{brown} \verbatim \ukappa |endverbatim} &&&{κ}\cr
+\+{\color{brown} \verbatim \ulambda |endverbatim} &&&{λ}\cr
+\+{\color{brown} \verbatim \umu |endverbatim} &&&{μ}\cr
+\+{\color{brown} \verbatim \unu |endverbatim} &&&{ν}\cr
+\+{\color{brown} \verbatim \uxi |endverbatim} &&&{ξ}\cr
+\+{\color{brown} \verbatim \uomicron |endverbatim} &&&{ο}\cr
+\+{\color{brown} \verbatim \upi |endverbatim} &&&{π}\cr
+\+{\color{brown} \verbatim \urho |endverbatim} &&&{ρ}\cr
+\+{\color{brown} \verbatim \usigmaf |endverbatim} &&&{ς}\cr
+\+{\color{brown} \verbatim \usigma |endverbatim} &&&{σ}\cr
+\+{\color{brown} \verbatim \utau |endverbatim} &&&{τ}\cr
+\+{\color{brown} \verbatim \uupsilon |endverbatim} &&&{υ}\cr
+\+{\color{brown} \verbatim \uphi |endverbatim} &&&{φ}\cr
+\+{\color{brown} \verbatim \uchi |endverbatim} &&&{χ}\cr
+\+{\color{brown} \verbatim \upsi |endverbatim} &&&{ψ}\cr
+\+{\color{brown} \verbatim \uomega |endverbatim} &&&{ω}\cr
+\+{\color{brown} \verbatim \uthetasym |endverbatim} &&&{ϑ}\cr
+\+{\color{brown} \verbatim \uupsih |endverbatim} &&&{ϒ}\cr
+\+{\color{brown} \verbatim \upiv |endverbatim} &&&{ϖ}\cr
+\+{\color{brown} \verbatim \ubull |endverbatim} &&&{•}\cr
+\+{\color{brown} \verbatim \uhellip |endverbatim} &&&{…}\cr
+\+{\color{brown} \verbatim \uprime |endverbatim} &&&{′}\cr
+\+{\color{brown} \verbatim \uPrime |endverbatim} &&&{″}\cr
+\+{\color{brown} \verbatim \uoline |endverbatim} &&&{‾}\cr
+\+{\color{brown} \verbatim \ufrasl |endverbatim} &&&{⁄}\cr
+\+{\color{brown} \verbatim \uweierp |endverbatim} &&&{℘}\cr
+\+{\color{brown} \verbatim \uimage |endverbatim} &&&{ℑ}\cr
+\+{\color{brown} \verbatim \ureal |endverbatim} &&&{ℜ}\cr
+\+{\color{brown} \verbatim \utrade |endverbatim} &&&{™}\cr
+\+{\color{brown} \verbatim \ualefsym |endverbatim} &&&{ℵ}\cr
+\+{\color{brown} \verbatim \ularr |endverbatim} &&&{←}\cr
+\+{\color{brown} \verbatim \uuarr |endverbatim} &&&{↑}\cr
+\+{\color{brown} \verbatim \urarr |endverbatim} &&&{→}\cr
+\+{\color{brown} \verbatim \udarr |endverbatim} &&&{↓}\cr
+\+{\color{brown} \verbatim \uharr |endverbatim} &&&{↔}\cr
+\+{\color{brown} \verbatim \ucrarr |endverbatim} &&&{↵}\cr
+\+{\color{brown} \verbatim \ulArr |endverbatim} &&&{⇐}\cr
+\+{\color{brown} \verbatim \uuArr |endverbatim} &&&{⇑}\cr
+\+{\color{brown} \verbatim \urArr |endverbatim} &&&{⇒}\cr
+\+{\color{brown} \verbatim \udArr |endverbatim} &&&{⇓}\cr
+\+{\color{brown} \verbatim \uhArr |endverbatim} &&&{⇔}\cr
+\+{\color{brown} \verbatim \uforall |endverbatim} &&&{∀}\cr
+\+{\color{brown} \verbatim \upart |endverbatim} &&&{∂}\cr
+\+{\color{brown} \verbatim \uexist |endverbatim} &&&{∃}\cr
+\+{\color{brown} \verbatim \uempty |endverbatim} &&&{∅}\cr
+\+{\color{brown} \verbatim \unabla |endverbatim} &&&{∇}\cr
+\+{\color{brown} \verbatim \uisin |endverbatim} &&&{∈}\cr
+\+{\color{brown} \verbatim \unotin |endverbatim} &&&{∉}\cr
+\+{\color{brown} \verbatim \uni |endverbatim} &&&{∋}\cr
+\+{\color{brown} \verbatim \uprod |endverbatim} &&&{∏}\cr
+\+{\color{brown} \verbatim \usum |endverbatim} &&&{∑}\cr
+\+{\color{brown} \verbatim \uminus |endverbatim} &&&{−}\cr
+\+{\color{brown} \verbatim \ulowast |endverbatim} &&&{∗}\cr
+\+{\color{brown} \verbatim \uradic |endverbatim} &&&{√}\cr
+\+{\color{brown} \verbatim \uprop |endverbatim} &&&{∝}\cr
+\+{\color{brown} \verbatim \uinfin |endverbatim} &&&{∞}\cr
+\+{\color{brown} \verbatim \uang |endverbatim} &&&{∠}\cr
+\+{\color{brown} \verbatim \uand |endverbatim} &&&{∧}\cr
+\+{\color{brown} \verbatim \uor |endverbatim} &&&{∨}\cr
+\+{\color{brown} \verbatim \ucap |endverbatim} &&&{∩}\cr
+\+{\color{brown} \verbatim \ucup |endverbatim} &&&{∪}\cr
+\+{\color{brown} \verbatim \uint |endverbatim} &&&{∫}\cr
+\+{\color{brown} \verbatim \uthere4 |endverbatim} &&&{∴}\cr
+\+{\color{brown} \verbatim \usim |endverbatim} &&&{∼}\cr
+\+{\color{brown} \verbatim \ucong |endverbatim} &&&{≅}\cr
+\+{\color{brown} \verbatim \uasymp |endverbatim} &&&{≈}\cr
+\+{\color{brown} \verbatim \une |endverbatim} &&&{≠}\cr
+\+{\color{brown} \verbatim \uequiv |endverbatim} &&&{≡}\cr
+\+{\color{brown} \verbatim \ule |endverbatim} &&&{≤}\cr
+\+{\color{brown} \verbatim \uge |endverbatim} &&&{≥}\cr
+\+{\color{brown} \verbatim \usub |endverbatim} &&&{⊂}\cr
+\+{\color{brown} \verbatim \usup |endverbatim} &&&{⊃}\cr
+\+{\color{brown} \verbatim \unsub |endverbatim} &&&{⊄}\cr
+\+{\color{brown} \verbatim \usube |endverbatim} &&&{⊆}\cr
+\+{\color{brown} \verbatim \usupe |endverbatim} &&&{⊇}\cr
+\+{\color{brown} \verbatim \uoplus |endverbatim} &&&{⊕}\cr
+\+{\color{brown} \verbatim \uotimes |endverbatim} &&&{⊗}\cr
+\+{\color{brown} \verbatim \uperp |endverbatim} &&&{⊥}\cr
+\+{\color{brown} \verbatim \usdot |endverbatim} &&&{⋅}\cr
+\+{\color{brown} \verbatim \ulceil |endverbatim} &&&{⌈}\cr
+\+{\color{brown} \verbatim \urceil |endverbatim} &&&{⌉}\cr
+\+{\color{brown} \verbatim \ulfloor |endverbatim} &&&{⌊}\cr
+\+{\color{brown} \verbatim \urfloor |endverbatim} &&&{⌋}\cr
+\+{\color{brown} \verbatim \ulang |endverbatim} &&&{⟨}\cr
+\+{\color{brown} \verbatim \urang |endverbatim} &&&{⟩}\cr
+\+{\color{brown} \verbatim \uloz |endverbatim} &&&{◊}\cr
+\+{\color{brown} \verbatim \uspades |endverbatim} &&&{♠}\cr
+\+{\color{brown} \verbatim \uclubs |endverbatim} &&&{♣}\cr
+\+{\color{brown} \verbatim \uhearts |endverbatim} &&&{♥}\cr
+\+{\color{brown} \verbatim \udiams |endverbatim} &&&{♦}\cr
+\+{\color{brown} \verbatim \ufnof |endverbatim} &&&{ƒ}\cr
+\+{\color{brown} \verbatim \uensp |endverbatim} &&&{ }\cr
+\+{\color{brown} \verbatim \uemsp |endverbatim} &&&{ }\cr
+\+{\color{brown} \verbatim \uthinsp |endverbatim} &&&{ }\cr
+\+{\color{brown} \verbatim \uzwnj |endverbatim} &&&{‌}\cr
+\+{\color{brown} \verbatim \uzwj |endverbatim} &&&{‍}\cr
+\+{\color{brown} \verbatim \ulrm |endverbatim} &&&{‎}\cr
+\+{\color{brown} \verbatim \urlm |endverbatim} &&&{‏}\cr
+\+{\color{brown} \verbatim \undash |endverbatim} &&&{–}\cr
+\+{\color{brown} \verbatim \umdash |endverbatim} &&&{—}\cr
+\+{\color{brown} \verbatim \ulsquo |endverbatim} &&&{‘}\cr
+\+{\color{brown} \verbatim \ursquo |endverbatim} &&&{’}\cr
+\+{\color{brown} \verbatim \usbquo |endverbatim} &&&{‚}\cr
+\+{\color{brown} \verbatim \uldquo |endverbatim} &&&{“}\cr
+\+{\color{brown} \verbatim \urdquo |endverbatim} &&&{”}\cr
+\+{\color{brown} \verbatim \ubdquo |endverbatim} &&&{„}\cr
+\+{\color{brown} \verbatim \udagger |endverbatim} &&&{†}\cr
+\+{\color{brown} \verbatim \uDagger |endverbatim} &&&{‡}\cr
+\+{\color{brown} \verbatim \upermil |endverbatim} &&&{‰}\cr
+\+{\color{brown} \verbatim \ulsaquo |endverbatim} &&&{‹}\cr
+\+{\color{brown} \verbatim \ursaquo |endverbatim} &&&{›}\cr
+\+{\color{brown} \verbatim \ueuro |endverbatim} &&&{€}\cr
+\+{\color{brown} \verbatim \ucirc |endverbatim} &&&{ˆ}\cr
+\+{\color{brown} \verbatim \utilde |endverbatim} &&&{˜}\cr
+\+{\color{brown} \verbatim \uOElig |endverbatim} &&&{Œ}\cr
+\+{\color{brown} \verbatim \uoelig |endverbatim} &&&{œ}\cr
+\+{\color{brown} \verbatim \uScaron |endverbatim} &&&{Š}\cr
+\+{\color{brown} \verbatim \uscaron |endverbatim} &&&{š}\cr
+\+{\color{brown} \verbatim \uYuml |endverbatim} &&&{Ÿ}\cr
+\+{\color{brown} \verbatim \uquot |endverbatim} &&&{"}\cr
+\+{\color{brown} \verbatim \uamp |endverbatim} &&&{\&}\cr
+\+{\color{brown} \verbatim \uapos |endverbatim} &&&{'}\cr
+\+{\color{brown} \verbatim \ult |endverbatim} &&&{<}\cr
+\+{\color{brown} \verbatim \ugt |endverbatim} &&&{>}\cr
+\+{\color{brown} \verbatim \unbsp |endverbatim} &&&{}\cr
+\+{\color{brown} \verbatim \uiexcl |endverbatim} &&&{¡}\cr
+\+{\color{brown} \verbatim \ucent |endverbatim} &&&{¢}\cr
+\+{\color{brown} \verbatim \upound |endverbatim} &&&{£}\cr
+\+{\color{brown} \verbatim \ucurren |endverbatim} &&&{¤}\cr
+\+{\color{brown} \verbatim \uyen |endverbatim} &&&{¥}\cr
+\+{\color{brown} \verbatim \ubrvbar |endverbatim} &&&{¦}\cr
+\+{\color{brown} \verbatim \usect |endverbatim} &&&{§}\cr
+\+{\color{brown} \verbatim \uuml |endverbatim} &&&{¨}\cr
+\+{\color{brown} \verbatim \ucopy |endverbatim} &&&{©}\cr
+\+{\color{brown} \verbatim \uordf |endverbatim} &&&{ª}\cr
+\+{\color{brown} \verbatim \ulaquo |endverbatim} &&&{«}\cr
+\+{\color{brown} \verbatim \unot |endverbatim} &&&{¬}\cr
+\+{\color{brown} \verbatim \ushy |endverbatim} &&&{­}\cr
+\+{\color{brown} \verbatim \ureg |endverbatim} &&&{®}\cr
+\+{\color{brown} \verbatim \umacr |endverbatim} &&&{¯}\cr
+\+{\color{brown} \verbatim \udeg |endverbatim} &&&{°}\cr
+\+{\color{brown} \verbatim \uplusmn |endverbatim} &&&{±}\cr
+\+{\color{brown} \verbatim \usup2 |endverbatim} &&&{²}\cr
+\+{\color{brown} \verbatim \usup3 |endverbatim} &&&{³}\cr
+\+{\color{brown} \verbatim \uacute |endverbatim} &&&{´}\cr
+\+{\color{brown} \verbatim \umicro |endverbatim} &&&{µ}\cr
+\+{\color{brown} \verbatim \upara |endverbatim} &&&{¶}\cr
+\+{\color{brown} \verbatim \umiddot |endverbatim} &&&{·}\cr
+\+{\color{brown} \verbatim \ucedil |endverbatim} &&&{¸}\cr
+\+{\color{brown} \verbatim \usup1 |endverbatim} &&&{¹}\cr
+\+{\color{brown} \verbatim \uordm |endverbatim} &&&{º}\cr
+\+{\color{brown} \verbatim \uraquo |endverbatim} &&&{»}\cr
+\+{\color{brown} \verbatim \ufrac14 |endverbatim} &&&{¼}\cr
+\+{\color{brown} \verbatim \ufrac12 |endverbatim} &&&{½}\cr
+\+{\color{brown} \verbatim \ufrac34 |endverbatim} &&&{¾}\cr
+\+{\color{brown} \verbatim \uiquest |endverbatim} &&&{¿}\cr
+\+{\color{brown} \verbatim \uAgrave |endverbatim} &&&{À}\cr
+\+{\color{brown} \verbatim \uAacute |endverbatim} &&&{Á}\cr
+\+{\color{brown} \verbatim \uAcirc |endverbatim} &&&{Â}\cr
+\+{\color{brown} \verbatim \uAtilde |endverbatim} &&&{Ã}\cr
+\+{\color{brown} \verbatim \uAuml |endverbatim} &&&{Ä}\cr
+\+{\color{brown} \verbatim \uAring |endverbatim} &&&{Å}\cr
+\+{\color{brown} \verbatim \uAElig |endverbatim} &&&{Æ}\cr
+\+{\color{brown} \verbatim \uCcedil |endverbatim} &&&{Ç}\cr
+\+{\color{brown} \verbatim \uEgrave |endverbatim} &&&{È}\cr
+\+{\color{brown} \verbatim \uEacute |endverbatim} &&&{É}\cr
+\+{\color{brown} \verbatim \uEcirc |endverbatim} &&&{Ê}\cr
+\+{\color{brown} \verbatim \uEuml |endverbatim} &&&{Ë}\cr
+\+{\color{brown} \verbatim \uIgrave |endverbatim} &&&{Ì}\cr
+\+{\color{brown} \verbatim \uIacute |endverbatim} &&&{Í}\cr
+\+{\color{brown} \verbatim \uIcirc |endverbatim} &&&{Î}\cr
+\+{\color{brown} \verbatim \uIuml |endverbatim} &&&{Ï}\cr
+\+{\color{brown} \verbatim \uETH |endverbatim} &&&{Ð}\cr
+\+{\color{brown} \verbatim \uNtilde |endverbatim} &&&{Ñ}\cr
+\+{\color{brown} \verbatim \uOgrave |endverbatim} &&&{Ò}\cr
+\+{\color{brown} \verbatim \uOacute |endverbatim} &&&{Ó}\cr
+\+{\color{brown} \verbatim \uOcirc |endverbatim} &&&{Ô}\cr
+\+{\color{brown} \verbatim \uOtilde |endverbatim} &&&{Õ}\cr
+\+{\color{brown} \verbatim \uOuml |endverbatim} &&&{Ö}\cr
+\+{\color{brown} \verbatim \utimes |endverbatim} &&&{×}\cr
+\+{\color{brown} \verbatim \uOslash |endverbatim} &&&{Ø}\cr
+\+{\color{brown} \verbatim \uUgrave |endverbatim} &&&{Ù}\cr
+\+{\color{brown} \verbatim \uUacute |endverbatim} &&&{Ú}\cr
+\+{\color{brown} \verbatim \uUcirc |endverbatim} &&&{Û}\cr
+\+{\color{brown} \verbatim \uUuml |endverbatim} &&&{Ü}\cr
+\+{\color{brown} \verbatim \uYacute |endverbatim} &&&{Ý}\cr
+\+{\color{brown} \verbatim \uTHORN |endverbatim} &&&{Þ}\cr
+\+{\color{brown} \verbatim \uszlig |endverbatim} &&&{ß}\cr
+\+{\color{brown} \verbatim \uagrave |endverbatim} &&&{à}\cr
+\+{\color{brown} \verbatim \uaacute |endverbatim} &&&{á}\cr
+\+{\color{brown} \verbatim \uacirc |endverbatim} &&&{â}\cr
+\+{\color{brown} \verbatim \uatilde |endverbatim} &&&{ã}\cr
+\+{\color{brown} \verbatim \uauml |endverbatim} &&&{ä}\cr
+\+{\color{brown} \verbatim \uaring |endverbatim} &&&{å}\cr
+\+{\color{brown} \verbatim \uaelig |endverbatim} &&&{æ}\cr
+\+{\color{brown} \verbatim \uccedil |endverbatim} &&&{ç}\cr
+\+{\color{brown} \verbatim \uegrave |endverbatim} &&&{è}\cr
+\+{\color{brown} \verbatim \ueacute |endverbatim} &&&{é}\cr
+\+{\color{brown} \verbatim \uecirc |endverbatim} &&&{ê}\cr
+\+{\color{brown} \verbatim \ueuml |endverbatim} &&&{ë}\cr
+\+{\color{brown} \verbatim \uigrave |endverbatim} &&&{ì}\cr
+\+{\color{brown} \verbatim \uiacute |endverbatim} &&&{í}\cr
+\+{\color{brown} \verbatim \uicirc |endverbatim} &&&{î}\cr
+\+{\color{brown} \verbatim \uiuml |endverbatim} &&&{ï}\cr
+\+{\color{brown} \verbatim \ueth |endverbatim} &&&{ð}\cr
+\+{\color{brown} \verbatim \untilde |endverbatim} &&&{ñ}\cr
+\+{\color{brown} \verbatim \uograve |endverbatim} &&&{ò}\cr
+\+{\color{brown} \verbatim \uoacute |endverbatim} &&&{ó}\cr
+\+{\color{brown} \verbatim \uocirc |endverbatim} &&&{ô}\cr
+\+{\color{brown} \verbatim \uotilde |endverbatim} &&&{õ}\cr
+\+{\color{brown} \verbatim \uouml |endverbatim} &&&{ö}\cr
+\+{\color{brown} \verbatim \udivide |endverbatim} &&&{÷}\cr
+\+{\color{brown} \verbatim \uoslash |endverbatim} &&&{ø}\cr
+\+{\color{brown} \verbatim \uugrave |endverbatim} &&&{ù}\cr
+\+{\color{brown} \verbatim \uuacute |endverbatim} &&&{ú}\cr
+\+{\color{brown} \verbatim \uucirc |endverbatim} &&&{û}\cr
+\+{\color{brown} \verbatim \uuuml |endverbatim} &&&{ü}\cr
+\+{\color{brown} \verbatim \uyacute |endverbatim} &&&{ý}\cr
+\+{\color{brown} \verbatim \uthorn |endverbatim} &&&{þ}\cr
+\+{\color{brown} \verbatim \uyuml |endverbatim} &&&{ÿ}\cr
+\+{\color{brown} \verbatim \uhbar |endverbatim} &&&{ħ}\cr
+}
+
+\singlecolumn
+
+
+\ii We used the font Cambria Math to typeset the special unicode characters above. Other fonts, such as the main font family used in this document can be used as well. Note that some fonts may~not include many Unicode characters.
+
+\bs
+
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+The life of \ualpha\ was made better after tilting and becoming {\it \ualpha}---the tilt was about 15\udeg. Even small {\sevenbf \uGamma} and elder {\fourteenbf \uGamma} want to be {\sevenitbf \uGamma} and {\fourteenitbf \uGamma}. But \umu\ prefers to stay upright when used in $2$\,\umu l.|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\coderesult{The life of \ualpha\ was made better after tilting and becoming {\it \ualpha}---the tilt was about 15\udeg. Even small {\sevenbf \uGamma} and elder {\fourteenbf \uGamma} want to be {\sevenitbf \uGamma} and {\fourteenitbf \uGamma}. But \umu\ prefers to stay upright when used in $2$\,\umu l.}
+
+
+
+
+
+
+
+
+
+\section{Changing some math fonts}{Changing some math fonts}This feature changes some math fonts and is currently under development. The changed math fonts belong to {\sl family $0$}; this means that regular numerals~({\myfont{Warnock Pro}{10}{:+pnum:+lnum}0--9}), regular letters~(a--z and A--Z), upright Greek capitals~(\uGamma, \uDelta, \uTheta, \uLambda, \uXi, \uPi, \uSigma, \uUpsilon, \uPhi, \uPsi, \uOmega), and hat~(\;$\hat{}$\;) are changed. As a consequence of this change, numbers in text mode~(e.g., {\tt 149.75}) and in math mode~(e.g., {\tt \$149.75\$}) will be typeset using the same font. The change can be implemented~by:
+\ms
+\ii\inbox{\code{\bsl mymathfont\{\textcolor{blue}{\sl font name}\}\{\textcolor{blue}{\sl font size in points}\}}}
+\sk
+\ii It is possible to use \code{\bsl mymathfont} multiple times in the same document. However, before reusing \code{\bsl mymathfont}, the font size has to be reset by using the macro \code{\bsl resetfontsize}, which is included in \code{font-change-xetex}.
+
+\bs
+\ii\textcolor{red}{\bf Warning 1}: The macro \code{\bsl mymathfont} should be declared after \code{\bsl myzfont} or \code{\bsl myfont}, and after \code{\bsl hangpun} or \hbox{\code{\bsl nohangpun}}. In other words, the selection of the main body font and the choice between using hanging punctuation or not has to be made before invoking~\code{\bsl mymathfont}. If the definition \code{\bsl mymathfont} is invoked and the text font is selected multiple times using \code{\bsl myfont}, then after each selection, the math font must be redeclared using \code{\bsl mymathfont}. Otherwise, the capital upright Greek letters in math mode will be~missing.
+
+
+\bs
+\mymathfont{Warnock Pro}{10}
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\mysanzfont{Calibri}{11}{:+pnum:+lnum}% To use Calibri as the sans serif font
+\input font_kp% From the package font-change; math fonts compatible with Warnock Pro
+\myzfont{Warnock Pro}{10}{:+pnum:+lnum}% To use Warnock Pro as the main font
+\mymathfont{Warnock Pro}{10}% To typeset some math using Warnock Pro
+\centerline{\sanstwelvecapsbf Math Font Test}
+\bigskip
+This font is Warnock Pro. The year is 2016. Check the number 2016 below
+$$
+2016 \sin(x) + e^{xy} + \Gamma.
+$$
+In the above expression 2016, $\sin$, (, ), and \uGamma\ are in Warnock Pro, whereas e, x, and y are in Kp font.|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\coderesult{\centerline{\sanstwelvecapsbf Math Font Test}
+\myfont{Warnock Pro}{10}{:+pnum:+lnum}
+\resetfontsize\mymathfont{Warnock Pro}{10}%
+\bigskip
+This font is Warnock Pro. The year is 2016. Check the number 2016 below
+$$
+2016 \sin(x) + e^{xy} + \Gamma.
+$$
+In the above expression 2016, $\sin$, (, ), and \uGamma\ are in Warnock Pro, whereas e, x, and y are in Kp font.}
+
+
+
+
+
+
+\bs
+\ii\textcolor{red}{\bf Warning 2}: It may happen that the declared math font does not have Greek characters or there are some coding issues. As a result of this, the Greek letters will not be typeset! In the following example, we use the font Chaparral Pro for some maths but despite being a ``Pro'' font, it does~not have Greek letter support.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\mysanzfont{Calibri}{11}{:+pnum:+lnum}% To use Calibri as the sans serif font
+\myzfont{Chaparral Pro}{11}{:+pnum:+lnum}% To use Chaparral Pro as the main font
+\mymathfont{Chaparral Pro}{11}% To typeset some math using Chaparral Pro
+\centerline{\sanstwelvecapsbf Failed Math Font Test}
+\bigskip
+This font is Chaparral Pro. Take a look at the following equation:
+$$
+\Psi(x) = 173x^2 + 22\cos(x) + \Gamma(x)
+$$
+In the above expression 173, 22, (, ), and $\cos$ are in Chaparral Pro, while x and = are in Kp font, but the Greek letters are missing.|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\font\try="Chaparral Pro:+pnum:+lnum" at 11pt \try
+\resetfontsize \mymathfont{Chaparral Pro}{11}% To typeset some math using Chaparral Pro
+\centerline{\sanstwelvecapsbf Failed Math Font Test}
+\bigskip
+This font is Chaparral Pro. Take a look at the following equation:
+$$
+\Psi(x) = 173x^2 + 22\cos(x) + \Gamma(x)
+$$
+In the above expression 173, 22, (, ), and $\cos$ are in Chaparral Pro, while x and = are in Kp font, but the Greek letters are missing.}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+
+
+
+
+
+\section{font-change-xetex with font-change}{font-change-xetex with font-change}The text font changing capabilities of \code{font-change-xetex} can be combined with the package \code{font-change}~\cite{dhawan_font-change-3} which can change both math and text fonts. A font-changing macro from \code{font-change} has to be declared before the definitions of \code{font-change-xetex} so that the math font is chosen from \code{font-change} and the text font is selected by \code{font-change-xetex}. The definition \code{\bsl mymathfont} can be used to change some math fonts as well. The following example shows~this.
+
+\bs
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{\verbatim
+\mysanzfont{Calibri}{11}{:+pnum:+lnum}% To use Calibri as the sans serif font
+\input font_kp% From the package font-change; math fonts compatible with Chaparral Pro
+\myzfont{Minion Pro}{10}{:+pnum:+lnum}% To use Minion Pro as the main font
+\mymathfont{Minion Pro}{10}% To use Minion Pro for some math
+\centerline{\sanstwelvecapsbf Text \& Math Font Test}
+\bigskip
+The text font is Minion Pro, most math is in Kp font, and some math is in Minion Pro. \TeX's Kp fonts go very well with many fonts like Warnock Pro, Adobe Garamond Pro, Minion Pro, etc. The text typed below shows how harmonious the mix of Minion Pro and Kp fonts is.
+$$
+\Psi(x) = 173x^2 + 22\cos(x) + \Gamma(x)
+$$
+|endverbatim
+}
+\vskip0.5\baselineskip}\vrule}}\hrule}
+\sk\cl{$\downarrow \downarrow \downarrow$}\sk
+\vbox{\hrule\hbox{\vrule\hbox{\leftskip7mm\rightskip7mm
+\vbox{\vskip0.5\baselineskip \parindent=0pt
+{
+%\mysanzfont{Calibri}{11}{:+pnum:+lnum}% To use Calibri as the sans serif font
+%\input font_kp% From the package font-change; math fonts compatible with Chaparral Pro
+\myfont{Minion Pro}{10}{:+pnum:+lnum}% To use Minion Pro as the main font
+\resetfontsize\mymathfont{Minion Pro}{10}% To use Minion Pro for some math
+\centerline{\sanstwelvecapsbf Text \& Math Font Test}
+\bigskip
+The text font is Minion Pro, most math is in Kp font, and some math is in Minion Pro. \TeX's Kp fonts go very well with many fonts like Warnock Pro, Adobe Garamond Pro, Minion Pro, etc. The text typed below shows how harmonious the mix of Minion Pro and Kp fonts is.
+$$
+\Psi(x) = 173x^2 + 22\cos(x) + \Gamma(x)
+$$}\vskip0.5\baselineskip}\vrule}}\hrule}
+
+\bs
+The following sample texts display some combinations of math fonts (\capstex\ fonts invoked using \code{font-change}) and text fonts ({\caps otf} or {\caps ttf} fonts invoked using \code{font-change-xetex}).
+
+\newpage \ \ms
+\ii\includegraphics[scale=0.87]{font_samples_1.pdf}
+
+\newpage \ \ms
+\ii\includegraphics[scale=0.87]{font_samples_2.pdf}
+
+\newpage \ \ms
+\ii\includegraphics[scale=0.87]{font_samples_3.pdf}
+
+\newpage \ \ms
+\ii\includegraphics[scale=0.87]{font_samples_4.pdf}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage%
+{\special{pdf: outline 1 << /Title (Bibliography)/Dest [@thispage /FitH @ypos ]  >> }}%
+\headline{}%
+\centerline{\textcolor{sectioncolor}{\sanssixteenbf Bibliography}}%
+{\definexref{Bibliography}{Bibliography}{}}%
+\writetocentry{section}{\refs{Bibliography}}%
+\bigskip\bigskip%
+
+
+
+\bibliographystyle{ieeetran}
+\bibliography{c:/bib}
+\footline{\cl{\folio}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\special{pdf: docinfo << /Author (Amit Raj Dhawan)
+/Title (Macros to use OpenType and TrueType fonts with XeTeX)
+/Creator(XeTeX: Based on TeX---The Genius of Knuth)
+/Subject(Using system-installed fonts with XeTeX)
+/Keywords(TeX, XeTeX, fonts, math font, text, maths font, font-change, font-change-xetex, OpenType, TrueType, hanging punctuation, Unicode characters, macro, macros)>>}
+
+\special{pdf: docview <</PageMode /UseOutlines>> }
+
+
+
+
+\bye

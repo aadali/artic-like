@@ -1,0 +1,21 @@
+name mptrees
+category Package
+revision 60929
+shortdesc Probability trees with MetaPost
+longdesc This package provides MetaPost tools for drawing simple
+longdesc probability trees. One command and several parameters to
+longdesc control the output are provided.
+containersize 4288
+containerchecksum 8eb172f4051125fbe7d812520455e3a37888508754abe8abd539e84a1105575c32c2dbc850dc562a2dfab34811614e527cfa089c9de738b6ac7211f923c61929
+doccontainersize 114080
+doccontainerchecksum 2e7c3837ce93b67bd1604451792cc54842bec27b3ebb6c56b2a9b9d702c3fa999ecb3a2836076c39adb30dabf833a507974e9dfaf19c9166bbcd3428487cf0a8
+docfiles size=50
+ texmf-dist/doc/metapost/mptrees/README.md details="Readme"
+ texmf-dist/doc/metapost/mptrees/mptrees-doc.pdf details="Package documentation"
+ texmf-dist/doc/metapost/mptrees/mptrees-doc.tex
+runfiles size=4
+ texmf-dist/metapost/mptrees/mptrees.mp
+catalogue-ctan /graphics/metapost/contrib/macros/mptrees
+catalogue-license lppl1.3
+catalogue-topics diagram-maths maths probability graphics-mpost
+catalogue-version 21.11

@@ -1,0 +1,21 @@
+mparrows.mp
+
+This MetaPost module contains macros for changing the look of arrows
+in MetaPost.
+
+The full documentation is in mparrows.pdf
+
+All the files in the arrows bundle are copyright 2016 Palle Jorgensen
+The file mparrows.mp is public domain. The other files are released
+under Gnu GPL (see LICENSE for details)
+
+Files in the bundle:
+mparrowsexamples.mp	Source of the examples in the manual
+mparrows.pdf		Manual
+mparrows.tex		Source of the manual
+mparrows.mp		The MetaPost module
+LICENSE			License file
+README			This file
+
+Palle Jorgensen
+hamselv(a)pallej.dk

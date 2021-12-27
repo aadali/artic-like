@@ -1,0 +1,29 @@
+name font-change-xetex
+category Package
+revision 40404
+shortdesc Macros to change text and mathematics fonts in plain XeTeX
+longdesc This package consists of macros that can be used to typeset
+longdesc "plain" XeTeX documents using any OpenType or TrueType font
+longdesc installed on the computer system. The macros allow the user to
+longdesc change the text mode fonts and some math mode fonts. For any
+longdesc declared font family, various font style, weight, and size
+longdesc variants like bold, italics, small caps, etc., are available
+longdesc through standard and custom TeX control statements. Using the
+longdesc optional argument of the macros, the available XeTeX font
+longdesc features and OpenType tags can be accessed. Other features of
+longdesc the package include activating and deactivating hanging
+longdesc punctuation, and support for special Unicode characters.
+containersize 6072
+containerchecksum 17de7c596a774c5c2e115704c2c57385f3fa90bf2dd49362547873453c27700537ab7f1e8a143c2ed49c90efe6aec234d3cf61643228bcba5b51c5ddcbb8bba9
+doccontainersize 558812
+doccontainerchecksum 138375750a4d493774cbd558c6aa910d04bf3f32337f773438d6bb31e16df3d96af3a6ea12d4940c785c04f98130977750058f7c0ef2425e0d8147b4ab882a64
+docfiles size=158
+ texmf-dist/doc/xetex/font-change-xetex/README.txt details="Readme"
+ texmf-dist/doc/xetex/font-change-xetex/font-change-xetex.pdf details="Package documentation"
+ texmf-dist/doc/xetex/font-change-xetex/font-change-xetex.tex
+runfiles size=13
+ texmf-dist/tex/xetex/font-change-xetex/font-change-xetex.tex
+catalogue-ctan /macros/xetex/plain/font-change-xetex
+catalogue-license other-free
+catalogue-topics font-supp plain-ext xetex
+catalogue-version 2016.1

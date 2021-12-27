@@ -1,0 +1,93 @@
+%%
+%% This is file `lwarp-footnote.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lwarp.dtx  (with options: `footnote')
+%% This is a generated file.
+%% Copyright 2016-2020 Brian Dunn
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+\long\def\@makefntext#1{\textsuperscript{\@thefnmark}~#1}
+
+\LWR@ProvidesPackagePass{footnote}[1997/01/28]
+
+\long\def\@makefntext#1{\textsuperscript{\@thefnmark}~{#1}}
+
+\def\spewnotes{%
+  \endgroup%
+  \if@savingnotes\else\ifvoid\fn@notes\else\begingroup%
+    \let\@makefntext\@empty%
+    \let\@finalstrut\@gobble%
+    \let\rule\@gobbletwo%
+    \booltrue{LWR@spewingnotes}%        lwarp
+    \@footnotetext{\unvbox\fn@notes}%
+  \endgroup\fi\fi%
+}
+\let\endsavenotes\spewnotes
+
+\def\fn@fntext#1{%
+  \ifx\ifmeasuring@\@@undefined%
+    \expandafter\@secondoftwo\else\expandafter\@iden%
+  \fi%
+  {\ifmeasuring@\expandafter\@gobble\else\expandafter\@iden\fi}%
+  {%
+    \global\setbox\fn@notes\vbox{%
+      \unvbox\fn@notes%
+      \LWR@htmltagc{\LWR@tagregularparagraph}%      lwarp
+      \LWR@orignewline%                             lwarp
+      \fn@startnote%
+      \@makefntext{%
+        \rule\z@\footnotesep%
+        \ignorespaces%
+        #1%
+        \@finalstrut\strutbox%
+      }%
+      \fn@endnote%
+    }%
+  }%
+}
+\def\fn@startnote{%
+  \protected@edef\@currentlabel{\csname p@\@mpfn\endcsname\@thefnmark}%
+}
+
+\def\fn@endnote{%
+    \LWR@origtilde\LWR@orignewline%
+    \LWR@htmltagc{/\LWR@tagregularparagraph}\LWR@orignewline%
+    \LWR@origtilde\LWR@orignewline%
+}
+\def\fn@startfntext{%
+  \setbox\z@\vbox\bgroup%
+    \LWR@htmltagc{\LWR@tagregularparagraph}%    lwarp
+    \LWR@orignewline%                           lwarp
+    \fn@startnote%
+    \fn@prefntext% Req'd for numbering.
+    \ignorespaces%
+}
+
+\def\fn@endfntext{%
+    \fn@postfntext%
+    \LWR@origtilde\LWR@orignewline%
+    \LWR@htmltagc{/\LWR@tagregularparagraph}%
+    \LWR@orignewline%
+  \egroup%
+  \begingroup%
+    \let\@makefntext\@empty%
+    \let\@finalstrut\@gobble%
+    \LetLtxMacro\rule\@gobbletwo% *8* also the optional argument?
+    \booltrue{LWR@spewingnotes}%    lwarp
+    \@footnotetext{\unvbox\z@}%
+  \endgroup%
+}
+\let\endfootnote\fn@endfntext
+\let\endfootnotetext\endfootnote
+\endinput
+%%
+%% End of file `lwarp-footnote.sty'.

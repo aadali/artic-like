@@ -1,0 +1,282 @@
+%% Copyright 2016, Palle Jorgensen, hamselv(at)pallej.dk
+%
+% This file is part of the mparrows MetaPost module.
+% 
+% mparrows is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% mparrows is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with mparrows. If not, see <http://www.gnu.org/licenses/>.
+\pdfoutput1 %
+\documentclass[paper=a4,11pt,UKenglish,DIV=calc,BCOR=0mm,parskip=half,fleqn]{scrartcl}
+\usepackage[T1]{fontenc} %
+\usepackage[utf8]{inputenc} %
+\usepackage{babel} %
+\usepackage{tgpagella} %
+\usepackage{listings} %
+\usepackage{calc} %
+\usepackage[scaled]{luximono} %
+\usepackage{textcomp} %
+\renewcommand*\sfdefault{uop} %
+\linespread{1.045} %
+\usepackage{graphicx} %
+\usepackage{mflogo} %
+\usepackage{varioref} %
+\usepackage[colorlinks]{hyperref} %
+\usepackage[final]{microtype} %
+\setcounter{secnumdepth}{2} %
+\setcounter{tocdepth}{1} %
+\setkomafont{captionlabel}{\usekomafont{sectioning}} %
+\setkomafont{caption}{\small} %
+\author{Palle J\o rgensen} %
+\title{The \texttt{mparrows} \MP\ module\quad \raisebox{-1ex}{\includegraphics[scale=.5]{mparrowsexamples2.mps}}} %
+\hypersetup{pdftitle={The Mparrows MetaPost module}, pdfauthor={Palle Jorgensen}}
+\lstset{language=metapost,breaklines,morekeywords={setarrows,barbedarrowindent}}
+\newenvironment{example}[1]{%
+  \def\myfile{#1}
+  \begin{tabular}{@{}p{.67\linewidth-\tabcolsep}p{.33\linewidth}@{}}
+    \begin{minipage}[c]{\linewidth}}{%
+    \end{minipage}
+    &\parbox[c]{\linewidth}{\centering\includegraphics{\myfile}}
+  \end{tabular}}
+\protected\def\barbedarrowindent{\lstinline{barbedarrowindent}}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\label{sec:introduction}
+
+This MetaPost module provides some different types of arrow heads for
+use with the \lstinline{drawarrow} and \lstinline{drawdblarrow}
+commands.
+
+\section{Usage}
+\label{sec:usage}
+
+To load the mparrows module put the following line into the start of
+your MetaPost file:
+\begin{lstlisting}
+input mparrows;
+\end{lstlisting}
+
+\section{The new arrow types}
+\label{sec:new-arrow-types}
+
+The new arrows are defined with the same parameters as the original
+MetaPost arrows; \lstinline{ahlength} and \lstinline{ahangle}.
+
+\subsection{The original arrows of \MP}
+\label{sec:original-arrows-of-mp}
+
+\begin{example}{mparrowsexamples0.mps}
+  To the right the original arrows of MetaPost are shown.
+
+  They are shown here mostly for comparison. The picture is as most of
+  the other pictures scaled by five.
+
+  To use the original arrows type
+\begin{lstlisting}
+setarrows(orig);
+\end{lstlisting}
+\end{example}
+
+\subsection{The default arrows of the \texttt{mparrows} module}
+\label{sec:stand-arrows-mparrows}
+
+\begin{example}{mparrowsexamples1.mps}
+  The default arrow of the \texttt{mparrows} module look similar to the
+  original arrows of MetaPost.
+
+  However there is a little difference. See
+  section~\vref{sec:diff-betw-orig}.
+
+  To use the default arrows type
+\begin{lstlisting}
+setarrows(default);
+\end{lstlisting}
+  or do nothing -- it's default.
+\end{example}
+
+\subsection{Unfilled arrow heads}
+\label{sec:unfilled-arrow-heads}
+
+\begin{example}{mparrowsexamples2.mps}
+  Arrows just with the same outline as the default arrows but not
+  filled.
+
+  To use the unfilled default arrows type
+\begin{lstlisting}
+setarrows(defaultunfilled);
+\end{lstlisting}
+\end{example}
+
+\subsection{Sharp arrow heads}
+\label{sec:sharp-arrow-heads}
+
+\begin{example}{mparrowsexamples3.mps}
+  Arrows just with the same path for the arrow head as the default
+  arrows but only filled -- the outline is not drawn.
+
+  The tip of the arrow is exactly at the end of the path.
+
+  To use the sharp default arrows type
+\begin{lstlisting}
+setarrows(defaultsharp);
+\end{lstlisting}
+\end{example}
+
+\subsection{Barbed arrows}
+\label{sec:barbed-arrows-1}
+
+
+\begin{example}{mparrowsexamples4.mps}
+  With the same `outer' lines as the default arrow but the back of the
+  arrow head has barbs.
+
+  To use the barbed arrows type
+\begin{lstlisting}
+setarrows(barbed);
+\end{lstlisting}
+\end{example}
+
+\subsection{Unfilled barbed arrows}
+\label{sec:unfill-barb-arrows}
+
+\begin{example}{mparrowsexamples5.mps}
+  The barbed arrow unfilled.
+
+  To use the unfilled barbed arrows type
+\begin{lstlisting}
+setarrows(barbedunfilled);
+\end{lstlisting}
+\end{example}
+
+\subsection{Sharp barbed arrows}
+\label{sec:sharp-barbed-arrows}
+
+\begin{example}{mparrowsexamples6.mps}
+  The barbed arrow sharp.
+
+  To use the sharp barbed arrows type
+\begin{lstlisting}
+setarrows(barbedsharp);
+\end{lstlisting}
+\end{example}
+
+\subsection{Open arrowheads}
+\label{sec:open-arrowheads}
+
+\begin{example}{mparrowsexamples7.mps}
+  With the same `outer' lines as the default arrow but the back of the
+  arrow head is not drawn.
+
+  To use the open arrows type
+\begin{lstlisting}
+setarrows(open);
+\end{lstlisting}
+\end{example}
+
+\section{The \texttt{barbed} arrows}
+\label{sec:barbed-arrows}
+
+\begin{example}{mparrowsexamples33.mps}
+  The \texttt{barbed} arrows are configured via the
+  \barbedarrowindent\ value. \barbedarrowindent\ is the ratio of the
+  inner diameter of the barbed arrows (\textcolor{green}{green}
+  circle) to the outer diameter of the barbed arrows
+  (\textcolor{red}{red} circle).
+\end{example}
+%\includegraphics{mparrowsexamples33.mps}
+
+The \barbedarrowindent\ value is set with
+\begin{lstlisting}
+barbedarrowindent:=.6;
+\end{lstlisting}
+
+Below arrows with different values of \barbedarrowindent\ are displayed.
+\begin{description}
+\item[\includegraphics{mparrowsexamples10.mps}] %0
+%\item[\includegraphics{mparrowsexamples11.mps}] %0.2
+\item[\includegraphics{mparrowsexamples12.mps}] %0.4
+%\item[\includegraphics{mparrowsexamples13.mps}] %0.6
+\item[\includegraphics{mparrowsexamples14.mps}] %0.8
+%\item[\includegraphics{mparrowsexamples15.mps}] %1
+\item[\includegraphics{mparrowsexamples16.mps}] %1.2
+%\item[\includegraphics{mparrowsexamples17.mps}] %1.4
+\item[\includegraphics{mparrowsexamples18.mps}] %1.6
+%\item[\includegraphics{mparrowsexamples19.mps}] %1.8
+\item[\includegraphics{mparrowsexamples20.mps}] %2.0
+\end{description}
+
+\subsection{Negative values}
+\label{sec:negative-values}
+
+As the arrows are defined using circles negative values of
+\barbedarrowindent\ gives the same as the positives.
+\begin{description}
+\item[\includegraphics{mparrowsexamples13.mps}]
+\item[\includegraphics{mparrowsexamples30.mps}]
+\end{description}
+
+\section{The difference between the original and the default arrows}
+\label{sec:diff-betw-orig}
+
+The only (and invisible) difference between the original arrows of
+MetaPost and the default arrows of the \texttt{mparrows} module is how
+the path is drawn:
+
+\begin{example}{mparrowsexamples31.mps}
+  In the original definition the path is drawn as normal.
+\end{example}
+
+\begin{example}{mparrowsexamples32.mps}
+  In the \texttt{mparrows} default the path is cut after the arrow
+  head. This allows for making the arrow heads unfilled (see
+  section~\ref{sec:unfilled-arrow-heads}) or sharp (see
+  section~\ref{sec:sharp-arrow-heads}).
+\end{example}
+
+\clearpage
+% \section{Source of \texttt{mparrows.mp}}
+% \label{sec:source-texttt}
+
+% \lstinputlisting{mparrows.mp}
+% \clearpage
+
+\section{Copyright and license}
+\label{sec:license}
+
+Copyright 2016, Palle Jørgensen, hamselv(at)pallej.dk
+
+This file is part of the mparrows MetaPost module.
+
+mparrows is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+mparrows is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with mparrows. If not, see <http://www.gnu.org/licenses/>.
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

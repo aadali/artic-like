@@ -1,0 +1,129 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This file is part of the MPATTERN package
+%
+% Author: Piotr Bolek
+% wersja: 0.5 (Jun 25, 2001)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Description
+===========
+
+Package MPATTERN gives ability to define and use patterns in
+MetaPost. It uses Pattern Color Space available in PostScript Level 2.
+
+Package contains:
+- mpattern.mp: MetaPost macros for defining and using patterns.
+- README: short description in English.
+- README.PL: short description in Polish.
+- test.mp, test.tex, test.ps: usage examples.
+
+Using package
+=============
+
+Include the file mpattern.mp with the input command at the beginning
+of the source file and process the source file with the standard mpost
+program.
+
+User Interface
+==============
+
+Defining pattern
+----------------
+
+Patterns are defined using the following construct:
+
+beginpattern(<name_of_pattern>);
+...
+endpattern;
+
+Parameter <name_of_pattern> is the name by which the pattern is
+identified. This name can contain letters and underscore characters
+"_" but not digits. This name should NOT be given in quotes.
+
+One or more of the following macros can be invoked in any place
+inside pattern definition (between beginpattern and endpattern):
+- patternbbox(<pair>,<pair>)
+- patternbbox((<numeric>,<numeric>,<numeric>,<numeric>) 
+  Explicit coordinates of bounding box of pattern cell
+
+- patternxstep(<numeric>)
+- patternystep(<numeric>)
+- patternstep(<numeric>,<numeric>)
+- patternstep(<pair>)
+  Pattern spacing
+
+- patterntransform(<transform>)
+  Transformation of pattern shape
+
+- patterncolor(0<= <numeric> <= 1)
+  Explicit color replaced later by pattern
+
+Each pattern is temporarily written as picture with big number
+(default is 999) but when user will use this number for his own
+picture then for temporal storing of next patterns the greatest free
+number less then 999 will be used.
+
+Using patterns
+--------------
+
+Already defined pattern can be used for filling objects with
+two argument withpattern macro. It is used as follows:
+
+<path> withpattern <name_of_pattern>;
+
+where <path> is any valid expression defining closed path and
+<name_of_pattern> is the name given in definition of the pattern.
+
+Example
+-------
+
+Here is code to draw two circles filled with different checker
+patterns.
+
+input mpattern;
+
+beginpattern(checker);
+ d:=4mm;
+ fill unitsquare scaled d;
+ fill unitsquare scaled d shifted (d,d);
+ patternbbox(0,0,2d,2d);
+endpattern;
+
+beginpattern(rotated_checker);
+ fill unitsquare scaled 4mm rotated 45 withcolor .7white;
+endpattern;
+
+beginfig(11);
+ path p;
+ z1=(1cm,1cm);
+ p=fullcircle scaled 3cm;
+ fill p withpattern checker;
+ unfill p shifted z1;
+ fill p shifted z1 withpattern rotated_checker;
+endfig;
+
+Distribution of the package
+===========================
+
+The package MPATTERN belongs to the public domain. You can use any
+actuall version of GPL Licence if you want to modify or redistribute
+this package.
+
+Problems
+========
+
+06-2001: Filling text with patterns can make problems. The current
+	 solution is unstable.
+
+Changes
+=======
+
+06-2001: By the inspiration by the Piotr Strzelczyk's tutorial at the
+	 BachoTeX'2001 conference the necesity of Perl postprocessing
+	 is eliminated. The substitution of colors to patterns is now
+	 performed with help of dictionaries at the PostScript level.
+
+Contact with author
+=================
+
+e-mail: P.Bolek@gust.org.pl

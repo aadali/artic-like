@@ -1,0 +1,28 @@
+name hologo
+category Package
+revision 61078
+shortdesc A collection of logos with bookmark support
+longdesc The package defines a single command \hologo, whose argument is
+longdesc the usual case-confused ASCII version of the logo. The command
+longdesc is bookmark-enabled, so that every logo becomes available in
+longdesc bookmarks without further work.
+containersize 9916
+containerchecksum e825ae9d985c17cba001d2f0b670743b7ade2d32b67b165ed6529b38d0f7f687d6b4eff5cfdadb389c55285f10a37e1038104b7cc9502423fcc98da0a4fa7a6a
+doccontainersize 578024
+doccontainerchecksum 65b67851411c17105f12df60903550be206bc070da37e3e1cfc20fdee50bb0e84bd5ebe293617652efdedcd4b9ef6f86760502bb4edf9d470ff64285136df4c5
+docfiles size=150
+ texmf-dist/doc/generic/hologo/README.md details="Readme"
+ texmf-dist/doc/generic/hologo/hologo-example.tex
+ texmf-dist/doc/generic/hologo/hologo.pdf details="Package documentation"
+srccontainersize 19880
+srccontainerchecksum c9a8e2a3b4f35dc2da6339f9f2ba8e612398c7fe92455f021b5c006db34ce6e7e7a7a3cba08e5407516b8c171deccb742ecde1de0ba4e341392ded663ca280e2
+srcfiles size=29
+ texmf-dist/source/generic/hologo/hologo.dtx
+runfiles size=14
+ texmf-dist/tex/generic/hologo/hologo.sty
+catalogue-contact-bugs https://github.com/ho-tex/hologo/issues
+catalogue-contact-repository https://github.com/ho-tex/hologo
+catalogue-ctan /macros/latex/contrib/hologo
+catalogue-license lppl1.3c
+catalogue-topics logo
+catalogue-version 1.15

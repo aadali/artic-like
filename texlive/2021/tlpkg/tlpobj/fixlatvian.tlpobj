@@ -1,0 +1,27 @@
+name fixlatvian
+category Package
+revision 21631
+shortdesc Improve Latvian language support in XeLaTeX
+longdesc The package offers improvement of the Latvian language support
+longdesc in polyglossia, in particular in the area of the standard
+longdesc classes.
+containersize 2952
+containerchecksum 48d39745498c187d23c62191d7da6341ecc13d6c43ac97deebf453046e78a26d221b5c7b7ed22aa8909476a754e877de26c20391bccb5cddb2db1fa7b238d643
+doccontainersize 113476
+doccontainerchecksum 07dc4fa87b8564c3ff3144936ae4374e0bc7cf37a5a3e4b5d0724681859a41d30d714e96742253bb9a269116dd32d2ab0c1e5e1965242e88ea12fdcd224ace31
+docfiles size=43
+ texmf-dist/doc/xelatex/fixlatvian/Makefile
+ texmf-dist/doc/xelatex/fixlatvian/README details="Readme"
+ texmf-dist/doc/xelatex/fixlatvian/fixlatvian.pdf details="Package documentation (Latvian)" language="lv"
+srccontainersize 9240
+srccontainerchecksum 04903bf5ba774034c0b3dbec7c7d37ca5a802b3d104670d259667f8a965da26e7e954ce9272e14b6bab058a7e6a4b8ad42b710e22f85f2d0320a7827b2c7e173
+srcfiles size=8
+ texmf-dist/source/xelatex/fixlatvian/fixlatvian.dtx
+ texmf-dist/source/xelatex/fixlatvian/fixlatvian.ins
+runfiles size=3
+ texmf-dist/makeindex/fixlatvian/lv.ist
+ texmf-dist/tex/xelatex/fixlatvian/fixlatvian.sty
+catalogue-ctan /macros/xetex/latex/fixlatvian
+catalogue-license lppl1.3
+catalogue-topics multilingual-addon
+catalogue-version 1a

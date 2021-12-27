@@ -1,0 +1,329 @@
+\documentclass[colorhighlight]{bidipresentation}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\definergbcolor{textcolor}{000000}%
+\definergbcolor{inactivecolor}{B2B2B1}%
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\setlatintextfont{Times New Roman}
+\begin{document}
+\begin{rawslide}
+\tableofcontents
+\end{rawslide}
+\begin{rawslide}
+\section{لیست‌ها}
+\begin{flipitem}
+\item 
+این متنی کمی
+\item
+این متن طولانی است که بیشتر از یک سطر باشد تا ببینم مشکلی با رنگ وجود دارد یا خیر و ادامه متن که ادامه پیدا می‌کند در سطر بعدی
+\item سه
+\end{flipitem}
+\begin{flipenum}
+\item 
+این متنی کمی
+\item
+این متن طولانی است که بیشتر از یک سطر باشد تا ببینم مشکلی با رنگ وجود دارد یا خیر و ادامه متن که ادامه پیدا می‌کند در سطر بعدی
+\item سه
+\end{flipenum}
+\end{rawslide}
+\begin{rawslide}
+\section{جدول}
+  \newcommand{\tabend}{\\\hline}%
+
+  \liststepwise{%
+    \begin{center}
+      \step{%
+        \begin{tabular}{|r|r|r|}
+          \hline
+        1 & 2 & 3%
+          \step{\\\hline 4\renewcommand{\tabend}{\\\cline{1-1}}}%
+          \step{& 5\renewcommand{\tabend}{\\\cline{1-2}}}%
+          \step{& 6\renewcommand{\tabend}{\\\hline}}%
+          \step
+          {%
+            \\\hline
+                                %
+                                % Again, \step's are nested inside each other...
+                                %
+            \step{7}&\step{8}&\step{9}%
+            }%
+          \step{\\\hline اما\renewcommand{\tabend}{\\\cline{1-1}}}%
+          \step{&مواظب\renewcommand{\tabend}{\\\cline{1-2}}}%
+          \step{& متن بلند باشید!\renewcommand{\tabend}{\\\hline}}%
+          \tabend
+        \end{tabular}%
+        }%
+    \end{center}%
+    }%
+\end{rawslide}
+\begin{rawslide}
+\section{فرمول چندخطی}
+\liststepwise%
+{%
+  %
+  % This is just for compressing the equations so they can be squeezed on one slide.
+  %
+  \fontsize{7.8pt}{9pt}\selectfont
+  \renewcommand{\arraystretch}{0}%
+  \setlength{\arraycolsep}{0pt}%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  %
+  % \highlightboxed will be used for underlaying some formulas with color. To minimize overlap, the width of the outer
+  % frame is reduced.
+  \setlength{\highlightboxsep}{1pt}%
+  %
+  \begin{align*}
+    \lefteqn
+    {%
+      \min
+      \left(
+        % The nested braces are filled `from outer to inner'. This means nesting a lot of steps inside each other...
+        % The outermost brace is displayed from the outset.
+        % The first step (which follows right here) displays the next inner brace (the first argument of \min), filled
+        % with an almost `empty' array (apart from one comma and some dots).
+        % \bstep is used to get appropriate white space when the step is not yet active.
+        \bstep
+        {\max
+          \left(
+            \begin{array}{l}
+              % The next two steps fill in the lines of the array.
+              \bstep{\min\left(F'(x),\min\left(F_1(x),G_1(y)\right)\right)},\\[-2ex]
+              \vdots\\
+              \bstep{\min\left(F'(x),\min\left(F_n(x),G_n(y)\right)\right)}
+            \end{array}
+          \right)
+          },
+        % After the first brace is filled, the next step provides the second argument of \min.
+        \bstep{\min\left(G_i(y),H_i(z)\right)}
+      \right)
+      }
+    &
+    % The next couple of steps will create the remaining lines of the aligned equations. These need to be
+    % insubstantial (as is the default for \liststepwise), because & can't go in a box.
+    % As a consequence, the horizontal alignment cannot kick in until the last step is performed. This would make the
+    % alignment `flicker' sidewise.
+    % So we have to bite the bullet and duplicate the widest entry here (invisibly), so that the horizontal alignment
+    % is constant during all steps. *sigh*
+    \phantom
+    {%
+      {}=
+      \min
+      \left(
+        F'(x),
+        \min
+        \left(
+          \max
+          \left(
+            \begin{array}{l}
+              \min\left(F_1(x),\min\left(G_1(y),G_i(y)\right)\right),\\[-1.5ex]
+              \vdots\\[-.5ex]
+              \min\left(F_n(x),\min\left(G_n(y),G_i(y)\right)\right)
+            \end{array}
+          \right),
+          H_i(z)
+        \right)
+      \right)
+      }
+    % The next step displays two lines at a time, but incompletely, i.e. some parts are missing (which are inside
+    % nested calls of \bstep).
+    % This way, it is demonstrated how the arguments of the nested \min's are reordered.
+    \step
+    {%
+      \\
+      &=
+      \max
+      \left(
+        % The macro \activatestep is used by \stepwise to `wrap' the argument of a \bstep command at the _first_ time
+        % it appears.
+        % Usually, it does nothing. Now, we redefine it to highlight its background, so it is easier to spot the
+        % places where the additional arguments were inserted.
+        \let\activatestep\highlightboxed
+        \begin{array}{l}
+          \min
+          \left(
+            % The inner \bstep's display the missing arguments, which are completely identical in both lines.
+            % It is intended that all the missing arguments appear at the same time, so \rebstep is used for the
+            % remaining arguments which have been left out.
+            \min\left(\bstep{F'(x)},\min\left(\rebstep{F_1(x),G_1(y)}\right)\right),\min\left(G_i(y),H_i(z)\right)
+          \right),\\[-2ex]
+          \vdots\\[-1ex]
+          \min
+          \left(
+            \min\left(\rebstep{F'(x)},\min\left(\rebstep{F_n(x),G_n(y)}\right)\right),\min\left(G_i(y),H_i(z)\right)
+          \right)
+        \end{array}
+      \right)
+      \\
+      &=
+      \max
+      \left(
+        \let\activatestep\highlightboxed
+        \begin{array}{l}
+          \min
+          \left(
+            \min\left(
+              % Here are the remaining arguments of \min which are all to be displayed in one step (together with
+              % those from the previous line).
+              \rebstep{F'(x)},\min\left(\rebstep{F_1(x)},\min\left(\rebstep{G_1(y)},G_i(y)\right)\right)
+            \right),
+            H_i(z)
+          \right),\\[-2.5ex]
+          \vdots\\[-1.5ex]
+          \min
+          \left(
+            \min\left(
+              \rebstep{F'(x)},\min\left(\rebstep{F_n(x)},\min\left(\rebstep{G_n(y)},G_i(y)\right)\right)
+            \right),
+            H_i(z)
+          \right)
+        \end{array}
+      \right)
+      }
+    \step
+    {%
+      \\
+      &=
+      \min
+      \left(
+        F'(x),
+        \min
+        \left(
+          \max
+          \left(
+            \begin{array}{l}
+              \min\left(F_1(x),\min\left(G_1(y),G_i(y)\right)\right),\\[-1.5ex]
+              \vdots\\[-.5ex]
+              \min\left(F_n(x),\min\left(G_n(y),G_i(y)\right)\right)
+            \end{array}
+          \right),
+          H_i(z)
+        \right)
+      \right)
+      }
+  \end{align*}
+  }%
+\end{rawslide}
+\begin{rawslide}
+\section{شکل}
+\begin{LTR}
+\begin{center}%
+  \stepwise
+  {%
+    \setlength{\unitlength}{.95cm}%
+    \delimitershortfall-1sp% Just for the nested braces
+    \begin{picture}(14,2)
+      \put(0,1){\vector(1,0){1}}
+      \put(0.5,0.5){\makebox(0,0){\small $x(t)$}}
+      \put(13,1){\vector(1,0){1}}
+      \put(13.5,0.5){\makebox(0,0){\small $y(t)$}}
+      \step
+      {
+        \put(1,1){\line(3,2){1.5}}
+        \put(1,1){\line(3,-2){1.5}}
+        \put(2.5,0){\line(0,1){2}}
+        \put(2,1){\makebox(0,0){\large $\varphi$}}
+        }
+      \step
+      {
+        \put(2.5,1){\vector(1,0){3.5}}
+        \put(4.25,0.5){\makebox(0,0){\small $F_t = \varphi\left(x(t)\right)$}}
+        }
+      \step
+      {
+        \put(6,0){\framebox(2,2){\large $\Phi$}}
+        }
+      \step
+      {
+        \put(8,1){\vector(1,0){3.5}}
+        %
+        % Here, we find another nested use of \step inside \step.
+        % \bstep is a variant of \step which _always_ puts its argument into a box for leaving the correct amount of
+        % white space. We cannot use \parstepwise here because \put can't go into a box. Hence, just using \step for
+        % building the nested formula on the next line would give the wrong size for the nested braces.
+        %
+        \put(9.75,0.5){\makebox(0,0){\small $G_t = \Phi\left(\bstep{\varphi\left(\bstep{x(t)}\right)}\right)$}}
+        }
+      \step
+      {
+        \put(13,1){\line(-3,2){1.5}}
+        \put(13,1){\line(-3,-2){1.5}}
+        \put(11.5,0){\line(0,1){2}}
+        \put(12,1){\makebox(0,0){\large $\delta$}}
+        }
+    \end{picture}%
+    }%
+\end{center}%
+\end{LTR}
+\end{rawslide}
+\begin{rawslide}
+\section{پر کردن جای خالی}
+\newcommand{\placeholder}[1]{\leavevmode\phantom{#1}\llap{\rule{\widthof{\phantom{#1}}}{\fboxrule}}}%
+  %
+  % We use the custom command \parstepwise which not only wraps the whole argument of \stepwise into a minipage (because
+  % otherwise vertical spacing goes haywire, don't ask me why), but also gives substance to steps.
+  %
+  % All variants of \stepwise take an optional argument the contents of which are executed inside a group before the
+  % inner loop of starts. It can be used to set parameters locally.
+  % Here, we redefine \activatestep (which has been explained in the equation example) to highlight the first
+  % appearance of any word.
+  % \hidestepcontents is used as a `wrapper' for those arguments of \step which should not appear yet. It either
+  % displays nothing (this is the default for \stepwise and \liststepwise) or puts its argument into a \phantom
+  % (the default for \parstepwise); this behaviour is also toggled by \boxedsteps and \nonboxedsteps.
+  % Here, we redefine it to use our selfdefined \placeholder to mark `missing' words.
+  %
+  \parstepwise[\let\hidestepcontents=\placeholder\let\activatestep=\highlightboxed]%
+  {%
+    \begin{quote}
+      \Huge ما می‌تونیم \step{جای خالی} را \step{پر کنیم}
+      %
+      % \step takes an optional argument with which it can be specified _when_ its argument is to appear. This is
+      % expressed in \ifthenelse syntax (see the documentation of the ifthen package).
+      % Here, we refer to the counter step which is advanced by \stepwise and contains the number of the current step.
+      % This way, steps can be made to appear in any order.
+      \step[\value{step}=5]{متن} که در  ایجا
+      \step[\value{step}=4]{پر شده} و      \step[\value{step}=3]{\textbf{هر}} ترتیبی داره!
+    \end{quote}
+    }%
+\end{rawslide}
+\begin{rawslide}
+\section{نوشتن متن در جهت برعکس}
+  \newcounter{reversestepno}%
+  \newcommand{\backstep}{\step(\setcounter{reversestepno}{\value{totalsteps}-\value{stepcommand}+1}\ifthenelse{\value{step}=\value{reversestepno}})}%
+  %
+  % We use the custom command \parstepwise which not only wraps the whole argument of \stepwise into a minipage (because
+  % otherwise vertical spacing goes haywire, don't ask me why), but also gives substance to steps.
+  %
+  % If the following \stepwise command would only contain the calls to \backstep, everything would be fine.
+  % But we _had_ to add something else....
+  % In the second part of this application of \stepwise, several steps are executed simultaneously with those executed
+  % backwards in the first part. This means the value of the counter totalsteps is 14, i.e. the calls to \backstep
+  % correspond to steps 8...14. To remedy this, we decree that the first step performed shall be number 7, by setting
+  % the counter firststep accordingly in the optional argument of \stepwise.
+  %
+  \parstepwise[\setcounter{firststep}{\value{totalsteps}/2+\value{firststep}}]
+  {%
+    \begin{quote}
+      \Huge
+      \backstep{آیا} \backstep{الان} \backstep{می‌توان}
+      \backstep{متن را} \backstep{در جهت} \backstep{برعکس}
+      \backstep{نوشت\,!}
+
+      \bigskip
+
+      % By determining explicitly the times at which the following steps are executed, we make them appear
+      % simultaneously with the preceding flock of \backsteps. As we have set the counter firststep to 7, we start
+      % counting with 8.
+      %
+      \step[\value{step}=8]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=9]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=10]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=11]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=12]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=13]{\includegraphics[width=2cm]{fig-1}}
+      \step[\value{step}=14]{\includegraphics[width=2cm]{fig-1}}%
+    \end{quote}
+    }%
+\end{rawslide}
+\end{document}

@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage{graphicx}
+\title{The \texttt{threeddice} package}
+\author{Dan Luecking}
+\date{2010/11/30}
+\begin{document}
+
+\catcode`_=12
+{\catcode`\_=\active \global\let_\sb}
+
+\maketitle
+\section{Introduction}
+
+Running \texttt{mpost} on \texttt{threeddice.mp} produces 26 figure files.
+Six of them are are \texttt{die3d-1.mps}%
+    \footnote{If your \texttt{mpost} version is less that 0.9, you will 
+    get figure files with names like \texttt{threeddice.1}. You should 
+    update your \TeX{} system.} 
+through \texttt{die3d-6.mps}. These are pictures of a single die face 
+with the number of dots indicated by the numerical part. Three of these 
+would look the same if rotated by multiples of $90$ degrees. The other 
+three could look different. It is up to the users to perform this 
+rotation if they want a different view.
+
+The twelve files with 2-digit numerical part are 3D pictures of dice with 
+two faces showing, as if your were looking directly at a horizontal 
+edge. You will have to rotate it $\pm90$ degrees if you want the edge to be 
+vertical, or $180$ degrees if you prefer the positions of the top and 
+front face to be exchanged.
+
+The eight files with 3-digit numerical suffix are 3D pictures of dice with 
+three faces showing, as if your were looking directly at one of the 
+corners. They show a top face and a left and right face flanking a 
+vertical edge. You can get 16 other views by rotating them $\pm120$ 
+degrees. These rotations put one of the side faces on top. 
+
+\section{Modifications}
+
+These figures were taken from an actual right handed die, and are all
+the permissable views of such a die, apart from size of dots and the
+actual orientation of the patterns of dots. As near as I could determine
+from internet searches, there are no official standards for the 
+following. 
+\begin{itemize}
+  \item The 2-spot face has dots in opposite corners, but which two 
+        corners? On my die, if the 1-spot is on top, the 2-spot to the 
+        left and the 3-spot to the right (figure 
+        \texttt{die3d-123.mps}), the dots on the 2-spot face are in 
+        upper left and lower right. It seems it could just as well have 
+        been the other two corners. 
+
+  \item Similar question for the 3-spot face: three dots in a diagonal 
+        between opposite corners, but which two corners? In the previous
+        example (figure \texttt{die3d-123.mps}), the diagonal is from 
+        lower left to upper right.
+
+  \item The 6-spot face has two lines of three, parallel to two edges, 
+        but which two edges? In \texttt{die3d-246.mps} the lines of dots are 
+        horizontal, but it seems they could just as well have been 
+        vertical.
+\end{itemize}
+
+If you want some other orientation of these faces you will need to edit 
+\texttt{threeddice.mp}: for the 2-spot face exchange the definitions of 
+\texttt{pips2} and \texttt{pips7}; for the 3-spot face exchange 
+\texttt{pips3} and \texttt{pips8}; for the 6-spot face exchange 
+\texttt{pips6} and \texttt{pips11}.
+
+You can also change the size of the dots by giving a different value to 
+\texttt{dot_diam}. The dice have rounded corners, you can change their
+radius by changing \texttt{corner_rad}. The dots are placed so there is 
+at least \texttt{face_margin} of space between the dots and the straight 
+edge of the face. You can change this variable as well. 
+
+For other effects, you are on your own. A common requirement is that 
+faces with fewer dots have larger dots. This is relatively easy to do, 
+but requires changing the definitions of the 9 picture variables 
+\texttt{pips1} through \texttt{pips11}. 
+
+Naturally, the \texttt{graphics} and \texttt{graphicx} packages let you 
+scale these as you want. If you would prefer to change the unscaled 
+sizes, edit \texttt{threeddice.mp} to change \texttt{die_size} from 1cm to 
+the desired size.
+
+Finally, to get views of a left-handed die, simply reflect the views of 
+the right-handed die.
+
+\section{Appendix}
+
+\parindent 0pt
+These are the six single faces:
+
+\bigskip
+\includegraphics{die3d-1.mps}\quad
+\includegraphics{die3d-2.mps}\quad
+\includegraphics{die3d-3.mps}\quad
+\includegraphics{die3d-4.mps}\quad
+\includegraphics{die3d-5.mps}\quad
+\includegraphics{die3d-6.mps}
+
+\bigskip
+\filbreak
+The two-faced dice are ugly, so let me first show you the eight 
+three-faced dice:
+
+\bigskip
+\includegraphics{die3d-123.mps}\quad
+\includegraphics{die3d-135.mps}\quad
+\includegraphics{die3d-142.mps}\quad
+\includegraphics{die3d-154.mps}
+
+\bigskip
+\includegraphics{die3d-246.mps}\quad
+\includegraphics{die3d-263.mps}\quad
+\includegraphics{die3d-365.mps}\quad
+\includegraphics{die3d-456.mps}
+
+\bigskip
+\filbreak
+Finally, the twelve two-faced dice:
+
+\bigskip
+\includegraphics{die3d-12.mps}\quad
+\includegraphics{die3d-13.mps}\quad
+\includegraphics{die3d-14.mps}\quad
+\includegraphics{die3d-15.mps}\quad
+\includegraphics{die3d-23.mps}\quad
+\includegraphics{die3d-24.mps}
+
+\bigskip
+\includegraphics{die3d-26.mps}\quad
+\includegraphics{die3d-35.mps}\quad
+\includegraphics{die3d-36.mps}\quad
+\includegraphics{die3d-45.mps}\quad
+\includegraphics{die3d-46.mps}\quad
+\includegraphics{die3d-56.mps}
+
+\filbreak
+\end{document}

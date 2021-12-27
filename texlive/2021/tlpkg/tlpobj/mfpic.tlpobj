@@ -1,0 +1,52 @@
+name mfpic
+category Package
+revision 28444
+shortdesc Draw Metafont/post pictures from (La)TeX commands
+longdesc Mfpic is a scheme for producing pictures from (La)TeX commands.
+longdesc Commands \mfpic and \endmfpic (in LaTeX, the mfpic environment)
+longdesc enclose a group in which drawing commands may be placed. The
+longdesc commands generate a Meta-language file, which may be processed
+longdesc by MetaPost (or even Metafont). The resulting image file will
+longdesc be read back in to the document to place the picture at the
+longdesc point where the original (La)TeX commands appeared. Note that
+longdesc the ability to use MetaPost here means that the package works
+longdesc equally well in LaTeX and pdfLaTeX.
+containersize 47052
+containerchecksum 361983a020165d094bcd0fc9616be74bd2b5c72542b1e1b257b5ec42ac6be1175caf59c79e156da2bf6fecfe3746b4e33a4a8fc978eb124939ce0ffd2c383081
+doccontainersize 1174196
+doccontainerchecksum 97ec26cc1ed8e181c7d69af264204772c9075e3650044b58cad938fd6918f9cbf5c849699e31846f437e41410492b67668a7ec33e848cf6b5fb9c2d52d7a7947
+docfiles size=389
+ texmf-dist/doc/generic/mfpic/README details="Readme"
+ texmf-dist/doc/generic/mfpic/changes.txt
+ texmf-dist/doc/generic/mfpic/coil.mps
+ texmf-dist/doc/generic/mfpic/examples/data.dat
+ texmf-dist/doc/generic/mfpic/examples/forfun.tex
+ texmf-dist/doc/generic/mfpic/examples/lapictures.tex
+ texmf-dist/doc/generic/mfpic/examples/pictures.tex
+ texmf-dist/doc/generic/mfpic/install.txt
+ texmf-dist/doc/generic/mfpic/lcheadings.ist
+ texmf-dist/doc/generic/mfpic/mfpcard.pdf details="Quick reference" language="en"
+ texmf-dist/doc/generic/mfpic/mfpcard.tex
+ texmf-dist/doc/generic/mfpic/mfpdoc.sty
+ texmf-dist/doc/generic/mfpic/mfpguide.pdf details="Short introduction" language="en"
+ texmf-dist/doc/generic/mfpic/mfpguide.tex
+ texmf-dist/doc/generic/mfpic/mfpic-doc.pdf details="Mfpic manual" language="en"
+ texmf-dist/doc/generic/mfpic/mfpic-doc.tex
+srccontainersize 166720
+srccontainerchecksum 609b960a70d47edbb814c981c5cb03b91fd19e905f8caed599be2488e0ed9ef0bfe01af79353015e0d6dd2fcda6810bde10ec4d8e993356bb7371ed2805988c8
+srcfiles size=163
+ texmf-dist/source/generic/mfpic/grafbase.dtx
+ texmf-dist/source/generic/mfpic/mfpic.dtx
+ texmf-dist/source/generic/mfpic/mfpic.ins
+runfiles size=76
+ texmf-dist/metafont/mfpic/grafbase.mf
+ texmf-dist/metapost/mfpic/dvipsnam.mp
+ texmf-dist/metapost/mfpic/grafbase.mp
+ texmf-dist/tex/generic/mfpic/mfpic.sty
+ texmf-dist/tex/generic/mfpic/mfpic.tex
+ texmf-dist/tex/generic/mfpic/mfpicdef.tex
+catalogue-also mkpic
+catalogue-ctan /graphics/mfpic
+catalogue-license lppl1.3
+catalogue-topics graphics-in-tex
+catalogue-version 1.10

@@ -1,0 +1,124 @@
+name arabxetex
+category Package
+revision 38299
+shortdesc An ArabTeX-like interface for XeLaTeX
+longdesc ArabXeTeX provides a convenient ArabTeX-like user-interface for
+longdesc typesetting languages using the Arabic script in XeLaTeX, with
+longdesc flexible access to font features. Input in ArabTeX notation can
+longdesc be set in three different vocalization modes or in roman
+longdesc transliteration. Direct UTF-8 input is also supported. The
+longdesc parsing and converting of ArabTeX input to Unicode is done by
+longdesc means of TECkit mappings. Version 1.0 provides support for
+longdesc Arabic, Maghribi Arabic, Farsi (Persian), Urdu, Sindhi,
+longdesc Kashmiri, Ottoman Turkish, Kurdish, Jawi (Malay) and Uighur.
+longdesc The documentation covers topics such as typesetting the Holy
+longdesc Quran and typesetting bidirectional critical editions with the
+longdesc package ednotes.
+containersize 147680
+containerchecksum 7c58bd94b780abc5bc17b4218229d289797a155a8e98cae8e22825dc7d9b12c5514de01b12bf2f645047dafb13b4d519d463f4ced60f7ac53a65c6aa38cbec86
+doccontainersize 345168
+doccontainerchecksum 0dff3162a710b458b367bb4ca587d525b68ac79d2d3182e8b9d2ca90ff72f89bf69153960400c344511449c52346c329b8a34eb788e11ed9a5319bb6bca89418
+docfiles size=89
+ texmf-dist/doc/xelatex/arabxetex/README.md details="Readme"
+ texmf-dist/doc/xelatex/arabxetex/arabxetex.pdf details="Package documentation"
+ texmf-dist/doc/xelatex/arabxetex/examples/ednotes_example.pdf details="Ednotes example"
+ texmf-dist/doc/xelatex/arabxetex/examples/ednotes_example.tex
+ texmf-dist/doc/xelatex/arabxetex/examples/minimal.tex
+srccontainersize 29584
+srccontainerchecksum fb29b38d69d39f4c7ed04a3ebb114e49512abbf444f36fcd02dcccfdda22aa3800521c9819696c2828c46983f8266fc00aa59cafb35e26574a3403319d364d64
+srcfiles size=43
+ texmf-dist/source/xelatex/arabxetex/arabtex-farsi-trans-loc.map
+ texmf-dist/source/xelatex/arabxetex/arabtex-pashto-trans-loc.map
+ texmf-dist/source/xelatex/arabxetex/arabtex-sindhi-trans-loc.map
+ texmf-dist/source/xelatex/arabxetex/arabtex-trans-dmg.map
+ texmf-dist/source/xelatex/arabxetex/arabtex-trans-loc.map
+ texmf-dist/source/xelatex/arabxetex/arabtex-urdu-trans-loc.map
+ texmf-dist/source/xelatex/arabxetex/arabtex.maps
+ texmf-dist/source/xelatex/arabxetex/arabxetex.dtx
+ texmf-dist/source/xelatex/arabxetex/makemaps.pl
+runfiles size=197
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabicdigits.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabicdigits.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-trans-loc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-trans-loc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-farsi-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kashmiri-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kurdish.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-kurdish.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-maghribi-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-malay-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-trans-loc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-trans-loc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-pashto-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-trans-loc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-trans-loc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-sindhi-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-trans-dmg.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-trans-dmg.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-trans-loc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-trans-loc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-turk-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-uighur.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-uighur.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-fullvoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-fullvoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-novoc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-novoc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-trans-loc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-trans-loc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-urdu-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-voc.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/arabtex-voc.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/farsidigits.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/farsidigits.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/fixlamalif.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/fixlamalif.tec
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/mirrorpunct.map
+ texmf-dist/fonts/misc/xetex/fontmapping/arabxetex/mirrorpunct.tec
+ texmf-dist/tex/xelatex/arabxetex/arabxetex.sty
+catalogue-contact-bugs https://github.com/fc7/arabxetex/issues
+catalogue-contact-repository https://github.com/fc7/arabxetex/issues
+catalogue-ctan /macros/xetex/latex/arabxetex
+catalogue-license lppl
+catalogue-topics multilingual arabic kurdish persian xetex
+catalogue-version 1.2.1

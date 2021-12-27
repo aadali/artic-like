@@ -1,0 +1,30 @@
+name metapost-colorbrewer
+category Package
+revision 48753
+shortdesc An implementation of the colorbrewer2.org colours for MetaPost
+longdesc This package provides two MetaPost include files that define
+longdesc all the colorbrewer2.org colours: colorbrewer-cmyk.mp
+longdesc colorbrewer-rgb.mp The first defines all the colours as CMYK,
+longdesc the second as RGB. Use whichever one you prefer. For an example
+longdesc of what you can do, and a list of all the names, have a look at
+longdesc colorbrewer-sampler.mp. You can also see the names on
+longdesc http://colorbrewer2.org. The package also includes the Python
+longdesc script used to generate the MP source from the colorbrewer
+longdesc project.
+containersize 11784
+containerchecksum e59dd121f9a176e628697e31b720507723867a0b7b68b73531aa825bb02b07d04ff705bdfbeb369fe3a2d304f4c6c5aad3f823aaa4c82257540f1459cf099cb1
+doccontainersize 219680
+doccontainerchecksum 59f17d78ef78a142bde5783996f149b3a7c740c2b3ec6f90133115ebddcf6c460dada543482f5379872054a74eb772bab8afd96fa48b2484f7932a478b8bde2d
+docfiles size=66
+ texmf-dist/doc/metapost/metapost-colorbrewer/README.md details="Readme"
+ texmf-dist/doc/metapost/metapost-colorbrewer/colorbrewer-sampler.mp
+ texmf-dist/doc/metapost/metapost-colorbrewer/colorbrewer-sampler.pdf
+ texmf-dist/doc/metapost/metapost-colorbrewer/colorbrewer-sampler.png
+ texmf-dist/doc/metapost/metapost-colorbrewer/make_mp_colorbrewer.py
+runfiles size=30
+ texmf-dist/metapost/metapost-colorbrewer/colorbrewer-cmyk.mp
+ texmf-dist/metapost/metapost-colorbrewer/colorbrewer-rgb.mp
+catalogue-contact-repository https://github.com/thruston/metapost-colorbrewer
+catalogue-ctan /graphics/metapost/contrib/macros/metapost-colorbrewer
+catalogue-license gpl3+
+catalogue-topics mp-supp mp-use

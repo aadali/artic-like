@@ -1,0 +1,215 @@
+% Author: Arlie Coles
+% License: LaTeX Project Public License 1.3c
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{book-of-common-prayer}[2021/06/27 Liturgical documents in the style of the Book of Common Prayer]
+
+\RequirePackage[no-math]{fontspec}
+\RequirePackage[left=0.5in, right=0.5in, vmargin=0.5in]{geometry}
+\RequirePackage{titlesec}
+\RequirePackage{graphicx}
+\RequirePackage{titling}
+\RequirePackage{alltt}
+\RequirePackage{paracol}
+\RequirePackage{framed}
+\RequirePackage{makecell}
+\RequirePackage{xtab}
+\RequirePackage{tocloft}
+\RequirePackage{xcolor}
+\RequirePackage[object=vectorian]{pgfornament}
+\RequirePackage{enumitem}
+\RequirePackage{pgf}
+\RequirePackage{pgfopts}
+\RequirePackage{bilingualpages}
+
+% The BCP font is Sabon, so allow this option
+\DeclareOption{sabon}{\setmainfont[Ligatures=TeX]{Sabon LT Std}}
+\ProcessOptions\relax
+\newcommand{\sabon}[1]{{\fontspec{Sabon LT Std}#1}}
+
+% Page setup
+\geometry{
+  paperheight=8.5in,
+  paperwidth=5.5in,
+  heightrounded,
+}
+\setlength\parindent{0pt}
+\setlength{\parskip}{11pt}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\footskip}{15pt}
+\linespread{0.97}
+\titlespacing*{\section}{0pt}{*0}{0pt}
+\titlespacing*{\subsection}{0pt}{*0}{0pt}
+\titlespacing*{\subsubsection}{0pt}{*0}{0pt}
+
+
+% Spacing between music staves
+\newcommand{\betweenLilyPondSystem}[1]{\vspace{1mm}\linebreak} 
+
+% Manual spacing
+\newcommand{\tab}{\hspace*{1em}}
+\newcommand{\blankline}{\vspace{\parskip}}
+\newcommand{\deleteline}{\vspace{-\parskip}}
+
+% Cover image
+\usepackage{graphicx}
+\newcommand{\munepsfig}[3][scale=1.0]{% <===============================
+    \begin{figure}[!htbp]
+        \centering
+        \vspace{2mm}
+        \setlength{\fboxrule}{#3} % <===================================
+        \setlength{\fboxsep}{0pt} % <===================================
+        \framebox{\includegraphics[#1]{#2}} % <=====================
+    \end{figure}
+}
+
+% Instructions formatting: italicize
+\newcommand{\instruct}[1]{ {\small \textit{#1}} }
+\newcommand{\instructsmall}[1]{ {\footnotesize \textit{#1}} }
+
+% Versicle and response - for use in inline text (not music)
+\newcommand{\versiclefont}{Junicode}
+\newcommand{\textjuni}[1]{{\fontspec{\versiclefont}#1}}
+\newcommand{\versicle}{\textjuni{\char"2123} }
+\newcommand{\response}{\textjuni{\char"211F} }
+
+% Responses with full titles (in text)
+\xentrystretch{-0.99}
+\newenvironment{responses}
+  {\begin{xtabular}{@{}p{0.1\linewidth}p{0.85\linewidth}@{}}}
+  {\end{xtabular}}
+
+\newenvironment{responsesex}
+  {\begin{xtabular}{p{0.1\linewidth}p{0.25\linewidth}}}
+  {\end{xtabular}}
+
+% Responses with V/R (in text)
+\xentrystretch{-0.99}
+\newenvironment{vresponses}
+  {\begin{xtabular}{@{}p{0.05\linewidth}p{0.9\linewidth}@{}}}
+  {\end{xtabular}}
+
+\newenvironment{vresponsesex}
+  {\begin{xtabular}{p{0.05\linewidth}p{0.25\linewidth}}}
+  {\end{xtabular}}
+
+% Multi-line response
+\newcommand{\rlong}[1]{\makecell[lt]{#1}}
+
+% Responses with V/R (in text) with V/R doubled up per line.
+% First arg is width of verse (default 0.45)
+\newenvironment{vresponsesdouble}[1][0.45]
+  {\begin{xtabular}{@{}p{0.05\linewidth}p{#1\linewidth}p{0.05\linewidth}p{0.45\linewidth}@{}}}
+  {\end{xtabular}}
+% V/R in one line
+\newcommand{\VR}[2]{\versicle & #1 & \response & \textbf{#2} \\}
+
+\newenvironment{vresponsesdoubleex}[1][0.45]
+  {\begin{xtabular}{@{}p{0.05\linewidth}p{#1\linewidth}p{0.05\linewidth}p{0.05\linewidth}@{}}}
+  {\end{xtabular}}
+
+% Roles to go with the responses - the people are bolded
+\newcommand{\priest}[1]{\textit{Priest} & #1 \\}
+\newcommand{\deacon}[1]{\textit{Deacon} & #1 \\}
+\newcommand{\officiant}[1]{\textit{Officiant} & #1 \\}
+\newcommand{\people}[1]{\textit{People} & \textbf{#1} \\}
+\newcommand{\servers}[1]{\textit{Servers} & #1 \\}
+\newcommand{\contd}[1]{& #1 \\}
+
+% French role equivalents
+\newcommand{\pretre}[1]{\textit{Prêtre} & #1 \\}
+\newcommand{\diacre}[1]{\textit{Diacre} & #1 \\}
+\newcommand{\peuple}[1]{\textit{Peuple} & \textbf{#1} \\}
+\newcommand{\servants}[1]{\textit{Servants} & #1 \\}
+
+\newcommand{\V}[1]{\versicle & #1 \\}
+\newcommand{\R}[1]{\response & \textbf{#1} \\}
+
+% Large and small signs of the cross - for use in inline text (not music)
+\newcommand{\crossfont}{Arial Unicode MS}
+\newcommand{\textuni}[1]{{\fontspec{\crossfont}#1}}
+\newcommand{\cross}{{\textuni{\char"2720~}}}
+\newcommand{\scross}{+ }
+
+% French quotation marks (guillemets)
+\newcommand{\gl}{{\textuni{\char"00AB~}}}
+\newcommand{\gr}{{\textuni{\char"00BB~}}}
+
+% Historical credit
+\newcommand{\hist}[1]{\vspace{-.45cm} \hspace*{\fill}{ \scriptsize \textsc{#1} }\\}
+
+% Monarch name (inline text)
+\newcommand{\monarch}[1]{\textit{\MakeUppercase{#1}}}
+
+% Bible verse
+\newcommand{\bibleverse}[2]{
+  \hspace*{\fill}{ \scriptsize \textsc{#2}}\\
+  #1
+}
+
+\newcommand{\bibleref}[1]{
+  {\mdseries \scriptsize \textsc{#1}}
+}
+
+% Frame - put a box around some text
+\newcommand{\boxaround}[1]{
+  \begin{framed}
+  \small
+  \textit{#1}
+  \end{framed}
+  \deleteline
+}
+\def\boxit#1{%
+  \smash{\fboxsep=0pt\llap{\rlap{\fbox{\strut\makebox[#1]{}}}~}}\ignorespaces
+}
+
+% Prayer environment
+\newenvironment{prayer}
+  {\vspace{-2\parskip}
+   \begin{alltt}\normalfont}
+  {\end{alltt}
+  \vspace{-2\parskip}}
+
+% Two-col prayer
+\newenvironment{twocolprayer}
+  {\begin{table}[h!]
+      \centering
+      \begin{tabular}{ll}
+  }
+  {\end{tabular}
+    \end{table}
+  }
+
+% Three-col prayer
+\newenvironment{threecolprayer}
+  {\begin{table}[h!]
+      \centering
+      \begin{tabular}{lll}
+  }
+  {\end{tabular}
+    \end{table}
+  }
+
+% Header text
+\newcommand{\header}[1]{
+  \begin{center}
+    {\Large \textit{#1} }
+  \end{center}
+}
+
+% Smallcaps header text
+\newcommand{\smallcapsheader}[1]{
+  \begin{center}
+    {\large \textsc{#1} }
+  \end{center}
+}
+
+% Fancy horizontal line
+\newcommand{\makesectionline}[2]{%
+  \nointerlineskip \vspace{.5\baselineskip}\hspace{\fill}
+  {\resizebox{0.5\linewidth}{0.5ex}
+    {\pgfornament[color = #1]{#2}
+    }}%
+    \hspace{\fill}
+    \par\nointerlineskip \vspace{.5\baselineskip}
+  }
+\newcommand{\sectionline}{\makesectionline{black}{88}}

@@ -1,0 +1,76 @@
+name babelbib
+category Package
+revision 57349
+shortdesc Multilingual bibliographies
+longdesc This package enables the user to generate multilingual
+longdesc bibliographies in cooperation with babel. Two approaches are
+longdesc possible: Each citation may be written in another language, or
+longdesc the whole bibliography can be typeset in a language chosen by
+longdesc the user. In addition, the package supports commands to change
+longdesc the typography of the bibliographies.
+containersize 27240
+containerchecksum 90e78ff6086c80e0102ce7aae74070d3b1444208f3957e354f2c940ea4d279f87ed59e6c3310c6d9fc1464c227fb0eb4c3813ca679a6e94295e0b824cb527376
+doccontainersize 1253016
+doccontainerchecksum cd5785a17242a523f23093f8389f1d4c5e3d49c0656ac3f168a8627fb153b217b5a14e5c990c7afd1c5ea7324b5aad2e3dd40e8c2ca0f9ba9064f91f7214bf90
+docfiles size=430
+ texmf-dist/doc/bibtex/babelbib/ChangeLog
+ texmf-dist/doc/bibtex/babelbib/Makefile
+ texmf-dist/doc/bibtex/babelbib/README details="Readme"
+ texmf-dist/doc/bibtex/babelbib/babelbib.dtx
+ texmf-dist/doc/bibtex/babelbib/babelbib.ins
+ texmf-dist/doc/bibtex/babelbib/babelbib.pdf details="Package documentation"
+ texmf-dist/doc/bibtex/babelbib/babelbibtest.bib
+ texmf-dist/doc/bibtex/babelbib/babelbibtest.tex
+ texmf-dist/doc/bibtex/babelbib/getversion.tex
+ texmf-dist/doc/bibtex/babelbib/tugboat-babelbib.pdf details="TUGboat paper about the package"
+runfiles size=213
+ texmf-dist/bibtex/bst/babelbib/bababbr3-fl.bst
+ texmf-dist/bibtex/bst/babelbib/bababbr3-lf.bst
+ texmf-dist/bibtex/bst/babelbib/bababbr3.bst
+ texmf-dist/bibtex/bst/babelbib/bababbrv-fl.bst
+ texmf-dist/bibtex/bst/babelbib/bababbrv-lf.bst
+ texmf-dist/bibtex/bst/babelbib/bababbrv.bst
+ texmf-dist/bibtex/bst/babelbib/babalpha-fl.bst
+ texmf-dist/bibtex/bst/babelbib/babalpha-lf.bst
+ texmf-dist/bibtex/bst/babelbib/babalpha.bst
+ texmf-dist/bibtex/bst/babelbib/babamspl.bst
+ texmf-dist/bibtex/bst/babelbib/babplai3-fl.bst
+ texmf-dist/bibtex/bst/babelbib/babplai3-lf.bst
+ texmf-dist/bibtex/bst/babelbib/babplai3.bst
+ texmf-dist/bibtex/bst/babelbib/babplain-fl.bst
+ texmf-dist/bibtex/bst/babelbib/babplain-lf.bst
+ texmf-dist/bibtex/bst/babelbib/babplain.bst
+ texmf-dist/bibtex/bst/babelbib/babunsrt-fl.bst
+ texmf-dist/bibtex/bst/babelbib/babunsrt-lf.bst
+ texmf-dist/bibtex/bst/babelbib/babunsrt.bst
+ texmf-dist/tex/latex/babelbib/afrikaans.bdf
+ texmf-dist/tex/latex/babelbib/babelbib.sty
+ texmf-dist/tex/latex/babelbib/bahasa.bdf
+ texmf-dist/tex/latex/babelbib/catalan.bdf
+ texmf-dist/tex/latex/babelbib/croatian.bdf
+ texmf-dist/tex/latex/babelbib/czech.bdf
+ texmf-dist/tex/latex/babelbib/danish.bdf
+ texmf-dist/tex/latex/babelbib/dutch.bdf
+ texmf-dist/tex/latex/babelbib/english.bdf
+ texmf-dist/tex/latex/babelbib/esperanto.bdf
+ texmf-dist/tex/latex/babelbib/finnish.bdf
+ texmf-dist/tex/latex/babelbib/french.bdf
+ texmf-dist/tex/latex/babelbib/galician.bdf
+ texmf-dist/tex/latex/babelbib/german.bdf
+ texmf-dist/tex/latex/babelbib/greek.bdf
+ texmf-dist/tex/latex/babelbib/italian.bdf
+ texmf-dist/tex/latex/babelbib/norsk.bdf
+ texmf-dist/tex/latex/babelbib/portuguese.bdf
+ texmf-dist/tex/latex/babelbib/romanian.bdf
+ texmf-dist/tex/latex/babelbib/russian.bdf
+ texmf-dist/tex/latex/babelbib/serbian.bdf
+ texmf-dist/tex/latex/babelbib/spanish.bdf
+ texmf-dist/tex/latex/babelbib/swedish.bdf
+ texmf-dist/tex/latex/babelbib/turkish.bdf
+catalogue-contact-bugs https://github.com/TeX-Live/babelbib/issues
+catalogue-contact-home https://github.com/TeX-Live/babelbib
+catalogue-contact-repository https://github.com/TeX-Live/babelbib.git
+catalogue-ctan /biblio/bibtex/contrib/babelbib
+catalogue-license lppl1
+catalogue-topics bibtex-sty multilingual
+catalogue-version 1.34
