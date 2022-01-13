@@ -21,6 +21,7 @@ if path.isdir(INPUT_FASTQ):
     files = os.listdir(path.abspath(INPUT_FASTQ))
     fq_files = list(filter(lambda x: x.endswith("fastq") or x.endswith("fq"),files))
     fqgz_files = list(filter(lambda x: x.endswith("fastq.gz") or x.endswith("fq.gz"),files))
+    FQ = f"{path.abspath(INPUT_FASTQ)}/*"
     if len(fq_files) == len(files):
         COMMAND = f"cat {path.abspath(INPUT_FASTQ)}/*"
     elif len(fqgz_files) == len(files):
@@ -29,6 +30,7 @@ if path.isdir(INPUT_FASTQ):
         raise Exception(f"input_fastq directory must has only fastq or fastq.gz files, check your input_fastq: {INPUT_FASTQ}")
 
 elif path.isfile(INPUT_FASTQ):
+    FQ = f"{path.abspath(INPUT_FASTQ)}"
     if INPUT_FASTQ.endswith("fastq") or INPUT_FASTQ.endswith("fq"):
         COMMAND = f"cat {path.abspath(INPUT_FASTQ)}"
     elif INPUT_FASTQ.endswith("fastq.gz") or INPUT_FASTQ.endswith("fq.gz"):
@@ -56,20 +58,29 @@ else:
 
 ##### init the other params start...
 # now = datetime.now().strftime("%Y%m%d%H%M%S")
-MIN_LEN = config.get("min_read_len",200)
-MAX_LEN = config.get("max_read_len",1000)
-MIN_READ_Q = config.get("min_read_qual",9)
-MIN_MAPQ = config.get("min_mapq",60)
-MAP_THREAD = config.get("map_thread",8)
-MIN_DP = config.get("min_dp",30)
+MIN_LEN = int(config.get("min_read_len",200))
+MAX_LEN = int(config.get("max_read_len",1000))
+MIN_READ_Q = int(config.get("min_read_qual",9))
+MIN_MAPQ = int(config.get("min_mapq",60))
+MAP_THREAD = int(config.get("map_thread",8))
+MIN_DP = int(config.get("min_dp",30))
+MIN_QUAL = int(config.get("min_qual",20))
+HET_SITE = config.get("het_site", "more")
+LONGSHOT = bool(config.get("longshot", 1))
+frameshifts = bool(config.get("frameshifts", 1))
+FRAMESHIFTS = "--frameshifts" if frameshifts else ""
 MODEL = config.get("model","r941_min_hac_g507")
 SAMPLE = config.get("sample_name","test001")
 GENOME = path.join(SNAKEDIR,"genome",config.get("what_sample","sars-cov-2"),"sequences.fa")
 SNPEFF_DATA = path.join(SNAKEDIR,"genome")
 SNPEFF_CONF = path.join(SNAKEDIR,"config/snpEff.config")
+if LONGSHOT:
+    VCF = f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
+else:
+    VCF = f"{SAMPLE}/variants/{SAMPLE}.medaka.ann.vcf"
+
 
 ##### init the other params end...
-
 
 # ============================
 #       DEFINE RULES
@@ -78,21 +89,23 @@ rule consensus:
     input:
         a=f"{SAMPLE}/consensus/{SAMPLE}.consensus.fasta",
         b=f"{SAMPLE}/figures/{SAMPLE}.coverage.pdf",
-        c=f"{SAMPLE}/stat/{SAMPLE}.stat"
+        c=f"{SAMPLE}/stat/{SAMPLE}.stat",
+        d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
+        e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
 
 
 rule annotate:
     input:
-        c=f"{SAMPLE}/variants/{SAMPLE}.pass.variants.annotate.txt",
-        d=f"{SAMPLE}/variants/{SAMPLE}.fail.variants.annotate.txt",
-        e=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv"
+        f=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
+        g=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv"
 
 rule report:
     input:
-        f=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
+        h=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
 
 
 rule fastp:
+    # using fastp to filter the raw fastq dropping the low qual reads
     input:
         raw_data=INPUT_FASTQ
     output:
@@ -108,7 +121,28 @@ rule fastp:
         f"{COMMAND} | awk '{{params.awk_query}}' | fastp --stdin --out1 {{output.clean_data}}  --length_required {{params.length_required}} "
         f"--length_limit {{params.length_limit}} -q 0 -w 8 --average_qual {{params.average_qual}} --html {{output.html}} --json {{output.js}}"
 
+rule nanoplot:
+    # nanoplot was used to stat the raw fastq and the clean fastq and make plot
+    input:
+        raw_data=INPUT_FASTQ,
+        clean_data=rules.fastp.output.clean_data
+    output:
+        outdir=directory(f"{SAMPLE}/nanoplot"),
+        qc_summary=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
+        raw_stats_file=f"{SAMPLE}/nanoplot/{SAMPLE}_raw.NanoStats.txt",
+        clean_stats_file=f"{SAMPLE}/nanoplot/{SAMPLE}_clean.NanoStats.txt"
+    params:
+        threads=workflow.cores,
+        raw_prefix=f"{SAMPLE}_raw.",
+        clean_prefix=f"{SAMPLE}_clean."
+    shell:
+        f"NanoPlot -t {{params.threads}} --fastq {FQ} --tsv_stats --prefix {{params.raw_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
+        f"NanoPlot -t {{params.threads}} --fastq {{input.clean_data}} --tsv_stats --prefix {{params.clean_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
+        f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}}  "
+
+
 rule map:
+    # minimap2 is used to mao reads, the low map_qual align will be dropped
     input:
         clean_data=rules.fastp.output.clean_data,genome=GENOME
     output:
@@ -126,6 +160,8 @@ rule map:
         f"samtools index {{output.sorted_bam}}"
 
 rule trim_primers:
+    # if primer_bed is used, the alignments in bam file will be trimmed depended on the primer position
+    # else just reserve the good alignment whose map_qual is bigger than the specified qual
     input:
         sorted_bam=rules.map.output.sorted_bam,
         primer_bed=PRIMER
@@ -138,6 +174,7 @@ rule trim_primers:
         f"samtools index {{output.trimmed_bam}}"
 
 rule medaka_consensus:
+    # medaka will be called to make hdf file
     input:
         bamfile=rules.trim_primers.output.trimmed_bam
     output:
@@ -145,18 +182,49 @@ rule medaka_consensus:
     params:
         model=MODEL,threads=8
     shell:
-        f"medaka consensus --model {{params.model}} --threads {{params.threads}} {{input.bamfile}} {{output.hdf}}"
+        "medaka consensus --model {params.model} --threads {params.threads} {input.bamfile} {output.hdf}"
 
 rule medaka_variant:
+    # get gvcf file
     input:
-        hdf=rules.medaka_consensus.output.hdf,genome=GENOME
+        hdf=rules.medaka_consensus.output.hdf,genome=GENOME,bamfile=rules.trim_primers.output.trimmed_bam
+    output:
+        vcf=f"{SAMPLE}/variants/{SAMPLE}.medaka.gvcf"
+    shell:
+        "medaka variant --gvcf {input.genome} {input.hdf} {output.vcf};"
+
+rule bcftools_filter:
+    # drop the record that doesn't has alt or whose QUAL is less than specified qual
+    input:
+        annotate_vcf=rules.medaka_variant.output.vcf
     output:
         vcf=f"{SAMPLE}/variants/{SAMPLE}.medaka.vcf"
     shell:
-        f"medaka variant {{input.genome}} {{input.hdf}} {{output.vcf}}"
+        f"bgzip -f {{input.annotate_vcf}};"
+        f"tabix -p vcf {{input.annotate_vcf}}.gz;"
+        f"bcftools filter -e \"ALT='.' || QUAL < {{MIN_QUAL}}\" {{input.annotate_vcf}}.gz  > {{output.vcf}};"
 
+rule medaka_annotate:
+    # medaka annotate vcf to get the SR in INFO
+    input:
+        vcf=rules.bcftools_filter.output.vcf,genome=GENOME,bam=rules.trim_primers.output.trimmed_bam
+    output:
+        medaka_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.medaka.ann.vcf"
+    shell:
+        "medaka tools annotate --dpsp {input.vcf} {input.genome} {input.bam} {output.medaka_ann_vcf}"
+
+
+rule longshot:
+    # longshot call variants from the potential variants from medaka variants
+    input:
+        vcf=rules.bcftools_filter.output.vcf,bam=rules.trim_primers.output.trimmed_bam
+    output:
+        vcf=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
+    shell:
+        f"longshot -F -P 0 --bam {{input.bam}} --ref {GENOME} --out {{output.vcf}} -v {{input.vcf}}"
 
 rule mosdepth:
+    # get the coverage of each site
     input:
         rules.trim_primers.output.trimmed_bam
     output:
@@ -164,22 +232,19 @@ rule mosdepth:
     shell:
         f"mosdepth {SAMPLE}/mosdepth/{SAMPLE} {{input}}"
 
-rule longshot:
-    input:
-        vcf=rules.medaka_variant.output.vcf,bam=rules.trim_primers.output.trimmed_bam
-    output:
-        vcf=f"{SAMPLE}/variants/{SAMPLE}.longshot.vcf"
-    shell:
-        f"longshot -F -P 0 --bam {{input.bam}} --ref {GENOME} --out {{output.vcf}} -v {{input.vcf}}"
 
 rule filt_vcf:
+    # get the pass vcf and the fail vcf
     input:
-        vcf=rules.longshot.output.vcf
+        vcf=VCF
     output:
         pass_vcf=f"{SAMPLE}/variants/{SAMPLE}.pass.vcf",
-        fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf"
+        fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf",
+        report_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
     shell:
-        f"python {SNAKEDIR}/scripts/filt_vcf.py {{input.vcf}} {MIN_DP} {{output.pass_vcf}} {{output.fail_vcf}}; \n"
+        f"python {SNAKEDIR}/scripts/filt_vcf.py {FRAMESHIFTS} --min-depth {MIN_DP} "
+        f"--min-qual {MIN_QUAL} --het-site {{HET_SITE}} {{input.vcf}} "
+        f"{{output.pass_vcf}} {{output.fail_vcf}} {{output.report_vcf}}; \n"
 
 rule index:
     input:
@@ -193,6 +258,7 @@ rule index:
         f"bgzip {{input.fail_vcf}}  && tabix -p vcf {{output.fail_vcf}}"
 
 rule get_low_cover_region:
+    # bedtools will be used to get the low coverage region, this region will be N in consensus fasta
     input:
         per_base_dp=f"{SAMPLE}/mosdepth/{SAMPLE}.per-base.bed.gz"
     output:
@@ -205,6 +271,7 @@ rule get_low_cover_region:
         f"bedtools merge -i {{output.tempbed1}} > {{output.low_cover_bed}}"
 
 rule pre_mask:
+    # the position in low coverage region and fail vcf of reference will be masked by N firstly
     input:
         low_cover_bed=rules.get_low_cover_region.output.low_cover_bed,
         genome=GENOME,
@@ -215,6 +282,7 @@ rule pre_mask:
         f"python {SNAKEDIR}/scripts/mask_reference.py {{input.genome}} {{input.low_cover_bed}} {{input.fail_vcf}} {{output.pre_consensus}}"
 
 rule get_consensus:
+    # get the final consensus depends on the pass vcf, the alt in pass vcf will be applied ignoring the genotype
     input:
         pre_consensus=rules.pre_mask.output.pre_consensus,
         pass_vcf=rules.index.output.pass_vcf,
@@ -225,6 +293,7 @@ rule get_consensus:
         f"bcftools consensus -f {{input.pre_consensus}} -m {{input.mask_region}} {{input.pass_vcf}} > {{output.consensus}}"
 
 rule stat:
+    # a simple stat
     input:
         input_fastq=INPUT_FASTQ,sorted_bam=rules.trim_primers.output.trimmed_bam
     output:
@@ -236,6 +305,7 @@ rule stat:
         f"samtools fastq {{input.sorted_bam}} | {{params.awk_query}} | wc -lm >> {{output.stat_file}}"
 
 rule plot:
+    # plot the coverage fig
     input:
         per_base_dp=rules.mosdepth.output.per_base_dp
     output:
@@ -244,29 +314,27 @@ rule plot:
         f"python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}}"
 
 rule snpEff:
+    # snpEff annotate if {what_sample} is collected in the snpEff database
     input:
-        pass_vcf=rules.index.output.pass_vcf,
-        fail_vcf=rules.index.output.fail_vcf
+        report_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
     output:
-        pass_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.pass.snpEff.annotate.vcf",
-        fail_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.snpEff.annotate.vcf"
+        report_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.annotate.vcf"
     shell:
-        f"snpEff -c {SNPEFF_CONF} -dataDir {SNPEFF_DATA} -no-downstream -noStats -no-upstream {config.get('what_sample','sars-cov-2')} {{input.pass_vcf}} > {{output.pass_ann_vcf}};\n"
-        f"snpEff -c {SNPEFF_CONF} -dataDir {SNPEFF_DATA} -no-downstream -noStats -no-upstream {config.get('what_sample','sars-cov-2')} {{input.fail_vcf}} > {{output.fail_ann_vcf}};"
+        f"snpEff -c {SNPEFF_CONF} -dataDir {SNPEFF_DATA} -no-downstream -noStats -no-upstream {config.get('what_sample','sars-cov-2')} "
+        f"{{input.report_vcf}} > {{output.report_ann_vcf}};\n"
 
 rule handle_snpEff_result:
+    # convert the report vcf to variants list
     input:
-        pass_ann_vcf=rules.snpEff.output.pass_ann_vcf,
-        fail_ann_vcf=rules.snpEff.output.fail_ann_vcf
+        report_ann_vcf=rules.snpEff.output.report_ann_vcf
     output:
-        pass_variants_ann=f"{SAMPLE}/variants/{SAMPLE}.pass.variants.annotate.txt",
-        fail_variants_ann=f"{SAMPLE}/variants/{SAMPLE}.fail.variants.annotate.txt"
+        report_variants_list=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt"
     shell:
-        f"python {SNAKEDIR}/scripts/handle_snpeff_results.py {{input.pass_ann_vcf}} {{output.pass_variants_ann}};\n"
-        f"python {SNAKEDIR}/scripts/handle_snpeff_results.py {{input.fail_ann_vcf}} {{output.fail_variants_ann}};\n"
+        f"python {SNAKEDIR}/scripts/handle_snpeff_results.py {{input.report_ann_vcf}} {{output.report_variants_list}};\n"
 
 
 rule pangolin:
+    # pangolin
     input:
         fasta=rules.get_consensus.output.consensus
     output:
@@ -275,6 +343,7 @@ rule pangolin:
         f"pangolin {{input.fasta}} --outfile {{output.lineage_report}}"
 
 rule make_report_tex:
+    # get the report tex file
     input:
         consensus=rules.get_consensus.output.consensus,
         pass_vcf=rules.index.output.pass_vcf
@@ -282,11 +351,12 @@ rule make_report_tex:
         f"{SAMPLE}/report/{SAMPLE}.report.tex"
     params:
         sample_name=SAMPLE,
-        what_sample=config.get("what_sample", "sars-cov-2")
+        what_sample=config.get("what_sample","sars-cov-2")
     shell:
         f"python {SNAKEDIR}/scripts/report.py  {{params.sample_name}} {{params.what_sample}}  {{output}}"
 
 rule make_report_pdf:
+    # xetex will be called to generate the final pdf
     input:
         report_tex=rules.make_report_tex.output
     output:

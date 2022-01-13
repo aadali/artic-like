@@ -1175,6 +1175,7 @@ sepnum
 setspace
 stringenc
 subfig
+subfigure
 svn-prov
 textcase
 tools
@@ -2679,6 +2680,16 @@ test4.tex
 test5.tex
 test6.tex
 test7.tex
+
+./doc/latex/subfigure:
+ltxdoc.cfg
+README
+subfigure.pdf
+test2.tex
+test3.tex
+test4.tex
+test5.tex
+test.tex
 
 ./doc/latex/svn-prov:
 svn-prov.pdf
@@ -23473,6 +23484,7 @@ refcount
 rerunfilecheck
 stringenc
 subfig
+subfigure
 svn-prov
 textcase
 tools
@@ -24655,6 +24667,11 @@ stringenc.dtx
 Makefile
 subfig.dtx
 subfig.ins
+
+./source/latex/subfigure:
+Makefile
+subfigure.dtx
+subfigure.ins
 
 ./source/latex/svn-prov:
 Makefile
@@ -27533,6 +27550,7 @@ seminar
 sepnum
 setspace
 subfig
+subfigure
 svn-prov
 symbol
 textcase
@@ -30204,6 +30222,10 @@ setspace.sty
 ./tex/latex/subfig:
 altsf.cfg
 subfig.sty
+
+./tex/latex/subfigure:
+subfigure.cfg
+subfigure.sty
 
 ./tex/latex/svn-prov:
 svn-prov.sty

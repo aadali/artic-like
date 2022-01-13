@@ -1,52 +1,94 @@
 from sys import argv
 from os import path
-
+import argparse
 import vcf
+import re
 
-usage = f"usage: {path.basename(__file__)} <in.vcf> <min_dp> <pass.vcf> <fail.vcf>"
+parser = argparse.ArgumentParser()
+parser.add_argument("--frameshifts", action="store_true")
+parser.add_argument("--min-depth", required=False, type=int, default=20)
+parser.add_argument("--min-qual", required=False, type=int, default=20)
+parser.add_argument("--het-site", required=False, type=str, default="more")
+parser.add_argument("inputvcf")
+parser.add_argument("passvcf")
+parser.add_argument("failvcf")
+parser.add_argument("reportvcf")
 
-if len(argv) != 5:
-    raise Exception(usage + "\n")
+args = parser.parse_args()
 
-vcf_fh = argv[1]
-min_dp = argv[2]
-pass_vcf_fh = argv[3]
-fail_vcf_fh = argv[4]
-# vcf_fh = "/home/a/big/ycq/projects/artic-like/test001/variants/test001.longshot.vcf"
-invcf = vcf.Reader(filename=vcf_fh)
-invcf.filters['low_qual'] = vcf.parser._Filter(id="low_qual", desc="Qual less than 20")
-invcf.filters['low_dp'] = vcf.parser._Filter(id="low_dp", desc=f"DP less than {min_dp}")
-invcf.filters['het'] = vcf.parser._Filter(id="het", desc="this position is Het")
-invcf.filters['fs'] = vcf.parser._Filter(id="fs", desc="frameshift")
-pass_vcf = vcf.Writer(open(pass_vcf_fh, "w"), template=invcf)
-fail_vcf = vcf.Writer(open(fail_vcf_fh, "w"), template=invcf)
+inputvcf = args.inputvcf
+passvcf = args.passvcf
+failvcf = args.failvcf
+reportvcf = args.reportvcf
+min_dp = args.min_depth
+min_qual = args.min_qual
+het_site = args.het_site
 
+if het_site not in ['more', 'N']:
+    raise Exception("het_site must be \"more\" or \"N\"")
 
-def in_frame(v):
-    if len(v.ALT) > 1:
-        raise Exception("This code doesn't support multiple genotypes")
-    ref, alt = v.REF, v.ALT[0]
-    bases = len(ref) - len(alt)
-    if bases % 3 == 0:
-        return True
-    return False
+pass_vcf = open(passvcf, "w")
+fail_vcf = open(failvcf, "w")
+report_vcf = open(reportvcf, "w")
+medaka_vcf = True if "medaka" in inputvcf else False
+with open(inputvcf, "r") as invcf:
+    for line in invcf:
+        if line.startswith("#"):
+            pass_vcf.write(line)
+            fail_vcf.write(line)
+            report_vcf.write(line)
+            continue
+        CHRO, POS, _, REF, ALT, QUAL, _, INFO, FORMAT, SAMPLE = line.strip().split("\t")
+        if len(ALT.split(",")) > 1:
+            raise Exception("This code doesn't support multiple genotypes")
+        bases = len(REF) - len(ALT)
+        if bases % 3 == 0:
+            inframe = True
+        else:
+            inframe = False
+        gt_idx = FORMAT.split(":").index("GT")
+        sample = SAMPLE.split(":")
+        gt = sample[gt_idx]
+        dp = int(re.search("DP=(\d+)", INFO).group(1))
 
+        # the low dp or low QUAL record will be treated as bad variant
+        is_failed = dp < args.min_depth or float(QUAL) < args.min_qual or (not args.frameshifts and not inframe)
 
-for v in invcf:
-    dp = v.INFO['DP']
-    qual = v.QUAL
+        if not (dp < args.min_depth or float(QUAL) < args.min_qual):
+            # reportvcf contains the good record ignore its heterozygosity, will be displayed in the pdf report
+            report_vcf.write(line)
+        if medaka_vcf:
+            is_het = False if gt == "1" else True
+            # the variants in medaka vcf must be ref_hom or alt_hom. het genotype is impossible
+            if is_failed:
+                fail_vcf.write(line)
+            else:
+                pass_vcf.write(line)
 
-    if not in_frame(v):
-        v.FILTER = "fs"
-        fail_vcf.write_record(v)
-    elif dp < int(min_dp):
-        v.FILTER = "low_dp"
-        fail_vcf.write_record(v)
-    elif qual < 20:
-        v.FILTER = "low_qual"
-        fail_vcf.write_record(v)
-    elif v.num_het:
-        v.FILTER = "het"
-        fail_vcf.write_record(v)
-    else:
-        pass_vcf.write_record(v)
+        else:
+            # for longshot vcf
+            is_het = True if gt == "0/1" else False
+            if is_het:
+                if args.het_site == "more":
+                    ac = re.search("AC=(\d+),(\d+)", INFO)
+                    ref_ac = int(ac.group(1))
+                    alt_ac = int(ac.group(2))
+                    if is_failed:
+                        fail_vcf.write(line)
+                    else:
+                        # if this variant is a good het site and the alt dp is bigger than ref dp, then this record will
+                        # be write into the pass vcf, and the pass vcf will be called by bcftools consensus. And bcftools
+                        # consensus will apply the alt allele ignore its genotype. this is what "het_site: more" means
+                        # But if alt dp is less than ref_ac, then ignore this site, and the position of final consensus will
+                        # be ref allele. Although this position is ignored, it can be found in the report vcf
+                        if alt_ac > ref_ac:
+                            pass_vcf.write(line)
+
+                # if specify the het_site in config.yaml == "N", all the het sites will be N in the final consensus
+                elif args.het_site == "N":
+                    fail_vcf.write(line)
+            else:
+                if is_failed:
+                    fail_vcf.write(line)
+                else:
+                    pass_vcf.write(line)

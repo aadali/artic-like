@@ -27,6 +27,7 @@ preamble = r"""
 \usepackage{longtable}
 \usepackage{vtable}
 \usepackage{geometry}
+\usepackage{subfigure}
 \setCJKmainfont{SourceHanSansCN-Regular}[
     Extension = .otf,
     Path = FontsPath/,
@@ -52,10 +53,13 @@ def get_files(name):
     files = dict(
         stat_fp=path.abspath(f"{name}/stat/{name}.stat"),
         cov_fig_fp=path.abspath(f"{name}/figures/{name}.coverage.pdf"),
-        annotated_var_fp=path.abspath(f"{name}/variants/{name}.pass.variants.annotate.txt"),
-        unannotated_vcf_fp=path.abspath(f"{name}/variants/{name}.pass.vcf.gz"),
+        annotated_var_list=path.abspath(f"{name}/variants/{name}.report.snpEff.annotate.txt"),
+        unannotated_vcf_fp=path.abspath(f"{name}/variants/{name}.report.vcf"),
         consensus_fp=path.abspath(f"{name}/consensus/{name}.consensus.fasta"),
-        lineage_report_fp=path.abspath(f"{name}/pangolin/{name}.lineage_report.csv")
+        lineage_report_fp=path.abspath(f"{name}/pangolin/{name}.lineage_report.csv"),
+        nanoplot_raw_pic=path.abspath(f"{name}/nanoplot/{name}_raw.LengthvsQualityScatterPlot_dot.png"),
+        nanoplot_clean_pic=path.abspath(f"{name}/nanoplot/{name}_clean.LengthvsQualityScatterPlot_dot.png"),
+        nanoplot_qc_summary=path.abspath(f"{name}/nanoplot/{name}.qc.summary.txt")
     )
     return files
 
@@ -97,6 +101,30 @@ def infomations(stat_file):
     return "%\n".join(tex)
 
 
+def nanoplot_infos(nanoplot_qc_summary, nanoplot_raw_pic, nanoplot_clean_pic):
+    tex = []
+    tex.append("\\section{数据统计}")
+    col_formats = (r">{\centering\arraybackslash}m{0.25\paperwidth}"
+                   r">{\centering\arraybackslash}m{0.25\paperwidth}"
+                   r">{\centering\arraybackslash}m{0.25\paperwidth}")
+    tex.append(f"\\begin{{longtable}}{{{col_formats}}}")
+    title = "\\hline 统计项 & 过滤前 & 过滤后 \\\\ \\hline"
+    tex.append(title + "\\endfirsthead")
+    tex.append(title + "\\endhead")
+    tex.append("\\hline \\endfoot\n\\hline \\endlastfoot")
+    df = pd.read_csv(nanoplot_qc_summary, header=None, sep="\t", skiprows=1)
+    tex.append(df_to_table_tex(df))
+    tex.append("\\end{longtable}\n")
+
+    tex.append("\\begin{figure}[htbp]")
+    tex.append("\\centering")
+    tex.append("\\subfigure[过滤前]{\\includegraphics[width=0.5\\textwidth]{" + nanoplot_raw_pic + "}}")
+    tex.append("\\subfigure[过滤后]{\\includegraphics[width=0.5\\textwidth]{" + nanoplot_clean_pic + "}}")
+    tex.append("\\end{figure}")
+
+    return "%\n".join(tex)
+
+
 def coverage(cov_fig):
     tex = []
     tex.append("\\section{覆盖度}")
@@ -117,13 +145,23 @@ def handle(unannotated_vcf):
     outfile = path.join(dir_name, f".unannotated.variants.info")
     with open(outfile, "w") as outf:
         variants = vcf.Reader(filename=unannotated_vcf)
-        for variant in variants:
-            line = [str(variant.CHROM),
-                    str(variant.POS),
-                    f"{variant.REF}:{variant.INFO['AC'][0]}",
-                    f"{variant.ALT[0]}:{variant.INFO['AC'][1]}",
-                    f"{variant.INFO['DP']}"]
-            outf.write("\t".join(line) + '\n')
+        # the vcf may be annotated by medaka tools or called by longshot
+        if "medaka_version" in dict(variants.metadata):
+            for variant in variants:
+                line = [str(variant.CHROM),
+                        str(variant.POS),
+                        f"{variant.REF}:{sum(variant.INFO['SR'][:2])}",
+                        f"{variant.ALT[0]}:{sum(variant.INFO['SR'][-2:])}",
+                        f"{variant.INFO['DP']}"]
+                outf.write("\t".join(line) + "\n")
+        else:
+            for variant in variants:
+                line = [str(variant.CHROM),
+                        str(variant.POS),
+                        f"{variant.REF}:{variant.INFO['AC'][0]}",
+                        f"{variant.ALT[0]}:{variant.INFO['AC'][1]}",
+                        f"{variant.INFO['DP']}"]
+                outf.write("\t".join(line) + '\n')
     return outfile
 
 
@@ -204,10 +242,13 @@ def tex_report(sample_name, out_tex):
     files = get_files(sample_name)
     stat_fp = files['stat_fp']
     cov_fig_fp = files['cov_fig_fp']
-    annotated_var_fp = files['annotated_var_fp']
+    annotated_var_fp = files['annotated_var_list']
     unannotated_vcf_fp = files['unannotated_vcf_fp']
     consensus_fp = files['consensus_fp']
     lineage_report_fp = files['lineage_report_fp']
+    nanoplot_qc_summary = files['nanoplot_qc_summary']
+    nanoplot_raw_pic = files['nanoplot_raw_pic']
+    nanoplot_clean_pic = files['nanoplot_clean_pic']
 
     tex_lines.append(preamble)
     tex_lines.append("\\begin{document}")
@@ -215,6 +256,7 @@ def tex_report(sample_name, out_tex):
     tex_lines.append("\\LARGE{样本检测报告}")
     tex_lines.append("\\end{center}")
     tex_lines.append(infomations(stat_fp))
+    tex_lines.append(nanoplot_infos(nanoplot_qc_summary, nanoplot_raw_pic, nanoplot_clean_pic))
     tex_lines.append(coverage(cov_fig_fp))
     tex_lines.append(consensus(consensus_fp))
     tex_lines.append(variants_list(annotated_var_fp, unannotated_vcf_fp))
