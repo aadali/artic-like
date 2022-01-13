@@ -2,7 +2,7 @@
 
 wd=`pwd`
 
-echo export PATH=\$PATH:$wd/texlive >> ~/.basrhc    # source ~/.bashrc
+echo export PATH=\$PATH:$wd/texlive >> ~/.bashrc    # source ~/.bashrc
 
 condaDir=$(dirname $(dirname $(which conda)))
 
