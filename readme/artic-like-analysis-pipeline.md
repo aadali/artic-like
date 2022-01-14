@@ -7,7 +7,9 @@
 ​		使用之前**必需安装conda**，整个流程依赖于conda进行软件安装和管理
 
 ```shell
-tar -zxf artic-like.tar.gz
+wget https://github.com/aadali/artic-like/archive/refs/heads/master.zip
+unzip master.zip
+mv artic-like-master artic-like
 cd artic-like
 bash install.sh
 ```
