@@ -1,0 +1,52 @@
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+#!genome-build ViralProj15437
+#!genome-build-accession NCBI_Assembly:GCF_000862745.1
+##sequence-region NC_001961.1 1 15428
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=28344
+NC_001961.1	RefSeq	region	1	15428	.	+	.	ID=NC_001961.1:1..15428;Dbxref=taxon:28344;gbkey=Src;genome=genomic;mol_type=genomic RNA
+NC_001961.1	RefSeq	five_prime_UTR	1	189	.	+	.	ID=id-NC_001961.1:1..189;gbkey=5'UTR
+NC_001961.1	RefSeq	gene	190	12071	.	+	.	ID=gene-PRRSVgp1;Dbxref=GeneID:1494884;Name=PRRSVgp1;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp1
+NC_001961.1	RefSeq	CDS	190	7695	.	+	0	ID=cds-NP_066135.1;Parent=gene-PRRSVgp1;Dbxref=Genbank:NP_066135.1,GeneID:1494884;Name=NP_066135.1;gbkey=CDS;locus_tag=PRRSVgp1;product=ORF 1ab polyprotein;protein_id=NP_066135.1
+NC_001961.1	RefSeq	CDS	7695	12071	.	+	0	ID=cds-NP_066135.1;Parent=gene-PRRSVgp1;Dbxref=Genbank:NP_066135.1,GeneID:1494884;Name=NP_066135.1;gbkey=CDS;locus_tag=PRRSVgp1;product=ORF 1ab polyprotein;protein_id=NP_066135.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	190	1335	.	+	.	ID=id-NP_066135.1:1..382;Note=Contains papain-like cysteine proteinase domains 1a (PCP1a) and 1b (PCP1b). Cleavage at the C-terminus is mediated by PCP1b.;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp1 (pcp1a and pcp1b);protein_id=NP_740595.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	1336	4923	.	+	.	ID=id-NP_066135.1:383..1578;Note=contains cysteine proteinase 2 domain (CP2) that mediates cleavage at the C-terminus. The N-terminus is the product of proteinase PCP1b.;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp2;protein_id=NP_740596.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	4924	5616	.	+	.	ID=id-NP_066135.1:1579..1809;Parent=cds-NP_066135.1;gbkey=Prot;product=hydrophobic protein;protein_id=NP_740597.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	5617	6228	.	+	.	ID=id-NP_066135.1:1810..2013;Parent=cds-NP_066135.1;gbkey=Prot;product=3C-like serine proteinase;protein_id=NP_740598.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	6229	6738	.	+	.	ID=id-NP_066135.1:2014..2183;Parent=cds-NP_066135.1;gbkey=Prot;product=hydrophobic protein 2;protein_id=NP_740599.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	6739	6786	.	+	.	ID=id-NP_066135.1:2184..2199;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp6;protein_id=NP_740600.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	6787	7563	.	+	.	ID=id-NP_066135.1:2200..2458;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp7;protein_id=NP_740601.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	7564	7695	.	+	.	ID=id-NP_066135.1:2459..3143;Parent=cds-NP_066135.1;gbkey=Prot;product=RNA-dependent RNA polymerase;protein_id=NP_740602.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	7695	9617	.	+	.	ID=id-NP_066135.1:2459..3143;Parent=cds-NP_066135.1;gbkey=Prot;product=RNA-dependent RNA polymerase;protein_id=NP_740602.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	9618	10940	.	+	.	ID=id-NP_066135.1:3144..3584;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp10 (MB%2C NTPase%2C HEL);protein_id=NP_740603.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	10941	11609	.	+	.	ID=id-NP_066135.1:3585..3807;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp11;protein_id=NP_740604.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	11610	12068	.	+	.	ID=id-NP_066135.1:3808..3960;Parent=cds-NP_066135.1;gbkey=Prot;product=nsp12;protein_id=NP_740605.1
+NC_001961.1	RefSeq	sequence_feature	7689	7760	.	+	.	ID=id-PRRSVgp1;Dbxref=GeneID:1494884;function=frameshift [minus 1] at ORF1a/1b junction;gbkey=misc_feature;locus_tag=PRRSVgp1;standard_name=ribosomal frameshift region
+NC_001961.1	RefSeq	gene	190	7701	.	+	.	ID=gene-PRRSVgp2;Dbxref=GeneID:1494889;Name=PRRSVgp2;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp2
+NC_001961.1	RefSeq	CDS	190	7701	.	+	0	ID=cds-NP_047406.1;Parent=gene-PRRSVgp2;Dbxref=Genbank:NP_047406.1,GeneID:1494889;Name=NP_047406.1;Note=ORF1a;gbkey=CDS;locus_tag=PRRSVgp2;product=ORF1a polyprotein;protein_id=NP_047406.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	7564	7698	.	+	.	ID=id-NP_047406.1:2459..2503;Parent=cds-NP_047406.1;gbkey=Prot;product=nsp8;protein_id=NP_740594.1
+NC_001961.1	RefSeq	gene	190	4396	.	+	.	ID=gene-PRRSV_gp11;Dbxref=GeneID:13905089;Name=ORF1aTF;gbkey=Gene;gene=ORF1aTF;gene_biotype=protein_coding;locus_tag=PRRSV_gp11
+NC_001961.1	RefSeq	CDS	190	3888	.	+	0	ID=cds-YP_006950436.1;Parent=gene-PRRSV_gp11;Dbxref=Genbank:YP_006950436.1,GeneID:13905089;Name=YP_006950436.1;Note=product of -2 frameshift;exception=ribosomal slippage;gbkey=CDS;gene=ORF1aTF;locus_tag=PRRSV_gp11;product=1aTF polyprotein;protein_id=YP_006950436.1
+NC_001961.1	RefSeq	CDS	3887	4396	.	+	0	ID=cds-YP_006950436.1;Parent=gene-PRRSV_gp11;Dbxref=Genbank:YP_006950436.1,GeneID:13905089;Name=YP_006950436.1;Note=product of -2 frameshift;exception=ribosomal slippage;gbkey=CDS;gene=ORF1aTF;locus_tag=PRRSV_gp11;product=1aTF polyprotein;protein_id=YP_006950436.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	1339	3888	.	+	.	ID=id-YP_006950436.1:384..1402;Parent=cds-YP_006950436.1;gbkey=Prot;product=nsp2TF protein;protein_id=YP_006950437.1
+NC_001961.1	RefSeq	mature_protein_region_of_CDS	3887	4393	.	+	.	ID=id-YP_006950436.1:384..1402;Parent=cds-YP_006950436.1;gbkey=Prot;product=nsp2TF protein;protein_id=YP_006950437.1
+NC_001961.1	RefSeq	gene	12073	12843	.	+	.	ID=gene-PRRSVgp3;Dbxref=GeneID:1494886;Name=PRRSVgp3;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp3
+NC_001961.1	RefSeq	CDS	12073	12843	.	+	0	ID=cds-NP_047408.1;Parent=gene-PRRSVgp3;Dbxref=Genbank:NP_047408.1,GeneID:1494886;Name=NP_047408.1;Note=ORF2;gbkey=CDS;locus_tag=PRRSVgp3;product=GP2 glycosylated envelope protein;protein_id=NP_047408.1
+NC_001961.1	RefSeq	gene	12078	12299	.	+	.	ID=gene-PRRSVgp10;Dbxref=GeneID:13439862;Name=PRRSVgp10;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp10
+NC_001961.1	RefSeq	CDS	12078	12299	.	+	0	ID=cds-YP_006589918.1;Parent=gene-PRRSVgp10;Dbxref=Genbank:YP_006589918.1,GeneID:13439862;Name=YP_006589918.1;Note=E protein has been added by NCBI Staff with the kind help of Dr. David Karlin (Department of Zoology%2C University of Oxford%2C UK).;gbkey=CDS;locus_tag=PRRSVgp10;product=E protein;protein_id=YP_006589918.1
+NC_001961.1	RefSeq	gene	12696	13460	.	+	.	ID=gene-PRRSVgp4;Dbxref=GeneID:1494891;Name=PRRSVgp4;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp4
+NC_001961.1	RefSeq	CDS	12696	13460	.	+	0	ID=cds-NP_047409.1;Parent=gene-PRRSVgp4;Dbxref=Genbank:NP_047409.1,GeneID:1494891;Name=NP_047409.1;Note=ORF3;gbkey=CDS;locus_tag=PRRSVgp4;product=GP3 envelope protein;protein_id=NP_047409.1
+NC_001961.1	RefSeq	gene	13241	13777	.	+	.	ID=gene-PRRSVgp5;Dbxref=GeneID:1494887;Name=PRRSVgp5;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp5
+NC_001961.1	RefSeq	CDS	13241	13777	.	+	0	ID=cds-NP_047410.1;Parent=gene-PRRSVgp5;Dbxref=Genbank:NP_047410.1,GeneID:1494887;Name=NP_047410.1;Note=ORF4;gbkey=CDS;locus_tag=PRRSVgp5;product=GP4;protein_id=NP_047410.1
+NC_001961.1	RefSeq	gene	13778	13933	.	+	.	ID=gene-PRRSVgp9;Dbxref=GeneID:13160851;Name=orf5a;gbkey=Gene;gene=orf5a;gene_biotype=protein_coding;locus_tag=PRRSVgp9
+NC_001961.1	RefSeq	CDS	13778	13933	.	+	0	ID=cds-YP_006488613.1;Parent=gene-PRRSVgp9;Dbxref=Genbank:YP_006488613.1,GeneID:13160851;Name=YP_006488613.1;Note=ORF5a protein has been added by NCBI Staff with the kind help of Dr. David Karlin (Department of Zoology%2C University of Oxford%2C UK) and Dr. Andrew Firth (Department of Pathology%2C University of Cambridge%2C UK);gbkey=CDS;gene=orf5a;locus_tag=PRRSVgp9;product=ORF5a protein;protein_id=YP_006488613.1
+NC_001961.1	RefSeq	gene	13788	14390	.	+	.	ID=gene-PRRSVgp6;Dbxref=GeneID:1494885;Name=PRRSVgp6;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp6
+NC_001961.1	RefSeq	CDS	13788	14390	.	+	0	ID=cds-NP_047411.1;Parent=gene-PRRSVgp6;Dbxref=Genbank:NP_047411.1,GeneID:1494885;Name=NP_047411.1;Note=ORF5;gbkey=CDS;locus_tag=PRRSVgp6;product=GP5 glycosylated envelope protein;protein_id=NP_047411.1
+NC_001961.1	RefSeq	gene	14375	14899	.	+	.	ID=gene-PRRSVgp7;Dbxref=GeneID:1494890;Name=PRRSVgp7;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp7
+NC_001961.1	RefSeq	CDS	14375	14899	.	+	0	ID=cds-NP_047412.1;Parent=gene-PRRSVgp7;Dbxref=Genbank:NP_047412.1,GeneID:1494890;Name=NP_047412.1;Note=ORF6;gbkey=CDS;locus_tag=PRRSVgp7;product=membrane protein M;protein_id=NP_047412.1
+NC_001961.1	RefSeq	gene	14889	15260	.	+	.	ID=gene-PRRSVgp8;Dbxref=GeneID:1494888;Name=PRRSVgp8;gbkey=Gene;gene_biotype=protein_coding;locus_tag=PRRSVgp8
+NC_001961.1	RefSeq	CDS	14889	15260	.	+	0	ID=cds-NP_047413.1;Parent=gene-PRRSVgp8;Dbxref=Genbank:NP_047413.1,GeneID:1494888;Name=NP_047413.1;Note=ORF7;gbkey=CDS;locus_tag=PRRSVgp8;product=nucleocapsid protein N;protein_id=NP_047413.1
+NC_001961.1	RefSeq	three_prime_UTR	15261	15411	.	+	.	ID=id-NC_001961.1:15261..15411;gbkey=3'UTR
+NC_001961.1	RefSeq	polyA_site	15412	15412	.	+	.	ID=id-NC_001961.1:15412..15412;gbkey=polyA_site
+###
