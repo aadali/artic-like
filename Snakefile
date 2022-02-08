@@ -85,6 +85,18 @@ else:
 # ============================
 #       DEFINE RULES
 # ============================
+
+rule all:
+    input:
+        a=f"{SAMPLE}/consensus/{SAMPLE}.consensus.fasta",
+        b=f"{SAMPLE}/figures/{SAMPLE}.coverage.pdf",
+        c=f"{SAMPLE}/stat/{SAMPLE}.stat",
+        d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
+        e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf",
+        f = f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
+        g = f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
+        h = f"{SAMPLE}/report/{SAMPLE}.report.pdf"
+
 rule consensus:
     input:
         a=f"{SAMPLE}/consensus/{SAMPLE}.consensus.fasta",
@@ -130,7 +142,8 @@ rule nanoplot:
         outdir=directory(f"{SAMPLE}/nanoplot"),
         qc_summary=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
         raw_stats_file=f"{SAMPLE}/nanoplot/{SAMPLE}_raw.NanoStats.txt",
-        clean_stats_file=f"{SAMPLE}/nanoplot/{SAMPLE}_clean.NanoStats.txt"
+        clean_stats_file=f"{SAMPLE}/nanoplot/{SAMPLE}_clean.NanoStats.txt",
+        finish=f"{SAMPLE}.nanoplot.finish"  # if nanoplot ruls finished, the file will be touched
     params:
         threads=workflow.cores,
         raw_prefix=f"{SAMPLE}_raw.",
@@ -138,7 +151,8 @@ rule nanoplot:
     shell:
         f"NanoPlot -t {{params.threads}} --fastq {FQ} --tsv_stats --prefix {{params.raw_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
         f"NanoPlot -t {{params.threads}} --fastq {{input.clean_data}} --tsv_stats --prefix {{params.clean_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
-        f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}}  "
+        f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}};\n"
+        f"touch {{output.finish}}  "
 
 
 rule map:
@@ -345,10 +359,11 @@ rule pangolin:
 rule make_report_tex:
     # get the report tex file
     input:
+        finish=rules.nanoplot.output.finish,
         consensus=rules.get_consensus.output.consensus,
         pass_vcf=rules.index.output.pass_vcf
     output:
-        f"{SAMPLE}/report/{SAMPLE}.report.tex"
+        f"{SAMPLE}/report/{SAMPLE}.report.tex",
     params:
         sample_name=SAMPLE,
         what_sample=config.get("what_sample","sars-cov-2")
@@ -366,6 +381,7 @@ rule make_report_pdf:
         f"{SNAKEDIR}/texlive/2021/bin/x86_64-linux/xelatex -output-directory={SAMPLE}/report {{input.report_tex}};\n"
         f"rm {SAMPLE}/report/{SAMPLE}.report.log;\n"
         f"rm {SAMPLE}/report/{SAMPLE}.report.aux;\n"
+        f"rm {{rules.nanoplot.output.finish}}"
 
 
 

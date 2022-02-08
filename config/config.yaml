@@ -1,5 +1,5 @@
 # the input file or directory, endswith fastq or fastq.gz or fq or fq.gz
-input_fastq: "/home/a/big/ycq/data/henanCDC-20210801/20210801_1_5/barcode05.fq.gz"
+input_fastq: ""
 
 # the primer bed file, if specified, trim_bases will be ignored. else the raw bam will be trimmed depended on the primer positions
 primer_bed: ""
