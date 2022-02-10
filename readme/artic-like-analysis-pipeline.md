@@ -22,7 +22,7 @@ sudo apt install texlive-binaries	# 安装texlive
 ```shell
 git clone https://github.com/aadali/artic-like.git
 cd artic-like
-conda env create -f env/artic-like.env.yaml	# 安装texlive
+conda env create -f env/artic-like.env.yaml	# 创建artic-like环境
 sudo apt install texlive-binaries	# 安装texlive
 ```
 
