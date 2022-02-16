@@ -1,0 +1,60 @@
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+#!genome-build ViralMultiSegProj274585
+#!genome-build-accession NCBI_Assembly:GCF_000928555.1
+##sequence-region NC_026422.1_seg1_PB2 1 2280
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026422.1_seg1_PB2	RefSeq	region	1	2280	.	+	.	ID=NC_026422.1_seg1_PB2:1..2280;Dbxref=taxon:1332244;Name=1;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=1;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026422.1_seg1_PB2	RefSeq	gene	1	2280	.	+	.	ID=gene-TS66_s1gp1;Dbxref=GeneID:23104219;Name=PB2;gbkey=Gene;gene=PB2;gene_biotype=protein_coding;locus_tag=TS66_s1gp1
+NC_026422.1_seg1_PB2	RefSeq	CDS	1	2280	.	+	0	ID=cds-YP_009118470.1;Parent=gene-TS66_s1gp1;Dbxref=Genbank:YP_009118470.1,GeneID:23104219;Name=YP_009118470.1;gbkey=CDS;gene=PB2;locus_tag=TS66_s1gp1;product=polymerase PB2;protein_id=YP_009118470.1
+##sequence-region NC_026423.1_seg2_PB1 1 2297
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026423.1_seg2_PB1	RefSeq	region	1	2297	.	+	.	ID=NC_026423.1_seg2_PB1:1..2297;Dbxref=taxon:1332244;Name=2;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=2;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026423.1_seg2_PB1	RefSeq	gene	1	2274	.	+	.	ID=gene-TS66_s2gp1;Dbxref=GeneID:23104222;Name=PB1;gbkey=Gene;gene=PB1;gene_biotype=protein_coding;locus_tag=TS66_s2gp1
+NC_026423.1_seg2_PB1	RefSeq	CDS	1	2274	.	+	0	ID=cds-YP_009118471.1;Parent=gene-TS66_s2gp1;Dbxref=Genbank:YP_009118471.1,GeneID:23104222;Name=YP_009118471.1;gbkey=CDS;gene=PB1;locus_tag=TS66_s2gp1;product=polymerase PB1;protein_id=YP_009118471.1
+NC_026423.1_seg2_PB1	RefSeq	gene	95	367	.	+	.	ID=gene-TS66_s2gp2;Dbxref=GeneID:23104221;Name=PB1-F2;gbkey=Gene;gene=PB1-F2;gene_biotype=protein_coding;locus_tag=TS66_s2gp2
+NC_026423.1_seg2_PB1	RefSeq	CDS	95	367	.	+	0	ID=cds-YP_009118472.1;Parent=gene-TS66_s2gp2;Dbxref=Genbank:YP_009118472.1,GeneID:23104221;Name=YP_009118472.1;gbkey=CDS;gene=PB1-F2;locus_tag=TS66_s2gp2;product=PB1-F2 protein;protein_id=YP_009118472.1
+##sequence-region NC_026424.1_seg3_PA 1 2176
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026424.1_seg3_PA	RefSeq	region	1	2176	.	+	.	ID=NC_026424.1_seg3_PA:1..2176;Dbxref=taxon:1332244;Name=3;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=3;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026424.1_seg3_PA	RefSeq	gene	1	2151	.	+	.	ID=gene-TS66_s3gp1;Dbxref=GeneID:23104225;Name=PA;gbkey=Gene;gene=PA;gene_biotype=protein_coding;locus_tag=TS66_s3gp1
+NC_026424.1_seg3_PA	RefSeq	CDS	1	2151	.	+	0	ID=cds-YP_009118473.1;Parent=gene-TS66_s3gp1;Dbxref=Genbank:YP_009118473.1,GeneID:23104225;Name=YP_009118473.1;gbkey=CDS;gene=PA;locus_tag=TS66_s3gp1;product=polymerase PA;protein_id=YP_009118473.1
+NC_026424.1_seg3_PA	RefSeq	gene	1	760	.	+	.	ID=gene-TS66_s3gp2;Dbxref=GeneID:23104224;Name=PA-X;gbkey=Gene;gene=PA-X;gene_biotype=protein_coding;locus_tag=TS66_s3gp2
+NC_026424.1_seg3_PA	RefSeq	CDS	1	570	.	+	0	ID=cds-YP_009118474.1;Parent=gene-TS66_s3gp2;Dbxref=Genbank:YP_009118474.1,GeneID:23104224;Name=YP_009118474.1;exception=ribosomal slippage;gbkey=CDS;gene=PA-X;locus_tag=TS66_s3gp2;product=PA-X protein;protein_id=YP_009118474.1
+NC_026424.1_seg3_PA	RefSeq	CDS	572	760	.	+	0	ID=cds-YP_009118474.1;Parent=gene-TS66_s3gp2;Dbxref=Genbank:YP_009118474.1,GeneID:23104224;Name=YP_009118474.1;exception=ribosomal slippage;gbkey=CDS;gene=PA-X;locus_tag=TS66_s3gp2;product=PA-X protein;protein_id=YP_009118474.1
+##sequence-region NC_026425.1_seg4_HA 1 1708
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026425.1_seg4_HA	RefSeq	region	1	1708	.	+	.	ID=NC_026425.1_seg4_HA:1..1708;Dbxref=taxon:1332244;Name=4;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=4;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026425.1_seg4_HA	RefSeq	gene	1	1683	.	+	.	ID=gene-TS66_s4gp1;Dbxref=GeneID:23104227;Name=HA;gbkey=Gene;gene=HA;gene_biotype=protein_coding;locus_tag=TS66_s4gp1
+NC_026425.1_seg4_HA	RefSeq	CDS	1	1683	.	+	0	ID=cds-YP_009118475.1;Parent=gene-TS66_s4gp1;Dbxref=Genbank:YP_009118475.1,GeneID:23104227;Name=YP_009118475.1;gbkey=CDS;gene=HA;locus_tag=TS66_s4gp1;product=hemagglutinin;protein_id=YP_009118475.1
+NC_026425.1_seg4_HA	RefSeq	signal_peptide_region_of_CDS	1	54	.	+	.	ID=id-YP_009118475.1:1..18;Parent=cds-YP_009118475.1;gbkey=Prot
+NC_026425.1_seg4_HA	RefSeq	mature_protein_region_of_CDS	55	1017	.	+	.	ID=id-YP_009118475.1:19..339;Parent=cds-YP_009118475.1;gbkey=Prot;product=HA1;protein_id=YP_009118482.1
+NC_026425.1_seg4_HA	RefSeq	mature_protein_region_of_CDS	1018	1680	.	+	.	ID=id-YP_009118475.1:340..560;Parent=cds-YP_009118475.1;gbkey=Prot;product=HA2;protein_id=YP_009118483.1
+##sequence-region NC_026426.1_seg5_NP 1 1506
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026426.1_seg5_NP	RefSeq	region	1	1506	.	+	.	ID=NC_026426.1_seg5_NP:1..1506;Dbxref=taxon:1332244;Name=5;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=5;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026426.1_seg5_NP	RefSeq	gene	1	1497	.	+	.	ID=gene-TS66_s5gp1;Dbxref=GeneID:23104229;Name=NP;gbkey=Gene;gene=NP;gene_biotype=protein_coding;locus_tag=TS66_s5gp1
+NC_026426.1_seg5_NP	RefSeq	CDS	1	1497	.	+	0	ID=cds-YP_009118476.1;Parent=gene-TS66_s5gp1;Dbxref=Genbank:YP_009118476.1,GeneID:23104229;Name=YP_009118476.1;gbkey=CDS;gene=NP;locus_tag=TS66_s5gp1;product=nucleocapsid protein;protein_id=YP_009118476.1
+##sequence-region NC_026429.1_seg6_NA 1 1398
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026429.1_seg6_NA	RefSeq	region	1	1398	.	+	.	ID=NC_026429.1_seg6_NA:1..1398;Dbxref=taxon:1332244;Name=6;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=6;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026429.1_seg6_NA	RefSeq	gene	1	1398	.	+	.	ID=gene-TS66_s6gp1;Dbxref=GeneID:23104238;Name=NA;gbkey=Gene;gene=NA;gene_biotype=protein_coding;locus_tag=TS66_s6gp1
+NC_026429.1_seg6_NA	RefSeq	CDS	1	1398	.	+	0	ID=cds-YP_009118481.1;Parent=gene-TS66_s6gp1;Dbxref=Genbank:YP_009118481.1,GeneID:23104238;Name=YP_009118481.1;gbkey=CDS;gene=NA;locus_tag=TS66_s6gp1;product=neuraminidase;protein_id=YP_009118481.1
+##sequence-region NC_026427.1_seg7_M 1 985
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026427.1_seg7_M	RefSeq	region	1	985	.	+	.	ID=NC_026427.1_seg7_M:1..985;Dbxref=taxon:1332244;Name=7;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=7;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026427.1_seg7_M	RefSeq	gene	1	982	.	+	.	ID=gene-TS66_s7gp1;Dbxref=GeneID:23104232;Name=M2;gbkey=Gene;gene=M2;gene_biotype=protein_coding;locus_tag=TS66_s7gp1
+NC_026427.1_seg7_M	RefSeq	CDS	1	26	.	+	0	ID=cds-YP_009118477.1;Parent=gene-TS66_s7gp1;Dbxref=Genbank:YP_009118477.1,GeneID:23104232;Name=YP_009118477.1;gbkey=CDS;gene=M2;locus_tag=TS66_s7gp1;product=matrix protein 2;protein_id=YP_009118477.1
+NC_026427.1_seg7_M	RefSeq	CDS	715	982	.	+	1	ID=cds-YP_009118477.1;Parent=gene-TS66_s7gp1;Dbxref=Genbank:YP_009118477.1,GeneID:23104232;Name=YP_009118477.1;gbkey=CDS;gene=M2;locus_tag=TS66_s7gp1;product=matrix protein 2;protein_id=YP_009118477.1
+NC_026427.1_seg7_M	RefSeq	gene	1	759	.	+	.	ID=gene-TS66_s7gp2;Dbxref=GeneID:23104231;Name=M1;gbkey=Gene;gene=M1;gene_biotype=protein_coding;locus_tag=TS66_s7gp2
+NC_026427.1_seg7_M	RefSeq	CDS	1	759	.	+	0	ID=cds-YP_009118478.1;Parent=gene-TS66_s7gp2;Dbxref=Genbank:YP_009118478.1,GeneID:23104231;Name=YP_009118478.1;gbkey=CDS;gene=M1;locus_tag=TS66_s7gp2;product=matrix protein 1;protein_id=YP_009118478.1
+##sequence-region NC_026428.1_seg8_NS 1 841
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=1332244
+NC_026428.1_seg8_NS	RefSeq	region	1	841	.	+	.	ID=NC_026428.1_seg8_NS:1..841;Dbxref=taxon:1332244;Name=8;collection-date=05-Mar-2013;country=China;gbkey=Src;genome=genomic;mol_type=viral cRNA;nat-host=Homo sapiens;note=passage details: E1;segment=8;serotype=H7N9;strain=A/Shanghai/02/2013
+NC_026428.1_seg8_NS	RefSeq	gene	1	838	.	+	.	ID=gene-TS66_s8gp1;Dbxref=GeneID:23104236;Name=NEP;gbkey=Gene;gene=NEP;gene_biotype=protein_coding;gene_synonym=NS2;locus_tag=TS66_s8gp1
+NC_026428.1_seg8_NS	RefSeq	CDS	1	30	.	+	0	ID=cds-YP_009118479.1;Parent=gene-TS66_s8gp1;Dbxref=Genbank:YP_009118479.1,GeneID:23104236;Name=YP_009118479.1;Note=nonstructural protein 2;gbkey=CDS;gene=NEP;locus_tag=TS66_s8gp1;product=nuclear export protein;protein_id=YP_009118479.1
+NC_026428.1_seg8_NS	RefSeq	CDS	503	838	.	+	0	ID=cds-YP_009118479.1;Parent=gene-TS66_s8gp1;Dbxref=Genbank:YP_009118479.1,GeneID:23104236;Name=YP_009118479.1;Note=nonstructural protein 2;gbkey=CDS;gene=NEP;locus_tag=TS66_s8gp1;product=nuclear export protein;protein_id=YP_009118479.1
+NC_026428.1_seg8_NS	RefSeq	gene	1	654	.	+	.	ID=gene-TS66_s8gp2;Dbxref=GeneID:23104235;Name=NS1;gbkey=Gene;gene=NS1;gene_biotype=protein_coding;locus_tag=TS66_s8gp2
+NC_026428.1_seg8_NS	RefSeq	CDS	1	654	.	+	0	ID=cds-YP_009118480.1;Parent=gene-TS66_s8gp2;Dbxref=Genbank:YP_009118480.1,GeneID:23104235;Name=YP_009118480.1;gbkey=CDS;gene=NS1;locus_tag=TS66_s8gp2;product=nonstructural protein 1;protein_id=YP_009118480.1
+###
