@@ -1,3 +1,5 @@
+import os
+from subprocess import run, PIPE
 from os import path
 import re
 from datetime import datetime
@@ -52,7 +54,7 @@ preamble = preamble.replace("FontsPath", fonts_path)
 def get_files(name):
     files = dict(
         stat_fp=path.abspath(f"{name}/stat/{name}.stat"),
-        cov_fig_fp=path.abspath(f"{name}/figures/{name}.coverage.pdf"),
+        cov_figs_dir=path.abspath(f"{name}/figures"),
         annotated_var_list=path.abspath(f"{name}/variants/{name}.report.snpEff.annotate.txt"),
         unannotated_vcf_fp=path.abspath(f"{name}/variants/{name}.report.vcf"),
         consensus_fp=path.abspath(f"{name}/consensus/{name}.consensus.fasta"),
@@ -125,10 +127,26 @@ def nanoplot_infos(nanoplot_qc_summary, nanoplot_raw_pic, nanoplot_clean_pic):
     return "%\n".join(tex)
 
 
-def coverage(cov_fig):
+def coverage(cov_figs_dir):
+    shell_out = run(f"ls -t {cov_figs_dir}", shell=True, stdout=PIPE)
+    files = shell_out.stdout.decode("utf-8").strip().split("\n")
+    files.reverse()
+    figs_num = len(files)
     tex = []
     tex.append("\\section{覆盖度}")
-    tex.append("{\\raggedright \includegraphics[width=1.0\\textwidth]{" + cov_fig + "}}")
+    if figs_num == 1:
+        tex.append("{\\raggedright \includegraphics[width=1.0\\textwidth]{" + path.join(cov_figs_dir, files[0]) + "}}")
+    else:
+        sub_tex = []
+        for file in files:
+            sub_tex.append(
+                "{\\raggedright \includegraphics[width=0.5\\textwidth]{" + path.join(cov_figs_dir, file) + "}}")
+            if len(sub_tex) == 2:
+                tex.append("\n".join(sub_tex) + "\\par")
+                sub_tex =[]
+            if file == files[-1] and len(sub_tex) == 1:
+                tex.append(f"%\n{sub_tex[0]}")
+
     return "%\n".join(tex)
 
 
@@ -241,7 +259,7 @@ def tex_report(sample_name, out_tex):
     tex_lines = []
     files = get_files(sample_name)
     stat_fp = files['stat_fp']
-    cov_fig_fp = files['cov_fig_fp']
+    cov_figs_dir = files['cov_figs_dir']
     annotated_var_fp = files['annotated_var_list']
     unannotated_vcf_fp = files['unannotated_vcf_fp']
     consensus_fp = files['consensus_fp']
@@ -257,7 +275,7 @@ def tex_report(sample_name, out_tex):
     tex_lines.append("\\end{center}")
     tex_lines.append(infomations(stat_fp))
     tex_lines.append(nanoplot_infos(nanoplot_qc_summary, nanoplot_raw_pic, nanoplot_clean_pic))
-    tex_lines.append(coverage(cov_fig_fp))
+    tex_lines.append(coverage(cov_figs_dir))
     tex_lines.append(consensus(consensus_fp))
     tex_lines.append(variants_list(annotated_var_fp, unannotated_vcf_fp))
     tex_lines.append(lineage(lineage_report_fp))

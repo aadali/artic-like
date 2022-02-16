@@ -89,7 +89,7 @@ else:
 rule all:
     input:
         a=f"{SAMPLE}/consensus/{SAMPLE}.consensus.fasta",
-        b=f"{SAMPLE}/figures/{SAMPLE}.coverage.pdf",
+        b=f"{SAMPLE}/figures",
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
         e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf",
@@ -100,7 +100,7 @@ rule all:
 rule consensus:
     input:
         a=f"{SAMPLE}/consensus/{SAMPLE}.consensus.fasta",
-        b=f"{SAMPLE}/figures/{SAMPLE}.coverage.pdf",
+        b=f"{SAMPLE}/figures",
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
         e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
@@ -323,9 +323,9 @@ rule plot:
     input:
         per_base_dp=rules.mosdepth.output.per_base_dp
     output:
-        fig=f"{SAMPLE}/figures/{SAMPLE}.coverage.pdf"
+        fig=directory(f"{SAMPLE}/figures")
     shell:
-        f"python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}}"
+        f"mkdir -p {{output.fig}}; python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}}"
 
 rule snpEff:
     # snpEff annotate if {what_sample} is collected in the snpEff database
