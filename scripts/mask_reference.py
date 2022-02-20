@@ -7,7 +7,7 @@ def parse_reference(ref_fh):
     with open(ref_fh, "r") as inf:
         for line in inf:
             if line.startswith(">"):
-                contig = line.strip()[1:]
+                contig = line.strip().split(" ")[0][1:]
                 contig_seq[contig] = []
             else:
                 contig_seq[contig].append(line)

@@ -92,7 +92,7 @@ def infomations(stat_file):
     mapped_line_num, mapped_data = mapped.group(1), mapped.group(2)
     mapped_data = f"{int(mapped_data) / 1000000:.2f}M"
     tex.append("\\section{基本信息}")
-    tex.append("\\begin{tabular}[htbp]{>{\\raggedright\\arraybackslash}m{5cm} >{\\raggedright\\arraybackslash}m{5cm}}")
+    tex.append("\\begin{tabular}[htbp]{>{\\raggedright\\arraybackslash}m{7cm} >{\\raggedright\\arraybackslash}m{5cm}}")
     tex.append(f"样本名称 & {escape_char(sample_name)} \\\\")
     tex.append(f"分析时间 & {escape_char(time)} \\\\")
     tex.append(f"测序数据量 & {escape_char(raw_data)} \\\\")
@@ -153,7 +153,7 @@ def coverage(cov_figs_dir):
 def consensus(consensus_fa):
     tex = []
     tex.append("\\section{一致性序列}")
-    tex.append(consensus_fa)
+    tex.append(escape_char(consensus_fa))
     return "%\n".join(tex)
 
 
@@ -250,7 +250,7 @@ def lineage(lineage_report):
     tex.append("\\begin{tabular}[htbp]{")
     tex.append(">{\\centering\\arraybackslash}m{0.2\\textwidth}" * 4 + "}\\hline")
     tex.append("样本 & Pangolin分型 & WHO命名 & Pangolin版本 \\\\ \\hline")
-    tex.append(f"{sample_name} & {pangolin_lineage} & {who} & {pangolin_version} \\\\ \\hline")
+    tex.append(f"{escape_char(sample_name)} & {pangolin_lineage} & {who} & {pangolin_version} \\\\ \\hline")
     tex.append("\\end{tabular}")
     return "%\n".join(tex)
 

@@ -277,11 +277,11 @@ rule get_low_cover_region:
         per_base_dp=f"{SAMPLE}/mosdepth/{SAMPLE}.per-base.bed.gz"
     output:
         low_cover_bed=f"{SAMPLE}/mosdepth/{SAMPLE}.low_cover.bed",
-        tempbed1=temporary(f"{SAMPLE}/modepth/{SAMPLE}.low_cover.temp1.bed"),
+        tempbed1=temporary(f"{SAMPLE}/mosdepth/{SAMPLE}.low_cover.temp1.bed"),
     params:
         min_dp=MIN_DP
     shell:
-        f"zcat {{input.per_base_dp}} | awk '$4 < {{params.min_dp}}' | sort -k2 -n > {{output.tempbed1}} &&  "
+        f"zcat {{input.per_base_dp}} | awk '$4 < {{params.min_dp}}' > {{output.tempbed1}} &&  "
         f"bedtools merge -i {{output.tempbed1}} > {{output.low_cover_bed}}"
 
 rule pre_mask:
