@@ -62,13 +62,13 @@ def plot_coverage(per_base_dp, out_dir):
             positions.extend(list(range(row.start, row.end)))
             depth.extend((row.end - row.start) * [row.depth])
 
-        # depth2 = [dp if dp < 1200 else 1200 for dp in depth]
-        ax.bar(positions, depth, width=1)
+        depth2 = [dp if dp < 3000 else 3000 for dp in depth]
+        ax.bar(positions, depth2, width=1)
         ax.set_xlabel('Position')
         ax.set_ylabel("Depth")
         ax.set_title(plot_title)
         ax.xaxis.set_major_locator(MultipleLocator(bin_width))
-        # ax.yaxis.set_major_locator(MultipleLocator(100))
+        ax.yaxis.set_major_locator(MultipleLocator(200))
         ax.xaxis.set_major_formatter(xaxis_major_formater)
         ax.set_xlim(-length * 0.01, length * 1.01)
         ax.spines['right'].set_visible(False)
