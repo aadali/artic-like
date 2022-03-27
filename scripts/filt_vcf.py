@@ -5,38 +5,28 @@ import vcf
 import re
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--frameshifts", action="store_true")
 parser.add_argument("--min-depth", required=False, type=int, default=20)
 parser.add_argument("--min-qual", required=False, type=int, default=20)
-parser.add_argument("--het-site", required=False, type=str, default="more")
 parser.add_argument("inputvcf")
 parser.add_argument("passvcf")
 parser.add_argument("failvcf")
-parser.add_argument("reportvcf")
 
 args = parser.parse_args()
 
 inputvcf = args.inputvcf
 passvcf = args.passvcf
 failvcf = args.failvcf
-reportvcf = args.reportvcf
 min_dp = args.min_depth
 min_qual = args.min_qual
-het_site = args.het_site
 
-if het_site not in ['more', 'N']:
-    raise Exception("het_site must be \"more\" or \"N\"")
 
 pass_vcf = open(passvcf, "w")
 fail_vcf = open(failvcf, "w")
-report_vcf = open(reportvcf, "w")
-medaka_vcf = True if "medaka" in inputvcf else False
 with open(inputvcf, "r") as invcf:
     for line in invcf:
         if line.startswith("#"):
             pass_vcf.write(line)
             fail_vcf.write(line)
-            report_vcf.write(line)
             continue
         CHRO, POS, _, REF, ALT, QUAL, _, INFO, FORMAT, SAMPLE = line.strip().split("\t")
         if len(ALT.split(",")) > 1:
@@ -46,6 +36,18 @@ with open(inputvcf, "r") as invcf:
             inframe = True
         else:
             inframe = False
+        GT, GQ = SAMPLE.split(":")
+        GT = int(GT)
+        GQ = int(GQ)
+        if GT != 1:
+            raise Exception("Medaka variants is not alt homo")
+        if GQ < args.min_qual or float(QUAL) < args.min_qual:
+            fail_vcf.write(line)
+        else:
+            pass_vcf.write(line)
+
+        continue # don't run the below code
+
         gt_idx = FORMAT.split(":").index("GT")
         sample = SAMPLE.split(":")
         gt = sample[gt_idx]
