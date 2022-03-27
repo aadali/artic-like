@@ -76,7 +76,7 @@ class Primers(object):
             right_pos = primers[paired_primers_name]['right']['end']
             if right_pos < left_pos:
                 return primers[paired_primers_name]
-        return {}
+        return
 
 
 def paired_supplementary(align1, align2, primers, tail_head_primers, reference_len):
