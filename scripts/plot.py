@@ -41,7 +41,7 @@ def plot_coverage(per_base_dp, out_dir, sample_name):
             cov = sub_df.query("depth >= @i").shape[0] / length
             title.append(f">={i}X: {cov:.2%}")
 
-        plot_title = f"{sample_name}{group}\n{title[0]:^20}{title[1]:^20}\n{title[2]:^20}{title[3]:^20}"
+        plot_title = f"{sample_name}-{group}\n{title[0]:^20}{title[1]:^20}\n{title[2]:^20}{title[3]:^20}"
         fig, ax = plt.subplots(figsize=(12, 6))
         positions = sub_df['position']
         depth = sub_df['depth']

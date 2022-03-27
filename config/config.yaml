@@ -5,7 +5,7 @@ input_fastq: ""
 primer_bed: ""
 
 # if no primer bed file, the raw fastq will be trimmed {trim_bases} base both of the ends
-trim_bases: 75
+trim_bases: 60
 
 # if read length is less than {min_read_len}, this read will be dropped
 min_read_len: 300
