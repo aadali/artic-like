@@ -62,22 +62,14 @@ MIN_LEN = int(config.get("min_read_len",200))
 MAX_LEN = int(config.get("max_read_len",1000))
 MIN_READ_Q = int(config.get("min_read_qual",9))
 MIN_MAPQ = int(config.get("min_mapq",60))
-MAP_THREAD = int(config.get("map_thread",8))
 MIN_DP = int(config.get("min_dp",30))
 MIN_QUAL = int(config.get("min_qual",20))
 HET_SITE = config.get("het_site", "more")
-LONGSHOT = bool(config.get("longshot", 1))
-frameshifts = bool(config.get("frameshifts", 1))
-FRAMESHIFTS = "--frameshifts" if frameshifts else ""
 MODEL = config.get("model","r941_min_hac_g507")
 SAMPLE = config.get("sample_name","test001")
 GENOME = path.join(SNAKEDIR,"genome",config.get("what_sample","sars-cov-2"),"sequences.fa")
 SNPEFF_DATA = path.join(SNAKEDIR,"genome")
 SNPEFF_CONF = path.join(SNAKEDIR,"config/snpEff.config")
-if LONGSHOT:
-    VCF = f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
-else:
-    VCF = f"{SAMPLE}/variants/{SAMPLE}.medaka.ann.vcf"
 
 
 ##### init the other params end...
@@ -92,7 +84,7 @@ rule all:
         b=f"{SAMPLE}/figures",
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
-        e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf",
+        e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf",
         f = f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
         g = f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
         h = f"{SAMPLE}/report/{SAMPLE}.report.pdf"
@@ -103,7 +95,7 @@ rule consensus:
         b=f"{SAMPLE}/figures",
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
-        e=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
+        e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
 
 
 rule annotate:
@@ -149,8 +141,8 @@ rule nanoplot:
         raw_prefix=f"{SAMPLE}_raw.",
         clean_prefix=f"{SAMPLE}_clean."
     shell:
-        f"NanoPlot -t {{params.threads}} --fastq {FQ} --tsv_stats --prefix {{params.raw_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
-        f"NanoPlot -t {{params.threads}} --fastq {{input.clean_data}} --tsv_stats --prefix {{params.clean_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
+        f"NanoPlot -t {{params.threads}} --fastq {FQ} --tsv_stats --downsample 2000 --prefix {{params.raw_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
+        f"NanoPlot -t {{params.threads}} --fastq {{input.clean_data}} --tsv_stats --downsample 2000 --prefix {{params.clean_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
         f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}};\n"
         f"touch {{output.finish}}  "
 
@@ -165,7 +157,7 @@ rule map:
         tempbam=temporary(f"{SAMPLE}/aligns/{SAMPLE}.temp.sorted.bam")
     params:
         min_mapq=MIN_MAPQ,
-        threads=MAP_THREAD
+        threads=workflow.cores
     shell:
         f"minimap2 -ax map-ont -R \"@RG\\tID:{SAMPLE}\\tSM:{SAMPLE}\" -t {{params.threads}} --MD {{input.genome}} {{input.clean_data}} | "
         f"samtools view -@ {{params.threads}} -bS > {{output.raw_bam}};\n"
@@ -225,40 +217,39 @@ rule medaka_annotate:
     output:
         medaka_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.medaka.ann.vcf"
     shell:
-        "medaka tools annotate --dpsp {input.vcf} {input.genome} {input.bam} {output.medaka_ann_vcf}"
+        "medaka tools annotate --pad 25 {input.vcf} {input.genome} {input.bam} {output.medaka_ann_vcf}"
 
 
-rule longshot:
-    # longshot call variants from the potential variants from medaka variants
+rule longshot_annotate:
+    # longshot call variants from the potential variants from medaka variants to get AD info
     input:
-        vcf=rules.bcftools_filter.output.vcf,bam=rules.trim_primers.output.trimmed_bam
+        vcf=rules.bcftools_filter.output.vcf,genome=GENOME,bam=rules.trim_primers.output.trimmed_bam
     output:
-        vcf=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
+        longshot_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
     shell:
-        f"longshot -F -P 0 --bam {{input.bam}} --ref {GENOME} --out {{output.vcf}} -v {{input.vcf}}"
+        f"longshot -F -P 0 --max_cigar_indel 200 --bam {{input.bam}} --ref {{input.genome}} --out {{output.longshot_ann_vcf}} -v {{input.vcf}}"
 
-rule mosdepth:
-    # get the coverage of each site
+rule get_per_base_depth:
     input:
-        rules.trim_primers.output.trimmed_bam
+        bam=rules.trim_primers.output.trimmed_bam
     output:
-        per_base_dp=f"{SAMPLE}/mosdepth/{SAMPLE}.per-base.bed.gz"
+        per_base_depth=f"{SAMPLE}/depth/{SAMPLE}.per-base.depth"
     shell:
-        f"mosdepth {SAMPLE}/mosdepth/{SAMPLE} {{input}}"
+        f"samtools depth -a -J {{input.bam}} > {{output.per_base_depth}}"
 
 
 rule filt_vcf:
     # get the pass vcf and the fail vcf
     input:
-        vcf=VCF
+        vcf1=rules.medaka_annotate.output.medaka_ann_vcf,
+        # vcf2=rules.longshot_annotate.output.longshot_ann_vcf
     output:
         pass_vcf=f"{SAMPLE}/variants/{SAMPLE}.pass.vcf",
         fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf",
-        report_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
     shell:
-        f"python {SNAKEDIR}/scripts/filt_vcf.py {FRAMESHIFTS} --min-depth {MIN_DP} "
-        f"--min-qual {MIN_QUAL} --het-site {{HET_SITE}} {{input.vcf}} "
-        f"{{output.pass_vcf}} {{output.fail_vcf}} {{output.report_vcf}}; \n"
+        f"python {SNAKEDIR}/scripts/filt_vcf.py  --min-depth {MIN_DP} "
+        f"--min-qual {MIN_QUAL}  {{input.vcf1}}  "
+        f"{{output.pass_vcf}} {{output.fail_vcf}} ; \n"
 
 rule index:
     input:
@@ -274,14 +265,15 @@ rule index:
 rule get_low_cover_region:
     # bedtools will be used to get the low coverage region, this region will be N in consensus fasta
     input:
-        per_base_dp=f"{SAMPLE}/mosdepth/{SAMPLE}.per-base.bed.gz"
+        per_base_dp=f"{SAMPLE}/depth/{SAMPLE}.per-base.depth"
     output:
-        low_cover_bed=f"{SAMPLE}/mosdepth/{SAMPLE}.low_cover.bed",
-        tempbed1=temporary(f"{SAMPLE}/mosdepth/{SAMPLE}.low_cover.temp1.bed"),
+        low_cover_bed=f"{SAMPLE}/depth/{SAMPLE}.low_cover.bed",
+        tempbed1=temporary(f"{SAMPLE}/depth/{SAMPLE}.low_cover.temp1.bed"),
     params:
-        min_dp=MIN_DP
+        # min_dp=MIN_DP,
+        awk_query=f"BEGIN{{OFS=\"\\t\"}}{{if($3< {MIN_DP}) {{print $1,$2-1,$2}} }}"
     shell:
-        f"zcat {{input.per_base_dp}} | awk '$4 < {{params.min_dp}}' > {{output.tempbed1}} &&  "
+        f"awk '{{params.awk_query}}' {{input.per_base_dp}} > {{output.tempbed1}} && "
         f"bedtools merge -i {{output.tempbed1}} > {{output.low_cover_bed}}"
 
 rule pre_mask:
@@ -321,26 +313,26 @@ rule stat:
 rule plot:
     # plot the coverage fig
     input:
-        per_base_dp=rules.mosdepth.output.per_base_dp
+        per_base_dp=rules.get_per_base_depth.output.per_base_depth
     output:
-        fig=directory(f"{SAMPLE}/figures")
+        fig=directory(f"{SAMPLE}/figures"),
     shell:
-        f"mkdir -p {{output.fig}}; python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}}"
+        f"mkdir -p {{output.fig}}; python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}} {SAMPLE}"
 
 rule snpEff:
     # snpEff annotate if {what_sample} is collected in the snpEff database
     input:
-        report_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
+        vcf=rules.longshot_annotate.output.longshot_ann_vcf
     output:
-        report_ann_vcf=f"{SAMPLE}/variants/{SAMPLE}.report.annotate.vcf"
+        vcf=f"{SAMPLE}/variants/{SAMPLE}.report.vcf"
     shell:
         f"snpEff -c {SNPEFF_CONF} -dataDir {SNPEFF_DATA} -no-downstream -noStats -no-upstream {config.get('what_sample','sars-cov-2')} "
-        f"{{input.report_vcf}} > {{output.report_ann_vcf}};\n"
+        f"{{input.vcf}} > {{output.vcf}};\n"
 
 rule handle_snpEff_result:
     # convert the report vcf to variants list
     input:
-        report_ann_vcf=rules.snpEff.output.report_ann_vcf
+        report_ann_vcf=rules.snpEff.output.vcf
     output:
         report_variants_list=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt"
     shell:
