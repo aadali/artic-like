@@ -32,7 +32,7 @@ what_sample: "sars-cov-2"
 model: "r941_min_hac_g507"
 
 # the min depth in vcf, if the dp is less than {min_dp}, this position will be N
-min_dp: 30
+min_dp: 20
 
 # the min qual of variant quality, if the QUAL is less than {min_qual}, the position will be N
 min_qual: 20
@@ -41,19 +41,10 @@ min_qual: 20
 # if het_set == "more", this position will be the allele whose depth is bigger;
 # elif het_set == "N", this position will be N;
 # default more
+# this para will be not USED in this pipelline. It is provided for potential future upgrade
 het_site: "more"
 
-# if frameshifts == 0, a variant cause frameshift will be dropped, this position will be N
-# if frameshifts == 1, a variant cause frameshift will be reserved
-# possible values {0, 1}
-# default 1
-frameshifts: 1
 
-# if longshot == 0, use medaka tools annotate;
-# if longshot == 1, use longshot call potential variants
-# possible values {0, 1}
-# default 1
-longshot: 1
 
 
 
