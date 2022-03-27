@@ -192,6 +192,12 @@ def df_to_table_tex(df):
 
 
 def variants_list(annotated_var, unannotated_vcf):
+    f"""
+    convert vcf to tex table
+    :param annotated_var: for genome that has snpEffectPredictor.bin in artic-like/genome/{what_sample}
+    :param unannotated_vcf:
+    :return:
+    """
     if not (path.exists(annotated_var) or path.exists(unannotated_vcf)):
         raise Exception()
     ann_col_formats = (r">{\centering\arraybackslash}m{0.08\paperwidth}"
@@ -221,6 +227,7 @@ def variants_list(annotated_var, unannotated_vcf):
         tex.append("\\hline \\endfoot\n\\hline \\endlastfoot")
         df = pd.read_csv(annotated_var, sep="\t", header=None)
         tex.append(df_to_table_tex(df))
+    # for sars-ncov-2, the below code would never be used, because snpEff will always annotate the variants
     else:
         tex.append(f"\\begin{{longtable}}{{{unann_col_formats}}}")
         title = "\\hline 染色体 & 变异位置 & 参考碱基 & 突变碱基 & 位点深度 \\\\ \\hline"
