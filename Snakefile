@@ -1,9 +1,14 @@
 import os
 from os import path
-
+import yaml
 
 SNAKEDIR = path.dirname(path.abspath(workflow.snakefile))
 configfile: path.join(SNAKEDIR,"config/config.yaml")
+with open(path.join(SNAKEDIR,"config/config.yaml"), 'r', encoding='utf-8') as f:
+    yaml_text = f.read()
+    dict_text = yaml.load(yaml_text,Loader=yaml.FullLoader)
+    config_paras = dict_text.keys()
+
 if workdir := workflow.overwrite_workdir:
     WORKDIR = path.abspath(workdir)
 else:
@@ -15,7 +20,7 @@ if "input_fastq" not in config:
 
 INPUT_FASTQ = config.get("input_fastq")
 if not path.exists(path.abspath(INPUT_FASTQ)) or len(INPUT_FASTQ.strip()) <= 1:
-    raise Exception(f"no such file or directory: {INPUT_FASTQ}")
+    raise Exception(f"the parameter: \"input_fastq\" not be specified OR no such file or directory: {INPUT_FASTQ}")
 
 if path.isdir(INPUT_FASTQ):
     files = os.listdir(path.abspath(INPUT_FASTQ))
@@ -64,15 +69,20 @@ MIN_READ_Q = int(config.get("min_read_qual",9))
 MIN_MAPQ = int(config.get("min_mapq",60))
 MIN_DP = int(config.get("min_dp",30))
 MIN_QUAL = int(config.get("min_qual",20))
-HET_SITE = config.get("het_site", "more")
+HET_SITE = config.get("het_site","more")
 MODEL = config.get("model","r941_min_hac_g507")
 SAMPLE = config.get("sample_name","test001")
 GENOME = path.join(SNAKEDIR,"genome",config.get("what_sample","sars-cov-2"),"sequences.fa")
 SNPEFF_DATA = path.join(SNAKEDIR,"genome")
 SNPEFF_CONF = path.join(SNAKEDIR,"config/snpEff.config")
 
-
 ##### init the other params end...
+
+
+#### check config params, the params name from command line may be wrong because of typing
+for para in config:
+    if para not in config_paras:
+        raise Exception("Couldn't understand the parameter: %s" % (para))
 
 # ============================
 #       DEFINE RULES
@@ -85,9 +95,9 @@ rule all:
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
         e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf",
-        f = f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
-        g = f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
-        h = f"{SAMPLE}/report/{SAMPLE}.report.pdf"
+        f=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
+        g=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
+        h=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
 
 rule consensus:
     input:
@@ -242,7 +252,7 @@ rule filt_vcf:
     # get the pass vcf and the fail vcf
     input:
         vcf1=rules.medaka_annotate.output.medaka_ann_vcf,
-        # vcf2=rules.longshot_annotate.output.longshot_ann_vcf
+    # vcf2=rules.longshot_annotate.output.longshot_ann_vcf
     output:
         pass_vcf=f"{SAMPLE}/variants/{SAMPLE}.pass.vcf",
         fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf",
@@ -374,9 +384,3 @@ rule make_report_pdf:
         f"rm {SAMPLE}/report/{SAMPLE}.report.log;\n"
         f"rm {SAMPLE}/report/{SAMPLE}.report.aux;\n"
         f"rm {{rules.nanoplot.output.finish}}"
-
-
-
-
-
-
