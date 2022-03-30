@@ -39,9 +39,10 @@ with open(inputvcf, "r") as invcf:
         GT, GQ = SAMPLE.split(":")
         GT = int(GT)
         GQ = int(GQ)
+        dp = int(re.search("DP=(\d+)", INFO).group(1))
         if GT != 1:
             raise Exception("Medaka variants is not alt homo")
-        if GQ < args.min_qual or float(QUAL) < args.min_qual:
+        if GQ < args.min_qual or float(QUAL) < args.min_qual or int(dp) < args.min_depth:
             fail_vcf.write(line)
         else:
             pass_vcf.write(line)
