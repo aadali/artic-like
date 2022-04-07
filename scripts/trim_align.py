@@ -306,10 +306,6 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log):
 
 
 if __name__ == '__main__':
-    input_bam = "/home/a/Desktop/henancdc_2022_01_04_trim_primers-3/aligns/henancdc_2022_01_04_trim_primers-3.sorted.bam"
-    out_bam = "/home/a/Desktop/henancdc_test.bam"
-    primer_bed = "/home/a/N4_primers.bed"
-    trim_log = "/home/a/Desktop/new_pipe.txt"
     paras_num = len(argv)
     if paras_num != 5:
         raise Exception(usage)
