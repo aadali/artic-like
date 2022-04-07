@@ -4,7 +4,7 @@ import yaml
 
 SNAKEDIR = path.dirname(path.abspath(workflow.snakefile))
 configfile: path.join(SNAKEDIR,"config/config.yaml")
-with open(path.join(SNAKEDIR,"config/config.yaml"), 'r', encoding='utf-8') as f:
+with open(path.join(SNAKEDIR,"config/config.yaml"),'r',encoding='utf-8') as f:
     yaml_text = f.read()
     dict_text = yaml.load(yaml_text,Loader=yaml.FullLoader)
     config_paras = dict_text.keys()
@@ -95,9 +95,10 @@ rule all:
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
         e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf",
-        f=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
-        g=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
-        h=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
+        f=f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.report",
+        g=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
+        h=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv",
+        i=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
 
 rule consensus:
     input:
@@ -105,17 +106,18 @@ rule consensus:
         b=f"{SAMPLE}/figures",
         c=f"{SAMPLE}/stat/{SAMPLE}.stat",
         d=f"{SAMPLE}/nanoplot/{SAMPLE}.qc.summary.txt",
-        e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf"
+        e=f"{SAMPLE}/variants/{SAMPLE}.longshot.ann.vcf",
+        f=f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.report"
 
 
 rule annotate:
     input:
-        f=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
-        g=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv"
+        g=f"{SAMPLE}/variants/{SAMPLE}.report.snpEff.annotate.txt",
+        h=f"{SAMPLE}/pangolin/{SAMPLE}.lineage_report.csv"
 
 rule report:
     input:
-        h=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
+        i=f"{SAMPLE}/report/{SAMPLE}.report.pdf"
 
 
 rule fastp:
@@ -183,9 +185,10 @@ rule trim_primers:
         primer_bed=PRIMER
     output:
         trimmed_bam=f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.bam",
-        temp_bam=temporary(f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.temp.bam")
+        temp_bam=temporary(f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.temp.bam"),
+        trim_log=f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.report"
     shell:
-        f"python {SNAKEDIR}/scripts/trim_primer.py {{input.sorted_bam}} {{output.temp_bam}} {{input.primer_bed}};\n"
+        f"python {SNAKEDIR}/scripts/trim_align.py {{input.sorted_bam}} {{output.temp_bam}} {{input.primer_bed}} {{output.trim_log}};\n"
         f"samtools sort {{output.temp_bam}} -o {{output.trimmed_bam}} && "
         f"samtools index {{output.trimmed_bam}}"
 
