@@ -68,7 +68,7 @@ class Primers(object):
         """
         :return: one paired primers, the pcr production of this primer will span the head and tail of the circle genome
         or
-        a empty dict
+        None
         """
         primers = self.get_primers()
         for paired_primers_name in primers:
