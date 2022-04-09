@@ -7,7 +7,12 @@ import pysam
 
 consumes_ref = [1, 0, 1, 1, 0, 0, 0, 1, 1]
 consumes_query = [1, 1, 0, 0, 1, 0, 0, 1, 1]
-usage = f"usage: {path.basename(__file__)} <input_bam> <output_bam> <primer_bed> <trim_log>"
+"""
+cigars = {"M": 0, "I": 1, "D": 2,
+          "N": 3, "S": 4, "H": 5,
+          "P": 6, "=": 7, "X": 8, "B": 9}
+"""
+usage = f"usage: {path.basename(__file__)} <input_bam> <output_bam> <primer_bed> <trim_log> <min_overlap>"
 
 
 class Primer(object):
@@ -238,7 +243,7 @@ def trim_right(segment, primers, supplementary=False):
     return segment
 
 
-def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log):
+def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap):
     inbam = pysam.AlignmentFile(inbam_fp, "rb")
     outbam = pysam.AlignmentFile(outbam_fp, "wb", template=inbam)
     trim_log_fh = open(trim_log, 'w', encoding='utf-8')
@@ -301,7 +306,7 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log):
                     str(trimmed_segment.reference_length),
                     str(paired_primers['amplicon'].insert_len)
                 ]) + "\n"
-                if trimmed_segment.reference_length < 100:
+                if trimmed_segment.reference_length < int(min_overlap):
                     continue
                 trim_log_fh.write(record)
                 outbam.write(trimmed_segment)

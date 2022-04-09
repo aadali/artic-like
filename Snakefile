@@ -69,6 +69,7 @@ MIN_READ_Q = int(config.get("min_read_qual",9))
 MIN_MAPQ = int(config.get("min_mapq",60))
 MIN_DP = int(config.get("min_dp",30))
 MIN_QUAL = int(config.get("min_qual",20))
+MIN_OVERLAP = int(config.get("min_overlap"), 300)
 HET_SITE = config.get("het_site","more")
 MODEL = config.get("model","r941_min_hac_g507")
 SAMPLE = config.get("sample_name","test001")
@@ -188,7 +189,7 @@ rule trim_primers:
         temp_bam=temporary(f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.temp.bam"),
         trim_log=f"{SAMPLE}/aligns/{SAMPLE}.primer_trimmed.report"
     shell:
-        f"python {SNAKEDIR}/scripts/trim_align.py {{input.sorted_bam}} {{output.temp_bam}} {{input.primer_bed}} {{output.trim_log}};\n"
+        f"python {SNAKEDIR}/scripts/trim_align.py {{input.sorted_bam}} {{output.temp_bam}} {{input.primer_bed}} {{output.trim_log}} {MIN_OVERLAP};\n"
         f"samtools sort {{output.temp_bam}} -o {{output.trimmed_bam}} && "
         f"samtools index {{output.trimmed_bam}}"
 
