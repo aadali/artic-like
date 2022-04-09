@@ -255,11 +255,11 @@ rule get_per_base_depth:
 rule filt_vcf:
     # get the pass vcf and the fail vcf
     input:
-        vcf1=rules.medaka_annotate.output.medaka_ann_vcf,
+        vcf1=rules.medaka_annotate.output.medaka_ann_vcf
     # vcf2=rules.longshot_annotate.output.longshot_ann_vcf
     output:
         pass_vcf=f"{SAMPLE}/variants/{SAMPLE}.pass.vcf",
-        fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf",
+        fail_vcf=f"{SAMPLE}/variants/{SAMPLE}.fail.vcf"
     shell:
         f"python {SNAKEDIR}/scripts/filt_vcf.py  --min-depth {MIN_DP} "
         f"--min-qual {MIN_QUAL}  {{input.vcf1}}  "
@@ -282,7 +282,7 @@ rule get_low_cover_region:
         per_base_dp=f"{SAMPLE}/depth/{SAMPLE}.per-base.depth"
     output:
         low_cover_bed=f"{SAMPLE}/depth/{SAMPLE}.low_cover.bed",
-        tempbed1=temporary(f"{SAMPLE}/depth/{SAMPLE}.low_cover.temp1.bed"),
+        tempbed1=temporary(f"{SAMPLE}/depth/{SAMPLE}.low_cover.temp1.bed")
     params:
         # min_dp=MIN_DP,
         awk_query=f"BEGIN{{OFS=\"\\t\"}}{{if($3< {MIN_DP}) {{print $1,$2-1,$2}} }}"
@@ -329,7 +329,7 @@ rule plot:
     input:
         per_base_dp=rules.get_per_base_depth.output.per_base_depth
     output:
-        fig=directory(f"{SAMPLE}/figures"),
+        fig=directory(f"{SAMPLE}/figures")
     shell:
         f"mkdir -p {{output.fig}}; python {SNAKEDIR}/scripts/plot.py {{input.per_base_dp}} {{output.fig}} {SAMPLE}"
 
@@ -369,7 +369,7 @@ rule make_report_tex:
         consensus=rules.get_consensus.output.consensus,
         pass_vcf=rules.index.output.pass_vcf
     output:
-        f"{SAMPLE}/report/{SAMPLE}.report.tex",
+        f"{SAMPLE}/report/{SAMPLE}.report.tex"
     params:
         sample_name=SAMPLE,
         what_sample=config.get("what_sample","sars-cov-2")
