@@ -47,7 +47,7 @@ def plot_coverage(per_base_dp, out_dir, sample_name):
         positions = sub_df['position']
         depth = sub_df['depth']
 
-        depth2 = [dp if dp < 1200 else 1200 + math.log(dp-1200, 2) for dp in depth]
+        depth2 = [dp if dp <= 1050 else 1050 + math.log(dp-1050, 1.2) for dp in depth]
         ax.bar(positions, depth2, width=1)
         ax.set_xlabel('Position')
         ax.set_ylabel("Depth")

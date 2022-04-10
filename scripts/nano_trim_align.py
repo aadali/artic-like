@@ -12,7 +12,7 @@ cigars = {"M": 0, "I": 1, "D": 2,
           "N": 3, "S": 4, "H": 5,
           "P": 6, "=": 7, "X": 8, "B": 9}
 """
-usage = f"usage: {path.basename(__file__)} <input_bam> <output_bam> <primer_bed> <trim_log> <min_overlap>"
+usage = f"usage: {path.basename(__file__)} <input_bam> <output_bam> <primer_bed> <trim_log> <min_overlap> <trim_bases>"
 
 
 class Primer(object):
@@ -136,7 +136,7 @@ def find_closest_amplicon(segment, primers):
         return
 
 
-def trim_left(segment, primers, supplementary=False):
+def trim_left(segment, primers=None, trim_bases=None, supplementary=False):
     assert isinstance(segment, pysam.AlignedSegment)
     segment = copy(segment)
     left_soft = 0
@@ -145,11 +145,18 @@ def trim_left(segment, primers, supplementary=False):
     ref_start, ref_end = segment.reference_start, segment.reference_end
     cigars = segment.cigartuples
     first_cigar = cigars[0]
-    left_primer = primers['left']
+    if primers is not None:
+        left_end = primers['left'].end
+    elif trim_bases is not None:
+        assert isinstance(trim_bases, int)
+        left_end = ref_start + trim_bases
 
-    if ref_start < left_primer.end:
-        segment.reference_start = left_primer.end
-        total_offset = left_primer.end - ref_start
+    else:
+        raise Exception("only one params shoud be spicified in {\"primers\", \"trim_bases\"}")
+
+    if ref_start < left_end:
+        segment.reference_start = left_end
+        total_offset = left_end - ref_start
         for idx, (flag, length) in enumerate(cigars):
             if consumes_query[flag]:
                 left_soft += length
@@ -191,7 +198,7 @@ def trim_left(segment, primers, supplementary=False):
     return segment
 
 
-def trim_right(segment, primers, supplementary=False):
+def trim_right(segment, primers=None, trim_bases=None, supplementary=False):
     assert isinstance(segment, pysam.AlignedSegment)
     segment = copy(segment)
     right_cigar_modify = []
@@ -200,10 +207,16 @@ def trim_right(segment, primers, supplementary=False):
     cigars = segment.cigartuples
     last_cigar = cigars[-1]
     ref_start, ref_end = segment.reference_start, segment.reference_end
-    right_primer = primers['right']
+    if primers is not None:
+        right_start = primers['right'].start
+    elif trim_bases is not None:
+        assert isinstance(trim_bases, int)
+        right_start = ref_end - trim_bases
+    else:
+        raise Exception("only one params shoud be spicified in {\"primers\", \"trim_bases\"}")
 
-    if ref_end > right_primer.start:
-        total_offset = ref_end - right_primer.start
+    if ref_end > right_start:
+        total_offset = ref_end - right_start
         for idx, (flag, length) in enumerate(cigars[::-1]):
             if consumes_query[flag]:
                 right_soft += length
@@ -243,12 +256,13 @@ def trim_right(segment, primers, supplementary=False):
     return segment
 
 
-def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap):
+def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap, trim_bases):
     inbam = pysam.AlignmentFile(inbam_fp, "rb")
     outbam = pysam.AlignmentFile(outbam_fp, "wb", template=inbam)
     trim_log_fh = open(trim_log, 'w', encoding='utf-8')
     primer_base_name = path.basename(primer_bed)
-    no_primer_header = "\t".join(['ReadName', "RefStart", "RefEnd", "AlignLen"])
+    no_primer_header = "\t".join(['ReadName', "RefStart", "RefEnd", "AlignLen",
+                                  "RefStartTrimmed", "RefEndTrimmed", "AlignLenTrimmed"])
     header = "\t".join([
         "ReadName",
         "RefStart",
@@ -267,15 +281,23 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap):
         "InsertLen"
     ])
     if primer_base_name == ".noprimer.txt":
+        trim_bases = int(trim_bases)
         trim_log_fh.write(no_primer_header + '\n')
         for segment in inbam:
             if segment.is_unmapped or segment.is_supplementary:
                 continue
+            new_segment = trim_left(segment, trim_bases=trim_bases)
+            trimmed_segment = trim_right(new_segment, trim_bases=trim_bases)
+            if trimmed_segment.reference_length < int(min_overlap):
+                continue
             trim_log_fh.write(f"{segment.qname}\t"
-                              f"{str(segment.reference_start)}\t"
-                              f"{str(segment.reference_end)}\t"
-                              f"{segment.reference_length}\n")
-            outbam.write(segment)
+                              f"{segment.reference_start}\t"
+                              f"{segment.reference_end}\t"
+                              f"{segment.reference_length}\t"
+                              f"{trimmed_segment.reference_start}\t"
+                              f"{trimmed_segment.reference_end}\t"
+                              f"{trimmed_segment.reference_length}\n")
+            outbam.write(trimmed_segment)
 
     else:
         primers = Primers(primer_bed)
@@ -283,11 +305,11 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap):
         for segment in inbam:
             if segment.is_unmapped or segment.is_supplementary:
                 continue
-            paired_primers = find_closest_amplicon(segment, primers)
+            paired_primers = find_closest_amplicon(segment, primers=primers)
             if paired_primers is None:
                 continue
             else:
-                new_segment = trim_left(segment, paired_primers)
+                new_segment = trim_left(segment, primers=paired_primers)
                 trimmed_segment = trim_right(new_segment, paired_primers)
                 record = "\t".join([
                     segment.qname,
@@ -314,7 +336,7 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap):
 
 if __name__ == '__main__':
     paras_num = len(argv)
-    if paras_num != 5:
+    if paras_num != 7:
         raise Exception(usage)
     else:
         trim_bam(*argv[1:])
