@@ -7,12 +7,13 @@ from sys import argv
 
 import pandas as pd
 
-usage = f"{path.basename(__file__)} <SAMPLE_NAME>  <WHAT_SAMPLE> <REPORT_TEX>"
-if len(argv) != 4:
+usage = f"{path.basename(__file__)} <ANALYSIS_NAME> <SAMPLE_NAME>  <WHAT_SAMPLE> <REPORT_TEX>"
+if len(argv) != 5:
     raise Exception(usage + "\n")
-sample_name = argv[1]
-what_sample = argv[2]
-report_tex = argv[3]
+analysis_name = argv[1]
+sample_name = argv[2]
+what_sample = argv[3]
+report_tex = argv[4]
 
 # sample_name = "test001"
 # what_sample = "sars-cov-2"
@@ -51,17 +52,18 @@ fonts_path = path.join(scripts_dir, "../texlive/fonts")
 preamble = preamble.replace("FontsPath", fonts_path)
 
 
-def get_files(name):
+def get_files(analysis_name, name):
     files = dict(
-        stat_fp=path.abspath(f"{name}/stat/{name}.stat"),
-        cov_figs_dir=path.abspath(f"{name}/figures"),
-        annotated_var_list=path.abspath(f"{name}/variants/{name}.report.snpEff.annotate.txt"),
-        unannotated_vcf_fp=path.abspath(f"{name}/variants/{name}.report.vcf"),
-        consensus_fp=path.abspath(f"{name}/consensus/{name}.consensus.fasta"),
-        lineage_report_fp=path.abspath(f"{name}/pangolin/{name}.lineage_report.csv"),
-        nanoplot_raw_pic=path.abspath(f"{name}/nanoplot/{name}_raw.LengthvsQualityScatterPlot_dot.png"),
-        nanoplot_clean_pic=path.abspath(f"{name}/nanoplot/{name}_clean.LengthvsQualityScatterPlot_dot.png"),
-        nanoplot_qc_summary=path.abspath(f"{name}/nanoplot/{name}.qc.summary.txt")
+        stat_fp=path.abspath(f"{analysis_name}/{name}/stat/{name}.stat"),
+        cov_figs_dir=path.abspath(f"{analysis_name}/{name}/figures"),
+        annotated_var_list=path.abspath(f"{analysis_name}/{name}/variants/{name}.report.snpEff.annotate.txt"),
+        unannotated_vcf_fp=path.abspath(f"{analysis_name}/{name}/variants/{name}.report.vcf"),
+        consensus_fp=path.abspath(f"{analysis_name}/{name}/consensus/{name}.consensus.fasta"),
+        lineage_report_fp=path.abspath(f"{analysis_name}/{name}/pangolin/{name}.lineage_report.csv"),
+        nanoplot_raw_pic=path.abspath(f"{analysis_name}/{name}/nanoplot/{name}_raw.LengthvsQualityScatterPlot_dot.png"),
+        nanoplot_clean_pic=path.abspath(
+            f"{analysis_name}/{name}/nanoplot/{name}_clean.LengthvsQualityScatterPlot_dot.png"),
+        nanoplot_qc_summary=path.abspath(f"{analysis_name}/{name}/nanoplot/{name}.qc.summary.txt")
     )
     return files
 
@@ -143,7 +145,7 @@ def coverage(cov_figs_dir):
                 "{\\raggedright \includegraphics[width=0.5\\textwidth]{" + path.join(cov_figs_dir, file) + "}}")
             if len(sub_tex) == 2:
                 tex.append("\n".join(sub_tex) + "\\par")
-                sub_tex =[]
+                sub_tex = []
             if file == files[-1] and len(sub_tex) == 1:
                 tex.append(f"%\n{sub_tex[0]}")
 
@@ -262,9 +264,9 @@ def lineage(lineage_report):
     return "%\n".join(tex)
 
 
-def tex_report(sample_name, out_tex):
+def tex_report(analysis_name, sample_name, out_tex):
     tex_lines = []
-    files = get_files(sample_name)
+    files = get_files(analysis_name, sample_name)
     stat_fp = files['stat_fp']
     cov_figs_dir = files['cov_figs_dir']
     annotated_var_fp = files['annotated_var_list']
@@ -292,4 +294,4 @@ def tex_report(sample_name, out_tex):
 
 
 if __name__ == '__main__':
-    tex_report(sample_name, report_tex)
+    tex_report(analysis_name, sample_name, report_tex)
