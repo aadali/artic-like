@@ -61,14 +61,12 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
 
         files = list(filter(lambda x: path.isfile(path.join(abs_path,x)),contents))
         if len(dirs) == len(contents):
-            samples = ["" if (
-                # samples whose fastsq files number is too few or the unclaffied will be discarded
-                    len(os.listdir(path.join(abs_path,sample))) < FILES_PER_BAR or
-                    re.search("unclassfied",sample,re.IGNORECASE)) else sample
-                       for sample in dirs]
-            samples = list(set(samples))
-            if "" in samples:
-                samples.remove("")
+            samples = []
+            for sample in dirs:
+                if (len(os.listdir(path.join(abs_path,sample))) > FILES_PER_BAR
+                        or
+                        not re.search("unclassfied",sample,re.IGNORECASE)):
+                    samples.append(sample)
             abs_first_sample = path.join(abs_path,dirs[0])
             command = get_command(abs_first_sample)
 
@@ -116,7 +114,6 @@ if path.exists(abs_primer_bed) and path.isfile(abs_primer_bed):
 else:
     TRIM_BASES = config.get("trim_bases",30)
 ##### check primer bed file and trim bases params end...
-
 
 
 #### check config params, the params name from command line may be wrong because of typing
@@ -419,7 +416,9 @@ rule make_report_tex:
         finish=rules.nanoplot.output.finish,
         consensus=rules.get_consensus.output.consensus,
         pass_vcf=rules.index.output.pass_vcf,
-        coverage_fig=rules.plot.output.fig
+        coverage_fig=rules.plot.output.fig,
+        snpeff_vcf=rules.snpEff.output.vcf,
+        handle_vcf_result=rules.handle_snpEff_result.output.report_variants_list
     output:
         f"{ANALYSIS_NAME}/{{SAMPLE}}/report/{{SAMPLE}}.report.tex"
     params:
