@@ -64,7 +64,7 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
             samples = []
             for sample in dirs:
                 if (len(os.listdir(path.join(abs_path,sample))) > FILES_PER_BAR
-                        or
+                        and
                         not re.search("unclassfied",sample,re.IGNORECASE)):
                     samples.append(sample)
             abs_first_sample = path.join(abs_path,dirs[0])
