@@ -19,8 +19,6 @@ min_read_qual: 8
 # if read map qual is less than {min_mapq}, this align will be dropped from bam
 min_mapq: 30
 
-# map threads
-map_thread: 8
 
 # analysis_name, default test001
 # the pipeline will create a directory named {analysis_name} and if two or more barcode samples in the input_fastq directory,
