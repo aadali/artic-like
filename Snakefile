@@ -73,13 +73,13 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
             # for fastq_pass that contain barcodes directory containing fastq or fastq.gz files
             # abs_path will match the abs path of fastq_pass
             # SAMPLE will match the barcode01 barcode02 or something else directory name
-            return (f"{command}", f"{abs_path}/{{SAMPLE}}/", " > ", samples)
+            return (f"{command}", f"{abs_path}/{{SAMPLE}}/*", " > ", samples)
 
         elif len(files) == len(contents):
             samples = [analysis_name]
             command = get_command(abs_path)
             # for one directory which contains fastq or fastq.gz files
-            return (f"{command}", f"{abs_path}/", " > ", samples)
+            return (f"{command}", f"{abs_path}/*", " > ", samples)
         else:
             raise Exception()
     else:
@@ -112,7 +112,7 @@ TRIM_BASES = 0
 if path.exists(abs_primer_bed) and path.isfile(abs_primer_bed):
     PRIMER = abs_primer_bed
 else:
-    TRIM_BASES = config.get("trim_bases",30)
+    TRIM_BASES = config.get("trim_bases",25)
 ##### check primer bed file and trim bases params end...
 
 
@@ -163,7 +163,7 @@ rule fastp:
         clean_data=f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.clean.fastq.gz",
         js=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.json"),
         html=temporary(f"{ANALYSIS_NAME}{{SAMPLE}}/clean_data/{{SAMPLE}}.html"),
-        tmp=temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq")
+        tmp=temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq.gz") if INPUT.endswith("gz")  else temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq")
     params:
         length_required=MIN_LEN,
         length_limit=MAX_LEN,
@@ -171,7 +171,7 @@ rule fastp:
     threads:
         THREADS
     shell:
-        f"{COMMAND} {{input.raw_data}}/*  {REDIRECTION} {{output.tmp}} && "
+        f"{COMMAND} {{input.raw_data}}  {REDIRECTION} {{output.tmp}} && "
         f"fastp -i {{output.tmp}} -o {{output.clean_data}} "
         # f"--trim_front1 {TRIM_BASES} --trim_tail1 {TRIM_BASES} "
         f"--length_required {{params.length_required}} --length_limit {{params.length_limit}} "
