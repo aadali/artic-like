@@ -162,7 +162,7 @@ rule fastp:
     output:
         clean_data=f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.clean.fastq.gz",
         js=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.json"),
-        html=temporary(f"{ANALYSIS_NAME}{{SAMPLE}}/clean_data/{{SAMPLE}}.html"),
+        html=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.html"),
         tmp=temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq.gz") if INPUT.endswith("gz")  else temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq")
     params:
         length_required=MIN_LEN,
