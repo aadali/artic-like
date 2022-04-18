@@ -65,7 +65,7 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
             for sample in dirs:
                 if (len(os.listdir(path.join(abs_path,sample))) > FILES_PER_BAR
                         and
-                        not re.search("unclassfied",sample,re.IGNORECASE)):
+                        not re.search("unclassified",sample,re.IGNORECASE)):
                     samples.append(sample)
             abs_first_sample = path.join(abs_path,dirs[0])
             command = get_command(abs_first_sample)
@@ -73,19 +73,19 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
             # for fastq_pass that contain barcodes directory containing fastq or fastq.gz files
             # abs_path will match the abs path of fastq_pass
             # SAMPLE will match the barcode01 barcode02 or something else directory name
-            return (f"{command}", f"{abs_path}/{{SAMPLE}}/*", " > ", samples)
+            return (f"{command}", f"{abs_path}/{{SAMPLE}}", "/*",  "> ", samples)
 
         elif len(files) == len(contents):
             samples = [analysis_name]
             command = get_command(abs_path)
             # for one directory which contains fastq or fastq.gz files
-            return (f"{command}", f"{abs_path}/*", " > ", samples)
+            return (f"{command}", f"{abs_path}", "/*"," > ", samples)
         else:
             raise Exception()
     else:
         # if the input_fastq is one fastq or gz file
         samples = [analysis_name]
-        return "ln -s", f"{path.abspath(input_fastq)}", "", samples
+        return "ln -s", f"{path.abspath(input_fastq)}", " ","", samples
 
 
 if "input_fastq" not in config:
@@ -96,9 +96,8 @@ if not path.exists(INPUT_FASTQ) or not INPUT_FASTQ.startswith("/"):
     raise Exception(f"No such file or directory: {INPUT_FASTQ} OR "
                     f"\"input_fastq\" shoud be absolute path")
 
-COMMAND, INPUT, REDIRECTION, SAMPLES = detect_input(INPUT_FASTQ,ANALYSIS_NAME)
+COMMAND, INPUT, INNER, REDIRECTION, SAMPLES = detect_input(INPUT_FASTQ,ANALYSIS_NAME)
 THREADS = int(workflow.cores / len(SAMPLES))
-print(THREADS)
 ##### check input fastq end...
 
 
@@ -171,7 +170,7 @@ rule fastp:
     threads:
         THREADS
     shell:
-        f"{COMMAND} {{input.raw_data}}  {REDIRECTION} {{output.tmp}} && "
+        f"{COMMAND} {{input.raw_data}}{INNER}  {REDIRECTION} {{output.tmp}} && "
         f"fastp -i {{output.tmp}} -o {{output.clean_data}} "
         # f"--trim_front1 {TRIM_BASES} --trim_tail1 {TRIM_BASES} "
         f"--length_required {{params.length_required}} --length_limit {{params.length_limit}} "
