@@ -241,8 +241,8 @@ rule igv_tools:
     output:
         per_base_counts=f"{ANALYSIS_NAME}/{{SAMPLE}}/depth/{{SAMPLE}}.igv.per-pos.bases.depth"
     shell:
-        ". $(conda info --base)/etc/profile.d/conda.sh  && "
-        "conda activate artic-like-igvtools && "
+        "set +eu && . $(conda info --base)/etc/profile.d/conda.sh  && "
+        "conda activate artic-like-igvtools && set -eu && "
         f"igvtools count {{input.bamfile}} stdout {{input.genome}} -w 1 --bases > {{output.per_base_counts}};\n"
 
 rule medaka_consensus:
@@ -431,8 +431,8 @@ rule pangolin:
     output:
         lineage_report=f"{ANALYSIS_NAME}/{{SAMPLE}}/pangolin/{{SAMPLE}}.lineage_report.csv"
     shell:
-        ". $(conda info --base)/etc/profile.d/conda.sh && "
-        "conda activate artic-like-pangolin && "
+        "set +eu && . $(conda info --base)/etc/profile.d/conda.sh && "
+        "conda activate artic-like-pangolin && set -eu && "
         f"pangolin {{input.fasta}} --outfile {{output.lineage_report}}"
 
 rule make_report_tex:
