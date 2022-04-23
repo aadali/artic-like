@@ -47,7 +47,7 @@ model: "r941_min_hac_g507"
 min_dp: 20
 
 # the min qual of variant quality, if the QUAL is less than {min_qual}, the position will be N
-min_qual: 20
+min_qual: 40
 
 # for het site,
 # if het_set == "more", this position will be the allele whose depth is bigger;

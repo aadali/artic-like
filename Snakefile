@@ -30,7 +30,7 @@ ANALYSIS_NAME = config.get("analysis_name","test001")
 GENOME = path.join(SNAKEDIR,"genome",config.get("what_sample","sars-cov-2"),"sequences.fa")
 SNPEFF_DATA = path.join(SNAKEDIR,"genome")
 SNPEFF_CONF = path.join(SNAKEDIR,"config/snpEff.config")
-FILES_PER_BAR = int(config.get("files_per_bar",3))
+FILES_PER_BAR = int(config.get("files_per_bar",2))
 
 
 ##### init the other params end...
@@ -67,25 +67,25 @@ def detect_input(input_fastq, analysis_name=ANALYSIS_NAME):
                         and
                         not re.search("unclassified",sample,re.IGNORECASE)):
                     samples.append(sample)
-            abs_first_sample = path.join(abs_path,dirs[0])
+            abs_first_sample = path.join(abs_path,samples[0])
             command = get_command(abs_first_sample)
 
             # for fastq_pass that contain barcodes directory containing fastq or fastq.gz files
             # abs_path will match the abs path of fastq_pass
             # SAMPLE will match the barcode01 barcode02 or something else directory name
-            return (f"{command}", f"{abs_path}/{{SAMPLE}}", "/*",  "> ", samples)
+            return (f"{command}", f"{abs_path}/{{SAMPLE}}", "/*", "> ", samples)
 
         elif len(files) == len(contents):
             samples = [analysis_name]
             command = get_command(abs_path)
             # for one directory which contains fastq or fastq.gz files
-            return (f"{command}", f"{abs_path}", "/*"," > ", samples)
+            return (f"{command}", f"{abs_path}", "/*", " > ", samples)
         else:
             raise Exception()
     else:
         # if the input_fastq is one fastq or gz file
         samples = [analysis_name]
-        return "ln -s", f"{path.abspath(input_fastq)}", " ","", samples
+        return "ln -s", f"{path.abspath(input_fastq)}", " ", "", samples
 
 
 if "input_fastq" not in config:
@@ -97,7 +97,7 @@ if not path.exists(INPUT_FASTQ) or not INPUT_FASTQ.startswith("/"):
                     f"\"input_fastq\" shoud be absolute path")
 
 COMMAND, INPUT, INNER, REDIRECTION, SAMPLES = detect_input(INPUT_FASTQ,ANALYSIS_NAME)
-THREADS = int(workflow.cores / len(SAMPLES))
+THREADS = int(workflow.cores / len(SAMPLES)) if workflow.cores > len(SAMPLES) else 1
 ##### check input fastq end...
 
 
@@ -162,7 +162,7 @@ rule fastp:
         clean_data=f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.clean.fastq.gz",
         js=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.json"),
         html=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/clean_data/{{SAMPLE}}.html"),
-        tmp=temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq.gz") if INPUT.endswith("gz")  else temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq")
+        tmp=temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq.gz") if INPUT.endswith("gz") else temporary(f"/tmp/{ANALYSIS_NAME}/{{SAMPLE}}.tmp.fastq")
     params:
         length_required=MIN_LEN,
         length_limit=MAX_LEN,
@@ -193,8 +193,8 @@ rule nanoplot:
     threads:
         THREADS
     shell:
-        f"NanoPlot -t {{threads}} --fastq {{input.raw_data}} --tsv_stats --downsample 2000 --prefix {{params.raw_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
-        f"NanoPlot -t {{threads}} --fastq {{input.clean_data}} --tsv_stats --downsample 2000 --prefix {{params.clean_prefix}} --plots hex dot -o {{output.outdir}} --dpi 300;\n"
+        f"NanoPlot -t {{threads}} --fastq {{input.raw_data}} --tsv_stats --downsample 2000 --prefix {{params.raw_prefix}}  -o {{output.outdir}} --dpi 300;\n"
+        f"NanoPlot -t {{threads}} --fastq {{input.clean_data}} --tsv_stats --downsample 2000 --prefix {{params.clean_prefix}}  -o {{output.outdir}} --dpi 300;\n"
         f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}};\n"
         f"touch {{output.finish}}  "
 
@@ -233,6 +233,17 @@ rule trim_primers:
         f"{{input.sorted_bam}} {{output.temp_bam}} {{input.primer_bed}} {{output.trim_log}} {MIN_OVERLAP} {TRIM_BASES};\n"
         f"samtools sort {{output.temp_bam}} -o {{output.trimmed_bam}} && "
         f"samtools index {{output.trimmed_bam}}"
+
+rule igv_tools:
+    input:
+        bamfile=rules.trim_primers.output.trimmed_bam,
+        genome=GENOME,
+    output:
+        per_base_counts=f"{ANALYSIS_NAME}/{{SAMPLE}}/depth/{{SAMPLE}}.igv.per-pos.bases.depth"
+    shell:
+        ". $(conda info --base)/etc/profile.d/conda.sh  && "
+        "conda activate artic-like-igvtools && "
+        f"igvtools count {{input.bamfile}} stdout {{input.genome}} -w 1 --bases > {{output.per_base_counts}};\n"
 
 rule medaka_consensus:
     # medaka will be called to make hdf file
@@ -280,7 +291,7 @@ rule longshot_annotate:
     input:
         vcf=rules.bcftools_filter.output.vcf,genome=GENOME,bam=rules.trim_primers.output.trimmed_bam
     output:
-        longshot_ann_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.longshot.ann.vcf"
+        longshot_ann_vcf=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.longshot.ann.temp.vcf")
     shell:
         f"longshot -F -P 0 --max_cigar_indel 200 --bam {{input.bam}} --ref {{input.genome}} --out {{output.longshot_ann_vcf}} -v {{input.vcf}}"
 
@@ -297,18 +308,31 @@ rule filt_vcf:
     # get the pass vcf and the fail vcf
     input:
         vcf1=rules.medaka_annotate.output.medaka_ann_vcf
-    # vcf2=rules.longshot_annotate.output.longshot_ann_vcf
     output:
-        pass_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.pass.vcf",
+        pass_vcf=temporary(f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.pass.tmp.vcf"),
         fail_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.fail.vcf"
     shell:
         f"python {SNAKEDIR}/scripts/nano_filt_vcf.py  --min-depth {MIN_DP} "
         f"--min-qual {MIN_QUAL}  {{input.vcf1}}  "
         f"{{output.pass_vcf}} {{output.fail_vcf}} ; \n"
 
+rule calibrate_vcf:
+    input:
+        longshot_ann_vcf=rules.longshot_annotate.output.longshot_ann_vcf,
+        medaka_pass_vcf=rules.filt_vcf.output.pass_vcf,
+        per_base_counts=rules.igv_tools.output.per_base_counts,
+        genome=GENOME
+    output:
+        longshot_ann_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.longshot.ann.vcf",
+        medaka_pass_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.pass.vcf"
+    shell:
+        f"python {SNAKEDIR}/scripts/nano_calibrate_vcf.py {{input.per_base_counts}} {{input.genome}} {{input.longshot_ann_vcf}} {{output.longshot_ann_vcf}} "
+        f"{{input.medaka_pass_vcf}} {{output.medaka_pass_vcf}}"
+
+
 rule index:
     input:
-        pass_vcf=rules.filt_vcf.output.pass_vcf,
+        pass_vcf=rules.calibrate_vcf.output.medaka_pass_vcf,
         fail_vcf=rules.filt_vcf.output.fail_vcf
     output:
         pass_vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.pass.vcf.gz",
@@ -383,7 +407,7 @@ rule plot:
 rule snpEff:
     # snpEff annotate if {what_sample} is collected in the snpEff database
     input:
-        vcf=rules.longshot_annotate.output.longshot_ann_vcf
+        vcf=rules.calibrate_vcf.output.longshot_ann_vcf
     output:
         vcf=f"{ANALYSIS_NAME}/{{SAMPLE}}/variants/{{SAMPLE}}.report.vcf"
     shell:
@@ -407,6 +431,8 @@ rule pangolin:
     output:
         lineage_report=f"{ANALYSIS_NAME}/{{SAMPLE}}/pangolin/{{SAMPLE}}.lineage_report.csv"
     shell:
+        ". $(conda info --base)/etc/profile.d/conda.sh && "
+        "conda activate artic-like-pangolin && "
         f"pangolin {{input.fasta}} --outfile {{output.lineage_report}}"
 
 rule make_report_tex:

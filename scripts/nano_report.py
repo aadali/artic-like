@@ -248,7 +248,7 @@ def lineage(lineage_report):
     from subprocess import run, PIPE
 
     tex = []
-    result = run("pangolin --version", shell=True, stdout=PIPE)
+    result = run(". $(conda info --base)/etc/profile.d/conda.sh && conda activate artic-like-pangolin && pangolin --version", shell=True, stdout=PIPE)
     pangolin_version = result.stdout.decode("utf-8").strip()
     with open(lineage_report, 'r') as infile:
         lines = infile.readlines()
