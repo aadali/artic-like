@@ -22,6 +22,9 @@ class Primer(object):
         self.end = end
         self.name = name
 
+    def __repr__(self):
+        return self.name
+
 
 class PrimersAmplicon(object):
     def __init__(self, insert_start, insert_end, amp_start, amp_end):
@@ -30,6 +33,9 @@ class PrimersAmplicon(object):
         self.amp_start = amp_start
         self.amp_end = amp_end
         self.insert_len = insert_end - insert_start
+
+    def __repr__(self):
+        return f"{self.insert_start}-{self.insert_end}"
 
 
 class Primers(object):
@@ -45,6 +51,8 @@ class Primers(object):
                                 usecols=range(4),
                                 names=['ref', 'start', 'end', 'name'],
                                 dtype={'ref': str, 'start': int, 'end': int, 'name': str})
+        self.most_left = min(primer_df['start'])
+        self.most_right = max(primer_df['end'])
 
         primers = defaultdict(dict)
         for primer in primer_df.itertuples(index=False):
@@ -77,6 +85,9 @@ class Primers(object):
 
         return primers
 
+    def both_ends_pos(self):
+        pass
+
     # def check_primers(self):
     #     for paired_primers_name, paired_primers in self.primers.items():
     #         if len(paired_primers) != 2:
@@ -94,7 +105,7 @@ def find_closest_amplicon(segment, primers):
     candidate_primers = []
     for paired_primers_name, paired_primers in primers.primers.items():
         amplicon = paired_primers['amplicon']
-        if ref_start <= amplicon.insert_start <= ref_end <= amplicon.insert_start:
+        if ref_start <= amplicon.insert_start <= ref_end <= amplicon.insert_end:
             """
             situation 1:
                         insert_start-------------------------------insert_end
@@ -118,7 +129,7 @@ def find_closest_amplicon(segment, primers):
             """
             candidate_primers.append([paired_primers, abs(amplicon.insert_end - ref_start)])
 
-        elif amplicon.insert_start <= ref_start <= ref_end <=  amplicon.insert_end:
+        elif amplicon.insert_start <= ref_start <= ref_end <= amplicon.insert_end:
             """
             situation 4:
             insert_start--------------------------------------------------------------insert_end
@@ -131,12 +142,12 @@ def find_closest_amplicon(segment, primers):
             continue
 
     if candidate_primers:
-        return max(candidate_primers, key=lambda x: x[1])[0]
+        return sorted(candidate_primers, key=lambda x: x[1], reverse=True)[0][0]
     else:
         return
 
 
-def trim_left(segment, primers=None, trim_bases=None, supplementary=False):
+def trim_left(segment, primers=None, trim_bases=None, most_left=False, supplementary=False):
     assert isinstance(segment, pysam.AlignedSegment)
     segment = copy(segment)
     left_soft = 0
@@ -146,7 +157,8 @@ def trim_left(segment, primers=None, trim_bases=None, supplementary=False):
     cigars = segment.cigartuples
     first_cigar = cigars[0]
     if primers is not None:
-        left_end = primers['left'].end
+        #  for the first amplicon's left primer, trim from the primer start
+        left_end = primers['left'].start if most_left else primers['left'].end
     elif trim_bases is not None:
         assert isinstance(trim_bases, int)
         left_end = ref_start + trim_bases
@@ -198,7 +210,7 @@ def trim_left(segment, primers=None, trim_bases=None, supplementary=False):
     return segment
 
 
-def trim_right(segment, primers=None, trim_bases=None, supplementary=False):
+def trim_right(segment, primers=None, trim_bases=None, most_right=False, supplementary=False):
     assert isinstance(segment, pysam.AlignedSegment)
     segment = copy(segment)
     right_cigar_modify = []
@@ -208,7 +220,8 @@ def trim_right(segment, primers=None, trim_bases=None, supplementary=False):
     last_cigar = cigars[-1]
     ref_start, ref_end = segment.reference_start, segment.reference_end
     if primers is not None:
-        right_start = primers['right'].start
+        #  for the last amplicon's right primer, trim from the primer end
+        right_start = primers['right'].end if most_right else primers['right'].start
     elif trim_bases is not None:
         assert isinstance(trim_bases, int)
         right_start = ref_end - trim_bases
@@ -309,8 +322,10 @@ def trim_bam(inbam_fp, outbam_fp, primer_bed, trim_log, min_overlap, trim_bases)
             if paired_primers is None:
                 continue
             else:
-                new_segment = trim_left(segment, primers=paired_primers)
-                trimmed_segment = trim_right(new_segment, paired_primers)
+                most_left = paired_primers['left'].start == primers.most_left
+                mosrt_right = paired_primers['right'].end == primers.most_right
+                new_segment = trim_left(segment, primers=paired_primers, most_left=most_left)
+                trimmed_segment = trim_right(new_segment, primers=paired_primers, most_right=mosrt_right)
                 record = "\t".join([
                     segment.qname,
                     str(segment.reference_start),
