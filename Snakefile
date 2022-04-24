@@ -241,7 +241,7 @@ rule igv_tools:
     output:
         per_base_counts=f"{ANALYSIS_NAME}/{{SAMPLE}}/depth/{{SAMPLE}}.igv.per-pos.bases.depth"
     shell:
-        "set +eu && . $(conda info --base)/etc/profile.d/conda.sh  && "
+        "set +eu && source $(conda info --base)/etc/profile.d/conda.sh  && "
         "conda activate artic-like-igvtools && set -eu && "
         f"igvtools count {{input.bamfile}} stdout {{input.genome}} -w 1 --bases > {{output.per_base_counts}};\n"
 
@@ -374,9 +374,12 @@ rule get_consensus:
         mask_region=rules.get_low_cover_region.output.low_cover_bed
     output:
         consensus=f"{ANALYSIS_NAME}/{{SAMPLE}}/consensus/{{SAMPLE}}.consensus.fasta",
+    params:
+        seq_name=f"{ANALYSIS_NAME}-{{SAMPLE}}"
     # finish_log=f"{ANALYSIS_NAME}/{{SAMPLE}}/{{SAMPLE}}.consensus.finished"
     shell:
         f"bcftools consensus -f {{input.pre_consensus}} -m {{input.mask_region}} {{input.pass_vcf}} > {{output.consensus}};\n"
+        f"sed -i '1c>{{params.seq_name}}' {{output.consensus}};\n"
         f"echo ===========================================================;\n"
         f"echo \"            {{wildcards.SAMPLE}} consensus finished        \";\n"
         f"echo ===========================================================;"
@@ -390,9 +393,10 @@ rule stat:
     output:
         stat_file=f"{ANALYSIS_NAME}/{{SAMPLE}}/stat/{{SAMPLE}}.stat"
     params:
-        awk_query="awk '{if(NR%4==2){print $0}}'"
+        awk_query="awk '{if(NR%4==2){print $0}}'",
+        command="zcat" if INPUT.endswith("gz") else "cat"
     shell:
-        f"{{params.awk_query}} {{input.input_fastq}} | wc -lm > {{output.stat_file}};\n"
+        f"{{params.command}} {{input.input_fastq}} | {{params.awk_query}} | wc -lm > {{output.stat_file}};\n"
         f"samtools fastq {{input.sorted_bam}} | {{params.awk_query}} | wc -lm >> {{output.stat_file}}"
 
 rule plot:
@@ -431,7 +435,7 @@ rule pangolin:
     output:
         lineage_report=f"{ANALYSIS_NAME}/{{SAMPLE}}/pangolin/{{SAMPLE}}.lineage_report.csv"
     shell:
-        "set +eu && . $(conda info --base)/etc/profile.d/conda.sh && "
+        "set +eu && source $(conda info --base)/etc/profile.d/conda.sh && "
         "conda activate artic-like-pangolin && set -eu && "
         f"pangolin {{input.fasta}} --outfile {{output.lineage_report}}"
 

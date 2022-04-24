@@ -88,9 +88,9 @@ for row in counts_df.itertuples(index=False):
     if alt_ac / total > min_freq:
         gt = "1/1" if alt_ac > ref_ac else "0/1"
         # only output the positon which alt_ac >= ref_ac, bcftools will apply this positions to get consensus
-        if ref_ac <= alt_ac and pos not in medaka_pass_del_range:
+        if alt_ac / (alt_ac + ref_ac) > 0.55 and pos not in medaka_pass_del_range:
             var_record = [contig_name, str(pos), ".", ref, alt, "500", 'PASS',
-                          f"DP={total};AC={ref_ac},{alt_ac};",
+                          f"DP={total};AC={int(ref_ac)},{int(alt_ac)};",
                           "GT:GQ",
                           f"{gt}:500"]
             candidate_variants.append(var_record)
