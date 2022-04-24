@@ -94,38 +94,38 @@ def find_closest_amplicon(segment, primers):
     candidate_primers = []
     for paired_primers_name, paired_primers in primers.primers.items():
         amplicon = paired_primers['amplicon']
-        if amplicon.insert_start >= ref_start and amplicon.insert_end >= ref_end:
+        if ref_start <= amplicon.insert_start <= ref_end <= amplicon.insert_start:
             """
             situation 1:
                         insert_start-------------------------------insert_end
             ref_start---------------------------------ref_end
             """
-            candidate_primers.append([paired_primers, ref_end - amplicon.insert_start])
+            candidate_primers.append([paired_primers, abs(ref_end - amplicon.insert_start)])
 
-        elif amplicon.insert_start >= ref_start and amplicon.insert_end <= ref_end:
+        elif ref_start <= amplicon.insert_start <= amplicon.insert_end <= ref_end:
             """
             situation 2:
                         insert_start-------------------------------insert_end
             ref_start--------------------------------------------------------------ref_end
             """
-            candidate_primers.append([paired_primers, amplicon.insert_end - amplicon.insert_start])
+            candidate_primers.append([paired_primers, abs(amplicon.insert_end - amplicon.insert_start)])
 
-        elif amplicon.insert_start <= ref_start and amplicon.insert_end <= ref_end:
+        elif amplicon.insert_start <= ref_start <= amplicon.insert_end <= ref_end:
             """
             situation 3:
             insert_start------------------------------insert_end
                         ref_start----------------------------------ref_end
             """
-            candidate_primers.append([paired_primers, amplicon.insert_end - ref_start])
+            candidate_primers.append([paired_primers, abs(amplicon.insert_end - ref_start)])
 
-        elif amplicon.insert_start <= ref_start and amplicon.insert_end >= ref_end:
+        elif amplicon.insert_start <= ref_start <= ref_end <=  amplicon.insert_end:
             """
             situation 4:
             insert_start--------------------------------------------------------------insert_end
                         ref_start-------------------------------ref_end
             
             """
-            candidate_primers.append([paired_primers, ref_start - ref_end])
+            candidate_primers.append([paired_primers, abs(ref_start - ref_end)])
 
         else:
             continue
