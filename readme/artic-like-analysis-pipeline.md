@@ -13,7 +13,9 @@ wget https://github.com/aadali/artic-like/archive/refs/heads/master.zip
 unzip master.zip
 mv artic-like-master artic-like
 cd artic-like
-conda env create -f artic-like.env.yaml	# 创建artic-like环境
+conda env create -f env/artic-like.env.yaml	# 创建artic-like环境
+conda env create -f env/artic-like-igvtools.yaml
+conda env create -f env/artic-like-pangolin.yaml
 sudo apt install texlive-binaries	# 安装texlive
 ```
 
@@ -23,12 +25,14 @@ sudo apt install texlive-binaries	# 安装texlive
 git clone https://github.com/aadali/artic-like.git
 cd artic-like
 conda env create -f env/artic-like.env.yaml	# 创建artic-like环境
+conda env create -f env/artic-like-igvtools.yaml
+conda env create -f env/artic-like-pangolin.yaml
 sudo apt install texlive-binaries	# 安装texlive
 ```
 
 #### **注**：*如果使用第一种方法安装，zip压缩包不要在windows或者U盘中进行解压，因为windows系统中解压出来的文件会丢失软texlive文件中一些可执行文件的软连接信息，导致在Ubutu下不能正常使用。可以通过windows或者u盘拷贝zip压缩文件到Ubuntu系统中，unzip后进行操作。*
 
-这个过程conda会新建一个名为`artic-like`的新环境，**安装完成后，重启一下终端**，`conda activate artic-like`即可使用
+这个过程conda会新建名为`artic-like`、`artic-like-igvtools`、`artic-like-pangolin`的新环境，**安装完成后，重启一下终端**，`conda activate artic-like`即可使用
 
 ## 使用
 
