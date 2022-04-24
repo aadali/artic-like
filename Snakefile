@@ -443,7 +443,8 @@ rule make_report_tex:
         pass_vcf=rules.index.output.pass_vcf,
         coverage_fig=rules.plot.output.fig,
         snpeff_vcf=rules.snpEff.output.vcf,
-        handle_vcf_result=rules.handle_snpEff_result.output.report_variants_list
+        handle_vcf_result=rules.handle_snpEff_result.output.report_variants_list,
+        lineage_report=rules.pangolin.output.lineage_report
     output:
         f"{ANALYSIS_NAME}/{{SAMPLE}}/report/{{SAMPLE}}.report.tex"
     params:
