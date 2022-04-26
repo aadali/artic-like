@@ -12,9 +12,9 @@ for deletion range, the script will ignore it.
 
 min_freq = 0.1
 
-usage = f"python {path.basename(__file__)} <igv_counts> <genome.fa> " \
-        f"<longhshot_ann_vcf> <modify_longshot_out_vcf> " \
-        f"<medaka_pass_vcf> <medaka_pass_out_vcf>"
+usage = f"python3 {path.basename(__file__)} <igv_counts> <genome.fa> " \
+        f"<input_longhshot_ann_vcf> <output_longshot_vcf> " \
+        f"<input_medaka_pass_vcf> <output_medaka_pass_vcf>"
 
 if len(argv) != 7:
     raise Exception(usage)
@@ -32,25 +32,28 @@ def func(vcffile):
     :return:
     """
     headers = []
-    dels = []
-    del_range = []
+    indels = []
+    indel_range = []
     with open(vcffile, "r") as infile:
         for line in infile:
             if line.startswith("#"):
                 headers.append(line.strip())
             else:
-                fileds = line.strip().split("\t")
-                ref, alt = fileds[3:5]
-                pos = int(fileds[1])
-                if len(ref) <= len(alt):
+                fields = line.strip().split("\t")
+                ref, alt = fields[3:5]
+                pos = int(fields[1])
+                qual = int(float(fields[5]))
+                if len(ref) == len(alt):
                     continue
                 else:
-                    del_range.extend(list(range(pos, pos + len(ref))))
-                    dels.append(fileds)
-    return headers, dels, del_range
+                    # for indels, there must be strong evidence to prove this position is postivate
+                    if qual >= 60:
+                        indel_range.extend(list(range(pos, pos + len(ref))))
+                        indels.append(fields)
+    return headers, indels, indel_range
 
 
-# longshot vcf is used for reprot dislpaying
+# longshot vcf is used for report dislpaying
 longshot_header, longshot_dels, longshot_del_range = func(longshot_ann)
 
 # medaka pass vcf is used for bcftools to generate consensus fasta
