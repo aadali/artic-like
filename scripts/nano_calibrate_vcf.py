@@ -75,6 +75,7 @@ for row in counts_df.itertuples(index=False):
     base_counts = dict(zip(list("ACGT"), row[1:]))
     sorted_base_counts = list(sorted(base_counts.items(), key=lambda x: x[1], reverse=True))
     total = sum(row[1:]) if sum(row[1:]) else 1
+    if total < 30: continue
     if ref == sorted_base_counts[0][0]:
         ref, ref_ac = sorted_base_counts[0]
         alt, alt_ac = sorted_base_counts[1]
