@@ -184,17 +184,14 @@ rule nanoplot:
     output:
         outdir=directory(f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot"),
         qc_summary=f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot/{{SAMPLE}}.qc.summary.txt",
+        raw_fig=f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot/{{SAMPLE}}_raw.LengthvsQualityScatterPlot_dot.png",
+        clean_fig=f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot/{{SAMPLE}}_clean.LengthvsQualityScatterPlot_dot.png",
         raw_stats_file=f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot/{{SAMPLE}}_raw.NanoStats.txt",
         clean_stats_file=f"{ANALYSIS_NAME}/{{SAMPLE}}/nanoplot/{{SAMPLE}}_clean.NanoStats.txt",
         finish=f"{ANALYSIS_NAME}/{{SAMPLE}}.nanoplot.finish"  # if nanoplot ruls finished, the file will be touched
-    params:
-        raw_prefix=f"{{SAMPLE}}_raw.",
-        clean_prefix=f"{{SAMPLE}}_clean."
-    threads:
-        THREADS
     shell:
-        f"NanoPlot -t {{threads}} --fastq {{input.raw_data}} --tsv_stats --downsample 2000 --prefix {{params.raw_prefix}}  -o {{output.outdir}} --dpi 300;\n"
-        f"NanoPlot -t {{threads}} --fastq {{input.clean_data}} --tsv_stats --downsample 2000 --prefix {{params.clean_prefix}}  -o {{output.outdir}} --dpi 300;\n"
+        f"python {SNAKEDIR}/scripts/nanoplot.py {{input.raw_data}} {{output.raw_fig}} {{output.raw_stats_file}};\n"
+        f"python {SNAKEDIR}/scripts/nanoplot.py {{input.clean_data}} {{output.clean_fig}} {{output.clean_stats_file}};\n"
         f"paste {{output.raw_stats_file}} {{output.clean_stats_file}} | cut -f 1,2,4 | sed  '1cMetrics\\traw\\tclean' > {{output.qc_summary}};\n"
         f"touch {{output.finish}}  "
 
