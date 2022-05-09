@@ -87,10 +87,10 @@ def get_stat(df, outfile):
     content.append(f"median_qual\t{np.median(df['quals']):.2f}")
     longest = df.sort_values(by="lengths", ascending=False).head(5)
     for idx, row in enumerate(longest.itertuples(index=False)):
-        content.append(f"longest_read_(with_Q):{idx + 1}\t{row.lengths} {row.quals:.2f}")
+        content.append(f"longest_read_(with_Q):{idx + 1}\t{row.lengths} ({row.quals:.2f})")
     highest = df.sort_values(by="quals", ascending=True).head(5)
     for idx, row in enumerate(highest.itertuples(index=False)):
-        content.append(f"higest_Q_read_(with_length):{idx + 1}\t{row.quals:.2f} {row.lengths}")
+        content.append(f"higest_Q_read_(with_length):{idx + 1}\t{row.quals:.2f} ({row.lengths})")
 
     for qual in [5, 7, 10, 12, 15, 20]:
         sub_df = df.query("quals >= @qual").reset_index()
