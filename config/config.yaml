@@ -1,4 +1,9 @@
 # the input file or directory, endswith fastq or fastq.gz or fq or fq.gz
+#1. directory
+#   1). a directory that contains sub directorys, and there are ont reads in the sub diretorys, e.g. the fastq_pass that contains some barcode directorys
+#   2). a directory that contains directly fastqs. These fastqs may be many paired ngs data or some ont fastqs just like the barcode in the fastq_pass
+#2. file, a fastq file of merged ont data
+#3. two files separated by one comma, this means input is a paired ngs reads. The former is read1 and the later is read2
 input_fastq: ""
 
 # the primer bed file, if specified, trim_bases will be ignored. else the raw bam will be trimmed depended on the primer positions
@@ -11,13 +16,13 @@ trim_bases: 20
 min_read_len: 300
 
 # if read length is greater than {max_read_len}, this read will be dropped, 0 means no limitation
-max_read_len: 800
+max_read_len: 1600
 
 # if read qual is less than {min_read_qual}, this read will be dropped
-min_read_qual: 8
+min_read_qual: 9
 
 # if read map qual is less than {min_mapq}, this align will be dropped from bam
-min_mapq: 30
+min_mapq: 40
 
 
 # analysis_name, default test001

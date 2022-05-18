@@ -1,2 +1,7 @@
 .idea/
 test_data/
+detect_input.py
+scripts/__pycache__/
+scripts/functions.c
+scripts/functions.py
+scripts/functions_setup.py
