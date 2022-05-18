@@ -1,13 +1,13 @@
 name: artic-like
 channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
-  - conda-forge
-  - bioconda
-  - epi2melabs
-  - r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - defaults
+  - r
+  - epi2melabs
+  - bioconda
+  - conda-forge
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
@@ -34,7 +34,7 @@ dependencies:
   - aws-sdk-cpp=1.8.186=hb4091e7_3
   - backports=1.1=pyhd3eb1b0_0
   - backports.functools_lru_cache=1.6.4=pyhd8ed1ab_0
-  - bcftools=1.15.1=h0ea216a_0
+  - bcftools=1.15=haf5b3da_0
   - bcrypt=3.2.0=py38h497a2fe_2
   - bedtools=2.30.0=h468198e_3
   - biopython=1.79=py38h497a2fe_1
@@ -44,9 +44,10 @@ dependencies:
   - brotli=1.0.9=h166bdaf_7
   - brotli-bin=1.0.9=h166bdaf_7
   - brotlipy=0.7.0=py38h0a891b7_1004
+  - bwa=0.7.17=h7132678_9
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.18.1=h7f98852_0
-  - ca-certificates=2022.3.29=h06a4308_1
+  - ca-certificates=2022.4.26=h06a4308_0
   - cachetools=5.0.0=pyhd8ed1ab_0
   - cairo=1.16.0=ha61ee94_1011
   - certifi=2021.10.8=py38h578d9bd_2
@@ -63,6 +64,7 @@ dependencies:
   - connection_pool=0.0.3=pyhd3deb0d_0
   - cryptography=36.0.2=py38h2b5fc30_1
   - cycler=0.11.0=pyhd8ed1ab_0
+  - cython=0.29.30=py38hfa26641_0
   - datrie=0.8.2=py38h497a2fe_3
   - dbus=1.13.18=hb2f20db_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
@@ -118,7 +120,7 @@ dependencies:
   - h5py=2.10.0=nompi_py38h9915d05_106
   - harfbuzz=4.2.0=hf9f4e7c_1
   - hdf5=1.10.6=nompi_h6a2412b_1114
-  - htslib=1.15.1=h9753748_0
+  - htslib=1.14=h9753748_2
   - httplib2=0.20.4=pyhd8ed1ab_0
   - icu=70.1=h27087fc_0
   - idna=3.3=pyhd8ed1ab_0
@@ -184,6 +186,7 @@ dependencies:
   - libxcb=1.13=h7f98852_1004
   - libxml2=2.9.13=h22db469_0
   - libzlib=1.2.11=h166bdaf_1014
+  - lofreq=2.1.5=py38h5eb2837_6
   - logmuse=0.2.6=pyh8c360ce_0
   - longshot=0.4.1=hc4ca7c3_2
   - lz4-c=1.9.3=h9c3ff4c_1
@@ -192,7 +195,7 @@ dependencies:
   - markupsafe=2.1.1=py38h0a891b7_1
   - mathjax=2.7.7=0
   - matplotlib-base=3.5.1=py38hf4fb855_0
-  - medaka=1.6.0=py38h84d2cc8_0
+  - medaka=1.5.0=py38h1e9d337_2
   - minimap2=2.23=h5bf99c6_0
   - multidict=6.0.2=py38h0a891b7_1
   - munkres=1.1.4=pyh9f0ad1d_0
@@ -210,7 +213,7 @@ dependencies:
   - ont-fast5-api=4.0.2=pyhdfd78af_0
   - openjdk=11.0.13=h87a67e3_0
   - openjpeg=2.4.0=hb52868f_1
-  - openssl=1.1.1n=h166bdaf_0
+  - openssl=1.1.1o=h166bdaf_0
   - opt_einsum=3.3.0=pyhd8ed1ab_1
   - orc=1.7.3=h1be678f_0
   - packaging=21.3=pyhd8ed1ab_0
@@ -276,7 +279,7 @@ dependencies:
   - rsa=4.8=pyhd8ed1ab_0
   - s2n=1.0.10=h9b69904_0
   - s3transfer=0.5.2=pyhd8ed1ab_0
-  - samtools=1.15.1=h1170115_0
+  - samtools=1.15=h3843a85_0
   - scipy=1.8.0=py38h56a6a73_1
   - setuptools=59.8.0=py38h578d9bd_1
   - six=1.16.0=pyh6c4a22f_0
