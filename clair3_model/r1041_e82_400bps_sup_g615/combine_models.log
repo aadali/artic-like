@@ -1,0 +1,6 @@
+Copying clair3_train_pileup/best_val_loss.index to clair3_model/pileup.index
+Copying clair3_train_pileup/best_val_loss.data-00000-of-00002 to clair3_model/pileup.data-00000-of-00002
+Copying clair3_train_pileup/best_val_loss.data-00001-of-00002 to clair3_model/pileup.data-00001-of-00002
+Copying clair3_train_full_alignment/best_val_loss.index to clair3_model/full_alignment.index
+Copying clair3_train_full_alignment/best_val_loss.data-00000-of-00002 to clair3_model/full_alignment.data-00000-of-00002
+Copying clair3_train_full_alignment/best_val_loss.data-00001-of-00002 to clair3_model/full_alignment.data-00001-of-00002
