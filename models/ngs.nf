@@ -34,7 +34,8 @@ process map {
         tuple   val(name), val(clean_reads), path("${name}.sorted.bam"), path("${name}.sorted.bam.bai")
     script:
     def reads2_para = clean_reads.clean_reads2 == null ? "" : clean_reads.clean_reads2
-    """bwa mem -t $params.map_cpu -R "@RG\\tID:${name}\\tSM:${name}"  $projectDir/genomes/$params.virus/sequences.fa  $clean_reads.clean_reads1 ${reads2_para} | \
+    """if [ ! -e $projectDir/genomes/$params.virus/sequences.fa.bwt ]; then bwa index $projectDir/genomes/$params.virus/sequences.fa; fi && \
+    bwa mem -t $params.map_cpu -R "@RG\\tID:${name}\\tSM:${name}"  $projectDir/genomes/$params.virus/sequences.fa  $clean_reads.clean_reads1 ${reads2_para} | \
     samtools view -bS > ${name}.raw.bam && \
     samtools view -h -F 4 -F 2048 -F 256   ${name}.raw.bam | \
     samtools sort -o ${name}.sorted.bam - && \
@@ -129,10 +130,10 @@ workflow ngs {
 
         snpEffOut = snpEffbin.exists() ? snpEff(ngsFiltVcfOut) : ngsFiltVcfOut.map{ it -> it[0, 1]}
 
-        if (params.pango_virus.contains(params.virus)) {
+        if (params.pango_virus.split(",").contains(params.virus)) {
             pangolinOut = pangolin(getConsensusOut)
         } else {
-            pangolinOut = getConsensusOut.map { it -> [it[0], null]}
+            pangolinOut = getConsensusOut.map { it -> [it[0], file("empty.file")]} | pangolin
         }
 
     emit:

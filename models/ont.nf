@@ -295,7 +295,7 @@ workflow ont {
 
         snpEffOut = snpEffbin.exists() ? snpEff(ontGetVariantsOut) : ontGetVariantsOut.map{it -> it[0, 1]} // snpEffOut: [name, report.vcf] or [name, vcf.gz]
 
-        if (params.pango_virus.contains(params.virus)) {
+        if (params.pango_virus.split(",").contains(params.virus)) {
             pangolinOut = pangolin(getConsensusOut)
         } else {
             pangolinOut = getConsensusOut.map{it ->[it[0], file("empty.file")]} | pangolin
