@@ -225,3 +225,4 @@ NGS 双端数据reads2。同时指定`--reads1`和`--reads2`说明输入为NGS�
 ## 联系
 
 yinchaoqun@bio-chain.com
+aadali@163.com
