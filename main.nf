@@ -34,7 +34,7 @@ checkArgs(allowedArgs)
 // a = detectLongReads()
 
 process makeExcelReport {
-    storeDir    "$params.directory/$params.analysis_name/$params.analysis_name/08.report"
+    storeDir    "$params.directory/$params.analysis_name/$name/08.report"
     conda       "$params.conda_path/artic-like"
     tag         "${name}"
 
