@@ -1,4 +1,5 @@
 include {q2p; detectLongReads} from './utils.nf'
+
 process ontPreprocess {
     storeDir    "$params.directory/$params.analysis_name/${input_fastq['name']}/01.clean_data"
     conda       "$params.conda_path/artic-like"
@@ -24,7 +25,7 @@ process ontFiltlong {
     output:
         tuple   val(name), path("${name}.clean.fastq.gz")
     script:
-    def pred = q2p(params.min_read_qual)
+    def pred = q2p(params.min_read_qual) // the --min_mean_q of filtlong should be phred
     """ filtlong --min_length $params.min_read_len  --max_length $params.max_read_len --min_mean_q $pred $raw_fastq | gzip -c > ${name}.clean.fastq.gz """ 
 }
 
@@ -45,8 +46,6 @@ process ontMap {
     samtools index ${name}.sorted.bam && \
     rm ${name}.raw.bam"""
 }
-
-
 
 process trimPrimer {
     storeDir    "$params.directory/$params.analysis_name/$name/02.aligns"
@@ -157,6 +156,7 @@ process ontFiltIndel {
     output:
         tuple   val(name), path("${name}.indel.vcf")
     script:
+    // TODO: bcftools filter is based on experience, especially (GT='1/1' || FORMAT/AF > 0.6). So some false negative variants may occur.
     """bcftools filter -i "TYPE='indel' && FILTER='PASS' && FORMAT/DP >= $params.min_dp && (GT='1/1' || FORMAT/AF > 0.6)" ${indel_raw_vcf} > ${name}.indel.vcf"""
 }
 
@@ -186,6 +186,8 @@ process igvtools {
     output:
         tuple   val(name), path("${name}.per-pos.each.bases.depth")
     script:
+    // the first 4 lines of result of igvtools are description, so using sed to delete this. And for each contig of reference, there always is a header formatted by
+    // "variableStep chrom={congitName} span=N", so this line will be deleted and new column of contig name be added by awk
     """igvtools count $bam stdout $projectDir/genomes/$params.virus/sequences.fa -w 1 --bases > a.txt && \
     sed '1,4d' a.txt | awk 'BEGIN{OFS="\\t"}{if (\$0 ~ /^variableStep/) {split(\$0, a, " "); sub("chrom=", "", a[2]); contig=a[2]} else {print contig,\$0} }' > \
     ${name}.per-pos.each.bases.depth"""
@@ -201,6 +203,7 @@ process ontGetVariants {
     output:
         tuple   val(name), path("${name}.vcf.gz"), path("${name}.vcf.gz.tbi")
     script:
+    // result of igvtools will be used to call SNV, then merge it and indel result of clair3
     """python $projectDir/scripts/get_variants.py --snv_freq $params.min_snv_freq --outfile ${name}.vcf $projectDir/genomes/$params.virus/sequences.fa $low_cover $ppebd $indel && \
     bgzip ${name}.vcf && tabix -p vcf ${name}.vcf.gz"""
 }
@@ -228,6 +231,7 @@ process getConsensus {
     output:
         tuple   val(name), path("${name}.consensus.fasta")
     script:
+    // to distinguish every nucleic acid sequence, the name of sequence must be updated by sed
     """bcftools consensus -f $projectDir/genomes/$params.virus/sequences.fa -m ${low_cover} $vcf > ${name}.consensus.fasta && \
     sed -i  '/^>/s/>/>${name}-/' ${name}.consensus.fasta && \
     echo && \
@@ -275,6 +279,7 @@ workflow ont {
         igvtools(trimPrimerOut.map{it -> it[0..2]}).set{igvtoolsOut} // igvtoolsOut: [name, ppebd]
 
         plot(getPerBaseDpOut).set{plotOut} // plotOut: [name, rawCov.png, modifiedCov.png]
+        // TODO: if the reference is multi segment e.g. influenza, so the second and third element in plotOut will be list
 
         getLowCoverRegion(getPerBaseDpOut).set{getLowCoverRegionOut} // getLowCoverRegion: [name, low_cover.bed]
 

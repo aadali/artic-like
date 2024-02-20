@@ -67,6 +67,13 @@ process ngsGetVariants {
     output:
         tuple   val(name), path("${name}.raw.vcf")
     script:
+    /*
+    --min-coverage 
+        Require at least this coverage to process a site. default: 0
+    -F  --min-alternate-fraction 
+        Require at least this fraction of observations supporting an alternate allele within a single individual in the
+        in order to evaluate the position.  default: 0.05
+    */
     """freebayes -f $projectDir/genomes/$params.virus/sequences.fa -m $params.min_mapq --min-coverage $params.min_dp -F $params.min_snv_freq ${trimmed_bam} > ${name}.raw.vcf"""
 }
 
@@ -80,6 +87,7 @@ process ngsFiltVcf {
     output:
         tuple   val(name), path("${name}.pass.vcf.gz"), path("${name}.pass.vcf.gz.tbi")
     script:
+    // the result of freebayes is not normal vcf, so using bcftools norm to modify vcf
     """bcftools norm -a -m - -f $projectDir/genomes/$params.virus/sequences.fa -o ${name}.norm.vcf ${name}.raw.vcf && \
     python $projectDir/scripts/ngs_filt_vcf.py --infile ${name}.norm.vcf --outfile ${name}.pass.vcf --min_dp $params.min_dp --min_alt_freq $params.min_snv_freq && \
     bgzip ${name}.pass.vcf && tabix -p vcf ${name}.pass.vcf.gz"""
@@ -91,9 +99,9 @@ workflow ngs {
         fastpOut.map {
             it -> {
                 clean = it[1]
-                if (clean.size() == 2) {
+                if (clean.size() == 2) { // for NGS PE reads, it's a list whose length is 2
                     clean_reads = [clean_reads1: clean[0], clean_reads2: clean[1]]
-                } else {
+                } else { // for NGS SE reads, it's the name of clean_1.fastq.gz and its length will never be 2
                     clean_reads = [clean_reads1: clean, clean_reads2: null]
                 }
             }
@@ -119,6 +127,7 @@ workflow ngs {
         getLowCoverRegion(getPerBaseDpOut).set { getLowCoverRegionOut } // getLowCoverRegionOut: [name, low_cover.bed]
 
         plot(getPerBaseDpOut).set { plotOut } // plotOut: [name, raw.coverage.png, modified.coverage.png]
+        // TODO: if the reference is multi segment e.g. influenza, so the second and third element in plotOut will be list
 
         ngsFiltVcfOut
             .join(getLowCoverRegionOut)
@@ -141,6 +150,6 @@ workflow ngs {
         figures = plotOut // [name, rawCov.png, modifedCov.png]
         vcfRpt = snpEffOut // [name, report.vcf[.gz]]
         consensus = getConsensusOut // [name, consensus.fasta]
-        pangoRpt = pangolinOut // [name, pagnRpt] || [name, null]
+        pangoRpt = pangolinOut // [name, pagnRpt] 
     
 }

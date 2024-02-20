@@ -61,13 +61,23 @@ def getExtension(input_fastq) {
 }
 
 def detectLongReads() {
+    /*
+    return ArrayList<LinkedHashMap<String, String>>, each element is a sample
+        name: the sample_name of this sample
+        fastqs: the fastq[.gz] file path
+        cmd: how handle this fastqs, if fastqs is a file, make symbolic link; if it's files, cat them into new file
+        direction: '' when fastqs is a file or '>' when fastqs is files path
+        ext: extension of the symbolic link name and merged file depends on the file's extension of the --long_reads
+    */
     input_fastq = file(params.long_reads, checkIfExists: true)
     if (input_fastq.isEmpty()) {printError("--long_reads is empty")}
     if (input_fastq.isFile()) {
+        // --long_reads is a fastq[.gz]
         ext = getExtension([params.long_reads])
         return [[name:params.analysis_name, fastqs:params.long_reads, cmd: 'ln -sf ', direction: '', ext: ext]]
     } 
     if (input_fastq.isDirectory()) {
+        // --long_reads is a directory, maybe a barcode directory or fastq_pass directory
         contents = input_fastq.list()
         contents_len = contents.size()
         subdirs_len = contents.findAll{it -> file("${params.long_reads}/$it").isDirectory()}.size()
@@ -78,16 +88,18 @@ def detectLongReads() {
         }
 
         if (contents_len == subfiles_len) {
+            // --long_reads is a barcode directory
             ext = getExtension(contents.collect{ it -> "${params.long_reads}/$it"})
             a = [[name: params.analysis_name, fastqs: "${params.long_reads}/*", cmd: 'cat', direction: ' > ', ext: ext]]
             return a
         } 
 
         if (contents_len == subdirs_len) {
+            // --long_reads is a fastq_pass directory
             a = []
             for (def each_name in contents) {
                 fqs = file("${params.long_reads}/${each_name}").list()
-                if (fqs.size() <= params.files_per_bar || each_name == "unclassified") continue
+                if (fqs.size() <= params.files_per_bar || each_name == "unclassified") continue // files number in subdirectory or name == "unclassified" will be ignored
                 ext = getExtension(fqs)
                 a << [name: each_name, fastqs: "${params.long_reads}/${each_name}/*", cmd: "cat", direction: " > ", ext: ext]
             }
