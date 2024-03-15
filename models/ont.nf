@@ -127,7 +127,7 @@ process ontCallIndel {
     input:
         tuple   val(name), path(bam), path(bai)
     output:
-        tuple   val(name), path("${name}.indel.raw.vcf")
+        tuple   val(name), path("${name}.indel.raw.vcf.gz")
     script:
     """if [ ! -e $projectDir/genomes/$params.virus/sequences.fa.fai ]; then samtools faidx $projectDir/genomes/$params.virus/sequences.fa; fi && \
     run_clair3.sh  \
@@ -142,7 +142,7 @@ process ontCallIndel {
     --fast_mode \
     --min_coverage=$params.min_dp \
     --threads $params.map_cpu  
-    cp ./clair3_output/merge_output.vcf.gz  ${name}.indel.raw.vcf
+    cp ./clair3_output/merge_output.vcf.gz  ${name}.indel.raw.vcf.gz
     # bcftools filter -i "TYPE='indel' && FILTER='PASS' && FORMAT/DP >= $params.min_dp && (GT='1/1' || FORMAT/AF > 0.6)" ./clair3_output/merge_output.vcf.gz > ${name}.indel.vcf"""
 }
 

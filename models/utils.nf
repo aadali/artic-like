@@ -99,7 +99,7 @@ def detectLongReads() {
             a = []
             for (def each_name in contents) {
                 fqs = file("${params.long_reads}/${each_name}").list()
-                if (fqs.size() <= params.files_per_bar || each_name == "unclassified") continue // files number in subdirectory or name == "unclassified" will be ignored
+                if (fqs.size() < params.files_per_bar || each_name == "unclassified") continue // files number in subdirectory or name == "unclassified" will be ignored
                 ext = getExtension(fqs)
                 a << [name: each_name, fastqs: "${params.long_reads}/${each_name}/*", cmd: "cat", direction: " > ", ext: ext]
             }
