@@ -1,17 +1,20 @@
 include {q2p; detectLongReads} from './utils.nf'
 
 process ontPreprocess {
-    storeDir    "$params.directory/$params.analysis_name/${input_fastq['name']}/01.clean_data"
+    storeDir    "$params.directory/$params.analysis_name/${name}/01.clean_data"
     conda       "$params.conda_path/artic-like"
     debug       true
-    tag         "${input_fastq['name']}"
+    tag         "$name"
 
     input:
-        val input_fastq
+        val(name)
+        val(fastq)
+        val(cmd)
+        val(ext)
     output:
-        tuple   val("${input_fastq['name']}"), path("${input_fastq['name']}.raw.${input_fastq['ext']}")
+        tuple   val(name), path("${name}.raw.fastq*", arity: '1')
     script:
-    """${input_fastq['cmd']} ${input_fastq['fastqs']}  ${input_fastq['direction']}  ${input_fastq['name']}.raw.${input_fastq['ext']}"""
+    """if [ -f $fastq ]; then $cmd $fastq ${name}.raw${ext}; elif [ -d $fastq ]; then $cmd $fastq/* > ${name}.raw${ext}; fi"""
 }
 
 process ontFiltlong {
@@ -304,8 +307,21 @@ process pangolin {
 
 workflow ont {
     main:
-        input = Channel.fromList(detectLongReads())
-        ontPreprocess(input).set{ontPreprocessOut} // ontPreprocessOut: [name, raw.fastq]
+        input = detectLongReads()
+        def names = []
+        def fastqs = []
+        def cmds = []
+        def exts = []
+        for (def item in input){
+            names.add(item['name'])
+            fastqs.add(item['fastqs'])
+            cmds.add(item['cmd'])
+            exts.add(item['ext'])
+        }
+
+        ontPreprocess(Channel.fromList(names), Channel.fromList(fastqs), Channel.fromList(cmds), Channel.fromList(exts)).set{ontPreprocessOut}
+        // input = Channel.fromList(detectLongReads())
+        // ontPreprocess(input).set{ontPreprocessOut} // ontPreprocessOut: [name, raw.fastq]
 
         ontStatRaw(ontPreprocessOut).set{ontStatRawOut} // ontStatRawOut: [name, raw.png, raw_stats]
 

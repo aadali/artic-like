@@ -55,8 +55,8 @@ def getExtension(input_fastq) {
     lens = input_fastq.size()
     gz_lens = input_fastq.findAll{it -> it.endsWith(".fastq.gz") || it.endsWith(".fq.gz")}.size()
     fq_lens = input_fastq.findAll{it -> it.endsWith(".fastq") || it.endsWith(".fq")}.size()
-    if (lens == gz_lens) return "fastq.gz"
-    if (lens == fq_lens) return "fastq"
+    if (lens == gz_lens) return ".fastq.gz"
+    if (lens == fq_lens) return ".fastq"
     printError("compressed and uncompressed files were found simultaneously")
 }
 
@@ -90,7 +90,7 @@ def detectLongReads() {
         if (contents_len == subfiles_len) {
             // --long_reads is a barcode directory
             ext = getExtension(contents.collect{ it -> "${params.long_reads}/$it"})
-            a = [[name: params.analysis_name, fastqs: "${params.long_reads}/*", cmd: 'cat', direction: ' > ', ext: ext]]
+            a = [[name: params.analysis_name, fastqs: "${params.long_reads}", cmd: 'cat', direction: ' > ', ext: ext]]
             return a
         } 
 
@@ -101,7 +101,7 @@ def detectLongReads() {
                 fqs = file("${params.long_reads}/${each_name}").list()
                 if (fqs.size() < params.files_per_bar || each_name == "unclassified") continue // files number in subdirectory or name == "unclassified" will be ignored
                 ext = getExtension(fqs)
-                a << [name: each_name, fastqs: "${params.long_reads}/${each_name}/*", cmd: "cat", direction: " > ", ext: ext]
+                a << [name: each_name, fastqs: "${params.long_reads}/${each_name}", cmd: "cat", direction: " > ", ext: ext]
             }
             return a
         }
