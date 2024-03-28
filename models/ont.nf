@@ -23,10 +23,10 @@ process ontFiltlong {
     input:
         tuple   val(name), path(raw_fastq)
     output:
-        tuple   val(name), path("${name}.clean.fastq.gz")
+        tuple   val(name), path("${name}.clean.fastq")
     script:
     def pred = q2p(params.min_read_qual) // the --min_mean_q of filtlong should be phred
-    """ filtlong --min_length $params.min_read_len  --max_length $params.max_read_len --min_mean_q $pred $raw_fastq | gzip -c > ${name}.clean.fastq.gz """ 
+    """ filtlong --min_length $params.min_read_len  --max_length $params.max_read_len --min_mean_q $pred $raw_fastq > ${name}.clean.fastq """ 
 }
 
 process ontMap {
@@ -67,6 +67,51 @@ process trimPrimer {
     rm tmp.bam"""
 }
 
+
+process ontStatRaw {
+    storeDir    "$params.directory/$params.analysis_name/$name/03.stats"
+    conda       "$params.conda_path/artic-like"
+    debug       true
+    tag         "$name"
+
+    input:
+        tuple   val(name), path(raw_fastq)
+    output:
+        tuple   val(name), path("${name}.raw.LengthvsQualityScatterPlot_dot.png"), path("${name}.raw.stats.txt") 
+    script:
+    """python $projectDir/scripts/nanoplot.py ${raw_fastq} ${name}.raw.LengthvsQualityScatterPlot_dot.png ${name}.raw.stats.txt"""
+}
+
+
+process ontStatClean {
+    storeDir    "$params.directory/$params.analysis_name/$name/03.stats"
+    conda       "$params.conda_path/artic-like"
+    debug       true
+    tag         "$name"
+
+    input:
+        tuple   val(name), path(clean_fastq)
+    output:
+        tuple   val(name), path("${name}.clean.LengthvsQualityScatterPlot_dot.png"), path("${name}.clean.stats.txt") 
+    script:
+    """python $projectDir/scripts/nanoplot.py ${clean_fastq} ${name}.clean.LengthvsQualityScatterPlot_dot.png ${name}.clean.stats.txt"""
+}
+
+process ontStatMapped {
+    storeDir    "$params.directory/$params.analysis_name/$name/03.stats"
+    conda       "$params.conda_path/artic-like"
+    debug       true
+    tag         "$name"
+
+    input:
+        tuple   val(name), path(bam), path(bai)
+    output:
+        tuple   val(name), path("${name}.mapped.LengthvsQualityScatterPlot_dot.png"), path("${name}.mapped.stats.txt")
+    script:
+    """samtools fastq $bam > ${name}.mapped.fastq && \
+    python $projectDir/scripts/nanoplot.py ${name}.mapped.fastq  ${name}.mapped.LengthvsQualityScatterPlot_dot.png ${name}.mapped.stats.txt"""
+}
+
 process ontStat {
     storeDir    "$params.directory/$params.analysis_name/$name/03.stats"
     conda       "$params.conda_path/artic-like"
@@ -74,22 +119,26 @@ process ontStat {
     tag         "$name"
 
     input:
-        tuple   val(name), path(bam), path(bai), path(raw_fastq), path(clean_fastq)
+        tuple   val(name), 
+                path("${name}.raw.LengthvsQualityScatterPlot_dot.png"),
+                path(raw_stats), 
+                path("${name}.clean.LengthvsQualityScatterPlot_dot.png"), 
+                path(clean_stats), 
+                path("${name}.mapped.LengthvsQualityScatterPlot_dot.png"),
+                path(mapped_stats)
     output:
         tuple   val(name), 
-                path("${name}.raw.LengthvsQualityScatterPlot_dot.png"), 
+                path("${name}.raw.LengthvsQualityScatterPlot_dot.png"),
                 path("${name}.clean.LengthvsQualityScatterPlot_dot.png"), 
                 path("${name}.mapped.LengthvsQualityScatterPlot_dot.png"),
                 path("${name}.summary.txt")
     script:
-    """samtools fastq $bam > ${name}.mapped.fastq && \
-    python $projectDir/scripts/nanoplot.py ${raw_fastq} ${name}.raw.LengthvsQualityScatterPlot_dot.png ${name}.raw.stats.txt && \
-    python $projectDir/scripts/nanoplot.py ${clean_fastq} ${name}.clean.LengthvsQualityScatterPlot_dot.png ${name}.clean.stats.txt && \
-    python $projectDir/scripts/nanoplot.py ${name}.mapped.fastq  ${name}.mapped.LengthvsQualityScatterPlot_dot.png ${name}.mapped.stats.txt && \
-    echo -e "SampleName\t${params.analysis_name}\t$name" > a.txt && \
-    paste ${name}.raw.stats.txt ${name}.clean.stats.txt ${name}.mapped.stats.txt | cut -f 1,2,4,6 | sed '1cMetrics\\traw\\tclean\\tmapped' > b.txt && \
+    """echo -e "SampleName\t${params.analysis_name}\t$name" > a.txt && \
+    paste ${raw_stats} ${clean_stats} ${mapped_stats} | cut -f 1,2,4,6 | sed '1cMetrics\\traw\\tclean\\tmapped' > b.txt && \
     cat a.txt b.txt > ${name}.summary.txt && rm a.txt b.txt """
+
 }
+
 
 process getPerBaseDp {
     storeDir    "$params.directory/$params.analysis_name/$name/04.depth"
@@ -141,9 +190,9 @@ process ontCallIndel {
     --no_phasing_for_fa \
     --fast_mode \
     --min_coverage=$params.min_dp \
-    --threads $params.map_cpu  
-    cp ./clair3_output/merge_output.vcf.gz  ${name}.indel.raw.vcf.gz
-    # bcftools filter -i "TYPE='indel' && FILTER='PASS' && FORMAT/DP >= $params.min_dp && (GT='1/1' || FORMAT/AF > 0.6)" ./clair3_output/merge_output.vcf.gz > ${name}.indel.vcf"""
+    --threads $params.map_cpu \
+    --pileup_only && \
+    cp ./clair3_output/pileup.vcf.gz  ${name}.indel.raw.vcf.gz"""
 }
 
 process ontFiltIndel {
@@ -258,16 +307,19 @@ workflow ont {
         input = Channel.fromList(detectLongReads())
         ontPreprocess(input).set{ontPreprocessOut} // ontPreprocessOut: [name, raw.fastq]
 
+        ontStatRaw(ontPreprocessOut).set{ontStatRawOut} // ontStatRawOut: [name, raw.png, raw_stats]
+
         ontFiltlong(ontPreprocessOut).set{ontFiltlongOut} // ontFiltlongOut: [name, clean.fastq]
+
+        ontStatClean(ontFiltlongOut).set{ontStatCleanOut} // ontStatCleanOut: [name, clean.png, clean_stats]
 
         ontMap(ontFiltlongOut).set{ontMapOut} // ontMapOut: [name, sorted.bam, sorted.bam.bai]
 
         trimPrimer(ontMapOut).set{trimPrimerOut} // trimPrimerOut: [name, trimmed.bam, trimmed.bam.bai, trimmed.report]
 
-        trimPrimerOut.map{it -> it[0..2]}
-            .join(ontPreprocessOut)
-            .join(ontFiltlongOut)
-            .set{ontStatIn} // ontStatIn: [name, trimmed.bam, timmed.bam.bai, raw.fastq, clean.fastq]
+        ontStatMapped(trimPrimerOut.map{it -> it[0..2]}).set{ontStatMappedOut} // ontStatsMappedOut: [name, mapped.png, mapped_stats]
+
+        ontStatRawOut.join(ontStatCleanOut).join(ontStatMappedOut).set{ontStatIn} // ontStatIn: [name, raw.png, raw_stats, clean.png, clean_stats, mapped.png, mapped_stats]
 
         ontStat(ontStatIn).set{ontStatOut} // ontStatOut: [name, raw.png, clean.png, mapped.png, summary.txt]
 
